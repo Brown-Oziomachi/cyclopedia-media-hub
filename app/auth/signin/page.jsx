@@ -1,10 +1,9 @@
 import React from "react";
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub, FaFacebook } from "react-icons/fa";
 import Link from "next/link";
 import { auth, signIn } from "@/auth";
 import { redirect } from "next/navigation";
 import AuthForm from "@/components/Login";
+import { ChartPie, Facebook, Github } from "lucide-react";
 
 const Page = async () => {
   const session = await auth();
@@ -36,7 +35,7 @@ const Page = async () => {
 
 
       {/* Right Section: Social Sign-In */}
-      <div className="relative w-full lg:w-1/2 flex flex-col gap-6 items-center lg:items-start lg:mt-60 lg:ml-30 lg:mt-0 z-10 ">
+      <div className="relative w-full lg:w-1/2 flex flex-col gap-6 items-center lg:items-start lg:mt-60 lg:ml-30 z-10 ">
         <h2 className="text-xl lg:text-2xl font-bold text-cyan-400 mb-4 lg:mb-6">
           Sign in with Social Media
         </h2>
@@ -47,7 +46,7 @@ const Page = async () => {
           }}
         >
           <button className="flex items-center gap-3 w-full shadow-md text-lg py-3 px-6 rounded-lg bg-gradient-to-r from-red-700 via-yellow-500 to-green-600 hover:scale-105 transform transition-all duration-300">
-            <FcGoogle className="text-2xl lg:text-3xl" />
+          <ChartPie  className="text-2xl lg:text-3xl" />
             Continue with Google
           </button>
         </form>
@@ -58,7 +57,7 @@ const Page = async () => {
           }}
         >
           <button className="flex items-center gap-3 w-full shadow-md text-lg py-3 px-6 rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 hover:scale-105 transform transition-all duration-300">
-            <FaFacebook className="text-2xl lg:text-3xl" />
+          <Facebook  className="text-2xl lg:text-3xl" />
             Continue with Facebook
           </button>
         </form>
@@ -69,7 +68,7 @@ const Page = async () => {
           }}
         >
           <button className="flex items-center gap-3 w-full shadow-md text-lg py-3 px-6 rounded-lg bg-gray-800 hover:scale-105 transform transition-all duration-300">
-            <FaGithub className="text-2xl lg:text-3xl" />
+          <Github  className="text-2xl lg:text-3xl" />
             Continue with GitHub
           </button>
         </form>
@@ -77,11 +76,11 @@ const Page = async () => {
         {/* Terms & Privacy */}
         <div className="text-center lg:text-left text-sm text-gray-500 mt-6">
           By signing in, you accept our{" "}
-          <Link href="/privacy-policy" className="text-blue-500 hover:underline">
+          <Link href="/privacypolicy" className="text-blue-500 hover:underline">
             Privacy Policy
           </Link>{" "}
           and{" "}
-          <Link href="/terms-of-service" className="text-blue-500 hover:underline">
+          <Link href="/termsofservices" className="text-blue-500 hover:underline">
             Terms of Services
           </Link>.
         </div>

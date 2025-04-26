@@ -1,13 +1,9 @@
 "use client";
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
-import { SiMaterialdesignicons } from "react-icons/si";
-import { Ring2 } from 'ldrs/react'
-import 'ldrs/react/Ring2.css'
-import { motion } from "framer-motion";
-import { FaSun } from "react-icons/fa";
 import Footer from '@/components/Footer';
 import Popup from '@/components/Popup';
+import { LoaderCircle } from 'lucide-react';
 
 
 
@@ -23,7 +19,7 @@ const Page = () => {
       return () => clearTimeout(timer);
     }, []);
  
-  
+
 
 
 
@@ -34,7 +30,7 @@ const Page = () => {
                 <div className="flex justify-center items-center h-dvh z-50 bg-gradient-to-r from-gray-900 via-black to-gray-800">
                  
                   <h1 className="text-4xl lg:text-6xl font-extrabold z-50 tracking-wide leading-tight text-white relative"></h1>
-                <Ring2  size="50" speed="1.10" color="blue" />
+                <LoaderCircle   size="50" speed="1.10" color="orange" className='animate-spin'/>
                   <img
                     src="logo.png"
                     alt="My Logo"
@@ -56,14 +52,13 @@ const Page = () => {
               <Popup/>
                     {/* The Moon Web Title */}
                     <div className="flex items-center justify-center ">
-                      <motion.h1
+                      <h1 
                         className="text-5xl font-bold text-cyan-500 max-md:text-2xl flex items-center justify-center gap-2"
                         animate={{ x: [0, 100, -100, 0] }} // Moves left, right, left, back to start
                         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                       >
                         The <span className="text-orange-400">Sun</span>Web
-                        <FaSun className="text-orange-400 animate-pulse text-7xl" />
-                      </motion.h1>
+                      </h1>
                     </div>
               
                     {/* Description Text */}
@@ -108,14 +103,14 @@ const Page = () => {
       <div className="py-20 bg-gradient-to-r from-black via-gray-950 to-black  text-center">
         <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb- py-1">
         <div>
-      <motion.div
+      <h1
       initial={{ x: -100 }}
       animate={{ x: 1 }}
       transition={{ duration: 10.20, ease: "easeOut", }}
       className=""
       >
           Ready to Elevate Your Digital Presence?
-          </motion.div>
+      </h1>
           </div>
         </h2>
         
@@ -305,25 +300,23 @@ const Page = () => {
       
       {[
         {
-          icon: <SiMaterialdesignicons className="text-5xl text-cyan-400 mx-auto mb-4" />,
           title: "Web Design",
           description:
             "Crafting stunning, user-friendly websites tailored to your unique vision.",
         },
         {
-          icon: <SiMaterialdesignicons className="text-5xl text-purple-400 mx-auto mb-4" />,
           title: "Website Maintenance",
           description:
             "Keeping your website secure, efficient, and running like clockwork.",
         },
         {
-          icon: <SiMaterialdesignicons className="text-5xl text-green-400 mx-auto mb-4" />,
+       
           title: "Digital Marketing",
           description:
             "Helping you connect with your audience and expand your digital reach.",
         },
         {
-          icon: <SiMaterialdesignicons className="text-5xl text-blue-400 mx-auto mb-4" />,
+         
           title: "Development",
           description:
             "Building powerful custom web applications and software solutions.",
@@ -389,5 +382,4 @@ const Page = () => {
   </>
   )
 }
-  
 export default Page;

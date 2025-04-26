@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { collection, getDocs } from "firebase/firestore";
 import Link from "next/link";
 import { db1 } from "@/lib/firebaseConfig";
+import { ChevronsRight } from "lucide-react";
 
 const Page = ({ session }) => {
   const [blog, setBlog] = useState([]); // Stores all blogs
@@ -123,7 +123,7 @@ const Page = ({ session }) => {
                   href={`/blog/${item.id}`}
                   className="mt-5 block px-4 py-2 bg-yellow-500 text-black rounded-full text-center font-semibold hover:bg-yellow-600 transition-all"
                 >
-                  Read More <MdKeyboardDoubleArrowRight className="inline-block ml-1" />
+                  Read More <ChevronsRight  className="inline-block ml-1" />
                 </Link>
               </article>
             ))}

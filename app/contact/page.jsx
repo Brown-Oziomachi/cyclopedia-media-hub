@@ -5,11 +5,8 @@ import * as Yup from "yup";
 import React, { useEffect, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { Field, Form, Formik, ErrorMessage } from "formik";
-import { BiLoaderCircle } from "react-icons/bi";
-import { FaRegCheckCircle } from "react-icons/fa";
-import { Ring2 } from "ldrs/react";
-import "ldrs/react/Ring2.css";
 import { db2 } from "@/lib/firebaseConfig";
+import { LoaderCircle } from "lucide-react";
 
 // Validation Schema
 const valSchema = Yup.object({
@@ -65,7 +62,7 @@ const ContactPage = () => {
                     <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-900 via-black to-gray-800 ">
                      
                       <h1 className="text-4xl lg:text-6xl font-extrabold tracking-wide leading-tight text-white relative"></h1>
-                    <Ring2  size="50" speed="1.10" color="blue" />
+                    <LoaderCircle   size="50" speed="1.10" color="orange" className="animate-spin"/>
                       <img
                         src="logo.png"
                         alt="My Logo"
@@ -193,7 +190,7 @@ const ContactPage = () => {
                     >
                       {processing ? (
                         <span className="flex items-center justify-center">
-                          <BiLoaderCircle className="animate-spin text-2xl" />
+                          <ThumbsUp  className="animate-spin text-2xl" />
                         </span>
                       ) : (
                         "Send Message"

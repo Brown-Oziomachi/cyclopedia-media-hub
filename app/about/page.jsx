@@ -2,9 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Ring2 } from "ldrs/react";
-import "ldrs/react/Ring2.css";
 import Footer from "@/components/Footer";
+import { LoaderCircle } from "lucide-react";
 
 const About = () => {
   const [loading, setLoading] = useState(true);
@@ -21,8 +20,8 @@ const About = () => {
     <>
       {loading ? (
         <div className="flex justify-center items-center h-screen bg-gray-800">
-          <h1 className="text-4xl font-bold text-orange-500">Loading...</h1>
-          <Ring2 size="50" speed="1.10" color="orange" />
+          <h1 className="text-4xl font-bold text-orange-500"></h1>
+          <LoaderCircle  size="50" speed="1.10" color="orange" className="animate-spin"/>
         </div>
       ) : (
         <main className="bg-gray-100 min-h-screen">

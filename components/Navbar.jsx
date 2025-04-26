@@ -2,10 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { IoIosMenu } from "react-icons/io";
-import { RiCloseFill } from "react-icons/ri";
-import { IoIosArrowDown } from "react-icons/io";
 import { signOut, useSession } from "next-auth/react";
+import { ChevronDown, Circle, SquareMenu } from "lucide-react";
 
 
 const ProfileDropdownNavbar = () => {
@@ -14,15 +12,15 @@ const ProfileDropdownNavbar = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false); // Dropdown toggle for profile options
 
   const navItems = [
-    { text: "HOME", url: "/" },
-    { text: "ABOUT", url: "/about" },
-    { text: "BLOG", url: "/blog" },
-    { text: "CONTACT", url: "/contact" },
-    { text: "SERVICES", url: "/#services-section" },
-    { text: "NEWS", url: "/news" },
-    { text: "DEVELOPERS", url: "/developers" },
+    { text: "HOME", url: "/", icon: "/House", className: "text-white" },
+    { text: "ABOUT", url: "/about", icon: "/About" },
+    { text: "BLOG", url: "/blog", icon: "/Blog" },
+    { text: "CONTACT", url: "/contact", icon: "/Contact" },
+    { text: "SERVICES", url: "/#services-section", icon: "/Services" },
+    { text: "NEWS", url: "/news", icon: "/News" },
+    { text: "DEVELOPERS", url: "/developers", icon: "/Developers" },
+    
   ];
-
   return (
     <main className="fixed w-full bg-gradient-to-r from-gray-900 via-black to-gray-800 shadow-lg z-50">
       <section className="px-5 py-4 flex items-center justify-between">
@@ -38,7 +36,9 @@ const ProfileDropdownNavbar = () => {
             />
           </Link>
         </div>
-
+        {/* <div className="text-white text-2xl font-bold">
+            {Service.icon}
+          </div> */}
         {/* Desktop Navigation Links */}
         <div className="hidden lg:flex items-center gap-6">
           {navItems.map((item, index) => (
@@ -66,7 +66,7 @@ const ProfileDropdownNavbar = () => {
                 className="w-10 h-10 rounded-full shadow-lg hover:scale-105 transition-transform duration-300 z-50"
               />
               
-              <IoIosArrowDown className="text-2xl text-cyan-400" />
+              <ChevronDown className="text-2xl text-cyan-400" />
             </div>
             {dropdownVisible && (
               <div
@@ -114,7 +114,7 @@ const ProfileDropdownNavbar = () => {
         onClick={() => setShowNav(!showNav)}
         className="lg:hidden text-3xl text-orange-400 focus:outline-none z-50"
       >
-        {showNav ? <RiCloseFill className="text-white" /> : <IoIosMenu className="text-white" />}
+        {showNav ? <Circle  className="text-white" /> : <SquareMenu  className="text-white" />}
       </button>
 
       <div
