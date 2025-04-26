@@ -2,9 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import Link from "next/link";
-import { RiLoader2Line } from "react-icons/ri";
-import { Ring2 } from "ldrs/react";
-import "ldrs/react/Ring2.css";
 import { db1 } from "@/lib/firebaseConfig";
 
 // Component to render blog details
@@ -44,7 +41,7 @@ const BlogDetails = ({ params }) => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-gray-700 via-gray-900 to-black">
-        <Ring2 size="50" speed="1.10" color="blue" />
+        <LoaderCircle size="50" speed="1.10" color="blue" />
         <p className="ml-4 text-gray-300">Loading blog content...</p>
       </div>
     );

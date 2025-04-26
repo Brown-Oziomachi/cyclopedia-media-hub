@@ -6,8 +6,20 @@ import AuthProvider from "@/components/AuthProvider";
 
 const PoppinsFont = Poppins({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-poppins',
+
+    display: 'swap',
+    style
+  });
+
+  export const metadata = {
+    title: 'Webwiz',
+    description: 'My portfolio website',
+  };
+
+  const poppins = Poppins({
+    subsets: ['latin'],
+    weight: ['400', '500', '600', '700'],
+    variable: '--font-poppins',
 })
 export default function RootLayout({ children }) {
   return (
