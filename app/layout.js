@@ -2,16 +2,15 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/components/AuthProvider";
 import Navbar from "@/components/Navbar";
-import { GeistMono } from 'next/font/google';
+import { Inter } from "next/font/google";
 
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const geistSans = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const geistMono = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
