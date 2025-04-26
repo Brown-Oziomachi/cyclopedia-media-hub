@@ -1,7 +1,7 @@
 "use client";
 
 import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
-import { FaChevronDown } from "react-icons/fa";
+import { ChevronDown, } from "lucide-react";
 import { useState } from "react";
 
 const faqs = [
@@ -69,13 +69,13 @@ export default function Faqs() {
           className="border border-cyan-500 rounded-lg mb-4 bg-gray-700"
         >
           <AccordionSummary
-            expandIcon={<FaChevronDown className={`transform transition-transform ${expanded === index ? "rotate-180" : "rotate-0"} text-cyan-400`} />}
+            expandIcon={<ChevronDown className={`transform transition-transform ${expanded === index ? "rotate-180" : "rotate-0"} text-cyan-400`} />}
             className="text-white px-4 py-3 hover:bg-cyan-600 rounded-lg"
           >
             <h2 className="text-lg font-semibold">{faq.question}</h2>
           </AccordionSummary>
           <AccordionDetails>
-            <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
+            <p className="text-black leading-relaxed">{faq.answer}</p>
           </AccordionDetails>
         </Accordion>
       ))}

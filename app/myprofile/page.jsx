@@ -1,10 +1,9 @@
 "use client";
 
 import { auth } from "@/auth";
-import FAQ from "@/components/faqme";
+import { Github, Linkedin, Twitter } from "lucide-react";
 import { redirect } from "next/navigation";
 import React from "react";
-import { FaLinkedin, FaTwitter, FaGithub } from "react-icons/fa";
 
 const ProfileCard = async () => {
   const session = await auth();
@@ -51,7 +50,7 @@ const ProfileCard = async () => {
               rel="noopener noreferrer"
               className="text-cyan-400 hover:text-cyan-600"
             >
-              <FaLinkedin size={30} />
+             <Linkedin size={30} />
             </a>
             <a
               href="https://twitter.com/username"
@@ -59,7 +58,7 @@ const ProfileCard = async () => {
               rel="noopener noreferrer"
               className="text-blue-400 hover:text-blue-600"
             >
-              <FaTwitter size={30} />
+              <Twitter size={30} />
             </a>
             <a
               href="https://github.com/username"
@@ -67,7 +66,7 @@ const ProfileCard = async () => {
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-gray-600"
             >
-              <FaGithub size={30} />
+              <Github  size={30} />
             </a>
           </div>
         </div>

@@ -207,7 +207,7 @@ const ContactPage = () => {
                     <h1 className="text-xl text-black font-bold ">
                       Submission Successful
                     </h1>
-                    <FaRegCheckCircle className="text-4xl text-green-500 mb-4 mx-auto" />
+                    <ThumbsUp className="text-4xl text-green-500 mb-4 mx-auto" />
                     <button
                       onClick={() => setModalVisibility(false)}
                       className="bg-cyan-500 hover:bg-cyan-600 text-white py-2 px-10 rounded-lg transition"

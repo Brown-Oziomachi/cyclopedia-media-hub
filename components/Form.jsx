@@ -6,11 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '@/firebase/formDb';  // <--- UPDATED IMPORT
 import { Field, Form, Formik, ErrorMessage } from 'formik';
-import { BiLoaderCircle } from "react-icons/bi";
-import { FaRegCheckCircle } from "react-icons/fa";
-import { Ring2 } from 'ldrs/react'
-import 'ldrs/react/Ring2.css'
-
+import { LoaderCircle, ThumbsUp } from 'lucide-react';
 
 // Validation schema
 const valSchema = Yup.object({
@@ -27,7 +23,7 @@ const ContactPage = ({ session }) => {
      useEffect(() => {
       const timer = setTimeout(() => {
         setLoading(false);
-      }, 1000); // adjust the timeout as needed
+      }, 3000); // adjust the timeout as needed
   
       return () => clearTimeout(timer);
     }, []);
@@ -70,7 +66,7 @@ const ContactPage = ({ session }) => {
             <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-700 via-gray-900 to-gray-900">
              
               <h1 className="text-4xl lg:text-6xl font-extrabold tracking-wide leading-tight text-white relative"></h1>
-            <Ring2  size="50" speed="0.5" color="blue" />
+            <LoaderCircle   size="50" speed="0.5" color="blue" />
               <img
                 src="logo.png"
                 alt="My Logo"
@@ -155,7 +151,7 @@ const ContactPage = ({ session }) => {
               >
                 {processing ? (
                   <span className="w-full text-white py-2 px-4 rounded-lg hover:bg-cyan-600 transition duration-300 flex items-center justify-center">
-                    <BiLoaderCircle className="animate-spin text-2xl  " />
+                    <LoaderCircle  className="animate-spin text-2xl  " />
                   </span>
                 ) : (
                   "Send Message"
@@ -174,7 +170,7 @@ const ContactPage = ({ session }) => {
       >
         <div className="w-[20rem] h-[30vh] flex flex-col gap-5 items-center justify-center shadow-lg rounded-lg bg-white border-t-10 border-gray-900 text-center">
           <h1 className="text-black text-2xl">Submission Successful</h1>
-          <FaRegCheckCircle className="text-6xl text-green-500" />
+          <ThumbsUp className="text-6xl text-green-500" />
           <button onClick={() => setModalVisibility(false)} className='text-gray-900 border rounded-lg  px-5'>Close</button>
         </div>
       </div>

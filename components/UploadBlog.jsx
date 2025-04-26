@@ -5,8 +5,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { collection, addDoc } from "firebase/firestore";
 import { db1, } from "@/lib/firebaseConfig"; // Import Firestore and Storage
-import { BiLoaderCircle } from "react-icons/bi";
-import { FaRegCheckCircle } from "react-icons/fa";
+import { LoaderCircle } from "lucide-react";
 
 // Validation Schema
 const valSchema = Yup.object({
@@ -122,7 +121,7 @@ const UploadBlog = ({ session }) => {
               >
                 {processing ? (
                   <span className="flex items-center justify-center">
-                    <BiLoaderCircle className="animate-spin text-2xl" />
+                    <LoaderCircle className="animate-spin text-2xl" />
                   </span>
                 ) : (
                   "Submit Blog"
@@ -137,7 +136,7 @@ const UploadBlog = ({ session }) => {
         <div className="absolute h-screen w-full bg-black/20 flex items-center justify-center">
           <div className="w-[22rem] h-[30vh] flex flex-col gap-6 items-center justify-center shadow-2xl rounded-lg bg-gray-800 text-white p-6">
             <h1 className="text-xl font-semibold">Blog Upload Successful</h1>
-            <FaRegCheckCircle className="text-6xl text-green-500" />
+            <ThumbsUp  className="text-6xl text-green-500" />
             <button
               onClick={() => setModalVisibility(false)}
               className="bg-indigo-600 px-4 py-2 rounded-lg hover:bg-indigo-700 transition"
