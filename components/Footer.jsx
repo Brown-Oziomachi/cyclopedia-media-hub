@@ -1,4 +1,5 @@
 "use client";
+import { MailCheck } from "lucide-react";
 import Link from "next/link";
 import React, {useState } from "react";
 
@@ -58,9 +59,10 @@ const Footer = () => {
               />
               <button
                 type="submit"
-                className="px-4 py-2 bg-cyan-500 text-white rounded-r-md hover:bg-cyan-600 transition duration-300"
+                className=" flex gap-2 px-4 py-2 bg-cyan-500 text-white rounded-r-md hover:bg-cyan-600 transition duration-300"
               >
                 Subscribe
+                <MailCheck />
               </button>
             </form>
             <span className="mt-4 text-sm">

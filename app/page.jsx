@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import Footer from '@/components/Footer';
 import Popup from '@/components/Popup';
-import { LoaderCircle } from 'lucide-react';
+import { ArrowRightToLine,  ChevronRight, LoaderCircle, Share, Star } from 'lucide-react';
 
 
 
@@ -30,7 +30,7 @@ const Page = () => {
                 <div className="flex justify-center items-center h-dvh z-50 bg-gradient-to-r from-gray-900 via-black to-gray-800">
                  
                   <h1 className="text-4xl lg:text-6xl font-extrabold z-50 tracking-wide leading-tight text-white relative"></h1>
-                <LoaderCircle   size="50" speed="1.10" color="orange" className='animate-spin'/>
+                  <LoaderCircle  size="50" speed="1.10" color="orange" className='animate-spin'/>
                   <img
                     src="logo.png"
                     alt="My Logo"
@@ -72,13 +72,15 @@ const Page = () => {
                     {/* Buttons */}
                     <div className="flex justify-center gap-4 mt-6">
                       <Link href="/contact">
-                        <button className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg">
+                        <button className="bg-cyan-500 flex gap-2 hover:bg-gray-800 hover:text-cyan-500 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg">
                           Get Started
+                        <ArrowRightToLine />
                         </button>
                       </Link>
                       <Link href="/about">
-                        <button className="bg-gray-800 hover:bg-gray-700 text-cyan-400 px-6 py-3 rounded-lg font-semibold transition-all shadow-lg">
+                        <button className="bg-gray-800 flex gap-2 hover:bg-gray-700 text-cyan-400 px-6 py-3 rounded-lg font-semibold transition-all shadow-lg">
                           Learn More
+                          <ChevronRight />
                         </button>
                       </Link>
                     </div>
@@ -122,8 +124,9 @@ const Page = () => {
            we channel this energy to help your ideas thrive. With personalized strategies, unparalleled creativity,
            and a commitment to excellence, we empower you to shine brighter in your industry</h5>
         <Link href={session ? "/contact" : "/auth/signin"}>
-          <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 text-lg rounded-lg font-bold shadow-lg transition-all">
+          <button className="bg-orange-500 flex mx-auto gap-2 hover:bg-orange-600 text-white px-8 py-4 text-lg rounded-lg font-bold shadow-lg transition-all">
             Connect
+            <Share className='hover:animate-bounce' />
           </button>
         </Link>
       
@@ -165,7 +168,7 @@ const Page = () => {
   <div>
     <div className="relative z-0 py-20  overflow-hidden">
       {/* Moon */}
-      <div className="py-20 absolute w-64 h-64 max-md:h-40 max-md:w-40 rounded-full bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse"></div>
+      <div className="py-20 absolute w-64 h-64 max-md:h-20 max-md:w-20 rounded-full bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse"></div>
     </div>
 
     {/* Content Section */}
@@ -174,8 +177,8 @@ const Page = () => {
       description:
         "In today’s digital age, a professional website isn’t just a nice-to-have—it’s a necessity. Discover why a stunning and functional online presence matters more than ever.",
       buttons: [
-        { text: "Read More", href: "/lessons" },
-        { text: "Hire a Developer", href: "/developers" },
+        { text: "Read More", href: "/lessons", icon: ChevronRight },
+        { text: "Hire a Developer", href: "/developers", icon: Star  },
       ],
     }].map((item, index) => (
       <div
@@ -188,11 +191,12 @@ const Page = () => {
         <p className="text-gray-400 mb-6">{item.description}</p>
         <div className="flex flex-wrap gap-4">
           {item.buttons.map((button, btnIndex) => (
-            <Link key={btnIndex} href={button.href}>
-              <p className="px-4 py-2 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600 transition">
-                {button.text}
-              </p>
-            </Link>
+             <Link key={btnIndex} href={button.href}>
+                <p className="px-4 py-2 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600 transition flex items-center gap-2">
+                  {button.text}
+                  {button.icon && <button.icon />}
+                </p>
+              </Link>
           ))}
         </div>
       </div>
@@ -366,9 +370,10 @@ const Page = () => {
       <div className="flex justify-center mt-8">
         <Link
           href={session ? "/contact" : "/auth/signin"}
-          className="bg-orange-500 text-white py-3 px-10 rounded-md text-lg font-semibold hover:bg-orange-600 shadow-lg transition-all"
+          className=" flex  gap-2 bg-orange-500 text-white py-3 px-10 rounded-md text-lg font-semibold hover:bg-orange-600 shadow-lg transition-all"
         >
           Connect
+          <Share className='hover:animate-bounce' />
         </Link>
       </div>
     </div>

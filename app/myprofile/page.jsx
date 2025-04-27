@@ -13,7 +13,7 @@ const ProfileCard = async () => {
 
   return (
     <>
-      <main className="max-w-5xl mx-auto bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-lg shadow-2xl mb-10 overflow-hidden text-white">
+      <main className="z-0 max-w-5xl mx-auto bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-lg shadow-2xl mb-10 overflow-hidden text-white">
         {/* Header Section */}
         <div className="relative h-64">
           <img
@@ -21,7 +21,7 @@ const ProfileCard = async () => {
             alt="Header Background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-0">
             <h1 className="text-4xl lg:text-5xl font-extrabold text-white">Brown Code</h1>
           </div>
         </div>
@@ -139,8 +139,7 @@ const ProfileCard = async () => {
           </div>
         </div>
 
-        {/* FAQ Section */}
-        <FAQ />
+       
 
         {/* Contact Section */}
         <div className="px-8 py-10">

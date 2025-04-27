@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
-import { ChevronDown, Circle, SquareMenu } from "lucide-react";
+import { BellRing, ChevronDown, ListCollapse, Menu, Newspaper, Rss,  UserRoundPen } from "lucide-react";
 
 
 const ProfileDropdownNavbar = () => {
@@ -12,13 +12,13 @@ const ProfileDropdownNavbar = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false); // Dropdown toggle for profile options
 
   const navItems = [
-    { text: "HOME", url: "/", icon: "/House", className: "text-white" },
-    { text: "ABOUT", url: "/about", icon: "/About" },
-    { text: "BLOG", url: "/blog", icon: "/Blog" },
-    { text: "CONTACT", url: "/contact", icon: "/Contact" },
-    { text: "SERVICES", url: "/#services-section", icon: "/Services" },
+    { text: "HOME", url: "/",  },
+    { text: "ABOUT", url: "/about", },
+    { text: "BLOG", url: "/blog",},
+    { text: "CONTACT", url: "/contact", },
+    { text: "SERVICES", url: "/#services-section", },
     { text: "NEWS", url: "/news", icon: "/News" },
-    { text: "DEVELOPERS", url: "/developers", icon: "/Developers" },
+    { text: "DEVELOPERS", url: "/developers", },
     
   ];
   return (
@@ -51,7 +51,7 @@ const ProfileDropdownNavbar = () => {
             </Link>
           ))}
         </div>
-
+      
         {/* User Profile Dropdown */}
         {session ? (
           <div className="relative flex items-center gap-4">
@@ -75,20 +75,30 @@ const ProfileDropdownNavbar = () => {
               >
                 <Link
                   href="/profile"
-                  className="block text-sm text-gray-200 hover:text-cyan-400 py-2 px-3 rounded-lg hover:bg-gray-700 transition"
+                  className=" flex gap-2  text-sm text-gray-200 hover:text-cyan-400 py-2 px-3 rounded-lg hover:bg-gray-700 transition"
                 >
+                  <UserRoundPen className="text-sm"/>
                   My Profile
                 </Link>
                 <Link
-                  href="/settings"
-                  className="block text-sm text-gray-200 hover:text-cyan-400 py-2 px-3 rounded-lg hover:bg-gray-700 transition"
+                  href="/blog"
+                  className="flex gap-2 text-sm text-gray-200 hover:text-cyan-400 py-2 px-3 rounded-lg hover:bg-gray-700 transition"
                 >
-                  Settings
+                  <Rss className="text-sm"/>
+                  Blog
+                </Link>
+                <Link
+                  href="/news"
+                  className=" flex gap-2 text-sm text-gray-200 hover:text-cyan-400 py-2 px-3 rounded-lg hover:bg-gray-700 transition"
+                >
+                  <Newspaper className="text-sm"/>
+                  News
                 </Link>
                 <Link
                   href="/notifications"
-                  className="block text-sm text-gray-200 hover:text-cyan-400 py-2 px-3 rounded-lg hover:bg-gray-700 transition"
+                  className="flex gap-2 text-sm text-gray-200 hover:text-cyan-400 py-2 px-3 rounded-lg hover:bg-gray-700 transition"
                 >
+                  <BellRing className="text-sm"/>
                   Notifications
                 </Link>
                 <button
@@ -114,7 +124,7 @@ const ProfileDropdownNavbar = () => {
         onClick={() => setShowNav(!showNav)}
         className="lg:hidden text-3xl text-orange-400 focus:outline-none z-50"
       >
-        {showNav ? <Circle  className="text-white" /> : <SquareMenu  className="text-white" />}
+        {showNav ? <ListCollapse  className="text-white" /> : <Menu  className="text-white" />}
       </button>
 
       <div

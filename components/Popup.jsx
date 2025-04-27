@@ -23,7 +23,7 @@ const Popup = () => {
     <div >
       {showPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white text-gray-900 p-6 rounded-lg shadow-lg w-11/12 sm:w-1/3 z-50">
+          <div className="bg-orange-500 text-gray-900 p-6 rounded-lg shadow-lg w-11/12 sm:w-1/3 z-50">
             <h2 className="text-xl font-bold mb-4">WEBWIZ CREATION.</h2>
             <img src="AI wiz.png" alt="" />
             <p className="text-gray-700 z-50">

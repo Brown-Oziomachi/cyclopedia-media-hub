@@ -4,6 +4,7 @@ import AuthProvider from "@/components/AuthProvider";
 import Navbar from "@/components/Navbar";
 import { Inter } from "next/font/google";
 
+
 const geistSans = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
