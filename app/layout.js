@@ -1,19 +1,6 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/components/AuthProvider";
 import Navbar from "@/components/Navbar";
-import { Inter } from "next/font/google";
-
-
-const geistSans = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const geistMono = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
 
 export const metadata = {
   title: "Create Next App",
@@ -23,18 +10,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="antialiased">
         <AuthProvider>
-         <Navbar />
-         <main >
-          {children}
-        </main>
+          <Navbar />
+          <main>{children}</main>
         </AuthProvider>
       </body>
     </html>
   );
 }
-
-

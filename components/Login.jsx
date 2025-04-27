@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import {setDoc, doc} from "firebase/firestore";
-import { toast } from "react-toast";
 import { auth, db } from "./Firebase";
 
 
@@ -27,21 +26,12 @@ function AuthForm() {
           password: password,
         });
       }
-      // Handle success notification
-      toast.success("Sign-in successful!", {
-        position: "top-center",
-        onClose: () => {
-        }
-      });
+     
   
       // Redirect user to profile page
     } catch (error) {
       console.error("Sign-in Error:", error.message);
   
-      // Handle error notification
-      toast.error("Error: " + error.message, {
-        position: "top-center",
-      });
     }
   };
   return (
