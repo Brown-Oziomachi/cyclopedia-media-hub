@@ -1,9 +1,10 @@
 {
+  "$schema": "./schemas/package-schema.json",
   "name": "my-portfolio-webwiz",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -13,6 +14,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.9",
+    "express": "^5.1.0",
     "firebase": "^11.6.0",
     "firebase-admin": "^12.7.0",
     "formik": "^2.4.6",
@@ -26,10 +28,13 @@
     "react-dom": "^19.1.0",
     "react-router-dom": "^6.20.0",
     "ri": "^0.0.0",
+    "webpack": "^5.99.7",
     "yup": "^1.6.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.4",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
     "tailwindcss": "^4.1.4"
   }
 }

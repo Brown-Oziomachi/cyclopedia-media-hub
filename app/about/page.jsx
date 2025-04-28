@@ -25,26 +25,7 @@ const About = () => {
         </div>
       ) : (
         <main className="bg-gray-100 min-h-screen ">
-          <nav className="bg-gray-900 text-white fixed top-0 w-full shadow-md lg:mt-15 max-md:mt-15 ">
-            <div className="container mx-auto flex justify-between items-center p-4 ">
-              <h1 className="font-bold text-xl text-orange-500">Webwiz Creation</h1>
-              <div> 
-                <Link href="/">
-                  <p className="text-white hover:text-orange-500 mx-2">Home</p>
-                </Link>
-                <Link href="/developers">
-                  <p className="text-white hover:text-orange-500 mx-2">Developers</p>
-                </Link>
-                <Link href="/about">
-                  <p className="text-white hover:text-orange-500 mx-2">About Us</p>
-                </Link>
-                <Link href="/contact">
-                  <p className="text-white hover:text-orange-500 mx-2">Contact</p>
-                </Link>
-              </div>
-            </div>
-          </nav>
-
+         
                 <header className="flex flex-col justify-center items-center min-h-screen text-center bg-gray-900 text-white max-md:py-50">
                 <div className="space-">
                   <h1 className="text-5xl font-extrabold text-orange-500 mb-10">

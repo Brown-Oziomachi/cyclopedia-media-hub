@@ -24,10 +24,10 @@ const Footer = () => {
           </div>
   
           {/* Contact Info */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Contact Us</h3>
+          <div className="space-x-5 grid grid-cols-1 lg:grid gap-4">
+            <h3 className="text-lg font-semibold text-white mb-4 ">Contact Us</h3>
             <span>
-              Email: <span className="text-cyan-400 hover:underline">info@webwiz.com</span>
+              Email: <span className="text-cyan-400 hover:underline">webwizcreation.web@gmail.com</span>
             </span>
             <span>
               Phone: <span className="text-cyan-400 hover:underline">+234 8142 995114</span>

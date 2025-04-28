@@ -1,12 +1,20 @@
-module.exports = {
-    content: [
-      './app/**/*.{js,ts,jsx,tsx}',
-      './components/**/*.{js,ts,jsx,tsx}',
-      './styles/globals.css', // Include your global CSS file
-    ],
-    theme: {
-      extend: {},
+export const theme = {
+  extend: {
+    colors: {
+      background: 'var(--color-background)',
+      foreground: 'var(--color-foreground)',
     },
-    plugins: [],
-  };
-  
+    fontFamily: {
+      sans: 'var(--font-sans)',
+      mono: 'var(--font-mono)',
+    },
+  },
+};
+export const plugins = [];
+export const content = [
+  './app/**/*.{js,ts,jsx,tsx}',
+  './components/**/*.{js,ts,jsx,tsx}',
+  './pages/**/*.{js,ts,jsx,tsx}',
+  './public/**/*.{js,ts,jsx,tsx}',
+  './styles/**/*.{js,ts,jsx,tsx}',
+];
