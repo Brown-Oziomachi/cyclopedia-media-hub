@@ -214,7 +214,7 @@ const Page = () => {
     </h2>
     
     {/* Introductory Paragraph */}
-    <p className="text-center text-gray-950 text-lg max-w-3xl mx-auto mb-12 leading-relaxed">
+    <p className="text-center text-gray-400 text-lg max-w-3xl mx-auto mb-12 leading-relaxed">
       At the heart of our work lies passion and innovation. We are a vibrant
       team committed to delivering excellence in web development, design, and
       digital strategy. Let us help you unlock your potential in the digital
@@ -291,7 +291,7 @@ const Page = () => {
 
 
 <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white py-16  mt-30 ">
-  <div className="container mx-auto px-5 lg:px-20 w-full ">
+  <div className=" mx-auto px-5 lg:px-20 ">
     {/* Section Header */}
     <h2
     id="services-section"

@@ -24,12 +24,11 @@ const About = () => {
           <LoaderCircle  size="50" speed="1.10" color="orange" className="animate-spin"/>
         </div>
       ) : (
-        <main className="bg-gray-100 min-h-screen">
-          {/* Navigation Bar */}
-          <nav className="bg-gray-900 text-white fixed top-0 w-full shadow-md">
-            <div className="container mx-auto flex justify-between items-center p-4">
+        <main className="bg-gray-100 min-h-screen ">
+          <nav className="bg-gray-900 text-white fixed top-0 w-full shadow-md mt-15 ">
+            <div className="container mx-auto flex justify-between items-center p-4 ">
               <h1 className="font-bold text-xl text-orange-500">Webwiz Creation</h1>
-              <div>
+              <div> 
                 <Link href="/home">
                   <p className="text-white hover:text-orange-500 mx-2">Home</p>
                 </Link>
@@ -46,22 +45,20 @@ const About = () => {
             </div>
           </nav>
 
-          {/* Hero Section */}
-          <header className="flex flex-col justify-center items-center h-screen text-center bg-gray-900 text-white">
-            <div className="space-y-6">
-              <h1 className="text-5xl font-extrabold text-orange-500">
-                About Webwiz Creation
-              </h1>
-              <p className="text-lg max-w-3xl mx-auto leading-relaxed">
-                Discover who we are and how we bring your vision to life. At Webwiz Creation, we specialize in transforming ideas into exceptional digital experiences. With a team of expert developers, designers, and strategists, we focus on delivering tailored solutions that meet the unique needs of our clients. From front-end aesthetics to back-end efficiency, we bridge creativity with technical expertise to craft impactful and user-friendly designs.
-              </p>
-              <p className="text-lg max-w-3xl mx-auto leading-relaxed">
-                Our mission is to empower businesses, startups, and individuals by turning ambitious visions into reality. Through innovative solutions, cutting-edge technologies, and relentless dedication, we aim to build digital products that not only meet but exceed expectations. With Webwiz Creation, you get more than just a service—you gain a partner committed to your success every step of the way.
-              </p>
-            </div>
-          </header>
+                <header className="flex flex-col justify-center items-center min-h-screen text-center bg-gray-900 text-white py-2 mt-10">
+                <div className="space-">
+                  <h1 className="text-5xl font-extrabold text-orange-500">
+                  About Webwiz Creation
+                  </h1>
+                  <p className="text-lg max-w-3xl mx-auto leading-relaxed">
+                  Discover who we are and how we bring your vision to life. At Webwiz Creation, we specialize in transforming ideas into exceptional digital experiences. With a team of expert developers, designers, and strategists, we focus on delivering tailored solutions that meet the unique needs of our clients. From front-end aesthetics to back-end efficiency, we bridge creativity with technical expertise to craft impactful and user-friendly designs.
+                  </p>
+                  <p className="text-lg max-w-3xl mx-auto leading-relaxed">
+                  Our mission is to empower businesses, startups, and individuals by turning ambitious visions into reality. Through innovative solutions, cutting-edge technologies, and relentless dedication, we aim to build digital products that not only meet but exceed expectations. With Webwiz Creation, you get more than just a service—you gain a partner committed to your success every step of the way.
+                  </p>
+                </div>
+                </header>
 
-          {/* Core Competencies Section */}
           <section className="py-16 bg-gray-100">
             <div className="container mx-auto">
               <h2 className="text-4xl font-bold text-center text-orange-500 mb-10">
