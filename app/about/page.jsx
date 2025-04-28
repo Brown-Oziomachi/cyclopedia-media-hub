@@ -25,11 +25,11 @@ const About = () => {
         </div>
       ) : (
         <main className="bg-gray-100 min-h-screen ">
-          <nav className="bg-gray-900 text-white fixed top-0 w-full shadow-md mt-15 ">
+          <nav className="bg-gray-900 text-white fixed top-0 w-full shadow-md lg:mt-15 max-md:mt-15 ">
             <div className="container mx-auto flex justify-between items-center p-4 ">
               <h1 className="font-bold text-xl text-orange-500">Webwiz Creation</h1>
               <div> 
-                <Link href="/home">
+                <Link href="/">
                   <p className="text-white hover:text-orange-500 mx-2">Home</p>
                 </Link>
                 <Link href="/developers">
@@ -45,9 +45,9 @@ const About = () => {
             </div>
           </nav>
 
-                <header className="flex flex-col justify-center items-center min-h-screen text-center bg-gray-900 text-white py-2 mt-10">
+                <header className="flex flex-col justify-center items-center min-h-screen text-center bg-gray-900 text-white max-md:py-50">
                 <div className="space-">
-                  <h1 className="text-5xl font-extrabold text-orange-500">
+                  <h1 className="text-5xl font-extrabold text-orange-500 mb-10">
                   About Webwiz Creation
                   </h1>
                   <p className="text-lg max-w-3xl mx-auto leading-relaxed">
@@ -101,14 +101,14 @@ const About = () => {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-                  <h3 className="text-2xl font-bold text-orange-500 mb-4">2020</h3>
+                  <h3 className="text-2xl font-bold text-orange-500 mb-4">2024</h3>
                   <p>
                     Webwiz Creation was founded with a mission to revolutionize web
                     design and development, delivering value-driven solutions to our clients.
                   </p>
                 </div>
                 <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-                  <h3 className="text-2xl font-bold text-orange-500 mb-4">2022</h3>
+                  <h3 className="text-2xl font-bold text-orange-500 mb-4">2025</h3>
                   <p>
                     Expanded our services globally, working with clients from over 10 countries
                     across diverse industries.
@@ -118,7 +118,6 @@ const About = () => {
             </div>
           </section>
 
-          {/* Client Testimonials */}
           <section className="py-16 bg-gray-100">
             <div className="container mx-auto text-center">
               <h2 className="text-4xl font-bold text-orange-500 mb-10">

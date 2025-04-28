@@ -84,7 +84,7 @@ const ContactPage = () => {
               </div>
               <div className="text-lg lg:text-xl text-gray-300 leading-relaxed">
                 📞 Have a question? Call us at <a href="tel:+2348142995114" className="text-cyan-400 hover:underline">+234 8142 995114</a><br />
-                ✉️ Prefer email? Reach out at <a href="mailto:brownozioma@outlook.com" className="text-cyan-400 hover:underline">brownozioma@outlook.com</a>
+                ✉️ Prefer email? Reach out at <a href="mailto:webwizcreation.web@gmail.com" className="text-cyan-400 hover:underline">webwizcreation.web@gmail.com</a>
               </div>
             </div>
 
