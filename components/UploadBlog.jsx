@@ -5,7 +5,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { collection, addDoc } from "firebase/firestore";
 import { db1, } from "@/lib/firebaseConfig"; // Import Firestore and Storage
-import { LoaderCircle } from "lucide-react";
+import { LoaderCircle, ThumbsUp } from "lucide-react";
 
 // Validation Schema
 const valSchema = Yup.object({
@@ -55,12 +55,38 @@ const UploadBlog = ({ session }) => {
           Publish Your Blog
         </h2>
         <Formik
-          initialValues={{ title: "", body: "", genre: "",  }}
+          initialValues={{ title: "", body: "", genre: "", vidoe: "", image: "" }}
           validationSchema={valSchema}
           onSubmit={handleSubmit}
         >
             <Form className="space-y-6">
-             
+              {/* Video URL Input */}
+              <div>
+                <label htmlFor="video" className="block text-sm font-medium text-gray-300">
+                  Video URL
+                </label>
+                <Field
+                  name="video"
+                  type="url"
+                  placeholder="Enter video URL"
+                  className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+                <ErrorMessage name="video" component="p" className="text-sm text-red-600 mt-1" />
+              </div>
+
+              {/* Image URL Input */}
+              <div>
+                <label htmlFor="image" className="block text-sm font-medium text-gray-300">
+                  Image URL
+                </label>
+                <Field
+                  name="image"
+                  type="url"
+                  placeholder="Enter image URL"
+                  className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+                <ErrorMessage name="image" component="p" className="text-sm text-red-600 mt-1" />
+              </div>
 
               <div>
                 <label htmlFor="title" className="block text-sm font-medium text-gray-300">
@@ -90,8 +116,8 @@ const UploadBlog = ({ session }) => {
                 <ErrorMessage name="body" component="p" className="text-sm text-red-600 mt-1" />
               </div>
 
-              {/* Genre Selection */}
-              <div>
+                {/* Genre Selection */}
+                <div>
                 <label htmlFor="genre" className="block text-sm font-medium text-gray-300">
                   Genre
                 </label>
@@ -101,7 +127,7 @@ const UploadBlog = ({ session }) => {
                   className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
                   <option value="" disabled>
-                    Select a genre
+                  Select a genre
                   </option>
                   <option value="Technology">Technology</option>
                   <option value="Lifestyle">Lifestyle</option>
@@ -111,9 +137,9 @@ const UploadBlog = ({ session }) => {
                   <option value="Travel">Travel</option>
                 </Field>
                 <ErrorMessage name="genre" component="p" className="text-sm text-red-600 mt-1" />
-              </div>
+                </div>
 
-              {/* Submit Button */}
+                {/* Submit Button */}
               <button
                 disabled={processing}
                 type="submit"

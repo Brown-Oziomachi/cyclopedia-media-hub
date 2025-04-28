@@ -1,4 +1,5 @@
 "use client"
+import React from "react";
 import { db1 } from "@/lib/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import { LoaderCircle } from "lucide-react";
@@ -25,17 +26,19 @@ const handleSingleFetch = async (id)=>{
   }
 }
 
+
 const BlogDetails = ({params}) => {
   const [blog, setBlog] = useState(null)
+  const id = React.use(params).id;
 
   useEffect(() => {
     const fetchBlog = async () => {
-      const fetchedBlog = await handleSingleFetch(params.id);
+      const fetchedBlog = await handleSingleFetch(id);
       setBlog(fetchedBlog);
     };
 
     fetchBlog();
-  }, [params.id]);
+  }, [id]);
 
   if (!blog) return <div className="flex items-center justify-center h-dvh">
     <LoaderCircle  className="text-6xl animate-spin"/>
@@ -75,11 +78,15 @@ const BlogDetails = ({params}) => {
         </div>
         <p className="text-xs text-gray-400 mb-6">Posted on {blog.timestamp}</p>
         <div className="mb-6">
-          <img
-            src="/logo.png" // Replace with blog.imageUrl if available
-            alt="Blog Cover"
-            className=" rounded-md shadow-sm w-40 h-40"
-          />
+          {blog.videoUrl ? (
+            <video src={blog.videoUrl} controls className="w-full rounded-md shadow-sm" />
+          ) : (
+            <img
+              src="/logo.png" // Replace with blog.imageUrl if available
+              alt="Blog Cover"
+              className=" rounded-md shadow-sm w-40 h-40"
+            />
+          )}
         </div>
         <p className="text-gray-700 leading-7 whitespace-pre-line">{blog.body}</p>
       </div>

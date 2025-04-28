@@ -96,35 +96,30 @@ const Page = ({ session }) => {
           <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10">
             {filteredBlogs.map((item, index) => (
               <article
-                key={index}
-                className="p-6 rounded-lg bg-gradient-to-b from-gray-900 to-gray-700 shadow-lg relative"
+          key={index}
+          className="p-6 rounded-lg bg-gradient-to-b from-gray-900 to-gray-700 shadow-lg relative"
               >
-                <img
-                  src={item.imageUrl || "/default-image.jpg"}
-                  alt={item.title}
-                  className="w-full h-48 object-cover rounded-md mb-4 py-10"
-                />
-                <span className="absolute top-4 left-4 bg-yellow-500 text-black text-xs px-3 py-1 rounded-full">
-                  {item.genre || "General"}
-                </span>
-                <div className="flex flex-col items-center">
-                  <h2 className="text-3xl font-bold mb-3 text-center">
-                    {item.title}
-                  </h2>
-                  <p className="text-sm text-gray-400 mb-2">by {item.author}</p>
-                  <p className="line-clamp-3 text-sm text-gray-300 mb-4 text-center">
-                    {item.body}
-                  </p>
-                </div>
-                <p className="text-xs text-gray-400 text-center">
-                  Posted on {item.timestamp || "Unknown Date"}
-                </p>
-                <Link
-                  href={`/blog/${item.id}`}
-                  className="mt-5 block px-4 py-2 bg-yellow-500 text-black rounded-full text-center font-semibold hover:bg-yellow-600 transition-all"
-                >
-                  Read More <ChevronsRight  className="inline-block ml-1" />
-                </Link>
+          <span className="absolute top-4 left-4 bg-yellow-500 text-black text-xs px-3 py-1 rounded-full">
+            {item.genre || "General"}
+          </span>
+          <div className="flex flex-col items-center">
+            <h2 className="text-3xl font-bold mb-3 text-center py-5">
+              {item.title}
+            </h2>
+            <p className="text-sm text-gray-400 mb-2">by {item.author}</p>
+            <p className="line-clamp-3 text-sm text-gray-300 mb-4 text-center">
+              {item.body}
+            </p>
+          </div>
+          <p className="text-xs text-gray-400 text-center">
+            Posted on {item.timestamp || "Unknown Date"}
+          </p>
+          <Link
+            href={`/blog/${item.id}`}
+            className="mt-5 block px-4 py-2 bg-yellow-500 text-black rounded-full text-center font-semibold hover:bg-yellow-600 transition-all"
+          >
+            Read More <ChevronsRight  className="inline-block ml-1" />
+          </Link>
               </article>
             ))}
           </section>
@@ -133,8 +128,6 @@ const Page = ({ session }) => {
             No blog posts available for the selected category.
           </div>
         )}
-
-        {/* About Section */}
         <div className="mt-20 bg-gray-800 p-6 rounded-lg text-center">
           <h2 className="text-3xl font-extrabold mb-4">About Our Blog</h2>
           <p className="text-gray-300 leading-relaxed max-w-3xl mx-auto">

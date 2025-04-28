@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import Footer from '@/components/Footer';
 import Popup from '@/components/Popup';
-import { ArrowRightToLine,  ChevronRight, LoaderCircle, Share, Star } from 'lucide-react';
+import { ArrowRight, ArrowRightToLine,  ChevronRight, LampDesk, LaptopMinimal, LoaderCircle, Palette, PersonStanding, Share, Star, Store, Webhook } from 'lucide-react';
 
 
 
@@ -95,7 +95,7 @@ const Page = () => {
 
       <div className="relative  bg-gradient-to-b from-gray-900 to-black flex py-30 items-center justify-center">
       {/* Moon */}
-      <div className="absolute w-64 h-64 rounded-full z-0 bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse"></div>
+      <div className="absolute w-40 h-40 rounded-full z-0 bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse"></div>
     </div>
 
 
@@ -126,7 +126,7 @@ const Page = () => {
         <Link href={session ? "/contact" : "/auth/signin"}>
           <button className="bg-orange-500 flex mx-auto gap-2 hover:bg-orange-600 text-white px-8 py-4 text-lg rounded-lg font-bold shadow-lg transition-all">
             Connect
-            <Share className='hover:animate-bounce' />
+            <ArrowRight className='hover:animate-bounce' />
           </button>
         </Link>
       
@@ -166,9 +166,9 @@ const Page = () => {
 
           <div className="bg-gradient-to-r from-orange-400 via-gray-950 to-black py-1 overflow-hidden">
   <div>
-    <div className="relative z-0 py-20  overflow-hidden">
+    <div className="relative z-0 py-20  overflow-hidden flex items-center justify-center">
       {/* Moon */}
-      <div className="py-20 absolute w-64 h-64 max-md:h-20 max-md:w-20 rounded-full bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse"></div>
+      <div className="py-20 absolute w-64 h-64 object-cover rounded-full bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse"></div>
     </div>
 
     {/* Content Section */}
@@ -178,7 +178,8 @@ const Page = () => {
         "In today’s digital age, a professional website isn’t just a nice-to-have—it’s a necessity. Discover why a stunning and functional online presence matters more than ever.",
       buttons: [
         { text: "Read More", href: "/lessons", icon: ChevronRight },
-        { text: "Hire a Developer", href: "/developers", icon: Star  },
+        { text: "Hire a Developer", href: "/developers", icon: PersonStanding },
+        { text: "Get Started", href: "/contact", icon: ArrowRightToLine },
       ],
     }].map((item, index) => (
       <div
@@ -213,7 +214,7 @@ const Page = () => {
     </h2>
     
     {/* Introductory Paragraph */}
-    <p className="text-center text-gray-300 text-lg max-w-3xl mx-auto mb-12 leading-relaxed">
+    <p className="text-center text-gray-950 text-lg max-w-3xl mx-auto mb-12 leading-relaxed">
       At the heart of our work lies passion and innovation. We are a vibrant
       team committed to delivering excellence in web development, design, and
       digital strategy. Let us help you unlock your potential in the digital
@@ -276,8 +277,9 @@ const Page = () => {
       <div className="flex flex-wrap justify-center gap-4">
         {item.buttons.map((button, btnIndex) => (
           <Link key={btnIndex} href={button.href}>
-            <p className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-full shadow-md transition duration-300">
+            <p className=" flex gap-1 cursor-not-allowed px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-full shadow-md transition duration-300">
               {button.text}
+              <ChevronRight />
             </p>
           </Link>
         ))}
@@ -288,40 +290,43 @@ const Page = () => {
 </div>
 
 
-
-<div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white py-16">
-  <div className="container mx-auto px-5 lg:px-20">
+<div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white py-16  mt-30 ">
+  <div className="container mx-auto px-5 lg:px-20 w-full ">
     {/* Section Header */}
     <h2
-      id="services-section"
+    id="services-section"
       className="text-center text-4xl lg:text-5xl font-extrabold text-cyan-400 mb-12 tracking-wide uppercase animate-fade-in"
     >
       Explore Our Exceptional Services
     </h2>
 
     {/* Services Grid */}
-    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 bg-black w-full  rounded-lg shadow-lg">
       
       {[
         {
-          title: "Web Design",
+          icon: <Palette className='mx-auto text-3xl'/>,
+          title: "Website Design",
           description:
             "Crafting stunning, user-friendly websites tailored to your unique vision.",
         },
         {
+          icon: <Webhook className='mx-auto text-3xl'/>,
           title: "Website Maintenance",
           description:
             "Keeping your website secure, efficient, and running like clockwork.",
         },
         {
-       
+          icon: <Store className='mx-auto text-3xl'/>,
+          title: "E-commerce Solutions",
           title: "Digital Marketing",
           description:
-            "Helping you connect with your audience and expand your digital reach.",
+            "Creating and optimizing online stores for maximum sales and engagement.",
         },
         {
-         
-          title: "Development",
+          icon: <LaptopMinimal className='mx-auto text-3xl'/>,
+          title: "Branding",
+          title: "Website  Development",
           description:
             "Building powerful custom web applications and software solutions.",
         },
@@ -353,7 +358,7 @@ const Page = () => {
       <div className=" overflow-hidden rounded-full bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse"></div>
 </div>
   {/* Join Us Section */}
-  <section className=" b mt-10 bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse ">
+  <section className=" b mt-20 bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse">
     <div className="container mx-auto px-5 lg:px-20 text-center bg-black py-20">
       <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
         Join Webwiz Today!
@@ -373,7 +378,7 @@ const Page = () => {
           className=" flex  gap-2 bg-orange-500 text-white py-3 px-10 rounded-md text-lg font-semibold hover:bg-orange-600 shadow-lg transition-all"
         >
           Connect
-          <Share className='hover:animate-bounce' />
+          <ArrowRight className='hover:animate-bounce' />
         </Link>
       </div>
     </div>

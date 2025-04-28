@@ -1,5 +1,6 @@
 "use client";
 
+import { LogIn } from "lucide-react";
 import React, { useState, useEffect } from "react";
 
 const Popup = () => {    
@@ -38,9 +39,10 @@ const Popup = () => {
               </button>
               <a
                 href="/auth/signin"
-                className="ml-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition"
+                className=" flex gap-1 ml-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition"
               >
                 Sign In
+                <LogIn />
               </a>
             </div>
           </div>

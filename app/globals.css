@@ -5,7 +5,6 @@
   --foreground: #171717;
 }
 
-/* Removed @theme rule as requested */
 
 @media (prefers-color-scheme: dark) {
   :root {
