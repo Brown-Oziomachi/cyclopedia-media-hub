@@ -7,7 +7,7 @@ import { useState } from "react";
 const faqs = [
   {
     question: "What is Webwiz Creation?",
-    answer: "Webwiz Creation is a dynamic website development platform that helps individuals and businesses establish and enhance their online presence efficiently.",
+    answer: "Webwiz Creation is a dynamic website development company that helps individuals and businesses establish and enhance their online presence efficiently.",
   },
   {
     question: "Is Webwiz Creation free to use?",

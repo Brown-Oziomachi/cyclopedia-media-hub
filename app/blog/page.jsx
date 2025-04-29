@@ -7,6 +7,7 @@ import { db1 } from "@/lib/firebaseConfig";
 import { ChevronsRight } from "lucide-react";
 
 const Page = ({ session }) => {
+  
   const [blog, setBlog] = useState([]); // Stores all blogs
   const [filteredBlogs, setFilteredBlogs] = useState([]); // Stores filtered blogs based on category
   const [loading, setLoading] = useState(true); // Loading state
@@ -43,7 +44,7 @@ const Page = ({ session }) => {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white px-8 py-20">
+    <main className="min-h-screen bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white px-8 py-30">
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
         <header className="mb-12 text-center">

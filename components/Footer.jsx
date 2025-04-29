@@ -5,7 +5,41 @@ import React, {useState } from "react";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
+  const subscribeToNewsletter = async (e) => {
+    e.preventDefault();
+    if (!email.trim()) {
+      alert('Please enter a valid email address.');
+      return;
+    }
 
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      try {
+        const data = await response.json();
+        console.log(data);
+
+        if (response.ok) {
+          alert(data.message);
+          setEmail(''); // Clear the input field after successful subscription
+        } else {
+          alert(data.error || 'An error occurred. Please try again.');
+        }
+      } catch (parseError) {
+        console.error('Error parsing JSON:', parseError);
+        alert('An error occurred while processing the response. Please try again.');
+      }
+    } catch (error) {
+      console.error('Subscription error:', error);
+      alert('An error occurred. Please try again.');
+    }
+  };
   return (
     <div className="flex flex-col ">
       <footer className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-gray-400 py-10">

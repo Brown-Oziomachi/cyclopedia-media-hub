@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
-import { BellRing, ChevronDown, ListCollapse, Menu, Newspaper, Rss,  UserRoundPen } from "lucide-react";
+import { BellRing, ChevronDown, ListCollapse, LogIn, LogOut, Menu, Newspaper, Rss,  UserRoundPen } from "lucide-react";
 
 
 const ProfileDropdownNavbar = () => {
@@ -55,58 +55,69 @@ const ProfileDropdownNavbar = () => {
         {/* User Profile Dropdown */}
         {session ? (
           <div className="relative flex items-center gap-4">
-            <div
-              className="flex items-center gap-2 cursor-pointer"
+            <button
+              className="flex items-center gap-2 focus:outline-none"
               onClick={() => setDropdownVisible(!dropdownVisible)}
             >
-              
-              <img
-                src={session?.user?.image}
-                alt={session?.user?.name.slice(0, 1).toUpperCase()}
-                className="w-10 h-10 rounded-full shadow-lg hover:scale-105 transition-transform duration-300 z-50"
-              />
-              
-              <ChevronDown className="text-2xl text-cyan-400" />
-            </div>
+              <div className="relative">
+          <Image
+            src={session?.user?.img}
+            alt={session?.user?.name}
+            width={40}
+            height={40}
+            className="rounded-full shadow-md hover:shadow-lg transition-shadow duration-300 object-cover"
+          />
+          <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full ring-2 ring-gray-900"></span>
+              </div>
+              <span className="text-sm font-semibold text-gray-200 hover:text-cyan-400 transition-colors duration-300 hidden md:inline-block">
+          {session?.user?.name}
+              </span>
+              <ChevronDown className={`text-xl text-cyan-400 transition-transform duration-200 ${dropdownVisible ? 'rotate-180' : ''}`} />
+            </button>
             {dropdownVisible && (
               <div
-                className="absolute top-12 right-0 w-40 bg-gray-800 rounded-lg shadow-lg p-3 z-50"
-                onMouseLeave={() => setDropdownVisible(false)} // Close dropdown when mouse leaves
+          className="absolute top-12 right-0 mt-2 w-56 bg-gray-800 border border-gray-700 rounded-md shadow-xl overflow-hidden z-50"
               >
-                <Link
-                  href="/profile"
-                  className=" flex gap-2  text-sm text-gray-200 hover:text-cyan-400 py-2 px-3 rounded-lg hover:bg-gray-700 transition"
-                >
-                  <UserRoundPen className="text-sm"/>
-                  My Profile
-                </Link>
-                <Link
-                  href="/blog"
-                  className="flex gap-2 text-sm text-gray-200 hover:text-cyan-400 py-2 px-3 rounded-lg hover:bg-gray-700 transition"
-                >
-                  <Rss className="text-sm"/>
-                  Blog
-                </Link>
-                <Link
-                  href="/news"
-                  className=" flex gap-2 text-sm text-gray-200 hover:text-cyan-400 py-2 px-3 rounded-lg hover:bg-gray-700 transition"
-                >
-                  <Newspaper className="text-sm"/>
-                  News
-                </Link>
-                <Link
-                  href="/notifications"
-                  className="flex gap-2 text-sm text-gray-200 hover:text-cyan-400 py-2 px-3 rounded-lg hover:bg-gray-700 transition"
-                >
-                  <BellRing className="text-sm"/>
-                  Notifications
-                </Link>
-                <button
-                  onClick={signOut}
-                  className="w-full bg-cyan-500 text-white py-2 px-3 rounded-lg hover:bg-cyan-600 transition duration-300 mt-2"
-                >
-                  Sign Out
-                </button>
+          <div className="py-2 px-4 border-b border-gray-700">
+            <p className="text-sm text-gray-300 truncate">{session?.user?.email}</p>
+          </div>
+          <Link
+            href="/profile"
+            className="block py-2 px-4 text-sm text-gray-200 hover:bg-gray-700 hover:text-cyan-400 transition-colors duration-200"
+          >
+            <UserRoundPen className="inline-block mr-2 text-gray-400" size={16} />
+            My Profile
+          </Link>
+          <Link
+            href="/blog"
+            className="block py-2 px-4 text-sm text-gray-200 hover:bg-gray-700 hover:text-cyan-400 transition-colors duration-200"
+          >
+            <Rss className="inline-block mr-2 text-gray-400" size={16} />
+            Blog
+          </Link>
+          <Link
+            href="/news"
+            className="block py-2 px-4 text-sm text-gray-200 hover:bg-gray-700 hover:text-cyan-400 transition-colors duration-200"
+          >
+            <Newspaper className="inline-block mr-2 text-gray-400" size={16} />
+            News
+          </Link>
+          <Link
+            href="/notifications"
+            className="block py-2 px-4 text-sm text-gray-200 hover:bg-gray-700 hover:text-cyan-400 transition-colors duration-200"
+          >
+            <BellRing className="inline-block mr-2 text-gray-400" size={16} />
+            Notifications
+          </Link>
+          <div className="py-2">
+            <button
+              onClick={signOut}
+              className="flex w-full text-left py-2 px-4 text-sm text-gray-200 hover:bg-red-600 hover:text-white transition-colors duration-200"
+            >
+              <LogOut className="inline-block mr-2 text-gray-400" size={16}/>
+              Sign Out
+            </button>
+          </div>
               </div>
             )}
           </div>
@@ -115,6 +126,7 @@ const ProfileDropdownNavbar = () => {
             href="/auth/signin"
             className="hidden lg:inline-block text-md py-2 px-6  bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md"
           >
+            <LogIn   className="inline-block mr-2 text-gray-400  hover:text-cyan-400" size={16}/>
             Sign In
           </Link>
         )}
@@ -128,7 +140,7 @@ const ProfileDropdownNavbar = () => {
       </button>
 
       <div
-  className={`fixed top-0 left-0 w-full h-full mt-15 bg-black/80 text-white flex flex-col items-center justify-center z-50 overflow-hidden transition-transform ${
+  className={`fixed top-0 left-0 w-full h-full mt-20 bg-black/80 text-white flex flex-col items-center justify-center z-50 overflow-hidden transition-transform ${
     showNav ? "translate-y-0" : "translate-y-full"
   }`}
 >

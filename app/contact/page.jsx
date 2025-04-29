@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import { db2 } from "@/lib/firebaseConfig";
-import { LoaderCircle } from "lucide-react";
+import { LoaderCircle, ThumbsUp } from "lucide-react";
 
 // Validation Schema
 const valSchema = Yup.object({
@@ -70,9 +70,9 @@ const ContactPage = () => {
                       />
                     </div>
                   ) : (
-        <main className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white min-h-screen ">
+        <main className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white min-h-screen z-0 ">
           {/* Desktop Layout */}
-          <section className="container mx-auto px-5 lg:px-20 py-20 lg:flex lg:space-x-10">
+          <section className="container mx-auto px-5 lg:px-20 py-50 lg:flex lg:space-x-10">
             {/* Introduction / Information */}
             <div className="flex-1 space-y-6">
               <img src="Ai.png" alt="Webwiz Logo" className="w-50 lg:w-50 h-auto mb-6 mx-auto lg:mx-0" />
@@ -89,7 +89,7 @@ const ContactPage = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="flex-1 bg-gray-800 rounded-lg shadow-lg py-10 px-8 z-50 overflow-hidden">
+            <div className="flex-1 bg-gray-800 rounded-lg shadow-lg py-10 px-8 z-0 overflow-hidden ">
               <Formik
                 initialValues={{
                   name: "",
@@ -190,7 +190,7 @@ const ContactPage = () => {
                     >
                       {processing ? (
                         <span className="flex items-center justify-center">
-                          <ThumbsUp  className="animate-spin text-2xl" />
+                          <LoaderCircle   className="animate-spin text-2xl" />
                         </span>
                       ) : (
                         "Send Message"

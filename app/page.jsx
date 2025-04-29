@@ -139,7 +139,8 @@ const Page = () => {
             <h2 className="text-center text-4xl lg:text-5xl font-extrabold text-white mb-5">
               Join <span className="text-cyan-400">WebWiz Today!</span>
             </h2>
-            <div className="text-center text-gray-300 lg:text-xl max-w-3xl mx-auto">
+            <hr />
+            <div className="text-center text-gray-300 lg:text-xl max-w-3xl mx-auto text-base py-5">
             WebWiz isn’t just a platform; it’s a radiant space where the brilliance of innovation meets opportunity. Like the sun illuminating all it touches, WebWiz empowers developers, innovators, and collaborators to shine. Connect with talent, showcase skills, and create revolutionary ideas that light up your business..
              
             </div>
@@ -161,7 +162,7 @@ const Page = () => {
           </div>
 
 
-      
+       
 
 
           <div className="bg-gradient-to-r from-orange-400 via-gray-950 to-black py-1 overflow-hidden">
