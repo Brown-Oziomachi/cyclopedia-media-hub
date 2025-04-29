@@ -6,6 +6,7 @@ import {setDoc, doc} from "firebase/firestore";
 import { auth, db } from "./Firebase";
 
 
+
 function AuthForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,24 +15,20 @@ function AuthForm() {
     e.preventDefault();
     try {
       // Sign-in functionality
-      const userCredential = await signInWithEmailAndPassword(auth, email, password,);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("User Signed In:", userCredential.user);
-      // Redirect to profile page after successful sign-in
-      window.location.href = "/profile"; // Redirect to profile page after successful sign-in
       const user = auth.currentUser;
       console.log("User Signed In:", userCredential.user);
       if(user){
-        await setDoc(doc(db, "Users", user.uid), {
-          email: user.email,
-          password: password,
-        });
+        // Redirect to blog page after successful sign-in
+        window.location.href = "/blog";
       }
      
   
       // Redirect user to profile page
     } catch (error) {
       console.error("Sign-in Error:", error.message);
-  
+  // Handle errors here, such as displaying an error message to the user
     }
   };
   return (

@@ -306,18 +306,21 @@ const Page = () => {
       {[
         {
           icon: <Palette className='mx-auto text-3xl'/>,
+          img: "webs des.png",
           title: "Website Design",
           description:
             "Crafting stunning, user-friendly websites tailored to your unique vision.",
         },
         {
           icon: <Webhook className='mx-auto text-3xl'/>,
+          img: "web main.png",
           title: "Website Maintenance",
           description:
             "Keeping your website secure, efficient, and running like clockwork.",
         },
         {
           icon: <Store className='mx-auto text-3xl'/>,
+          img: "digital marketing.png",
           title: "E-commerce Solutions",
           title: "Digital Marketing",
           description:
@@ -325,7 +328,7 @@ const Page = () => {
         },
         {
           icon: <LaptopMinimal className='mx-auto text-3xl'/>,
-          title: "Branding",
+          img: "web dev.png",
           title: "Website  Development",
           description:
             "Building powerful custom web applications and software solutions.",
@@ -336,9 +339,17 @@ const Page = () => {
           className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group"
         >
           {/* Icon */}
-          <div className="group-hover:animate-bounce">
+          <div className="group-hover:animate-bounce m-5">
             {service.icon}
           </div>
+         {/* Image */}
+          {service.img && (
+            <img
+              src={service.img}
+              alt={service.title}
+              className="w-full  object-cover rounded-t-lg mb- group-hover:opacity-80 transition duration-300"
+            />
+           )}
           {/* Title */}
           <h3 className="text-center text-2xl font-bold mt-3 group-hover:text-cyan-400 transition">
             {service.title}
