@@ -208,7 +208,7 @@ const Page = () => {
 
 
 
-  <div className="container mx-auto px-5 lg:px-20 py-16">
+  <div className="container mx-auto px- lg:px-2 py-16">
     {/* Section Title */}
     <h2 className="text-center text-4xl lg:text-5xl font-extrabold text-cyan-400 mb-12 tracking-wide">
       We Are More Than <br /> A Digital Agency
@@ -290,9 +290,8 @@ const Page = () => {
   ))}
 </div>
 
-
-<div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white py-16  mt-30 ">
-  <div className=" mx-auto px-5 lg:px-20 ">
+<div className="bg-gray-950 text-white py-6  mt-30  ">
+  <div className=" mx-auto  lg:px-20 ">
     {/* Section Header */}
     <h2
     id="services-section"
@@ -371,8 +370,8 @@ const Page = () => {
 </div>
   {/* Join Us Section */}
   <section className=" b mt-20 bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse">
-    <div className="container mx-auto px-5 lg:px-20 text-center bg-black py-20">
-      <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+    <div className="container mx-auto px-5 lg:px-20 text-center bg-black py-20 ">
+      <h2 className="text-3xl lg:text-4xl font-bold text-white mb-5">
         Join Webwiz Today!
       </h2>
       <p className="text-lg text-gray-300 lg:w-2/3 mx-auto leading-relaxed">
