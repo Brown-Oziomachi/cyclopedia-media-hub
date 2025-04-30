@@ -29,10 +29,13 @@
     "react-dom": "^19.1.0",
     "react-router-dom": "^6.20.0",
     "ri": "^0.0.0",
+    "webpack": "^5.99.7",
     "yup": "^1.6.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.4",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
     "tailwindcss": "^4.1.4"
   }
 }
