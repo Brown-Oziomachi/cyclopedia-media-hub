@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import Footer from '@/components/Footer';
 import Popup from '@/components/Popup';
-import { ArrowRight, ArrowRightToLine,  ChevronRight, LampDesk, LaptopMinimal, LoaderCircle, Palette, PersonStanding, Share, Star, Store, Webhook } from 'lucide-react';
+import { ArrowRight, ArrowRightToLine,  ChevronRight, LampDesk, LaptopMinimal, Loader, Palette, PersonStanding, Share, Star, Store, Webhook } from 'lucide-react';
 
 
 
@@ -30,7 +30,7 @@ const Page = () => {
                 <div className="flex justify-center items-center h-dvh z-50 bg-gradient-to-r from-gray-900 via-black to-gray-800">
                  
                   <h1 className="text-4xl lg:text-6xl font-extrabold z-50 tracking-wide leading-tight text-white relative"></h1>
-                  <LoaderCircle  size="50" speed="1.10" color="orange" className='animate-spin'/>
+                  <Loader  size="50" speed="1.10" color="orange" className='animate-spin'/>
                   <img
                     src="logo.png"
                     alt="My Logo"

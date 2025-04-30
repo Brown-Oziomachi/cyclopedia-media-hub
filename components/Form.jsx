@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '@/firebase/formDb';  // <--- UPDATED IMPORT
 import { Field, Form, Formik, ErrorMessage } from 'formik';
-import { LoaderCircle, ThumbsUp } from 'lucide-react';
+import { Loader,ThumbsUp } from 'lucide-react';
 
 // Validation schema
 const valSchema = Yup.object({
@@ -66,7 +66,7 @@ const ContactPage = ({ session }) => {
             <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-700 via-gray-900 to-gray-900">
              
               <h1 className="text-4xl lg:text-6xl font-extrabold tracking-wide leading-tight text-white relative"></h1>
-            <LoaderCircle   size="50" speed="0.5" color="blue" />
+              <Loader   size="50" speed="0.5" color="blue" />
               <img
                 src="logo.png"
                 alt="My Logo"

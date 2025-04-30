@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import { db2 } from "@/lib/firebaseConfig";
-import { LoaderCircle, ThumbsUp } from "lucide-react";
+import { Loader, ThumbsUp } from "lucide-react";
 
 // Validation Schema
 const valSchema = Yup.object({
@@ -62,7 +62,7 @@ const ContactPage = () => {
                     <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-900 via-black to-gray-800 ">
                      
                       <h1 className="text-4xl lg:text-6xl font-extrabold tracking-wide leading-tight text-white relative"></h1>
-                    <LoaderCircle   size="50" speed="1.10" color="orange" className="animate-spin"/>
+                      <Loader   size="50" speed="1.10" color="orange" className="animate-spin"/>
                       <img
                         src="logo.png"
                         alt="My Logo"

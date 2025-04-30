@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { LoaderCircle } from "lucide-react";
+import { Loader } from "lucide-react";
 
 
 const Page = () => {
@@ -46,7 +46,7 @@ const Page = () => {
       {loading ? (
         <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-700 via-gray-900 to-gray-900">
           <h1 className="text-4xl lg:text-6xl font-extrabold tracking-wide leading-tight text-white relative"></h1>
-          <LoaderCircle  size="50" speed="1.10" color="orange" className="animate-spin"/>
+          <Loader  size="50" speed="1.10" color="orange" className="animate-spin"/>
           <img
             src="logo.png"
             alt="My Logo"

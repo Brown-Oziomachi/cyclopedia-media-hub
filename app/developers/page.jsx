@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
-import { LoaderCircle } from "lucide-react";
+import { Loader } from "lucide-react";
 
 function DevelopersPage() {
   const [loading, setLoading] = useState(true);
@@ -76,7 +76,7 @@ function DevelopersPage() {
       {loading ? (
         <div className="flex justify-center items-center h-screen bg-gray-800">
           <h1 className="text-4xl font-bold text-red-500"></h1>
-          <LoaderCircle  size="50" speed="1.10" color="orange" className="animate-spin"/>
+          <Loader  size="50" speed="1.10" color="orange" className="animate-spin"/>
         </div>
       ) : (
         <main className="bg-gray-100 min-h-screen">          
