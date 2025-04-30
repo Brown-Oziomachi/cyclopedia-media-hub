@@ -1,5 +1,4 @@
 {
-  "$schema": "./schemas/package-schema.json",
   "name": "my-portfolio-webwiz",
   "version": "0.1.0",
   "private": true,
@@ -24,12 +23,10 @@
     "next": "^15.3.1",
     "next-auth": "^5.0.0-beta.25",
     "nodemailer": "^6.10.0",
-    "postcss-loader": "^8.1.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^6.20.0",
     "ri": "^0.0.0",
-    "webpack": "^5.99.7",
     "yup": "^1.6.1"
   },
   "devDependencies": {
