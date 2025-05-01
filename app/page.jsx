@@ -3,7 +3,8 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import Footer from '@/components/Footer';
 import Popup from '@/components/Popup';
-import { ArrowRight, ArrowRightToLine,  ChevronRight, LampDesk, LaptopMinimal, Loader, Palette, PersonStanding, Share, Star, Store, Webhook } from 'lucide-react';
+import { ArrowRight, ArrowRightToLine,  ChevronRight, LampDesk, LaptopMinimal, LoaderCircle, Palette, PersonStanding, Share, Star, Store, Webhook } from 'lucide-react';
+import BottomNav from '@/components/BottomNav';
 
 
 
@@ -30,7 +31,7 @@ const Page = () => {
                 <div className="flex justify-center items-center h-dvh z-50 bg-gradient-to-r from-gray-900 via-black to-gray-800">
                  
                   <h1 className="text-4xl lg:text-6xl font-extrabold z-50 tracking-wide leading-tight text-white relative"></h1>
-                  <Loader  size="50" speed="1.10" color="orange" className='animate-spin'/>
+                  <LoaderCircle  size="50" speed="1.10" color="orange" className='animate-spin'/>
                   <img
                     src="logo.png"
                     alt="My Logo"
@@ -70,15 +71,15 @@ const Page = () => {
                   
               
                     {/* Buttons */}
-                    <div className="flex justify-center gap-4 mt-6">
+                    <div className="flex justify-center gap-4 mt-6 group">
                       <Link href="/contact">
-                        <button className="bg-cyan-500 flex gap-2 hover:bg-gray-800 hover:text-cyan-500 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg">
+                        <button className=" hover:text-xl bg-cyan-500 flex gap-2 hover:bg-gray-800 hover:text-cyan-500 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg group-hover:bg-gray-800 group-hover:text-gray-800 ">
                           Get Started
                         <ArrowRightToLine />
                         </button>
                       </Link>
                       <Link href="/about">
-                        <button className="bg-gray-800 flex gap-2 hover:bg-gray-700 text-cyan-400 px-6 py-3 rounded-lg font-semibold transition-all shadow-lg">
+                        <button className="hover:text-xl group-hover:bg-cyan-500 group-hover:text-cyan-500  bg-gray-800 flex gap-2 hover:bg-gray-700 text-cyan-400 px-6 py-3 rounded-lg font-semibold transition-all shadow-lg group">
                           Learn More
                           <ChevronRight />
                         </button>
@@ -97,7 +98,6 @@ const Page = () => {
       {/* Moon */}
       <div className="absolute w-40 h-40 rounded-full z-0 bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse"></div>
     </div>
-
 
 
 
@@ -124,9 +124,9 @@ const Page = () => {
            we channel this energy to help your ideas thrive. With personalized strategies, unparalleled creativity,
            and a commitment to excellence, we empower you to shine brighter in your industry</h5>
         <Link href={session ? "/contact" : "/auth/signin"}>
-          <button className="bg-orange-500 flex mx-auto gap-2 hover:bg-orange-600 text-white px-8 py-4 text-lg rounded-lg font-bold shadow-lg transition-all">
+          <button className="bg-orange-500 flex mx-auto gap-2 hover:bg-orange-600 hover:animate-pulse text-white px-8 py-4 text-lg rounded-lg font-bold shadow-lg transition-all">
             Connect
-            <ArrowRight className='hover:animate-bounce' />
+            <ArrowRight className='hover:animate-pulse' />
           </button>
         </Link>
       
@@ -180,7 +180,7 @@ const Page = () => {
       buttons: [
         { text: "Read More", href: "/lessons", icon: ChevronRight },
         { text: "Hire a Developer", href: "/developers", icon: PersonStanding },
-        { text: "Get Started", href: "/contact", icon: ArrowRightToLine },
+        { text: "Get Started", href: "/contact", icon: ArrowRightToLine,},
       ],
     }].map((item, index) => (
       <div
@@ -191,10 +191,10 @@ const Page = () => {
           {item.title}
         </h3>
         <p className="text-gray-400 mb-6">{item.description}</p>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 group">
           {item.buttons.map((button, btnIndex) => (
              <Link key={btnIndex} href={button.href}>
-                <p className="px-4 py-2 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600 transition flex items-center gap-2">
+                <p className=" group-hover:text-orange-500 px-4 py-2 bg-orange-500 text-white hover:text-white rounded-lg font-semibold hover:bg-orange-600 transition flex items-center gap-2">
                   {button.text}
                   {button.icon && <button.icon />}
                 </p>
@@ -398,8 +398,9 @@ const Page = () => {
     </div>
   </div>
   </div>
+  <BottomNav/>
 
-  <Footer/>
+  <Footer className="h-dvh"/>
   </>
   )
 }

@@ -1,6 +1,5 @@
 "use client";
 import { auth } from "@/auth";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import React from "react";
 

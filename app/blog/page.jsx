@@ -44,7 +44,7 @@ const Page = ({ session }) => {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white px-8 py-30">
+    <main className="min-h-screen bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white px-8 py-20">
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
         <header className="mb-12 text-center">

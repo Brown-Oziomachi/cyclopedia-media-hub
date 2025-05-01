@@ -106,8 +106,8 @@ const Footer = () => {
         </div>
   
         {/* Quick Links Section */}
-        <div className="container mx-auto px-6 lg:px-20 mt-10 text-center lg:text-left">
-          <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
+        <div className="container mx-auto px-6 lg:px-20 mt-5 text-center lg:text-left py-10">
+          <h3 className="text-lg font-semibold text-white mb-0">Quick Links</h3>
           <ul className="flex flex-wrap justify-center lg:justify-start gap-4">
             <li>
               <Link href="/privacypolicy">

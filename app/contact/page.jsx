@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import { db2 } from "@/lib/firebaseConfig";
-import { Loader, ThumbsUp } from "lucide-react";
+import { LoaderCircle, ThumbsUp } from "lucide-react";
 
 // Validation Schema
 const valSchema = Yup.object({
@@ -62,7 +62,7 @@ const ContactPage = () => {
                     <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-900 via-black to-gray-800 ">
                      
                       <h1 className="text-4xl lg:text-6xl font-extrabold tracking-wide leading-tight text-white relative"></h1>
-                      <Loader   size="50" speed="1.10" color="orange" className="animate-spin"/>
+                    <LoaderCircle   size="50" speed="1.10" color="orange" className="animate-spin"/>
                       <img
                         src="logo.png"
                         alt="My Logo"
@@ -72,10 +72,10 @@ const ContactPage = () => {
                   ) : (
         <main className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white min-h-screen z-0 ">
           {/* Desktop Layout */}
-          <section className="container mx-auto px-5 lg:px-20 py-50 lg:flex lg:space-x-10">
+          <section className="container mx-auto px-5 lg:px-20 py-30 lg:flex lg:space-x-10 ">
             {/* Introduction / Information */}
             <div className="flex-1 space-y-6">
-              <img src="Ai.png" alt="Webwiz Logo" className="w-50 lg:w-50 h-auto mb-6 mx-auto lg:mx-0" />
+              <img src="Ai.png" alt="Webwiz Logo" className="w-100 lg:w-100 h-auto mb-6 mx-auto lg:mx-0 hover:scale-50" />
               <h1 className="text-4xl lg:text-6xl font-extrabold text-white">Contact WebWiz</h1>
               <div className="text-lg lg:text-xl text-gray-300 leading-relaxed mt-4">
                 At WebWiz, we are dedicated to bringing your ideas to life. Whether you're looking

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
-import { Loader } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 
 function DevelopersPage() {
   const [loading, setLoading] = useState(true);
@@ -76,7 +76,7 @@ function DevelopersPage() {
       {loading ? (
         <div className="flex justify-center items-center h-screen bg-gray-800">
           <h1 className="text-4xl font-bold text-red-500"></h1>
-          <Loader  size="50" speed="1.10" color="orange" className="animate-spin"/>
+          <LoaderCircle  size="50" speed="1.10" color="orange" className="animate-spin"/>
         </div>
       ) : (
         <main className="bg-gray-100 min-h-screen">          
@@ -149,22 +149,22 @@ function DevelopersPage() {
                 {developersData.map((developer, index) => (
                   <div
                     key={index}
-                    className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all"
+                    className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all "
                   >
                     <img
                       src={developer.image}
                       alt={developer.name}
                       className="w-full h-40 object-cover rounded-md mb-4"
                     />
-                    <h3 className="text-2xl font-bold text-red-500 mb-2">
+                    <h3 className="text-2xl font-bold text-red-500 mb-2 group-hover:text-white group-hover:bg-red-500 hover:border hover:border-tr-8">
                       {developer.name}
                     </h3>
-                    <p className="text-gray-600 mb-2">{developer.specialty}</p>
-                    <p className="text-sm text-gray-500">{developer.bio}</p>
-                    <div className="flex justify-center gap-4 mt-4">
+                    <p className="text-gray-600 mb-2  ">{developer.specialty}</p>
+                    <p className="text-sm text-gray-500  ">{developer.bio}</p>
+                    <div className="flex justify-center gap-4 mt-4 group-hover:text-red-500">
                       {developer.links.map((link, linkIndex) => (
                         <Link key={linkIndex} href={link.href}>
-                          <p className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
+                          <p className="px-4 py-2 bg-red-500 text-white  rounded-md  hover:text-red-500 hover:bg-white  ">
                             {link.text}
                           </p>
                         </Link>
