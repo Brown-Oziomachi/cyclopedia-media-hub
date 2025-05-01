@@ -140,18 +140,18 @@ const Page = () => {
               Join <span className="text-cyan-400">WebWiz Today!</span>
             </h2>
             <hr />
-            <div className="text-center text-gray-300 lg:text-xl max-w-3xl mx-auto text-base py-5">
+            <div className="text-center text-gray-300 lg:text-xl  mx-auto text-base">
             WebWiz isn’t just a platform; it’s a radiant space where the brilliance of innovation meets opportunity. Like the sun illuminating all it touches, WebWiz empowers developers, innovators, and collaborators to shine. Connect with talent, showcase skills, and create revolutionary ideas that light up your business..
              
             </div>
             
-              <div className="max-w-6xl mx-auto px-6 lg:px-20 ">
+              <div className=" mx-auto px- lg:px-20 ">
          
             <div className="text-center text-gray-300 lg:text-xl">
-              <div className='py-5'>
+              <div className='py-2'>
                 WebWiz is your gateway to cutting-edge technology and creative innovations. We bring the warmth and energy of sunlight to individuals, businesses, and organizations striving to thrive in the digital era. Our dynamic solutions help your vision flourish and illuminate new possibilities.
               </div>
-              <div className='py-5'>
+              <div className='py-2'>
               Whether you're a developer seeking collaboration or a business searching for talent, WebWiz is the sunlit hub for endless opportunities and revolutionary ideas. Let us brighten your journey toward success.
                 <Link href="/auth/signin">
                   <p className="text-yellow-400 underline">Join us today!</p>
@@ -185,7 +185,7 @@ const Page = () => {
     }].map((item, index) => (
       <div
         key={index}
-        className="bg-black z-50 p-10 rounded-lg shadow-md hover:shadow-lg transition border-l-4 border-cyan-500 mb-10"
+        className="bg-black z-50 p-10 rounded-lg shadow-md hover:shadow-lg transition border-l-4 border-orange-400 mb-10"
       >
         <h3 className="text-xl lg:text-2xl font-bold text-white mb-4">
           {item.title}
