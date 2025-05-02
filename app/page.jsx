@@ -153,7 +153,7 @@ const Page = () => {
               <div className='py-2'>
               Whether you're a developer seeking collaboration or a business searching for talent, WebWiz is the sunlit hub for endless opportunities and revolutionary ideas. Let us brighten your journey toward success.
                 <Link href="/registration">
-                  <p className="text-yellow-400 underline">Register here!</p>
+                  <p className="text-yellow-600 hover:text-white underline">Register <span className='hover:text-cyan-400'> here!</span></p>
                 </Link>
               </div>
             </div>

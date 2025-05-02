@@ -6,7 +6,11 @@ import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { LoaderCircle } from "lucide-react";
 
-function DevelopersPage() {
+async function DevelopersPage() {
+  const session = await auth()
+  if(!session)
+    redirect(session ? "/developer" : "/auth/signin");
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -17,29 +21,13 @@ function DevelopersPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  
-  useEffect(() => {
-    const fetchSession = async () => {
-      try {
-        const session = await auth();
-        if (!session) {
-          redirect("/developers");
-        } else {
-          setLoading(false);
-        }
-      } catch (error) {
-        console.error("Error fetching session:", error);
-        setLoading(false);
-      }
-    };
 
-    fetchSession();
-  }, []);
+  
 
 
   const developersData = [
     {
-      name: "Brown Emmanuel",
+      name: "Brown Code",
       specialty: "Front-End Developer",
       image: "/brown-profile.jpg",
       bio: "Crafting intuitive UI/UX designs.",
@@ -61,7 +49,73 @@ function DevelopersPage() {
       ],
     },
     {
-      name: "John Smith",
+      name: "Dev Viktor",
+      specialty: "Frontend Developer",
+      image: "/john-profile.jpg",
+      bio: "End-to-end web solutions.",
+      links: [
+        { text: "Portfolio", href: "/john-portfolio" },
+        { text: "GitHub", href: "https://github.com/johnsmith" },
+        { text: "Hire Me", href: "mailto:john.smith@example.com" },
+      ],
+    },
+    {
+      name: "Stella Phoebe",
+      specialty: "Cyber Security",
+      image: "/john-profile.jpg",
+      bio: "End-to-end web solutions.",
+      links: [
+        { text: "Portfolio", href: "/john-portfolio" },
+        { text: "GitHub", href: "https://github.com/johnsmith" },
+        { text: "Hire Me", href: "mailto:john.smith@example.com" },
+      ],
+    },
+    {
+      name: "James Donny",
+      specialty: "Software Developer",
+      image: "/john-profile.jpg",
+      bio: "End-to-end web solutions.",
+      links: [
+        { text: "Portfolio", href: "/john-portfolio" },
+        { text: "GitHub", href: "https://github.com/johnsmith" },
+        { text: "Hire Me", href: "mailto:john.smith@example.com" },
+      ],
+    },
+    {
+      name: "Andy OKey",
+      specialty: "Software Engineer",
+      image: "/john-profile.jpg",
+      bio: "End-to-end web solutions.",
+      links: [
+        { text: "Portfolio", href: "/john-portfolio" },
+        { text: "GitHub", href: "https://github.com/johnsmith" },
+        { text: "Hire Me", href: "mailto:john.smith@example.com" },
+      ],
+    },
+    {
+      name: "Danny Daniel",
+      specialty: "Digital Marketer",
+      image: "/john-profile.jpg",
+      bio: "End-to-end web solutions.",
+      links: [
+        { text: "Portfolio", href: "/john-portfolio" },
+        { text: "GitHub", href: "https://github.com/johnsmith" },
+        { text: "Hire Me", href: "mailto:john.smith@example.com" },
+      ],
+    },
+    {
+      name: "Doper Dopey",
+      specialty: "Web Designer",
+      image: "/john-profile.jpg",
+      bio: "End-to-end web solutions.",
+      links: [
+        { text: "Portfolio", href: "/john-portfolio" },
+        { text: "GitHub", href: "https://github.com/johnsmith" },
+        { text: "Hire Me", href: "mailto:john.smith@example.com" },
+      ],
+    },
+    {
+      name: "Godspeed Cent",
       specialty: "Full-Stack Developer",
       image: "/john-profile.jpg",
       bio: "End-to-end web solutions.",
