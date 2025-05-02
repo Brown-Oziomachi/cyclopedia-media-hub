@@ -10,6 +10,15 @@ function DevelopersPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  
+  useEffect(() => {
     const fetchSession = async () => {
       try {
         const session = await auth();
@@ -27,13 +36,6 @@ function DevelopersPage() {
     fetchSession();
   }, []);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const developersData = [
     {

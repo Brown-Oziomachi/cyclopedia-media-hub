@@ -133,10 +133,9 @@ const Page = () => {
 </div>
 
 
-
           {/* ACTION SECTION */}
-          <div className=" mx-auto px-6 lg:px-50 py-16 bg-black ">
-            <h2 className="text-center text-4xl lg:text-5xl font-extrabold text-white mb-5">
+          <div className=" mx-auto px-6 lg:px-50 py-16 bg-black  border  border-amber-600 shadow-2xl shadow-amber-700">
+            <h2 className="text-center text-4xl lg:text-5xl font-extrabold text-white mb-5 ">
               Join <span className="text-cyan-400">WebWiz Today!</span>
             </h2>
             <hr />
@@ -153,8 +152,8 @@ const Page = () => {
               </div>
               <div className='py-2'>
               Whether you're a developer seeking collaboration or a business searching for talent, WebWiz is the sunlit hub for endless opportunities and revolutionary ideas. Let us brighten your journey toward success.
-                <Link href="/auth/signin">
-                  <p className="text-yellow-400 underline">Join us today!</p>
+                <Link href="/registration">
+                  <p className="text-yellow-400 underline">Register here!</p>
                 </Link>
               </div>
             </div>
