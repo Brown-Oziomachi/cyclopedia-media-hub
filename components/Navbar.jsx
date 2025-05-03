@@ -20,6 +20,8 @@ const ProfileDropdownNavbar = () => {
     { text: "SERVICES", url: "/#services-section", },
     { text: "NEWS", url: "/news", icon: "/News" },
     { text: "DEVELOPERS", url: "/developers", },
+    { text: "PROJECTS", url: "/projects", },
+
     
   ];
   return (
@@ -32,12 +34,10 @@ const ProfileDropdownNavbar = () => {
               width={50}
               height={50}
               alt="WebWiz Logo"
-              className="rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
+              className="rounded-full shadow-xl hover:scale-110 transition-transform duration-100 z-50"
             />
           </Link>
-        {/* <div className="text-white text-2xl font-bold">
-            {Service.icon}
-          </div> */}
+       
         {/* Desktop Navigation Links */}
         <div className="hidden lg:flex items-center gap-6">
           {navItems.map((item, index) => (
@@ -138,7 +138,7 @@ const ProfileDropdownNavbar = () => {
       </button>
 
       <div
-  className={`fixed top-0 left-0 w-full h-full mt-20 bg-black/80 text-white flex flex-col items-center justify-center z-50 overflow-hidden transition-transform ${
+  className={`fixed top-0 left-0 w-full h-full bg-black/80 text-white flex flex-col items-center justify-center z-0 overflow-hidden transition-transform ${
     showNav ? "translate-y-0" : "translate-y-full"
   }`}
 >

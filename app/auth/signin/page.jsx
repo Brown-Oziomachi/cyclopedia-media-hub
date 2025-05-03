@@ -37,7 +37,7 @@ const Page = async () => {
       {/* Right Section: Social Sign-In */}
       <div className="relative w-full lg:w-1/2 flex flex-col gap-6 items-center lg:items-start lg:mt-60 lg:ml-30 z-10 ">
         <h2 className="text-xl lg:text-2xl font-bold text-cyan-400 mb-4 lg:mb-6">
-          Sign in with Social Media
+          Sign in to get started
         </h2>
         <form
           action={async () => {
@@ -45,7 +45,7 @@ const Page = async () => {
             await signIn("google");
           }}
         >
-          <button className="flex items-center gap-3 w-full shadow-md text-lg py-3 px-6 rounded-lg bg-gradient-to-r from-red-700 via-yellow-500 to-green-600 hover:scale-105 transform transition-all duration-300">
+          <button className="flex items-center gap-3 w-full shadow-md text-lg py-3 px-8 rounded-lg bg-gradient-to-r from-red-700 via-yellow-500 to-green-600 hover:scale-105 transform transition-all duration-300">
           <ChartPie  className="text-2xl lg:text-3xl" />
             Continue with Google
           </button>
@@ -67,8 +67,8 @@ const Page = async () => {
             await signIn("github");
           }}
         >
-          <button className="flex items-center gap-3 w-full shadow-md text-lg py-3 px-6 rounded-lg bg-gray-800 hover:scale-105 transform transition-all duration-300">
-          <Github  className="text-2xl lg:text-3xl" />
+          <button className=" text-white flex items-center gap-3 w-full shadow-md text-lg py-3 px-8 rounded-lg bg-gray-800 hover:scale-105 transform transition-all duration-300">
+          <Github  className="text-2xl lg:text-3xl text-white" />
             Continue with GitHub
           </button>
         </form>

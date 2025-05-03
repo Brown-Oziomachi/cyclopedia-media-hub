@@ -15,7 +15,7 @@ const Page = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000); // Adjust the timeout as needed
+    }, 9000); // Adjust the timeout as needed
     return () => clearTimeout(timer);
   }, []);
 
@@ -45,7 +45,7 @@ const Page = () => {
     <>
       {loading ? (
         <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-700 via-gray-900 to-gray-900">
-          <h1 className="text-4xl lg:text-6xl font-extrabold tracking-wide leading-tight text-white relative"></h1>
+          <h1 className="text-xl lg:text-6xl font-extrabold tracking-wide leading-tight text-white relative">Fetching News</h1>
           <LoaderCircle  size="50" speed="1.10" color="orange" className="animate-spin"/>
           <img
             src="logo.png"

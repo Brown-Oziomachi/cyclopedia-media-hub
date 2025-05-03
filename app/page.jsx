@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import Footer from '@/components/Footer';
 import Popup from '@/components/Popup';
-import { ArrowRight, ArrowRightToLine,  ChevronRight, LampDesk, LaptopMinimal, LoaderCircle, Palette, PersonStanding, Share, Star, Store, Webhook } from 'lucide-react';
+import { ArrowRight, ArrowRightToLine,  ChevronRight, LaptopMinimal, LoaderCircle, Palette, PersonStanding, Store, Webhook } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
 
 
@@ -21,10 +21,6 @@ const Page = () => {
     }, []);
  
 
-
-
-
- 
   return (
     <>
      {loading ? (
@@ -117,10 +113,10 @@ const Page = () => {
         </h2>
         
         <div className="text-lg  text-gray-400  mx-auto mb-1">
-        The Sun Web: Bringing Light to Your Digital Presence
+        The <span className='text-orange-400'>sun</span> Web: Bringing Light to Your Digital Presence
         </div>
         <h4 className='text-3xl text-orange-400'>Why the Sun Web?</h4>
-        <h5 className='lg:w-1/2 mx-auto text-gray-400 '>The sun is a universal symbol of growth, clarity, and inspiration. At Webwiz Creation,
+        <h5 className='lg:w-1/2 mx-auto text-orange-400 '>The sun is a universal symbol of growth, clarity, and inspiration. At Webwiz Creation,
            we channel this energy to help your ideas thrive. With personalized strategies, unparalleled creativity,
            and a commitment to excellence, we empower you to shine brighter in your industry</h5>
         <Link href={session ? "/contact" : "/auth/signin"}>
@@ -377,8 +373,8 @@ const Page = () => {
         Webwiz isn't just a platform for developers; it's a space where you can
         uncover talent, collaborate, and thrive. Connect with developers across
         diverse specialties and turn innovative ideas into reality.{" "}
-        <Link href="/auth/signin">
-          <span className="text-yellow-500 underline">Sign up now</span>
+        <Link href="/registration">
+          <span className="text-yellow-500 underline">Register Now</span>
         </Link>
       </p>
     
