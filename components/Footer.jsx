@@ -93,7 +93,7 @@ const Footer = () => {
               />
               <button
                 type="submit"
-                className=" flex gap-2 px-4 py-2 bg-cyan-500 text-white rounded-r-md hover:bg-cyan-600 transition duration-300"
+                className=" flex gap-2 px-4 py-2 cursor-pointer bg-cyan-500 text-white rounded-r-md hover:bg-cyan-600 transition duration-300"
               >
                 Subscribe
                 <MailCheck />

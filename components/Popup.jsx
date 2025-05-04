@@ -28,26 +28,24 @@ const Popup = () => {
             <h2 className="text-xl font-bold mb-4">WEBWIZ CREATION.</h2>
             <img src="AI wiz.png" alt="" />
            
-            <p className="text-black font-serif font-black z-50">
+            <p className="text-black font-serif font-black z-0">
               Please sign in to explore all the features of our website.
             </p>
             <div className="flex justify-end mt-4 z-50">
               <button
                 onClick={closePopup}
-                className="bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition"
+                className="bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition cursor-pointer"
               >
                 Close
               </button>
               <p
                 href="/auth/signin"
-                className=" flex gap-1 ml-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition"
+                className=" flex gap-1 ml-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition cursor-pointer z-50"
               >
                 Sign In
                 <LogIn />
               </p>
-            </div>
-            <div>
-            </div>
+            </div>  
           </div>
         </div>
     )

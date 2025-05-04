@@ -19,9 +19,9 @@ const [loading, setLoading] = useState(true)
   return (
     <>
      {loading ? (
-                    <div className="flex justify-center items-center h-screen z-50 bg-gradient-to-r from-gray-900 via-black to-gray-800">
+                    <div className="flex justify-center items-center h-screen z-50 bg-gradient-to-r from-gray-900 via-black to-orange-400">
                      
-                      <h1 className="text-xl lg:text-xl font-extrabold z-50 tracking-wide leading-tight text-white relative">Loading Projects</h1> <br />
+                      <h1 className="text-xl lg:text-4xl font-extrabold z-50 tracking-wide leading-tight text-white relative">Loading Projects</h1> <br />
                       <LoaderCircle  size="50" speed="1.10" color="orange" className='animate-spin'/>
                       <img
                         src="logo.png"

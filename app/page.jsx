@@ -11,7 +11,8 @@ import BottomNav from '@/components/BottomNav';
 const Page = () => {
     const [loading, setLoading] = useState(true); // Loading state
     const [session] = useState();
-
+    const [showpopup, setShowPopup] = useState(true);
+   
      useEffect(() => {
       const timer = setTimeout(() => {
         setLoading(false);
@@ -20,11 +21,14 @@ const Page = () => {
       return () => clearTimeout(timer);
     }, []);
  
+useEffect(() => {
+  setShowPopup(false);
+})
 
   return (
     <>
      {loading ? (
-                <div className="flex justify-center items-center h-dvh z-50 bg-gradient-to-r from-gray-900 via-black to-gray-800">
+                <div className="flex justify-center items-center h-dvh z-50 bg-gradient-to-r from-gray-900 via-black to-orange-400">
                  
                   <h1 className="text-4xl lg:text-6xl font-extrabold z-50 tracking-wide leading-tight text-white relative"></h1>
                   <LoaderCircle  size="50" speed="1.10" color="orange" className='animate-spin'/>
@@ -69,20 +73,37 @@ const Page = () => {
                     {/* Buttons */}
                     <div className="flex justify-center gap-4 mt-6 group">
                       <Link href="/contact">
-                        <button className=" hover:text-xl bg-cyan-500 flex gap-2 hover:bg-gray-800 hover:text-cyan-500 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg group-hover:bg-gray-800 group-hover:text-gray-800 ">
+                        <button className="cursor-pointer hover:text-xl bg-cyan-500 flex gap-2 hover:bg-gray-800 hover:text-cyan-500 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg group-hover:bg-gray-800 group-hover:text-gray-800 ">
                           Get Started
                         <ArrowRightToLine />
                         </button>
                       </Link>
                       <Link href="/about">
-                        <button className="hover:text-xl group-hover:bg-cyan-500 group-hover:text-cyan-500  bg-gray-800 flex gap-2 hover:bg-gray-700 text-cyan-400 px-6 py-3 rounded-lg font-semibold transition-all shadow-lg group">
+                        <button className="cursor-pointer hover:text-xl group-hover:bg-cyan-500 group-hover:text-cyan-500  bg-gray-800 flex gap-2 hover:bg-gray-700 text-cyan-400 px-6 py-3 rounded-lg font-semibold transition-all shadow-lg group">
                           Learn More
                           <ChevronRight />
                         </button>
                       </Link>
                     </div>
                   </div>
-                  </main>
+
+                  <div className=' border py-1 px-20 m-6 rounded-2xl text-2xl mix-blend-hard-light cursor-pointer'>
+                    <button
+                    onClick={showpopup && (
+                      <h1>Hello This is popup</h1>
+                      
+                    )
+                    
+                  }
+                  className='text-orange-400 animate-pulse cursor-pointer flex  items-center justify-center'>
+                    Watch
+                    <ChevronRight />
+                    <ChevronRight />
+                    <ChevronRight />
+
+                  </button>
+               </div>
+               </main>
               </div>
               
               )
@@ -119,8 +140,8 @@ const Page = () => {
         <h5 className='lg:w-1/2 mx-auto text-orange-400 '>The sun is a universal symbol of growth, clarity, and inspiration. At Webwiz Creation,
            we channel this energy to help your ideas thrive. With personalized strategies, unparalleled creativity,
            and a commitment to excellence, we empower you to shine brighter in your industry</h5>
-        <Link href={session ? "/contact" : "/auth/signin"}>
-          <button className="bg-orange-500 flex mx-auto gap-2 hover:bg-orange-600 hover:animate-pulse text-white px-8 py-4 text-lg rounded-lg font-bold shadow-lg transition-all">
+        <Link href={session ? "/contact" : "/auth/signin"} className='cursor-wait'>
+          <button className="bg-orange-500 flex mx-auto gap-2  cursor-pointer hover:bg-orange-600 hover:animate-pulse text-white px-8 py-4 text-lg rounded-lg font-bold shadow-lg transition-all">
             Connect
             <ArrowRight className='hover:animate-pulse' />
           </button>
@@ -130,12 +151,12 @@ const Page = () => {
 
 
           {/* ACTION SECTION */}
-          <div className=" mx-auto px-6 lg:px-50 py-16 bg-black  border  border-amber-600 shadow-2xl shadow-amber-700">
+          <div className=" mx-auto px-6 lg:px-50 py-16 bg-black  outline-1 outline-white  border-amber-600 shadow-2xl shadow-amber-700">
             <h2 className="text-center text-4xl lg:text-5xl font-extrabold text-white mb-5 ">
               Join <span className="text-cyan-400">WebWiz Today!</span>
             </h2>
             <hr />
-            <div className="text-center text-gray-300 lg:text-xl  mx-auto text-base">
+            <div className="text-center text-gray-300 lg:text-xl  mx-auto text-base ">
             WebWiz isn’t just a platform; it’s a radiant space where the brilliance of innovation meets opportunity. Like the sun illuminating all it touches, WebWiz empowers developers, innovators, and collaborators to shine. Connect with talent, showcase skills, and create revolutionary ideas that light up your business..
              
             </div>
@@ -149,7 +170,7 @@ const Page = () => {
               <div className='py-2'>
               Whether you're a developer seeking collaboration or a business searching for talent, WebWiz is the sunlit hub for endless opportunities and revolutionary ideas. Let us brighten your journey toward success.
                 <Link href="/registration">
-                  <p className="text-yellow-600 hover:text-white underline">Register <span className='hover:text-cyan-400'> here!</span></p>
+                  <p className="text-yellow-600 hover:text-white underline ">Register <span className='hover:text-cyan-400'> here!</span></p>
                 </Link>
               </div>
             </div>
@@ -224,19 +245,21 @@ const Page = () => {
       img: "ourmission.png",
       title: "Our Mission",
       description: "Empowering businesses with innovative web solutions.",
-      buttons: [{ text: "Learn More", href: "/#" }],
+      buttons: [{ text: "Learn More", href: "/about" }],
     },
     {
       img: "ourvision.png",
       title: "Our Vision",
       description: "To be the leading provider of cutting-edge web solutions.",
-      buttons: [{ text: "Explore", href: "/#" }],
+      buttons: [{ text: "Learn More", href: "/about" }],
+
     },
     {
       img: "corevalue.png",
       title: "Core Values",
       description: "Dedicated to building impactful online presences.",
-      buttons: [{ text: "Discover", href: "/#core-value" }],
+      buttons: [{ text: "Learn More", href: "/about" }],
+
     },
     {
       img: "dev.png",
@@ -273,7 +296,7 @@ const Page = () => {
       <div className="flex flex-wrap justify-center gap-4">
         {item.buttons.map((button, btnIndex) => (
           <Link key={btnIndex} href={button.href}>
-            <p className=" flex gap-1 cursor-not-allowed px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-full shadow-md transition duration-300">
+            <p className=" flex gap-1 cursor-pointer px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-full shadow-md transition duration-300">
               {button.text}
               <ChevronRight />
             </p>

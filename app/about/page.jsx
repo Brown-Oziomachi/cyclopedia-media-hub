@@ -19,7 +19,7 @@ const About = () => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen bg-gray-800">
+        <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-900 via-black to-orange-400">
           <h1 className="text-4xl font-bold text-orange-500"></h1>
           <Loader  size="50" speed="1.10" color="orange" className="animate-spin"/>
         </div>
@@ -38,6 +38,7 @@ const About = () => {
                   Our mission is to empower businesses, startups, and individuals by turning ambitious visions into reality. Through innovative solutions, cutting-edge technologies, and relentless dedication, we aim to build digital products that not only meet but exceed expectations. With Webwiz Creation, you get more than just a service—you gain a partner committed to your success every step of the way.
                   </p>
                 </div>
+                <h1 className="text-lg">Are you a developer seeking for collaboration <Link href="/registration"><span className="text-orange-400 underline">Register now</span></Link>  and join Webwiz team.</h1>
                 </header>
 
           <section className="py-16 bg-gray-100">

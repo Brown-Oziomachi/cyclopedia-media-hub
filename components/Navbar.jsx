@@ -28,7 +28,7 @@ const ProfileDropdownNavbar = () => {
     <main className="fixed w-full bg-gradient-to-r from-gray-900 via-black to-gray-800 shadow-lg z-50">
       <section className="px-5 py-4 flex items-center justify-between">
         {/* Logo */}
-          <Link href="/">
+          {/* <Link href="/">
             <Image
               src={logo}
               width={50}
@@ -36,7 +36,7 @@ const ProfileDropdownNavbar = () => {
               alt="WebWiz Logo"
               className="rounded-full shadow-xl hover:scale-110 transition-transform duration-100 z-50"
             />
-          </Link>
+          </Link> */}
        
         {/* Desktop Navigation Links */}
         <div className="hidden lg:flex items-center gap-6">

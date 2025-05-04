@@ -59,37 +59,40 @@ const ContactPage = () => {
   return (
     <>  
     {loading ? (
-                    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-900 via-black to-gray-800 ">
+                    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-900 via-black to-orange-400 ">
                      
                       <h1 className="text-4xl lg:text-6xl font-extrabold tracking-wide leading-tight text-white relative"></h1>
                     <LoaderCircle   size="50" speed="1.10" color="orange" className="animate-spin"/>
                       <img
                         src="logo.png"
                         alt="My Logo"
-                        className="h-30 lg:h-30 mt-10 animate-pulse absolute top-30 left-0 right-0 bottom-0 mx-auto"
+                        className="h-30 lg:h-30 mt-10 animate-pulse absolute top-30 left-0 right-0 bottom-0 mx-auto "
                       />
                     </div>
                   ) : (
-        <main className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white min-h-screen z-0 ">
+        <main className="bg-gradient-to-br from-gray-900 via-black to-orange-400 text-white min-h-screen z-0 ">
           {/* Desktop Layout */}
           <section className="container mx-auto px-5 lg:px-20 py-30 lg:flex lg:space-x-10 ">
             {/* Introduction / Information */}
             <div className="flex-1 space-y-6">
-              <img src="Ai.png" alt="Webwiz Logo" className="w-100 lg:w-100 h-auto mb-6 mx-auto lg:mx-0 hover:scale-50" />
+              <Link href="/">
+              <img src="Ai.png" alt="Webwiz Logo" className="w-100 lg:w-100 h-auto mx-auto  hover:scale-50 cursor-pointer " />
+              </Link>
               <h1 className="text-4xl lg:text-6xl font-extrabold text-white">Contact WebWiz</h1>
-              <div className="text-lg lg:text-xl text-gray-300 leading-relaxed mt-4">
+              <h2 className="text-center mb-0 text-orange-400">The Sun Web</h2>
+              <div className="text-lg lg:text-xl text-gray-300 leading-relaxed mt-1">
                 At WebWiz, we are dedicated to bringing your ideas to life. Whether you're looking
                 for expert web solutions, custom designs, or seamless functionality, we're here to help.
                 Drop us a message and let’s collaborate to build something extraordinary!
               </div>
-              <div className="text-lg lg:text-xl text-gray-300 leading-relaxed">
+              <div className="text-lg lg:text-xl text-gray-300 leading-relaxed max-md:mb-10">
                 📞 Have a question? Call us at <a href="tel:+2348142995114" className="text-cyan-400 hover:underline">+234 8142 995114</a><br />
-                ✉️ Prefer email? Reach out at <a href="mailto:webwizcreation.web@gmail.com" className="text-cyan-400 hover:underline">webwizcreation.web@gmail.com</a>
+                ✉️ Prefer email? Reach out at <a href="mailto:webwizcreation.web@gmail.com" className="text-cyan-400 hover:underline ">webwizcreation.web@gmail.com</a>
               </div>
             </div>
 
             {/* Contact Form */}
-            <div className="flex-1 bg-gray-800 rounded-lg shadow-lg py-10 px-8 z-0 overflow-hidden ">
+            <div className="flex-1 bg-gray-800 rounded-lg shadow-lg py-5 px-8 z-0 overflow-hidden ">
               <Formik
                 initialValues={{
                   name: "",
@@ -186,10 +189,10 @@ const ContactPage = () => {
                     <button
                       disabled={processing}
                       type="submit"
-                      className="w-full bg-cyan-500 text-white py-3 rounded-lg hover:bg-cyan-600 transition"
+                      className="w-full bg-cyan-500 text-white py-3 rounded-lg hover:bg-cyan-600 transition cursor-pointer"
                     >
                       {processing ? (
-                        <span className="flex items-center justify-center">
+                        <span className="flex items-center justify-center ">
                           <LoaderCircle   className="animate-spin text-2xl" />
                         </span>
                       ) : (
