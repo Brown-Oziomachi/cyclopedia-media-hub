@@ -1,6 +1,7 @@
 "use client";
 
 import { auth } from "@/auth";
+import ChatDropdown from "@/components/Chat";
 import { Github, Instagram, Linkedin, } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -168,6 +169,7 @@ const ProfileCard = async () => {
               Resume
             </a>
           </div>
+          <ChatDropdown/>
         </div>
       </main>
     </>

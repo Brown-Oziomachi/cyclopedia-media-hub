@@ -27,7 +27,7 @@ const Page = async () => {
       Step into the future of creativity and possibilities. Sign in to get started!
     </p>
     <div className="w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-xl shadow-lg px-6 py-8 lg:px-8 lg:py-10">
-      <AuthForm />
+      {/* <AuthForm /> */}
     </div>
     
   </div>
