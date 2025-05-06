@@ -8,7 +8,7 @@ import { ChartPie, Facebook, Github } from "lucide-react";
 const Page = async () => {
   const session = await auth();
   if (session) {
-    redirect("/blog");
+    redirect("/myprofile");
   }
 
   return (
@@ -75,11 +75,11 @@ const Page = async () => {
 
         {/* Terms & Privacy */}
         <div className="text-center lg:text-left text-sm text-gray-500 mt-6">
-          By signing in, you accept our{" "}
+          By signing in, you accept our
           <Link href="/privacypolicy" className="text-blue-500 hover:underline">
             Privacy Policy
-          </Link>{" "}
-          and{" "}
+          </Link>
+          and
           <Link href="/termsofservices" className="text-blue-500 hover:underline">
             Terms of Services
           </Link>.

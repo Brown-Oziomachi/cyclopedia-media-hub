@@ -46,7 +46,7 @@ useEffect(() => {
                 <main className="flex flex-col justify-center items-center h-80 lg:h-200 text-center px-4 lg:px-0 ">
                   <div className="space-y-2 ">
                     {/* Webwiz Creation Title */}
-                    <h1 className='text-4xl font-bold lg:text-7xl max-md:mr-30 text-gray-600 max-md:mt-20'>
+                    <h1 className='text-4xl font-bold lg:text-7xl max-md:mr-30 text-gray-600 max-md:mt-40'>
                         WEBWIZ <span className="text-orange-400 max-md:ml-50">CREATION</span>
                     </h1>
                      
@@ -88,7 +88,7 @@ useEffect(() => {
                     </div>
                   </div>
 
-                  <div>
+                  <div className='mb-30'>
                   <PopupVideo/>
 
                </div>

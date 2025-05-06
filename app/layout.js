@@ -7,7 +7,8 @@ import logo from "@/public/logo.png";
 
 export const metadata = {
   title: "Webwiz Creation - The Sun Web",
-  description: "Feed your fantacies",
+  description: "A website development company",
+  keywords: "web development, web design, software development",
   icons: {
     icon: "/logo.png",
     shortcut: "/logo.png",
