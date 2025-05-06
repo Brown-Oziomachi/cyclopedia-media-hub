@@ -6,6 +6,7 @@ import Popup from '@/components/Popup';
 import { ArrowRight, ArrowRightToLine,  ChevronRight, LaptopMinimal, LoaderCircle, Palette, PersonStanding, Store, Webhook } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
 import PopupVideo from '@/components/PopupVideo';
+import ChatDropdown from '@/components/Chat';
 
 
 
@@ -90,7 +91,7 @@ useEffect(() => {
 
                   <div className='mb-30'>
                   <PopupVideo/>
-
+                  <ChatDropdown/>
                </div>
                </main>
               </div>

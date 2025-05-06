@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { BellRing, ChevronDown, ListCollapse, LogIn, LogOut, Menu, Newspaper, Rss,  UserRoundPen } from "lucide-react";
 import logo from "../public/logo.png";
+import ChatDropdown from "./Chat";
 
 
 const ProfileDropdownNavbar = () => {
