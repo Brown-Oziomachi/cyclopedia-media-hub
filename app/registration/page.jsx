@@ -77,7 +77,7 @@ const [loading, setLoading] = useState(false)
 
       
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-gray-900 via-black to-orange-400">
-      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md lg:max-w-lg">
+      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md lg:max-w-lg mt-30">
       <h2 className="text-2xl font-bold mb-4 text-center">Developer Registration</h2>
       {message && <p className="text-green-500">{message}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -166,10 +166,10 @@ const [loading, setLoading] = useState(false)
       </form>
       </div>
       </div>
-
       <div className="text-center text-gray-400 text-sm mt-4">
       <p>Already have an account? <a href="/auth/signin" className="text-cyan-400 hover:underline">Sign In</a></p>
       </div>
+
       </section>
     )
     }
