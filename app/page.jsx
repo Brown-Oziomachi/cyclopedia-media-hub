@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import Popup from '@/components/Popup';
 import { ArrowRight, ArrowRightToLine,  ChevronRight, LaptopMinimal, LoaderCircle, Palette, PersonStanding, Store, Webhook } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
+import PopupVideo from '@/components/PopupVideo';
 
 
 
@@ -45,7 +46,7 @@ useEffect(() => {
                 <main className="flex flex-col justify-center items-center h-80 lg:h-200 text-center px-4 lg:px-0 ">
                   <div className="space-y-2 ">
                     {/* Webwiz Creation Title */}
-                    <h1 className='text-4xl font-bold lg:text-7xl max-md:mr-30 text-gray-600'>
+                    <h1 className='text-4xl font-bold lg:text-7xl max-md:mr-30 text-gray-600 max-md:mt-20'>
                         WEBWIZ <span className="text-orange-400 max-md:ml-50">CREATION</span>
                     </h1>
                      
@@ -87,21 +88,9 @@ useEffect(() => {
                     </div>
                   </div>
 
-                  <div className=' border py-1 px-20 m-6 rounded-2xl text-2xl mix-blend-hard-light cursor-pointer'>
-                    <button
-                    onClick={showpopup && (
-                      <h1>Hello This is popup</h1>
-                      
-                    )
-                    
-                  }
-                  className='text-orange-400 animate-pulse cursor-pointer flex  items-center justify-center'>
-                    Watch
-                    <ChevronRight />
-                    <ChevronRight />
-                    <ChevronRight />
+                  <div>
+                  <PopupVideo/>
 
-                  </button>
                </div>
                </main>
               </div>
@@ -140,7 +129,7 @@ useEffect(() => {
         <h5 className='lg:w-1/2 mx-auto text-orange-400 '>The sun is a universal symbol of growth, clarity, and inspiration. At Webwiz Creation,
            we channel this energy to help your ideas thrive. With personalized strategies, unparalleled creativity,
            and a commitment to excellence, we empower you to shine brighter in your industry</h5>
-        <Link href={session ? "/contact" : "/auth/signin"} className='cursor-wait'>
+        <Link href={session ? "/contact" : "/auth/signin"} className='cursor-pointer'>
           <button className="bg-orange-500 flex mx-auto gap-2  cursor-pointer hover:bg-orange-600 hover:animate-pulse text-white px-8 py-4 text-lg rounded-lg font-bold shadow-lg transition-all">
             Connect
             <ArrowRight className='hover:animate-pulse' />

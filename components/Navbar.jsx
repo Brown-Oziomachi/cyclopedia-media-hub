@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { BellRing, ChevronDown, ListCollapse, LogIn, LogOut, Menu, Newspaper, Rss,  UserRoundPen } from "lucide-react";
+import logo from "../public/logo.png";
 
 
 const ProfileDropdownNavbar = () => {
@@ -26,7 +27,16 @@ const ProfileDropdownNavbar = () => {
   return (
     <main className="fixed w-full bg-gradient-to-r from-gray-900 via-black to-gray-800 shadow-lg z-50">
       <section className="px-5 py-4 flex items-center justify-between">
-         
+        {/* Logo */}
+          <Link href="/">
+            <Image
+              src={logo}
+              width={50}
+              height={50}
+              alt="WebWiz Logo"
+              className="rounded-full shadow-xl hover:scale-110 transition-transform duration-100 z-50"
+            />
+          </Link>
        
         {/* Desktop Navigation Links */}
         <div className="hidden lg:flex items-center gap-6">

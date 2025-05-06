@@ -2,6 +2,7 @@
 
 import { auth } from "@/auth";
 import { Github, Linkedin, Twitter } from "lucide-react";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -13,28 +14,30 @@ const ProfileCard = async () => {
 
   return (
     <>
-      <main className="z-0 max-w-5xl mx-auto bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-lg shadow-2xl mb-10 overflow-hidden text-white">
+      <main className="z-50 max-w-5xl mx-auto bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-lg shadow-2xl mb-10 overflow-hidden text-white">
         {/* Header Section */}
-        <div className="relative h-64">
+        <div className="relative h-64 mt-10">
           <img
             src="/corevalue.png"
             alt="Header Background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-0">
-            <h1 className="text-4xl lg:text-5xl font-extrabold text-white">Brown Code</h1>
+          <div className="absolute inset-0  bg-opacity-100 flex items-center justify-center z-0 ">
+            <h1 className="text-4xl lg:text-5xl font-extrabold text-white z-0">Brown Code</h1>
           </div>
         </div>
 
         {/* Profile Section */}
-        <div className="p-8 lg:flex lg:justify-between lg:items-center">
+        <div className="p-8 lg:flex lg:justify-between lg:items-center z-50">
           <div className="flex flex-col items-center lg:items-start">
             <img
-              src="/bro.png"
+              src="/brown.png"
               alt="Profile Picture"
               className="w-40 h-40 lg:w-52 lg:h-52 rounded-full border-4 border-cyan-400 shadow-lg"
             />
-            <div className="text-center lg:text-left mt-6">
+            <div className="text-center lg:text-left mt-4">
+              <h3 className=" text-xl font-serif font-semibold">Brown Oziomachi</h3>
+              <h4>Company: <Link href="/" className="text-orange-400 underline">webwiz creation</Link></h4>
               <h2 className="text-3xl font-bold">Frontend Web Developer</h2>
               <p className="text-gray-400 mt-2">
                 Passionate about crafting scalable and intuitive user experiences with modern web technologies.
@@ -43,7 +46,7 @@ const ProfileCard = async () => {
           </div>
 
           {/* Social Links */}
-          <div className="flex space-x-6 mt-6 lg:mt-0 justify-center lg:justify-start">
+          <div className="flex space-x-6 mt-6 lg:mt-0 justify-center lg:justify-start z-50">
             <a
               href="https://linkedin.com/in/username"
               target="_blank"
@@ -72,7 +75,7 @@ const ProfileCard = async () => {
         </div>
 
         {/* Skills Section */}
-        <div className="px-8 py-10">
+        <div className="px-8 py-10 z-50">
           <h1 className="text-center text-3xl font-extrabold mb-6">Skills</h1>
           <div className="flex flex-wrap gap-4 justify-center">
             {["HTML", "CSS", "JavaScript", "Node.js", "React", "Next.js", "Tailwind CSS"].map(
@@ -89,7 +92,7 @@ const ProfileCard = async () => {
         </div>
 
         {/* Services Section */}
-        <div className="px-8 py-10 bg-gradient-to-r from-cyan-500 to-blue-600 text-center">
+        <div className="px-8 py-10 bg-gradient-to-r from-cyan-500 to-blue-600 text-center z-50">
           <h2 className="text-4xl font-bold mb-4">Services Offered</h2>
           <p className="text-lg leading-relaxed max-w-3xl mx-auto">
             I offer a range of services to meet your web development needs.
@@ -109,7 +112,7 @@ const ProfileCard = async () => {
         </div>
 
         {/* Hobbies Section */}
-        <div className="px-8 py-10">
+        <div className="px-8 py-10 z-50">
           <h2 className="text-center text-3xl font-extrabold mb-6">Hobbies</h2>
           <div className="flex flex-wrap justify-center gap-4">
             {["Coding", "Gaming", "Photography", "Traveling", "Reading"].map((hobby, index) => (
@@ -124,7 +127,7 @@ const ProfileCard = async () => {
         </div>
 
         {/* Gallery Section */}
-        <div className="px-8 py-10">
+        <div className="px-8 py-10 z-50">
           <h2 className="text-center text-3xl font-extrabold mb-6">Gallery</h2>
           <div className="grid lg:grid-cols-3 gap-6">
             {["gallery1.jpg", "gallery2.jpg", "gallery3.jpg"].map((image, index) => (
@@ -142,7 +145,7 @@ const ProfileCard = async () => {
        
 
         {/* Contact Section */}
-        <div className="px-8 py-10">
+        <div className="px-8 py- z-50">
           <h2 className="text-center text-3xl font-extrabold mb-6">Contact</h2>
           <p className="text-center text-lg text-gray-300 mb-6">
             Interested in collaborating or hiring me? Feel free to reach out!
