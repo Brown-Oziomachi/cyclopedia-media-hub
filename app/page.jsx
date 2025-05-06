@@ -41,7 +41,7 @@ useEffect(() => {
                 </div>
               ) : (
                 
-                <div className=" py-20  bg-gradient-to-r from-gray-950 via-black to-orange-400 text-white  rounded-tr-full rounded-ss-full relative overflow-hidden">
+                <div className=" py-20  bg-gradient-to-r from-gray-700 via-black to-orange-400 text-white  rounded-tr-full rounded-ss-full relative overflow-hidden">
                 {/* Hero Section */}
                 <main className="flex flex-col justify-center items-center h-80 lg:h-200 text-center px-4 lg:px-0 ">
                   <div className="space-y-2 ">
@@ -51,7 +51,7 @@ useEffect(() => {
                     </h1>
                      
                     
-              <Popup/>
+              {/* <Popup/> */}
                     {/* The Moon Web Title */}
                     <div className="flex items-center justify-center ">
                       <h1 
@@ -125,7 +125,7 @@ useEffect(() => {
         <div className="text-lg  text-gray-400  mx-auto mb-1">
         The <span className='text-orange-400'>sun</span> Web: Bringing Light to Your Digital Presence
         </div>
-        <h4 className='text-3xl text-orange-400'>Why the Sun Web?</h4>
+        <h4 className='text-3xl text-white'>Why the Sun Web?</h4>
         <h5 className='lg:w-1/2 mx-auto text-orange-400 '>The sun is a universal symbol of growth, clarity, and inspiration. At Webwiz Creation,
            we channel this energy to help your ideas thrive. With personalized strategies, unparalleled creativity,
            and a commitment to excellence, we empower you to shine brighter in your industry</h5>
