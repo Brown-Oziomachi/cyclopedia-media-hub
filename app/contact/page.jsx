@@ -78,14 +78,14 @@ const ContactPage = () => {
               <Link href="/">
               <img src="Ai.png" alt="Webwiz Logo" className="w-100 lg:w-100 h-auto mx-auto  hover:scale-50 cursor-pointer " />
               </Link>
-              <h1 className="text-4xl lg:text-6xl font-extrabold text-white">Contact WebWiz</h1>
+              <h1 className="text-4xl lg:text-6xl font-extrabold text-white max-lg:text-center">Contact WebWiz</h1>
               <h2 className="text-center mb-0 text-orange-400">The Sun Web</h2>
               <div className="text-lg lg:text-xl text-gray-300 leading-relaxed mt-1">
                 At WebWiz, we are dedicated to bringing your ideas to life. Whether you're looking
                 for expert web solutions, custom designs, or seamless functionality, we're here to help.
                 Drop us a message and let’s collaborate to build something extraordinary!
               </div>
-              <div className="text-lg lg:text-xl text-gray-300 leading-relaxed max-md:mb-10">
+              <div className="text-lg lg:text-xl text-gray-300 leading-relaxed max-lg:mb-10">
                 📞 Have a question? Call us at <a href="tel:+2348142995114" className="text-cyan-400 hover:underline">+234 8142 995114</a><br />
                 ✉️ Prefer email? Reach out at <a href="mailto:webwizcreation.web@gmail.com" className="text-cyan-400 hover:underline ">webwizcreation.web@gmail.com</a>
               </div>

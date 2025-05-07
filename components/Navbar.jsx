@@ -17,6 +17,7 @@ const ProfileDropdownNavbar = () => {
     { text: "HOME", url: "/",  },
     { text: "ABOUT", url: "/about", },
     { text: "BLOG", url: "/blog",},
+    { text: "POST", url: "/upload-to-blog", },
     { text: "CONTACT", url: "/contact", },
     { text: "SERVICES", url: "/#services-section", },
     { text: "NEWS", url: "/news", icon: "/News" },

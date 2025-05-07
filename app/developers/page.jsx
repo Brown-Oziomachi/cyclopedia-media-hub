@@ -1,41 +1,36 @@
 "use server";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { auth } from "@/auth";
 
 
 async function DevelopersPage() {
-  const session = await auth();
-  if (!session) {
-    redirect("/auth/signin");
-  }
+
   const developersData = [
     {
-      name: "Brown Emmanuel",
+      name: "Brown Code",
       specialty: "Front-End Developer",
-      image: "/brown-profile.jpg",
+      image: "/coderer.png",
       bio: "Crafting intuitive UI/UX designs.",
       links: [
         { text: "Portfolio", href: "/myprofile" },
-        { text: "GitHub", href: "https://github.com/brownemmanuel" },
+        { text: "GitHub", href: "https://github.com/Brown-Oziomachi" },
         { text: "Hire Me", href: "mailto:browncemmanuel@gmail.com" },
       ],
     },
     {
-      name: "Jane Doe",
-      specialty: "Back-End Developer",
-      image: "/jane-profile.jpg",
+      name: "Victor_D3v",
+      specialty: "Front-End Developer",
+      image: "/victorr.png",
       bio: "Specialist in server-side logic.",
       links: [
         { text: "Portfolio", href: "/jane-portfolio" },
         { text: "GitHub", href: "https://github.com/janedoe" },
-        { text: "Hire Me", href: "mailto:jane.doe@example.com" },
+        { text: "Hire Me", href: "mailto:jane.doe@gmail.com" },
       ],
     },
     {
-      name: "John Smith",
-      specialty: "Full-Stack Developer",
-      image: "/john-profile.jpg",
+      name: "Dev_Hiba",
+      specialty: "Front-End Developer",
+      image: "/hiba.png",
       bio: "End-to-end web solutions.",
       links: [
         { text: "Portfolio", href: "/john-portfolio" },
@@ -108,22 +103,22 @@ async function DevelopersPage() {
           <h2 className="text-4xl font-bold text-center text-red-500 mb-10">
             Meet Our Developers
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ">
             {developersData.map((developer, index) => (
               <div
                 key={index}
-                className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all "
+                className=" p-6 rounded-lg shadow-lg hover:shadow-xl transition-all bg-gray-900 "
               >
                 <img
                   src={developer.image}
                   alt={developer.name}
-                  className="w-full h-40 object-cover rounded-md mb-4"
+                  className="w-full h-100 rounded-md mb-4"
                 />
-                <h3 className="text-2xl font-bold text-red-500 mb-2 group-hover:text-white group-hover:bg-red-500 hover:border hover:border-tr-8">
+                <h3 className="text-center text-2xl font-bold text-red-500 mb-2 group-hover:text-white group-hover:bg-red-500 hover:border hover:border-tr-8">
                   {developer.name}
                 </h3>
-                <p className="text-gray-600 mb-2  ">{developer.specialty}</p>
-                <p className="text-sm text-gray-500  ">{developer.bio}</p>
+                <p className="text-gray-600 mb-2 text-center ">{developer.specialty}</p>
+                <p className="text-sm text-gray-500  text-center">{developer.bio}</p>
                 <div className="flex justify-center gap-4 mt-4 group-hover:text-red-500">
                   {developer.links.map((link, linkIndex) => (
                     <Link key={linkIndex} href={link.href}>

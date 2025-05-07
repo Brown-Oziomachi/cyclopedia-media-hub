@@ -6,135 +6,113 @@ import Link from "next/link";
 import { db1 } from "@/lib/firebaseConfig";
 import { ChevronsRight } from "lucide-react";
 
-const Page = ({ session }) => {
-  
-  const [blog, setBlog] = useState([]); // Stores all blogs
-  const [filteredBlogs, setFilteredBlogs] = useState([]); // Stores filtered blogs based on category
-  const [loading, setLoading] = useState(true); // Loading state
-  const [selectedCategory, setSelectedCategory] = useState(null); // Tracks currently selected category
-
-  // Fetch blog posts from Firebase
-  const fetchBlog = async () => {
-    setLoading(true);
-    try {
-      const blogData = [];
-      const querySnapshot = await getDocs(collection(db1, "blog"));
-      querySnapshot.forEach((doc) => {
-        const blog = { id: doc.id, ...doc.data() };
-        blogData.push(blog);
-      });
-      setBlog(blogData); // Store all blog data
-      setFilteredBlogs(blogData); // Initially, show all blogs
-    } catch (error) {
-      console.error("Error fetching blog:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+const BlogPage = () => {
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
-    fetchBlog();
+    const fetchBlogs = async () => {
+      setLoading(true);
+      try {
+        const querySnapshot = await getDocs(collection(db1, "blog"));
+        const blogs = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setBlogPosts(blogs);
+        setFilteredPosts(blogs);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
   }, []);
 
-  // Filter blogs by category
-  const handleCategoryClick = (category) => {
+  const filterByCategory = (category) => {
     setSelectedCategory(category);
-    const filtered = blog.filter((item) => item.genre === category);
-    setFilteredBlogs(filtered);
+    const filtered = blogPosts.filter((post) => post.genre === category);
+    setFilteredPosts(filtered);
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white px-8 py-20">
-      <div className="max-w-6xl mx-auto">
-        {/* Header Section */}
-        <header className="mb-12 text-center">
-          <h1 className="text-6xl font-extrabold">Discover Amazing Blog Posts</h1>
-          <p className="mt-4 text-xl text-gray-400">
-            Inspiration, Stories, and Insights
-          </p>
+    <main className="min-h-screen bg-gray-950 text-white px-8 py-16">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <header className="text-center mb-12">
+          <h1 className="text-6xl font-bold tracking-tight">Discover Inspiring Blog Posts</h1>
+          <p className="text-xl text-gray-400 mt-3">Explore unique insights, stories, and expert opinions</p>
         </header>
 
-        {/* Popular Categories Section */}
-        <div className="mb-12">
-          <h2 className="text-center text-3xl font-extrabold mb-6">
-            Popular Categories
-          </h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            {["Technology", "Lifestyle", "Coding", "Health", "Finance", "Travel"].map(
-              (category, index) => (
-                <button
-                  key={index}
-                  className={`py-2 px-4 rounded-lg shadow-md transition duration-300 ${
-                    selectedCategory === category
-                      ? "bg-yellow-600 text-black"
-                      : "bg-yellow-500 text-black hover:bg-yellow-600"
-                  }`}
-                  onClick={() => handleCategoryClick(category)}
-                >
-                  {category}
-                </button>
-              )
-            )}
+        {/* Categories */}
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-semibold mb-6">Popular Categories</h2>
+          <div className="flex justify-start items-center md:animate-none overflow-x-auto max-md:whitespace-nowrap snap-x snap-mandatory">
+            {["Technology", "Lifestyle", "Coding", "Health", "History","Nature", "Finance", "Travel", "Faith", "Religion", "Sex", "Wealth", "Business", "Ideas", "Action", "Drama", "Romance", "Music", "Mystery", "Fantasy", "Education", "Horror", "Comedy", "Adventure", 
+            "Documentary", "Marriage", "Teens","Fashions", "Mothers","Knowledge","Ignorance", "Fathers","Divorce", "Sports", "Street", "Strategy", "Animals", "News", "Politics", "Prayer", "Relationship", "Wisdom"  ].map((category) => (
+              <button
+                key={category}
+                className={`px-6 py-3 rounded-xl text-lg font-medium transition-all ${
+                  selectedCategory === category ? "bg-yellow-600 text-black" : "bg-yellow-500 text-black hover:bg-yellow-600"
+                }`}
+                onClick={() => filterByCategory(category)}
+              >
+                {category}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Display Selected Category */}
+        {/* Selected Category Display */}
         {selectedCategory && (
           <div className="text-center mb-6">
             <h3 className="text-lg font-semibold text-gray-300">
-              Showing posts for:{" "}
-              <span className="text-yellow-500 font-bold">{selectedCategory}</span>
+              Showing posts for: <span className="text-yellow-500 font-bold">{selectedCategory}</span>
             </h3>
           </div>
         )}
 
-        {/* Blog Section */}
+        {/* Blog Posts Section */}
         {loading ? (
           <div className="flex justify-center items-center h-[50vh]">
             <div className="w-14 h-14 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
-        ) : filteredBlogs.length > 0 ? (
-          <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10">
-            {filteredBlogs.map((item, index) => (
-              <article
-          key={index}
-          className="p-6 rounded-lg bg-gradient-to-b from-gray-900 to-gray-700 shadow-lg relative"
-              >
-          <span className="absolute top-4 left-4 bg-yellow-500 text-black text-xs px-3 py-1 rounded-full">
-            {item.genre || "General"}
-          </span>
-          <div className="flex flex-col items-center">
-            <h2 className="text-3xl font-bold mb-3 text-center py-5">
-              {item.title}
-            </h2>
-            <p className="text-sm text-gray-400 mb-2">by {item.author}</p>
-            <p className="line-clamp-3 text-sm text-gray-300 mb-4 text-center">
-              {item.body}
-            </p>
-          </div>
-          <p className="text-xs text-gray-400 text-center">
-            Posted on {item.timestamp || "Unknown Date"}
-          </p>
-          <Link
-            href={`/blog/${item.id}`}
-            className="mt-5 block px-4 py-2 bg-yellow-500 text-black rounded-full text-center font-semibold hover:bg-yellow-600 transition-all"
-          >
-            Read More <ChevronsRight  className="inline-block ml-1" />
-          </Link>
+        ) : filteredPosts.length > 0 ? (
+          <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
+            {filteredPosts.map((post) => (
+              <article key={post.id} className="p-6 rounded-xl bg-gradient-to-b from-gray-900 to-gray-700 shadow-lg relative">
+                <span className="absolute top-4 left-4 bg-yellow-500 text-black text-xs px-3 py-1 rounded-full">
+                  {post.genre || "General"}
+                </span>
+                <div className="flex flex-col items-center text-center">
+                  <h2 className="text-4xl font-bold mb-3 py-5">{post.title}</h2>
+                  <p className="text-sm text-gray-400 mb-2">by {post.author}</p>
+                  <p className="line-clamp-3 text-sm text-gray-300 mb-4">{post.body}</p>
+                </div>
+                <p className="text-xs text-gray-400 text-center">Posted on {post.timestamp || "Unknown Date"}</p>
+                <Link
+                  href={`/blog/${post.id}`}
+                  className="mt-5 block px-4 py-3 bg-yellow-500 text-black rounded-full text-center font-semibold hover:bg-yellow-600 transition-all"
+                >
+                  Read More <ChevronsRight className="inline-block ml-1" />
+                </Link>
               </article>
             ))}
           </section>
         ) : (
-          <div className="text-center text-lg text-gray-300">
-            No blog posts available for the selected category.
-          </div>
+          <div className="text-center text-lg text-gray-300">No blog posts available for the selected category.</div>
         )}
+
+        {/* About Section */}
         <div className="mt-20 bg-gray-800 p-6 rounded-lg text-center">
           <h2 className="text-3xl font-extrabold mb-4">About Our Blog</h2>
           <p className="text-gray-300 leading-relaxed max-w-3xl mx-auto">
-            Dive into stories and insights that inspire, educate, and entertain.
-            From technology and web development to lifestyle and creativity, we
-            bring diverse perspectives together in one place.
+            Dive into stories and insights that inspire, educate, and entertain. 
+            From technology and web development to lifestyle and creativity, we bring diverse perspectives together in one place.
           </p>
         </div>
       </div>
@@ -142,4 +120,4 @@ const Page = ({ session }) => {
   );
 };
 
-export default Page;
+export default BlogPage;

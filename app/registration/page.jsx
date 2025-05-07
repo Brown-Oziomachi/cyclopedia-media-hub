@@ -1,60 +1,66 @@
 "use client"
-import { LoaderCircle } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
-import { db3, } from "@/lib/firebaseConfig";
-import { getDocs } from 'firebase/firestore';
+import Link from "next/link";
+import * as Yup from "yup";
+import React, { useEffect, useState } from "react";
+import { collection, addDoc } from "firebase/firestore";
+import { Field, Form, Formik, ErrorMessage } from "formik";
+import { db2 } from "@/lib/firebaseConfig";
+import { LoaderCircle, ThumbsUp } from "lucide-react";
 
 
 
 const page = () => {   
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    skills: "",
-  });
+const [loading, setLoading] = useState(false)
+const [processing, setProcessing] = useState(false);
+const [modalVisibility, setModalVisibility] = useState(false);
 
-  const [message, setMessage] = useState("");
 
-  // Handle form input changes
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+// Validation Schema
+const valSchema = Yup.object({
+  name: Yup.string().required("Name is required"),
+  skills: Yup.string().required("Skills is required"),
+  tel: Yup.string().required("Tel is required"),
+  bio: Yup.string().required("Bio is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  url: Yup.string().required("Short bio is required"),
+  url: Yup.string().required("Portfolio is required"),
+  url: Yup.string().required("Github Link is required"),
+});
 
-  // Submit form data to Firebase
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const fetchData = async () => {
-    
-    try {
-      const formData = [];
-       const querySnapshot =  await getDocs(collection(db3, "webwizcreation"));
-       querySnapshot.forEach((doc) => {
-        const formData = {id: doc.id, ...doc.data() };
-        formData.push(formData)
-       })
-      setMessage("Registration successful!");
-      setFormData({ name: "", email: "", skills: "",  }); // Reset form
+useEffect(() => {
+ const timer = setTimeout( ()=> {
+   setLoading(false)
+ }, 10000)
+
+ return ()=> clearTimeout(timer)
+},[]);
+
+const handleSubmit = async (values, { resetForm }) => {
+try {
+  setProcessing(true);
+  
+      const webwizformDoc = {
+        name: values.name,
+        tel: values.number,
+        email: values.email,
+        skills: values.skills,
+        url: values.url,
+        bio: values.bio,
+        timestamp: new Date().toLocaleDateString(),
+      };
+
+      const webwizformRef = await addDoc(collection(db2, "contactForm"), webwizformDoc);
+      console.log(webwizformRef.id);
+
+      resetForm();
+      setModalVisibility(true);
     } catch (error) {
-      console.error("Error adding document:", error);
-      setMessage("Error registering. Please try again.");
+      console.error("Error sending form", error);
+      alert("Please check your network. Try again!");
     } finally {
-      setLoading(false);
+      setProcessing(false);
     }
   };
-  const collection =  db3.collection("webwizcreation");
-  useEffect(() => {
-    fetchData();
-  }, []);
-}
-const [loading, setLoading] = useState(false)
-
- useEffect(() => {
-  const timer = setTimeout( ()=> {
-    setLoading(false)
-  }, 10000)
-
-  return ()=> clearTimeout(timer)
- },[]);
 
 
    
@@ -79,102 +85,162 @@ const [loading, setLoading] = useState(false)
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-gray-900 via-black to-orange-400">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md lg:max-w-lg mt-30">
       <h2 className="text-2xl font-bold mb-4 text-center">Developer Registration</h2>
-      {message && <p className="text-green-500">{message}</p>}
-      <form onSubmit={handleSubmit} className="space-y-4">
-      <input
+      <Formik
+       initialValues={{
+        name: "",
+        tel: "",
+        email: "",
+        skills: "",
+        url: "",
+        bio: "",
+      }}
+      validationSchema={valSchema}
+      onSubmit={handleSubmit}
+    >
+      <Form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+
+      <Field
       type="text"
       name="name"
       placeholder="Full Name"
-      value={formData.name}
-      onChange={handleChange}
       className="w-full p-3 border rounded focus:ring focus:ring-blue-200"
       required
       minLength="3"
       maxLength="50"
       />
-      <input
+      <ErrorMessage
+         name="name"
+        component="p"
+        className="text-sm text-red-500"
+        />
+        </div>
+
+       <div>
+
+      <Field
       type="email"
       name="email"
       placeholder="Email"
-      value={formData.email}
-      onChange={handleChange}
       className="w-full p-3 border rounded focus:ring focus:ring-blue-200"
       required
       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
       />
-      <input
+      <ErrorMessage
+                              name="email"
+                              component="p"
+                              className="text-sm text-red-500"
+                            />
+
+      </div>
+
+      <div>
+      <Field
       type="text"
       name="skills"
       placeholder="Skills (e.g., JavaScript, React)"
-      value={formData.skills}
-      onChange={handleChange}
       className="w-full p-3 border rounded focus:ring focus:ring-blue-200"
       required
       minLength="2"
       maxLength="100"
       />
-       <input
-      type="tel"
-      name="phone"
-      placeholder="Phone Number"
-      value={formData.phone || ''}
-      onChange={handleChange}
-      className="w-full p-3 border rounded focus:ring focus:ring-blue-200"
-      required
-      pattern="[0-9]{10}"
-      />
-       <textarea
+      <ErrorMessage
+                              name="skills"
+                              component="p"
+                              className="text-sm text-red-500"
+                            />
+
+      </div>
+
+      
+      <div>
+
+       <Field
       name="bio"
       placeholder="Short Bio"
-      value={formData.bio || ''}
-      onChange={handleChange}
       className="w-full p-3 border rounded focus:ring focus:ring-blue-200"
       required
       minLength="10"
       maxLength="200"
       />
-       <input
+      <ErrorMessage
+                              name="bio"
+                              component="p"
+                              className="text-sm text-red-500"
+                            />
+      </div>
+
+     <div>
+
+       <Field
       type="url"
       name="portfolioLink"
       placeholder="Portfolio Link"
-      value={formData.portfolioLink || ''}
-      onChange={handleChange}
       className="w-full p-3 border rounded focus:ring focus:ring-blue-200"
       />
-       <input
+      <ErrorMessage
+                              name="url"
+                              component="p"
+                              className="text-sm text-red-500"
+                            />
+     </div>
+
+        <div>
+
+       <Field
       type="url"
       name="githubLink"
       placeholder="GitHub Link"
-      value={formData.githubLink || ''}
-      onChange={handleChange}
       className="w-full p-3 border rounded focus:ring focus:ring-blue-200"
       />
-       <input
-      type="url"
-      name="linkedinLink"
-      placeholder="LinkedIn Link"
-      value={formData.linkedinLink || ''}
-      onChange={handleChange}
-      className="w-full p-3 border rounded focus:ring focus:ring-blue-200"
-      />
+      <ErrorMessage
+                              name="url"
+                              component="p"
+                              className="text-sm text-red-500"
+                            />
+        </div>
+
       <button
+      disabled={processing}
       type="submit"
       className="w-full bg-blue-500 text-white p-3 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200"
       >
-      Register
-      </button>
-      </form>
+     {processing ? (
+                             <span className="flex items-center justify-center ">
+                               <LoaderCircle   className="animate-spin text-2xl" />
+                             </span>
+                           ) : (
+                             "Register"
+                           )}
+                         </button>
+      </Form>
+      
+      </Formik>
+      
+       {modalVisibility && (
+                      <div className="absolute inset-30 bg-opacity-50 flex items-center justify-center">
+                        <div className="bg-white rounded-lg shadow-lg p-20 text-center">
+                          <h1 className="text-xl text-black font-bold ">
+                            Registration Successful
+                          </h1>
+                          <ThumbsUp className="text-4xl text-green-500 mb-4 mx-auto" />
+                          <button
+                            onClick={() => setModalVisibility(false)}
+                            className="bg-cyan-500 hover:bg-cyan-600 text-white py-2 px-10 rounded-lg transition"
+                          >
+                            Close
+                          </button>
       </div>
       </div>
-      <div className="text-center text-gray-400 text-sm mt-4">
-      <p>Already have an account? <a href="/auth/signin" className="text-cyan-400 hover:underline">Sign In</a></p>
+       )
+      }
       </div>
-
+      </div>
       </section>
-    )
+      )
     }
     </>
     )
-}
+  }
 
 export default page

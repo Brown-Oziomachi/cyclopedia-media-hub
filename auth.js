@@ -19,4 +19,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.AUTH_FACEBOOK_SECRET,
     }),
   ],
+  secret: process.env.NEXT_AUTH_SECRET,
 });

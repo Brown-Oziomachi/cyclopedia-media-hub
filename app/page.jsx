@@ -47,7 +47,7 @@ useEffect(() => {
                 <main className="flex flex-col justify-center items-center h-80 lg:h-200 text-center px-4 lg:px-0 ">
                   <div className="space-y-2 ">
                     {/* Webwiz Creation Title */}
-                    <h1 className='text-4xl font-bold lg:text-7xl max-md:mr-30 text-gray-600 max-md:mt-50'>
+                    <h1 className='text-4xl font-bold lg:text-7xl max-md:mr-30 text-gray-600 max-md:mt-30'>
                         WEBWIZ <span className="text-orange-400 max-md:ml-50">CREATION</span>
                     </h1>
                      
@@ -73,7 +73,7 @@ useEffect(() => {
                   
               
                     {/* Buttons */}
-                    <div className="flex justify-center gap-4 mt-6 group">
+                    <div className="flex justify-center gap-4 mt-2 group">
                       <Link href="/contact">
                         <button className="cursor-pointer hover:text-xl bg-cyan-500 flex gap-2 hover:bg-gray-800 hover:text-cyan-500 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg group-hover:bg-gray-800 group-hover:text-gray-800 ">
                           Get Started
@@ -89,10 +89,10 @@ useEffect(() => {
                     </div>
                   </div>
 
-                  <div className='mb-30'>
+                  <div className='max-md:mb-0'>
+               </div>
                   <PopupVideo/>
                   <ChatDropdown/>
-               </div>
                </main>
               </div>
               

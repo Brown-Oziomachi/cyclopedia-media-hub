@@ -45,8 +45,8 @@ function AuthForm() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800 px-4 z-0">
-      <div className="w-full max-w-md bg-gradient-to-br from-gray-800 via-gray-700 to-gray-800 p-6 rounded-lg shadow-lg">
+    <div className="flex flex-col items-center justify-center  px-4 z-0 w-full">
+      <div className="w-full max-w-md bg-gradient-to-br from-gray-800 via-gray-700 to-orange-400 p-6 rounded-lg shadow-lg ">
         <h2 className="text-2xl font-bold text-cyan-400 text-center mb-6">Sign In</h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <input
@@ -68,10 +68,10 @@ function AuthForm() {
           <button
           disabled={processing}
             type="submit"
-            className="w-full py-3 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-semibold hover:scale-105 transform transition-all duration-300"
+            className="w-full py-3 rounded-lg bg-gradient-to-br from-gray-900 via-black to-orange-400 font-bold text-white  hover:scale-105 transform transition-all duration-300 hidden"
           >
             {processing ? (
-              <span className="flex items-center justify-center">
+              <span className="flex items-center justify-center ">
                           <LoaderCircle   className="animate-spin text-2xl" />
                         </span>
                       ) : (

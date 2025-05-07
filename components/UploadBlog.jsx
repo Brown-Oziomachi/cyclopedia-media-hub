@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -7,7 +6,8 @@ import { collection, addDoc } from "firebase/firestore";
 import { db1, } from "@/lib/firebaseConfig"; // Import Firestore and Storage
 import { LoaderCircle, ThumbsUp } from "lucide-react";
 
-// Validation Schema
+
+
 const valSchema = Yup.object({
   title: Yup.string().required("Title is required"),
   body: Yup.string()
@@ -23,10 +23,6 @@ const UploadBlog = ({ session }) => {
   const handleSubmit = async (values, { resetForm }) => {
     try {
       setProcessing(true);
-
-      // Upload the image to Firebase Storage
-     
-      // Create an object to be sent to the database
       const blogData = {
         title: values.title,
         body: values.body,
@@ -34,7 +30,6 @@ const UploadBlog = ({ session }) => {
         author: session?.user?.name || "Anonymous",
         timestamp: new Date().toLocaleDateString(),
       };
-
       const blogRef = await addDoc(collection(db1, "blog"), blogData);
       console.log("Blog ID:", blogRef.id);
 
@@ -49,30 +44,18 @@ const UploadBlog = ({ session }) => {
   };
 
   return (
-    <main className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-800 via-gray-900 to-black p-6">
-      <div className="w-full max-w-lg rounded-lg shadow-xl p-6 bg-gradient-to-r from-gray-700 via-gray-800 to-black">
+    <main className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-800 via-gray-900 to-orange-400 p-6">
+      <div className="w-full max-w-lg rounded-lg shadow-xl p-6 bg-gradient-to-r from-gray-700 via-gray-800 to-orange-400 mt-10">
         <h2 className="text-3xl font-bold text-center text-white mb-6">
           Publish Your Blog
         </h2>
         <Formik
-          initialValues={{ title: "", body: "", genre: "", vidoe: "", image: "" }}
+          initialValues={{ title: "", body: "", genre: "", image: "" }}
           validationSchema={valSchema}
           onSubmit={handleSubmit}
         >
             <Form className="space-y-6">
-              {/* Video URL Input */}
-              <div>
-                <label htmlFor="video" className="block text-sm font-medium text-gray-300">
-                  Video URL
-                </label>
-                <Field
-                  name="video"
-                  type="url"
-                  placeholder="Enter video URL"
-                  className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                />
-                <ErrorMessage name="video" component="p" className="text-sm text-red-600 mt-1" />
-              </div>
+             
 
               {/* Image URL Input */}
               <div>
@@ -135,6 +118,47 @@ const UploadBlog = ({ session }) => {
                   <option value="Health">Health</option>
                   <option value="Finance">Finance</option>
                   <option value="Travel">Travel</option>
+                  <option value="Faith">Faith</option>
+                  <option value="Religion">Religion</option>
+                  <option value="Sex-lesson">Sex-Lesson</option>
+                  <option value="Wealth">Wealth</option>
+                  <option value="Business">Business</option>
+                  <option value="Ideas">Ideas</option>
+                  <option value="Action">Action</option>
+                  <option value="Drama">Drama</option>
+                  <option value="Romance">Romance</option>
+                  <option value="Music">Music</option>
+                  <option value="Mystery">Mystery</option>
+                  <option value="Marriage">Marriage</option>
+                  <option value="Fantasy">Fantasy</option>
+                  <option value="Education">Education</option>
+                  <option value="Nature">Nature</option>
+                  <option value="Horror">Horror</option>
+                  <option value="History">History</option>
+                  <option value="Comedy">Comedy</option>
+                  <option value="Adventure">Adventure</option>
+                  <option value="Documentary">Documentary</option>
+                  <option value="Teens">Teens</option>
+                  <option value="Youth">Youth</option>
+                  <option value="Children">Children</option>
+                  <option value="Mothers">Mothers</option>
+                  <option value="Fathers">Fathers</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Street Art">Street Art</option>
+                  <option value="Strategy">Strategy</option>
+                  <option value="Animals">Animals</option>
+                  <option value="News">News</option>
+                  <option value="Politics">Politics</option>
+                  <option value="Prayer">Prayer</option>
+                  <option value="Relationship">Relationship</option>
+                  <option value="Wisdom">Wisdom</option>
+                  <option value="Divorce">Divorce</option>
+                  <option value="Fashion">Fashion</option>
+                  <option value="Knowledge">Knowledge</option>
+                  <option value="Ignorance">Ignorance</option>
+
+
+
                 </Field>
                 <ErrorMessage name="genre" component="p" className="text-sm text-red-600 mt-1" />
                 </div>
@@ -143,7 +167,7 @@ const UploadBlog = ({ session }) => {
               <button
                 disabled={processing}
                 type="submit"
-                className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition"
+                className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold bg-gradient-to-r from-gray-700 via-gray-800 to-orange-400 shadow-2xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition cursor-pointer"
               >
                 {processing ? (
                   <span className="flex items-center justify-center">
