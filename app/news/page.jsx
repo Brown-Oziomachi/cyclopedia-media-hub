@@ -10,7 +10,7 @@ const Page = () => {
   const [platform, setPlatform] = useState("cnn");
   const [error, setError] = useState(null);
 
-  const apiKey = "8077e1560d2b4646ab9cb6d41cbc3b42";
+  const apiKey = "1c55b74f16d841288b034128f24ecde6";
 
   useEffect(() => {
     const timer = setTimeout(() => {
