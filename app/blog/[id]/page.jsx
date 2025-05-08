@@ -108,6 +108,7 @@ const BlogDetails = ({ params }) => {
           </span>
 
           {/* Title */}
+          <h1>Webwiz Creation</h1>
           <h1 className="text-4xl font-bold text-white mb-4 text-center">{blog.title}</h1>
 
           {/* Author & Like Button */}
@@ -124,7 +125,7 @@ const BlogDetails = ({ params }) => {
           </div>
 
           {/* Timestamp */}
-          <p className="text-gray-400 text-sm mb-6">
+          <p className="text-gray-400 text-sm mb-6 inline-block text-right">
             Posted on {blog.timestamp || "Unknown Date"}
           </p>
 
