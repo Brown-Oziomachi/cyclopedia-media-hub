@@ -93,7 +93,7 @@ const BlogDetails = ({ params }) => {
         <meta name="twitter:description" content={blog.body.substring(0, 160)} />
         {blog.imageUrl && <meta name="twitter:image" content={blog.imageUrl} />}
       </head>
-      <main className="min-h-screen px-6 py-16 max-w-4xl mx-auto bg-black text-gray-200">
+      <main className="min-h-screen px-6 py-16 max-w-4xl mx-auto bg-white text-gray-200">
         {/* Back Button */}
         <div className="flex items-center justify-between mb-6">
           <Link href="/blog" className="text-blue-500 hover:underline text-lg">
@@ -101,14 +101,14 @@ const BlogDetails = ({ params }) => {
           </Link>
         </div>
         {/* Blog Content */}
-        <div className="bg-gray-400 shadow-lg rounded-lg p-8">
+        <div className="bg-gray-900 shadow-lg rounded-lg p-8">
           {/* Category Tag */}
           <span className="inline-block mb-4 px-4 py-1 bg-purple-600 text-white text-sm rounded-full">
             {blog.genre}
           </span>
 
           {/* Title */}
-          <h1 className="text-4xl font-bold text-gray-900 mb-4 text-center">{blog.title}</h1>
+          <h1 className="text-4xl font-bold text-white mb-4 text-center">{blog.title}</h1>
 
           {/* Author & Like Button */}
           <p className="text-gray-600 text-lg">{blog.image}</p>
@@ -134,16 +134,15 @@ const BlogDetails = ({ params }) => {
             <video src={blog.videoUrl} controls className="w-full rounded-xl shadow-xl" />
           ) : (
             <img
-              src={blog.imageUrl || "/logo.png"}
-              alt="Blog Cover"
-              className="rounded-xl shadow-xl w-full h-100 max-md:h-50 object-cover"
+              src={blog.imageUrl || "/"}
+              className=""
             />
           )}
         </div>
 
           <div className="flex items-center gap-4 mb-1 relative">
             <button
-              className="flex items-center gap-2   text-white font-bold py-2 px-4 rounded transition mt-5"
+              className="flex items-center gap-2   text-black font-bold py-2 px-4 rounded transition mt-5"
               onClick={handleShareClick}
             >
               <Share className="h-5 w-5" /> Share
