@@ -22,9 +22,9 @@ async function DevelopersPage() {
       image: "/victorr.png",
       bio: "Specialist in server-side logic.",
       links: [
-        { text: "Portfolio", href: "/jane-portfolio" },
-        { text: "GitHub", href: "https://github.com/janedoe" },
-        { text: "Hire Me", href: "mailto:jane.doe@gmail.com" },
+        { text: "Portfolio", href: "/myprofile" },
+        { text: "GitHub", href: "github.com/Victor-dev0p" },
+        { text: "Hire Me", href: "mailto:victorerukpe496@gmail.com" },
       ],
     },
     {
@@ -33,9 +33,9 @@ async function DevelopersPage() {
       image: "/hiba.png",
       bio: "End-to-end web solutions.",
       links: [
-        { text: "Portfolio", href: "/john-portfolio" },
-        { text: "GitHub", href: "https://github.com/johnsmith" },
-        { text: "Hire Me", href: "mailto:john.smith@example.com" },
+        { text: "Portfolio", href: "/myprofile" },
+        { text: "GitHub", href: "https://github.com/HIBATULLA" },
+        { text: "Hire Me", href: "mailto:devhibatullahismail45@gmail.com" },
       ],
     },
   ];

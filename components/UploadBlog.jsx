@@ -47,7 +47,7 @@ const UploadBlog = ({ session }) => {
     <main className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-800 via-gray-900 to-orange-400 p-6">
       <div className="w-full max-w-lg rounded-lg shadow-xl p-6 bg-gradient-to-r from-gray-700 via-gray-800 to-orange-400 mt-10">
         <h2 className="text-3xl font-bold text-center text-white mb-6">
-          Publish Your Blog
+          Upload To Wiz
         </h2>
         <Formik
           initialValues={{ title: "", body: "", genre: "", image: "" }}
@@ -156,6 +156,11 @@ const UploadBlog = ({ session }) => {
                   <option value="Fashion">Fashion</option>
                   <option value="Knowledge">Knowledge</option>
                   <option value="Ignorance">Ignorance</option>
+                  <option value="Love">Love</option>
+                  <option value="Facts">Facts</option>
+                  <option value="Family">Family</option>
+                  <option value="Culture">Culture</option>
+
 
 
 
