@@ -66,7 +66,9 @@ const BlogPage = () => {
             ))}
           </div>
         </div>
-
+            <div>
+              <h1 className="py-5 font-serif font-bold text-2xl">Latest Post</h1>
+            </div>
         {/* Selected Category Display */}
         {selectedCategory && (
           <div className="text-center mb-6">
@@ -82,21 +84,21 @@ const BlogPage = () => {
             <div className="w-14 h-14 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : filteredPosts.length > 0 ? (
-          <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
+          <section className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-8">
             {filteredPosts.map((post) => (
-              <article key={post.id} className="p-6 rounded-xl bg-gradient-to-b from-gray-900 to-gray-700 shadow-lg relative">
+              <article key={post.id} className="p-6 rounded-xl bg-black shadow-lg relative">
                 <span className="absolute top-4 left-4 bg-yellow-500 text-black text-xs px-3 py-1 rounded-full">
                   {post.genre || "General"}
                 </span>
                 <div className="flex flex-col items-center text-center">
-                  <h2 className="text-4xl font-bold mb-3 py-5">{post.title}</h2>
+                  <h2 className="text-2xl font-bold mb-3 py-3">{post.title}</h2>
                   <p className="text-sm text-gray-400 mb-2">by {post.author}</p>
                   <p className="line-clamp-3 text-sm text-gray-300 mb-4">{post.body}</p>
                 </div>
                 <p className="text-xs text-gray-400 text-center">Posted on {post.timestamp || "Unknown Date"}</p>
                 <Link
                   href={`/blog/${post.id}`}
-                  className="mt-5 block px-4 py-3 bg-yellow-500 text-black rounded-full text-center font-semibold hover:bg-yellow-600 transition-all"
+                  className="mt-5 block px-4 py-3  text-yellow-500 rounded-full text-center font-semibold hover:text-white transition-all"
                 >
                   Read More <ChevronsRight className="inline-block ml-1" />
                 </Link>
