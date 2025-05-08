@@ -16,7 +16,8 @@ const valSchema = Yup.object({
   genre: Yup.string().required("Please select a genre"),
 });
 
-const UploadBlog = ({ session }) => {
+ const UploadBlog = ({ session }) => {
+  
   const [processing, setProcessing] = useState(false);
   const [modalVisibility, setModalVisibility] = useState(false);
 

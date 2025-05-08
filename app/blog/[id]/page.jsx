@@ -93,7 +93,7 @@ const BlogDetails = ({ params }) => {
         <meta name="twitter:description" content={blog.body.substring(0, 160)} />
         {blog.imageUrl && <meta name="twitter:image" content={blog.imageUrl} />}
       </head>
-      <main className="min-h-screen px-6 py-16 max-w-4xl mx-auto  text-gray-800">
+      <main className="min-h-screen px-6 py-16 max-w-4xl mx-auto bg-black text-gray-200">
         {/* Back Button */}
         <div className="flex items-center justify-between mb-6">
           <Link href="/blog" className="text-blue-500 hover:underline text-lg">
@@ -114,13 +114,13 @@ const BlogDetails = ({ params }) => {
           <p className="text-gray-600 text-lg">{blog.image}</p>
           <div className="flex items-center justify-between mb-6">
             <p className="text-gray-600 text-lg text-center">Writer: {blog.author}</p>
-            <button
+            {/* <button
               className="flex items-center text-gray-600 hover:text-red-500 transition-all"
               onClick={handleLikeClick}
             >
               <Heart className={`h-6 w-6 mr-2 ${liked ? "fill-red-500 scale-110" : "fill-none"}`} />
               {liked ? "Liked" : "Like"} ({likes})
-            </button>
+            </button> */}
           </div>
 
           {/* Timestamp */}
@@ -141,10 +141,9 @@ const BlogDetails = ({ params }) => {
           )}
         </div>
 
-        /* Share and Save Section */
-          <div className="flex items-center gap-4 mb-6 relative">
+          <div className="flex items-center gap-4 mb-1 relative">
             <button
-              className="flex items-center gap-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition"
+              className="flex items-center gap-2   text-white font-bold py-2 px-4 rounded transition mt-5"
               onClick={handleShareClick}
             >
               <Share className="h-5 w-5" /> Share
@@ -186,20 +185,23 @@ const BlogDetails = ({ params }) => {
               </div>
             )}
 
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               Save
-            </button>
+            </button> */}
           </div>
-
+          <button
+              className="flex items-center text-gray-600 hover:text-red-500 transition-all"
+              onClick={handleLikeClick}
+            >
+              <Heart className={`h-6 w-6 mr-2 ${liked ? "fill-red-500 scale-110" : "fill-none"}`} />
+              {liked ? "Liked" : "Like"} ({likes})
+            </button>
           {/* Blog Body */}
-        <p className="text-gray-700 leading-7 whitespace-pre-line">{blog.body}</p>
+        <p className="text-gray-700 leading-7 whitespace-pre-line ">{blog.body}</p>
         <div className="flex justify-center mt-8">
-          <Link
-            href="/blog"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Back to Blogs
-          </Link>
+           <Link href="/blog" className="text-blue-500 hover:underline text-lg">
+           ← Back to Blogs
+         </Link>
         </div> 
         </main>
         </>

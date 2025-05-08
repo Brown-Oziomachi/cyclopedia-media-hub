@@ -1,23 +1,18 @@
-"use client";
-import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useSession, signIn } from "next-auth/react"; // Using `next-auth/react`
-import { useRouter } from "next/navigation";
+import { redirect, } from "next/navigation";
 import { ChartPie, Facebook, Github } from "lucide-react";
 import Login from "@/components/Login";
+import { auth, signIn } from "@/auth";
 
 
 
-const Page = () => {
-  const { data: session, status } = useSession(); // Checking if user is logged in
-  const router = useRouter();
+const page = async () => {
+  const session = await auth();
+  if (session) {
+    redirect("/upload-to-blog");
+  }
 
-  useEffect(() => {
-    if (session) {
-      router.push("/myprofile"); // Redirect after successful login
-    }
-  }, [session, router]);
-
+  
   return (
     <main className="min-h-screen flex flex-col lg:flex-row items-center justify-between px-4 lg:px-20 relative z-0">
       {/* Background Glow */}
@@ -35,26 +30,43 @@ const Page = () => {
       <div className="relative w-full lg:w-1/2 flex flex-col gap-6 items-center lg:items-start z-10 lg:mt-30">
         <h2 className="text-xl lg:text-2xl font-bold text-cyan-400 mb-4 lg:mb-6">Sign in to get started</h2>
 
-        <button
-          className="flex items-center gap-3 w-full shadow-md text-lg py-3 px-8 rounded-lg bg-gradient-to-r from-red-700 via-yellow-500 to-green-600 hover:scale-105 transform transition-all duration-300"
-          onClick={() => signIn("google")}
+        <div className="max-w-2xl mx-auto my-1 p-5 flex flex-col justify-center items-center gap-10">
+        <form
+        action={async () => {
+            "use server";
+            await signIn("google");
+          }}
         >
-          <ChartPie className="text-2xl lg:text-3xl" /> Continue with Google
-        </button>
+          <button className="flex items-center md:gap-5 gap-2 shadow-md text-lg py-2 px-20 lg:px-30  rounded-full cursor-pointer text-white bg-gradient-to-r from-red-500 via-green-500 to-yellow-400 transition duration-300">
+            <ChartPie className="text-2xl" />
+             Google
+          </button>
 
-        <button
-          className="flex items-center gap-3 w-full shadow-md text-lg py-3 px-6 rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 hover:scale-105 transform transition-all duration-300"
-          onClick={() => signIn("facebook")}
-        >
-          <Facebook className="text-2xl lg:text-3xl" /> Continue with Facebook
-        </button>
+        </form>
 
-        <button
-          className="text-white flex items-center gap-3 w-full shadow-md text-lg py-3 px-8 rounded-lg bg-gray-800 hover:scale-105 transform transition-all duration-300"
-          onClick={() => signIn("github")}
+        <form
+          action={async () => {
+            "use server";
+            await signIn("github");
+          }}
         >
-          <Github className="text-2xl lg:text-3xl text-white" /> Continue with GitHub
-        </button>
+          <button className="flex items-center md:gap-5 gap-2 shadow-md text-lg py-2 px-23 lg:px-30 text-white bg-black rounded-full cursor-pointer ">
+            <Github className="text-2xl text-gray-800" />
+             Github
+          </button>
+        </form>
+
+        <form
+          action={async () => {
+            "use server";
+            await signIn("facebook");
+          }}
+        >
+          <button className="flex items-center md:gap-5 gap-2 shadow-md text-lg py-2 px-20 lg:px-30  text-white bg-blue-500 rounded-full cursor-pointer">
+            <Facebook className="text-2xl text-gray-800" />
+            Facebook
+          </button>
+        </form>
         <Login/>
 
         {/* Terms & Privacy */}
@@ -62,11 +74,12 @@ const Page = () => {
           By signing in, you accept our
           <Link href="/privacypolicy" className="text-blue-500 hover:underline"> Privacy Policy </Link>
           and
-          <Link href="/termsofservices" className="text-blue-500 hover:underline"> Terms of Services </Link>.
+        <Link href="/termsofservices" className="text-blue-500 hover:underline"> Terms of Services </Link>.
         </div>
       </div>
+    </div>
     </main>
-  );
-};
+  )
+  }
 
-export default Page;
+export default page;
