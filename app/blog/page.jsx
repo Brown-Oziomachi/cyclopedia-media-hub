@@ -48,6 +48,28 @@ const BlogPage = () => {
           <p className="text-xl text-gray-400 mt-3">Explore unique insights, stories, and expert opinions</p>
         </header>
 
+        {/* Search Bar */}
+        <div className="mb-8">
+          <input
+            type="text"
+            placeholder="Search by genre..."
+            className="w-full px-4 py-2 rounded-md text-white focus:ring focus:ring-yellow-500 border-white bg-amber-50/30"
+            onChange={(e) => {
+              const searchTerm = e.target.value.toLowerCase();
+              if (searchTerm) {
+          const filtered = blogPosts.filter((post) =>
+            post.genre.toLowerCase().includes(searchTerm)
+          );
+          setFilteredPosts(filtered);
+          setSelectedCategory(null); // Clear selected category when searching
+              } else {
+          setFilteredPosts(blogPosts); // Reset to all posts when search is cleared
+          setSelectedCategory(null);
+              }
+            }}
+          />
+        </div>
+
         {/* Categories */}
         <div className="text-center mb-10">
           <h2 className="text-3xl font-semibold mb-6">Popular Categories</h2>
@@ -55,24 +77,26 @@ const BlogPage = () => {
             {["Technology", "Lifestyle", "Coding", "Health", "History","Nature", "Finance", "Travel", "Faith", "Religion", "Sex", "Wealth", "Business", "Ideas", "Action", "Drama", "Romance", "Music", "Mystery", "Fantasy", "Education", "Horror", "Comedy", "Adventure", 
             "Documentary", "Marriage", "Teens","Fashions", "Mothers","Knowledge","Ignorance", "Love","Facts","Family","Culture", "Fathers","Divorce", "Sports", "Street", "Strategy", "Animals", "News", "Politics", "Prayer", "Relationship", "Wisdom"  ].map((category) => (
               <button
-                key={category}
-                className={`px-6 py-3 rounded-xl text-lg font-medium transition-all ${
-                  selectedCategory === category ? "bg-yellow-600 text-black" : "bg-yellow-500 text-black hover:bg-yellow-600"
-                }`}
-                onClick={() => filterByCategory(category)}
+          key={category}
+          className={`px-6 py-3 rounded-xl text-lg font-medium transition-all ${
+            selectedCategory === category ? "bg-yellow-600 text-black" : "bg-yellow-500 text-black hover:bg-yellow-600"
+          }`}
+          onClick={() => {
+            filterByCategory(category);
+          }}
               >
-                {category}
+          {category}
               </button>
             ))}
           </div>
         </div>
-            <div>
-              <h1 className="py-5 font-serif font-bold text-2xl">Latest Post</h1>
-            </div>
+        <div>
+          <h1 className="py-5 font-serif font-bold text-2xl">Latest Post</h1>
+        </div>
         {/* Selected Category Display */}
         {selectedCategory && (
-          <div className="text-center mb-6">
-            <h3 className="text-lg font-semibold text-gray-300">
+          <div className="text-center mb-6 border-b-5 border-white pb-3 text-white">
+            <h3 className="text-lg font-semibold text-gray-300 border-b-2 border-yellow-500 inline-block pb-1">
               Showing posts for: <span className="text-yellow-500 font-bold">{selectedCategory}</span>
             </h3>
           </div>
@@ -92,7 +116,7 @@ const BlogPage = () => {
                 </span>
                 <div className="flex flex-col items-center text-center">
                   <h2 className="text-2xl font-bold mb-3 py-3">{post.title}</h2>
-                  <h2 className="text-2xl font-bold mb-3 py-3">{post.image}</h2>
+                  <h2 className="text-2xl font-bold mb-3 py-3">{post.photoURL}</h2>
                   <p className="text-sm text-gray-400 mb-2">by {post.author}</p>
                   <p className="line-clamp-3  text-gray-300 mb-4 text-sm">{post.body}</p>
                 </div>

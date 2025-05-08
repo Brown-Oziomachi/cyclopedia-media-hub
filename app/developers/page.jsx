@@ -23,7 +23,7 @@ async function DevelopersPage() {
       bio: "Specialist in server-side logic.",
       links: [
         { text: "Portfolio", href: "/myprofile" },
-        { text: "GitHub", href: "github.com/Victor-dev0p" },
+        { text: "GitHub", href: "https://github.com/Victor-dev0p" },
         { text: "Hire Me", href: "mailto:victorerukpe496@gmail.com" },
       ],
     },

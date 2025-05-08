@@ -10,7 +10,7 @@ const Page = () => {
   const [platform, setPlatform] = useState("cnn");
   const [error, setError] = useState(null);
 
-  const apiKey = "8077e1560d2b4646ab9cb6d41cbc3b42";
+  const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
 
   useEffect(() => {
     const timer = setTimeout(() => {

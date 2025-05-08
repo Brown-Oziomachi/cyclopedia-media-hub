@@ -23,6 +23,7 @@ const ProfileDropdownNavbar = () => {
     { text: "NEWS", url: "/news", icon: "/News" },
     { text: "DEVELOPERS", url: "/developers", },
     { text: "PROJECTS", url: "/projects", },
+    { text: "YOUTUBE", url: "/youtubevideos", },
 
     
   ];

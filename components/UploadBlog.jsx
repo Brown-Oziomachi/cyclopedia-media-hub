@@ -10,10 +10,10 @@ import { LoaderCircle, ThumbsUp } from "lucide-react";
 
 const valSchema = Yup.object({
   title: Yup.string().required("Title is required"),
-  body: Yup.string()
-    .required("Please post your blog")
+  body: Yup.string().required("Please add your content")
     .min(10, "Minimum of 10 characters"),
   genre: Yup.string().required("Please select a genre"),
+  link: Yup.string().url("Must be a valid URL"),
 });
 
  const UploadBlog = ({ session }) => {
@@ -25,7 +25,9 @@ const valSchema = Yup.object({
     try {
       setProcessing(true);
       const blogData = {
+        image: values.image,
         title: values.title,
+        link: values.link,
         body: values.body,
         genre: values.genre,
         author: session?.user?.name || "Anonymous",
@@ -51,139 +53,162 @@ const valSchema = Yup.object({
           Upload To Wiz
         </h2>
         <Formik
-          initialValues={{ title: "", body: "", genre: "", image: "" }}
+          initialValues={{ title: "", body: "", genre: "", link: "", image: "" }}
           validationSchema={valSchema}
           onSubmit={handleSubmit}
         >
-            <Form className="space-y-6">
-             
+          <Form className="space-y-6">
+            {/* Image URL Input */}
+            <div>
+              <label htmlFor="image" className="block text-sm font-medium text-gray-300">
+                Image URL
+              </label>
+              <Field
+                name="image"
+                type="url"
+                placeholder="Enter image URL"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <ErrorMessage name="image" component="p" className="text-sm text-red-600 mt-1" />
+            </div>
 
-              {/* Image URL Input */}
-              <div>
-                <label htmlFor="image" className="block text-sm font-medium text-gray-300">
-                  Image URL
-                </label>
-                <Field
-                  name="image"
-                  type="url"
-                  placeholder="Enter image URL"
-                  className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                />
-                <ErrorMessage name="image" component="p" className="text-sm text-red-600 mt-1" />
-              </div>
+            {/* Display Image Preview */}
+            <Field name="image">
+              {({ field, form }) => (
+                field.value && (
+                  <div className="mb-4">
+                    <img
+                      src={field.value}
+                      alt="Image Preview"
+                      className="w-full h-auto rounded-lg"
+                    />
+                  </div>
+                )
+              )}
+            </Field>
 
-              <div>
-                <label htmlFor="title" className="block text-sm font-medium text-gray-300">
-                  Blog Title
-                </label>
-                <Field
-                  name="title"
-                  type="text"
-                  placeholder="Enter your blog title..."
-                  className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                />
-                <ErrorMessage name="title" component="p" className="text-sm text-red-600 mt-1" />
-              </div>
+            <div>
+              <label htmlFor="title" className="block text-sm font-medium text-gray-300">
+                Blog Title
+              </label>
+              <Field
+                name="title"
+                type="text"
+                placeholder="Enter your blog title..."
+                className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <ErrorMessage name="title" component="p" className="text-sm text-red-600 mt-1" />
+            </div>
 
-              {/* Body Input */}
-              <div>
-                <label htmlFor="body" className="block text-sm font-medium text-gray-300">
-                  Content
-                </label>
-                <Field
-                  name="body"
-                  as="textarea"
-                  rows="6"
-                  placeholder="Write your blog content..."
-                  className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                />
-                <ErrorMessage name="body" component="p" className="text-sm text-red-600 mt-1" />
-              </div>
+            {/* Link Input */}
+            <div>
+              <label htmlFor="link" className="block text-sm font-medium text-gray-300">
+                Link
+              </label>
+              <Field
+                name="link"
+                type="url"
+                placeholder="Enter a link for your post..."
+                className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <ErrorMessage name="link" component="p" className="text-sm text-red-600 mt-1" />
+            </div>
 
-                {/* Genre Selection */}
-                <div>
-                <label htmlFor="genre" className="block text-sm font-medium text-gray-300">
-                  Genre
-                </label>
-                <Field
-                  name="genre"
-                  as="select"
-                  className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                >
-                  <option value="" disabled>
-                  Select a genre
-                  </option>
-                  <option value="Technology">Technology</option>
-                  <option value="Lifestyle">Lifestyle</option>
-                  <option value="Coding">Coding</option>
-                  <option value="Health">Health</option>
-                  <option value="Finance">Finance</option>
-                  <option value="Travel">Travel</option>
-                  <option value="Faith">Faith</option>
-                  <option value="Religion">Religion</option>
-                  <option value="Sex-lesson">Sex-Lesson</option>
-                  <option value="Wealth">Wealth</option>
-                  <option value="Business">Business</option>
-                  <option value="Ideas">Ideas</option>
-                  <option value="Action">Action</option>
-                  <option value="Drama">Drama</option>
-                  <option value="Romance">Romance</option>
-                  <option value="Music">Music</option>
-                  <option value="Mystery">Mystery</option>
-                  <option value="Marriage">Marriage</option>
-                  <option value="Fantasy">Fantasy</option>
-                  <option value="Education">Education</option>
-                  <option value="Nature">Nature</option>
-                  <option value="Horror">Horror</option>
-                  <option value="History">History</option>
-                  <option value="Comedy">Comedy</option>
-                  <option value="Adventure">Adventure</option>
-                  <option value="Documentary">Documentary</option>
-                  <option value="Teens">Teens</option>
-                  <option value="Youth">Youth</option>
-                  <option value="Children">Children</option>
-                  <option value="Mothers">Mothers</option>
-                  <option value="Fathers">Fathers</option>
-                  <option value="Sports">Sports</option>
-                  <option value="Street Art">Street Art</option>
-                  <option value="Strategy">Strategy</option>
-                  <option value="Animals">Animals</option>
-                  <option value="News">News</option>
-                  <option value="Politics">Politics</option>
-                  <option value="Prayer">Prayer</option>
-                  <option value="Relationship">Relationship</option>
-                  <option value="Wisdom">Wisdom</option>
-                  <option value="Divorce">Divorce</option>
-                  <option value="Fashion">Fashion</option>
-                  <option value="Knowledge">Knowledge</option>
-                  <option value="Ignorance">Ignorance</option>
-                  <option value="Love">Love</option>
-                  <option value="Facts">Facts</option>
-                  <option value="Family">Family</option>
-                  <option value="Culture">Culture</option>
+            {/* Body Input */}
+            <div>
+              <label htmlFor="body" className="block text-sm font-medium text-gray-300">
+                Content
+              </label>
+              <Field
+                name="body"
+                as="textarea"
+                rows="6"
+                placeholder="Write your blog content..."
+                className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <ErrorMessage name="body" component="p" className="text-sm text-red-600 mt-1" />
+            </div>
 
-
-
-
-                </Field>
-                <ErrorMessage name="genre" component="p" className="text-sm text-red-600 mt-1" />
-                </div>
-
-                {/* Submit Button */}
-              <button
-                disabled={processing}
-                type="submit"
-                className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold bg-gradient-to-r from-gray-700 via-gray-800 to-orange-400 shadow-2xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition cursor-pointer"
+            {/* Genre Selection */}
+            <div>
+              <label htmlFor="genre" className="block text-sm font-medium text-gray-300">
+                Genre
+              </label>
+              <Field
+                name="genre"
+                as="select"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
-                {processing ? (
-                  <span className="flex items-center justify-center">
-                    <LoaderCircle className="animate-spin text-2xl" />
-                  </span>
-                ) : (
-                  "Submit Blog"
-                )}
-              </button>
-            </Form>
+                <option value="" disabled>
+                  Select a genre
+                </option>
+                <option value="Technology">Technology</option>
+                <option value="Lifestyle">Lifestyle</option>
+                <option value="Coding">Coding</option>
+                <option value="Health">Health</option>
+                <option value="Finance">Finance</option>
+                <option value="Travel">Travel</option>
+                <option value="Faith">Faith</option>
+                <option value="Religion">Religion</option>
+                <option value="Sex-lesson">Sex-Lesson</option>
+                <option value="Wealth">Wealth</option>
+                <option value="Business">Business</option>
+                <option value="Ideas">Ideas</option>
+                <option value="Action">Action</option>
+                <option value="Drama">Drama</option>
+                <option value="Romance">Romance</option>
+                <option value="Music">Music</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Marriage">Marriage</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Education">Education</option>
+                <option value="Nature">Nature</option>
+                <option value="Horror">Horror</option>
+                <option value="History">History</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Documentary">Documentary</option>
+                <option value="Teens">Teens</option>
+                <option value="Youth">Youth</option>
+                <option value="Children">Children</option>
+                <option value="Mothers">Mothers</option>
+                <option value="Fathers">Fathers</option>
+                <option value="Sports">Sports</option>
+                <option value="Street Art">Street Art</option>
+                <option value="Strategy">Strategy</option>
+                <option value="Animals">Animals</option>
+                <option value="News">News</option>
+                <option value="Politics">Politics</option>
+                <option value="Prayer">Prayer</option>
+                <option value="Relationship">Relationship</option>
+                <option value="Wisdom">Wisdom</option>
+                <option value="Divorce">Divorce</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Knowledge">Knowledge</option>
+                <option value="Ignorance">Ignorance</option>
+                <option value="Love">Love</option>
+                <option value="Facts">Facts</option>
+                <option value="Family">Family</option>
+                <option value="Culture">Culture</option>
+              </Field>
+              <ErrorMessage name="genre" component="p" className="text-sm text-red-600 mt-1" />
+            </div>
+
+            {/* Submit Button */}
+            <button
+              disabled={processing}
+              type="submit"
+              className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold bg-gradient-to-r from-gray-700 via-gray-800 to-orange-400 shadow-2xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition cursor-pointer"
+            >
+              {processing ? (
+                <span className="flex items-center justify-center">
+                  <LoaderCircle className="animate-spin text-2xl" />
+                </span>
+              ) : (
+                "Submit Blog"
+              )}
+            </button>
+          </Form>
         </Formik>
       </div>
 
@@ -192,18 +217,15 @@ const valSchema = Yup.object({
         <div className="absolute h-screen w-full bg-black/20 flex items-center justify-center">
           <div className="w-[22rem] h-[30vh] flex flex-col gap-6 items-center justify-center shadow-2xl rounded-lg bg-gray-800 text-white p-6">
             <h1 className="text-xl font-semibold">Blog Upload Successful</h1>
-            <ThumbsUp  className="text-6xl text-green-500" />
-            <button
-              onClick={() => setModalVisibility(false)}
-              className="bg-indigo-600 px-4 py-2 rounded-lg hover:bg-indigo-700 transition"
-            >
-              Close
-            </button>
-          </div>
+            <ThumbsUp className="text-6xl text-green-500" />
+            <button onClick={() => setModalVisibility(false)}>Close</button>
         </div>
-      )}
+      </div>
+      )
+    }
     </main>
   );
 };
+
 
 export default UploadBlog;
