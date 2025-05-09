@@ -3,10 +3,8 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import Footer from '@/components/Footer';
 import Popup from '@/components/Popup';
-import { ArrowRight, ArrowRightToLine,  ChevronRight, LaptopMinimal, LoaderCircle, Palette, PersonStanding, Store, Webhook } from 'lucide-react';
+import { ArrowRight, ArrowRightToLine,  ChevronRight, LaptopMinimal, LoaderCircle, Palette, PersonStanding, Play, Store, Webhook } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
-import PopupVideo from '@/components/PopupVideo';
-import ChatDropdown from '@/components/Chat';
 
 
 
@@ -91,8 +89,11 @@ useEffect(() => {
 
                   <div className='max-md:mb-0'>
                </div>
-                  <PopupVideo/>
-                  <ChatDropdown/>
+                  <div className='flex gap-1 mt-2'>
+                  <Link href="/youtubevideos" className='flex gap-1 bg-gradient-to-r from-gray-900 via-black to-orange-400 text-white px-10 py-3 rounded-lg hover:bg-blue-600 shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105 cursor-pointer'>Watch Video
+                  <Play/>
+                  </Link>
+                  </div>
                </main>
               </div>
               

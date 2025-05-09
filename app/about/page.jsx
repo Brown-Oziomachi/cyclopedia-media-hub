@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import { Loader} from "lucide-react";
-import PopupVideo from "@/components/PopupVideo";
 
 const About = () => {
   const [loading, setLoading] = useState(true);
@@ -38,7 +37,6 @@ const About = () => {
                   <p className="text-lg max-w-3xl mx-auto leading-relaxed">
                   Our mission is to empower businesses, startups, and individuals by turning ambitious visions into reality. Through innovative solutions, cutting-edge technologies, and relentless dedication, we aim to build digital products that not only meet but exceed expectations. With Webwiz Creation, you get more than just a service—you gain a partner committed to your success every step of the way.
                   </p>
-                  <p className="text-sm"><PopupVideo className=""/> </p>
                 </div>
                 <h1 className="text-lg">Are you a developer seeking for collaboration <Link href="/registration"><span className="text-orange-400 underline">Register now</span></Link>  and join Webwiz team.</h1>
                 </header>
