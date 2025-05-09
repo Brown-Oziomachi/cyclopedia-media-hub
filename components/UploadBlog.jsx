@@ -59,7 +59,7 @@ const valSchema = Yup.object({
         >
           <Form className="space-y-6">
             {/* Image URL Input */}
-            <div>
+            {/* <div>
               <label htmlFor="image" className="block text-sm font-medium text-gray-300">
                 Image URL
               </label>
@@ -70,7 +70,7 @@ const valSchema = Yup.object({
                 className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               <ErrorMessage name="image" component="p" className="text-sm text-red-600 mt-1" />
-            </div>
+            </div> */}
 
             {/* Display Image Preview */}
             <Field name="image">
@@ -88,8 +88,8 @@ const valSchema = Yup.object({
             </Field>
 
             <div>
-              <label htmlFor="title" className="block text-sm font-medium text-gray-300">
-                Blog Title
+              <label htmlFor="title" className=" text-sm font-medium text-gray-300 flex gap-2 ">
+                Blog Title <p className="text-red-600 mt-1">*</p>
               </label>
               <Field
                 name="title"
@@ -103,7 +103,7 @@ const valSchema = Yup.object({
             {/* Link Input */}
             <div>
               <label htmlFor="link" className="block text-sm font-medium text-gray-300">
-                Link
+                Link (optional)
               </label>
               <Field
                 name="link"
@@ -116,8 +116,8 @@ const valSchema = Yup.object({
 
             {/* Body Input */}
             <div>
-              <label htmlFor="body" className="block text-sm font-medium text-gray-300">
-                Content
+              <label htmlFor="body" className="flex gap-2 text-sm font-medium text-gray-300">
+                Content <p className="text-red-600 mt-1">*</p>
               </label>
               <Field
                 name="body"
@@ -131,8 +131,8 @@ const valSchema = Yup.object({
 
             {/* Genre Selection */}
             <div>
-              <label htmlFor="genre" className="block text-sm font-medium text-gray-300">
-                Genre
+              <label htmlFor="genre" className="flex gap-2 text-sm font-medium text-gray-300">
+                Genre  <p className="text-red-600 mt-1">*</p>
               </label>
               <Field
                 name="genre"
@@ -142,6 +142,7 @@ const valSchema = Yup.object({
                 <option value="" disabled>
                   Select a genre
                 </option>
+                <option value="Webwiz">Webwiz</option>
                 <option value="Technology">Technology</option>
                 <option value="Lifestyle">Lifestyle</option>
                 <option value="Coding">Coding</option>

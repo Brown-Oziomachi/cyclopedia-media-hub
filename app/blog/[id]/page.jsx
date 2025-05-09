@@ -31,7 +31,7 @@ const BlogDetails = ({ params }) => {
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
-  const id = resolvedParams?.id; 
+  const id = resolvedParams?.id;
 
   useEffect(() => {
     if (!id) return;
@@ -41,6 +41,10 @@ const BlogDetails = ({ params }) => {
       if (fetchedBlog) {
         setBlog(fetchedBlog);
         setLikes(fetchedBlog.likes || 0);
+        const storedLiked = localStorage.getItem(`liked-${id}`);
+        if (storedLiked) {
+          setLiked(true);
+        }
       }
     };
 
@@ -48,11 +52,12 @@ const BlogDetails = ({ params }) => {
   }, [id]);
 
   const handleLikeClick = async () => {
-    if (!blog) return;
-
     const newLikes = liked ? likes - 1 : likes + 1;
-    setLiked(!liked);
+    const newLikedState = !liked;
+    setLiked(newLikedState);
     setLikes(newLikes);
+
+    localStorage.setItem(`liked-${id}`, newLikedState.toString());
 
     try {
       const blogRef = doc(db1, "blog", id);
@@ -95,7 +100,7 @@ const BlogDetails = ({ params }) => {
       </head>
       <main className="min-h-screen px-6 py-16 max-w-4xl mx-auto bg-white text-gray-200">
         {/* Back Button */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-6 mt-5">
           <Link href="/blog" className="text-blue-500 hover:underline text-lg">
             ← Back to Blogs
           </Link>
@@ -129,65 +134,65 @@ const BlogDetails = ({ params }) => {
             Posted on {blog.timestamp || "Unknown Date"}
           </p>
 
-          {/* Image or Video */}
-          <div className="mb-6 flex justify-center"></div>
-          {blog.videoUrl ? (
-            <video src={blog.videoUrl} controls className="w-full rounded-xl shadow-xl" />
-          ) : (
-            <img
-              src={blog.imageUrl || "/"}
-              className=""
-            />
-          )}
-        </div>
+                {/* <div className="mb-6 flex justify-center">
+                        {blog.videoUrl ? (
+                        <video src={blog.videoUrl} controls className="w-full rounded-xl shadow-xl" />
+                        ) : (
+                        <img
+                          src={blog.imageUrl || "/"}
+                          className=""
+                        />
+                        )}
+                       </div> */}   </div>
 
-          <div className="flex items-center gap-4 mb-1 relative">
-            <button
-              className="flex items-center gap-2   text-black font-bold py-2 px-4 rounded transition mt-5"
-              onClick={handleShareClick}
-            >
-              <Share className="h-5 w-5" /> Share
-            </button>
-
-            {showShareMenu && (
-              <div className="absolute mt-10 bg-white shadow-md rounded-md p-3 flex flex-col gap-2 text-sm">
-                <a
-            href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
-                >
-            Share on Twitter
-                </a>
-                <a
-            href={`https://www.linkedin.com/shareArticle?mini=true&url=${window.location.href}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-700 hover:underline"
-                >
-            Share on LinkedIn
-                </a>
-                <a
-            href={`https://api.whatsapp.com/send?text=${window.location.href}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-green-600 hover:underline"
-                >
-            Share on WhatsApp
-                </a>
+                <div className="flex items-center gap-4 mb-1 relative">
                 <button
-            className="flex items-center text-gray-600 hover:text-gray-900"
-            onClick={() => handleCopyLink(false)}
-
+                  className="flex items-center gap-2   text-black font-bold py-2 px-4 rounded transition mt-5"
+                  onClick={handleShareClick}
                 >
-            <LinkIcon className="h-5 w-5 mr-2" /> Copy Link
+                  <Share className="h-5 w-5" /> Share
                 </button>
-              </div>
-            )}
 
-            {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Save
-            </button> */}
+                {showShareMenu && (
+                  <div className="absolute mt-10 bg-white shadow-md rounded-md p-3 flex flex-col gap-2 text-sm">
+                  <a
+                href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:underline"
+                  >
+                Share on Twitter
+                  </a>
+                  <a
+                href={`https://www.linkedin.com/shareArticle?mini=true&url=${window.location.href}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-700 hover:underline"
+                  >
+                Share on LinkedIn
+                  </a>
+                  <a
+                href={`https://api.whatsapp.com/send?text=${window.location.href}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-600 hover:underline"
+                  >
+                Share on WhatsApp
+                  </a>
+                  <button
+                className="flex items-center text-gray-600 hover:text-gray-900"
+                onClick={() => handleCopyLink(false)}
+
+                  >
+                <LinkIcon className="h-5 w-5 mr-2" /> Copy Link
+                  </button>
+                  </div>
+                )}
+
+                {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  Save
+                </button> */}
+                {/* comment under where the author can also reply the comment */}
           </div>
           <button
               className="flex items-center text-gray-600 hover:text-red-500 transition-all"

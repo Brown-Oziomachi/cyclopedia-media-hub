@@ -51,7 +51,7 @@ const Footer = () => {
             <span>&copy; 2025 Webwiz Creation. All rights reserved.</span>
             <div className="mt-2">
               Follow us: 
-              <Link href=""><span className="text-cyan-400 hover:underline ml-2">Facebook</span>|</Link> 
+              <Link href="https://www.facebook.com/profile.php?id=61575479727679"><span className="text-cyan-400 hover:underline ml-2">Facebook</span>|</Link> 
               <Link href="http://www.linkedin.com/in/brownoziomachi72a5a3229"> <span className="text-cyan-400 hover:underline">LinkedIn</span> | </Link>
               <Link href="https://www.instagram.com/webwiz_creation_webdevelopers/"> <span className="text-cyan-400 hover:underline">Instagram</span></Link>
             </div>
