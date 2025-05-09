@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Page = async () => {
   return (
-    <main className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-10 px-5">
+    <main className="bg-gradient-to-r from-gray-900 via-gray-800 to-orange-400 text-white py-10 px-5">
       {/* Header Section */}
       <section className="text-center py-10">
         <h1 className="text-3xl font-extrabold mb-6">🌐 Your Website is Your Digital Storefront</h1>
