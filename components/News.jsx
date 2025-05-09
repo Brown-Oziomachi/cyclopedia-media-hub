@@ -6,9 +6,9 @@ const News = () => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    const API_KEY = process.env.NEXT_PUBLIC_NEWS_API_KEY;
+    const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
     const query = "latest";
-    const url = `https://newsapi.org/v2/everything?q=${query}&apiKey=${API_KEY}`;
+    const url = `https://newsapi.org/v2/everything?q=${query}&apiKey=${apiKey}`;
     const endpointUrl = url;
     
     axios.get(endpointUrl)

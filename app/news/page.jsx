@@ -20,6 +20,11 @@ const Page = () => {
   }, []);
 
   useEffect(() => {
+    if (!apiKey) {
+      console.error("API key is missing!");
+      return;
+    }
+
     const fetchNews = async () => {
       try {
         const response = await fetch(
