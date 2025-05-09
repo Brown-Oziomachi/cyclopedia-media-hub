@@ -20,31 +20,31 @@ const Page = () => {
   }, []);
 
   useEffect(() => {
-    if (!apiKey) {
-      setError("API Key is missing! Please set it in Vercel environment variables.");
-      return;
-    }
-  
-    const fetchNews = async () => {
-      try {
-        const response = await fetch(
-          `https://newsapi.org/v2/top-headlines?sources=${platform}&apiKey=${apiKey}`
-        );
-  
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-  
-        const data = await response.json();
-        setNews(data.articles);
-      } catch (error) {
-        setError(error.message);
+  if (!apiKey) {
+    setError("API Key is missing! Please set it in Vercel environment variables.");
+    return;
+  }
+
+  const fetchNews = async () => {
+    try {
+      const response = await fetch(
+        `https://newsapi.org/v2/top-headlines?sources=${platform}&apiKey=${apiKey}`
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
-    };
-  
-    fetchNews();
-  }, [platform, apiKey]);
-  
+
+      const data = await response.json();
+      setNews(data.articles);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  fetchNews();
+}, [platform, apiKey]);
+
   const handlePlatformChange = (event) => {
     setPlatform(event.target.value);
   };
