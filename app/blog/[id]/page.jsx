@@ -203,6 +203,7 @@ const BlogDetails = ({ params }) => {
             </button>
           {/* Blog Body */}
         <p className="text-gray-700 leading-7 whitespace-pre-line ">{blog.body}</p>
+                  
         <div className="flex justify-center mt-8">
            <Link href="/blog" className="text-blue-500 hover:underline text-lg">
            ← Back to Blogs
