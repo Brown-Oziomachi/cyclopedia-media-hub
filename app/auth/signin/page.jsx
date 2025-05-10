@@ -1,9 +1,7 @@
 import Link from "next/link";
 import { redirect, } from "next/navigation";
 import { ChartPie, Facebook, Github } from "lucide-react";
-import Login from "@/components/Login";
 import { auth, signIn } from "@/auth";
-
 
 
 const page = async () => {
@@ -37,6 +35,7 @@ const page = async () => {
             await signIn("google");
           }}
         >
+          
           <button className="flex items-center md:gap-5 gap-2 shadow-md text-lg py-2 px-20 lg:px-30  rounded-full cursor-pointer text-white bg-gradient-to-r from-red-500 via-green-500 to-yellow-400 transition duration-300">
             <ChartPie className="text-2xl" />
              Google
@@ -67,8 +66,6 @@ const page = async () => {
             Facebook
           </button>
         </form>
-        <Login/>
-
         {/* Terms & Privacy */}
         <div className="text-center lg:text-left text-sm text-gray-500 mt-6">
           By signing in, you accept our
