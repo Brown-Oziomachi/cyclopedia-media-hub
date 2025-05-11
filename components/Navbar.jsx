@@ -93,7 +93,7 @@ const ProfileDropdownNavbar = () => {
             </Link>
             <Link
             onClick={() => setShowNav(false)}
-              href="/profile"
+              href="/blog"
               className="block py-2 px-4 text-sm text-gray-200 hover:bg-gray-700 hover:text-cyan-400 transition-colors duration-200"
             >
               <Rss className="inline-block mr-2 text-gray-400" size={16} />
@@ -113,7 +113,7 @@ const ProfileDropdownNavbar = () => {
             >
               
               <BellRing className=" mr-2 text-gray-400" size={16} />
-              <p className="text-red-600 absolute top-0 left-4 font-bold">50</p>
+              <p className="text-red-600 absolute top-0 left-6 font-bold text-sm">50</p>
               Notifications
             </Link>
             <div className="py-2">
