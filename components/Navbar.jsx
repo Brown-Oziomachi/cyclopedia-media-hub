@@ -108,8 +108,9 @@ const ProfileDropdownNavbar = () => {
               href="/notifications"
               className="block py-2 px-4 text-sm text-gray-200 hover:bg-gray-700 hover:text-cyan-400 transition-colors duration-200"
             >
-              <BellRing className="inline-block mr-2 text-gray-400" size={16} />
-              <p className="text-red-600">50</p>
+              
+              <BellRing className="relative flex mr-2 text-gray-400" size={16} />
+              <p className="text-red-600 absolute">50</p>
               Notifications
             </Link>
             <div className="py-2">
