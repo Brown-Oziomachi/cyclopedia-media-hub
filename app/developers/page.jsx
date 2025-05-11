@@ -19,7 +19,7 @@ async function DevelopersPage() {
     {
       name: "Victor_D3v",
       specialty: "Front-End Developer",
-      image: "/victorr.png",
+      image: "/vik.png",
       bio: "Specialist in server-side logic.",
       links: [
         { text: "Portfolio", href: "/myprofile" },
@@ -107,22 +107,22 @@ async function DevelopersPage() {
             {developersData.map((developer, index) => (
               <div
                 key={index}
-                className=" p-6 rounded-lg shadow-lg hover:shadow-xl transition-all bg-gray-900 "
+                className=" p-1 rounded-lg  hover:shadow-xl m-5 transition-all bg-gray-900 relative "
               >
                 <img
                   src={developer.image}
                   alt={developer.name}
-                  className="w-full h-100 rounded-md mb-4"
+                  className="w-70 h-70 mb- rounded-full mx-auto "
                 />
-                <h3 className="text-center text-2xl font-bold text-red-500 mb-2 group-hover:text-white group-hover:bg-red-500 hover:border hover:border-tr-8">
+                <h3 className="absolute inset-0 top-50 text-center text-2xl font-bold text-red-500 mb-2 group-hover:text-white group-hover:bg-red-500 hover:border hover:border-tr-8 bg-gray-900 z-0 h-1/4 ">
                   {developer.name}
                 </h3>
-                <p className="text-gray-600 mb-2 text-center ">{developer.specialty}</p>
-                <p className="text-sm text-gray-500  text-center">{developer.bio}</p>
-                <div className="flex justify-center gap-4 mt-4 group-hover:text-red-500">
+                <p className="text-white mb-2 text-center absolute inset-0 top-60 ">{developer.specialty}</p>
+                <p className="text-sm text-white text-center absolute inset-0 top-65">{developer.bio}</p>
+                <div className="flex justify-center gap-4 mt-4 group-hover:text-red-500 z-50">
                   {developer.links.map((link, linkIndex) => (
                     <Link key={linkIndex} href={link.href}>
-                      <p className="px-4 py-2 bg-red-500 text-white  rounded-md  hover:text-red-500 hover:bg-white  ">
+                      <p className="px-4 py-2 bg-red-500 text-white  rounded-md  hover:text-red-500 hover:bg-white z-50 ">
                         {link.text}
                       </p>
                     </Link>

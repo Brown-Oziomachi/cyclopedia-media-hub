@@ -43,7 +43,7 @@ const page = async () => {
 
         </form>
 
-        <form
+        {/* <form
           action={async () => {
             "use server";
             await signIn("github");
@@ -53,9 +53,9 @@ const page = async () => {
             <Github className="text-2xl text-gray-800" />
              Github
           </button>
-        </form>
+        </form> */}
 
-        <form
+        {/* <form
           action={async () => {
             "use server";
             await signIn("facebook");
@@ -65,7 +65,7 @@ const page = async () => {
             <Facebook className="text-2xl text-gray-800" />
             Facebook
           </button>
-        </form>
+        </form> */}
         {/* Terms & Privacy */}
         <div className="text-center lg:text-left text-sm text-gray-500 mt-6">
           By signing in, you accept our
