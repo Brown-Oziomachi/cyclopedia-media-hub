@@ -110,7 +110,7 @@ const ProfileDropdownNavbar = () => {
             >
               
               <BellRing className=" mr-2 text-gray-400" size={16} />
-              <p className="text-red-600 absolute">50</p>
+              <p className="text-red-600 absolute top-4 left-4">50</p>
               Notifications
             </Link>
             <div className="py-2">
