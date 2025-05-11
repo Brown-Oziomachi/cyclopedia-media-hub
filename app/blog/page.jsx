@@ -81,6 +81,11 @@ const BlogPage = () => {
             {[
               "Webwiz",
               "Technology",
+              "AI",
+              "MLearning",
+              "DScience",
+              "Cybersecurity",
+              "CComputing",
               "Lifestyle",
               "Coding",
               "Health",
@@ -126,28 +131,24 @@ const BlogPage = () => {
               "Prayer",
               "Relationship",
               "Wisdom",
-              "",
+              
             ].map((category) => (
               <button
                 key={category}
-                className={`px-6 py-3 rounded-xl text-lg font-medium transition-all ${
+                className={`px-6 py-3 rounded-xl text-sm font-medium transition-all ${
                   selectedCategory === category
                     ? "bg-yellow-600 text-black"
                     : "bg-yellow-500 text-black hover:bg-yellow-600"
                 }`}
                 onClick={() => {
-                  filterByCategory(category);
-                }}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div>
-          <h1 className="py-5 font-serif font-bold text-2xl">Latest Post</h1>
-        </div>
-        {/* Selected Category Display */}
+                    filterByCategory(category);
+                    }}
+                  >
+                    {category}
+                  </button>
+                  ))}
+                </div>
+              </div>
         {selectedCategory && (
           <div className="text-center mb-6 border-b-5 border-white pb-3 text-white">
             <h3 className="text-lg font-semibold text-gray-300 border-b-2 border-yellow-500 inline-block pb-1">
