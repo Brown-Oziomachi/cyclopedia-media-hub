@@ -144,6 +144,14 @@ const valSchema = Yup.object({
                 </option>
                 <option value="Webwiz">Webwiz</option>
                 <option value="Technology">Technology</option>
+                <option value="Science">Science</option>
+                <option value="Art">Art</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Crypto">crypto</option>
+                <option value="Gaming">Gaming</option>
+                <option value="Social">Social</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Social Network">Social Network</option>
                 <option value="Lifestyle">Lifestyle</option>
                 <option value="Coding">Coding</option>
                 <option value="Health">Health</option>
