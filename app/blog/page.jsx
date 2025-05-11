@@ -85,7 +85,7 @@ const BlogPage = () => {
               "MLearning",
               "DScience",
               "Cybersecurity",
-              "CComputing",
+              "Cloud Computing",
               "Lifestyle",
               "Coding",
               "Health",
@@ -175,6 +175,10 @@ const BlogPage = () => {
                 <span className="absolute top-4 left-4 bg-yellow-500 text-black text-xs px-3 py-1 rounded-full">
                   {post.genre || "General"}
                 </span>
+                <Link
+                  href={`/blog/${post.id}`}
+                  className=" block px-4 py-3  text-yellow-500 rounded-full text-center font-semibold hover:text-white transition-all"
+                >
                 <div className="flex flex-col items-center text-center">
                   <h2 className="text-2xl font-bold mb-3 py-3">{post.title}</h2>
                   <h2 className="text-2xl font-bold mb-3 py-3">
@@ -188,10 +192,6 @@ const BlogPage = () => {
                 <p className="text-xs text-gray-400 text-center absolute top-4 right-4">
                   Posted on {post.timestamp || "Unknown Date"}
                 </p>
-                <Link
-                  href={`/blog/${post.id}`}
-                  className=" block px-4 py-3  text-yellow-500 rounded-full text-center font-semibold hover:text-white transition-all"
-                >
                   Learn more{" "}
                   <ChevronsRight className="inline-block max-lg:ml-27 lg:ml-25" />
                 </Link>
