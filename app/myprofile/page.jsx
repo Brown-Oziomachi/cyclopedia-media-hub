@@ -1,17 +1,12 @@
 "use client";
 
-import { auth } from "@/auth";
 import ChatDropdown from "@/components/Chat";
 import { Github, Instagram, Linkedin, } from "lucide-react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import React from "react";
 
-const ProfileCard = async () => {
-  const session = await auth();
-  if (!session) {
-    redirect("/auth/signin");
-  }
+const ProfileCard = () => {
+  
 
   return (
     <>
