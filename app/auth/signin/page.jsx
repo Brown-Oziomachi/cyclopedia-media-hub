@@ -7,7 +7,7 @@ import { auth, signIn } from "@/auth";
 const page = async () => {
   const session = await auth();
   if (session) {
-    redirect("/upload-to-blog");
+    redirect("/profile");
   }
 
   
