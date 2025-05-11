@@ -6,8 +6,6 @@ import Link from "next/link";
 import React from "react";
 
 const ProfileCard = () => {
-  
-
   return (
     <>
       <main className="z-50 max-w-5xl mx-auto bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-lg shadow-2xl mb-10 overflow-hidden text-white">
