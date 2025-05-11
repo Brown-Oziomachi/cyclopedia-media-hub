@@ -84,6 +84,7 @@ const ProfileDropdownNavbar = () => {
               <p className="text-sm text-gray-300 truncate">{session?.user?.email}</p>
             </div>
             <Link
+            onClick={() => setShowNav(false)}
               href="/profile"
               className="block py-2 px-4 text-sm text-gray-200 hover:bg-gray-700 hover:text-cyan-400 transition-colors duration-200"
             >
@@ -91,6 +92,7 @@ const ProfileDropdownNavbar = () => {
               My Profile
             </Link>
             <Link
+            onClick={() => setShowNav(false)}
               href="/profile"
               className="block py-2 px-4 text-sm text-gray-200 hover:bg-gray-700 hover:text-cyan-400 transition-colors duration-200"
             >
@@ -105,12 +107,13 @@ const ProfileDropdownNavbar = () => {
               News
             </Link>
             <Link
+            onClick={() => setShowNav(false)}
               href="/blog"
               className="relative flex py-2 px-4 text-sm text-gray-200 hover:bg-gray-700 hover:text-cyan-400 transition-colors duration-200"
             >
               
               <BellRing className=" mr-2 text-gray-400" size={16} />
-              <p className="text-red-600 absolute top-4 left-4">50</p>
+              <p className="text-red-600 absolute top-0 left-4 font-bold">50</p>
               Notifications
             </Link>
             <div className="py-2">
