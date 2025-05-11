@@ -81,6 +81,7 @@ const BlogPage = () => {
             {[
               "Webwiz",
               "Technology",
+              "Spirituality",
               "Science",
               "Art",
               "Entertainment",
@@ -93,9 +94,9 @@ const BlogPage = () => {
               "Gadgets",
               "Social network",
               "Engineering",
-              "English",
               "Language",
               "Statistics",
+              "English",
               "Mathematics",
               "Physics",
               "Chemistry",
