@@ -4,6 +4,9 @@ import { db1 } from "@/lib/firebaseConfig";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { LoaderCircle, Heart, Share, LinkIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import BlogDisplay from "@/components/BlogDisplay";
+
 
 const fetchSingleBlog = async (id) => {
   if (!id) return null;
@@ -32,6 +35,8 @@ const BlogDetails = ({ params }) => {
   const [liked, setLiked] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
   const id = resolvedParams?.id;
+  const [values, setValues] = useState({ title: "", genre: "", body: "" });
+
 
   useEffect(() => {
     if (!id) return;
@@ -86,19 +91,25 @@ const BlogDetails = ({ params }) => {
 
   return (
     <>
-      <head>
-        <title>{blog.title} - My Blog</title>
-        <meta name="description" content={blog.body.substring(0, 160)} />
-        <meta property="og:title" content={blog.title} />
-        <meta property="og:description" content={blog.body.substring(0, 160)} />
-        {blog.imageUrl && <meta property="og:image" content={blog.imageUrl} />}
-        <meta property="og:type" content="article" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={blog.title} />
-        <meta name="twitter:description" content={blog.body.substring(0, 160)} />
-        {blog.imageUrl && <meta name="twitter:image" content={blog.imageUrl} />}
-      </head>
+     <head>
+  <title>{blog.title} - My Blog</title>
+  <meta name="description" content={blog.body.substring(0, 160)} />
+  <meta property="og:title" content={blog.title} />
+  <meta property="og:description" content={blog.body.substring(0, 160)} />
+  {blog.imageUrl && <meta property="og:image" content={blog.imageUrl} />}
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={blog.title} />
+  <meta name="twitter:description" content={blog.body.substring(0, 160)} />
+  {blog.imageUrl && <meta name="twitter:image" content={blog.imageUrl} />}
+</head>
+
+
+
+
+
       <main className="min-h-screen px-6 py-16 max-w-4xl mx-auto bg-gray-900 text-gray-200">
+
         {/* Back Button */}
         <div className="flex items-center justify-between mb-6 mt-5">
           <Link href="/blog" className="text-blue-500 hover:underline text-lg">
@@ -145,17 +156,11 @@ const BlogDetails = ({ params }) => {
                         )}
                        </div> */}   </div>
 
-                <div className="flex items-center gap-4 mb-1 relative bg-white">
-               
-
-
-                {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                  Save
-                </button> */}
-                      </div>
-                      
-                      {/* Blog Body */}
-        <p className="text-gray-400 leading-7 whitespace-pre-line bg-gray-900 ">{blog.body}</p>
+<div className="container mx-auto px-4">
+      <BlogDisplay
+        body={blog.body}
+      />
+    </div>
         <div className="flex justify-center mt-8">
 
         <button
