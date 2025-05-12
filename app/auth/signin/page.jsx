@@ -20,15 +20,15 @@ const page = async () => {
         <h1 className="text-4xl lg:text-6xl font-extrabold text-cyan-400 tracking-wide mb-6">
           Welcome to <br /> WebWiz Creation
         </h1>
-        <p className="text-lg text-gray-300 max-w-md lg:max-w-lg leading-relaxed  ">
+        <p className="text-lg text-gray-300 lg:max-w-lg leading-relaxed  ">
           Step into the future of creativity and possibilities. Sign in to get started!
         </p>
       </div>
       {/* Right Section: Social Sign-In */}
-      <div className="relative w-full lg:w-1/2 flex flex-col gap-6 items-center lg:items-start z-10 lg:mt-30">
-        <h2 className="text-xl lg:text-2xl font-bold text-cyan-400 mb-4 lg:mb-6">Sign in to get started</h2>
+      <div className="relative w-full lg:w-1/2 flex flex-col  items-center lg:items-start z-10 lg:mt-30 ">
+        <h2 className="text-xl lg:text-2xl font-bold text-cyan-400 mb-4 lg:mb-6 lg:ml-50">Sign in to get started</h2>
 
-        <div className="max-w-2xl mx-auto my-1 p-5 flex flex-col justify-center items-center gap-10">
+        <div className="max-w-2xl mx-auto my-1 p-5 flex flex-col justify-center items-center gap-30">
         <form
         action={async () => {
             "use server";
@@ -43,29 +43,7 @@ const page = async () => {
 
         </form>
 
-        {/* <form
-          action={async () => {
-            "use server";
-            await signIn("github");
-          }}
-        >
-          <button className="flex items-center md:gap-5 gap-2 shadow-md text-lg py-2 px-23 lg:px-30 text-white bg-black rounded-full cursor-pointer ">
-            <Github className="text-2xl text-gray-800" />
-             Github
-          </button>
-        </form> */}
-
-        {/* <form
-          action={async () => {
-            "use server";
-            await signIn("facebook");
-          }}
-        >
-          <button className="flex items-center md:gap-5 gap-2 shadow-md text-lg py-2 px-20 lg:px-30  text-white bg-blue-500 rounded-full cursor-pointer">
-            <Facebook className="text-2xl text-gray-800" />
-            Facebook
-          </button>
-        </form> */}
+      
         {/* Terms & Privacy */}
         <div className="text-center lg:text-left text-sm text-gray-500 mt-6">
           By signing in, you accept our
