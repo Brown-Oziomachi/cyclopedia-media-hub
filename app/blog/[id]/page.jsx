@@ -155,7 +155,7 @@ const BlogDetails = ({ params }) => {
                       </div>
                       
                       {/* Blog Body */}
-        <p className="text-gray-400 leading-7 whitespace-pre-line bg-gray-900 mt-10">{blog.body}</p>
+        <p className="text-gray-400 leading-7 whitespace-pre-line bg-gray-900 ">{blog.body}</p>
         <div className="flex justify-center mt-8">
 
         <button
