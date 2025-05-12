@@ -9,30 +9,60 @@ const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId
 
 export default function VideoList() {
   const [videos, setVideos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  // Add a search form for user input
+  const handleInputChange = (e) => setSearchTerm(e.target.value);
 
-  const channelUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&type=video&key=${API_KEY}`;
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&type=video&q=${encodeURIComponent(searchTerm)}&key=${API_KEY}`;
+    fetch(searchUrl)
+      .then((res) => res.json())
+      .then((data) => setVideos(data.items))
+      .catch((error) => console.error("Error fetching videos:", error));
+  };
 
-useEffect(() => {
-    fetch(channelUrl)
+    // Fetch videos on initial mount
+    useEffect(() => {
+      const channelUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&type=video&key=${API_KEY}`;
+      fetch(channelUrl)
         .then((res) => res.json())
         .then((data) => setVideos(data.items))
         .catch((error) => console.error("Error fetching videos:", error));
-}, []);
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {videos.map((video) => (
-        <div key={video.id.videoId} className="bg-gradient-to-r from-gray-900 via-black to-orange-400 p-4 rounded-lg">
-          <iframe
-            width="100%"
-            height="200"
-            src={`https://www.youtube.com/embed/${video.id.videoId}`}
-            frameBorder="0"
-            allowFullScreen
+    }, []);
+  
+    return (
+      <>
+        <form onSubmit={handleSearch} className="mb-6 flex">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={handleInputChange}
+            placeholder="Search for a video..."
+            className="flex-1 p-2 rounded-l bg-gray-800 text-white outline-none"
           />
-          <h3 className="text-white mt-2">{video.snippet.title}</h3>
+          <button
+            type="submit"
+            className="bg-orange-400 text-white px-4 py-2 rounded-r"
+          >
+            Search
+          </button>
+        </form>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {videos?.map((video) => (
+            <div key={video.id.videoId} className="bg-gradient-to-r from-gray-900 via-black to-orange-400 p-4 rounded-lg">
+              <iframe
+                width="100%"
+                height="200"
+                src={`https://www.youtube.com/embed/${video.id.videoId}`}
+                frameBorder="0"
+                allowFullScreen
+              />
+              <h3 className="text-white mt-2">{video.snippet.title}</h3>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-  );
-}
+      </>
+    );
+  }
+  

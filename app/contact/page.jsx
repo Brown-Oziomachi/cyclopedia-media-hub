@@ -49,8 +49,9 @@ const ContactPage = () => {
       resetForm();
       setModalVisibility(true);
     } catch (error) {
-      console.error("Error sending form", error);
-      alert("Please check your network. Try again!");
+      console.error("Firebase Error:", error.code, error.message);
+      alert(`Error: ${error.message}`);
+    
     } finally {
       setProcessing(false);
     }
@@ -83,7 +84,7 @@ const ContactPage = () => {
               <div className="text-lg lg:text-xl text-gray-300 leading-relaxed mt-1">
                 At WebWiz, we are dedicated to bringing your ideas to life. Whether you're looking
                 for expert web solutions, custom designs, or seamless functionality, we're here to help.
-                Drop us a message and let’s collaborate to build something extraordinary!
+                Drop us a message and let’s collaborate to build something extraordinary for you!
               </div>
               <div className="text-lg lg:text-xl text-gray-300 leading-relaxed max-lg:mb-10">
                 📞 Have a question? Call us at <a href="tel:+2348142995114" className="text-cyan-400 hover:underline">+234 8142 995114</a><br />
@@ -114,7 +115,7 @@ const ContactPage = () => {
                       <Field
                         name="name"
                         type="text"
-                        placeholder="Name..."
+                        placeholder="Full Name..."
                         className="w-full p-3 rounded-lg border bg-gray-700 text-white focus:ring-2 focus:ring-cyan-500"
                       />
                       <ErrorMessage
