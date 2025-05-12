@@ -249,7 +249,6 @@ const valSchema = Yup.object({
             <h1 className="text-xl font-semibold">Blog Upload Successful</h1>
             <ThumbsUp className="text-6xl text-green-500" />
             <button onClick={() => setModalVisibility(false)} className="border px-5 py-2 text-white bg-amber-600">Close</button>
-            <button onClick={() =>("/blog"(genre.post))} className="text-yellow-600 bg-white">View Your Post</button>
         </div>
       </div>
       )
