@@ -212,7 +212,7 @@ const BlogPage = () => {
                     {post.photoURL}
                   </h2>
                   <p className="text-sm text-gray-400 mb-2">by {post.author}</p>
-                  <p className="line-clamp-3  text-gray-300 mb-4 text-sm">
+                  <p className="line-clamp-2 w-1/1  text-gray-300 mb-4 text-sm">
                     {post.body}
                   </p>
                 </div>
