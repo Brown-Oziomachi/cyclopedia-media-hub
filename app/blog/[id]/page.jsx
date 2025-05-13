@@ -120,7 +120,7 @@ const BlogDetails = ({ params }) => {
         {blog.imageUrl && <meta name="twitter:image" content={blog.imageUrl} />}
       </head>
 
-      <div className="min-h-screen px-2 py-16 max-w-4xl mx-auto bg-gray-900 text-gray-200">
+      <div className="min-h-screen px-2 py-16 max-w-4xl mx-auto bg-gray-900 text-gray-400">
         {/* Back Button */}
         <div className="flex items-center justify-between mb-6 mt-5">
           <Link href="/blog" className="text-blue-500 hover:underline text-lg">

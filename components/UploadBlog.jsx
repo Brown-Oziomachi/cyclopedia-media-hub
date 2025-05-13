@@ -292,6 +292,7 @@ Step 4: <Link href="/youtubevideos ">Watch</Link> </h1>
                   <option value="Cloud Computing">Cloud Computing</option>
                   <option value="Social Network">Social Network</option>
                   <option value="Lifestyle">Lifestyle</option>
+                  <option value="Stories">Stories</option>
                   <option value="Coding">Coding</option>
                   <option value="Health">Health</option>
                   <option value="Finance">Finance</option>

@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import Link from "next/link";
 import { db1 } from "@/lib/firebaseConfig";
-import { ChevronsRight } from "lucide-react";
 
 const BlogPage = () => {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -57,7 +56,7 @@ const BlogPage = () => {
           <input
             type="text"
             placeholder="Search by genre..."
-            className="w-full px-4 py-2 rounded-md text-white focus:ring focus:ring-yellow-500 border-white bg-amber-50/30"
+            className="w-full px-4 py-2 rounded-md text-white focus:ring focus:ring-yellow-500 border border-white bg-amber-50/30"
             onChange={(e) => {
               const searchTerm = e.target.value.toLowerCase();
               if (searchTerm) {
@@ -65,9 +64,9 @@ const BlogPage = () => {
                   post.genre.toLowerCase().includes(searchTerm)
                 );
                 setFilteredPosts(filtered);
-                setSelectedCategory(null); // Clear selected category when searching
+                setSelectedCategory(null);
               } else {
-                setFilteredPosts(blogPosts); // Reset to all posts when search is cleared
+                setFilteredPosts(blogPosts);
                 setSelectedCategory(null);
               }
             }}
@@ -77,7 +76,7 @@ const BlogPage = () => {
         {/* Categories */}
         <div className="text-center mb-10">
           <h2 className="text-3xl font-semibold mb-6">Popular Categories</h2>
-          <div className="flex justify-start items-center md:animate-none overflow-x-auto max-md:whitespace-nowrap snap-x snap-mandatory">
+          <div className="flex gap-3 overflow-x-auto whitespace-nowrap snap-x snap-mandatory pb-2">
             {[
               "Webwiz",
               "Technology",
@@ -114,6 +113,7 @@ const BlogPage = () => {
               "Cybersecurity",
               "Cloud Computing",
               "Lifestyle",
+              "Stories",
               "Coding",
               "Health",
               "History",
@@ -158,7 +158,7 @@ const BlogPage = () => {
               "Prayer",
               "Relationship",
               "Wisdom",
-              
+    
             ].map((category) => (
               <button
                 key={category}
@@ -167,17 +167,16 @@ const BlogPage = () => {
                     ? "bg-yellow-600 text-black"
                     : "bg-yellow-500 text-black hover:bg-yellow-600"
                 }`}
-                onClick={() => {
-                    filterByCategory(category);
-                    }}
-                  >
-                    {category}
-                  </button>
-                  ))}
-                </div>
-              </div>
+                onClick={() => filterByCategory(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {selectedCategory && (
-          <div className="text-center mb-6 border-b-5 border-white pb-3 text-white">
+          <div className="text-center mb-6 border-b pb-3">
             <h3 className="text-lg font-semibold text-gray-300 border-b-2 border-yellow-500 inline-block pb-1">
               Showing posts for:{" "}
               <span className="text-yellow-500 font-bold">
@@ -193,34 +192,39 @@ const BlogPage = () => {
             <div className="w-14 h-14 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : filteredPosts.length > 0 ? (
-          <section className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-8">
+          // Adjust grid so cards become slightly smaller (3 columns on large screens)
+          <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
             {filteredPosts.map((post) => (
               <article
                 key={post.id}
-                className="p-6 rounded-xl bg-gray-800 shadow-lg relative w-full hover:shadow-2xl transition-all duration-300"
+                className="bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
               >
-                <span className="absolute top-4 left-4 bg-yellow-500 text-black text-xs px-3 py-1 rounded-full">
+                {/* Category Tag */}
+                <span className="absolute top-4 left-4 bg-yellow-500 text-black text-xs px-3 py-1 rounded-full ">
                   {post.genre || "General"}
                 </span>
-                <Link
-                  href={`/blog/${post.id}`}
-                  className=" block px-4 py-3  text-yellow-500 rounded-full text-center font-semibold hover:text-white transition-all"
-                >
-                <div className="flex flex-col items-center text-center">
-                  <h2 className="text-2xl font-bold mb-3 py-3 ">{post.title}</h2>
-                  <h2 className="text-2xl font-bold mb-3 py-3">
-                    {post.photoURL}
-                  </h2>
-                  <p className="text-sm text-gray-400 mb-2">by {post.author}</p>
-                  <p className="line-clamp-2 w-1/1  text-gray-300 mb-4 text-sm">
-                    {post.body}
-                  </p>
-                </div>
-                <p className="text-xs text-gray-400 text-center absolute top-4 right-4">
-                  Posted on {post.timestamp || "Unknown Date"}
-                </p>
-                  Learn more{" "}
-                  <ChevronsRight className="inline-block max-lg:ml-27 lg:ml-25" />
+                <Link href={`/blog/${post.id}`}>
+                  <div className="block">
+                    {/* Optional Image Section */}
+                    {post.photoURL && (
+                      <div className="h-48 overflow-hidden">
+                        <img
+                          src={post.photoURL}
+                          alt={post.title}
+                          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                        />
+                      </div>
+                    )}
+                    <div className="p-5">
+                      <h2 className="text-2xl font-bold mb-3 mt-5">{post.title}</h2>
+                      <p className="text-sm text-gray-400 mb-4 line-clamp-3">
+                        {post.body}
+                      </p>
+                      <p className="text-xs text-gray-400 text-right">
+                        Posted on {post.timestamp || "Unknown Date"}
+                      </p>
+                    </div>
+                  </div>
                 </Link>
               </article>
             ))}
