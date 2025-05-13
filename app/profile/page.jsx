@@ -18,8 +18,13 @@ function ProfilePage() {
   // Fetch session on component mount
   useEffect(() => {
     async function fetchSession() {
-      const sess = await auth();
-      setSession(sess);
+      try {
+        const sess = await auth();
+        console.log("User Session Data:", sess); // Debugging log
+        setSession(sess);
+      } catch (error) {
+        console.error("Error fetching session:", error);
+      }
     }
     fetchSession();
   }, []);
@@ -50,24 +55,15 @@ function ProfilePage() {
     }
   }, [session]);
 
-  // Handler for the feedback form
-  const handleFeedbackSubmit = (e) => {
-    e.preventDefault();
-    console.log("User Feedback:", feedback);
-    // Extend this to send feedback to your backend or store it in Firestore
-    setFeedback("");
-    alert("Thank you for your feedback!");
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md bg-white/10 backdrop-blur-lg shadow-xl rounded-xl p-6 mt-10">
-        {session ? (
+      
           <>
             <div className="text-center">
               <img
                 className="h-20 w-20 mx-auto rounded-full border-2 border-white shadow-md hover:scale-105 transition-transform duration-300"
-                src={session?.user?.image || "/default-avatar.png"}
+                src={session?.user?.image || "/default-avatar.png"} // Default image fallback
                 alt="Profile Avatar"
               />
               <h1 className="mt-4 text-2xl font-semibold text-white">
@@ -91,9 +87,7 @@ function ProfilePage() {
               </p>
             </div>
           </>
-        ) : (
-          <p className="text-gray-300 text-center">Loading profile...</p>
-        )}
+       
 
         <div className="mt-6 flex justify-center">
           <Link
@@ -104,60 +98,30 @@ function ProfilePage() {
           </Link>
         </div>
 
-        <div className="mt-6 text-center">
-          <p className="text-gray-400">Want to explore more?</p>
-          <Link
-            href="/"
-            className="text-blue-400 hover:text-blue-500 transition-colors duration-300"
-          >
-            🌎 Go to Home →
-          </Link>
+        {/* --- User Blog Posts Section --- */}
+        <div className="mt-10 w-full max-w-md bg-white/10 backdrop-blur-lg shadow-xl rounded-xl p-6">
+          <h2 className="text-2xl font-bold text-white mb-4">Your Blog Posts</h2>
+          {loadingUserBlogs ? (
+            <p className="text-gray-300">Loading your blogs...</p>
+          ) : userBlogs.length > 0 ? (
+            <ul className="space-y-4">
+              {userBlogs.map((blog) => (
+                <li key={blog.id} className="bg-white/20 p-4 rounded shadow">
+                  <Link
+                    href={`/blog/${blog.id}`}
+                    className="text-blue-400 hover:text-blue-500 transition-colors"
+                  >
+                    {blog.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-300">
+              You haven't published any blog posts yet.
+            </p>
+          )}
         </div>
-      </div>
-
-      {/* --- New Section: Your Blog Posts --- */}
-      <div className="mt-10 w-full max-w-md bg-white/10 backdrop-blur-lg shadow-xl rounded-xl p-6">
-        <h2 className="text-2xl font-bold text-white mb-4">Your Blog Posts</h2>
-        {loadingUserBlogs ? (
-          <p className="text-gray-300">Loading your blogs...</p>
-        ) : userBlogs.length > 0 ? (
-          <ul className="space-y-4">
-            {userBlogs.map((blog) => (
-              <li key={blog.id} className="bg-white/20 p-4 rounded shadow">
-                <Link
-                  href={`/blog/${blog.id}`}
-                  className="text-blue-400 hover:text-blue-500 transition-colors"
-                >
-                  {blog.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-gray-300">
-            You haven't published any blog posts yet.
-          </p>
-        )}
-      </div>
-
-      {/* --- New Section: Feedback Form --- */}
-      <div className="mt-10 w-full max-w-md bg-white/10 backdrop-blur-lg shadow-xl rounded-xl p-6">
-        <h2 className="text-2xl font-bold text-white mb-4">Leave Us Feedback</h2>
-        <form onSubmit={handleFeedbackSubmit} className="flex flex-col gap-4">
-          <textarea
-            className="w-full p-3 rounded-md bg-white/10 text-white border border-gray-600 focus:outline-none focus:ring focus:ring-yellow-500"
-            placeholder="Your feedback..."
-            value={feedback}
-            onChange={(e) => setFeedback(e.target.value)}
-            rows={4}
-          />
-          <button
-            type="submit"
-            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
-          >
-            Submit Feedback
-          </button>
-        </form>
       </div>
     </div>
   );
