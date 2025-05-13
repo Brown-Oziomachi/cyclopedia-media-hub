@@ -7,6 +7,7 @@ import { db1 } from "@/lib/firebaseConfig"; // Import Firestore and Storage
 import { LoaderCircle, ThumbsUp } from "lucide-react";
 import BlogDisplay from "@/components/BlogDisplay";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 
 
@@ -25,7 +26,7 @@ const UploadBlog = ({ session,}) => {
   const [previewBody, setPreviewBody] = useState(""); // For markdown preview
   const [values, setValues] = useState({ title: "", genre: "", body: "" });
  const pathname = usePathname();
-
+const [showpopup, setShowPopup] = useState(false);
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
@@ -52,12 +53,60 @@ const UploadBlog = ({ session,}) => {
     }
   };
 
+  const handleShowPopup = (e) => {
+    e.preventDefault();
+    setShowPopup(true);
+  };
+
+  const closeModal = () => {
+    setShowPopup(false);
+  };
   return (
     <main className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-800 via-gray-900 to-orange-400 p-6">
       <div className="w-full max-w-lg rounded-lg shadow-xl p-6 bg-gradient-to-r from-gray-700 via-gray-800 to-orange-400 mt-10">
+        <div>
+
         <h2 className="text-3xl font-bold text-center text-white mb-6">
-          Upload To Wiz
+          Upload To Wiz <br />
+          <button onClick={handleShowPopup} className="text-sm text-gray-500">(!)Learn to Upload</button>
+          
         </h2>
+            
+        </div>
+        {showpopup && (
+            <div className="fixed inset-0 -mt-30 bg-black/50 bg-opacity-100 flex justify-center items-center  z-50">
+             <div className="bg-gray-900 text-gray-300 rounded-lg p-2 max-w-sm  lg:w-1/2 relative">
+              <h1 className=" scroll-auto">
+ <h2 className="text-2xl ">follow these simple steps:</h2> <br />    
+
+Step 1: Log In
+- Please log in to your Webwiz Creation account before uploading your blog post.
+- This ensures that your name is displayed instead of "Anonymous" when you submit your post. <br />
+<Link href="/auth/signin" className="text-orange-400">
+Log in here
+</Link>
+<br />
+<br />
+Step 2: Write Your Blog Title
+- Craft a catchy and descriptive title that captures the essence of your content.
+- Keep it concise and engaging to grab the reader's attention.
+<br />
+<br />
+Step 3: Add Your Content
+- Write your blog content, ensuring it's relevant to your title and engaging for your audience.
+- Use clear and concise language, and format your text for easy reading.
+<br />
+<br />
+Step 4: <Link href="/youtubevideos ">Watch</Link> </h1>
+              <button
+              onClick={closeModal}
+              className="mt-4 bg-black hover:bg-gray-800 text-white font-semibold px-4 py-1 rounded transition duration-200"
+            >
+              Close
+            </button>
+              </div>
+              </div>
+            )}
         <Formik
           initialValues={{
             title: "",
