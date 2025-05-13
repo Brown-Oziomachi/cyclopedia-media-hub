@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import Popup from '@/components/Popup';
 import { ArrowRight, ArrowRightToLine,  ChevronRight, LaptopMinimal, LoaderCircle, Palette, PersonStanding, Play, Store, Webhook } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
+import ChatDropdown from '@/components/Chat';
 
 
 
@@ -408,7 +409,7 @@ useEffect(() => {
   </div>
   </div>
   <BottomNav/>
-
+  <ChatDropdown/>
   <Footer className="h-dvh"/>
   </>
   )

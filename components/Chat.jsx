@@ -20,9 +20,9 @@ const ChatDropdown = () => {
                 href="https://wa.me/message/R4UKUMFIH22RJ1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center p-3 hover:bg-black"
+                className="flex items-center p-3 hover:bg-black text-white"
               >
-                <img src="/whatsapp.png" alt="WhatsApp" className="w-10 h-10 max-md:w-5 max-md:h-5 mr-2" />
+                <img src="/whatsapp logo.png" alt="WhatsApp" className="w-10 h-10 max-md:w-5 max-md:h-5 mr-2" />
                 WhatsApp
               </a>
             </li>
@@ -31,7 +31,7 @@ const ChatDropdown = () => {
                 href="https://www.instagram.com/webwiz_creation_webdevelopers/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center p-3 hover:bg-black"
+                className="flex items-center p-3 hover:bg-black text-white" 
               >
                 <img src="/instagram.png" alt="Instagram" className="w-10 h-10 max-md:w-5 max-md:h-5 mr-2" />
                 Instagram
@@ -42,9 +42,9 @@ const ChatDropdown = () => {
                 href="http://www.linkedin.com/in/brownoziomachi72a5a3229"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center p-3 hover:bg-black"
+                className="flex items-center p-3 hover:bg-black text-white"
               >
-                <img src="/linkedin.png" alt="LinkedIn" className="w-10 h-10 max-md:w-5 max-md:h-5 mr-2" />
+                <img src="/linkedin.png" alt="LinkedIn" className="w-10 h-10 max-md:w-5 max-md:h-5 mr-2 " />
                 LinkedIn
               </a>
             </li>

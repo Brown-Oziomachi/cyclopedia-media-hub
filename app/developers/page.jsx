@@ -98,7 +98,7 @@ async function DevelopersPage() {
         </div>
       </section>
       {/* Developers Section */}
-      <section className="py-16 bg-gray-100">
+      <section className="py-16 bg-gray-900">
         <div className="container mx-auto">
           <h2 className="text-4xl font-bold text-center text-red-500 mb-10">
             Meet Our Developers
@@ -107,22 +107,22 @@ async function DevelopersPage() {
             {developersData.map((developer, index) => (
               <div
                 key={index}
-                className=" p-1 rounded-lg  hover:shadow-xl m-5 transition-all bg-gray-900 relative "
+                className=" p-1 rounded-lg  hover:shadow-xl m-5 transition-all bg-gray-900 relative z-0 "
               >
                 <img
                   src={developer.image}
                   alt={developer.name}
                   className="w-70 h-70 mb- rounded-full mx-auto "
                 />
-                <h3 className="absolute inset-0 top-50 text-center text-2xl font-bold text-red-500 mb-2 group-hover:text-white group-hover:bg-red-500 hover:border hover:border-tr-8 bg-gray-900 z-0 h-1/4 ">
+                <h3 className="absolute inset-0 top-50 text-center text-2xl font-bold text-red-500 mb-2   bg-gray-900 z-0 h-1/4 ">
                   {developer.name}
                 </h3>
-                <p className="text-white mb-2 text-center absolute inset-0 top-60 ">{developer.specialty}</p>
-                <p className="text-sm text-white text-center absolute inset-0 top-65">{developer.bio}</p>
-                <div className="flex justify-center gap-4 mt-4 group-hover:text-red-500 z-50">
+                <p className="text-white mb-2 text-center absolute inset-0 top-60 z-0">{developer.specialty}</p>
+                <p className="text-sm text-white text-center absolute inset-0 top-65 z-0">{developer.bio}</p>
+                <div className="flex justify-center gap-4 mt-2 group-hover:text-red-500 z-50 cursor-pointer">
                   {developer.links.map((link, linkIndex) => (
-                    <Link key={linkIndex} href={link.href}>
-                      <p className="px-4 py-2 bg-red-500 text-white  rounded-md  hover:text-red-500 hover:bg-white z-50 ">
+                    <Link key={linkIndex} href={link.href} className="z-50">
+                      <p className="px-4 py-2 bg-red-500 text-white  rounded-md  hover:text-red-500 hover:bg-white z-50 cursor-pointer">
                         {link.text}
                       </p>
                     </Link>
@@ -142,7 +142,7 @@ async function DevelopersPage() {
             perfect developer for your needs.
           </p>
           <Link href="/contact">
-            <button className="bg-red-500 hover:bg-red-600 px-8 py-4 rounded-md text-xl shadow-md">
+            <button className="bg-red-500 hover:bg-red-600 px-8 py-4 rounded-md text-xl shadow-md cursor-pointer">
               Contact Us
             </button>
           </Link>

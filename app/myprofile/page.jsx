@@ -162,7 +162,7 @@ const ProfileCard = () => {
               Resume
             </a>
           </div>
-          <ChatDropdown/>
+         
         </div>
       </main>
     </>
