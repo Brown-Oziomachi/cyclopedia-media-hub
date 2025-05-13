@@ -197,7 +197,7 @@ const BlogPage = () => {
             {filteredPosts.map((post) => (
               <article
                 key={post.id}
-                className="p-6 rounded-xl bg-black shadow-lg relative"
+                className="p-6 rounded-xl bg-gray-800 shadow-lg relative w-full hover:shadow-2xl transition-all duration-300"
               >
                 <span className="absolute top-4 left-4 bg-yellow-500 text-black text-xs px-3 py-1 rounded-full">
                   {post.genre || "General"}
@@ -207,7 +207,7 @@ const BlogPage = () => {
                   className=" block px-4 py-3  text-yellow-500 rounded-full text-center font-semibold hover:text-white transition-all"
                 >
                 <div className="flex flex-col items-center text-center">
-                  <h2 className="text-2xl font-bold mb-3 py-3">{post.title}</h2>
+                  <h2 className="text-2xl font-bold mb-3 py-3 ">{post.title}</h2>
                   <h2 className="text-2xl font-bold mb-3 py-3">
                     {post.photoURL}
                   </h2>

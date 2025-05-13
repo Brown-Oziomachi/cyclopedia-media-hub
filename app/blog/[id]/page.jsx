@@ -108,7 +108,7 @@ const BlogDetails = ({ params }) => {
 
 
 
-      <main className="min-h-screen px-2 py-16 max-w-4xl mx-auto bg-gray-900 text-gray-200">
+      <div className="min-h-screen px-2 py-16 max-w-4xl mx-auto bg-black text-gray-200">
 
         {/* Back Button */}
         <div className="flex items-center justify-between mb-6 mt-5">
@@ -117,12 +117,14 @@ const BlogDetails = ({ params }) => {
           </Link>
         </div>
         {/* Blog Content */}
-        <div className="bg-gray-950 shadow-lg rounded-lg p-8">
+        <div className="bg-gray-800 shadow-lg rounded-lg p-8">
           {/* Category Tag */}
+          <Link
+            href={`/blog/${blog.id}`}>
           <span className="inline-block mb-4 px-4 py-1 bg-purple-600 text-white text-sm rounded-full">
             {blog.genre}
           </span>
-
+          </Link>
           {/* Title */}
           <h1>Webwiz Creation</h1>
           <h1 className="text-4xl font-bold text-white mb-4 text-center">{blog.title}</h1>
@@ -161,16 +163,23 @@ const BlogDetails = ({ params }) => {
         body={blog.body}
       />
     </div>
-        <div className="flex justify-center mt-8">
+        <div className="flex justify-center items-center shadow-lg">
+                <button
+                  className="flex items-center gap-2 text-gray-400 font-bold py-2 px-4 rounded transition mt-5 cursor-pointer"
+                  onClick={handleCopyLink}
+                >
+                  <LinkIcon className="h-5 w-5" /> Copy Link
+                </button>
+
 
         <button
-                  className="flex items-center gap-2   text-gray-400 font-bold py-2 px-4 rounded transition mt-5"
+                  className="flex items-center gap-2   text-gray-400 font-bold py-2 px-4 rounded transition mt-5 cursor-pointer"
                   onClick={handleShareClick}
                 >
                   <Share className="h-5 w-5" /> Share
                 </button>
         <button
-                        className="flex items-center text-gray-300 hover:text-red-500 transition-all mt-5"
+                        className="flex items-center text-gray-300 hover:text-red-500 transition-all mt-5 cursor-pointer"
                         onClick={handleLikeClick}
                       >
                         
@@ -212,14 +221,16 @@ const BlogDetails = ({ params }) => {
                         <Heart className={`h-6 w-6 mr-2 ${liked ? "fill-red-500 scale-110" : "fill-none"}`} />
                         {liked ? "Liked" : "Like"} ({likes})
                       </button>
+
         </div>
-                  
-        <div className="flex justify-center mt-8">
+        
+                  </div>
+        <div className="flex justify-center  bg-black">
            <Link href="/blog" className="text-blue-500 hover:underline text-lg">
            ← Back to Blogs
          </Link>
         </div> 
-        </main>
+      
         </>
   )
 }
