@@ -37,7 +37,7 @@ const BlogDetails = ({ params }) => {
   const id = resolvedParams?.id;
   const [values, setValues] = useState({ title: "", genre: "", body: "" });
 
-
+  
   useEffect(() => {
     if (!id) return;
 
@@ -130,14 +130,17 @@ const BlogDetails = ({ params }) => {
           <h1 className="text-4xl font-bold text-white mb-4 text-center">{blog.title}</h1>
 
           {/* Author & Like Button */}
-          <p className="text-gray-600 text-lg">{blog.image}</p>
-          <div className="flex items-center justify-between mb-6">
-            <p className="text-gray-400 text-lg text-center">Writer: {blog.author}</p>
+          <div className="mb-6">
+          <img
+            className=" h-20 w-20 rounded-full border-2 border-white shadow-md hover:scale-105 transition-transform duration-300"
+            src={blog?.user?.image || "/default-avatar.png"}
+            alt="Your image"
+          />
+            <p className="text-gray-400 text-lg">By: {blog.author}</p>
         
           </div>
-
           {/* Timestamp */}
-          <p className="text-gray-400 text-sm mb-6 inline-block text-right">
+          <p className="text-gray-400 text-sm inline-block text-right">
             Posted on {blog.timestamp || "Unknown Date"}
           </p>
   </div>
@@ -145,6 +148,7 @@ const BlogDetails = ({ params }) => {
 <div className="container mx-auto bg-gray-800 shadow-lg rounded-lg p-1">
       <BlogDisplay
         body={blog.body}
+        image={blog.image} 
       />
     </div>
         <div className="flex justify-center items-center shadow-lg">
