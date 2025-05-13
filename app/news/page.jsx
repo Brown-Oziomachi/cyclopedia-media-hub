@@ -11,14 +11,6 @@ const Page = () => {
   const [error, setError] = useState(null);
 
   const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 9000); // Adjust the timeout as needed
-    return () => clearTimeout(timer);
-  }, []);
-
   useEffect(() => {
   if (!apiKey) {
     setError("API Key is missing! Please set it in Vercel environment variables.");
@@ -48,6 +40,22 @@ const Page = () => {
   const handlePlatformChange = (event) => {
     setPlatform(event.target.value);
   };
+
+  const fetchNews = async () => {
+    const res = await fetch('/api/news');
+    const data = await res.json();
+    // process data...
+  }
+  
+  useEffect(() => {
+    fetchNews();
+  }   , []);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 9000); // Adjust the timeout as needed
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
