@@ -108,7 +108,7 @@ const BlogDetails = ({ params }) => {
 
 
 
-      <main className="min-h-screen px-6 py-16 max-w-4xl mx-auto bg-gray-900 text-gray-200">
+      <main className="min-h-screen px-2 py-16 max-w-4xl mx-auto bg-gray-900 text-gray-200">
 
         {/* Back Button */}
         <div className="flex items-center justify-between mb-6 mt-5">
@@ -156,7 +156,7 @@ const BlogDetails = ({ params }) => {
                         )}
                        </div> */}   </div>
 
-<div className="container mx-auto px-4">
+<div className="container mx-auto ">
       <BlogDisplay
         body={blog.body}
       />
