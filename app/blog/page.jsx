@@ -165,7 +165,7 @@ const BlogPage = () => {
                 className={`px-6 py-3 rounded-xl text-sm font-medium transition-all ${
                   selectedCategory === category
                     ? "bg-yellow-600 text-black"
-                    : "bg-yellow-500 text-black hover:bg-yellow-600"
+                    : "bg-yellow-800 text-black hover:bg-yellow-600"
                 }`}
                 onClick={() => filterByCategory(category)}
               >
@@ -188,19 +188,19 @@ const BlogPage = () => {
 
         {/* Blog Posts Section */}
         {loading ? (
-          <div className="flex justify-center items-center h-[50vh]">
+          <div className="flex justify-center items-center h-[30vh]">
             <div className="w-14 h-14 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : filteredPosts.length > 0 ? (
           // Adjust grid so cards become slightly smaller (3 columns on large screens)
-          <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
+          <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 ">
             {filteredPosts.map((post) => (
               <article
                 key={post.id}
-                className="bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
+                className="bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit"
               >
                 {/* Category Tag */}
-                <span className="absolute top-4 left-4 bg-yellow-500 text-black text-xs px-3 py-1 rounded-full ">
+                <span className="absolute top-4 left-4 bg-yellow-800 text-black text-xs px-3 py-1 rounded-full ">
                   {post.genre || "General"}
                 </span>
                 <Link href={`/blog/${post.id}`}>

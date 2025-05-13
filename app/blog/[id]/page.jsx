@@ -225,7 +225,7 @@ const BlogDetails = ({ params }) => {
         {otherBlogs.length > 0 && (
           <div className="max-w-4xl mx-auto mt-8 px-2">
             <h2 className="text-2xl font-bold text-white mb-4">Other Blog Options</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {otherBlogs.map((other) => (
                 <Link key={other.id} href={`/blog/${other.id}`}>
                   <div className="bg-gray-950 p-4 rounded-lg shadow hover:bg-gray-700 transition-colors cursor-pointer">
