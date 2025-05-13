@@ -162,25 +162,6 @@ const BlogDetails = ({ params }) => {
         <div className="container mx-auto bg-gray-800 shadow-lg rounded-lg p-1 mt-8">
           <BlogDisplay body={blog.body} image={session?.user?.image} />
         </div>
-
-        {/* Other Blog Options Section */}
-        {otherBlogs.length > 0 && (
-          <div className="max-w-4xl mx-auto mt-8 px-2">
-            <h2 className="text-2xl font-bold text-white mb-4">Other Blog Options</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {otherBlogs.map((other) => (
-                <Link key={other.id} href={`/blog/${other.id}`}>
-                  <div className="bg-gray-950 p-4 rounded-lg shadow hover:bg-gray-700 transition-colors cursor-pointer">
-                    <h3 className="text-xl font-bold text-white">{other.title}</h3>
-                    <p className="text-gray-400 text-sm mb-2">{other.genre}</p>
-                    <p className="text-gray-200 text-sm line-clamp-2">{other.body}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
-
         <div className="flex justify-center items-center shadow-lg mt-8">
           <button
             className="flex items-center gap-2 text-gray-400 font-bold py-2 px-4 rounded transition mt-5 cursor-pointer"
@@ -239,6 +220,25 @@ const BlogDetails = ({ params }) => {
           </button>
         </div>
       </div>
+
+        {/* Other Blog Options Section */}
+        {otherBlogs.length > 0 && (
+          <div className="max-w-4xl mx-auto mt-8 px-2">
+            <h2 className="text-2xl font-bold text-white mb-4">Other Blog Options</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {otherBlogs.map((other) => (
+                <Link key={other.id} href={`/blog/${other.id}`}>
+                  <div className="bg-gray-950 p-4 rounded-lg shadow hover:bg-gray-700 transition-colors cursor-pointer">
+                    <h3 className="text-xl font-bold text-white">{other.title}</h3>
+                    <p className="text-gray-400 text-sm mb-2">{other.genre}</p>
+                    <p className="text-gray-200 text-sm line-clamp-2">{other.body}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
 
       <div className="flex justify-center bg-black py-4">
         <Link href="/blog" className="text-blue-500 hover:underline text-lg">
