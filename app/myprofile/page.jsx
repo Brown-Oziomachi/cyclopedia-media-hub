@@ -20,7 +20,7 @@ const ProfileCard = () => {
             <h1 className="text-4xl lg:text-5xl font-extrabold text-white z-0">Brown Code</h1>
           </div>
         </div>
-
+        
         {/* Profile Section */}
         <div className="p-8 lg:flex lg:justify-between lg:items-center z-50">
           <div className="flex flex-col items-center lg:items-start">

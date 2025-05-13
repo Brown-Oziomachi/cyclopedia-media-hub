@@ -9,12 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@auth/firebase-adapter": "^2.8.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.9",
     "firebase": "^11.6.0",
-    "firebase-admin": "^12.7.0",
     "formik": "^2.4.6",
     "io": "^1.5.3",
     "lucide-react": "^0.503.0",

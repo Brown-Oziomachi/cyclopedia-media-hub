@@ -2,14 +2,19 @@ import Link from "next/link";
 import { redirect, } from "next/navigation";
 import { ChartPie, Facebook, Github } from "lucide-react";
 import { auth, signIn } from "@/auth";
+import { setDoc, doc } from "firebase/firestore";
+import { db1 } from "@/lib/firebaseConfig";
+
 
 
 const page = async () => {
+  
+  
   const session = await auth();
   if (session) {
     redirect("/profile");
   }
-
+  
   
   return (
     <main className="min-h-screen flex flex-col lg:flex-row items-center justify-between px-4 lg:px-20 relative z-0">
