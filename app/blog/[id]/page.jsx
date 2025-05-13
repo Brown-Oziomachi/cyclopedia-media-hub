@@ -108,7 +108,7 @@ const BlogDetails = ({ params }) => {
 
 
 
-      <div className="min-h-screen px-2 py-16 max-w-4xl mx-auto bg-black text-gray-200">
+      <div className="min-h-screen px-2 py-16 max-w-4xl mx-auto bg-gray-900 text-gray-200">
 
         {/* Back Button */}
         <div className="flex items-center justify-between mb-6 mt-5">
@@ -117,7 +117,7 @@ const BlogDetails = ({ params }) => {
           </Link>
         </div>
         {/* Blog Content */}
-        <div className="bg-gray-800 shadow-lg rounded-lg p-8">
+        <div className="bg-gray-950 shadow-lg rounded-lg p-8">
           {/* Category Tag */}
           <Link
             href={`/blog/${blog.id}`}>
@@ -133,32 +133,16 @@ const BlogDetails = ({ params }) => {
           <p className="text-gray-600 text-lg">{blog.image}</p>
           <div className="flex items-center justify-between mb-6">
             <p className="text-gray-400 text-lg text-center">Writer: {blog.author}</p>
-            {/* <button
-              className="flex items-center text-gray-600 hover:text-red-500 transition-all"
-              onClick={handleLikeClick}
-            >
-              <Heart className={`h-6 w-6 mr-2 ${liked ? "fill-red-500 scale-110" : "fill-none"}`} />
-              {liked ? "Liked" : "Like"} ({likes})
-            </button> */}
+        
           </div>
 
           {/* Timestamp */}
           <p className="text-gray-400 text-sm mb-6 inline-block text-right">
             Posted on {blog.timestamp || "Unknown Date"}
           </p>
+  </div>
 
-                {/* <div className="mb-6 flex justify-center">
-                        {blog.videoUrl ? (
-                        <video src={blog.videoUrl} controls className="w-full rounded-xl shadow-xl" />
-                        ) : (
-                        <img
-                          src={blog.imageUrl || "/"}
-                          className=""
-                        />
-                        )}
-                       </div> */}   </div>
-
-<div className="container mx-auto ">
+<div className="container mx-auto bg-gray-800 shadow-lg rounded-lg p-1">
       <BlogDisplay
         body={blog.body}
       />
