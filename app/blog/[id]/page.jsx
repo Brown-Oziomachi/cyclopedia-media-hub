@@ -117,7 +117,7 @@ const BlogDetails = ({ params }) => {
           </Link>
         </div>
         {/* Blog Content */}
-        <div className="bg-gradient-to-br from-gray-900 via-black to-orange-400 shadow-lg z-0 rounded-lg p-8">
+        <div className="bg-gradient-to-br from-gray-900 via-black to-orange-400 shadow-lg z-0 rounded-lg p-8 relative">
           {/* Category Tag */}
           <Link
             href={`/blog/${blog.id}`}>
@@ -126,7 +126,7 @@ const BlogDetails = ({ params }) => {
           </span>
           </Link>
           {/* Title */}
-          <h1>Webwiz Creation</h1>
+          <h1 className="text-xs text-gray-400 text-center absolute top-10 right-4">THE SUN WEB</h1>
           <h1 className="text-4xl font-bold text-white mb-4 text-center">{blog.title}</h1>
 
           {/* Author & Like Button */}
