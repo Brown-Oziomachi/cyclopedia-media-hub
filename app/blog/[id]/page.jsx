@@ -132,7 +132,7 @@ const BlogDetails = ({ params }) => {
         <div className="bg-gradient-to-br from-gray-900 via-black to-orange-400 shadow-lg z-0 rounded-lg p-8 relative">
           {/* Category Tag */}
           <Link href={`/blog/${blog.id}`}>
-            <span className="inline-block mb-4 px-4 py-1 bg-purple-600 text-white text-sm rounded-full">
+            <span className="inline-block mb-4 px-4 py-1 bg-purple-900 text-white text-sm rounded-full">
               {blog.genre}
             </span>
           </Link>
