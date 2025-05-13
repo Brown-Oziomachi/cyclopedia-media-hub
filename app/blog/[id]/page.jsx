@@ -117,7 +117,7 @@ const BlogDetails = ({ params }) => {
           </Link>
         </div>
         {/* Blog Content */}
-        <div className="bg-gray-950 shadow-lg rounded-lg p-8">
+        <div className="bg-gradient-to-br from-gray-900 via-black to-orange-400 shadow-lg rounded-lg p-8">
           {/* Category Tag */}
           <Link
             href={`/blog/${blog.id}`}>
