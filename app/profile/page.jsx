@@ -118,7 +118,7 @@ function ProfilePage() {
             </ul>
           ) : (
             <p className="text-gray-300">
-              You haven't published any blog posts yet.
+              You haven't published any blog posts yet. Try one.
             </p>
           )}
         </div>
