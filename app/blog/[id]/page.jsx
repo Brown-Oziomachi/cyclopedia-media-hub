@@ -1,10 +1,19 @@
 "use client";
 import React, { use, useEffect, useState } from "react";
-import { db1 } from "@/lib/firebaseConfig";
-import { doc, getDoc, updateDoc, collection, query, getDocs } from "firebase/firestore";
+import { db1, db3, } from "@/lib/firebaseConfig";
+import {
+  doc,
+  updateDoc,
+  collection,
+  query,
+  getDocs,
+  addDoc,
+  serverTimestamp,
+  getDoc,
+  where, // Make sure 'where' is imported
+} from "firebase/firestore";
 import { LoaderCircle, Heart, Share, LinkIcon } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import BlogDisplay from "@/components/BlogDisplay";
 
 const fetchSingleBlog = async (id) => {
@@ -35,6 +44,53 @@ const BlogDetails = ({ params }) => {
   const id = resolvedParams?.id;
   const [session, setSession] = useState(null);
   const [otherBlogs, setOtherBlogs] = useState([]);
+  const [newComment, setNewComment] = useState("");
+  const [comments, setComments] = useState([]);
+
+  // Fetch comments specifically for this blog post from Firestore (db4)
+  useEffect(() => {
+    async function fetchComments() {
+      if (!id) return;
+      try {
+        const commentsQuery = query(
+          collection(db3, "comments"),
+          where("blogId", "==", id)
+        );
+        const querySnapshot = await getDocs(commentsQuery);
+        const commentsArray = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setComments(commentsArray);
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+      }
+    }
+    fetchComments();
+  }, [id]);
+
+  // Submit a new comment for the current blog post to Firestore (db4)
+  const handleCommentSubmit = async () => {
+    if (newComment.trim() !== "") {
+      try {
+        const commentData = {
+          blogId: id, // Tag the comment with the current blog post's id
+          text: newComment,
+          userName: session?.user?.name || "Anonymous",
+          userImage: session?.user?.image || "/default-avatar.png",
+          timestamp: serverTimestamp(),
+        };
+
+        await addDoc(collection(db3, "comments"), commentData);
+
+        // Optionally, re-fetch comments here or update locally:
+        setComments((prev) => [...prev, commentData]);
+        setNewComment("");
+      } catch (error) {
+        console.error("Error submitting comment:", error);
+      }
+    }
+  };
 
   // Fetch the currently selected blog.
   useEffect(() => {
@@ -53,7 +109,7 @@ const BlogDetails = ({ params }) => {
     fetchBlog();
   }, [id]);
 
-  // Once the blog is loaded, fetch other blog options (excluding the current one).
+  // Fetch other blog options (excluding the current one)
   useEffect(() => {
     if (!blog) return;
     async function fetchOtherBlogs() {
@@ -104,6 +160,9 @@ const BlogDetails = ({ params }) => {
       </div>
     );
   }
+
+
+
 
   return (
     <>
@@ -162,6 +221,7 @@ const BlogDetails = ({ params }) => {
         <div className="container mx-auto bg-gray-800 shadow-lg rounded-lg p-1 mt-8">
           <BlogDisplay body={blog.body} image={session?.user?.image} />
         </div>
+
         <div className="flex justify-center items-center shadow-lg mt-8">
           <button
             className="flex items-center gap-2 text-gray-400 font-bold py-2 px-4 rounded transition mt-5 cursor-pointer"
@@ -207,19 +267,86 @@ const BlogDetails = ({ params }) => {
                 </a>
                 <button
                   className="flex items-center text-gray-600 hover:text-gray-900"
-                  onClick={() => handleCopyLink(false)}
+                  onClick={() => setShowShareMenu(false)}
                 >
                   <LinkIcon className="h-5 w-5 mr-2" /> Copy Link
                 </button>
               </div>
             )}
             <Heart
-              className={`h-6 w-6 mr-2 ${liked ? "fill-red-500 scale-110" : "fill-none"}`}
+              className={`h-6 w-6 mr-2 ${
+                liked ? "fill-red-500 scale-110" : "fill-none"
+              }`}
             />
             {liked ? "Liked" : "Like"} ({likes})
           </button>
         </div>
-      </div>
+
+        {/* Comments Section */}
+        <div className="mt-10 bg-gray-800 shadow-lg rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-white mb-4">
+            Join the Conversation
+          </h2>
+
+          {/* Comment Input */}
+          <div className="flex items-center space-x-4 mb-6">
+            <img
+              src={session?.user?.image || "/default-avatar.png"}
+              alt="User avatar"
+              className="w-10 h-10 rounded-full border-2 border-white shadow-md"
+            />
+            <input
+              type="text"
+              placeholder="Write a comment..."
+              className="w-full p-3 rounded-md bg-white/10 text-white border border-gray-600 focus:outline-none focus:ring focus:ring-yellow-500"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+            />
+            <button
+              onClick={handleCommentSubmit}
+              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+            >
+              Post
+            </button>
+          </div>
+
+       {/* Display Comments */}
+<ul className="space-y-4">
+  {comments.length > 0 ? (
+    [...comments]
+      .sort((a, b) => b.timestamp?.seconds - a.timestamp?.seconds) // sorts comments (newest first)
+      .map((comment) => (
+        <li
+          key={comment.id}
+          className="bg-white/10 p-4 rounded shadow hover:bg-white/20 transition duration-200"
+        >
+          <div className="flex items-center space-x-3">
+            <img
+              src={comment.userImage || "/default-avatar.png"}
+              alt="User avatar"
+              className="w-8 h-8 rounded-full border-2 border-white"
+            />
+            <div>
+              <p className="text-white font-semibold">{comment.userName}</p>
+              {comment.timestamp && (
+                <p className="text-sm text-gray-400">
+                  {new Date(comment.timestamp.seconds * 1000).toLocaleString()}
+                </p>
+              )}
+            </div>
+          </div>
+          <p className="text-gray-300 mt-2">{comment.text}</p>
+        </li>
+      ))
+  ) : (
+    <p className="text-gray-300">Be the first to comment!</p>
+  )}
+</ul>
+</div>
+        </div>
+ 
+
+
 
         {/* Other Blog Options Section */}
         {otherBlogs.length > 0 && (
@@ -248,6 +375,5 @@ const BlogDetails = ({ params }) => {
     </>
   );
 };
-
 export default BlogDetails;
 
