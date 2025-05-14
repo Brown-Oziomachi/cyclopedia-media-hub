@@ -13,15 +13,15 @@ function ProfilePage() {
   const [loadingUserBlogs, setLoadingUserBlogs] = useState(true);
   const [feedback, setFeedback] = useState("");
 
-  // if (!session) {
-  //   redirect("/auth/signin"); // Redirect if not authenticated
-  // }
+  if (!session) {
+    redirect("/auth/signin"); // Redirect if not authenticated
+  }
 
 
   useEffect(() => {
     async function fetchSession() {
-      const sess = await auth();
-      setSession(sess);
+      const session = await auth();
+      setSession(session);
     }
     fetchSession();
   }, []);
@@ -152,7 +152,7 @@ function ProfilePage() {
               href="/blog"
               className="text-blue-100 hover:text-blue-200 underline"
             >
-              View All Posts →
+              View All Posts → 
             </Link>
           </div>
 
