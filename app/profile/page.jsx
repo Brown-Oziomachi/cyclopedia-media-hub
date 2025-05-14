@@ -1,6 +1,6 @@
 "use client"
 import UpdateProfile from "@/components/UpdateProfile";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
@@ -13,9 +13,9 @@ function ProfilePage() {
   const [loadingUserBlogs, setLoadingUserBlogs] = useState(true);
   const [feedback, setFeedback] = useState("");
 
-  if (!session) {
-    redirect("/auth/signin"); // Redirect if not authenticated
-  }
+  // if (!session) {
+  //   redirect("/auth/signin"); // Redirect if not authenticated
+  // }
 
 
   useEffect(() => {
