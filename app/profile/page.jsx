@@ -8,11 +8,12 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db1 } from "@/lib/firebaseConfig";
 
 function ProfilePage() {
-  const [session, setSession] = useState(null);
+  
+  const [session, setSession] = useState([])
   const [userBlogs, setUserBlogs] = useState([]);
   const [loadingUserBlogs, setLoadingUserBlogs] = useState(true);
-  const [feedback, setFeedback] = useState("");
-
+  
+ 
   useEffect(() => {
     async function fetchSession() {
       const session = await auth();
@@ -21,6 +22,23 @@ function ProfilePage() {
     }
     fetchSession();
   }, []);
+ const uid = session?.user?.id;
+const currentName = session?.user?.name;
+
+
+  // Fetch user blogs when session is available
+  // and user is logged in
+  useEffect(() => {
+    if (!session) return;
+    if (session.error) {
+      console.error("Session error:", session.error); // Debugging session error
+      return;
+    }
+    if (!session.user) {
+      console.log("No user in session"); // Debugging no user
+      return;
+    }
+  }, [session]);
 
   useEffect(() => {
     if (session?.user?.email) {
@@ -34,7 +52,7 @@ function ProfilePage() {
           );
           const querySnapshot = await getDocs(q);
           console.log("Query Snapshot:", querySnapshot.docs); // Debugging Firestore response
-          
+
           const blogs = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
@@ -50,58 +68,40 @@ function ProfilePage() {
     }
   }, [session]);
 
-  // Handler for the feedback form
-  const handleFeedbackSubmit = (e) => {
-    e.preventDefault();
-    console.log("User Feedback:", feedback);
-    setFeedback("");
-    alert("Thank you for your feedback!");
-  };
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-orange-400 py-12 px-6 lg:px-12">
-      <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur-lg rounded-xl shadow-xl p-6">
-        
+      <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur-lg rounded-xl shadow-xl p-6 mt-10">
         {/* Profile Cover */}
         <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-orange-400 h-40 rounded-lg shadow-md">
+          <p className="text-3xl text-center shadow-2xl text-orange-400">Welcome to Webwiz Creation website</p>{" "}
           <div className="absolute -bottom-10 left-4 flex items-center space-x-4">
-            
-            {/* Debugging: Log user data before rendering */}
-            {console.log("User Data:", session?.user)}
-
-            {/* Profile Image */}
             <img
               src={session?.user?.image || "/default-avatar.png"}
-              alt="Profile"
+              alt="Profile Picture"
               className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
             />
-            
-            {/* User Name & Email (conditionally displayed) */}
             <div>
-              <h2 className="text-xl font-bold text-white">
-                {session?.user?.name || "N/A"}
-              </h2>
+              <h1 className="text-3xl font-bold text-white">
+                {session?.user?.name || "User Name"}
+              </h1>
+              <p className="text-gray-300">
+                {session?.user?.email || "@example.com"}
+              </p>
             </div>
           </div>
         </div>
+        {/* User Info Section */}
 
-        {/* Profile Details */}
-        <div className="mt-16 bg-gray-900/100 p-6 rounded-lg shadow-md">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <p className="text-gray-200">Name:</p>
-              <p className="font-medium">{session?.user?.name || "N/A"}</p>
-            </div>
-            {session?.user?.email && (
-              <div>
-                <p className="text-gray-200">Email:</p>
-                <p className="font-medium">
-                  {session?.user?.email || "Not available"}
-                </p>
-              </div>
-            )}
-          </div>
-
+        {/* Profile Update Form */}
+        <div className="mt-20">
+        
+      {uid && <UpdateProfile uid={uid} currentName={currentName} />}
+    </div>
+            
+        {/* Upload to Blog Section */}
+        <div className="mt-10">
           <div className="mt-6 flex justify-center">
             <Link
               href="/upload-to-blog"
@@ -124,7 +124,9 @@ function ProfilePage() {
 
         {/* Blog Posts Section */}
         <div className="mt-10 w-full max-w-md bg-white/10 backdrop-blur-lg shadow-xl rounded-xl p-6">
-          <h2 className="text-2xl font-bold text-white mb-4">Your Blog Posts</h2>
+          <h2 className="text-2xl font-bold text-white mb-4">
+            Your Blog Posts
+          </h2>
           {loadingUserBlogs ? (
             <p className="text-gray-300">Loading your blogs...</p>
           ) : userBlogs.length > 0 ? (
@@ -151,28 +153,8 @@ function ProfilePage() {
             href="/blog"
             className="text-blue-100 hover:text-blue-200 underline"
           >
-            View All Posts → 
+            View All Posts →
           </Link>
-        </div>
-
-        {/* Feedback Form Section */}
-        <div className="mt-10 w-full max-w-md bg-white/10 backdrop-blur-lg shadow-xl rounded-xl p-6">
-          <h2 className="text-2xl font-bold text-white mb-4">Leave Us Feedback</h2>
-          <form onSubmit={handleFeedbackSubmit} className="flex flex-col gap-4">
-            <textarea
-              className="w-full p-3 rounded-md bg-white/10 text-white border border-gray-600 focus:outline-none focus:ring focus:ring-yellow-500"
-              placeholder="Your feedback..."
-              value={feedback}
-              onChange={(e) => setFeedback(e.target.value)}
-              rows={4}
-            />
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
-            >
-              Submit Feedback
-            </button>
-          </form>
         </div>
       </div>
     </div>

@@ -2,8 +2,6 @@ import Link from "next/link";
 import { redirect, } from "next/navigation";
 import { ChartPie, Facebook, Github } from "lucide-react";
 import { auth, signIn } from "@/auth";
-import { setDoc, doc } from "firebase/firestore";
-import { db1 } from "@/lib/firebaseConfig";
 
 
 

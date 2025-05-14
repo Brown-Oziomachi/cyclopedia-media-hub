@@ -25,7 +25,8 @@ const UpdateProfile = ({ uid, currentName }) => {
 
   return (
     <main className="md:px-10 p-3">
-      <form onSubmit={handleSubmit} className="mt-6">
+      <form onSubmit={handleSubmit} className="flex flex-col max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+      
         <input
           type="text"
           className="w-full p-2 rounded-md border border-gray-200 outline-none"
