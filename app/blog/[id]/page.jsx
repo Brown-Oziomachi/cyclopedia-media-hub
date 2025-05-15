@@ -102,7 +102,7 @@ const BlogDetails = ({ params }) => {
       
       {/* Comments Section */}
       <div className="mt-10 bg-gray-800 shadow-lg rounded-lg p-6">
-        <h2 className="text-2xl font-bold text-white mb-4">Join the Conversation</h2>
+        <h2 className="text-2xl font-bold text-white mb-4">Join the Conversation!</h2>
         <div className="flex items-center space-x-4 mb-6">
           <img
             src={session?.user?.image || "/default-avatar.png"}
