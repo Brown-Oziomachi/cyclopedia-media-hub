@@ -376,4 +376,3 @@ const BlogDetails = ({ params }) => {
   );
 };
 export default BlogDetails;
-

@@ -3,62 +3,15 @@ import UpdateProfile from "@/components/UpdateProfile";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db1 } from "@/lib/firebaseConfig";
 
-function ProfilePage() {
-  const [session, setSession] = useState(null);
-  const [userBlogs, setUserBlogs] = useState([]);
-  const [loadingUserBlogs, setLoadingUserBlogs] = useState(true);
-  const [feedback, setFeedback] = useState("");
 
-  useEffect(() => {
-    async function fetchSession() {
-      const sess = await auth();
-      setSession(sess);
-      console.log("Session object:", sess); // Keep this for debugging
-      if (!sess) {
-        redirect("/auth/signin"); // Redirect if not authenticated
-      }
-    }
-    fetchSession();
-  }, []);
+  async function ProfilePage() {
+  const session = await auth();
+  if (!session) {
+    redirect("/auth/signin"); // Redirect if not authenticated
+  }
 
-  useEffect(() => {
-    if (session?.user?.email) {
-      async function fetchUserBlogs() {
-        setLoadingUserBlogs(true);
-        try {
-          const q = query(
-            collection(db1, "blog"),
-            where("author.email", "==", session.user.email)
-          );
-          const querySnapshot = await getDocs(q);
-          const blogs = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          setUserBlogs(blogs);
-        } catch (error) {
-          console.error("Error fetching user blogs:", error);
-        } finally {
-          setLoadingUserBlogs(false);
-        }
-      }
-      fetchUserBlogs();
-    }
-  }, [session]);
-
-  // Handler for the feedback form
-  const handleFeedbackSubmit = (e) => {
-    e.preventDefault();
-    console.log("User Feedback:", feedback);
-    // Extend this to send feedback to your backend or store it in Firestore
-    setFeedback("");
-    alert("Thank you for your feedback!");
-  };
-
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-orange-400 py-12 px-6 lg:px-12">
       <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur-lg rounded-xl shadow-xl p-6 mt-10">
@@ -83,13 +36,13 @@ function ProfilePage() {
         {/* Profile Details */}
         <div className="mt-16 bg-gray-900/100 p-6 rounded-lg shadow-md">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
+            <div className="flex gap-5">
               <p className="text-gray-200">Name:</p>
-              <p className="font-medium">{session?.user?.name || "N/A"}</p>
+              <p className="font-medium text-gray-300">{session?.user?.name || "N/A"}</p>
             </div>
-            <div>
+            <div className="flex gap-5">
               <p className="text-gray-200">Email:</p>
-              <p className="font-medium">{session?.user?.email || "Not available"}</p>
+              <p className="font-medium text-gray-300">{session?.user?.email || "Not available"}</p>
             </div>
           </div>
 
@@ -112,27 +65,7 @@ function ProfilePage() {
             </Link>
           </div>
         </div>
-<div className="mt-10 w-full max-w-md bg-white/10 backdrop-blur-lg shadow-xl rounded-xl p-6">
-  <h2 className="text-2xl font-bold text-white mb-4">Your Blog Posts</h2>
-  {loadingUserBlogs ? (
-    <p className="text-gray-300">Loading your blogs...</p>
-  ) : userBlogs.length > 0 ? (
-    <ul className="space-y-4">
-      {userBlogs.map((blog) => (
-        <li key={blog.id} className="bg-white/20 p-4 rounded shadow">
-          <Link
-            href={`/blog/${blog.id}`}
-            className="text-blue-400 hover:text-blue-500 transition-colors"
-          >
-            {blog.title}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <p className="text-gray-300">You haven't published any blog posts yet.</p>
-  )}
-</div>
+
 <div className="mt-4 text-right">
   <Link
     href="/blog"
@@ -145,7 +78,5 @@ function ProfilePage() {
 </div>
   )
 }
-
-
 
 export default ProfilePage;
