@@ -9,8 +9,6 @@ import BlogDisplay from "@/components/BlogDisplay";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-
-
 const valSchema = Yup.object({
   title: Yup.string().required("Title is required"),
   body: Yup.string()
@@ -19,20 +17,19 @@ const valSchema = Yup.object({
   genre: Yup.string().required("Please select a genre"),
   link: Yup.string().url("Must be a valid URL"),
 });
-const UploadBlog = ({ session,}) => {
-
+const UploadBlog = ({ session }) => {
   const [processing, setProcessing] = useState(false);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [previewBody, setPreviewBody] = useState(""); // For markdown preview
   const [values, setValues] = useState({ title: "", genre: "", body: "" });
- const pathname = usePathname();
-const [showpopup, setShowPopup] = useState(false);
+  const pathname = usePathname();
+  const [showpopup, setShowPopup] = useState(false);
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
       setProcessing(true);
       const blogData = {
-        image: values.image,
+        imageUrl: values.image,
         title: values.title,
         link: values.link,
         body: values.body,
@@ -65,48 +62,49 @@ const [showpopup, setShowPopup] = useState(false);
     <main className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-800 via-gray-900 to-orange-400 p-6">
       <div className="w-full max-w-lg rounded-lg shadow-xl p-6 bg-gradient-to-r from-gray-700 via-gray-800 to-orange-400 mt-10">
         <div>
-
-        <h2 className="text-3xl font-bold text-center text-white mb-6">
-          Upload To Wiz <br />
-          <button onClick={handleShowPopup} className="text-sm text-gray-500">(!)Learn to Upload</button>
-          
-        </h2>
-            
+          <h2 className="text-3xl font-bold text-center text-white mb-6">
+            Upload To Wiz <br />
+            <button onClick={handleShowPopup} className="text-sm text-gray-500">
+              (!)Learn to Upload
+            </button>
+          </h2>
         </div>
         {showpopup && (
-            <div className="fixed inset-0 -mt-30 bg-black/50 bg-opacity-100 flex justify-center items-center  z-50">
-             <div className="bg-gray-900 text-gray-300 rounded-lg p-2 max-w-sm  lg:w-1/2 relative">
+          <div className="fixed inset-0 -mt-30 bg-black/50 bg-opacity-100 flex justify-center items-center  z-50">
+            <div className="bg-gray-900 text-gray-300 rounded-lg p-2 max-w-sm  lg:w-1/2 relative">
               <h1 className=" scroll-auto">
- <h2 className="text-2xl ">follow these simple steps:</h2> <br />    
-
-Step 1: Log In
-- Please log in to your Webwiz Creation account before uploading your blog post.
-- This ensures that your name is displayed instead of "Anonymous" when you submit your post. <br />
-<Link href="/auth/signin" className="text-orange-400">
-Log in here
-</Link>
-<br />
-<br />
-Step 2: Write Your Blog Title
-- Craft a catchy and descriptive title that captures the essence of your content.
-- Keep it concise and engaging to grab the reader's attention.
-<br />
-<br />
-Step 3: Add Your Content
-- Write your blog content, ensuring it's relevant to your title and engaging for your audience.
-- Use clear and concise language, and format your text for easy reading.
-<br />
-<br />
-Step 4: <Link href="/youtubevideos ">Watch</Link> </h1>
+                <h2 className="text-2xl ">follow these simple steps:</h2> <br />
+                Step 1: Log In - Please log in to your Webwiz Creation account
+                before uploading your blog post. - This ensures that your name
+                is displayed instead of "Anonymous" when you submit your post.{" "}
+                <br />
+                <Link href="/auth/signin" className="text-orange-400">
+                  Log in here
+                </Link>
+                <br />
+                <br />
+                Step 2: Write Your Blog Title - Craft a catchy and descriptive
+                title that captures the essence of your content. - Keep it
+                concise and engaging to grab the reader's attention.
+                <br />
+                <br />
+                Step 3: Add Your Content - Write your blog content, ensuring
+                it's relevant to your title and engaging for your audience. -
+                Use clear and concise language, and format your text for easy
+                reading.
+                <br />
+                <br />
+                Step 4: <Link href="/youtubevideos ">Watch</Link>{" "}
+              </h1>
               <button
-              onClick={closeModal}
-              className="mt-4 bg-black hover:bg-gray-800 text-white font-semibold px-4 py-1 rounded transition duration-200"
-            >
-              Close
-            </button>
-              </div>
-              </div>
-            )}
+                onClick={closeModal}
+                className="mt-4 bg-black hover:bg-gray-800 text-white font-semibold px-4 py-1 rounded transition duration-200"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
         <Formik
           initialValues={{
             title: "",
@@ -120,35 +118,6 @@ Step 4: <Link href="/youtubevideos ">Watch</Link> </h1>
         >
           {({ values, setFieldValue }) => (
             <Form className="space-y-6">
-              {/* Image URL Input */}
-              {/* <div>
-              <label htmlFor="image" className="block text-sm font-medium text-gray-300">
-                Image URL
-              </label>
-              <Field
-                name="image"
-                type="url"
-                placeholder="Enter image URL"
-                className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              />
-              <ErrorMessage name="image" component="p" className="text-sm text-red-600 mt-1" />
-            </div> */}
-
-              {/* Display Image Preview */}
-              <Field name="image">
-                {({ field, form }) =>
-                  field.value && (
-                    <div className="mb-4">
-                      <img
-                        src={field.value}
-                        alt="Image Preview"
-                        className="w-full h-auto rounded-lg"
-                      />
-                    </div>
-                  )
-                }
-              </Field>
-
               <div>
                 <label
                   htmlFor="title"
@@ -169,26 +138,41 @@ Step 4: <Link href="/youtubevideos ">Watch</Link> </h1>
                 />
               </div>
 
-              {/* Link Input */}
+              {/* Image URL Input */}
               <div>
                 <label
-                  htmlFor="link"
+                  htmlFor="image"
                   className="block text-sm font-medium text-gray-300"
                 >
-                  Link (optional)
+                  Image URL (Optional)
                 </label>
                 <Field
-                  name="link"
+                  name="image"
                   type="url"
-                  placeholder="Enter a link for your post..."
+                  placeholder="Enter image URL"
                   className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
                 <ErrorMessage
-                  name="link"
+                  name="image"
                   component="p"
                   className="text-sm text-red-600 mt-1"
                 />
               </div>
+
+              {/* Display Image Preview */}
+              <Field name="image">
+                {({ field, form }) =>
+                  field.value && (
+                    <div className="mb-4">
+                      <img
+                        src={field.value}
+                        alt="Image Preview"
+                        className="w-full h-auto rounded-lg"
+                      />
+                    </div>
+                  )
+                }
+              </Field>
 
               {/* Body Input with Textarea and "Add Link" Helper */}
               <>
@@ -203,7 +187,7 @@ Step 4: <Link href="/youtubevideos ">Watch</Link> </h1>
                   <span className="text-xs text-gray-400">
                     <strong>Tip:</strong> To add a link, use{" "}
                     <span className="font-mono  px-1 rounded text-orange-400">
-                      [text](https://your-link.com) 
+                      [text](https://your-link.com)
                     </span>
                     . To make text <strong>bold</strong>, wrap with{" "}
                     <span className="font-mono bg-gray-700 px-1 rounded text-orange-400">
@@ -228,22 +212,18 @@ Step 4: <Link href="/youtubevideos ">Watch</Link> </h1>
                   component="p"
                   className="text-sm text-red-600 mt-1"
                 />
-     
-{/* Preview Section (visible only on /upload) */}
-{pathname && pathname.includes("/upload") && (
-        <div className="preview-container p-2 bg-gray-900 rounded-lg text-white">
-          <div className="text-xs text-gray-400 ">Preview:</div>
-          <BlogDisplay
-            title={values.title}
-            genre={values.genre}
-            body={values.body}
-          />
 
-        </div>
-
-
-          )}
-                         
+                {/* Preview Section (visible only on /upload) */}
+                {pathname && pathname.includes("/upload") && (
+                  <div className="preview-container p-2 bg-gray-900 rounded-lg text-white">
+                    <div className="text-xs text-gray-400 ">Preview:</div>
+                    <BlogDisplay
+                      title={values.title}
+                      genre={values.genre}
+                      body={values.body}
+                    />
+                  </div>
+                )}
               </>
               <div>
                 <label
@@ -361,7 +341,6 @@ Step 4: <Link href="/youtubevideos ">Watch</Link> </h1>
                   "Submit Blog"
                 )}
               </button>
-          
             </Form>
           )}
         </Formik>

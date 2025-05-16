@@ -267,13 +267,13 @@ const BlogDetails = ({ params }) => {
           <input
             type="text"
             placeholder="Write a comment..."
-            className="w-full p-3 rounded-md bg-white/10 text-white border border-gray-600 focus:outline-none focus:ring focus:ring-yellow-500"
+            className="w-full p-3 rounded-md bg-gray-900 text-orange-400 border border-gray-600 focus:outline-none focus:ring focus:ring-yellow-500"
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
           />
           <button
             onClick={handleCommentSubmit}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+            className="px-4 py-2 bg-gradient-to-br from-gray-900 via-black to-orange-400 text-white rounded-md hover:bg-blue-600 transition-colors"
           >
             Post
           </button>
@@ -285,15 +285,15 @@ const BlogDetails = ({ params }) => {
             [...comments]
               .sort((a, b) => b.timestamp?.seconds - a.timestamp?.seconds)
               .map((comment) => (
-                <li key={comment.id} className="bg-white/10 p-4 rounded shadow hover:bg-white/20 transition duration-200">
+                <li key={comment.id} className="bg-gray-900 p-4 rounded shadow hover:bg-black transition duration-200">
                   <div className="flex items-center space-x-3">
                     <img
                       src={comment.userImage || "/default-avatar.png"}
                       alt="User avatar"
-                      className="w-8 h-8 rounded-full border-2 border-white"
+                      className="w-8 h-8 rounded-full border-2 border-orange-400"
                     />
                     <div>
-                      <p className="text-white font-semibold">{comment.userName}</p>
+                      <p className="text-orange-400 font-semibold">{comment.userName}</p>
                       {comment.timestamp && (
                         <p className="text-sm text-gray-400">
                           {new Date(comment.timestamp.seconds * 1000).toLocaleString()}

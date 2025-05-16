@@ -3,6 +3,7 @@ import UpdateProfile from "@/components/UpdateProfile";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import Link from "next/link";
+import UserBlogs from "@/components/UserBlog";
 
 
   async function ProfilePage() {
@@ -11,10 +12,14 @@ import Link from "next/link";
     redirect("/auth/signin"); // Redirect if not authenticated
   }
 
-  
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-orange-400 py-12 px-6 lg:px-12">
-      <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur-lg rounded-xl shadow-xl p-6 mt-10">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-orange-400 py-12  lg:px-12">
+      <div className="bg-blue-700 h-auto w-full py-5">
+      <h1 className="text-white mt-3 text-center ">Your access is confirmed.</h1>
+      <h2 className="text-center text-white ">We are building a better way. <Link href="/contact"><span className=" underline">SHARE YOUR THOUGHTS</span></Link></h2>
+      </div>
+      <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur-lg rounded-xl shadow-xl p-6 mt-5">
         {/* Profile Cover */}
         <div className="relative  bg-gradient-to-br from-gray-900 via-gray-800 to-orange-400 h-40 rounded-lg shadow-md">
           <div className="absolute -bottom-10 left-4 flex items-center space-x-4">
@@ -54,7 +59,6 @@ import Link from "next/link";
                Upload to Wiz
             </Link>
           </div>
-
           <div className="mt-6 text-center">
             <p className="text-gray-400">Want to explore more?</p>
             <Link
@@ -66,6 +70,12 @@ import Link from "next/link";
           </div>
         </div>
 
+ 
+
+
+<UserBlogs/>
+
+
 <div className="mt-4 text-right">
   <Link
     href="/blog"
@@ -74,8 +84,8 @@ import Link from "next/link";
     View All Posts →
   </Link>
 </div>
+ </div>
 
-</div>
   )
 }
 
