@@ -73,6 +73,30 @@ const BlogDetails = ({ params }) => {
     }
   }, [id]);
 
+  // Fetch other blog options (excluding the current one)
+  useEffect(() => {
+    if (!blog) return;
+    async function fetchOtherBlogs() {
+      try {
+        const blogsRef = collection(db1, "blog");
+        const q = query(blogsRef);
+        const querySnapshot = await getDocs(q);
+        const blogs = [];
+        querySnapshot.forEach((docSnap) => {
+          if (docSnap.id !== blog.id) {
+            blogs.push({ id: docSnap.id, ...docSnap.data() });
+          }
+        });
+        setOtherBlogs(blogs);
+      } catch (err) {
+        console.error("Error fetching other blogs:", err);
+      }
+    }
+    fetchOtherBlogs();
+  }, [blog]);
+
+
+
   // Submit a new comment
   const handleCommentSubmit = async () => {
     if (newComment.trim() !== "") {
@@ -285,8 +309,31 @@ const BlogDetails = ({ params }) => {
           )}
         </ul>
       </div>
-    </div>
-  );
-};
+   {/* Other Blog Options Section */}
+        {otherBlogs.length > 0 && (
+          <div className="max-w-4xl mx-auto mt-8 px-2">
+            <h2 className="text-2xl font-bold text-white mb-4">Other Blog Options</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {otherBlogs.map((other) => (
+                <Link key={other.id} href={`/blog/${other.id}`}>
+                  <div className="bg-gray-950 p-4 rounded-lg shadow hover:bg-gray-700 transition-colors cursor-pointer">
+                    <h3 className="text-xl font-bold text-white">{other.title}</h3>
+                    <p className="text-gray-400 text-sm mb-2">{other.genre}</p>
+                    <p className="text-gray-200 text-sm line-clamp-2">{other.body}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
+
+      <div className="flex justify-center bg-black py-4">
+        <Link href="/blog" className="text-blue-500 hover:underline text-lg">
+          ← Back to Blogs
+        </Link>
+      </div>
+      </div>
+  )
+}
 export default BlogDetails;
