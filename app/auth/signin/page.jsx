@@ -6,8 +6,6 @@ import { auth, signIn } from "@/auth";
 
 
 const page = async () => {
-  
-  
   const session = await auth();
   if (session) {
     redirect("/profile");
@@ -55,7 +53,6 @@ const page = async () => {
             Sign in with Github
             </button>
           </form>
-      
         {/* Terms & Privacy */}
         <div className="text-center lg:text-left text-sm text-gray-500 mb-10">
           By signing in, you accept our
