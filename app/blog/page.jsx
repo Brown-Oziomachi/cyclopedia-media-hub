@@ -197,12 +197,18 @@ const BlogPage = () => {
             {filteredPosts.map((post) => (
               <article
                 key={post.id}
-                className="bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit"
+                className="bg-gray-900 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit"
               >
                 {/* Category Tag */}
                 <span className="absolute top-4 left-4 bg-yellow-800 text-black text-xs px-3 py-1 rounded-full ">
                   {post.genre || "General"}
                 </span>
+                <p className="text-gray-400 text-xs absolute bottom-4 left-4">
+            <strong>By:</strong> {post.author}
+          </p>
+            <h1 className="text-xs text-gray-400 text-center absolute top-4 right-4">
+            THE <span className="text-orange-400">SUN</span> WEB
+          </h1>
                 <Link href={`/blog/${post.id}`}>
                   <div className="block">
                     {/* Optional Image Section */}

@@ -2,12 +2,14 @@
 import React, { use, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { db1, db3 } from "@/lib/firebaseConfig";
+
 import {
   doc,
   updateDoc,
   collection,
   query,
   getDocs,
+  arrayUnion,
   addDoc,
   serverTimestamp,
   getDoc,
@@ -28,6 +30,52 @@ const BlogDetails = ({ params }) => {
   const [otherBlogs, setOtherBlogs] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([]);
+  const [replyingTo, setReplyingTo] = useState(null);
+const [replyText, setReplyText] = useState("");
+
+const handleReplySubmit = async (commentId, replyText, setReplyText, setReplyingTo, setComments) => {
+  if (!replyText.trim()) return;
+
+  // ✅ Get the logged-in user from Auth.js
+  const user = session?.user;
+
+  if (!user) {
+    alert("Please log in to reply.");
+    return;
+  }
+
+  const replyData = {
+    id: Date.now().toString(),
+    userName: user.name || "Anonymous", // ✅ Auth.js uses `user.name`
+    userImage: user.image || "/default-avatar.png", // ✅ Auth.js uses `user.image`
+    text: replyText,
+    timestamp: Math.floor(Date.now() / 1000)
+  };
+
+  const commentRef = doc(db3, "comments", commentId);
+
+  try {
+    await updateDoc(commentRef, {
+      replies: arrayUnion(replyData)
+    });
+
+    // ✅ Instantly update UI without refresh
+    setComments((prevComments) =>
+      prevComments.map((comment) =>
+        comment.id === commentId
+          ? { ...comment, replies: [...(comment.replies || []), replyData] }
+          : comment
+      )
+    );
+
+    setReplyText(""); 
+    setReplyingTo(null);
+  } catch (error) {
+    console.error("Error submitting reply:", error);
+  }
+};
+
+
 
   // Fetch comments for this blog post
   useEffect(() => {
@@ -140,6 +188,8 @@ const BlogDetails = ({ params }) => {
       console.error("Error updating likes:", error);
     }
   };
+
+  
 
   // Render loading state if blog is not fetched yet
   if (!blog) {
@@ -256,13 +306,13 @@ const BlogDetails = ({ params }) => {
       </div>
 
       {/* Comments Section */}
-      <div className="mt-10 bg-gray-800 shadow-lg rounded-lg p-6">
+      <div className="mt-10 bg-gray-950 shadow-lg rounded-lg p-6">
         <h2 className="text-2xl font-bold text-white mb-4">Join the Conversation</h2>
         <div className="flex items-center space-x-4 mb-6">
           <img
             src={session?.user?.image || "/default-avatar.png"}
             alt="User avatar"
-            className="w-10 h-10 rounded-full border-2 border-white shadow-md"
+            className="w-10 h-10 rounded-full border-2 border-orange-400 shadow-md"
           />
           <input
             type="text"
@@ -278,62 +328,130 @@ const BlogDetails = ({ params }) => {
             Post
           </button>
         </div>
+</div>
+<div>
+ <div>
+  {/* Display Comments */}
+  <ul className="space-y-4">
+    {comments.length > 0 ? (
+      comments
+        .sort((a, b) => b.timestamp?.seconds - a.timestamp?.seconds)
+        .map((comment) => (
+          <li
+            key={comment.id}
+            className="bg-gray-950 p-4 rounded shadow hover:bg-black transition duration-200"
+          >
+            {/* Comment Header */}
+            <div className="flex items-center space-x-3">
+              <img
+                src={comment.userImage || "/default-avatar.png"}
+                alt="User avatar"
+                className="w-8 h-8 rounded-full border-2 border-orange-400"
+              />
+              <div>
+                <p className="text-orange-400 font-semibold">{comment.userName}</p>
+                {comment.timestamp && (
+                  <p className="text-sm text-gray-400">
+                    {new Date(comment.timestamp.seconds * 1000).toLocaleString()}
+                  </p>
+                )}
+              </div>
+            </div>
 
-        {/* Display Comments */}
-        <ul className="space-y-4">
-          {comments.length > 0 ? (
-            [...comments]
-              .sort((a, b) => b.timestamp?.seconds - a.timestamp?.seconds)
-              .map((comment) => (
-                <li key={comment.id} className="bg-gray-900 p-4 rounded shadow hover:bg-black transition duration-200">
-                  <div className="flex items-center space-x-3">
+            {/* Comment text */}
+            <p className="text-gray-300 mt-2">{comment.text}</p>
+
+            {/* Reply Button */}
+            <button
+              className="text-blue-400 mt-2 hover:underline"
+              onClick={() => setReplyingTo(comment.id)}
+            >
+              Reply
+            </button>
+
+            {/* Reply Input Section */}
+            {replyingTo === comment.id && (
+              <div className="mt-2">
+                <input
+                  type="text"
+                  placeholder="Write a reply..."
+                  className="w-full p-2 bg-gray-900 rounded"
+                  value={replyText}
+                  onChange={(e) => setReplyText(e.target.value)}
+                />
+                <button
+                  className="mt-2 bg-orange-400 p-2 rounded"
+                  onClick={() =>
+                    handleReplySubmit(
+                      comment.id,
+                      replyText,
+                      setReplyText,
+                      setReplyingTo,
+                      setComments,
+                      db3
+                    )
+                  }
+                >
+                  Submit Reply
+                </button>
+              </div>
+            )}
+
+            {/* Display Replies */}
+            {comment.replies && comment.replies.length > 0 && (
+              <ul className="ml-6 mt-2 space-y-2">
+                {comment.replies.map((reply) => (
+                  <li
+                    key={reply.id}
+                    className="bg-gray-900 p-3 rounded flex items-center space-x-3"
+                  >
                     <img
-                      src={comment.userImage || "/default-avatar.png"}
+                      src={reply.userImage || "/default-avatar.png"}
                       alt="User avatar"
-                      className="w-8 h-8 rounded-full border-2 border-orange-400"
+                      className="w-6 h-6 rounded-full border-2 border-orange-400"
                     />
                     <div>
-                      <p className="text-orange-400 font-semibold">{comment.userName}</p>
-                      {comment.timestamp && (
-                        <p className="text-sm text-gray-400">
-                          {new Date(comment.timestamp.seconds * 1000).toLocaleString()}
-                        </p>
-                      )}
+                      <p className="text-orange-400 font-semibold">{reply.userName}</p>
+                      <p className="text-blue-500">{reply.text}</p>
                     </div>
-                  </div>
-                  <p className="text-gray-300 mt-2">{comment.text}</p>
-                </li>
-              ))
-          ) : (
-            <p className="text-gray-300">Be the first to comment!</p>
-          )}
-        </ul>
-      </div>
-   {/* Other Blog Options Section */}
-        {otherBlogs.length > 0 && (
-          <div className="max-w-4xl mx-auto mt-8 px-2">
-            <h2 className="text-2xl font-bold text-white mb-4">Other Blog Options</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {otherBlogs.map((other) => (
-                <Link key={other.id} href={`/blog/${other.id}`}>
-                  <div className="bg-gray-950 p-4 rounded-lg shadow hover:bg-gray-700 transition-colors cursor-pointer">
-                    <h3 className="text-xl font-bold text-white">{other.title}</h3>
-                    <p className="text-gray-400 text-sm mb-2">{other.genre}</p>
-                    <p className="text-gray-200 text-sm line-clamp-2">{other.body}</p>
-                  </div>
-                </Link>
-              ))}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))
+    ) : (
+      <p className="text-gray-300">Be the first to comment!</p>
+    )}
+  </ul>
+
+  {/* Other Blog Options */}
+  {otherBlogs.length > 0 && (
+    <div className="max-w-4xl mx-auto mt-8 px-2">
+      <h2 className="text-2xl font-bold text-white mb-4">Other Blog Options</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {otherBlogs.map((other) => (
+          <Link key={other.id} href={`/blog/${other.id}`}>
+            <div className="bg-gray-950 p-4 rounded-lg shadow hover:bg-gray-700 transition-colors cursor-pointer">
+              <h3 className="text-xl font-bold text-white">{other.title}</h3>
+              <p className="text-gray-400 text-sm mb-2">{other.genre}</p>
+              <p className="text-gray-200 text-sm line-clamp-2">{other.body}</p>
             </div>
-          </div>
-        )}
-
-
-      <div className="flex justify-center bg-black py-4">
-        <Link href="/blog" className="text-blue-500 hover:underline text-lg">
-          ← Back to Blogs
-        </Link>
+          </Link>
+        ))}
       </div>
-      </div>
+    </div>
+  )}
+
+  {/* Back to Blogs Link */}
+  <div className="flex justify-center bg-black py-4">
+    <Link href="/blog" className="text-blue-500 hover:underline text-lg">
+      ← Back to Blogs
+    </Link>
+  </div>
+</div>
+</div>
+</div>
   )
 }
 export default BlogDetails;
