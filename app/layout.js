@@ -6,7 +6,7 @@ import Script from 'next/script'; // <-- Import the Script component
 
 
 
-const RECAPTCHA_V3_SITE_KEY = '6Lf6Vz4rAAAAAK7lhu4wZmAFUn7xLPaBVyXN7DCW'; // <-- Your key here!
+const RECAPTCHA_V3_SITE_KEY = '6LfRYD4rAAAAABqP_F8glwmCbq5BKeMdq8Q91Wik'; // <-- Your key here!
 export const metadata = {
   title: "Webwiz Creation - The Sun Web",
   description: "A website development company",

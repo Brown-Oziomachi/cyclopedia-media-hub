@@ -59,10 +59,10 @@ const UploadBlog = ({ session }) => {
     setShowPopup(false);
   };
   return (
-    <main className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-800 via-gray-900 to-orange-400 p-6">
-      <div className="w-full max-w-lg rounded-lg shadow-xl p-6 bg-gradient-to-r from-gray-700 via-gray-800 to-orange-400 mt-10">
+    <main className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-800 via-gray-900 to-orange-400">
+      <div className="w-full max-w-lg rounded-lg shadow-xl  bg-gradient-to-r from-gray-700 via-gray-800 to-orange-400 mt-20">
         <div>
-          <h2 className="text-3xl font-bold text-center text-white mb-6">
+          <h2 className="text-3xl font-bold text-center text-white m-5">
             Upload To Wiz <br />
             <button onClick={handleShowPopup} className="text-sm text-gray-500">
               (!)Learn to Upload
@@ -70,15 +70,15 @@ const UploadBlog = ({ session }) => {
           </h2>
         </div>
         {showpopup && (
-          <div className="fixed inset-0 -mt-30 bg-black/50 bg-opacity-100 flex justify-center items-center  z-50">
-            <div className="bg-gray-900 text-gray-300 rounded-lg p-2 max-w-sm  lg:w-1/2 relative">
-              <h1 className=" scroll-auto">
-                <h2 className="text-2xl ">follow these simple steps:</h2> <br />
+          <div className=" -mt-10 bg-black bg-opacity-100 flex justify-center items-center  z-50">
+            <div className="bg-gray-800/50 text-gray-400 border rounded-lg p-2 ">
+              <h1 className=" scroll-auto m-5">
+                <h2 className="text-2xl text-center">Follow These Simple Steps:</h2> <br />
                 Step 1: Log In - Please log in to your Webwiz Creation account
                 before uploading your blog post. - This ensures that your name
                 is displayed instead of "Anonymous" when you submit your post.{" "}
                 <br />
-                <Link href="/auth/signin" className="text-orange-400">
+                <Link href="/auth/signin" className="text-orange-400 border py-1 px-3 border-white rounded-md">
                   Log in here
                 </Link>
                 <br />
@@ -94,14 +94,46 @@ const UploadBlog = ({ session }) => {
                 reading.
                 <br />
                 <br />
-                Step 4: <Link href="/youtubevideos ">Watch</Link>{" "}
+                Step 4: Step 4: Add a Link (Optional) If relevant, include a
+                link to a related article, website, or resource. Make sure the
+                link is accurate and functional.
+                <br />
+                <br />
+                Step 5: Select a Genre Choose a genre that best suits your
+                content and title. This helps readers find your blog post and
+                ensures it's categorized correctly.
+                <br />
+                <br />
+                Example Genres
+                <li>Technology</li>
+                <li>Lifestyle</li>
+                <li>Business</li>
+                <li>Education</li>
+                and more!
+                <br />
+                <br />
+                Step 6: Submit Your Blog Post Review your content for accuracy
+                and grammar. Submit your blog post, and it will be reviewed and
+                published. By logging in and following these steps, you'll be
+                able to share your ideas and connect with your audience through
+                the Webwiz Creation blog. Happy blogging!
               </h1>
-              <button
-                onClick={closeModal}
-                className="mt-4 bg-black hover:bg-gray-800 text-white font-semibold px-4 py-1 rounded transition duration-200"
-              >
-                Close
-              </button>
+              <div className="flex items-center justify-center gap-10">
+                <div className="">
+                <Link href="/auth/signin">
+                  <button className=" bg-white hover:bg-gray-800 text-black font-semibold px-4 py-1 rounded transition duration-200 border">Get Started</button>
+                </Link>
+                </div>
+                <div className="">
+
+                <button
+                  onClick={closeModal}
+                  className=" bg-black hover:bg-gray-800 text-white font-semibold px-4 py-1 rounded transition duration-200 border"
+                  >
+                  Close
+                </button>
+                  </div>
+                </div>
             </div>
           </div>
         )}
