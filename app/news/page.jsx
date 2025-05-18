@@ -44,6 +44,7 @@ const Page = () => {
   const fetchNews = async () => {
     const res = await fetch('/api/news');
     const data = await res.json();
+    res.status(200).json(data);
     // process data...
   }
   

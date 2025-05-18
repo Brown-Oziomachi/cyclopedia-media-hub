@@ -10,6 +10,7 @@ const BlogPage = () => {
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [showContentType, setShowContentType] = useState('blog'); // State to toggle between 'blog' and 'video'
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -21,7 +22,8 @@ const BlogPage = () => {
           ...doc.data(),
         }));
         setBlogPosts(blogs);
-        setFilteredPosts(blogs);
+        // Initial filter on load based on default showContentType
+        setFilteredPosts(blogs.filter(post => showContentType === 'blog' ? !post.isVideo : post.isVideo));
       } catch (error) {
         console.error("Error fetching blogs:", error);
       } finally {
@@ -30,12 +32,20 @@ const BlogPage = () => {
     };
 
     fetchBlogs();
-  }, []);
+  }, [showContentType]); // Add showContentType to dependency array to refetch/refilter on toggle
 
+  // This function now filters by genre within the currently selected content type
   const filterByCategory = (category) => {
     setSelectedCategory(category);
-    const filtered = blogPosts.filter((post) => post.genre === category);
+    const basePosts = showContentType === 'blog' ? blogPosts.filter(post => !post.isVideo) : blogPosts.filter(post => post.isVideo);
+    const filtered = basePosts.filter((post) => post.genre === category);
     setFilteredPosts(filtered);
+  };
+
+  // Function to reset filters and change content type view
+  const handleContentTypeChange = (type) => {
+    setShowContentType(type);
+    setSelectedCategory(null); // Reset category filter when changing content type
   };
 
   return (
@@ -44,29 +54,56 @@ const BlogPage = () => {
         {/* Header */}
         <header className="text-center mb-12">
           <h1 className="text-6xl font-bold tracking-tight mt-5">
-            Discover Inspiring Blog Posts
+             Discover Inspiring {showContentType === 'blog' ? 'Blog Posts' : 'Videos'}
           </h1>
           <p className="text-xl text-gray-400 mt-3">
             Explore unique insights, stories, and expert opinions
           </p>
         </header>
 
+        {/* Content Type Toggle Buttons */}
+        <div className="flex gap-4 mb-6 justify-center">
+          <button
+            className={`px-6 py-3 rounded-xl font-semibold transition ${
+              showContentType === 'blog'
+                ? 'bg-yellow-600 text-black'
+                : 'bg-yellow-800 text-black hover:bg-yellow-600'
+            }`}
+            onClick={() => handleContentTypeChange('blog')}
+          >
+            Blog
+          </button>
+          <button
+            className={`px-6 py-3 rounded-xl font-semibold transition hidden ${
+              showContentType === 'video'
+                ? 'bg-yellow-600 text-black'
+                : 'bg-yellow-800 text-black hover:bg-yellow-600'
+            }`}
+            onClick={() => handleContentTypeChange('video')}
+          >
+            Videos
+          </button>
+        </div>
+
+
         {/* Search Bar */}
         <div className="mb-8">
           <input
             type="text"
-            placeholder="Search by genre..."
+            placeholder={`Search ${showContentType} by genre...`}
             className="w-full px-4 py-2 rounded-md text-white focus:ring focus:ring-yellow-500 border border-white bg-amber-50/30"
             onChange={(e) => {
               const searchTerm = e.target.value.toLowerCase();
+              const basePosts = showContentType === 'blog' ? blogPosts.filter(post => !post.isVideo) : blogPosts.filter(post => post.isVideo);
+
               if (searchTerm) {
-                const filtered = blogPosts.filter((post) =>
-                  post.genre.toLowerCase().includes(searchTerm)
+                const filtered = basePosts.filter((post) =>
+                  post.genre && post.genre.toLowerCase().includes(searchTerm) // Added check for post.genre existence
                 );
                 setFilteredPosts(filtered);
                 setSelectedCategory(null);
               } else {
-                setFilteredPosts(blogPosts);
+                setFilteredPosts(basePosts);
                 setSelectedCategory(null);
               }
             }}
@@ -158,7 +195,6 @@ const BlogPage = () => {
               "Prayer",
               "Relationship",
               "Wisdom",
-    
             ].map((category) => (
               <button
                 key={category}
@@ -178,7 +214,7 @@ const BlogPage = () => {
         {selectedCategory && (
           <div className="text-center mb-6 border-b pb-3">
             <h3 className="text-lg font-semibold text-gray-300 border-b-2 border-yellow-500 inline-block pb-1">
-              Showing posts for:{" "}
+              Showing {showContentType === 'blog' ? 'blog posts' : 'videos'} for:{" "}
               <span className="text-yellow-500 font-bold">
                 {selectedCategory}
               </span>
@@ -186,13 +222,12 @@ const BlogPage = () => {
           </div>
         )}
 
-        {/* Blog Posts Section */}
+        {/* Content Section */}
         {loading ? (
           <div className="flex justify-center items-center h-[30vh]">
             <div className="w-14 h-14 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : filteredPosts.length > 0 ? (
-          // Adjust grid so cards become slightly smaller (3 columns on large screens)
           <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 ">
             {filteredPosts.map((post) => (
               <article
@@ -204,46 +239,75 @@ const BlogPage = () => {
                   {post.genre || "General"}
                 </span>
                 <p className="text-gray-400 text-xs absolute bottom-4 left-4">
-            <strong>By:</strong> {post.author}
-          </p>
-            <h1 className="text-xs text-gray-400 text-center absolute top-4 right-4">
-            THE <span className="text-orange-400">SUN</span> WEB
-          </h1>
-                <Link href={`/blog/${post.id}`}>
-                  <div className="block">
-                    {/* Optional Image Section */}
-                    {post.photoURL && (
-                      <div className="h-48 overflow-hidden">
-                        <img
-                          src={post.photoURL}
-                          alt={post.title}
-                          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                        />
+                  <strong>By:</strong> {post.author}
+                </p>
+                <h1 className="text-xs text-gray-400 text-center absolute top-4 right-4">
+                  THE <span className="text-orange-400">SUN</span> WEB
+                </h1>
+                {/* Use different link structure or rendering based on content type if needed */}
+                {showContentType === 'blog' ? (
+                    <Link href={`/blog/${post.id}`}>
+                      <div className="block">
+                        {/* Optional Image Section for Blog */}
+                        {post.photoURL && (
+                          <div className="h-48 overflow-hidden">
+                            <img
+                              src={post.photoURL}
+                              alt={post.title}
+                              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                            />
+                          </div>
+                        )}
+                        <div className="p-5">
+                          <h2 className="text-2xl font-bold mb-3 mt-5">{post.title}</h2>
+                          <p className="text-sm text-gray-400 mb-4 line-clamp-3">
+                            {post.body}
+                          </p>
+                          <p className="text-xs text-gray-400 text-right">
+                            Posted on {post.timestamp || "Unknown Date"}
+                          </p>
+                        </div>
                       </div>
-                    )}
-                    <div className="p-5">
-                      <h2 className="text-2xl font-bold mb-3 mt-5">{post.title}</h2>
-                      <p className="text-sm text-gray-400 mb-4 line-clamp-3">
-                        {post.body}
-                      </p>
-                      <p className="text-xs text-gray-400 text-right">
-                        Posted on {post.timestamp || "Unknown Date"}
-                      </p>
+                    </Link>
+                ) : (
+                    // Content display for Videos (replace with your video rendering logic)
+                    <div className="block">
+                        {/* Example: embed video player or link */}
+                        {post.videoURL && (
+                            <div className="h-48 bg-black flex items-center justify-center">
+                                {/* Replace with your video player component or iframe */}
+                                <p className="text-white">Video Placeholder</p>
+                            </div>
+                        )}
+                        <div className="p-5">
+                           <h2 className="text-2xl font-bold mb-3 mt-5">{post.title}</h2>
+                           <p className="text-sm text-gray-400 mb-4 line-clamp-3">
+                             {post.description || post.body} {/* Use video description if available */}
+                           </p>
+                           <p className="text-xs text-gray-400 text-right">
+                            Posted on {post.timestamp || "Unknown Date"}
+                           </p>
+                           {/* Optional: Link to video page */}
+                           {post.videoURL && (
+                               <Link href={post.videoURL} target="_blank" rel="noopener noreferrer">
+                                   <p className="text-yellow-500 hover:underline mt-2">Watch Video</p>
+                               </Link>
+                           )}
+                         </div>
                     </div>
-                  </div>
-                </Link>
+                )}
               </article>
             ))}
           </section>
         ) : (
           <div className="text-center text-lg text-gray-300">
-            No blog posts available for the selected category.
+            No {showContentType === 'blog' ? 'blog posts' : 'videos'} available {selectedCategory && `for the selected category "${selectedCategory}"`}.
           </div>
         )}
 
         {/* About Section */}
         <div className="mt-20 bg-gray-800 p-6 rounded-lg text-center">
-          <h2 className="text-3xl font-extrabold mb-4">About Our Blog</h2>
+          <h2 className="text-3xl font-extrabold mb-4">About Our {showContentType === 'blog' ? 'Blog' : 'Videos'}</h2>
           <p className="text-gray-300 leading-relaxed max-w-3xl mx-auto">
             Dive into stories and insights that inspire, educate, and entertain.
             From technology and web development to lifestyle and creativity, we

@@ -17,7 +17,8 @@ const ProfileDropdownNavbar = () => {
     { text: "HOME", url: "/",  },
     { text: "ABOUT", url: "/about", },
     { text: "BLOG", url: "/blog",},
-    { text: "POST", url: "/upload-to-blog", },
+    { text: "UPLOAD BLOG", url: "/upload-to-blog", },
+    { text: "UPLOAD VIDEO", url: "/upload-to-video",},
     { text: "CONTACT", url: "/contact", },
     { text: "SERVICES", url: "/#services-section", },
     { text: "NEWS", url: "/news", icon: "/News" },
@@ -30,6 +31,7 @@ const ProfileDropdownNavbar = () => {
   return (
     <main className="fixed w-full bg-gradient-to-r from-gray-900 via-black to-gray-800 shadow-lg z-50">
       <section className="px-5 py-4 flex items-center justify-between">
+        <span className="flex items-center justify-center border-gray-800 font-extralight border px-2 rounded-md">
         {/* Logo */}
           <Link href="/">
             <Image
@@ -37,9 +39,11 @@ const ProfileDropdownNavbar = () => {
               width={50}
               height={50}
               alt="WebWiz Logo"
-              className="rounded-full shadow-xl hover:scale-110 transition-transform duration-100 z-50"
+              className="rounded-full shadow-xl hover:scale-110 transition-transform duration-100 z-50 "
             />
           </Link>
+            <h1 className="text-white -ml-5">WebWiz</h1>
+        </span>
        
         {/* Desktop Navigation Links */}
         <div className="hidden lg:flex items-center gap-6">

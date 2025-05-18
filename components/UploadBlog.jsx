@@ -62,12 +62,32 @@ const UploadBlog = ({ session }) => {
     <main className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-800 via-gray-900 to-orange-400">
       <div className="w-full max-w-lg rounded-lg shadow-xl  bg-gradient-to-r from-gray-700 via-gray-800 to-orange-400 mt-20">
         <div>
-          <h2 className="text-3xl font-bold text-center text-white m-5">
-            Upload To Wiz <br />
+          <h1 className="text font-bold text-center text-white m-5">
+            
+          <div className="flex items-center justify-between">
+                <div className="">
+                <Link href="/upload-to-blog">
+                  <button className="bg-gradient-to-r from-gray-700 via-gray-800 to-orange-400 hover:bg-gray-800 text-black font-semibold px-4 py-1 rounded transition duration-200 border border-black">
+                    Upload Blog</button>
+                </Link>
+                </div>
+                <div className="">
+                  <Link href="/upload-to-video">
+
+                <button
+                  onClick={closeModal}
+                  className="bg-gradient-to-r from-orange-400 via-gray-800 to-gray-700 hover:bg-gray-800 text-white font-semibold px-4 py-1 rounded transition duration-200 border"
+                  >
+                  Upload Video
+                </button>
+                  </Link>
+                  </div>
+                </div>
+
             <button onClick={handleShowPopup} className="text-sm text-gray-500">
               (!)Learn to Upload
             </button>
-          </h2>
+          </h1>
         </div>
         {showpopup && (
           <div className=" -mt-10 bg-black bg-opacity-100 flex justify-center items-center  z-50">

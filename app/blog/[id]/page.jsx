@@ -316,8 +316,8 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
           />
           <input
             type="text"
-            placeholder="Write a comment..."
-            className="w-full p-3 rounded-md bg-gray-900 text-orange-400 border border-gray-600 focus:outline-none focus:ring focus:ring-yellow-500"
+            placeholder="What's on your mind?"
+            className="w-full  p-2 rounded-md bg-gray-900 text-orange-400 border border-gray-600 focus:outline-none focus:ring focus:ring-yellow-500"
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
           />
