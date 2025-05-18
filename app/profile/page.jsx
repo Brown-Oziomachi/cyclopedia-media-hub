@@ -9,7 +9,7 @@ import UserBlogs from "@/components/UserBlog";
   async function ProfilePage() {
   const session = await auth();
   if (!session) {
-    redirect("/auth/signin"); // Redirect if not authenticated
+    redirect("/"); // Redirect if not authenticated
   }
 
 

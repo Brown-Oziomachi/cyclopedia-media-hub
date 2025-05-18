@@ -118,10 +118,10 @@ const UploadBlog = ({ session }) => {
                 able to share your ideas and connect with your audience through
                 the Webwiz Creation blog. Happy blogging!
               </h1>
-              <div className="flex items-center justify-center gap-10">
+              <div className="flex items-center justify-between">
                 <div className="">
                 <Link href="/auth/signin">
-                  <button className=" bg-white hover:bg-gray-800 text-black font-semibold px-4 py-1 rounded transition duration-200 border">Get Started</button>
+                  <button className=" bg-white hover:bg-gray-800 text-black font-semibold px-4 py-1 rounded transition duration-200 border border-black">Get Started</button>
                 </Link>
                 </div>
                 <div className="">
