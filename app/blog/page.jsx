@@ -64,7 +64,7 @@ const BlogPage = () => {
         {/* Content Type Toggle Buttons */}
         <div className="flex gap-4 mb-6 justify-center">
           <button
-            className={`px-6 py-3 rounded-xl font-semibold transition ${
+            className={`px-6 py-3 rounded-xl font-semibold transition -skew-10 ${
               showContentType === 'blog'
                 ? 'bg-yellow-600 text-black'
                 : 'bg-yellow-800 text-black hover:bg-yellow-600'
@@ -81,10 +81,11 @@ const BlogPage = () => {
             }`}
             onClick={() => handleContentTypeChange('video')}
           >
-            Videos
+           Introducing Videos
           </button>
+          <p className="px-6 py-3 rounded-xl font-semibold transition border animate-pulse skew-10">Introducing Videos</p>
         </div>
-
+ 
 
         {/* Search Bar */}
         <div className="mb-8">

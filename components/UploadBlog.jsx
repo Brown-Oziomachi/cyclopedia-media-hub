@@ -65,13 +65,8 @@ const UploadBlog = ({ session }) => {
           <h1 className="text font-bold text-center text-white m-5">
             
           <div className="flex items-center justify-between">
-                <div className="">
-                <Link href="/upload-to-blog">
-                  <button className="bg-gradient-to-r from-gray-700 via-gray-800 to-orange-400 hover:bg-gray-800 text-black font-semibold px-4 py-1 rounded transition duration-200 border border-black">
-                    Upload Blog</button>
-                </Link>
-                </div>
-                <div className="">
+               
+                <div className="ml-auto">
                   <Link href="/upload-to-video">
 
                 <button
