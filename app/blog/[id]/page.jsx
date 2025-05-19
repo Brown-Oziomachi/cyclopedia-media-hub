@@ -312,7 +312,7 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
           <img
             src={session?.user?.image || "/default-avatar.png"}
             alt="User avatar"
-            className="w-10 h-10 rounded-full border-2 border-orange-400 shadow-md"
+            className="w-10 h-10 rounded-full border-2 border-black border-b-white shadow-md"
           />
           <input
             type="text"
@@ -346,7 +346,7 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
               <img
                 src={comment.userImage || "/default-avatar.png"}
                 alt="User avatar"
-                className="w-8 h-8 rounded-full border-2 border-orange-400"
+                className="w-8 h-8 rounded-full border-2 border-black border-b-white"
               />
               <div>
                 <p className="text-white font-semibold">{comment.userName}</p>

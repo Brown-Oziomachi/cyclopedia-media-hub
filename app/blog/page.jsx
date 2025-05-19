@@ -221,8 +221,8 @@ const filterByCategory = (category) => {
         </div>
 
         {selectedCategory && (
-          <div className="text-center mb-6 border-b pb-3">
-            <h3 className="text-lg font-semibold text-gray-300 border-b-2 border-yellow-500 inline-block pb-1">
+          <div className="text-center mb-6 border-b">
+            <h3 className="text-lg font-semibold text-gray-300 border-b-2 border-yellow-500 inline-block ">
               Showing {showContentType === 'blog' ? 'blog posts' : 'videos'} for:{" "}
               <span className="text-yellow-500 font-bold">
                 {selectedCategory}
@@ -261,15 +261,15 @@ const filterByCategory = (category) => {
                         {post.photoURL && (
                           <div className="h-48 overflow-hidden">
                             <img
-                              src={post.photoURL}
+                              src={post.image}
                               alt={post.title}
                               className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                             />
                           </div>
                         )}
-                        <div className="p-5">
-                          <h2 className="text-2xl font-bold mb-3 mt-5">{post.title}</h2>
-                          <p className="text-sm text-gray-400 mb-4 line-clamp-3">
+                        <div className="py-5">
+                          <h2 className="text-xl font-bold mb-3 mt-5">{post.title}</h2>
+                          <p className="text-sm text-gray-400 mb-4 line-clamp-2">
                             {post.body}
                           </p>
                           <p className="text-xs text-gray-400 text-right">
