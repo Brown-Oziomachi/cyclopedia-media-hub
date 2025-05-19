@@ -224,7 +224,7 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
         <img
           src={session?.user?.image}
           alt="User profile"
-          className="w-20 h-20 rounded-full border border-gray-300"
+          className="w-20 h-20 rounded-full border border-gray-300 border-b-5"
         />
 </div>
           <p className="text-gray-400 text-lg">
@@ -412,7 +412,7 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
                     />
                     <div>
                       <p className="text-white font-semibold">{reply.userName}</p>
-                      <p className="text-gray-400">{reply.text}</p>
+                      <p className="text-gray-400 -ml-10">{reply.text}</p>
                     </div>
                   </li>
                 ))}

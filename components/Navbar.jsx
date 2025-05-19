@@ -162,8 +162,8 @@ const ProfileDropdownNavbar = () => {
     <img
       src={session.user.image}
       alt={session.user.name}
-      className="rounded-b-full mb-10 shadow-2xl max-w-[150px] max-h-[150px] object-cover" // Ensure avatar stays within boundaries
-    />
+      className="rounded-b-full mb-5 shadow-2xl max-w-[80px] max-h-[80px] object-cover border-b-white border-b-10" // Ensure avatar stays within boundaries
+      />
   )}
 
   {/* Navigation Items */}
