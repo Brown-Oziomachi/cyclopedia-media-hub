@@ -403,7 +403,7 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
                 {comment.replies.map((reply) => (
                   <li
                     key={reply.id}
-                    className="bg-gray-900 p-3 rounded flex items-center space-x-3"
+                    className="bg-gray-900 p-3 rounded flex  space-x-3"
                   >
                     <img
                       src={reply.userImage || "/default-avatar.png"}
