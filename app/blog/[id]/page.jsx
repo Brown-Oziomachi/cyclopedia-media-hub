@@ -206,7 +206,7 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
         <div className="bg-gradient-to-br from-gray-900 via-black to-orange-400 shadow-lg z-0 rounded-lg p-8 relative">
           {/* Category Tag */}
           <Link href={`/blog/${blog.id}`}>
-            <span className="inline-block mb-4 px-4 py-1 bg-purple-900 text-white text-sm rounded-full">
+            <span className="inline-block mb-4 px-4 py-1 bg-white text-black text-sm rounded-full">
               {blog.genre}
             </span>
           </Link>
@@ -237,7 +237,7 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
           </p>
           </div>
 
-        <div className=" ">
+        <div className="">
           <BlogDisplay body={blog.body} />
         </div>
 
@@ -317,7 +317,7 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
           <input
             type="text"
             placeholder="What's on your mind?"
-            className="w-full  p-2 rounded-md bg-gray-900 text-orange-400 border border-gray-600 focus:outline-none focus:ring focus:ring-yellow-500"
+            className="w-full  p-2 rounded-md bg-gray-900 text-white border border-gray-600 focus:outline-none focus:ring focus:ring-yellow-500"
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
           />
@@ -349,7 +349,7 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
                 className="w-8 h-8 rounded-full border-2 border-orange-400"
               />
               <div>
-                <p className="text-orange-400 font-semibold">{comment.userName}</p>
+                <p className="text-white font-semibold">{comment.userName}</p>
                 {comment.timestamp && (
                   <p className="text-sm text-gray-400">
                     {new Date(comment.timestamp.seconds * 1000).toLocaleString()}
@@ -380,7 +380,7 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
                   onChange={(e) => setReplyText(e.target.value)}
                 />
                 <button
-                  className="mt-2 bg-orange-400 p-2 rounded"
+                  className="mt-2 bg-gray-400 px-5 py-1 text-black p-2 rounded"
                   onClick={() =>
                     handleReplySubmit(
                       comment.id,
@@ -392,7 +392,7 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
                     )
                   }
                 >
-                  Submit Reply
+                  Submit
                 </button>
               </div>
             )}
@@ -408,11 +408,11 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
                     <img
                       src={reply.userImage || "/default-avatar.png"}
                       alt="User avatar"
-                      className="w-6 h-6 rounded-full border-2 border-orange-400"
+                      className="w-6 h-6 rounded-full border-2 border-b-white"
                     />
                     <div>
-                      <p className="text-orange-400 font-semibold">{reply.userName}</p>
-                      <p className="text-blue-500">{reply.text}</p>
+                      <p className="text-white font-semibold">{reply.userName}</p>
+                      <p className="text-gray-400">{reply.text}</p>
                     </div>
                   </li>
                 ))}

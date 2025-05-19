@@ -1,3 +1,4 @@
+import { MessageCircle } from "lucide-react";
 import { useState } from "react";
 
 const ChatDropdown = () => {
@@ -6,10 +7,10 @@ const ChatDropdown = () => {
   return (
     <div className="fixed bottom-50 max-md:bottom-40 right-2 z-50">
       <button
-        className="bg-green-500 text-white py-2 rounded-md flex items-center shadow-md hover:bg-green-600"
+        className="bg-white text-black py-2 rounded-md flex items-center shadow-md p-2 z-0"
         onClick={() => setIsOpen(!isOpen)}
       >
-        Chat Us <span className="ml-2">&#9662;</span> {/* Down arrow */}
+          <MessageCircle /> <span className="ml-2">&#9662;</span> {/* Down arrow */}
       </button>
 
       {isOpen && (

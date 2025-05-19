@@ -71,7 +71,7 @@ const ContactPage = () => {
                       />
                     </div>
                   ) : (
-        <main className="bg-gradient-to-br from-gray-900 via-black to-orange-400 text-white min-h-screen z-0 ">
+        <main className="bg-gradient-to-br from-gray-900 via-black to-white text-white min-h-screen z-0 ">
           {/* Desktop Layout */}
           <section className="container mx-auto px-5 lg:px-20 py-30 lg:flex lg:space-x-10 ">
             {/* Introduction / Information */}
@@ -87,8 +87,8 @@ const ContactPage = () => {
                 Drop us a message and let’s collaborate to build something extraordinary for you!
               </div>
               <div className="text-lg lg:text-xl text-gray-300 leading-relaxed max-lg:mb-10">
-                📞 Have a question? Call us at <a href="tel:+2348142995114" className="text-cyan-400 hover:underline">+234 8142 995114</a><br />
-                ✉️ Prefer email? Reach out at <a href="mailto:webwizcreation.web@gmail.com" className="text-cyan-400 hover:underline ">webwizcreation.web@gmail.com</a>
+                📞 Have a question? Call us at <a href="tel:+2348142995114" className="text-blue-600 underline">+234 8142 995114</a><br />
+                ✉️ Prefer email? Reach out at <a href="mailto:webwizcreation.web@gmail.com" className="text-blue-600 underline ">webwizcreation.web@gmail.com</a>
               </div>
             </div>
 
@@ -107,7 +107,7 @@ const ContactPage = () => {
               >
                 {() => (
                   <Form>
-                    <h2 className="text-2xl font-bold text-center mb-6 text-cyan-400 relative">
+                    <h2 className="text-2xl font-bold text-center mb-6 text-white relative">
                       Contact Form
                     </h2>
                     {/* Name Input */}
@@ -190,7 +190,7 @@ const ContactPage = () => {
                     <button
                       disabled={processing}
                       type="submit"
-                      className="w-full bg-cyan-500 text-white py-3 rounded-lg hover:bg-cyan-600 transition cursor-pointer"
+                      className="w-full  bg-white text-black py-3 rounded-lg hover:bg-cyan-600 transition cursor-pointer"
                     >
                       {processing ? (
                         <span className="flex items-center justify-center ">
@@ -230,7 +230,7 @@ const ContactPage = () => {
               © 2025 WebWiz Creation. Designed and developed for excellence.
             </span>
             <Link href="/">
-              <span className="text-cyan-400 hover:underline">www.webwizcreation.com</span>
+              <span className="text-blue-600 hover:underline">www.webwizcreation.com</span>
             </Link>
             </div>
         </main>

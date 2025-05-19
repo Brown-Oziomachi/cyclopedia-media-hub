@@ -57,7 +57,7 @@ const filterByCategory = (category) => {
   
   
   return (
-    <main className="min-h-screen bg-gray-950 text-white px-8 py-16">
+    <main className="min-h-screen bg-gray-950 text-white px-8 py-30">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <header className="text-center mb-12">
@@ -74,8 +74,8 @@ const filterByCategory = (category) => {
           <button
             className={`px-6 py-3 rounded-xl font-semibold transition -skew-10 ${
               showContentType === 'blog'
-                ? 'bg-yellow-600 text-black'
-                : 'bg-yellow-800 text-black hover:bg-yellow-600'
+                ? 'bg-white text-black'
+                : 'bg-yellow-800 text-black hover:bg-white'
             }`}
             onClick={() => handleContentTypeChange('blog')}
           >
@@ -209,8 +209,8 @@ const filterByCategory = (category) => {
                 key={category}
                 className={`px-6 py-3 rounded-xl text-sm font-medium transition-all ${
                   selectedCategory === category
-                    ? "bg-yellow-600 text-black"
-                    : "bg-yellow-800 text-black hover:bg-yellow-600"
+                    ? "bg-black text-white"
+                    : "bg-white text-black hover:bg-black hover:text-white"
                 }`}
                 onClick={() => filterByCategory(category)}
               >
@@ -241,10 +241,10 @@ const filterByCategory = (category) => {
             {filteredPosts.map((post) => (
               <article
                 key={post.id}
-                className="bg-gray-900 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit"
+                className="bg-gray-950 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit"
               >
                 {/* Category Tag */}
-                <span className="absolute top-4 left-4 bg-yellow-800 text-black text-xs px-3 py-1 rounded-full ">
+                <span className="absolute top-4 left-4 bg-white text-black text-xs px-3 py-1 rounded-full ">
                   {post.genre || "General"}
                 </span>
                 <p className="text-gray-400 text-xs absolute bottom-4 left-4">
@@ -309,15 +309,15 @@ const filterByCategory = (category) => {
             ))}
           </section>
         ) : (
-          <div className="text-center text-lg text-gray-300">
+          <div className="text-center text-lg text-white">
             No {showContentType === 'blog' ? 'blog posts' : 'videos'} available {selectedCategory && `for the selected category "${selectedCategory}"`}.
           </div>
         )}
 
         {/* About Section */}
-        <div className="mt-20 bg-gray-800 p-6 rounded-lg text-center">
-          <h2 className="text-3xl font-extrabold mb-4">About Our {showContentType === 'blog' ? 'Blog' : 'Videos'}</h2>
-          <p className="text-gray-300 leading-relaxed max-w-3xl mx-auto">
+        <div className="mt-20 bg-white p-6 rounded-lg text-center">
+          <h2 className="text-3xl font-extrabold mb-4 text-black">About Our {showContentType === 'blog' ? 'Blog' : 'Videos'}</h2>
+          <p className="text-gray-950 leading-relaxed max-w-3xl mx-auto">
             Dive into stories and insights that inspire, educate, and entertain.
             From technology and web development to lifestyle and creativity, we
             bring diverse perspectives together in one place.

@@ -41,7 +41,7 @@ useEffect(() => {
                 </div>
               ) : (
                 
-                <div className=" py-20  bg-gradient-to-r from-gray-700 via-black to-orange-400 text-white  rounded-tr-full rounded-ss-full relative overflow-hidden">
+                <div className=" py-20  bg-gradient-to-r from-gray-950 via-black to-orange-400 text-white  rounded-tr-full rounded-ss-full relative overflow-hidden">
                 {/* Hero Section */}
                 <main className="flex flex-col justify-center items-center h-80 lg:h-200 text-center px-4 lg:px-0 ">
                   <div className="space-y-2 ">
@@ -55,7 +55,7 @@ useEffect(() => {
                     {/* The Moon Web Title */}
                     <div className="flex items-center justify-center ">
                       <h1 
-                        className="text-5xl font-bold text-cyan-500 max-md:text-2xl flex items-center justify-center gap-2"
+                        className="text-5xl font-bold text-white max-md:text-2xl flex items-center justify-center gap-2"
                         animate={{ x: [0, 100, -100, 0] }} // Moves left, right, left, back to start
                         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                       >
@@ -74,13 +74,13 @@ useEffect(() => {
                     {/* Buttons */}
                     <div className="flex justify-center gap-4 mt-2 group">
                       <Link href="/contact">
-                        <button className="cursor-pointer hover:text-xl bg-cyan-500 flex gap-2 hover:bg-gray-800 hover:text-cyan-500 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg group-hover:bg-gray-800 group-hover:text-gray-800 ">
+                        <button className="cursor-pointer hover:text-xl bg-black flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg group-hover:bg-white group-hover:text-black ">
                           Get Started
                         <ArrowRightToLine />
                         </button>
                       </Link>
                       <Link href="/about">
-                        <button className="cursor-pointer hover:text-xl group-hover:bg-cyan-500 group-hover:text-cyan-500  bg-gray-800 flex gap-2 hover:bg-gray-700 text-cyan-400 px-6 py-3 rounded-lg font-semibold transition-all shadow-lg group">
+                        <button className="cursor-pointer hover:text-xl group-hover:bg-black group-hover:text-white  bg-white flex gap-2 hover:bg-white text-black px-6 py-3 rounded-lg font-semibold transition-all shadow-lg group">
                           Learn More
                           <ChevronRight />
                         </button>
@@ -129,11 +129,11 @@ useEffect(() => {
         The <span className='text-orange-400'>sun</span> Web: Bringing Light to Your Digital Presence
         </div>
         <h4 className='text-3xl text-white'>Why the Sun Web?</h4>
-        <h5 className='lg:w-1/2 mx-auto text-orange-400 '>The sun is a universal symbol of growth, clarity, and inspiration. At Webwiz Creation,
+        <h5 className='lg:w-1/2 mx-auto text-white '>The sun is a universal symbol of growth, clarity, and inspiration. At Webwiz Creation,
            we channel this energy to help your ideas thrive. With personalized strategies, unparalleled creativity,
            and a commitment to excellence, we empower you to shine brighter in your industry</h5>
         <Link href={session ? "/contact" : "/auth/signin"} className='cursor-pointer'>
-          <button className="bg-orange-500 flex mx-auto gap-2  cursor-pointer hover:bg-orange-600 hover:animate-pulse text-white px-8 py-4 text-lg rounded-lg font-bold shadow-lg transition-all">
+          <button className="bg-white flex mx-auto gap-2  cursor-pointer hover:bg-black hover:text-white hover:animate-pulse text-black px-8 py-4 text-lg rounded-lg font-bold shadow-lg transition-all">
             Connect
             <ArrowRight className='hover:animate-pulse' />
           </button>
@@ -145,7 +145,7 @@ useEffect(() => {
           {/* ACTION SECTION */}
           <div className=" mx-auto px-6 lg:px-50 py-16 bg-black  outline-1 outline-white  border-amber-600 shadow-2xl shadow-amber-700">
             <h2 className="text-center text-4xl lg:text-5xl font-extrabold text-white mb-5 ">
-              Join <span className="text-cyan-400">WebWiz Today!</span>
+              Join WebWiz Today!  
             </h2>
             <hr />
             <div className="text-center text-gray-300 lg:text-xl  mx-auto text-base ">
@@ -193,7 +193,7 @@ useEffect(() => {
     }].map((item, index) => (
       <div
         key={index}
-        className="bg-black z-50 p-10 rounded-lg shadow-md hover:shadow-lg transition border-l-4 border-orange-400 mb-10"
+        className="bg-black z-50 p-5 rounded-lg shadow-md hover:shadow-lg transition border-l-4 border-black mb-10"
       >
         <h3 className="text-xl lg:text-2xl font-bold text-white mb-4">
           {item.title}
@@ -202,7 +202,7 @@ useEffect(() => {
         <div className="flex flex-wrap gap-4 group">
           {item.buttons.map((button, btnIndex) => (
              <Link key={btnIndex} href={button.href}>
-                <p className=" group-hover:text-orange-500 px-4 py-2 bg-orange-500 text-white hover:text-white rounded-lg font-semibold hover:bg-orange-600 transition flex items-center gap-2">
+                <p className=" group-hover:text-black px-4 py-2 bg-black text-white hover:text-white rounded-lg font-semibold hover:bg-black transition flex items-center gap-2">
                   {button.text}
                   {button.icon && <button.icon />}
                 </p>
@@ -218,7 +218,7 @@ useEffect(() => {
 
   <div className="container mx-auto px- lg:px-2 py-16">
     {/* Section Title */}
-    <h2 className="text-center text-4xl lg:text-5xl font-extrabold text-cyan-400 mb-12 tracking-wide">
+    <h2 className="text-center text-4xl lg:text-5xl font-extrabold text-white mb-12 tracking-wide">
       We Are More Than <br /> A Digital Agency
     </h2>
     
@@ -264,7 +264,7 @@ useEffect(() => {
     
     <div
       key={index}
-      className="bg-gray-900 hover:bg-gray-800 p-5 rounded-xl shadow-lg transition-transform transform hover:scale-105 text-center group"
+      className="bg-gray-950 hover:bg-gray-800 p-5 rounded-xl shadow-lg transition-transform transform hover:scale-105 text-center group"
     >
       
       {/* Image */}
@@ -275,7 +275,7 @@ useEffect(() => {
       />
 
       {/* Title */}
-      <h3 className="text-2xl font-extrabold text-orange-400 group-hover:text-orange-500 transition duration-300 mb-3">
+      <h3 className="text-2xl font-extrabold text-white group-hover:text-orange-500 transition duration-300 mb-3">
         {item.title}
       </h3>
 
@@ -288,7 +288,7 @@ useEffect(() => {
       <div className="flex flex-wrap justify-center gap-4">
         {item.buttons.map((button, btnIndex) => (
           <Link key={btnIndex} href={button.href}>
-            <p className=" flex gap-1 cursor-pointer px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-full shadow-md transition duration-300">
+            <p className=" flex gap-1 cursor-pointer px-4 py-2 bg-black hover:bg-orange-600 text-white font-medium rounded-full shadow-md transition duration-300">
               {button.text}
               <ChevronRight />
             </p>
@@ -305,7 +305,7 @@ useEffect(() => {
     {/* Section Header */}
     <h2
     id="services-section"
-      className="text-center text-4xl lg:text-5xl font-extrabold text-cyan-400 mb-12 tracking-wide uppercase animate-fade-in"
+      className="text-center text-4xl lg:text-5xl font-extrabold text-white mb-12 tracking-wide uppercase animate-fade-in"
     >
       Explore Our Exceptional Services
     </h2>
@@ -346,7 +346,7 @@ useEffect(() => {
       ].map((service, index) => (
         <div
           key={index}
-          className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group"
+          className="bg-white text-black p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group"
         >
           {/* Icon */}
           <div className="group-hover:animate-bounce m-5">
@@ -396,7 +396,7 @@ useEffect(() => {
       <div className="flex justify-center mt-8">
         <Link
           href={session ? "/contact" : "/auth/signin"}
-          className=" flex  gap-2 bg-orange-500 text-white py-3 px-10 rounded-md text-lg font-semibold hover:bg-orange-600 shadow-lg transition-all"
+          className=" flex  gap-2 bg-white text-black py-3 px-10 rounded-md text-lg font-semibold hover:bg-orange-600 shadow-lg transition-all"
         >
           Connect
           <ArrowRight className='hover:animate-bounce' />

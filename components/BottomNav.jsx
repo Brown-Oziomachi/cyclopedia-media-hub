@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 
     return (
-      <div className="fixed bottom-0 left-0 w-full bg-orange-900 text-white py-3 shadow-lg">
+      <div className="fixed bottom-0 left-0 w-full bg-black text-white py-3 shadow-lg">
       <div className="flex justify-start items-center md:animate-none overflow-x-auto max-md:whitespace-nowrap snap-x snap-mandatory">
         <button className="snap-start shrink-0 p-2 rounded   whitespace-nowrap">
         Welcome to webwiz Creation, a website development company. We are a team

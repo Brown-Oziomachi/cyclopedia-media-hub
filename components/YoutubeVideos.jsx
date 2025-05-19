@@ -50,7 +50,7 @@ export default function VideoList() {
         </form>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {videos?.map((video) => (
-            <div key={video.id.videoId} className="bg-gradient-to-r from-gray-900 via-black to-orange-400 p-4 rounded-lg">
+            <div key={video.id.videoId} className="bg-black p-4 rounded-lg">
               <iframe
                 width="100%"
                 height="200"
