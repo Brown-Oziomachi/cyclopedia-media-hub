@@ -34,27 +34,35 @@ const BlogPage = () => {
     fetchBlogs();
   }, [showContentType]); // Add showContentType to dependency array to refetch/refilter on toggle
 
-  // This function now filters by genre within the currently selected content type
-  const filterByCategory = (category) => {
-    setSelectedCategory(category);
-    const basePosts = showContentType === 'blog' ? blogPosts.filter(post => !post.isVideo) : blogPosts.filter(post => post.isVideo);
-    const filtered = basePosts.filter((post) => post.genre === category);
-    setFilteredPosts(filtered);
-  };
+  // When switching to 'blog' or 'video', show all posts of that type
+const handleContentTypeChange = (type) => {
+  setShowContentType(type);
+  setSelectedCategory(null);
+  if (type === 'blog') {
+    setFilteredPosts(blogPosts.filter(post => !post.isVideo));
+  } else {
+    setFilteredPosts(blogPosts.filter(post => post.isVideo));
+  }
+};
 
-  // Function to reset filters and change content type view
-  const handleContentTypeChange = (type) => {
-    setShowContentType(type);
-    setSelectedCategory(null); // Reset category filter when changing content type
-  };
-
+// When clicking a category, filter posts within current type
+const filterByCategory = (category) => {
+  setSelectedCategory(category);
+  const basePosts = showContentType === 'blog'
+    ? blogPosts.filter(post => !post.isVideo)
+    : blogPosts.filter(post => post.isVideo);
+  const filtered = basePosts.filter((post) => post.genre === category);
+  setFilteredPosts(filtered);
+};
+  
+  
   return (
     <main className="min-h-screen bg-gray-950 text-white px-8 py-16">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <header className="text-center mb-12">
           <h1 className="text-6xl font-bold tracking-tight mt-5">
-             Discover Inspiring {showContentType === 'blog' ? 'Blog Posts' : 'Videos'}
+             Discover Inspiring {showContentType === 'blog' ? 'Blog ' : 'Videos'}
           </h1>
           <p className="text-xl text-gray-400 mt-3">
             Explore unique insights, stories, and expert opinions
