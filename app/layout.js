@@ -1,5 +1,3 @@
-// app/layout.jsx or _app.js
-
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import AuthProvider from "@/components/AuthProvider";
@@ -13,14 +11,14 @@ export const metadata = {
     shortcut: "/logo.png",
     apple: "/logo.png",
   },
+  other: {
+    "google-adsense-account": "8408243121163767", // 👈 Replace this
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-
-      </head>
       <body className="antialiased">
         <AuthProvider>
           <Navbar />

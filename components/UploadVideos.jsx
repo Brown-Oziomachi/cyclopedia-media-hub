@@ -203,14 +203,14 @@ function AddVideoForm() {
             value={formData.description}
             onChange={handleChange}
             rows="4"
-            className="w-full px-3 py-2 rounded-md bg-gray-700 border border-gray-600 text-white"
+            className="w-full px-3 py-2 rounded-md bg-gray-700 border border-gray-600 text-white line-clamp-2"
           ></textarea>
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          className={`w-full px-4 py-2 rounded-md text-black font-semibold transition ${
+          className={`w-full px-4 py-2 rounded-md text-black font-semibold transition hidden ${
             loading ? "bg-gray-500 cursor-not-allowed" : "bg-yellow-600 hover:bg-yellow-500"
           }`}
         >

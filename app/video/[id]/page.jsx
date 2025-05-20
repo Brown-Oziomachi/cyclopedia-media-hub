@@ -1,7 +1,9 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { app1 } from "@/lib/firebaseConfig";
 
 function getYouTubeEmbedURL(url) {
   try {
@@ -24,27 +26,38 @@ function getYouTubeEmbedURL(url) {
 
 const VideoPage = () => {
   const searchParams = useSearchParams();
- const router = useRouter();
+  const router = useRouter();
 
-  const handleBack = () => {
-    if (typeof window !== 'undefined' && window.history.length > 1) {
-      router.back();
-    } else {
-      router.push('/videos'); // or your desired default route
-    }
-  };
-  // Decode URL params
   const rawUrl = searchParams.get("url") || "";
   const rawTitle = searchParams.get("title") || "";
   const rawDesc = searchParams.get("desc") || "";
 
-  // Decode URI components
   const decodedUrl = decodeURIComponent(rawUrl);
   const decodedTitle = decodeURIComponent(rawTitle);
   const decodedDesc = decodeURIComponent(rawDesc);
 
-  // Convert YouTube watch URLs to embed URLs
   const videoURL = getYouTubeEmbedURL(decodedUrl);
+  const isDirectVideo = videoURL.match(/\.(mp4|webm|ogg)$/i);
+
+  const [moreVideos, setMoreVideos] = useState([]);
+  const db = getFirestore(app1);
+
+  useEffect(() => {
+    async function fetchVideos() {
+      try {
+        const videosCol = collection(db, "videos");
+        const videosSnapshot = await getDocs(videosCol);
+        const videosList = videosSnapshot.docs.map((doc) => {
+          console.log("Video doc:", doc.id, doc.data()); // Debug output
+          return { id: doc.id, ...doc.data() };
+        });
+        setMoreVideos(videosList);
+      } catch (error) {
+        console.error("Error fetching videos:", error);
+      }
+    }
+    fetchVideos();
+  }, [db]);
 
   if (!decodedUrl) {
     return (
@@ -54,18 +67,34 @@ const VideoPage = () => {
     );
   }
 
-  const isDirectVideo = videoURL.match(/\.(mp4|webm|ogg)$/i);
-
   return (
     <main className="min-h-screen bg-gray-950 text-white px-4 py-12 flex flex-col items-center max-w-4xl mx-auto">
-     <button
-      className="mb-8 px-6 py-2 bg-yellow-500 text-black rounded-lg font-semibold mt-15"
-      onClick={handleBack}
-    >
-      ← Back
-    </button>
+      <div className="flex gap-4 mb-8 mt-20">
+        <button
+          className="px-6 py-2 bg-gray-600 text-black rounded-lg font-semibold"
+          onClick={() => router.push("/blog")}
+        >
+          ← Back
+        </button>
+        <button
+          className="px-6 py-2 bg-gray-600 text-white rounded-lg font-semibold"
+          onClick={() => {
+            if (navigator.share) {
+              navigator.share({
+                title: decodedTitle,
+                url: window.location.href,
+              });
+            } else {
+              navigator.clipboard.writeText(window.location.href);
+              alert("Link copied to clipboard!");
+            }
+          }}
+        >
+          Share
+        </button>
+      </div>
 
-      <div className="w-full aspect-video rounded-xl overflow-hidden shadow-lg">
+      <div className="w-full aspect-video rounded-xl overflow-hidden shadow-lg mb-8">
         {isDirectVideo ? (
           <video controls className="w-full h-full bg-black">
             <source src={videoURL} />
@@ -73,18 +102,58 @@ const VideoPage = () => {
           </video>
         ) : (
           <iframe
-          src={videoURL}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          className="w-full h-full"
-          title={decodedTitle}
-          frameBorder="0"
+            src={videoURL}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full"
+            title={decodedTitle}
+            frameBorder="0"
           ></iframe>
         )}
       </div>
-        <h1 className="text-xl font-bold mb-4 text-center">{decodedTitle}</h1>
-        <p className="text-gray-300 mb-8 text-center">{decodedDesc}</p>
-        
+
+      <h1 className="text-xl font-bold mb-4">{decodedTitle}</h1>
+      <p className="text-gray-300 mb-8">{decodedDesc}</p>
+
+      <section className="w-full mt-12">
+        <h2 className="text-2xl font-semibold mb-6 text-center">More Videos</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {moreVideos.length === 0 && (
+            <p className="text-center col-span-full text-gray-400">No videos found</p>
+          )}
+          {moreVideos.map(({ id, url, title, desc }) => {
+            if (!url) return null;
+            if (url === decodedUrl) return null; // Skip current video
+            const embedUrl = getYouTubeEmbedURL(url);
+
+            return (
+              <div
+                key={id}
+                className="cursor-pointer rounded-lg overflow-hidden shadow-lg hover:shadow-yellow-500 transition-shadow bg-gray-800"
+                onClick={() =>
+                  router.push(
+                    `/video?url=${encodeURIComponent(url)}&title=${encodeURIComponent(
+                      title || "No title"
+                    )}&desc=${encodeURIComponent(desc || "")}`
+                  )
+                }
+              >
+                <div className="aspect-video w-full relative">
+                  <iframe
+                    src={embedUrl}
+                    title={title || "Video"}
+                    className="w-full h-full pointer-events-none"
+                    frameBorder="0"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                <h3 className="p-3 text-center text-white font-semibold">{title || "Untitled"}</h3>
+                <p className="px-3 pb-4 text-gray-400 text-sm text-center">{desc || ""}</p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
     </main>
   );
 };
