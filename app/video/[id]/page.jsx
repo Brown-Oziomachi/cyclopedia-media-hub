@@ -24,8 +24,15 @@ function getYouTubeEmbedURL(url) {
 
 const VideoPage = () => {
   const searchParams = useSearchParams();
-  const router = useRouter();
+ const router = useRouter();
 
+  const handleBack = () => {
+    if (typeof window !== 'undefined' && window.history.length > 1) {
+      router.back();
+    } else {
+      router.push('/videos'); // or your desired default route
+    }
+  };
   // Decode URL params
   const rawUrl = searchParams.get("url") || "";
   const rawTitle = searchParams.get("title") || "";
@@ -51,12 +58,12 @@ const VideoPage = () => {
 
   return (
     <main className="min-h-screen bg-gray-950 text-white px-4 py-12 flex flex-col items-center max-w-4xl mx-auto">
-      <button
-        className="mb-8 px-6 py-2 bg-yellow-500 text-black rounded-lg font-semibold mt-15"
-        onClick={() => router.back()}
-      >
-        ← Back
-      </button>
+     <button
+      className="mb-8 px-6 py-2 bg-yellow-500 text-black rounded-lg font-semibold mt-15"
+      onClick={handleBack}
+    >
+      ← Back
+    </button>
 
       <div className="w-full aspect-video rounded-xl overflow-hidden shadow-lg">
         {isDirectVideo ? (
