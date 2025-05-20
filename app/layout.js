@@ -19,8 +19,7 @@ export default function RootLayout({ children }) {
       <head>
         {/* Add your Google site verification meta tag here */}
         <meta
-          name="google-site-verification"
-          content="ca-pub-8408243121163767"
+          name="google-adsense-account" content="ca-pub-8408243121163767"
         />
       </head>
       <body className="antialiased">

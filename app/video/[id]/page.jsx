@@ -67,6 +67,11 @@ const VideoPage = () => {
     );
   }
 
+   const handleCopyLink = () => {
+    navigator.clipboard.writeText(window.location.href);
+    alert("Blog link copied to clipboard!");
+  };
+  
   return (
     <main className="min-h-screen bg-gray-950 text-white px-4 py-12 flex flex-col items-center max-w-4xl mx-auto">
       <div className="flex gap-4 mb-8 mt-20">
@@ -79,12 +84,7 @@ const VideoPage = () => {
         <button
           className="px-6 py-2 bg-gray-600 text-white rounded-lg font-semibold"
           onClick={() => {
-            if (navigator.share) {
-              navigator.share({
-                title: decodedTitle,
-                url: window.location.href,
-              });
-            } else {
+           {
               navigator.clipboard.writeText(window.location.href);
               alert("Link copied to clipboard!");
             }
