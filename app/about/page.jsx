@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
-import { Loader} from "lucide-react";
+import { Loader } from "lucide-react";
 
 const About = () => {
   const [loading, setLoading] = useState(true);
@@ -11,7 +11,7 @@ const About = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000); // Adjust the timeout as needed
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -19,106 +19,107 @@ const About = () => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-900 via-black to-orange-400">
-          <h1 className="text-4xl font-bold text-orange-500"></h1>
-          <Loader  size="50" speed="1.10" color="orange" className="animate-spin"/>
+        <div className="flex justify-center items-center h-screen bg-black">
+          <Loader size={50} className="animate-spin text-gray-400" />
         </div>
       ) : (
-        <main className="bg-gray-100 min-h-screen ">
-         
-                <header className="flex flex-col justify-center items-center min-h-screen text-center bg-black text-white max-md:py-50">
-                <div className="space-">
-                  <h1 className="text-5xl font-extrabold text-white mb-10">
-                  About Webwiz Creation
-                  </h1>
-                  <p className="text-lg max-w-3xl mx-auto leading-relaxed">
-                  Discover who we are and how we bring your vision to life. At Webwiz Creation, we specialize in transforming ideas into exceptional digital experiences. With a team of expert developers, designers, and strategists, we focus on delivering tailored solutions that meet the unique needs of our clients. From front-end aesthetics to back-end efficiency, we bridge creativity with technical expertise to craft impactful and user-friendly designs.
-                  </p>
-                  <p className="text-lg max-w-3xl mx-auto leading-relaxed">
-                  Our mission is to empower businesses, startups, and individuals by turning ambitious visions into reality. Through innovative solutions, cutting-edge technologies, and relentless dedication, we aim to build digital products that not only meet but exceed expectations. With Webwiz Creation, you get more than just a service—you gain a partner committed to your success every step of the way.
-                  </p>
-                </div>
-                <h1 className="text-lg">Are you a developer seeking for collaboration <Link href="/registration"><span className="text-blue-400 underline">Register now</span></Link>  and join Webwiz team.</h1>
-                </header>
+        <main className="bg-white min-h-screen text-gray-900 font-sans">
+          {/* Hero Section */}
+          <header className="flex flex-col justify-center items-center min-h-screen text-center bg-black text-white px-6 md:px-20">
+            <h1 className="text-5xl font-extrabold mb-8 tracking-tight">
+              About Webwiz Creation
+            </h1>
+            <p className="max-w-3xl text-lg leading-relaxed mb-6">
+              At Webwiz Creation, we transform your ideas into exceptional digital experiences. Our expert team combines creativity and technical expertise to deliver tailored web solutions that empower your business.
+            </p>
+            <p className="max-w-3xl text-lg leading-relaxed mb-10">
+              Our mission is to turn your vision into reality through innovative solutions and relentless dedication. Partner with us for digital products designed to exceed expectations.
+            </p>
+            <p className="text-gray-400 text-sm">
+              Are you a developer seeking collaboration?{" "}
+              <Link href="/registration">
+                <p className="text-white underline hover:text-gray-300 transition">
+                  Register now
+                </p>
+              </Link>{" "}
+              to join the Webwiz team.
+            </p>
+          </header>
 
-          <section className="py-16 bg-gray-100">
-            <div className="container mx-auto">
-              <h2 className="text-4xl font-bold text-center text-black mb-10">
+          {/* Services Section */}
+          <section className="py-16 bg-gray-50">
+            <div className="container mx-auto max-w-7xl px-6">
+              <h2 className="text-4xl font-bold text-center mb-14 tracking-wide">
                 What Sets Us Apart
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
-                  <h3 className="text-2xl font-bold text-black mb-4">
-                    Responsive Web Design
-                  </h3>
-                  <p className="text-gray-600">
-                    Creating visually appealing, mobile-friendly websites that adapt to any device seamlessly.
-                  </p>
-                </div>
-                <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
-                  <h3 className="text-2xl font-bold text-black mb-4">
-                    SEO Optimization
-                  </h3>
-                  <p className="text-gray-600">
-                    Ensuring your brand gains visibility through advanced search engine optimization strategies.
-                  </p>
-                </div>
-                <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
-                  <h3 className="text-2xl font-bold text-black mb-4">
-                    User-Centric Development
-                  </h3>
-                  <p className="text-gray-600">
-                    Building intuitive, user-friendly interfaces that keep your audience engaged.
-                  </p>
-                </div>
+              <div className="grid gap-10 md:grid-cols-3">
+                {[
+                  {
+                    title: "Responsive Web Design",
+                    desc:
+                      "Crafting visually stunning, mobile-optimized websites that adapt flawlessly across devices.",
+                  },
+                  {
+                    title: "SEO Optimization",
+                    desc:
+                      "Boosting your brand's visibility with strategic and ethical search engine optimization.",
+                  },
+                  {
+                    title: "User-Centric Development",
+                    desc:
+                      "Designing intuitive interfaces focused on user engagement and satisfaction.",
+                  },
+                ].map(({ title, desc }) => (
+                  <div
+                    key={title}
+                    className="bg-white rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow"
+                  >
+                    <h3 className="text-2xl font-semibold mb-4">{title}</h3>
+                    <p className="text-gray-700 leading-relaxed">{desc}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
 
-          {/* Milestone Timeline */}
+          {/* Journey Section */}
           <section className="py-16 bg-gray-900 text-white">
-            <div className="container mx-auto">
-              <h2 className="text-4xl font-bold text-center text-white mb-10">
+            <div className="container mx-auto max-w-5xl px-6">
+              <h2 className="text-4xl font-bold text-center mb-14 tracking-wide">
                 Our Journey
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-                  <h3 className="text-2xl font-bold text-white mb-4">2024</h3>
-                  <p>
-                    Webwiz Creation was founded with a mission to revolutionize web
-                    design and development, delivering value-driven solutions to our clients.
+              <div className="grid gap-10 md:grid-cols-2">
+                <div className="bg-gray-800 rounded-lg p-8 shadow-lg">
+                  <h3 className="text-3xl font-semibold mb-3">2024</h3>
+                  <p className="leading-relaxed">
+                    Founded with a vision to revolutionize web design and deliver value-driven, client-focused solutions.
                   </p>
                 </div>
-                <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-                  <h3 className="text-2xl font-bold text-white mb-4">2025</h3>
-                  <p>
-                    Expanded our services globally, working with clients from over 10 countries
-                    across diverse industries.
+                <div className="bg-gray-800 rounded-lg p-8 shadow-lg">
+                  <h3 className="text-3xl font-semibold mb-3">2025</h3>
+                  <p className="leading-relaxed">
+                    Expanded our global footprint, serving clients across 10+ countries with diverse industry expertise.
                   </p>
                 </div>
               </div>
             </div>
           </section>
 
-          <section className="py-16 bg-gray-100">
-            <div className="container mx-auto text-center">
-              <h2 className="text-4xl font-bold text-black mb-10">
+          {/* Testimonials Section */}
+          <section className="py-16 bg-gray-50">
+            <div className="container mx-auto max-w-7xl px-6 text-center">
+              <h2 className="text-4xl font-bold mb-14 tracking-wide text-gray-900">
                 What Our Clients Say
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div className="bg-white p-6 rounded-lg shadow-lg">
-                  <p className="text-gray-600 italic">
-                    "Webwiz Creation turned our ideas into an incredible website! Their
-                    attention to detail and creativity exceeded our expectations."
-                  </p>
-                  <h3 className="text-lg font-bold text-black mt-4">- Sarah A.</h3>
-                </div>
-                <div className="bg-white p-6 rounded-lg shadow-lg">
-                  <p className="text-gray-600 italic">
-                    "The team was professional, timely, and a pleasure to work with. Highly recommended!"
-                  </p>
-                  <h3 className="text-lg font-bold text-black mt-4">- Mike T.</h3>
-                </div>
+              <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+                <blockquote className="bg-white p-8 rounded-lg shadow-md italic text-gray-700">
+                  “Webwiz Creation turned our ideas into an incredible website! Their attention to detail and creativity exceeded our expectations.”
+                  <footer className="mt-6 font-semibold text-gray-900">— Sarah A.</footer>
+                </blockquote>
+                <blockquote className="bg-white p-8 rounded-lg shadow-md italic text-gray-700">
+                  “The team was professional, timely, and a pleasure to work with. Highly recommended!”
+                  <footer className="mt-6 font-semibold text-gray-900">— Mike T.</footer>
+                </blockquote>
               </div>
             </div>
           </section>

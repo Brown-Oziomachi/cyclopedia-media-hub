@@ -1,76 +1,83 @@
 import Link from "next/link";
-import { redirect, } from "next/navigation";
-import { ChartPie, Facebook, Github } from "lucide-react";
+import { redirect } from "next/navigation";
+import { ChartPie, Github } from "lucide-react";
 import { auth, signIn } from "@/auth";
-
-
 
 const page = async () => {
   const session = await auth();
   if (session) {
     redirect("/profile");
   }
-  
-  
+
   return (
-    <main className="min-h-screen flex flex-col lg:flex-row items-center justify-between px-4 lg:px-20 relative z-0">
-      {/* Background Glow */}
-      <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900 to-orange-400 opacity-100 z-0"></div>
-      {/* Left Section */}
-      <div className="relative w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left z-0 py-20 lg:py-20">
-        <h1 className="text-4xl lg:text-6xl font-extrabold text-cyan-400 tracking-wide mb-6">
-          Welcome to <br /> WebWiz Creation
-        </h1>
-        <p className="text-lg text-gray-300 lg:max-w-lg leading-relaxed  ">
-          Step into the future of creativity and possibilities. Sign in to get started!
-        </p>
-      </div>
-      {/* Right Section: Social Sign-In */}
-      <div className="relative w-full lg:w-1/2 flex flex-col  items-center lg:items-start z-10 lg:mt-30 ">
-        <h2 className="text-xl lg:text-2xl font-bold text-cyan-400 mb-4 lg:mb-6 lg:ml-50">Sign in to get started</h2>
+    <main className="min-h-screen bg-black flex items-center justify-center px-4">
+      <div className="max-w-md w-full bg-gray-900 rounded-lg shadow-xl p-8 space-y-8">
+        <header className="text-center">
+          <h1 className="text-3xl font-extrabold text-white mb-2">
+            Welcome to WebWiz Creation
+          </h1>
+          <p className="text-gray-300">
+            Sign in to unlock your creative potential.
+          </p>
+        </header>
 
-        <div className="max-w-2xl mx-auto my-1 p-5 flex flex-col justify-center items-center gap-10">
-        <form
-        action={async () => {
-            "use server";
-            await signIn("google");
-            }}
-            >
-            <button className="flex items-center gap-2 shadow-md text-lg py-2 px-5 lg:px-10 rounded-full cursor-pointer text-white bg-[#4285F4] hover:bg-[#357ae8] transition duration-300">
-            <ChartPie className="text-2xl" />
-            Sign in with Google
-            </button>
-            </form>
-
-            <form
+        <section className="space-y-6">
+          <form
             action={async () => {
-            "use server";
-            await signIn("github");
+              "use server";
+              await signIn("google");
             }}
           >
-            <button className="flex items-center  gap-2 shadow-md text-lg py-2 px-5 lg:px-10 rounded-full cursor-pointer text-white bg-black transition duration-300 ">
-            <Github className="text-2xl" />
-            Sign in with Github
+            <button
+              type="submit"
+              className="w-full flex items-center justify-center gap-3 bg-white text-black font-semibold py-3 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-500 transition"
+              aria-label="Sign in with Google"
+            >
+              <ChartPie className="text-2xl" />
+              Sign in with Google
             </button>
           </form>
-        {/* Terms & Privacy */}
-        <div className="text-center lg:text-left text-sm text-gray-500 mb-10">
-          By signing in, you accept our
-          <Link href="/privacypolicy" className="text-blue-500 hover:underline"> Privacy Policy </Link>
-          and
-        <Link href="/termsofservices" className="text-blue-500 hover:underline"> Terms of Services </Link>.
-        </div>
+
+          <form
+            action={async () => {
+              "use server";
+              await signIn("github");
+            }}
+          >
+            <button
+              type="submit"
+              className="w-full flex items-center justify-center gap-3 bg-gray-700 text-white font-semibold py-3 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-500 transition"
+              aria-label="Sign in with Github"
+            >
+              <Github className="text-2xl" />
+              Sign in with GitHub
+            </button>
+          </form>
+        </section>
+
+        <footer className="text-center text-sm text-gray-400">
+          <p>
+            By signing in, you agree to our{" "}
+            <Link
+              href="/privacypolicy"
+              className="text-gray-300 hover:underline focus:outline-none focus:ring-1 focus:ring-gray-400"
+            >
+              Privacy Policy
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="/termsofservices"
+              className="text-gray-300 hover:underline focus:outline-none focus:ring-1 focus:ring-gray-400"
+            >
+              Terms of Service
+            </Link>
+            .
+          </p>
+          <p className="mt-4 select-none">&copy; {new Date().getFullYear()} WebWiz Creation. All rights reserved.</p>
+        </footer>
       </div>
-      </div>
-      {/* Footer Section */}
-      <footer className="absolute bottom-0 left-0 w-full py-4 bg-gray-900 text-center text-gray-500 ">
-        <p className="text-sm">
-          &copy; {new Date().getFullYear()} WebWiz Creation. All rights reserved.
-        </p>
-      </footer>
     </main>
   );
 };
-
 
 export default page;

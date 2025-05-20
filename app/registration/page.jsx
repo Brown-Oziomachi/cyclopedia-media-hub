@@ -12,22 +12,24 @@ const page = () => {
   const [processing, setProcessing] = useState(false);
   const [modalVisibility, setModalVisibility] = useState(false);
 
-  // Validation Schema
   const valSchema = Yup.object({
     name: Yup.string().required("Name is required"),
-    skills: Yup.string().required("Skills is required"),
-    tel: Yup.string().required("Tel is required"),
+    skills: Yup.string().required("Skills are required"),
+    tel: Yup.string().required("Phone number is required"),
     bio: Yup.string().required("Bio is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
-    url: Yup.string().required("Short bio is required"),
-    url: Yup.string().required("Portfolio Link is required"),
-    url: Yup.string().required("Github Link is required"),
+    portfolioLink: Yup.string()
+      .url("Must be a valid URL")
+      .required("Portfolio link is required"),
+    githubLink: Yup.string()
+      .url("Must be a valid URL")
+      .required("GitHub link is required"),
   });
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 10000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -38,22 +40,21 @@ const page = () => {
 
       const webwizformDoc = {
         name: values.name,
-        tel: values.number,
+        tel: values.tel,
         email: values.email,
         skills: values.skills,
-        url: values.url,
+        portfolioLink: values.portfolioLink,
+        githubLink: values.githubLink,
         bio: values.bio,
         timestamp: new Date().toLocaleDateString(),
       };
 
-      const webwizformRef = await addDoc(collection(db2, "contactForm"),webwizformDoc);
-      console.log(webwizformRef.id);
-
+      await addDoc(collection(db2, "contactForm"), webwizformDoc);
       resetForm();
       setModalVisibility(true);
     } catch (error) {
       console.error("Error sending form", error);
-      alert("Please check your network. Try again!");
+      alert("Please check your network connection and try again.");
     } finally {
       setProcessing(false);
     }
@@ -62,170 +63,125 @@ const page = () => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen z-50 bg-gradient-to-r from-gray-900 via-black to-orange-400">
-          <h1 className="text-xl lg:text-xl font-extrabold z-50 tracking-wide leading-tight text-white relative">
-            Loading Tech form
-          </h1>{" "}
-          <br />
-          <LoaderCircle
-            size="50"
-            speed="1.10"
-            color="orange"
-            className="animate-spin"
-          />
-          <img
-            src="logo.png"
-            alt="My Logo"
-            className="h-30 lg:h-30 mt-10 animate-pulse absolute top-30 left-0 right-0 bottom-0 mx-auto"
-          />
+        <div className="flex justify-center items-center h-screen bg-black">
+          <div className="text-center">
+            <h1 className="text-xl font-extrabold text-white mb-6">
+              Loading Tech form...
+            </h1>
+            <LoaderCircle
+              size={50}
+              color="white"
+              className="animate-spin mx-auto"
+            />
+            <img
+              src="logo.png"
+              alt="Logo"
+              className="h-24 mt-10 mx-auto animate-pulse"
+            />
+          </div>
         </div>
       ) : (
-        <section>
-          <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-gray-900 via-black to-orange-400">
-            <div className="bg-gradient-to-r from-gray-900 via-black to-orange-400 p-6 rounded-lg shadow-md w-full max-w-md lg:max-w-lg mt-30">
-              <h2 className="text-2xl font-bold mb-4 text-center text-white">
-                Developer Registration
-              </h2>
-              <Formik
-                initialValues={{
-                  name: "",
-                  tel: "",
-                  email: "",
-                  skills: "",
-                  url: "",
-                  bio: "",
-                }}
-                validationSchema={valSchema}
-                onSubmit={handleSubmit}
-              >
-                <Form  className="space-y-10">
-                  <div>
+        <section className="min-h-screen flex items-center justify-center bg-black px-5 py-10">
+          <div className="max-w-lg w-full bg-gray-900 border border-gray-700 rounded-lg shadow-lg p-8">
+            <h2 className="text-3xl font-semibold mb-8 text-white text-center">
+              Developer Registration
+            </h2>
+            <Formik
+              initialValues={{
+                name: "",
+                tel: "",
+                email: "",
+                skills: "",
+                portfolioLink: "",
+                githubLink: "",
+                bio: "",
+              }}
+              validationSchema={valSchema}
+              onSubmit={handleSubmit}
+            >
+              <Form className="space-y-6">
+                {[
+                  {
+                    name: "name",
+                    type: "text",
+                    placeholder: "Full Name",
+                  },
+                  {
+                    name: "tel",
+                    type: "tel",
+                    placeholder: "Phone Number",
+                  },
+                  {
+                    name: "email",
+                    type: "email",
+                    placeholder: "Email",
+                  },
+                  {
+                    name: "skills",
+                    type: "text",
+                    placeholder: "Skills (e.g., JavaScript, React)",
+                  },
+                  {
+                    name: "bio",
+                    type: "text",
+                    placeholder: "Short Bio",
+                  },
+                  {
+                    name: "portfolioLink",
+                    type: "url",
+                    placeholder: "Portfolio Link",
+                  },
+                  {
+                    name: "githubLink",
+                    type: "url",
+                    placeholder: "GitHub Link",
+                  },
+                ].map(({ name, type, placeholder }) => (
+                  <div key={name}>
                     <Field
-                      type="text"
-                      name="name"
-                      placeholder="Full Name"
-                      className="w-full p-3 text-white border border-amber-50 rounded focus:ring focus:ring-blue-200"
-                      required
-                      minLength="3"
-                      maxLength="50"
+                      type={type}
+                      name={name}
+                      placeholder={placeholder}
+                      className="w-full px-4 py-3 border border-gray-600 rounded-md bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-white"
                     />
                     <ErrorMessage
-                      name="name"
+                      name={name}
                       component="p"
-                      className="text-sm text-red-500"
+                      className="mt-1 text-sm text-red-500"
                     />
                   </div>
+                ))}
 
-                  <div>
-                    <Field
-                      type="email"
-                      name="email"
-                      placeholder="Email"
-                      className="w-full p-3 text-white border border-amber-50 rounded focus:ring focus:ring-blue-200"
-                      required
-                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                    />
-                    <ErrorMessage
-                      name="email"
-                      component="p"
-                      className="text-sm text-red-500"
-                    />
-                  </div>
+                <button
+                  disabled={processing}
+                  type="submit"
+                  className="w-full py-3 bg-white text-black rounded-md font-semibold hover:bg-gray-200 transition disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {processing ? (
+                    <LoaderCircle className="animate-spin mx-auto" />
+                  ) : (
+                    "Register"
+                  )}
+                </button>
+              </Form>
+            </Formik>
 
-                  <div>
-                    <Field
-                      type="text"
-                      name="skills"
-                      placeholder="Skills (e.g., JavaScript, React)"
-                      className="w-full p-3 text-white border border-amber-50 rounded focus:ring focus:ring-blue-200"
-                      required
-                      minLength="2"
-                      maxLength="100"
-                    />
-                    <ErrorMessage
-                      name="skills"
-                      component="p"
-                      className="text-sm text-red-500"
-                    />
-                  </div>
-
-                  <div>
-                    <Field
-                      name="bio"
-                      placeholder="Short Bio"
-                      className="w-full p-3 text-white border border-amber-50 rounded focus:ring focus:ring-blue-200"
-                      required
-                      minLength="10"
-                      maxLength="200"
-                    />
-                    <ErrorMessage
-                      name="bio"
-                      component="p"
-                      className="text-sm text-red-500"
-                    />
-                  </div>
-
-                  <div>
-                    <Field
-                      type="url"
-                      name="portfolioLink"
-                      placeholder="Portfolio Link"
-                      className="w-full p-3 text-white border border-amber-50 rounded focus:ring focus:ring-blue-200"
-                    />
-                    <ErrorMessage
-                      name="url"
-                      component="p"
-                      className="text-sm text-red-500"
-                    />
-                  </div>
-
-                  <div>
-                    <Field
-                      type="url"
-                      name="githubLink"
-                      placeholder="GitHub Link"
-                      className="w-full p-3 text-white border border-amber-50 rounded focus:ring focus:ring-blue-200"
-                    />
-                    <ErrorMessage
-                      name="url"
-                      component="p"
-                      className="text-sm text-red-500"
-                    />
-                  </div>
-
+            {modalVisibility && (
+              <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+                <div className="bg-white rounded-lg shadow-lg p-8 max-w-sm mx-4 text-center">
+                  <h1 className="text-xl font-bold text-gray-900 mb-4">
+                    Registration Successful
+                  </h1>
+                  <ThumbsUp className="mx-auto mb-6 text-green-600" size={48} />
                   <button
-                    disabled={processing}
-                    type="submit"
-                    className="w-full bg-gradient-to-r from-gray-900 via-black to-orange-400 text-white py-3 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
+                    onClick={() => setModalVisibility(false)}
+                    className="px-6 py-2 bg-black text-white rounded-md hover:bg-gray-900 transition"
                   >
-                    {processing ? (
-                      <span className="flex items-center justify-center ">
-                        <LoaderCircle className="animate-spin text-2xl" />
-                      </span>
-                    ) : (
-                      "Register"
-                    )}
+                    Close
                   </button>
-                </Form>
-              </Formik>
-
-              {modalVisibility && (
-                <div className="absolute inset-30 bg-opacity-50 flex items-center justify-center">
-                  <div className="bg-white rounded-lg shadow-lg p-20 text-center">
-                    <h1 className="text-xl text-black font-bold ">
-                      Registration Successful
-                    </h1>
-                    <ThumbsUp className="text-4xl text-green-500 mb-4 mx-auto" />
-                    <button
-                      onClick={() => setModalVisibility(false)}
-                      className="bg-cyan-500 hover:bg-cyan-600 text-white py-2 px-10 rounded-lg transition"
-                    >
-                      Close
-                    </button>
-                  </div>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </section>
       )}

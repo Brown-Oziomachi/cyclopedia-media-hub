@@ -3,7 +3,6 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { LoaderCircle } from "lucide-react";
 
-
 const Page = () => {
   const [loading, setLoading] = useState(true);
   const [news, setNews] = useState([]);
@@ -11,63 +10,56 @@ const Page = () => {
   const [error, setError] = useState(null);
 
   const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
+
   useEffect(() => {
-  if (!apiKey) {
-    setError("API Key is missing! Please set it in Vercel environment variables.");
-    return;
-  }
-
-  const fetchNews = async () => {
-    try {
-      const response = await fetch(
-        `https://newsapi.org/v2/top-headlines?sources=${platform}&apiKey=${apiKey}`
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      setNews(data.articles);
-    } catch (error) {
-      setError(error.message);
+    if (!apiKey) {
+      setError("API Key is missing! Please set it in your environment variables.");
+      setLoading(false);
+      return;
     }
-  };
 
-  fetchNews();
-}, [platform, apiKey]);
+    setLoading(true);
+    setError(null);
+
+    const fetchNews = async () => {
+      try {
+        const response = await fetch(
+          `https://newsapi.org/v2/top-headlines?sources=${platform}&apiKey=${apiKey}`
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setNews(data.articles || []);
+      } catch (error) {
+        setError(error.message || "Something went wrong");
+        setNews([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
+  }, [platform, apiKey]);
 
   const handlePlatformChange = (event) => {
     setPlatform(event.target.value);
   };
 
-  const fetchNews = async () => {
-    const res = await fetch('/api/news');
-    const data = await res.json();
-    res.status(200).json(data);
-    // process data...
-  }
-  
-  useEffect(() => {
-    fetchNews();
-  }   , []);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 9000); // Adjust the timeout as needed
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen bg-gradient-to-r from-orange-400 via-gray-900 to-gray-900">
-          <h1 className="text-xl lg:text-6xl font-extrabold tracking-wide leading-tight text-white relative">Fetching News</h1>
-          <LoaderCircle  size="50" speed="1.10" color="orange" className="animate-spin"/>
+        <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-r from-orange-400 via-gray-900 to-gray-900 gap-6">
+          <h1 className="text-xl lg:text-6xl font-extrabold tracking-wide leading-tight text-white relative">
+            Fetching News
+          </h1>
+          <LoaderCircle size={50} speed={1.1} color="orange" className="animate-spin" />
           <img
             src="logo.png"
             alt="My Logo"
-            className="h-30 lg:h-30 mt-10 animate-pulse absolute top-30 left-0 right-0 bottom-0 mx-auto"
+            className="h-30 lg:h-30 mt-10 animate-pulse"
           />
         </div>
       ) : (
@@ -127,6 +119,10 @@ const Page = () => {
             <div className="text-center text-red-500">
               <p>Error fetching news: {error}</p>
             </div>
+          ) : news.length === 0 ? (
+            <div className="text-center text-gray-400">
+              <p>No news articles available.</p>
+            </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {news.map((article, index) => (
@@ -136,11 +132,14 @@ const Page = () => {
                       src={article.urlToImage}
                       alt={article.title}
                       className="w-full h-48 object-cover rounded-t-lg"
+                      loading="lazy"
                     />
                   )}
                   <div className="p-4">
                     <h3 className="text-lg font-bold">{article.title || "Untitled"}</h3>
-                    <p className="text-gray-400 mt-1">{new Date(article.publishedAt).toLocaleDateString()}</p>
+                    <p className="text-gray-400 mt-1">
+                      {new Date(article.publishedAt).toLocaleDateString()}
+                    </p>
                     <p className="text-gray-500 mt-2">{article.description || "No description available"}</p>
                     {article.url && (
                       <a

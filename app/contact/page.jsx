@@ -25,7 +25,7 @@ const ContactPage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -43,57 +43,58 @@ const ContactPage = () => {
         timestamp: new Date().toLocaleDateString(),
       };
 
-      const webwizformRef = await addDoc(collection(db2, "contactForm"), webwizformDoc);
-      console.log(webwizformRef.id);
+      await addDoc(collection(db2, "contactForm"), webwizformDoc);
 
       resetForm();
       setModalVisibility(true);
     } catch (error) {
       console.error("Firebase Error:", error.code, error.message);
       alert(`Error: ${error.message}`);
-    
     } finally {
       setProcessing(false);
     }
   };
 
   return (
-    <>  
-    {loading ? (
-                    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-900 via-black to-orange-400 ">
-                     
-                      <h1 className="text-4xl lg:text-6xl font-extrabold tracking-wide leading-tight text-white relative"></h1>
-                    <LoaderCircle   size="50" speed="1.10" color="orange" className="animate-spin"/>
-                      <img
-                        src="logo.png"
-                        alt="My Logo"
-                        className="h-30 lg:h-30 mt-10 animate-pulse absolute top-30 left-0 right-0 bottom-0 mx-auto "
-                      />
-                    </div>
-                  ) : (
-        <main className="bg-gradient-to-br from-gray-900 via-black to-white text-white min-h-screen z-0 ">
-          {/* Desktop Layout */}
-          <section className="container mx-auto px-5 lg:px-20 py-30 lg:flex lg:space-x-10 ">
-            {/* Introduction / Information */}
-            <div className="flex-1 space-y-6">
+    <>
+      {loading ? (
+        <div className="flex justify-center items-center h-screen bg-black">
+          <LoaderCircle size={50} speed={1.1} color="white" className="animate-spin" />
+        </div>
+      ) : (
+        <main className="bg-black text-white min-h-screen">
+          <section className="container mx-auto px-6 py-16 lg:flex lg:space-x-12">
+            {/* Left Info */}
+            <div className="flex-1 space-y-6 max-w-xl mx-auto lg:mx-0">
               <Link href="/">
-              <img src="Ai.png" alt="Webwiz Logo" className="w-100 lg:w-100 h-auto mx-auto  hover:scale-50 cursor-pointer " />
+                <img
+                  src="Ai.png"
+                  alt="Webwiz Logo"
+                  className="w-40 h-auto mx-auto lg:mx-0 cursor-pointer"
+                />
               </Link>
-              <h1 className="text-4xl lg:text-6xl font-extrabold text-white max-lg:text-center">Contact WebWiz</h1>
-              <h2 className="text-center mb-0 text-orange-400">The Sun Web</h2>
-              <div className="text-lg lg:text-xl text-gray-300 leading-relaxed mt-1">
+              <h1 className="text-5xl font-extrabold text-white">Contact WebWiz</h1>
+              <h2 className="text-xl text-gray-400 uppercase tracking-wider mb-4">The Sun Web</h2>
+              <p className="text-gray-300 leading-relaxed text-lg">
                 At WebWiz, we are dedicated to bringing your ideas to life. Whether you're looking
                 for expert web solutions, custom designs, or seamless functionality, we're here to help.
                 Drop us a message and let’s collaborate to build something extraordinary for you!
-              </div>
-              <div className="text-lg lg:text-xl text-gray-300 leading-relaxed max-lg:mb-10">
-                📞 Have a question? Call us at <a href="tel:+2348142995114" className="text-blue-600 underline">+234 8142 995114</a><br />
-                ✉️ Prefer email? Reach out at <a href="mailto:webwizcreation.web@gmail.com" className="text-blue-600 underline ">webwizcreation.web@gmail.com</a>
-              </div>
+              </p>
+              <p className="text-gray-400 text-lg leading-relaxed">
+                📞 Have a question? Call us at{" "}
+                <a href="tel:+2348142995114" className="underline text-gray-200">
+                  +234 8142 995114
+                </a>
+                <br />
+                ✉️ Prefer email? Reach out at{" "}
+                <a href="mailto:webwizcreation.web@gmail.com" className="underline text-gray-200">
+                  webwizcreation.web@gmail.com
+                </a>
+              </p>
             </div>
 
-            {/* Contact Form */}
-            <div className="flex-1 bg-gray-800 rounded-lg shadow-lg py-5 px-8 z-0 overflow-hidden ">
+            {/* Form */}
+            <div className="flex-1 bg-gray-900 rounded-lg shadow-lg p-8 max-w-xl mx-auto lg:mx-0 mt-10 lg:mt-0">
               <Formik
                 initialValues={{
                   name: "",
@@ -107,95 +108,49 @@ const ContactPage = () => {
               >
                 {() => (
                   <Form>
-                    <h2 className="text-2xl font-bold text-center mb-6 text-white relative">
-                      Contact Form
-                    </h2>
-                    {/* Name Input */}
-                    <div className="mb-4">
-                      <Field
-                        name="name"
-                        type="text"
-                        placeholder="Full Name..."
-                        className="w-full p-3 rounded-lg border bg-gray-700 text-white focus:ring-2 focus:ring-cyan-500"
-                      />
-                      <ErrorMessage
-                        name="name"
-                        component="p"
-                        className="text-sm text-red-500"
-                      />
-                    </div>
+                    <h2 className="text-3xl font-semibold mb-8 text-white text-center">Contact Form</h2>
 
-                    {/* Phone Number Input */}
-                    <div className="mb-4">
-                      <Field
-                        name="number"
-                        type="tel"
-                        placeholder="+234..."
-                        className="w-full p-3 rounded-lg border bg-gray-700 text-white focus:ring-2 focus:ring-cyan-500"
-                      />
-                      <ErrorMessage
-                        name="number"
-                        component="p"
-                        className="text-sm text-red-500"
-                      />
-                    </div>
+                    {["name", "number", "email", "address"].map((field) => (
+                      <div key={field} className="mb-6">
+                        <Field
+                          name={field}
+                          type={field === "email" ? "email" : "text"}
+                          placeholder={
+                            field === "number" ? "+234..." : 
+                            field.charAt(0).toUpperCase() + field.slice(1) + "..."
+                          }
+                          className="w-full p-3 rounded border border-gray-700 bg-transparent text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white"
+                        />
+                        <ErrorMessage
+                          name={field}
+                          component="p"
+                          className="text-sm text-red-500 mt-1"
+                        />
+                      </div>
+                    ))}
 
-                    {/* Email Input */}
-                    <div className="mb-4">
-                      <Field
-                        name="email"
-                        type="email"
-                        placeholder="Email..."
-                        className="w-full p-3 rounded-lg border bg-gray-700 text-white focus:ring-2 focus:ring-cyan-500"
-                      />
-                      <ErrorMessage
-                        name="email"
-                        component="p"
-                        className="text-sm text-red-500"
-                      />
-                    </div>
-
-                    {/* Address Input */}
-                    <div className="mb-4">
-                      <Field
-                        name="address"
-                        type="text"
-                        placeholder="Address..."
-                        className="w-full p-3 rounded-lg border bg-gray-700 text-white focus:ring-2 focus:ring-cyan-500"
-                      />
-                      <ErrorMessage
-                        name="address"
-                        component="p"
-                        className="text-sm text-red-500"
-                      />
-                    </div>
-
-                    {/* Message Input */}
-                    <div className="mb-6">
+                    <div className="mb-8">
                       <Field
                         name="message"
                         as="textarea"
                         rows="5"
                         placeholder="Message..."
-                        className="w-full p-3 rounded-lg border bg-gray-700 text-white focus:ring-2 focus:ring-cyan-500"
+                        className="w-full p-3 rounded border border-gray-700 bg-transparent text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white"
                       />
                       <ErrorMessage
                         name="message"
                         component="p"
-                        className="text-sm text-red-500"
+                        className="text-sm text-red-500 mt-1"
                       />
                     </div>
 
-                    {/* Submit Button */}
                     <button
-                      disabled={processing}
                       type="submit"
-                      className="w-full  bg-white text-black py-3 rounded-lg hover:bg-cyan-600 transition cursor-pointer"
+                      disabled={processing}
+                      className="w-full py-3 rounded bg-white text-black font-semibold hover:bg-gray-300 transition"
                     >
                       {processing ? (
-                        <span className="flex items-center justify-center ">
-                          <LoaderCircle   className="animate-spin text-2xl" />
-                        </span>
+                        <LoaderCircle className="mx-auto animate-spin" size={24} />
                       ) : (
                         "Send Message"
                       )}
@@ -203,18 +158,18 @@ const ContactPage = () => {
                   </Form>
                 )}
               </Formik>
-           
+
               {/* Success Modal */}
               {modalVisibility && (
-                <div className="absolute inset-30 bg-opacity-50 flex items-center justify-center">
-                  <div className="bg-white rounded-lg shadow-lg p-20 text-center">
-                    <h1 className="text-xl text-black font-bold ">
+                <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+                  <div className="bg-white rounded-lg shadow-lg p-12 text-center max-w-sm mx-4">
+                    <h1 className="text-2xl font-bold text-black mb-4">
                       Submission Successful
                     </h1>
-                    <ThumbsUp className="text-4xl text-green-500 mb-4 mx-auto" />
+                    <ThumbsUp className="text-5xl text-black mb-6 mx-auto" />
                     <button
                       onClick={() => setModalVisibility(false)}
-                      className="bg-cyan-500 hover:bg-cyan-600 text-white py-2 px-10 rounded-lg transition"
+                      className="bg-black text-white py-2 px-8 rounded hover:bg-gray-800 transition"
                     >
                       Close
                     </button>
@@ -223,21 +178,19 @@ const ContactPage = () => {
               )}
             </div>
           </section>
-        
+
           {/* Footer */}
-          <div div className="text-center py-10 text-gray-400">
-            <span>
-              © 2025 WebWiz Creation. Designed and developed for excellence.
-            </span>
+          <footer className="text-center py-8 text-gray-400 text-sm">
+            <span>© 2025 WebWiz Creation. Designed and developed for excellence.</span>
+            <br />
             <Link href="/">
-              <span className="text-blue-600 hover:underline">www.webwizcreation.com</span>
+              <p className="underline text-gray-300 hover:text-white">www.webwizcreation.com</p>
             </Link>
-            </div>
+          </footer>
         </main>
-     )
-    }
+      )}
     </>
-  )
-}
+  );
+};
 
 export default ContactPage;

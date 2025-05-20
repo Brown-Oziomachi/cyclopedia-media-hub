@@ -1,135 +1,96 @@
 "use client";
-import { MailCheck } from "lucide-react";
+
 import Link from "next/link";
-import React, {useState } from "react";
+import { useState } from "react";
+import { MailCheck } from "lucide-react";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
-  const subscribeToNewsletter = async (e) => {
+
+  const handleSubscribe = async (e) => {
     e.preventDefault();
     if (!email.trim()) {
-      alert('Please enter a valid email address.');
+      alert("Please enter a valid email.");
       return;
     }
 
     try {
-      const response = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
 
-      try {
-        const data = await response.json();
-        console.log(data);
-
-        if (response.ok) {
-          alert(data.message);
-          setEmail(''); // Clear the input field after successful subscription
-        } else {
-          alert(data.error || 'An error occurred. Please try again.');
-        }
-      } catch (parseError) {
-        console.error('Error parsing JSON:', parseError);
-        alert('An error occurred while processing the response. Please try again.');
+      const data = await res.json();
+      if (res.ok) {
+        alert(data.message || "Subscribed!");
+        setEmail("");
+      } else {
+        alert(data.error || "Subscription failed.");
       }
-    } catch (error) {
-      console.error('Subscription error:', error);
-      alert('An error occurred. Please try again.');
+    } catch (err) {
+      console.error(err);
+      alert("Error. Please try again.");
     }
   };
+
   return (
-    <div className="flex flex-col ">
-      <footer className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-gray-400 py-10">
-        <div className="container mx-auto px-6 lg:px-20 grid grid-cols-1 lg:grid-cols-3 gap-10 text-center lg:text-left">
-          
-          {/* Company Info */}
-          <div>
-            <img src="/logo.png" alt="Webwiz Logo" className="w-28 h-auto mx-auto lg:mx-0 mb-4" />
-            <span>&copy; 2025 Webwiz Creation. All rights reserved.</span>
-            <div className="mt-2">
-              Follow us: 
-              <Link href="https://www.facebook.com/profile.php?id=61575479727679"><span className="text-cyan-400 hover:underline ml-2">Facebook</span>|</Link> 
-              <Link href="http://www.linkedin.com/in/brownoziomachi72a5a3229"> <span className="text-cyan-400 hover:underline">LinkedIn</span> | </Link>
-              <Link href="https://www.instagram.com/webwiz_creation_webdevelopers/"> <span className="text-cyan-400 hover:underline">Instagram</span></Link>
-            </div>
+    <footer className="bg-black text-white py-14 px-6">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
+
+        {/* Brand */}
+        <div>
+          <img src="/logo.png" alt="Webwiz Logo" className="w-28 mb-4" />
+          <p className="text-gray-400 text-sm">&copy; 2025 Webwiz Creation. All rights reserved.</p>
+          <div className="mt-4 flex gap-4 text-sm">
+            <Link href="https://www.facebook.com/profile.php?id=61575479727679" className="text-gray-300 hover:text-white">Facebook</Link>
+            <Link href="http://www.linkedin.com/in/brownoziomachi72a5a3229" className="text-gray-300 hover:text-white">LinkedIn</Link>
+            <Link href="https://www.instagram.com/webwiz_creation_webdevelopers/" className="text-gray-300 hover:text-white">Instagram</Link>
           </div>
-  
-          {/* Contact Info */}
-          <div className="space-x-5 grid grid-cols-1 lg:grid gap-4">
-            <h3 className="text-lg font-semibold text-white mb-4 ">Contact Us</h3>
-            <span>
-              Email: <span className="text-cyan-400 hover:underline">webwizcreation.web@gmail.com</span>
-            </span>
-            <span>
-              Phone: <span className="text-cyan-400 hover:underline">+234 8142 995114</span>
-            </span>
-            <span>Address: FCT Abuja City, Nigeria</span>
-          </div>
-  
-          {/* Newsletter Subscription */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Stay Updated</h3>
-            <form
-              className="flex justify-center lg:justify-start"
-              onSubmit={(e) => {
-                e.preventDefault();
-                if (email.trim()) {
-                  alert(`Thank you for subscribing with ${email}!`);
-                  setEmail('');
-                } else {
-                  alert('Please enter a valid email address.');
-                }
-              }}
+        </div>
+
+        {/* Contact Info */}
+        <div>
+          <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+          <p>Email: <span className="text-gray-300">webwizcreation.web@gmail.com</span></p>
+          <p className="mt-2">Phone: <span className="text-gray-300">+234 8142 995114</span></p>
+          <p className="mt-2 text-gray-400">Address: FCT Abuja City, Nigeria</p>
+        </div>
+
+        {/* Newsletter */}
+        <div>
+          <h3 className="text-lg font-semibold mb-4">Subscribe to Updates</h3>
+          <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="flex-1 px-4 py-2 rounded-md bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <button
+              type="submit"
+              className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-md hover:bg-gray-200 transition"
             >
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full px-4 py-2 rounded-l-md border border-gray-600 focus:outline-none bg-gray-700 text-white"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <button
-                type="submit"
-                className=" flex gap-2 px-4 py-2 cursor-pointer bg-cyan-500 text-white rounded-r-md hover:bg-cyan-600 transition duration-300"
-              >
-                Subscribe
-                <MailCheck />
-              </button>
-            </form>
-            <span className="mt-4 text-sm">
-              Join our newsletter for updates and exclusive insights.
-            </span>
-          </div>
+              Subscribe <MailCheck size={18} />
+            </button>
+          </form>
+          <p className="text-sm text-gray-400 mt-3">Get exclusive tips and updates in your inbox.</p>
         </div>
-  
-        {/* Quick Links Section */}
-        <div className="container mx-auto px-6 lg:px-20 mt-5 text-center lg:text-left py-10">
-          <h3 className="text-lg font-semibold text-white mb-0">Quick Links</h3>
-          <ul className="flex flex-wrap justify-center lg:justify-start gap-4">
-            <li>
-              <Link href="/privacypolicy">
-                <span className="text-cyan-400 hover:underline">Privacy Policy</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/termsofservices">
-                <span className="text-cyan-400 hover:underline">Terms of Service</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/faq">
-                <span className="text-cyan-400 hover:underline">FAQ</span>
-              </Link>
-            </li>
-          </ul>
-        </div>
-        
-      </footer>
-  </div>
-  )
-}  
+      </div>
+
+      {/* Divider */}
+      <div className="border-t border-gray-700 mb-20 pt-6 text-center">
+        <h4 className="text-md font-semibold mb-10">Quick Links</h4>
+        <ul className="flex justify-center flex-wrap gap-6 text-sm text-gray-300">
+          <li><Link href="/privacypolicy" className="hover:text-white">Privacy Policy</Link></li>
+          <li><Link href="/termsofservices" className="hover:text-white">Terms of Service</Link></li>
+          <li><Link href="/faq" className="hover:text-white">FAQ</Link></li>
+        </ul>
+      </div>
+    </footer>
+  );
+};
 
 export default Footer;

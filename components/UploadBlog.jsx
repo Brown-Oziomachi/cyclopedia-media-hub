@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { collection, addDoc } from "firebase/firestore";
-import { db1 } from "@/lib/firebaseConfig"; // Import Firestore and Storage
+import { db1 } from "@/lib/firebaseConfig";
 import { LoaderCircle, ThumbsUp } from "lucide-react";
 import BlogDisplay from "@/components/BlogDisplay";
 import { usePathname } from "next/navigation";
@@ -15,154 +15,134 @@ const valSchema = Yup.object({
     .required("Please add your content")
     .min(10, "Minimum of 10 characters"),
   genre: Yup.string().required("Please select a genre"),
-  link: Yup.string().url("Must be a valid URL"),
+  link: Yup.string().url("Must be a valid URL").nullable(),
 });
+
 const UploadBlog = ({ session }) => {
   const [processing, setProcessing] = useState(false);
   const [modalVisibility, setModalVisibility] = useState(false);
-  const [previewBody, setPreviewBody] = useState(""); // For markdown preview
-  const [values, setValues] = useState({ title: "", genre: "", body: "" });
+  const [previewBody, setPreviewBody] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
   const pathname = usePathname();
-  const [showpopup, setShowPopup] = useState(false);
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
       setProcessing(true);
+
       const blogData = {
-        imageUrl: values.image,
-        title: values.title,
-        link: values.link,
-        body: values.body,
+        imageUrl: values.image || null,
+        title: values.title.trim(),
+        link: values.link ? values.link.trim() : "",
+        body: values.body.trim(),
         genre: values.genre,
         author: session?.user?.name || "Anonymous",
-        timestamp: new Date().toLocaleDateString(),
+        timestamp: new Date().toISOString(),
       };
-      const blogRef = await addDoc(collection(db1, "blog"), blogData);
-      console.log("Blog ID:", blogRef.id);
+
+      await addDoc(collection(db1, "blog"), blogData);
 
       resetForm();
+      setPreviewBody("");
       setModalVisibility(true);
     } catch (error) {
       console.error("Error uploading blog:", error);
-      alert("Error uploading blog. Try again!");
+      alert("Error uploading blog. Please try again.");
     } finally {
       setProcessing(false);
     }
   };
 
-  const handleShowPopup = (e) => {
-    e.preventDefault();
-    setShowPopup(true);
-  };
-
-  const closeModal = () => {
-    setShowPopup(false);
-  };
   return (
-    <main className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-800 via-gray-900 to-orange-400">
-      <div className="w-full max-w-lg rounded-lg shadow-xl  bg-gradient-to-r from-gray-700 via-gray-800 to-orange-400 mt-20">
-        <div>
-          <h1 className="text font-bold text-center text-white m-5">
-            
-          <div className="flex items-center justify-between">
-               
-                <div className="mr-auto">
-                  <Link href="/upload-to-video">
-
-                <button
-                  onClick={closeModal}
-                  className="bg-gradient-to-r from-orange-400 via-gray-800 to-gray-700 hover:bg-gray-800 text-white font-semibold px-4 py-1 rounded transition duration-200 border"
-                  >
-                  Upload Video
-                </button>
-                  </Link>
-                  </div>
-
-                  <div className="ml-auto">
-                  <Link href="/upload-to-reels">
-
-                <button
-                  onClick={closeModal}
-                  className="bg-gradient-to-r from-orange-400 via-gray-800 to-gray-700 hover:bg-gray-800 text-white font-semibold px-4 py-1 rounded transition duration-200 border"
-                  >
-Reels                </button>
-                  </Link>
-                  </div>
-                </div>
-
-            <button onClick={handleShowPopup} className="text-sm text-gray-500">
-              (!)Learn to Upload
-            </button>
+    <main className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-orange-600 p-6">
+      <div className="w-full max-w-3xl bg-gray-900 rounded-xl shadow-xl p-8 text-white mt-10">
+        <header className="mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <h1 className="text-3xl font-extrabold tracking-wide">
+            Upload Blog Post
           </h1>
-        </div>
-        {showpopup && (
-          <div className=" -mt-10 bg-black bg-opacity-100 flex justify-center items-center  z-50">
-            <div className="bg-gray-800/50 text-gray-400 border rounded-lg p-2 ">
-              <h1 className=" scroll-auto m-5">
-                <h2 className="text-2xl text-center">Follow These Simple Steps:</h2> <br />
-                Step 1: Log In - Please log in to your Webwiz Creation account
-                before uploading your blog post. - This ensures that your name
-                is displayed instead of "Anonymous" when you submit your post.{" "}
-                <br />
-                <Link href="/auth/signin" className="text-orange-400 border py-1 px-3 border-white rounded-md">
-                  Log in here
-                </Link>
-                <br />
-                <br />
-                Step 2: Write Your Blog Title - Craft a catchy and descriptive
-                title that captures the essence of your content. - Keep it
-                concise and engaging to grab the reader's attention.
-                <br />
-                <br />
-                Step 3: Add Your Content - Write your blog content, ensuring
-                it's relevant to your title and engaging for your audience. -
-                Use clear and concise language, and format your text for easy
-                reading.
-                <br />
-                <br />
-                Step 4: Step 4: Add a Link (Optional) If relevant, include a
-                link to a related article, website, or resource. Make sure the
-                link is accurate and functional.
-                <br />
-                <br />
-                Step 5: Select a Genre Choose a genre that best suits your
-                content and title. This helps readers find your blog post and
-                ensures it's categorized correctly.
-                <br />
-                <br />
-                Example Genres
-                <li>Technology</li>
-                <li>Lifestyle</li>
-                <li>Business</li>
-                <li>Education</li>
-                and more!
-                <br />
-                <br />
-                Step 6: Submit Your Blog Post Review your content for accuracy
-                and grammar. Submit your blog post, and it will be reviewed and
-                published. By logging in and following these steps, you'll be
-                able to share your ideas and connect with your audience through
-                the Webwiz Creation blog. Happy blogging!
-              </h1>
-              <div className="flex items-center justify-between">
-                <div className="">
-                <Link href="/auth/signin">
-                  <button className=" bg-white hover:bg-gray-800 text-black font-semibold px-4 py-1 rounded transition duration-200 border border-black">Get Started</button>
-                </Link>
-                </div>
-                <div className="">
+          <nav className="flex gap-3">
+            <Link href="/upload-to-video">
+              <p className="inline-block bg-gradient-to-r from-orange-500 via-gray-800 to-gray-700 hover:from-orange-600 hover:via-gray-900 hover:to-gray-800 transition rounded-md px-5 py-2 font-semibold shadow-md">
+                Upload Video
+              </p>
+            </Link>
+            <Link href="/upload-to-reels">
+              <p className="inline-block bg-gradient-to-r from-orange-500 via-gray-800 to-gray-700 hover:from-orange-600 hover:via-gray-900 hover:to-gray-800 transition rounded-md px-5 py-2 font-semibold shadow-md">
+                Upload Reels
+              </p>
+            </Link>
+          </nav>
+        </header>
 
+        <button
+          onClick={() => setShowPopup(true)}
+          className="mb-8 text-sm text-orange-400 hover:text-orange-500 underline transition focus:outline-none"
+          aria-label="Learn how to upload"
+        >
+          (!) Learn to Upload
+        </button>
+
+        {showPopup && (
+          <div
+            role="dialog"
+            aria-modal="true"
+            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-6 z-50"
+          >
+            <div className="max-w-lg bg-gray-800 rounded-lg p-6 text-gray-200 shadow-lg overflow-y-auto max-h-[80vh]">
+              <h2 className="text-2xl font-semibold mb-4 text-center text-orange-400">
+                Follow These Simple Steps:
+              </h2>
+              <ol className="list-decimal list-inside space-y-3 text-sm leading-relaxed">
+                <li>
+                  <strong>Log In:</strong> Please log in to your Webwiz Creation
+                  account before uploading your blog post. This ensures your
+                  name appears as the author.
+                  <div className="mt-2">
+                    <Link href="/auth/signin">
+                      <p className="inline-block text-orange-400 border border-orange-400 rounded-md px-4 py-1 hover:bg-orange-400 hover:text-gray-900 transition">
+                        Log in here
+                      </p>
+                    </Link>
+                  </div>
+                </li>
+                <li>
+                  <strong>Write Your Blog Title:</strong> Craft a catchy,
+                  concise, and descriptive title.
+                </li>
+                <li>
+                  <strong>Add Your Content:</strong> Write engaging content
+                  relevant to your title. Use clear language and format for
+                  readability.
+                </li>
+                <li>
+                  <strong>Add a Link (Optional):</strong> Include any relevant
+                  URLs (must be valid).
+                </li>
+                <li>
+                  <strong>Select a Genre:</strong> Choose the genre that fits
+                  your content best for better categorization.
+                </li>
+                <li>
+                  <strong>Submit:</strong> Review and submit your blog post. It
+                  will be reviewed and published accordingly.
+                </li>
+              </ol>
+              <div className="mt-6 flex justify-end gap-4">
+                <Link href="/auth/signin">
+                  <p className="bg-orange-500 px-6 py-2 rounded-md font-semibold text-gray-900 hover:bg-orange-600 transition shadow">
+                    Get Started
+                  </p>
+                </Link>
                 <button
-                  onClick={closeModal}
-                  className=" bg-black hover:bg-gray-800 text-white font-semibold px-4 py-1 rounded transition duration-200 border"
-                  >
+                  onClick={() => setShowPopup(false)}
+                  className="bg-gray-700 px-6 py-2 rounded-md font-semibold hover:bg-gray-600 transition"
+                >
                   Close
                 </button>
-                  </div>
-                </div>
+              </div>
             </div>
           </div>
         )}
+
         <Formik
           initialValues={{
             title: "",
@@ -179,28 +159,28 @@ Reels                </button>
               <div>
                 <label
                   htmlFor="title"
-                  className=" text-sm font-medium text-gray-300 flex gap-2 "
+                  className="block mb-1 font-medium text-gray-300"
                 >
-                  Blog Title <p className="text-red-600 mt-1">*</p>
+                  Blog Title <span className="text-red-600">*</span>
                 </label>
                 <Field
                   name="title"
                   type="text"
                   placeholder="Enter your blog title..."
-                  className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full p-3 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+                  aria-required="true"
                 />
                 <ErrorMessage
                   name="title"
                   component="p"
-                  className="text-sm text-red-600 mt-1"
+                  className="mt-1 text-sm text-red-500"
                 />
               </div>
 
-              {/* Image URL Input */}
               <div>
                 <label
                   htmlFor="image"
-                  className="block text-sm font-medium text-gray-300"
+                  className="block mb-1 font-medium text-gray-300"
                 >
                   Image URL (Optional)
                 </label>
@@ -208,92 +188,89 @@ Reels                </button>
                   name="image"
                   type="url"
                   placeholder="Enter image URL"
-                  className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full p-3 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
                 />
                 <ErrorMessage
                   name="image"
                   component="p"
-                  className="text-sm text-red-600 mt-1"
+                  className="mt-1 text-sm text-red-500"
                 />
               </div>
 
-              {/* Display Image Preview */}
-              <Field name="image">
-                {({ field, form }) =>
-                  field.value && (
-                    <div className="mb-4">
-                      <img
-                        src={field.value}
-                        alt="Image Preview"
-                        className="w-full h-auto rounded-lg"
-                      />
-                    </div>
-                  )
-                }
-              </Field>
+              {values.image && (
+                <div className="mb-6 rounded-md overflow-hidden border border-gray-700">
+                  <img
+                    src={values.image}
+                    alt="Image Preview"
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
+              )}
 
-              {/* Body Input with Textarea and "Add Link" Helper */}
-              <>
+              <div>
                 <label
                   htmlFor="body"
-                  className="flex gap-2 text-sm font-medium text-gray-300"
+                  className="block mb-1 font-medium text-gray-300"
                 >
-                  Content <p className="text-red-600 ">*</p>
+                  Content <span className="text-red-600">*</span>
                 </label>
-
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs text-gray-400">
-                    <strong>Tip:</strong> To add a link, use{" "}
-                    <span className="font-mono  px-1 rounded text-orange-400">
-                      [text](https://your-link.com)
-                    </span>
-                    . To make text <strong>bold</strong>, wrap with{" "}
-                    <span className="font-mono bg-gray-700 px-1 rounded text-orange-400">
-                      **double asterisks**
-                    </span>
-                    .
-                  </span>
-                </div>
+                <small className="block mb-2 text-xs text-gray-400">
+                  Tip: To add a link use{" "}
+                  <code className="bg-gray-700 px-1 rounded text-orange-400">
+                    [text](https://your-link.com)
+                  </code>
+                  , and for
+                  <strong> bold</strong> wrap text with{" "}
+                  <code className="bg-gray-700 px-1 rounded text-orange-400">
+                    **double asterisks**
+                  </code>
+                  .
+                </small>
                 <Field
                   as="textarea"
                   name="body"
                   placeholder="Enter your blog content..."
-                  className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500 min-h-[120px]"
+                  rows={7}
+                  className="w-full p-3 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 transition resize-none"
                   onChange={(e) => {
                     setFieldValue("body", e.target.value);
                     setPreviewBody(e.target.value);
                   }}
-                  value={values.body}
+                  aria-required="true"
                 />
                 <ErrorMessage
                   name="body"
                   component="p"
-                  className="text-sm text-red-600 mt-1"
+                  className="mt-1 text-sm text-red-500"
                 />
 
-                {/* Preview Section (visible only on /upload) */}
-                {pathname && pathname.includes("/upload") && (
-                  <div className="preview-container p-2 bg-gray-900 rounded-lg text-white">
-                    <div className="text-xs text-gray-400 ">Preview:</div>
+                {/* Preview Section */}
+                {pathname?.includes("/upload") && (
+                  <section className="mt-6 p-4 bg-gray-900 rounded-md border border-gray-700">
+                    <h3 className="mb-2 text-sm font-semibold text-orange-400">
+                      Preview:
+                    </h3>
                     <BlogDisplay
                       title={values.title}
                       genre={values.genre}
-                      body={values.body}
+                      body={previewBody}
                     />
-                  </div>
+                  </section>
                 )}
-              </>
+              </div>
+
               <div>
                 <label
                   htmlFor="genre"
-                  className="flex gap-2 text-sm font-medium text-gray-300"
+                  className="block mb-1 font-medium text-gray-300"
                 >
-                  Genre <p className="text-red-600 mt-1">*</p>
+                  Genre <span className="text-red-600">*</span>
                 </label>
                 <Field
                   name="genre"
                   as="select"
-                  className="w-full p-3 rounded-lg bg-gray-800 text-white border focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full p-3 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+                  aria-required="true"
                 >
                   <option value="" disabled>
                     Select a genre
@@ -304,8 +281,8 @@ Reels                </button>
                   <option value="Science">Science</option>
                   <option value="Art">Art</option>
                   <option value="Entertainment">Entertainment</option>
-                  <option value="Crypto">crypto</option>
-                  <option value="Blockchain">Art</option>
+                  <option value="Crypto">Crypto</option>
+                  <option value="Blockchain">Blockchain</option>
                   <option value="Gaming">Gaming</option>
                   <option value="Social Media">Social Media</option>
                   <option value="Software">Software</option>
@@ -324,7 +301,7 @@ Reels                </button>
                   <option value="Economics">Economics</option>
                   <option value="Law">Law</option>
                   <option value="AI">AI</option>
-                  <option value="Machine Learning">MLearning</option>
+                  <option value="Machine Learning">Machine Learning</option>
                   <option value="Data Science">Data Science</option>
                   <option value="Cybersecurity">Cybersecurity</option>
                   <option value="Cloud Computing">Cloud Computing</option>
@@ -337,90 +314,76 @@ Reels                </button>
                   <option value="Travel">Travel</option>
                   <option value="Faith">Faith</option>
                   <option value="Religion">Religion</option>
-                  <option value="Sex-lesson">Sex-Lesson</option>
+                  <option value="Sex-Lesson">Sex-Lesson</option>
                   <option value="Wealth">Wealth</option>
                   <option value="Business">Business</option>
                   <option value="Ideas">Ideas</option>
-                  <option value="Action">Action</option>
-                  <option value="Drama">Drama</option>
-                  <option value="Romance">Romance</option>
-                  <option value="Music">Music</option>
-                  <option value="Mystery">Mystery</option>
-                  <option value="Marriage">Marriage</option>
-                  <option value="Fantasy">Fantasy</option>
-                  <option value="Education">Education</option>
-                  <option value="Nature">Nature</option>
-                  <option value="Horror">Horror</option>
-                  <option value="History">History</option>
                   <option value="Comedy">Comedy</option>
-                  <option value="Adventure">Adventure</option>
-                  <option value="Documentary">Documentary</option>
-                  <option value="Teens">Teens</option>
-                  <option value="Youth">Youth</option>
-                  <option value="Children">Children</option>
-                  <option value="Mothers">Mothers</option>
-                  <option value="Fathers">Fathers</option>
-                  <option value="Sports">Sports</option>
-                  <option value="Street Art">Street Art</option>
-                  <option value="Strategy">Strategy</option>
-                  <option value="Animals">Animals</option>
-                  <option value="News">News</option>
-                  <option value="Politics">Politics</option>
-                  <option value="Prayer">Prayer</option>
-                  <option value="Relationship">Relationship</option>
-                  <option value="Wisdom">Wisdom</option>
-                  <option value="Divorce">Divorce</option>
-                  <option value="Fashion">Fashion</option>
-                  <option value="Knowledge">Knowledge</option>
-                  <option value="Ignorance">Ignorance</option>
-                  <option value="Love">Love</option>
-                  <option value="Facts">Facts</option>
-                  <option value="Family">Family</option>
-                  <option value="Culture">Culture</option>
+                  <option value="Motivation">Motivation</option>
+                  <option value="Education">Education</option>
+                  <option value="Tutorials">Tutorials</option>
                 </Field>
                 <ErrorMessage
                   name="genre"
                   component="p"
-                  className="text-sm text-red-600 mt-1"
+                  className="mt-1 text-sm text-red-500"
                 />
               </div>
-
-              {/* Submit Button */}
-              <button
-                disabled={processing}
-                type="submit"
-                className="hidden w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold bg-gradient-to-r from-gray-700 via-gray-800 to-orange-400 shadow-2xl hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition cursor-pointer"
-              >
-                {processing ? (
-                  <span className="flex items-center justify-center">
-                    <LoaderCircle className="animate-spin text-2xl" />
-                  </span>
-                ) : (
-                  "Submit Blog"
-                )}
-              </button>
+              <div className="flex items-center justify-between">
+                <button
+                  type="submit"
+                  disabled={processing}
+                  className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 to-orange-700 hover:from-orange-600 hover:to-orange-800 focus:outline-none focus:ring-4 focus:ring-orange-400 text-white font-bold rounded-md px-6 py-3 transition disabled:opacity-60 disabled:cursor-not-allowed shadow-lg"
+                >
+                  {processing ? (
+                    <>
+                      <LoaderCircle className="animate-spin h-5 w-5" />
+                      Uploading...
+                    </>
+                  ) : (
+                    "Upload"
+                  )}
+                </button>
+              </div>
             </Form>
           )}
         </Formik>
-      </div>
 
-      {/* Modal for Successful Upload */}
-      {modalVisibility && (
-        <div className="absolute h-screen w-full bg-black/20 flex items-center justify-center">
-          <div className="w-[22rem] h-[30vh] flex flex-col gap-6 items-center justify-center shadow-2xl rounded-lg bg-gray-800 text-white p-6">
-            <h1 className="text-xl font-semibold">Blog Upload Successful</h1>
-            <ThumbsUp className="text-6xl text-green-500" />
-            <button
-              onClick={() => setModalVisibility(false)}
-              className="border px-5 py-2 text-white bg-amber-600"
-            >
-              Close
-            </button>
+        {/* Success Modal */}
+        {modalVisibility && (
+          <div
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="upload-success-title"
+            aria-describedby="upload-success-desc"
+            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 p-4 z-50"
+          >
+            <div className="bg-gray-800 rounded-xl p-6 max-w-sm w-full text-center shadow-lg">
+              <ThumbsUp className="mx-auto mb-4 h-10 w-10 text-orange-400" />
+              <h2
+                id="upload-success-title"
+                className="text-lg font-semibold text-orange-400 mb-2"
+              >
+                Your blog was uploaded successfully!
+              </h2>
+              <p
+                id="upload-success-desc"
+                className="text-sm text-gray-300 mb-6"
+              >
+                Thanks for sharing your blog post with the community.
+              </p>
+              <button
+                onClick={() => setModalVisibility(false)}
+                className="px-6 py-2 bg-orange-500 rounded-md font-semibold text-gray-900 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 transition shadow"
+              >
+                Close
+              </button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </main>
   );
 };
 
-export default UploadBlog;
+export default UploadBlog

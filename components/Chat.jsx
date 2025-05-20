@@ -1,3 +1,5 @@
+"use client";
+import { SpeedDial, SpeedDialIcon } from "@mui/material";
 import { MessageCircle } from "lucide-react";
 import { useState } from "react";
 
@@ -5,25 +7,34 @@ const ChatDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="fixed bottom-50 max-md:bottom-40 right-2 z-50">
-      <button
-        className="bg-white text-black py-2 rounded-md flex items-center shadow-md p-2 z-0"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-          <MessageCircle /> <span className="ml-2">&#9662;</span> {/* Down arrow */}
-      </button>
+    <>
+      {/* SpeedDial Button */}
+      <div className="fixed bottom-16 right-4 z-50">
+        <SpeedDial
+          ariaLabel="Chat options"
+          sx={{ position: "absolute", bottom: 0, right: 0 }}
+          icon={<SpeedDialIcon />}
+          onClick={() => setIsOpen(!isOpen)}
+          FabProps={{ sx: { backgroundColor: "#fff", color: "#000" } }}
+        />
+      </div>
 
+      {/* Chat Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-black shadow-lg rounded-md border">
+        <div className="fixed bottom-28 right-6 z-50 w-60 bg-black text-white rounded-md shadow-xl border border-gray-600">
           <ul className="flex flex-col">
             <li>
               <a
                 href="https://wa.me/message/R4UKUMFIH22RJ1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center p-3 hover:bg-black text-white"
+                className="flex items-center p-3 hover:bg-gray-800"
               >
-                <img src="/whatsapp logo.png" alt="WhatsApp" className="w-10 h-10 max-md:w-5 max-md:h-5 mr-2" />
+                <img
+                  src="/whatsapp logo.png"
+                  alt="WhatsApp"
+                  className="w-8 h-8 mr-3"
+                />
                 WhatsApp
               </a>
             </li>
@@ -32,9 +43,13 @@ const ChatDropdown = () => {
                 href="https://www.instagram.com/webwiz_creation_webdevelopers/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center p-3 hover:bg-black text-white" 
+                className="flex items-center p-3 hover:bg-gray-800"
               >
-                <img src="/instagram.png" alt="Instagram" className="w-10 h-10 max-md:w-5 max-md:h-5 mr-2" />
+                <img
+                  src="/instagram.png"
+                  alt="Instagram"
+                  className="w-8 h-8 mr-3"
+                />
                 Instagram
               </a>
             </li>
@@ -43,16 +58,20 @@ const ChatDropdown = () => {
                 href="http://www.linkedin.com/in/brownoziomachi72a5a3229"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center p-3 hover:bg-black text-white"
+                className="flex items-center p-3 hover:bg-gray-800"
               >
-                <img src="/linkedin.png" alt="LinkedIn" className="w-10 h-10 max-md:w-5 max-md:h-5 mr-2 " />
+                <img
+                  src="/linkedin.png"
+                  alt="LinkedIn"
+                  className="w-8 h-8 mr-3"
+                />
                 LinkedIn
               </a>
             </li>
           </ul>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

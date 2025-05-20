@@ -5,88 +5,102 @@ import { auth } from "@/auth";
 import Link from "next/link";
 import UserBlogs from "@/components/UserBlog";
 
-
-  async function ProfilePage() {
+async function ProfilePage() {
   const session = await auth();
   if (!session) {
     redirect("/"); // Redirect if not authenticated
   }
 
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-orange-400 py-12  lg:px-12">
-      <div className="bg-blue-700 h-auto w-full py-5">
-      <h1 className="text-white mt-3 text-center ">Your access is confirmed.</h1>
-      <h2 className="text-center text-white ">We are building a better way. <Link href="/contact"><span className=" underline">SHARE YOUR THOUGHTS</span></Link></h2>
+    <div className="min-h-screen bg-black text-white py-12 lg:px-12">
+      {/* Header info bar */}
+      <div className="bg-gray-900/90 h-auto w-full py-5 border-b border-gray-700">
+        <h1 className="text-center text-white/90 text-lg font-semibold">
+          Your access is confirmed.
+        </h1>
+        <h2 className="text-center text-white/70 text-sm mt-1">
+          We are building a better way.{" "}
+          <Link href="/contact">
+            <span className="underline cursor-pointer text-white hover:text-gray-300">
+              SHARE YOUR THOUGHTS
+            </span>
+          </Link>
+        </h2>
       </div>
-      <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur-lg rounded-xl shadow-xl p-6 mt-5">
+
+      {/* Main profile container */}
+      <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-md rounded-xl shadow-lg p-6 mt-8 border border-gray-800">
         {/* Profile Cover */}
-        <div className="relative  bg-gradient-to-br from-gray-900 via-gray-800 to-orange-400 h-40 rounded-lg shadow-md">
-          <div className="absolute -bottom-10 left-4 flex items-center space-x-4">
-            {/* Profile Image */}
+        <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 h-40 rounded-lg shadow-inner border border-gray-700">
+          <div className="absolute -bottom-12 left-6 flex items-center space-x-6">
+            {/* Profile Image (no grayscale) */}
             <img
               src={session?.user?.image || "/default-avatar.png"}
               alt="Profile"
-              className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
+              className="w-28 h-28 rounded-full border-4 border-white shadow-lg object-cover"
             />
-            {/* User Name & Email */}
+            {/* User Name (normal color) */}
             <div>
-              <h2 className="text-xl font-bold text-white">
+              <h2 className="text-3xl font-extrabold text-white drop-shadow-lg">
                 {session?.user?.name}
               </h2>
+              <p className="text-white/70 text-sm mt-1">{session?.user?.email}</p>
             </div>
           </div>
         </div>
-</div>
-        {/* Profile Details */}
-        <div className="mt-16 bg-gray-900/100 p-6 rounded-lg shadow-md">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex gap-5">
-              <p className="text-gray-200">Name:</p>
-              <p className="font-medium text-gray-300">{session?.user?.name || "N/A"}</p>
+
+        {/* Spacer for profile image overlay */}
+        <div className="h-16"></div>
+
+        {/* Profile Details Section */}
+        <div className="bg-gray-900/90 p-6 rounded-lg shadow-md border border-gray-700">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="flex flex-col gap-1">
+              <p className="text-gray-400 uppercase tracking-wide text-xs">Name</p>
+              <p className="text-white font-semibold">{session?.user?.name || "N/A"}</p>
             </div>
-            <div className="flex gap-5">
-              <p className="text-gray-200">Email:</p>
-              <p className="font-medium text-gray-300">{session?.user?.email || "Not available"}</p>
+            <div className="flex flex-col gap-1">
+              <p className="text-gray-400 uppercase tracking-wide text-xs">Email</p>
+              <p className="text-white font-semibold">
+                {session?.user?.email || "Not available"}
+              </p>
             </div>
           </div>
 
-          <div className="mt-6 flex justify-center">
+          <div className="mt-8 flex justify-center">
             <Link
               href="/upload-to-blog"
-              className="px-4 py-2 bg-blue-500 text-white font-medium rounded-lg shadow hover:bg-blue-600 transition-colors duration-300"
+              className="px-5 py-3 bg-white text-black font-semibold rounded-lg shadow hover:bg-gray-200 transition"
             >
-               Upload to Wiz
+              Upload to Wiz
             </Link>
           </div>
-          <div className="mt-6 text-center">
-            <p className="text-gray-400">Want to explore more?</p>
-            <Link
-              href="/"
-              className="text-blue-400 hover:text-blue-500 transition-colors duration-300"
-            >
+
+          <div className="mt-6 text-center text-gray-500 text-sm">
+            Want to explore more?{" "}
+            <Link href="/" className="underline hover:text-white cursor-pointer">
               Go to Home →
             </Link>
           </div>
         </div>
 
- 
+        {/* User Blogs Section */}
+        <div className="mt-10">
+          <UserBlogs />
+        </div>
 
-
-<UserBlogs/>
-
-
-<div className="mt-4 text-right">
-  <Link
-    href="/blog"
-    className="text-blue-100 hover:text-blue-200 underline"
-  >
-    View All Posts →
-  </Link>
-</div>
- </div>
-
-  )
+        {/* View all posts link */}
+        <div className="mt-6 text-right">
+          <Link
+            href="/blog"
+            className="text-gray-400 hover:text-white underline"
+          >
+            View All Posts →
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default ProfilePage;
