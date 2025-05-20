@@ -1,7 +1,9 @@
+// app/layout.jsx or _app.js
+
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import AuthProvider from "@/components/AuthProvider";
-import logo from "@/public/logo.png";
+import Script from "next/script";
 
 export const metadata = {
   title: "Webwiz Creation - The Sun Web",
@@ -13,10 +15,20 @@ export const metadata = {
     apple: "/logo.png",
   },
 };
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`.className} antialiased`}>
+      <head>
+        {/* Load Google AdSense script once */}
+        <Script
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          data-ad-client="ca-pub-8408243121163767"
+          async
+        />
+      </head>
+      <body className="antialiased">
         <AuthProvider>
           <Navbar />
           {children}
@@ -25,4 +37,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-

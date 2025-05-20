@@ -6,6 +6,7 @@ import Popup from '@/components/Popup';
 import { ArrowRight, ArrowRightToLine,  ChevronRight, LaptopMinimal, LoaderCircle, Palette, PersonStanding, Play, Store, Webhook } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
 import ChatDropdown from '@/components/Chat';
+import AdsenseScript from '@/components/AdsenceClient';
 
 
 
@@ -49,7 +50,7 @@ useEffect(() => {
                     <h1 className='text-4xl font-bold lg:text-7xl max-md:mr-30 text-gray-600 max-md:mt-30'>
                         WEBWIZ <span className="text-orange-400 max-md:ml-50">CREATION</span>
                     </h1>
-                     
+                     <AdsenseScript/>
                     
               {/* <Popup/> */}
                     {/* The Moon Web Title */}

@@ -66,7 +66,7 @@ const UploadBlog = ({ session }) => {
             
           <div className="flex items-center justify-between">
                
-                <div className="ml-auto">
+                <div className="mr-auto">
                   <Link href="/upload-to-video">
 
                 <button
@@ -75,6 +75,17 @@ const UploadBlog = ({ session }) => {
                   >
                   Upload Video
                 </button>
+                  </Link>
+                  </div>
+
+                  <div className="ml-auto">
+                  <Link href="/upload-to-reels">
+
+                <button
+                  onClick={closeModal}
+                  className="bg-gradient-to-r from-orange-400 via-gray-800 to-gray-700 hover:bg-gray-800 text-white font-semibold px-4 py-1 rounded transition duration-200 border"
+                  >
+Reels                </button>
                   </Link>
                   </div>
                 </div>
