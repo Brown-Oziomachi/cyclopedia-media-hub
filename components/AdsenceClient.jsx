@@ -1,26 +1,28 @@
 "use client";
+import { useEffect, useState } from "react";
+import Script from "next/script";
 
-import { useEffect } from "react";
+export default function AdBanner() {
+  const [showAd, setShowAd] = useState(false);
 
-export default function AdsenseClient() {
   useEffect(() => {
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-      console.error("Adsense error:", e);
-    }
+    setShowAd(true);
   }, []);
 
   return (
-    <div className="my-6 text-center">
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block" }}
-        data-ad-client="ca-pub-8408243121163767"  // Your AdSense client ID
-        data-ad-slot="8408243121163767"                 // Your ad slot ID
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      ></ins>
-    </div>
+    <>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8408243121163767"
+     crossorigin="anonymous"></script>
+      {showAd && (
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block", width: "100%", height: "90px" }}
+          data-ad-client="ca-pub-8408243121163767"
+          data-ad-slot="8408243121163767"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+      )}
+    </>
   );
 }

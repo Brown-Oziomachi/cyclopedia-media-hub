@@ -18,6 +18,7 @@ import {
 import { LoaderCircle, Heart, Share, LinkIcon } from "lucide-react";
 import Link from "next/link";
 import BlogDisplay from "@/components/BlogDisplay";
+import AdBanner from "@/components/AdsenceClient";
 
 const BlogDetails = ({ params }) => {
   const resolvedParams = use(params); // Unwrap the Promise from params
@@ -203,6 +204,7 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
   return (
     <div className="min-h-screen px-2 py-16 max-w-4xl mx-auto bg-gray-900 text-gray-400">
            {/* Blog Content */}
+           <AdBanner/>
         <div className="bg-gradient-to-br from-gray-900 via-black to-orange-400 shadow-lg z-0 rounded-lg p-8 relative">
           {/* Category Tag */}
           <Link href={`/blog/${blog.id}`}>

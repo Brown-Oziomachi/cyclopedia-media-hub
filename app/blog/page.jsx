@@ -1,17 +1,161 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, addDoc } from "firebase/firestore";
 import Link from "next/link";
 import { db1 } from "@/lib/firebaseConfig";
+import { useRouter } from "next/navigation";
+import { serverTimestamp } from "firebase/firestore";
+import AdBanner from "@/components/AdsenceClient";
+
+await addDoc(collection(db1, "blog"), {
+  title: "My post",
+  body: "Content...",
+  timestamp: serverTimestamp(), // ✅ ensures correct format
+});
+
+const formatTimestamp = (timestamp) => {
+  if (!timestamp) return "Unknown Date";
+
+  // Firestore timestamp object (has seconds)
+  if (timestamp.seconds && typeof timestamp.seconds === "number") {
+    return new Date(timestamp.seconds * 1000).toLocaleDateString();
+  }
+
+  // Firestore timestamp object with toDate()
+  if (typeof timestamp.toDate === "function") {
+    try {
+      return timestamp.toDate().toLocaleDateString();
+    } catch {
+      return "Unknown Date";
+    }
+  }
+
+  // Date object
+  if (timestamp instanceof Date) {
+    return timestamp.toLocaleDateString();
+  }
+
+  // String date
+  try {
+    const date = new Date(timestamp);
+    if (!isNaN(date.getTime())) {
+      return date.toLocaleDateString();
+    }
+  } catch {
+    return "Unknown Date";
+  }
+
+  return "Unknown Date";
+};
+
+
+
 
 const BlogPage = () => {
+  const router = useRouter();
+
   const [blogPosts, setBlogPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showContentType, setShowContentType] = useState("blog");
-  const [activeVideo, setActiveVideo] = useState(null);
+  
+  useEffect(() => {
+    const adElements = document.querySelectorAll("ins.adsbygoogle");
+  
+    adElements.forEach((ad) => {
+      if (!ad.getAttribute("data-adsbygoogle-status")) {
+        try {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+          console.error("Adsense push error:", e);
+        }
+      }
+    });
+  }, []);
+  const genres = [
+    "Webwiz",
+    "Technology",
+    "Spirituality",
+    "Science",
+    "Art",
+    "Entertainment",
+    "Crypto",
+    "Blockchain",
+    "Gaming",
+    "Social Media",
+    "Software",
+    "Hardware",
+    "Gadgets",
+    "Social network",
+    "Engineering",
+    "Language",
+    "English",
+    "Statistics",
+    "Mathematics",
+    "Physics",
+    "Chemistry",
+    "Biology",
+    "Astronomy",
+    "Geography",
+    "Psychology",
+    "Philosophy",
+    "Sociology",
+    "Economics",
+    "Law",
+    "AI",
+    "Machine Learning",
+    "Data Science",
+    "Cybersecurity",
+    "Cloud Computing",
+    "Lifestyle",
+    "Stories",
+    "Coding",
+    "Health",
+    "History",
+    "Nature",
+    "Finance",
+    "Travel",
+    "Faith",
+    "Religion",
+    "Sex",
+    "Wealth",
+    "Business",
+    "Ideas",
+    "Action",
+    "Drama",
+    "Romance",
+    "Music",
+    "Mystery",
+    "Fantasy",
+    "Education",
+    "Horror",
+    "Comedy",
+    "Adventure",
+    "Documentary",
+    "Marriage",
+    "Teens",
+    "Fashions",
+    "Mothers",
+    "Knowledge",
+    "Ignorance",
+    "Love",
+    "Facts",
+    "Family",
+    "Culture",
+    "Fathers",
+    "Divorce",
+    "Sports",
+    "Street",
+    "Strategy",
+    "Animals",
+    "News",
+    "Politics",
+    "Prayer",
+    "Relationship",
+    "Wisdom",
+  ];
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -76,49 +220,6 @@ const BlogPage = () => {
     setFilteredPosts(filtered);
   };
 
-  const openVideo = (url) => {
-    let embedUrl = "";
-
-    try {
-      const parsedUrl = new URL(url);
-
-      // YouTube
-      if (parsedUrl.hostname.includes("youtube.com")) {
-        const videoId = parsedUrl.searchParams.get("v");
-        if (videoId) embedUrl = `https://www.youtube.com/embed/${videoId}`;
-      } else if (parsedUrl.hostname === "youtu.be") {
-        const videoId = parsedUrl.pathname.slice(1);
-        if (videoId) embedUrl = `https://www.youtube.com/embed/${videoId}`;
-      }
-
-      // Facebook
-      else if (parsedUrl.hostname.includes("facebook.com")) {
-        embedUrl = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=0&width=560`;
-      }
-
-      // Vimeo
-      else if (parsedUrl.hostname.includes("vimeo.com")) {
-        const videoId = parsedUrl.pathname.split("/").pop();
-        embedUrl = `https://player.vimeo.com/video/${videoId}`;
-      }
-
-      // Direct video files (MP4, WebM, OGG)
-      else if (url.match(/\.(mp4|webm|ogg)$/i)) {
-        embedUrl = url;
-      }
-
-      // Fallback
-      else {
-        console.warn("Unsupported video URL:", url);
-        return;
-      }
-
-      setActiveVideo(embedUrl);
-    } catch (err) {
-      console.error("Invalid video URL:", url, err);
-    }
-  };
-
   const extractYouTubeId = (url) => {
     try {
       const parsedUrl = new URL(url);
@@ -135,6 +236,17 @@ const BlogPage = () => {
     }
     return null;
   };
+
+  const openVideo = (post) => {
+    const videoURL = encodeURIComponent(post.videoURL);
+    const title = encodeURIComponent(post.title);
+    const desc = encodeURIComponent(post.description || post.body || "");
+
+    router.push(
+      `/video/${post.id}?url=${videoURL}&title=${title}&desc=${desc}`
+    );
+  };
+
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -145,6 +257,7 @@ const BlogPage = () => {
 
   return (
     <main className="min-h-screen bg-gray-950 text-white px-8 py-30">
+      <AdBanner/>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <header className="text-center mb-12">
@@ -156,8 +269,6 @@ const BlogPage = () => {
           </p>
         </header>
 
-
-
         {/* Toggle */}
         <div className="flex gap-4 mb-6 justify-center">
           {["blog", "video", "reels"].map((type) => (
@@ -165,14 +276,8 @@ const BlogPage = () => {
               key={type}
               className={`px-6 py-3 rounded-xl font-semibold transition ${
                 showContentType === type
-                  ? type === "reels"
-                    ? "bg-white text-black"
-                    : type === "video"
-                    ? "bg-white text-black"
-                    : "bg-white text-black"
-                  : type === "reels"
-                  ? "bg-white text-black hover:bg-pink-600"
-                  : "bg-white text-black hover:bg-white"
+                  ? "bg-white text-black"
+                  : "bg-white text-black hover:bg-pink-600"
               }`}
               onClick={() => handleContentTypeChange(type)}
             >
@@ -181,7 +286,7 @@ const BlogPage = () => {
           ))}
         </div>
 
-        {/* Search */}
+  {/* Search */}
         <div className="mb-8">
           <input
             type="text"
@@ -216,147 +321,165 @@ const BlogPage = () => {
           />
         </div>
 
-        {/* Modal */}
-        {activeVideo && (
-          <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center">
-            <div className="relative w-full max-w-4xl px-4">
-              <button
-                onClick={() => setActiveVideo(null)}
-                className="absolute top-2 right-2 text-white text-3xl z-50"
-              >
-                &times;
-              </button>
-              <div className="aspect-video w-full">
-                {activeVideo.match(/\.(mp4|webm|ogg)$/i) ? (
-                  <video controls className="w-full h-full rounded-xl shadow-lg">
-                    <source src={activeVideo} />
-                    Your browser does not support the video tag.
-                  </video>
-                ) : (
-                  <iframe
-                    src={activeVideo}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full rounded-xl shadow-lg"
-                    title="video player"
-                    frameBorder="0"
-                  ></iframe>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Genre Filter Buttons */}
+        <div
+          className="flex overflow-x-auto whitespace-nowrap gap-3 mb-6 px-4"
+          style={{ scrollbarWidth: "none" }}
+        >
+          {genres.map((genre) => (
+            <button
+              key={genre}
+              className={`flex-shrink-0 px-4 py-2 rounded-md font-medium transition ${
+                selectedCategory === genre
+                  ? "bg-yellow-500 text-black"
+                  : "bg-gray-800 text-white hover:bg-yellow-400"
+              }`}
+              onClick={() => filterByCategory(genre)}
+            >
+              {genre}
+            </button>
+          ))}
+          {selectedCategory && (
+            <button
+              className="flex-shrink-0 px-4 py-2 rounded-md font-medium bg-red-600 text-white hover:bg-red-700"
+              onClick={() => {
+                setSelectedCategory(null);
+                let basePosts = [];
+                if (showContentType === "blog") {
+                  basePosts = blogPosts.filter((post) => !post.isVideo);
+                } else if (showContentType === "video") {
+                  basePosts = blogPosts.filter(
+                    (post) => post.isVideo && !post.isReel
+                  );
+                } else if (showContentType === "reels") {
+                  basePosts = blogPosts.filter((post) => post.isReel);
+                }
+                setFilteredPosts(basePosts);
+              }}
+            >
+              Clear Genre Filter
+            </button>
+          )}
+        </div>
 
         {/* Posts */}
-        {!loading && filteredPosts.length > 0 && showContentType !== "reels" && (
-          <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
-            {filteredPosts.map((post) => (
-              <article
-                key={post.id}
-                className="bg-gray-950 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit"
-              >
-                <span className="absolute top-4 left-4 bg-white text-black text-xs px-3 py-1 rounded-full">
-                  {post.genre || "General"}
-                </span>
-                <h1 className="text-xs text-gray-400 text-center absolute top-4 right-4">
-                  THE <span className="text-orange-400">SUN</span> WEB
-                </h1>
+        {!loading &&
+          filteredPosts.length > 0 &&
+          showContentType !== "reels" && (
+            <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
+              {filteredPosts.map((post) => (
+                <article
+                  key={post.id}
+                  className="bg-gray-950 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit"
+                >
+                  <span className="absolute top-4 left-4 bg-white text-black text-xs px-3 py-1 rounded-full">
+                    {post.genre || "General"}
+                  </span>
+                  <h1 className="text-xs text-gray-400 text-center absolute top-4 right-4">
+                    THE <span className="text-orange-400">SUN</span> WEB
+                  </h1>
 
-                {showContentType === "blog" ? (
-                  <Link href={`/blog/${post.id}`} className="block">
-                    {post.image && (
-                      <div className="h-48 overflow-hidden">
+                  {showContentType === "blog" ? (
+                    <Link href={`/blog/${post.id}`} className="block">
+                      {post.image && (
+                        <div className="h-48 overflow-hidden">
+                          <img
+                            src={post.image}
+                            alt={post.title}
+                            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                          />
+                        </div>
+                      )}
+                      <div className="py-5">
+                        <h2 className="text-xl font-bold mb-3 mt-5">
+                          {post.title}
+                        </h2>
+                        <p className="text-sm text-gray-400 mb-4 line-clamp-2">
+                          {post.body}
+                        </p>
+                        <p className="text-xs text-gray-400 text-right">
+                          Posted on {formatTimestamp(post.timestamp)}
+                        </p>
+                      </div>
+                    </Link>
+                  ) : (
+                    <div
+                      className="block cursor-pointer"
+                      onClick={() => openVideo(post)}
+                    >
+                      <div className="h-48 bg-black flex items-center justify-center">
                         <img
-                          src={post.image}
-                          alt={post.title}
-                          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                          src={
+                            post.thumbnail
+                              ? post.thumbnail
+                              : post.videoURL?.includes("youtube.com") ||
+                                post.videoURL?.includes("youtu.be")
+                              ? `https://img.youtube.com/vi/${extractYouTubeId(
+                                  post.videoURL
+                                )}/hqdefault.jpg`
+                              : "/video-placeholder.jpg"
+                          }
+                          alt="Video thumbnail"
+                          className="w-full h-full object-cover"
                         />
                       </div>
-                    )}
-                    <div className="py-5">
-                      <h2 className="text-xl font-bold mb-3 mt-5">{post.title}</h2>
-                      <p className="text-sm text-gray-400 mb-4 line-clamp-2">{post.body}</p>
-                      <p className="text-xs text-gray-400 text-right">
-                        Posted on{" "}
-                        {post.timestamp?.seconds
-                          ? new Date(post.timestamp.seconds * 1000).toLocaleDateString()
-                          : "Unknown Date"}
-                      </p>
+                      <div className="p-5">
+                        <h2 className="text-2xl font-bold mb-3 mt-5">
+                          {post.title}
+                        </h2>
+                        <p className="text-sm text-gray-400 mb-4 line-clamp-3">
+                          {post.description || post.body}
+                        </p>
+                        <p className="text-xs text-gray-400 text-right">
+                          Posted on {formatTimestamp(post.timestamp)}
+                        </p>
+                      </div>
                     </div>
-                  </Link>
-                ) : (
-                  <div
-                    className="block cursor-pointer"
-                    onClick={() => openVideo(post.videoURL)}
-                  >
-                    <div className="h-48 bg-black flex items-center justify-center">
-                      <img
-                        src={
-                          post.thumbnail
-                            ? post.thumbnail
-                            : post.videoURL?.includes("youtube.com") ||
-                              post.videoURL?.includes("youtu.be")
-                            ? `https://img.youtube.com/vi/${extractYouTubeId(
-                                post.videoURL
-                              )}/hqdefault.jpg`
-                            : "/video-placeholder.jpg"
-                        }
-                        alt="Video thumbnail"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="p-5">
-                      <h2 className="text-2xl font-bold mb-3 mt-5">{post.title}</h2>
-                      <p className="text-sm text-gray-400 mb-4 line-clamp-3">
-                        {post.description || post.body}
-                      </p>
-                      <p className="text-xs text-gray-400 text-right">
-                        Posted on{" "}
-                        {post.timestamp?.seconds
-                          ? new Date(post.timestamp.seconds * 1000).toLocaleDateString()
-                          : "Unknown Date"}
-                      </p>
-                    </div>
-                  </div>
-                )}
-              </article>
-            ))}
-          </section>
-        )}
+                  )}
+                </article>
+              ))}
+            </section>
+          )}
 
         {/* Reels */}
-        {!loading && filteredPosts.length > 0 && showContentType === "reels" && (
-          <section className="flex flex-col gap-8 max-w-xl mx-auto">
-            {filteredPosts.map((reel) => (
-              <div
-                key={reel.id}
-                className="relative cursor-pointer rounded-xl shadow-lg overflow-hidden bg-black"
-                onClick={() => openVideo(reel.videoURL)}
-              >
-                <div className="aspect-[9/16] w-full relative">
-                  <img
-                    src={
-                      reel.thumbnail
-                        ? reel.thumbnail
-                        : reel.videoURL?.includes("youtube.com") ||
-                          reel.videoURL?.includes("youtu.be")
-                        ? `https://img.youtube.com/vi/${extractYouTubeId(reel.videoURL)}/hqdefault.jpg`
-                        : "/video-placeholder.jpg"
-                    }
-                    alt={reel.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                    <h2 className="text-white text-lg font-bold line-clamp-2">{reel.title}</h2>
-                    <p className="text-gray-300 text-sm line-clamp-2 mt-1">
-                      {reel.description || reel.body}
-                    </p>
+        {!loading &&
+          filteredPosts.length > 0 &&
+          showContentType === "reels" && (
+            <section className="flex flex-col gap-8 max-w-xl mx-auto">
+              {filteredPosts.map((reel) => (
+                <div
+                  key={reel.id}
+                  className="relative cursor-pointer rounded-xl shadow-lg overflow-hidden bg-black"
+                  onClick={() => openVideo(reel)}
+                >
+                  <div className="aspect-[9/16] w-full relative">
+                    <img
+                      src={
+                        reel.thumbnail
+                          ? reel.thumbnail
+                          : reel.videoURL?.includes("youtube.com") ||
+                            reel.videoURL?.includes("youtu.be")
+                          ? `https://img.youtube.com/vi/${extractYouTubeId(
+                              reel.videoURL
+                            )}/hqdefault.jpg`
+                          : "/video-placeholder.jpg"
+                      }
+                      alt={reel.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                      <h2 className="text-white text-lg font-bold line-clamp-2">
+                        {reel.title}
+                      </h2>
+                      <p className="text-gray-300 text-sm line-clamp-2 mt-1">
+                        {reel.description || reel.body}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </section>
-        )}
+              ))}
+            </section>
+          )}
 
         {loading && (
           <div className="flex justify-center items-center h-[30vh]">
@@ -364,8 +487,11 @@ const BlogPage = () => {
           </div>
         )}
       </div>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8408243121163767"
-     crossorigin="anonymous"></script>
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8408243121163767"
+        crossOrigin="anonymous"
+      ></script>
     </main>
   );
 };
