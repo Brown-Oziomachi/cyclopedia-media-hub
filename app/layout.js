@@ -17,10 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Add your Google site verification meta tag here */}
-        <meta
-          name="google-adsense-account" content="ca-pub-8408243121163767"
-        />
+        <meta name="google-adsense-account" content="ca-pub-8408243121163767"/>
       </head>
       <body className="antialiased">
         <AuthProvider>
