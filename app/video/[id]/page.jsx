@@ -1,6 +1,5 @@
 "use client";
 
-import AdBanner from "@/components/AdsenceClient";
 import { useSearchParams, useRouter } from "next/navigation";
 import React from "react";
 
@@ -78,7 +77,6 @@ const VideoPage = () => {
       </div>
         <h1 className="text-xl font-bold mb-4 text-center">{decodedTitle}</h1>
         <p className="text-gray-300 mb-8 text-center">{decodedDesc}</p>
-              <AdBanner />
         
     </main>
   );

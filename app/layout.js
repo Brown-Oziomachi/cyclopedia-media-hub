@@ -3,7 +3,6 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import AuthProvider from "@/components/AuthProvider";
-import Script from "next/script";
 
 export const metadata = {
   title: "Webwiz Creation - The Sun Web",
@@ -20,9 +19,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Load Google AdSense script once */}
-       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8408243121163767"
-     crossorigin="anonymous"></script>
 
       </head>
       <body className="antialiased">

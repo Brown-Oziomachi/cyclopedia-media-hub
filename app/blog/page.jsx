@@ -1,18 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs, } from "firebase/firestore";
 import Link from "next/link";
 import { db1 } from "@/lib/firebaseConfig";
 import { useRouter } from "next/navigation";
 import { serverTimestamp } from "firebase/firestore";
-import AdBanner from "@/components/AdsenceClient";
 
-await addDoc(collection(db1, "blog"), {
-  title: "My post",
-  body: "Content...",
-  timestamp: serverTimestamp(), // ✅ ensures correct format
-});
+
+
 
 const formatTimestamp = (timestamp) => {
   if (!timestamp) return "Unknown Date";
@@ -61,19 +57,7 @@ const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showContentType, setShowContentType] = useState("blog");
   
-  useEffect(() => {
-    const adElements = document.querySelectorAll("ins.adsbygoogle");
-  
-    adElements.forEach((ad) => {
-      if (!ad.getAttribute("data-adsbygoogle-status")) {
-        try {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {
-          console.error("Adsense push error:", e);
-        }
-      }
-    });
-  }, []);
+
   const genres = [
     "Webwiz",
     "Technology",
@@ -257,7 +241,6 @@ const BlogPage = () => {
 
   return (
     <main className="min-h-screen bg-gray-950 text-white px-8 py-30">
-      <AdBanner/>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <header className="text-center mb-12">
@@ -487,11 +470,7 @@ const BlogPage = () => {
           </div>
         )}
       </div>
-      <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8408243121163767"
-        crossOrigin="anonymous"
-      ></script>
+    
     </main>
   );
 };
