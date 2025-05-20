@@ -115,47 +115,13 @@ const VideoPage = () => {
       <h1 className="text-xl font-bold mb-4">{decodedTitle}</h1>
       <p className="text-gray-300 mb-8">{decodedDesc}</p>
 
-      <section className="w-full mt-12">
-        <h2 className="text-2xl font-semibold mb-6 text-center">More Videos</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {moreVideos.length === 0 && (
-            <p className="text-center col-span-full text-gray-400">No videos found</p>
-          )}
-          {moreVideos.map(({ id, url, title, desc }) => {
-            if (!url) return null;
-            if (url === decodedUrl) return null; // Skip current video
-            const embedUrl = getYouTubeEmbedURL(url);
+<form action="https://yourlist.usX.list-manage.com/subscribe/post?u=YOUR_USER_ID&amp;id=YOUR_LIST_ID" method="post" target="_blank" rel="noopener noreferrer">
+  <input type="email" name="EMAIL" placeholder="Your email" required />
+  <button type="submit">Subscribe</button>
+</form>
 
-            return (
-              <div
-                key={id}
-                className="cursor-pointer rounded-lg overflow-hidden shadow-lg hover:shadow-yellow-500 transition-shadow bg-gray-800"
-                onClick={() =>
-                  router.push(
-                    `/video?url=${encodeURIComponent(url)}&title=${encodeURIComponent(
-                      title || "No title"
-                    )}&desc=${encodeURIComponent(desc || "")}`
-                  )
-                }
-              >
-                <div className="aspect-video w-full relative">
-                  <iframe
-                    src={embedUrl}
-                    title={title || "Video"}
-                    className="w-full h-full pointer-events-none"
-                    frameBorder="0"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-                <h3 className="p-3 text-center text-white font-semibold">{title || "Untitled"}</h3>
-                <p className="px-3 pb-4 text-gray-400 text-sm text-center">{desc || ""}</p>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-    </main>
-  );
-};
+     </main>
+  )
+}
 
 export default VideoPage;
