@@ -364,16 +364,8 @@ const BlogPage = () => {
           </div>
         )}
       </div>
-      <div className=" text-center z-0">
-  <ins
-    className="adsbygoogle"
-    style={{ display: "block" }}
-    data-ad-client="ca-pub-8408243121163767" // Your AdSense client ID
-    data-ad-slot="8408243121163767" // Your ad slot ID
-    data-ad-format="auto"
-    data-full-width-responsive="true"
-  ></ins>
-</div>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8408243121163767"
+     crossorigin="anonymous"></script>
     </main>
   );
 };

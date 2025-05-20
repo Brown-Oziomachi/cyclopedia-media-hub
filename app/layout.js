@@ -21,12 +21,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         {/* Load Google AdSense script once */}
-        <Script
-          strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          data-ad-client="ca-pub-8408243121163767"
-          async
-        />
+       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8408243121163767"
+     crossorigin="anonymous"></script>
+
       </head>
       <body className="antialiased">
         <AuthProvider>
