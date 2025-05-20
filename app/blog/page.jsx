@@ -166,13 +166,13 @@ const BlogPage = () => {
               className={`px-6 py-3 rounded-xl font-semibold transition ${
                 showContentType === type
                   ? type === "reels"
-                    ? "bg-pink-500 text-black"
+                    ? "bg-white text-black"
                     : type === "video"
-                    ? "bg-yellow-600 text-black"
+                    ? "bg-white text-black"
                     : "bg-white text-black"
                   : type === "reels"
-                  ? "bg-pink-800 text-black hover:bg-pink-600"
-                  : "bg-yellow-800 text-black hover:bg-white"
+                  ? "bg-white text-black hover:bg-pink-600"
+                  : "bg-white text-black hover:bg-white"
               }`}
               onClick={() => handleContentTypeChange(type)}
             >
