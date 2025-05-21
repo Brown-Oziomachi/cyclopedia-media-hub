@@ -32,6 +32,12 @@ export default function RootLayout({ children }) {
             }(document,"script","https://chimpstatic.com/mcjs-connected/js/users/1891544f1915e02fc10b28245/61a57155f09ce3b0012e2c71e.js");`,
           }}
         />
+        {/* Other meta tags */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8408243121163767"
+          crossorigin="anonymous"
+        ></script>
       </head>
       <body className="antialiased">
         <AuthProvider>

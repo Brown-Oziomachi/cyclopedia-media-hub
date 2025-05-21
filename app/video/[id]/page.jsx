@@ -4,6 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { app1 } from "@/lib/firebaseConfig";
+import Ads from "@/components/Ads";
 
 function getYouTubeEmbedURL(url) {
   try {
@@ -92,7 +93,7 @@ const VideoPage = () => {
           Share
         </button>
       </div>
-
+<Ads/>
       {copySuccess && (
         <div className="mb-4 text-green-400 font-semibold animate-fade-in">
           Link copied to clipboard!

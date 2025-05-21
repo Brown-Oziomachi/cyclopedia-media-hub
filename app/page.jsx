@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import BottomNav from "@/components/BottomNav";
 import ChatDropdown from "@/components/Chat";
+import Ads from "@/components/Ads";
 
 const Page = () => {
   const [loading, setLoading] = useState(true); // Loading state
@@ -55,14 +56,14 @@ const Page = () => {
       ) : (
         <div className="py-20 bg-gradient-to-r from-black via-gray-900 to-gray-800 text-white rounded-tr-full rounded-ss-full relative overflow-hidden">
           {/* Hero Section */}
-          <main className="flex flex-col justify-center items-center h-80 lg:h-200 text-center px-4 lg:px-0 ">
+          <main className="flex flex-col justify-center items-center h-80 lg:h-200 text-center px-4 lg:px-0 mt-10">
+      <Ads adSlot="8408243121163767"/>
             <div className="space-y-2 ">
               {/* Webwiz Creation Title */}
               <h1 className="text-4xl font-bold lg:text-7xl max-md:mr-30 text-gray-400 max-md:mt-30">
                 WEBWIZ{" "}
                 <span className="text-white max-md:ml-50">CREATION</span>
               </h1>
-
               {/* The Sun Web Title */}
               <div className="flex items-center justify-center ">
                 <h1
@@ -345,6 +346,7 @@ const Page = () => {
           </div>
         </section>
       </div>
+      <Ads adSlot="8408243121163767" />
 
       <BottomNav />
       <ChatDropdown />

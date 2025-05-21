@@ -18,6 +18,7 @@ import {
 import { LoaderCircle, Heart, Share, LinkIcon } from "lucide-react";
 import Link from "next/link";
 import BlogDisplay from "@/components/BlogDisplay";
+import Ads from "@/components/Ads";
 
 const BlogDetails = ({ params }) => {
   const resolvedParams = use(params); // Unwrap the Promise from params
@@ -240,7 +241,7 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
         <div className="">
           <BlogDisplay body={blog.body} />
         </div>
-
+<Ads/>
       
       {/* Like Button */}
       <div className="flex justify-center items-center shadow-lg mt-8">

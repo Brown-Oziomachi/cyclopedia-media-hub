@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import Link from "next/link";
 import UserBlogs from "@/components/UserBlog";
+import Ads from "@/components/Ads";
 
 async function ProfilePage() {
   const session = await auth();
@@ -83,7 +84,7 @@ async function ProfilePage() {
             </Link>
           </div>
         </div>
-
+<Ads/>
         {/* User Blogs Section */}
         <div className="mt-10">
           <UserBlogs />
