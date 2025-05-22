@@ -251,7 +251,7 @@ const BlogPage = () => {
         {/* Header */}
         <header className="text-center mb-12">
           <h1 className="text-6xl font-bold tracking-tight mt-5">
-            Discover Inspiring {showContentType === "blog" ? "Blog " : "Videos"}
+            Wiz {showContentType === "blog" ? "Blog " : "Videos"}
           </h1>
           <p className="text-xl text-gray-400 mt-3 ">
             Explore unique insights, stories, and expert opinions
