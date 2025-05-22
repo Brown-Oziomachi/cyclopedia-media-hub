@@ -1,14 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { collection, getDocs, } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import Link from "next/link";
 import { db1 } from "@/lib/firebaseConfig";
 import { useRouter } from "next/navigation";
 import { serverTimestamp } from "firebase/firestore";
-
-
-
 
 const formatTimestamp = (timestamp) => {
   if (!timestamp) return "Unknown Date";
@@ -45,9 +42,6 @@ const formatTimestamp = (timestamp) => {
   return "Unknown Date";
 };
 
-
-
-
 const BlogPage = () => {
   const router = useRouter();
 
@@ -56,7 +50,19 @@ const BlogPage = () => {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showContentType, setShowContentType] = useState("blog");
-  
+  const [adShown, setAdShown] = useState({
+    video: false,
+    reels: false,
+  });
+
+  const handleClick = (type) => {
+    if ((type === "video" || type === "reels") && !adShown[type]) {
+      window.open("https://otieu.com/4/9366150", "_blank");
+      setAdShown((prev) => ({ ...prev, [type]: true }));
+      return;
+    }
+    handleContentTypeChange(type);
+  };
 
   const genres = [
     "Webwiz",
@@ -254,22 +260,21 @@ const BlogPage = () => {
 
         {/* Toggle */}
         <div className="flex gap-4 mb-6 justify-center">
-          {["blog", "video", "reels"].map((type) => (
-            <button
-              key={type}
-              className={`px-6 py-3 rounded-xl font-semibold transition ${
-                showContentType === type
-                  ? "bg-white text-black"
-                  : "bg-white text-black hover:bg-pink-600"
-              }`}
-              onClick={() => handleContentTypeChange(type)}
-            >
-              {type.charAt(0).toUpperCase() + type.slice(1)}
-            </button>
-          ))}
-        </div>
-
-  {/* Search */}
+      {["blog", "video", "reels"].map((type) => (
+        <button
+          key={type}
+          className={`px-6 py-3 rounded-xl font-semibold transition ${
+            showContentType === type
+              ? "bg-white text-black"
+              : "bg-white text-black hover:bg-pink-600"
+          }`}
+          onClick={() => handleClick(type)}
+        >
+          {type.charAt(0).toUpperCase() + type.slice(1)}
+        </button>
+      ))}
+    </div>
+        {/* Search */}
         <div className="mb-8">
           <input
             type="text"
@@ -470,7 +475,6 @@ const BlogPage = () => {
           </div>
         )}
       </div>
-    
     </main>
   );
 };

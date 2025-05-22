@@ -21,13 +21,14 @@ import BlogDisplay from "@/components/BlogDisplay";
 import Ads from "@/components/Ads";
 
 const BlogDetails = ({ params }) => {
-  const resolvedParams = use(params); // Unwrap the Promise from params
+const resolvedParams = use(params);
+const id = resolvedParams?.id;
+
   const { data: session } = useSession();
   const [blog, setBlog] = useState(null);
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
-  const id = resolvedParams?.id;
   const [otherBlogs, setOtherBlogs] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([]);
@@ -202,276 +203,219 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
   }
 
 
-  return (
-    <div className="min-h-screen px-2 py-16 max-w-5xl mx-auto bg-gradient-to-b from-gray-900 via-gray-950 to-gray-900 text-gray-300 font-sans leading-relaxed">
-      {/* Blog Content */}
-      <div className="bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 shadow-xl rounded-2xl p-10 relative border border-gray-700">
-        {/* Category Tag */}
-        <Link href={`/blog/${blog.id}`}>
-          <span className="inline-block mb-6 px-5 py-2 bg-gradient-to-r from-orange-500 to-yellow-400 text-black font-semibold text-sm rounded-full tracking-wide shadow-md cursor-pointer transition-transform hover:scale-105">
-            {blog.genre}
-          </span>
-        </Link>
-        {/* Title */}
-        <h1 className="text-xs text-gray-400 text-center absolute top-10 right-6 font-mono tracking-widest">
-          THE <span className="text-orange-400">SUN</span> WEB
-        </h1>
-        <h1 className="text-5xl font-extrabold text-white mb-6 text-center leading-tight drop-shadow-lg">
-          {blog.title}
-        </h1>
+return (
+  <div className="min-h-screen px-2 py-16 max-w-5xl mx-auto bg-gradient-to-b from-gray-900 via-gray-950 to-gray-900 text-gray-300 font-sans leading-relaxed space-y-14">
+    
+    {/* Blog Header Section */}
+    <div className="bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 shadow-xl rounded-2xl p-10 relative border border-gray-700 space-y-6">
+      <Link href={`/blog/${blog.id}`}>
+        <span className="inline-block px-5 py-2 bg-gradient-to-r from-orange-500 to-yellow-400 text-black font-semibold text-sm rounded-full shadow-md transition-transform hover:scale-105">
+          {blog.genre}
+        </span>
+      </Link>
 
-        {/* Author & Like Button */}
-        <div className="flex items-center space-x-6 mb-2">
+      <h1 className="text-xs text-gray-400 text-center absolute top-10 right-6 font-mono tracking-widest">
+        THE <span className="text-orange-400">SUN</span> WEB
+      </h1>
+
+      <h1 className="text-5xl font-extrabold text-white text-center drop-shadow-lg">
+        {blog.title}
+      </h1>
+
+      
+      <div className="flex flex-col items-center mb-6">
+        <Link href={`/profile/${blog.author}`}>
           <img
+            title="View Profile"
             src={session?.user?.image}
-            alt="User profile"
-            className="w-24 h-24 rounded-full border-4 border-orange-500 shadow-lg"
+            alt="User"
+            className="w-24 h-24 rounded-full border-4 border-orange-500 shadow-lg cursor-pointer hover:scale-105 transition-transform"
           />
-          <div>
-            <p className="text-gray-400 text-lg font-semibold tracking-wide">
-              By: <span className="text-white">{blog.author}</span>
-            </p>
-            {/* Timestamp */}
-            <p className="text-gray-500 text-sm mt-1">
-              Posted on {blog.timestamp || "Unknown Date"}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-8 bg-gray-900 rounded-xl shadow-lg p-2 border border-gray-700">
-        <BlogDisplay body={blog.body} />
-      </div>
-
-
-      {/* Like and Share Buttons */}
-      <div className="flex justify-center items-center  shadow-lg mt-12">
-        <button
-          className="flex items-center text-gray-300 hover:text-red-500 transition-all cursor-pointer"
-          onClick={handleLikeClick}
-          aria-label="Like Button"
-        >
-          <Heart
-            className={`h-7 w-7 mr-2 transition-transform ${
-              liked ? "fill-red-500 scale-110" : "fill-none"
-            }`}
-          />
-          {liked ? "Liked" : "Like"} ({likes})
-        </button>
-        <button
-          className="flex items-center gap-2 text-gray-400 font-semibold py-2 px-5 rounded-lg hover:bg-gray-800 transition duration-300 cursor-pointer"
-          onClick={handleCopyLink}
-        >
-          <LinkIcon className="h-6 w-6" /> Copy Link
-        </button>
-        <button
-          className="flex items-center gap-2 text-gray-400 font-semibold py-2 px-5 rounded-lg hover:bg-gray-800 transition duration-300 cursor-pointer relative"
-          onClick={handleShareClick}
-        >
-          <Share className="h-6 w-6" /> Share
-          {showShareMenu && (
-            <div className="absolute top-full mt-3 right-0 bg-gray-800 shadow-xl rounded-lg p-4 flex flex-col gap-3 text-sm w-56 z-50 border border-gray-700">
-              <a
-                href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-400 hover:underline"
-              >
-                Share on Twitter
-              </a>
-              <a
-                href={`https://www.linkedin.com/shareArticle?mini=true&url=${window.location.href}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline"
-              >
-                Share on LinkedIn
-              </a>
-              <a
-                href={`https://api.whatsapp.com/send?text=${window.location.href}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-green-500 hover:underline"
-              >
-                Share on WhatsApp
-              </a>
-              <button
-                className="flex items-center text-gray-400 hover:text-white mt-2"
-                onClick={() => setShowShareMenu(false)}
-              >
-                <LinkIcon className="h-5 w-5 mr-2" /> Close
-              </button>
-            </div>
-          )}
-        </button>
-      </div>
-
-      {/* Comments Section */}
-      <div className="mt-12 bg-gray-950 shadow-xl rounded-2xl p-8 border border-gray-700">
-        <h2 className="text-3xl font-extrabold text-white mb-6 tracking-wide">
-          Join the Conversation
-        </h2>
-        <div className="lg:flex items-center space-x-5 mb-8 grid">
-          <img
-            src={session?.user?.image || "/default-avatar.png"}
-            alt="User avatar"
-            className="w-12 h-12 rounded-full border-2 border-orange-500 shadow-md"
-          />
-          <input
-            type="text"
-            placeholder="What's on your mind?"
-            className="flex-grow p-5 rounded-lg bg-gray-900 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-          />
-          <button
-            onClick={handleCommentSubmit}
-            className="px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-400 text-black font-semibold rounded-lg shadow-md hover:from-orange-600 hover:to-yellow-500 transition"
-          >
-            Post
-          </button>
-        </div>
-
-        {/* Comments List */}
-        <ul className="space-y-6 max-h-[420px] overflow-y-auto ">
-          {comments.length > 0 ? (
-            comments
-              .sort((a, b) => b.timestamp?.seconds - a.timestamp?.seconds)
-              .map((comment) => (
-                <li
-                  key={comment.id}
-                  className="bg-gray-900 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition duration-300"
-                >
-                  {/* Comment Header */}
-                  <div className="flex items-center space-x-4 mb-3">
-                    <img
-                      src={comment.userImage || "/default-avatar.png"}
-                      alt="User avatar"
-                      className="w-10 h-10 rounded-full border-2 border-orange-500 shadow-sm"
-                    />
-                    <div>
-                      <p className="text-white font-semibold tracking-wide">
-                        {comment.userName}
-                      </p>
-                      {comment.timestamp && (
-                        <p className="text-sm text-gray-400">
-                          {new Date(
-                            comment.timestamp.seconds * 1000
-                          ).toLocaleString()}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Comment text */}
-                  <p className="text-gray-300 mb-3">{comment.text}</p>
-
-                  {/* Reply Button */}
-                  <button
-                    className="text-orange-400 font-semibold hover:underline"
-                    onClick={() => setReplyingTo(comment.id)}
-                  >
-                    Reply
-                  </button>
-
-                  {/* Reply Input Section */}
-                  {replyingTo === comment.id && (
-                    <div className="mt-4 flex flex-col space-y-3">
-                      <input
-                        type="text"
-                        placeholder="Write a reply..."
-                        className="w-full p-3 bg-gray-900 rounded-lg border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
-                        value={replyText}
-                        onChange={(e) => setReplyText(e.target.value)}
-                      />
-                      <button
-                        className="self-start px-5 py-2 bg-orange-400 text-black font-semibold rounded-lg shadow-md hover:bg-orange-500 transition"
-                        onClick={() =>
-                          handleReplySubmit(
-                            comment.id,
-                            replyText,
-                            setReplyText,
-                            setReplyingTo,
-                            setComments,
-                            db3
-                          )
-                        }
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  )}
-
-                  {/* Display Replies */}
-                  {comment.replies && comment.replies.length > 0 && (
-                    <ul className="ml-4 mt-6 space-y-4 border-l border-gray-700 ">
-                      {comment.replies.map((reply) => (
-                        <li
-                          key={reply.id}
-                          className="bg-gray-800 p- rounded-lg flex space-x-2 shadow-sm"
-                        >
-                          <img
-                            src={reply.userImage || "/default-avatar.png"}
-                            alt="User avatar"
-                            className="w-8 h-8 rounded-full border-2 border-orange-500 shadow"
-                          />
-                          <div>
-                            <p className="text-white  font-semibold ">
-                              {reply.userName}
-                            </p>
-                            <p className="text-gray-400 ">{reply.text}</p>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))
-          ) : (
-            <p className="text-gray-400">Be the first to comment!</p>
-          )}
-        </ul>
-      </div>
-
-      {/* Other Blog Options */}
-      {otherBlogs.length > 0 && (
-        <div className="max-w-5xl mx-auto mt-12 px-2">
-          <h2 className="text-3xl font-extrabold text-white mb-6 tracking-wide">
-            Other Blog Options
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {otherBlogs.map((other) => (
-              <Link key={other.id} href={`/blog/${other.id}`}>
-                <div className="bg-gray-900 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition cursor-pointer border border-gray-700">
-                  <h3 className="text-2xl font-bold text-white mb-2">
-                    {other.title}
-                  </h3>
-                  <p className="text-orange-400 font-semibold text-sm mb-3">
-                    {other.genre}
-                  </p>
-                  <p className="text-gray-300 text-sm line-clamp-3">
-                    {other.body}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Back to Blogs Link */}
-      <div className="flex justify-center bg-gray-900 py-6 mt-12 rounded-lg border-t border-gray-700">
-        <Link
-          href="/blog"
-          className="text-orange-400 hover:text-orange-500 font-semibold text-lg"
-        >
-          ← Back to Blogs
         </Link>
-      </div>
-            <Ads />
+        <h3 className="mt-2 text-lg font-semibold text-orange-600">{blog.author}</h3>
 
+          <p className="text-gray-500 text-sm mt-1">
+            Posted on {blog.timestamp || "Unknown Date"}
+          </p>
+        </div>
     </div>
-  );
-};
 
+    {/* Blog Body Content */}
+    <div className="bg-gray-900 rounded-xl shadow-lg p-6 border border-gray-700">
+      <BlogDisplay body={blog.body} />
+    </div>
+
+    {/* Like / Share Section */}
+    <div className="flex flex-wrap justify-center gap-6 items-center shadow-lg">
+      <button
+        onClick={handleLikeClick}
+        className="flex items-center text-gray-300 hover:text-red-500 transition-all"
+        aria-label="Like Button"
+      >
+        <Heart
+          className={`h-7 w-7 mr-2 transition-transform ${liked ? "fill-red-500 scale-110" : "fill-none"}`}
+        />
+        {liked ? "Liked" : "Like"} ({likes})
+      </button>
+
+      <button
+        onClick={handleCopyLink}
+        className="flex items-center gap-2 text-gray-400 font-semibold py-2 px-5 rounded-lg hover:bg-gray-800 transition"
+      >
+        <LinkIcon className="h-6 w-6" /> Copy Link
+      </button>
+
+      <button
+        onClick={handleShareClick}
+        className="flex items-center gap-2 text-gray-400 font-semibold py-2 px-5 rounded-lg hover:bg-gray-800 transition relative"
+      >
+        <Share className="h-6 w-6" /> Share
+        {showShareMenu && (
+          <div className="absolute top-full mt-3 right-0 bg-gray-800 shadow-xl rounded-lg p-4 flex flex-col gap-3 text-sm w-56 z-50 border border-gray-700">
+            <a href={`https://twitter.com/intent/tweet?url=${window.location.href}`} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Share on Twitter</a>
+            <a href={`https://www.linkedin.com/shareArticle?mini=true&url=${window.location.href}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Share on LinkedIn</a>
+            <a href={`https://api.whatsapp.com/send?text=${window.location.href}`} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:underline">Share on WhatsApp</a>
+            <button onClick={() => setShowShareMenu(false)} className="flex items-center text-gray-400 hover:text-white mt-2">
+              <LinkIcon className="h-5 w-5 mr-2" /> Close
+            </button>
+          </div>
+        )}
+      </button>
+    </div>
+
+    {/* Comment Section */}
+    <div className="bg-gray-950 shadow-xl rounded-2xl p-8 border border-gray-700 space-y-8">
+      <h2 className="text-3xl font-extrabold text-white tracking-wide">
+        Join the Conversation
+      </h2>
+
+      {/* New Comment Input */}
+      <div className="lg:flex items-center space-x-5 grid space-y-4 lg:space-y-0">
+        <img
+          src={session?.user?.image || "/default-avatar.png"}
+          alt="Avatar"
+          className="w-12 h-12 rounded-full border-2 border-orange-500 shadow-md"
+        />
+        <input
+          type="text"
+          placeholder="What's on your mind?"
+          className="flex-grow p-5 rounded-lg bg-gray-900 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+        />
+        <button
+          onClick={handleCommentSubmit}
+          className="px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-400 text-black font-semibold rounded-lg shadow-md hover:from-orange-600 hover:to-yellow-500 transition"
+        >
+          Post
+        </button>
+      </div>
+
+      {/* List of Comments */}
+      <ul className="space-y-6 max-h-[420px] overflow-y-auto pr-2">
+        {comments.length > 0 ? (
+          comments
+            .sort((a, b) => b.timestamp?.seconds - a.timestamp?.seconds)
+            .map((comment) => (
+              <li
+                key={comment.id}
+                className="bg-gray-900 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition"
+              >
+                <div className="flex items-center space-x-4 mb-3">
+                  <img
+                    src={comment.userImage || "/default-avatar.png"}
+                    alt="User"
+                    className="w-10 h-10 rounded-full border-2 border-orange-500 shadow-sm"
+                  />
+                  <div>
+                    <p className="text-white font-semibold">{comment.userName}</p>
+                    {comment.timestamp && (
+                      <p className="text-sm text-gray-400">
+                        {new Date(comment.timestamp.seconds * 1000).toLocaleString()}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                <p className="text-gray-300 mb-3">{comment.text}</p>
+
+                <button
+                  className="text-orange-400 font-semibold hover:underline"
+                  onClick={() => setReplyingTo(comment.id)}
+                >
+                  Reply
+                </button>
+
+                {replyingTo === comment.id && (
+                  <div className="mt-4 space-y-3">
+                    <input
+                      type="text"
+                      placeholder="Write a reply..."
+                      className="w-full p-3 bg-gray-900 rounded-lg border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+                      value={replyText}
+                      onChange={(e) => setReplyText(e.target.value)}
+                    />
+                    <button
+                      className="px-5 py-2 bg-orange-400 text-black font-semibold rounded-lg shadow-md hover:bg-orange-500 transition"
+                      onClick={() =>
+                        handleReplySubmit(
+                          comment.id,
+                          replyText,
+                          setReplyText,
+                          setReplyingTo,
+                          setComments,
+                          db3
+                        )
+                      }
+                    >
+                      Submit
+                    </button>
+                  </div>
+                )}
+
+                {comment.replies?.length > 0 && (
+                  <ul className="ml-4 mt-6 space-y-4 border-l border-gray-700 pl-4">
+                    {comment.replies.map((reply) => (
+                      <li key={reply.id} className="flex space-x-2 bg-gray-800 p-3 rounded-lg">
+                        <img
+                          src={reply.userImage || "/default-avatar.png"}
+                          alt="Reply User"
+                          className="w-8 h-8 rounded-full border-2 border-orange-500 shadow"
+                        />
+                        <div>
+                          <p className="text-white font-semibold">{reply.userName}</p>
+                          <p className="text-gray-400">{reply.text}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))
+        ) : (
+          <p className="text-gray-400">Be the first to comment!</p>
+        )}
+      </ul>
+    </div>
+
+    {/* Other Blog Suggestions */}
+    {otherBlogs.length > 0 && (
+      <div className="space-y-6">
+        <h2 className="text-3xl font-extrabold text-white tracking-wide">Other Blog Options</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {otherBlogs.map((other) => (
+            <Link key={other.id} href={`/blog/${other.id}`}>
+              <div className="bg-gray-900 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition cursor-pointer border border-gray-700">
+                <h3 className="text-2xl font-bold text-white mb-2">{other.title}</h3>
+                <p className="text-orange-400 font-semibold text-sm mb-3">{other.genre}</p>
+                <p className="text-gray-300 text-sm line-clamp-3">{other.body?.slice(0, 100)}...</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+);
+}
 export default BlogDetails;

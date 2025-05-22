@@ -44,15 +44,20 @@ function AddVideoForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setSuccess(false);
-    setError(null);
 
     if (!formData.title || !formData.videoURL || !formData.genre || !formData.thumbnailURL) {
       setError("Please fill in all required fields.");
-      setLoading(false);
       return;
     }
+
+    if (loading) return; // prevent multiple submits
+
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+
+    // Open Monetag popup once on submit
+    window.open("https://otieu.com/4/9365391", "_blank");
 
     try {
       await addDoc(collection(db1, "blog"), formData);
@@ -76,7 +81,7 @@ function AddVideoForm() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto  p-8 bg-neutral-900 text-white rounded-xl shadow-2xl">
+    <div className="max-w-2xl mx-auto p-8 bg-neutral-900 text-white rounded-xl shadow-2xl">
       <div className="flex justify-end mt-12">
         <Link href="/upload-to-blog" passHref>
           <button className="mb-6 px-5 py-2 text-sm bg-amber-600 hover:bg-amber-500 text-black font-semibold rounded-md transition duration-300">

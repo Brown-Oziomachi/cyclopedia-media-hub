@@ -42,9 +42,11 @@ const VideoPage = () => {
 
   const [moreVideos, setMoreVideos] = useState([]);
   const [copySuccess, setCopySuccess] = useState(false);
+  const [adShown, setAdShown] = useState(false);
 
   const db = getFirestore(app1);
 
+  // Fetch videos from Firestore
   useEffect(() => {
     async function fetchVideos() {
       try {
@@ -61,6 +63,23 @@ const VideoPage = () => {
     fetchVideos();
   }, [db]);
 
+  // Inject Mailchimp script once on mount
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.id = "mcjs";
+    script.async = true;
+    script.src =
+      "https://chimpstatic.com/mcjs-connected/js/users/23e65087a3046b65731008ccb/f3782b3348d3c882f43d3d40e.js";
+    document.body.appendChild(script);
+
+    return () => {
+      const existingScript = document.getElementById("mcjs");
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, []);
+
   if (!decodedUrl) {
     return (
       <main className="min-h-screen flex items-center justify-center bg-black text-white px-4">
@@ -75,16 +94,39 @@ const VideoPage = () => {
     setTimeout(() => setCopySuccess(false), 2000);
   };
 
+  const handleBackClick = () => {
+    if (!adShown) {
+      window.open("https://otieu.com/4/9366150", "_blank");
+      setAdShown(true);
+      return;
+    }
+    router.push("/blog");
+  };
+
+  const handleSubscribeClick = () => {
+    if (!adShown) {
+      window.open("https://otieu.com/4/9366150", "_blank");
+      setAdShown(true);
+      return;
+    }
+    // Submit the Mailchimp form programmatically
+    const form = document.getElementById("mc-embedded-subscribe-form");
+    if (form) {
+      form.submit();
+    }
+  };
+
   return (
     <main className="min-h-screen bg-black text-white px-6 py-12 flex flex-col items-center max-w-4xl mx-auto">
       <div className="flex gap-4 mb-8 mt-20">
         <button
-          onClick={() => router.push("/blog")}
+          onClick={handleBackClick}
           className="px-6 py-2 bg-white text-black font-semibold rounded-lg shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-white transition"
           aria-label="Go back to blog"
         >
           ← Back
         </button>
+
         <button
           onClick={handleCopyLink}
           className="px-6 py-2 bg-white text-black font-semibold rounded-lg shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-white transition"
@@ -93,7 +135,7 @@ const VideoPage = () => {
           Share
         </button>
       </div>
-<Ads/>
+      <Ads />
       {copySuccess && (
         <div className="mb-4 text-green-400 font-semibold animate-fade-in">
           Link copied to clipboard!
@@ -121,12 +163,15 @@ const VideoPage = () => {
       <h1 className="text-2xl font-bold mb-4 text-white">{decodedTitle}</h1>
       <p className="text-gray-400 mb-8 leading-relaxed">{decodedDesc}</p>
 
+      {/* Mailchimp subscription form */}
+      <h1>Subscribe to our email</h1>
       <form
-        action="https://yourlist.usX.list-manage.com/subscribe/post?u=YOUR_USER_ID&amp;id=YOUR_LIST_ID"
+        action="https://app.us13.list-manage.com/subscribe/post?u=43a30bccc98acfbb16a52d1eb&amp;id=4f4f321a7e&amp;f_id=00bb5fe1f0"
         method="post"
+        id="mc-embedded-subscribe-form"
+        name="mc-embedded-subscribe-form"
+        className="validate"
         target="_blank"
-        rel="noopener noreferrer"
-        className="w-full flex flex-col sm:flex-row gap-4"
       >
         <input
           type="email"
@@ -137,12 +182,24 @@ const VideoPage = () => {
           aria-label="Email address"
         />
         <button
-          type="submit"
-          className="px-6 py-3 rounded-md bg-white text-black font-semibold hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-white transition"
-          aria-label="Subscribe to newsletter"
-        >
-          Subscribe
-        </button>
+  type="button"
+  onClick={handleSubscribeClick}
+  className="flex items-center gap-2 px-8 py-3 rounded-md bg-black text-white font-semibold hover:bg-white hover:text-black border-2 border-white transition focus:outline-none focus:ring-2 focus:ring-white cursor-pointer"
+  aria-label="Subscribe for updates"
+>
+  Subscribe for Updates
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-5 w-5"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2}
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+  </svg>
+</button>
+
       </form>
     </main>
   );
