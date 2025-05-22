@@ -24,6 +24,7 @@ export default function RootLayout({ children }) {
        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8408243121163767"
      crossorigin="anonymous"></script>
 
+
       </head>
       <body className="antialiased">
         <AuthProvider>

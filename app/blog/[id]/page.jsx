@@ -305,7 +305,7 @@ return (
         />
         <button
           onClick={handleCommentSubmit}
-          className="px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-400 text-black font-semibold rounded-lg shadow-md hover:from-orange-600 hover:to-yellow-500 transition"
+          className="px-2 py-2  bg-gradient-to-r from-orange-500 to-yellow-400 text-black font-semibold rounded-lg shadow-md hover:from-orange-600 hover:to-yellow-500 transition"
         >
           Post
         </button>

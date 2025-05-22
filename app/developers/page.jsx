@@ -41,6 +41,7 @@ async function DevelopersPage() {
   return (
     <main className="bg-black min-h-screen text-white">
       {/* Hero Section */}
+
       <header className="flex flex-col justify-center items-center h-screen text-center px-5">
         <div className="space-y-6 max-w-xl">
           <h1 className="text-5xl font-extrabold tracking-tight">Find Your Perfect Developer</h1>
