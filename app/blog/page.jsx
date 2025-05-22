@@ -56,7 +56,7 @@ const BlogPage = () => {
   });
 
   const handleClick = (type) => {
-    if ((type === "video" || type === "reels") && !adShown[type]) {
+    if (( type === "reels") && !adShown[type]) {
       window.open("https://otieu.com/4/9366150", "_blank");
       setAdShown((prev) => ({ ...prev, [type]: true }));
       return;
