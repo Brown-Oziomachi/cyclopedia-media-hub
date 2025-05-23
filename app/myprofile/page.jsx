@@ -65,7 +65,7 @@ const ProfileCard = () => {
                 webwiz creation
               </Link>
             </h4>
-            <h2 className="text-3xl font-bold mt-2">Frontend Web Developer</h2>
+            <h2 className="text-3xl font-bold mt-2">Full-Stack Developer/<br />Python Developer</h2>
             <p className="text-gray-400 mt-3 leading-relaxed">
               Passionate about crafting scalable and intuitive user experiences with modern web
               technologies.

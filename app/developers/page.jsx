@@ -5,7 +5,7 @@ async function DevelopersPage() {
   const developersData = [
     {
       name: "Brown Code",
-      specialty: "Front-End Developer",
+      specialty: "Full-Stack Developer/Python Developer",
       image: "/coderer.png",
       bio: "Crafting intuitive UI/UX designs.",
       links: [
@@ -16,7 +16,7 @@ async function DevelopersPage() {
     },
     {
       name: "Victor_D3v",
-      specialty: "Front-End Developer",
+      specialty: "Full-Stack Developer",
       image: "/vik.png",
       bio: "Specialist in server-side logic.",
       links: [
@@ -27,7 +27,7 @@ async function DevelopersPage() {
     },
     {
       name: "Dev_Hiba",
-      specialty: "Front-End Developer",
+      specialty: "Full-stack Developer",
       image: "/hiba.png",
       bio: "End-to-end web solutions.",
       links: [
