@@ -7,11 +7,10 @@ import UserBlogs from "@/components/UserBlog";
 import Ads from "@/components/Ads";
 
 async function ProfilePage() {
-  const session = await auth();
-  if (!session) {
-    redirect("/"); // Redirect if not authenticated
-  }
-
+const session = await auth()
+if (!session) {
+  redirect("/")
+}
   return (
     <div className="min-h-screen bg-black text-white py-12 lg:px-12">
       {/* Header info bar */}

@@ -110,19 +110,20 @@ const Page = () => {
         </div>
       )}
 
-      <div className="relative bg-gradient-to-b from-black to-gray-900 flex py-30 items-center justify-center">
+      <div className="relative bg-gradient-to-b from-black to-gray-900 flex py-20 items-center justify-center">
         {/* Sun Glow (white pulse instead of orange) */}
-        <div className="absolute w-40 h-40 rounded-full z-0 bg-white shadow-[0_0_80px_40px_rgba(255,255,255,0.5)] animate-pulse"></div>
+        <div className="absolute w-40 h-40 rounded-full z-0 bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse"></div>
       </div>
 
-      <div className="py-20 bg-gradient-to-r from-black via-gray-900 to-black text-center">
+      <div className="py-2 bg-gradient-to-r from-black via-gray-900 to-black text-center">
         <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb- py-1">
           <div>
             <h1
-              className=""
+              className="mt-10 text-4xl lg:text-6xl font-extrabold text-white tracking-wide"
             >
               Ready to Elevate Your Digital Presence?
             </h1>
+            <img src="ele.png" alt="Elevate Your Digital Presence" className="mt-5 w-full h-48 object-cover rounded-t-lg group-hover:opacity-80 transition duration-300" />
           </div>
         </h2>
 
@@ -172,13 +173,14 @@ const Page = () => {
       </div>
 
       {/* MOON SECTION */}
-      <div className="bg-gradient-to-r from-orange-400 via-gray-950 to-black py-1 overflow-hidden">
-        <div className="relative z-0 py-20 flex items-center justify-center">
+      <div className=" py-1 overflow-hidden z-50">
+        <div className="relative z-0 py-20 flex items-center justify-center mb-25">
           <div className="absolute w-64 h-64 rounded-full bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse"></div>
         </div>
 
         {[{
           title: "Why Your Business Needs a Professional Website",
+          img: "bus.jpg",
           description:
             "In today’s digital age, a professional website isn’t just a nice-to-have—it’s a necessity. Discover why a stunning and functional online presence matters more than ever.",
           buttons: [
@@ -189,11 +191,15 @@ const Page = () => {
         }].map((item, index) => (
           <div
             key={index}
-            className="bg-black z-50 p-5 rounded-lg shadow-lg hover:shadow-orange-500 transition border-l-4 border-black mb-10"
+            className="bg-black z-0 p-5 -mt-15 rounded-lg shadow-lg shadow-orange-500 transition border-l-4 border-black mb-10 "
           >
-            <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
-            <p className="text-gray-400 mb-6">{item.description}</p>
-            <div className="flex flex-wrap gap-4 group">
+            <h3 className="text-2xl font-bold text-white mb-4 z-50">{item.title}</h3>
+<img
+                src={item.img}
+                alt={item.title}
+                className="w-full h-48 object-cover rounded-t-lg mb-5 group-hover:opacity-80 transition duration-300"
+              />            <h6 className="text-gray-400 mb-6">{item.description}</h6>
+            <div className="flex text-xs gap-4 group">
               {item.buttons.map((button, i) => (
                 <Link key={i} href={button.href}>
                   <p className="group-hover:text-black px-4 py-2 bg-black text-white hover:text-white rounded-lg font-semibold hover:bg-orange-600 transition flex items-center gap-2">
