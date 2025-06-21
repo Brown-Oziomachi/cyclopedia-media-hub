@@ -3,13 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
-import {
-  BellRing,
-  ChevronDown,
-  ListCollapse,
-  LogIn,
-  Menu,
-} from "lucide-react";
+import { BellRing, ChevronDown, ListCollapse, LogIn, Menu } from "lucide-react";
 import logo from "../public/logo.png";
 import { Drawer, Box } from "@mui/material";
 
@@ -89,13 +83,16 @@ const ProfileDropdownNavbar = () => {
                 <ChevronDown className="text-xl text-cyan-400 transition-transform duration-200" />
               </button>
 
-              <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
+              <Drawer
+                anchor="right"
+                open={drawerOpen}
+                onClose={toggleDrawer(false)}
+              >
                 <Box
                   sx={{
                     width: 280,
-                    bgcolor: "#1f2937",
-                    color: "white",
-                    height: "100%",
+                    bgcolor: "black",
+                    height: "50em",
                     p: 3,
                     display: "flex",
                     flexDirection: "column",
@@ -105,28 +102,44 @@ const ProfileDropdownNavbar = () => {
                   onClick={toggleDrawer(false)}
                   onKeyDown={toggleDrawer(false)}
                 >
-                  <div>
-                    <p className="font-semibold text-base truncate">{session.user.name}</p>
-                    <p className="text-gray-400 text-xs truncate mb-4">{session.user.email}</p>
+                  <div className="">
+                    <p className="font-semibold text-base truncate text-white">
+                      {session.user.name}
+                    </p>
+                    <p className="text-gray-400 text-xs truncate mb-4">
+                      {session.user.email}
+                    </p>
                     <hr className="my-4 border-gray-600" />
                     <nav className="flex flex-col space-y-2 text-gray-300 text-sm font-normal">
-                      <Link href="/profile" className="hover:text-cyan-400 transition-colors duration-200">
+                      <Link
+                        href="/profile"
+                        className="hover:text-cyan-400 transition-colors duration-200"
+                      >
                         My Profile
                       </Link>
-                      <Link href="/blog" className="hover:text-cyan-400 transition-colors duration-200">
+                      <Link
+                        href="/blog"
+                        className="hover:text-cyan-400 transition-colors duration-200"
+                      >
                         Blog
                       </Link>
-                      <Link href="/news" className="hover:text-cyan-400 transition-colors duration-200">
+                      <Link
+                        href="/news"
+                        className="hover:text-cyan-400 transition-colors duration-200"
+                      >
                         News
                       </Link>
-                      <Link href="/notifications" className="hover:text-cyan-400 transition-colors duration-200">
+                      <Link
+                        href="/notifications"
+                        className="hover:text-cyan-400 transition-colors duration-200"
+                      >
                         Notifications
                       </Link>
                     </nav>
                   </div>
                   <button
                     onClick={signOut}
-                    className="mt-6 w-full py-2 rounded bg-red-600 hover:bg-red-700 text-white text-sm font-semibold transition"
+                    className="mt-6 w-full py-2 rounded bg-gray-400/5 border-x text-white text-sm font-semibold transition"
                     aria-label="Sign out"
                   >
                     Sign Out

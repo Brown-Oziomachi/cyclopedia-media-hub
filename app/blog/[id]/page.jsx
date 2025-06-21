@@ -204,12 +204,11 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
 
 
 return (
-  <div className="min-h-screen px-2 py-16 max-w-5xl mx-auto bg-gradient-to-b from-gray-900 via-gray-950 to-gray-900 text-gray-300 font-sans leading-relaxed space-y-14">
-    
+  <div className="min-h-screen px-2 py-16 max-w-5xl mx-auto bg-gray-400/5 text-gray-300 font-sans leading-relaxed space-y-14">
     {/* Blog Header Section */}
-    <div className="bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 shadow-xl rounded-2xl p-10 relative border border-gray-700 space-y-6">
+    <div className="bg-gray-400/5 shadow-xl rounded-2xl p-10 relative border border-gray-700 space-y-6">
       <Link href={`/blog/${blog.id}`}>
-        <span className="inline-block px-5 py-2 bg-gradient-to-r from-orange-500 to-yellow-400 text-black font-semibold text-sm rounded-full shadow-md transition-transform hover:scale-105">
+        <span className="inline-block px-5 py-2 bg-gradient-to-r from-blue-500 text-black font-semibold text-sm rounded-full shadow-md transition-transform hover:scale-105">
           {blog.genre}
         </span>
       </Link>
@@ -218,10 +217,7 @@ return (
         THE <span className="text-orange-400">SUN</span> WEB
       </h1>
 
-      <h1 className="text-5xl font-extrabold text-white text-center drop-shadow-lg">
-        {blog.title}
-      </h1>
-
+     
       
       <div className="flex flex-col items-center mb-6">
         <Link href={`/profile/${blog.author}`}>
@@ -229,19 +225,24 @@ return (
             title="View Profile"
             src={session?.user?.image}
             alt="User"
-            className="w-24 h-24 rounded-full border-4 border-orange-500 shadow-lg cursor-pointer hover:scale-105 transition-transform"
+            className="w-24 h-24 rounded-full  shadow-lg cursor-pointer hover:scale-105 transition-transform"
           />
         </Link>
-        <h3 className="mt-2 text-lg font-semibold text-orange-600">{blog.author}</h3>
+        <h3 className="mt-2 text-lg font-semibold text-blue-600">{blog.author}</h3>
 
           <p className="text-gray-500 text-sm mt-1">
             Posted on {blog.timestamp || "Unknown Date"}
           </p>
         </div>
     </div>
+      <p className="-mt-15 text-center text-xs text-shadow-2xs border-b border-x px-0 border-gray-400/20 rounded-md">Learn, unlearn and relearn.</p>
 
     {/* Blog Body Content */}
-    <div className="bg-gray-900 rounded-xl shadow-lg p-6 border border-gray-700">
+
+    <div className="bg-gray-400/5 rounded-xl shadow-lg p-6 border border-gray-700">
+     <h1 className="text-3xl font-extrabold text-white text-center drop-shadow-lg">
+        {blog.title}
+      </h1>
       <BlogDisplay body={blog.body} />
     </div>
 
@@ -249,7 +250,7 @@ return (
     <div className="flex flex-wrap justify-center gap-6 items-center shadow-lg">
       <button
         onClick={handleLikeClick}
-        className="flex items-center text-gray-300 hover:text-red-500 transition-all"
+        className="flex items-center text-gray-300 hover:text-blue-500 transition-all"
         aria-label="Like Button"
       >
         <Heart
@@ -271,7 +272,7 @@ return (
       >
         <Share className="h-6 w-6" /> Share
         {showShareMenu && (
-          <div className="absolute top-full mt-3 right-0 bg-gray-800 shadow-xl rounded-lg p-4 flex flex-col gap-3 text-sm w-56 z-50 border border-gray-700">
+          <div className="absolute top-full mt-3 right-0bg-gray-400/5 shadow-xl rounded-lg p-4 flex flex-col gap-3 text-sm w-56 z-50 border border-gray-700">
             <a href={`https://twitter.com/intent/tweet?url=${window.location.href}`} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Share on Twitter</a>
             <a href={`https://www.linkedin.com/shareArticle?mini=true&url=${window.location.href}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Share on LinkedIn</a>
             <a href={`https://api.whatsapp.com/send?text=${window.location.href}`} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:underline">Share on WhatsApp</a>
@@ -284,7 +285,7 @@ return (
     </div>
 
     {/* Comment Section */}
-    <div className="bg-gray-950 shadow-xl rounded-2xl p-8 border border-gray-700 space-y-8">
+    <div className="bg-gray-400/5 shadow-xl rounded-2xl p-8 border border-gray-700 space-y-8">
       <h2 className="text-3xl font-extrabold text-white tracking-wide">
         Join the Conversation
       </h2>
@@ -294,18 +295,18 @@ return (
         <img
           src={session?.user?.image || "/default-avatar.png"}
           alt="Avatar"
-          className="w-12 h-12 rounded-full border-2 border-orange-500 shadow-md"
+          className="w-12 h-12 rounded-full shadow-md"
         />
         <input
           type="text"
           placeholder="What's on your mind?"
-          className="flex-grow p-5 rounded-lg bg-gray-900 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+          className="flex-grow p-5 rounded-lg bg-gray-400/5 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         />
         <button
           onClick={handleCommentSubmit}
-          className="lg:px-5 lg:py-2 px-3 py-2 max-md:w-1/2  bg-gradient-to-r from-orange-500 to-yellow-400 text-black font-semibold rounded-lg shadow-md hover:from-orange-600 hover:to-yellow-500 transition"
+          className="lg:px-5 lg:py-2 px-3 py-2 max-md:w-1/2  bg-gradient-to-r from-blue-500 to-yellow-400 text-black font-semibold rounded-lg shadow-md hover:from-orange-600 hover:to-yellow-500 transition"
         >
           Post
         </button>
@@ -319,13 +320,13 @@ return (
             .map((comment) => (
               <li
                 key={comment.id}
-                className="bg-gray-900 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition"
+                className="bg-gray-400/5 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition"
               >
                 <div className="flex items-center space-x-4 mb-3">
                   <img
                     src={comment.userImage || "/default-avatar.png"}
                     alt="User"
-                    className="w-10 h-10 rounded-full border-2 border-orange-500 shadow-sm"
+                    className="w-10 h-10 rounded-full  shadow-sm"
                   />
                   <div>
                     <p className="text-white font-semibold">{comment.userName}</p>
@@ -340,7 +341,7 @@ return (
                 <p className="text-gray-300 mb-3">{comment.text}</p>
 
                 <button
-                  className="text-orange-400 font-semibold hover:underline"
+                  className="text-blue-400 font-semibold hover:underline"
                   onClick={() => setReplyingTo(comment.id)}
                 >
                   Reply
@@ -351,7 +352,7 @@ return (
                     <input
                       type="text"
                       placeholder="Write a reply..."
-                      className="w-full p-3 bg-gray-900 rounded-lg border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+                      className="w-full p-3 bg-gray-400/5 rounded-lg border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
                       value={replyText}
                       onChange={(e) => setReplyText(e.target.value)}
                     />
@@ -376,11 +377,11 @@ return (
                 {comment.replies?.length > 0 && (
                   <ul className="ml-4 mt-6 space-y-4 border-l border-gray-700 pl-4">
                     {comment.replies.map((reply) => (
-                      <li key={reply.id} className="flex space-x-2 bg-gray-800 p-3 rounded-lg">
+                      <li key={reply.id} className="flex space-x-2 bg-gray-400/5 border-b border-r p-3 rounded-lg">
                         <img
                           src={reply.userImage || "/default-avatar.png"}
                           alt="Reply User"
-                          className="w-8 h-8 rounded-full border-2 border-orange-500 shadow"
+                          className="w-8 h-8 rounded-full  shadow"
                         />
                         <div>
                           <p className="text-white font-semibold">{reply.userName}</p>
@@ -401,11 +402,12 @@ return (
     {/* Other Blog Suggestions */}
     {otherBlogs.length > 0 && (
       <div className="space-y-6">
-        <h2 className="text-3xl font-extrabold text-white tracking-wide">Other Blog Options</h2>
+        <h1 className="mb-0 text-center text-xs">Read more blog post</h1>
+        <h2 className="text-3xl font-extrabold text-white tracking-wide text-center text-clip py-10 border-t border-x">Other Blog Options</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {otherBlogs.map((other) => (
             <Link key={other.id} href={`/blog/${other.id}`}>
-              <div className="bg-gray-900 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition cursor-pointer border border-gray-700">
+              <div className="bg-gray-400/5 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition cursor-pointer border-x">
                 <h3 className="text-2xl font-bold text-white mb-2">{other.title}</h3>
                 <p className="text-orange-400 font-semibold text-sm mb-3">{other.genre}</p>
                 <p className="text-gray-300 text-sm line-clamp-3">{other.body?.slice(0, 100)}...</p>

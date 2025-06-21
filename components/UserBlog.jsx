@@ -59,7 +59,7 @@ const UserPostsPreview = () => {
   if (!user) return <p className="text-white">Please sign in to see your posts.</p>;
 
   return (
-    <div className="bg-white dark:bg-black p-4 rounded shadow-sm">
+    <div className=" bg-gray-400/5 p-4 rounded shadow-sm">
       <h3 className="text-xl font-semibold mb-4">Your Latest Blog Posts</h3>
       {posts.length === 0 ? (
         <p className="text-gray-500">You haven't written any posts yet.</p>

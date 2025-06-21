@@ -12,16 +12,16 @@ if (!session) {
   redirect("/")
 }
   return (
-    <div className="min-h-screen bg-black text-white py-12 lg:px-12">
+    <div className="min-h-screen bg-gray-400/5 text-white py-12 lg:px-12 mb-10">
       {/* Header info bar */}
-      <div className="bg-gray-900/90 h-auto w-full py-5 border-b border-gray-700">
+      <div className="bg-gray-400/5 h-auto w-full py-5 border-b border-x mt-10">
         <h1 className="text-center text-white/90 text-lg font-semibold">
           Your access is confirmed.
         </h1>
         <h2 className="text-center text-white/70 text-sm mt-1">
           We are building a better way.{" "}
           <Link href="/contact">
-            <span className="underline cursor-pointer text-white hover:text-gray-300">
+            <span className="underline cursor-pointer text-white hover:text-gray-300 mb-10">
               SHARE YOUR THOUGHTS
             </span>
           </Link>
@@ -31,7 +31,7 @@ if (!session) {
       {/* Main profile container */}
       <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-md rounded-xl shadow-lg p-6 mt-8 border border-gray-800">
         {/* Profile Cover */}
-        <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 h-40 rounded-lg shadow-inner border border-gray-700">
+        <div className="relative bg-gray-400/5 rounded-lg shadow-inner border border-gray-700">
           <div className="absolute -bottom-12 left-6 flex items-center space-x-6">
             {/* Profile Image (no grayscale) */}
             <img
@@ -53,7 +53,7 @@ if (!session) {
         <div className="h-16"></div>
 
         {/* Profile Details Section */}
-        <div className="bg-gray-900/90 p-6 rounded-lg shadow-md border border-gray-700">
+        <div className="bg-gray-400/5 p-6 rounded-lg shadow-md border-x ">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-1">
               <p className="text-gray-400 uppercase tracking-wide text-xs">Name</p>
@@ -67,18 +67,18 @@ if (!session) {
             </div>
           </div>
 
-          <div className="mt-8 flex justify-center">
+          {/* <div className="mt-8 flex justify-center">
             <Link
               href="/upload-to-blog"
               className="px-5 py-3 bg-white text-black font-semibold rounded-lg shadow hover:bg-gray-200 transition"
             >
               Upload to Wiz
             </Link>
-          </div>
+          </div> */}
 
           <div className="mt-6 text-center text-gray-500 text-sm">
             Want to explore more?{" "}
-            <Link href="/" className="underline hover:text-white cursor-pointer">
+            <Link href="/" className="underline hover:text-white cursor-pointer text-white">
               Go to Home →
             </Link>
           </div>

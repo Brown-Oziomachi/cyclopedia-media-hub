@@ -24,7 +24,7 @@ const BlogDisplay = ({ title, genre, image, body }) => {
       <p className="text-gray-400 text-sm text-center">
         <ReactMarkdown>{genre}</ReactMarkdown>
       </p>
-      <div className="mt-4 bg-gray-900 p-4 rounded-lg text-white">
+      <div className="mt-4 space-y-3 rounded-lg text-white">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
       </div>
     </div>

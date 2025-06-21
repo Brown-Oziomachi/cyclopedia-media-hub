@@ -358,7 +358,7 @@ const BlogPage = () => {
               {filteredPosts.map((post) => (
                 <article
                   key={post.id}
-                  className="bg-gray-950 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit"
+                  className=" rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit"
                 >
                   <span className="absolute top-4 left-4 bg-white text-black text-xs px-3 py-1 rounded-full">
                     {post.genre || "General"}
@@ -395,7 +395,7 @@ const BlogPage = () => {
                       className="block cursor-pointer"
                       onClick={() => openVideo(post)}
                     >
-                      <div className="h-48 bg-black flex items-center justify-center">
+                      <div className="h-48 flex items-center justify-center">
                         <img
                           src={
                             post.thumbnail
