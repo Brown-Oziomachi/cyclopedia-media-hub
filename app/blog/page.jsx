@@ -246,7 +246,7 @@ const BlogPage = () => {
   }, []);
 
   return (
-    <main className="min-h-screen bg-gray-950 text-white px-8 py-30">
+    <main className="min-h-screen bg-gray-400/5 border-x text-white px-8 py-30">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <header className="text-center mb-12">
@@ -266,7 +266,7 @@ const BlogPage = () => {
           className={`px-6 py-3 rounded-xl font-semibold transition ${
             showContentType === type
               ? "bg-white text-black"
-              : "bg-white text-black hover:bg-pink-600"
+              : "bg-white text-black hover:bg-gray-400/5 border-x"
           }`}
           onClick={() => handleClick(type)}
         >
@@ -279,7 +279,7 @@ const BlogPage = () => {
           <input
             type="text"
             placeholder={`Search ${showContentType} by genre...`}
-            className="w-full px-4 py-2 rounded-md text-white focus:ring focus:ring-yellow-500 border border-white bg-amber-50/30"
+            className="w-full px-4 py-2 rounded-md text-white focus:ring focus:ring-yellow-500 border border-white bg-gray-400/10 border-x"
             onChange={(e) => {
               const searchTerm = e.target.value.toLowerCase();
               let basePosts = [];
@@ -317,10 +317,10 @@ const BlogPage = () => {
           {genres.map((genre) => (
             <button
               key={genre}
-              className={`flex-shrink-0 px-4 py-2 rounded-md font-medium transition ${
+              className={`flex-shrink-0 px-4 py-2 rounded-md font-medium transition cursor-pointer ${
                 selectedCategory === genre
                   ? "bg-yellow-500 text-black"
-                  : "bg-gray-800 text-white hover:bg-yellow-400"
+                  : "bg-gray-400/5 border-x text-white hover:bg-gray-400/10"
               }`}
               onClick={() => filterByCategory(genre)}
             >

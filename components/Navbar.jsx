@@ -36,10 +36,10 @@ const ProfileDropdownNavbar = () => {
   ];
 
   return (
-    <main className="fixed w-full bg-gradient-to-r from-gray-900 via-black to-gray-800 shadow-lg z-50">
+    <main className="fixed w-full bg-gray-400/5 border-x shadow-xl border-b border z-50">
       <section className="px-5 py-4 flex items-center justify-between">
         {/* Logo */}
-        <span className="flex items-center border px-2 border-gray-800 rounded-md font-extralight">
+        <span className="flex items-center border px-2 border-gray-400 rounded-md font-extralight">
           <Link href="/">
             <Image
               src={logo}
@@ -49,7 +49,7 @@ const ProfileDropdownNavbar = () => {
               className="rounded-full shadow-xl hover:scale-110 transition-transform duration-100 z-50"
             />
           </Link>
-          <h1 className="text-white -ml-5">WebWiz</h1>
+          <h1 className="text-white -ml-5 border-b">WebWiz</h1>
         </span>
 
         {/* Desktop Navigation */}
@@ -137,10 +137,10 @@ const ProfileDropdownNavbar = () => {
           ) : (
             <Link
               href="/auth/signin"
-              className="text-md py-2 px-6 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md"
+              className="text-md py-2 px-6 bg-gray-400/5 border-x text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md"
             >
-              <LogIn className="inline-block mr-2 text-gray-400" size={16} />
               Sign In
+              <LogIn className="inline-block ml-5 text-gray-400" size={16} />
             </Link>
           )}
         </div>
@@ -177,7 +177,7 @@ const ProfileDropdownNavbar = () => {
 
       {/* Mobile Navigation Overlay */}
       <div
-        className={`fixed top-0 left-0 w-full h-full bg-black/90 text-white flex flex-col items-center justify-center z-40 transition-transform duration-500 ${
+        className={`fixed top-0 left-0 w-full h-full bg-neutral-900 opacity-90 border-x  text-white flex flex-col items-center justify-center z-40 transition-transform duration-500 ${
           showNav ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -210,7 +210,7 @@ const ProfileDropdownNavbar = () => {
               signOut();
               setShowNav(false);
             }}
-            className="text-md py-2 px-6 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md mt-4"
+            className="text-md py-2 px-6 bg-gray-400/5 border-x text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md mt-4"
           >
             Sign Out
           </button>
@@ -218,7 +218,7 @@ const ProfileDropdownNavbar = () => {
           <Link
             href="/auth/signin"
             onClick={() => setShowNav(false)}
-            className="text-md py-2 px-6 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md mt-4"
+            className="text-md py-2 px-6 bg-gray-400/5 border-x text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md mt-4"
           >
             Sign In
           </Link>

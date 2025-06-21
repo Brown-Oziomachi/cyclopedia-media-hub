@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Page = () => {
   return (
-    <main className="bg-gray-900 text-gray-200 min-h-screen px-6 py-12 flex flex-col items-center">
+    <main className="bg-gray-400/5 border-x text-gray-200 min-h-screen px-6 py-12 flex flex-col items-center">
       {/* Header Section */}
       <section className="max-w-3xl text-center mb-16">
         <h1 className="text-4xl font-extrabold text-white mb-6 mt-10">
@@ -71,17 +71,17 @@ const Page = () => {
         ].map(({ title, text }, i) => (
           <div
             key={i}
-            className="bg-gray-800 rounded-lg p-8 shadow-md border border-gray-700 max-w-4xl mx-auto"
+            className="bg-gray-400/10 border-x rounded-lg p-8 shadow-md border border-gray-700 max-w-4xl mx-auto"
           >
-            <h2 className="text-2xl font-semibold text-cyan-400 mb-4">{title}</h2>
-            <p className="text-gray-300 leading-relaxed">{text}</p>
+            <h2 className="text-2xl font-semibold text-white mb-4">{title}</h2>
+            <p className="text-gray-300 leading-relaxed border py-1 px-5 rounded-e-2xl">{text}</p>
           </div>
         ))}
       </section>
 
       {/* Conclusion Section */}
       <section className="max-w-3xl text-center mt-20 mb-12 px-4">
-        <h2 className="text-3xl font-bold text-cyan-400 mb-6">
+        <h2 className="text-3xl font-bold text-white mb-6">
           Ready to Take Your Online Presence to the Next Level? 💻
         </h2>
         <p className="text-lg text-gray-300 mb-8 leading-relaxed">
@@ -89,16 +89,19 @@ const Page = () => {
           drives real results. Drop a comment or DM me to get started.
         </p>
         <div className="flex flex-wrap justify-center gap-6">
-          <a
-            href="mailto:browncemmanuel@gmail.com"
-            className="inline-block px-6 py-3 bg-cyan-500 hover:bg-cyan-600 rounded-lg font-semibold text-white shadow-lg transition"
+          <Link href="/">
+          <p className="line-block px-6 py-3 bg-gray-400/5 border-x hover:bg-gray-500/10 rounded-lg font-semibold text-white shadow-lg transition">Return </p>
+          </Link>
+          <p
+            href="mailto:webwizcreation.web@gmail.com"
+            className="cursor-pointer inline-block px-6 py-3 bg-gray-400/5 border-x hover:bg-gray-500/10 rounded-lg font-semibold text-white shadow-lg transition"
             aria-label="Send an email message"
           >
-            Message Me
-          </a>
+            Message us
+          </p>
           <Link
             href="/blog"
-            className="inline-block px-6 py-3 bg-green-600 hover:bg-green-700 rounded-lg font-semibold text-white shadow-lg transition"
+            className="inline-block px-6 py-3 underline rounded-lg font-semibold text-white shadow-lg transition border-x hover:no-underline"
             aria-label="Visit blog page"
           >
             Visit Blog
@@ -106,16 +109,6 @@ const Page = () => {
         </div>
       </section>
 
-      {/* Next Link */}
-      <div className="mb-10">
-        <Link
-          href="/blog"
-          className="text-cyan-400 hover:underline text-lg font-medium"
-          aria-label="Go to next page"
-        >
-          Next...
-        </Link>
-      </div>
     </main>
   );
 };

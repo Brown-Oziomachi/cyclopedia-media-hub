@@ -34,17 +34,18 @@ const ProfileCard = () => {
   };
 
   return (
-    <main className="z-50 max-w-5xl mx-auto bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-xl shadow-xl mb-12 overflow-hidden text-white font-sans">
+    <main className="z-50 max-w-5xl mx-auto bg-gray-400/5 border-x rounded-xl shadow-xl mb-12 overflow-hidden text-white font-sans">
       {/* Header Section */}
-      <div className="relative h-64 mt-12 rounded-b-xl overflow-hidden">
+      <div className="relative h-64 mt-17 rounded-b-xl overflow-hidden">
         <img
-          src="/corevalue.png"
+          src="/web1.jpg"
           alt="Header Background"
-          className="w-full h-full object-cover brightness-75"
+          className="w-full h-full object-cover brightness-75 opacity-30"
         />
         <div className="absolute inset-0 flex items-center justify-center">
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-wide drop-shadow-lg">
             Brown Code
+          <p className="absolute text-sm font-light text-center">"The act of programming is the skill of controlling complexity"</p>
           </h1>
         </div>
       </div>
@@ -55,17 +56,16 @@ const ProfileCard = () => {
           <img
             src="/coderr.png"
             alt="Profile Picture"
-            className="w-40 h-40 lg:h-52 lg:w-52 object-cover rounded-full border-4 border-cyan-400 shadow-lg transition-transform hover:scale-105"
+            className="w-40 h-40 lg:h-52 lg:w-52 object-cover rounded-full border-4 border-gray-400/5 shadow-lg transition-transform hover:scale-105"
           />
           <div className="mt-6 space-y-1">
             <h3 className="text-2xl font-serif font-semibold">Brown Oziomachi</h3>
             <h4 className="text-sm text-gray-300">
-              Company:{" "}
-              <Link href="/" className="text-orange-400 underline hover:text-orange-500">
+              <Link href="/" className="text-gray-400 underline hover:text-orange-500">
                 webwiz creation
               </Link>
             </h4>
-            <h2 className="text-3xl font-bold mt-2">Full-Stack Developer/<br />Python Developer</h2>
+            <h2 className="text-3xl font-bold mt-2 text-gray-500">Full-Stack Developer/<br />Python Developer</h2>
             <p className="text-gray-400 mt-3 leading-relaxed">
               Passionate about crafting scalable and intuitive user experiences with modern web
               technologies.
@@ -122,7 +122,7 @@ const ProfileCard = () => {
           ].map((skill, index) => (
             <span
               key={index}
-              className="bg-cyan-700 text-white py-2 px-5 rounded-lg shadow-md hover:bg-cyan-800 transition duration-300 select-none cursor-default font-semibold"
+              className="bg-gray-400/5 border-x text-white py-2 px-5 rounded-lg shadow-md hover:bg-cyan-800 transition duration-300 select-none cursor-default font-semibold"
             >
               {skill}
             </span>
@@ -133,7 +133,7 @@ const ProfileCard = () => {
       <hr className="border-gray-700 mx-8" />
 
       {/* Services Section */}
-      <section className="px-8 py-10 bg-gradient-to-r from-cyan-600 to-blue-700 rounded-lg mx-8 text-center text-white">
+      <section className="px-8 py-10 bg-gray-400/5 border-y rounded-lg mx-8 text-center text-white">
         <h2 className="text-4xl font-bold mb-5 tracking-tight">Services Offered</h2>
         <p className="text-lg leading-relaxed max-w-3xl mx-auto mb-10">
           I offer a range of services to meet your web development needs.
@@ -155,7 +155,7 @@ const ProfileCard = () => {
           ].map((service, index) => (
             <div
               key={index}
-              className="bg-black bg-opacity-10 backdrop-blur-md p-6 rounded-xl shadow-lg hover:bg-opacity-20 transition"
+              className=" border-x bg-opacity-10 backdrop-blur-md p-6 rounded-xl shadow-xl hover:bg-opacity-20 transition"
             >
               <h3 className="text-2xl font-semibold mb-3">{service.title}</h3>
               <p className="text-gray-300">{service.description}</p>
@@ -169,11 +169,11 @@ const ProfileCard = () => {
       {/* Hobbies Section */}
       <section className="px-8 py-10">
         <h2 className="text-center text-3xl font-extrabold mb-6 tracking-wide">Hobbies</h2>
-        <div className="flex flex-wrap justify-center gap-5 max-w-3xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-5 max-w-3xl mx-auto ">
           {["Coding", "Gaming", "Praying", "Traveling", "Reading"].map((hobby, index) => (
             <span
               key={index}
-              className="bg-gray-700 text-white py-2 px-6 rounded-xl shadow-md hover:bg-gray-800 transition duration-300 select-none cursor-default font-medium"
+              className="bg-gray-400/5 border-y text-white py-2 px-6 rounded-xl shadow-md hover:bg-gray-800 transition duration-300 select-none cursor-default font-medium"
             >
               {hobby}
             </span>
@@ -235,20 +235,20 @@ const ProfileCard = () => {
         <p className="text-gray-400 mb-8 text-lg leading-relaxed">
           Interested in collaborating or hiring me? Feel free to reach out!
         </p>
-        <div className="flex justify-center gap-6">
+        <div className="flex justify-center gap-2">
           <a
             href="mailto:browncemmanuel@gmail.com"
-            className="bg-cyan-700 text-white py-3 px-8 rounded-lg shadow-lg hover:bg-cyan-800 transition duration-300"
+            className="bg-gray-00/50 border-x text-white py-3 px-8 rounded-lg shadow-lg hover:bg-cyan-800 transition duration-300"
           >
-            Email Me
+            Email Me✉️
           </a>
           <a
             href="https://docs.google.com/document/d/1qOyfN6tep1N_eR8wgfoKTPxCeH7FP3e7J-VKJjwbeAI/edit?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-700 text-white py-3 px-8 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
+            className="bg-gray-400/5 border-x text-white py-3 px-8 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
           >
-            Resume
+            Resume☑️
           </a>
         </div>
       </section>

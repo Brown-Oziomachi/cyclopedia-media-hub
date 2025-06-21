@@ -10,8 +10,8 @@ const page = async () => {
   }
 
   return (
-    <main className="min-h-screen bg-black flex items-center justify-center px-4">
-      <div className="max-w-md w-full bg-gray-900 rounded-lg shadow-xl p-8 space-y-8">
+    <main className="min-h-screen bg-gray-400/5 border-x flex items-center justify-center px-4">
+      <div className="max-w-md w-full bg-gray-400/10 border-y rounded-lg shadow-xl p-8 space-y-8">
         <header className="text-center">
           <h1 className="text-3xl font-extrabold text-white mb-2">
             Welcome to WebWiz Creation
@@ -30,7 +30,7 @@ const page = async () => {
           >
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-3 bg-white text-black font-semibold py-3 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-500 transition"
+              className="w-full flex items-center justify-center gap-3 bg-white/50 border-x text-black font-semibold py-3 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-500 transition"
               aria-label="Sign in with Google"
             >
               <ChartPie className="text-2xl" />
@@ -46,7 +46,7 @@ const page = async () => {
           >
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-3 bg-gray-700 text-white font-semibold py-3 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-500 transition"
+              className="w-full flex items-center justify-center gap-3 bg-gray-400/5 border-x text-white font-semibold py-3 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-500 transition"
               aria-label="Sign in with Github"
             >
               <Github className="text-2xl" />

@@ -63,7 +63,7 @@ const Page = () => {
           />
         </div>
       ) : (
-        <div className="bg-gray-900 text-white min-h-screen py-10 px-5">
+        <div className="bg-gray-400/5 border-x text-white min-h-screen py-10 px-5">
           {/* Header Section */}
           <div className="text-center mb-10 mt-10">
             <img src="logo.png" alt="Global News Logo" width={100} height={100} className="mx-auto" />
@@ -80,7 +80,7 @@ const Page = () => {
             </label>
             <select
               id="news-sources"
-              className="py-2 px-4 bg-gray-800 text-white rounded-lg shadow-md hover:bg-gray-700 transition-all"
+              className="py-2 px-4 bg-gray-400/5 border-x text-black rounded-lg shadow-md hover:bg-gray-700 transition-all"
               value={platform}
               onChange={handlePlatformChange}
             >

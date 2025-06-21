@@ -7,6 +7,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import { db2 } from "@/lib/firebaseConfig";
 import { LoaderCircle, ThumbsUp } from "lucide-react";
+import ChatDropdown from "@/components/Chat";
 
 // Validation Schema
 const valSchema = Yup.object({
@@ -58,26 +59,26 @@ const ContactPage = () => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen bg-black">
+        <div className="flex justify-center items-center h-screen bg-gray-400/5">
           <LoaderCircle size={50} speed={1.1} color="white" className="animate-spin" />
         </div>
       ) : (
-        <main className="bg-black text-white min-h-screen">
-          <section className="container mx-auto px-6 py-16 lg:flex lg:space-x-12">
+        <main className="bg-gray-400/5 border-y text-white min-h-screen ">
+          <section className="container mx-auto px-6 py-6 lg:flex lg:gap-20 ">
             {/* Left Info */}
-            <div className="flex-1 space-y-6 max-w-xl mx-auto lg:mx-0">
-              <Link href="/">
+            <div className="flex-1 space-y-6 max-w-xl mx-auto lg:mx-0 space-x-20 mt-20">
+              <h1 className="text-5xl font-extrabold text-white text-center">Contact WebWiz</h1>
+              <div className="container mx-auto lg:space-x-2">
                 <img
-                  src="Ai.png"
+                  src="web9.jpg"
                   alt="Webwiz Logo"
-                  className="w-40 h-auto mx-auto lg:mx-0 cursor-pointer"
+                  className="w-full mx-auto "
                 />
-              </Link>
-              <h1 className="text-5xl font-extrabold text-white">Contact WebWiz</h1>
-              <h2 className="text-xl text-gray-400 uppercase tracking-wider mb-4">The Sun Web</h2>
-              <p className="text-gray-300 leading-relaxed text-lg">
+              <h2 className="text-xl text-gray-400 uppercase tracking-wider mb-4 text-center border-b border-x">BUILD A SYSTEM WITH <br /> THE SUN WEB</h2>
+              <p className="text-gray-300 leading-relaxed text-x1">
                 At WebWiz, we are dedicated to bringing your ideas to life. Whether you're looking
                 for expert web solutions, custom designs, or seamless functionality, we're here to help.
+                 <br /> <br />
                 Drop us a message and let’s collaborate to build something extraordinary for you!
               </p>
               <p className="text-gray-400 text-lg leading-relaxed">
@@ -91,10 +92,14 @@ const ContactPage = () => {
                   webwizcreation.web@gmail.com
                 </a>
               </p>
+              <p className="text-gray-300">or chat us via the circle you see on the screen
+                <ChatDropdown/>
+              </p>
             </div>
+              </div>
 
             {/* Form */}
-            <div className="flex-1 bg-gray-900 rounded-lg shadow-lg p-8 max-w-xl mx-auto lg:mx-0 mt-10 lg:mt-0">
+            <div className="flex-1 bg-gray-400/5 border-x rounded-lg shadow-lg p-5 mx-auto mt-5 lg:mt-20 ">
               <Formik
                 initialValues={{
                   name: "",
@@ -108,7 +113,7 @@ const ContactPage = () => {
               >
                 {() => (
                   <Form>
-                    <h2 className="text-3xl font-semibold mb-8 text-white text-center">Contact Form</h2>
+                    <h2 className="text-3xl font-semibold max-md:mb-8 text-white text-center py-2 rounded-md border-t border-x">Contact Form</h2>
 
                     {["name", "number", "email", "address"].map((field) => (
                       <div key={field} className="mb-6">
@@ -147,7 +152,7 @@ const ContactPage = () => {
                     <button
                       type="submit"
                       disabled={processing}
-                      className="w-full py-3 rounded bg-white text-black font-semibold hover:bg-gray-300 transition"
+                      className="w-full py-3 rounded bg-gray-400/10 border-b border-x text-white font-semibold hover:bg-gray-300 transition mb-0"
                     >
                       {processing ? (
                         <LoaderCircle className="mx-auto animate-spin" size={24} />

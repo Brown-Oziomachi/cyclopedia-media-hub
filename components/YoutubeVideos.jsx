@@ -33,17 +33,17 @@ export default function VideoList() {
   
     return (
       <>
-        <form onSubmit={handleSearch} className="mb-6 flex">
+        <form onSubmit={handleSearch} className="mb-6 flex gap-3">
           <input
             type="text"
             value={searchTerm}
             onChange={handleInputChange}
             placeholder="Search for a video..."
-            className="flex-1 p-2 rounded-l bg-gray-800 text-white outline-none"
+            className="flex-1 p-2 rounded-l bg-gray-400/5  text-white outline-none"
           />
           <button
             type="submit"
-            className="bg-orange-400 text-white px-4 py-2 rounded-r"
+            className="bg-gray-400/5 border-x  text-white px-4 py-2 rounded-r"
           >
             Search
           </button>

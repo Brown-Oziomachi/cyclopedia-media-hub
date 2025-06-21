@@ -21,7 +21,7 @@ const ChatDropdown = () => {
 
       {/* Chat Dropdown Menu */}
       {isOpen && (
-        <div className="fixed bottom-28 right-6 z-50 w-60 bg-black text-white rounded-md shadow-xl border border-gray-600">
+        <div className="fixed bottom-28 right-6 z-50 w-60 bg-gray-400/5 text-white rounded-md shadow-xl border border-gray-600">
           <ul className="flex flex-col">
             <li>
               <a

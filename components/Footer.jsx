@@ -35,7 +35,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-black text-white py-14 px-6">
+    <footer className="bg-gray-400/5 text-white py-14 px-6">
       <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
         {/* Brand */}
         <div>
@@ -82,6 +82,8 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-4">Subscribe to Updates</h3>
           {/* Mailchimp subscription form */}
+          <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-10 items-center justify-center ">
+
       <form
         action="https://app.us13.list-manage.com/subscribe/post?u=43a30bccc98acfbb16a52d1eb&amp;id=4f4f321a7e&amp;f_id=00bb5fe1f0"
         method="post"
@@ -95,7 +97,7 @@ const Footer = () => {
           name="EMAIL"
           placeholder="Your email"
           required
-          className="flex-grow px-4 py-3 rounded-md bg-gray-900 border border-gray-700 placeholder-gray-500 text-white focus:outline-none focus:ring-2 focus:ring-white transition"
+          className="flex-grow px-4 py-3 rounded-md bg-gray-400/5 border-x placeholder-gray-500 text-white focus:outline-none focus:ring-2 focus:ring-white transition"
           aria-label="Email address"
         />
         <button
@@ -106,6 +108,7 @@ const Footer = () => {
           Subscribe
         </button>
       </form>
+          </div>
           <p className="text-sm text-gray-400 mt-3">
             Get exclusive tips and updates in your inbox.
           </p>
@@ -113,7 +116,7 @@ const Footer = () => {
       </div>
 
       {/* Divider */}
-      <div className="border-t border-gray-700 mb-20 pt-6 text-center">
+      <div className="border-t border-gray-700 mb-5 pt-6 text-center">
         <h4 className="text-md font-semibold mb-10">Quick Links</h4>
         <ul className="flex justify-center flex-wrap gap-6 text-sm text-gray-300">
           <li>

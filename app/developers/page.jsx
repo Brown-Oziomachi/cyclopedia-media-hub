@@ -1,13 +1,12 @@
-"use server";
+"use client";
 import Link from "next/link";
 
-async function DevelopersPage() {
+ function DevelopersPage() {
   const developersData = [
     {
       name: "Brown Code",
       specialty: "Full-Stack Developer/Python Developer",
       image: "/coderer.png",
-      bio: "Crafting intuitive UI/UX designs.",
       links: [
         { text: "Portfolio", href: "/myprofile" },
         { text: "GitHub", href: "https://github.com/Brown-Oziomachi" },
@@ -18,7 +17,6 @@ async function DevelopersPage() {
       name: "Victor_D3v",
       specialty: "Full-Stack Developer",
       image: "/vik.png",
-      bio: "Specialist in server-side logic.",
       links: [
         { text: "Portfolio", href: "/myprofile" },
         { text: "GitHub", href: "https://github.com/Victor-dev0p" },
@@ -29,7 +27,6 @@ async function DevelopersPage() {
       name: "Dev_Hiba",
       specialty: "Full-stack Developer",
       image: "/hiba.png",
-      bio: "End-to-end web solutions.",
       links: [
         { text: "Portfolio", href: "/myprofile" },
         { text: "GitHub", href: "https://github.com/HIBATULLA" },
@@ -39,17 +36,37 @@ async function DevelopersPage() {
   ];
 
   return (
-    <main className="bg-black min-h-screen text-white">
+    <main className="bg-gray-400/5 min-h-screen text-white z-0">
       {/* Hero Section */}
 
-      <header className="flex flex-col justify-center items-center h-screen text-center px-5">
-        <div className="space-y-6 max-w-xl">
-          <h1 className="text-5xl font-extrabold tracking-tight">Find Your Perfect Developer</h1>
+        <button
+          onClick={() => scroll("left")}
+          aria-label="Scroll Left"
+          className="z-0 absolute top-1/2 left-2 -translate-y-1/2 bg-orange-400 bg-opacity-80 hover:bg-opacity-100 text-white rounded-full p-2 shadow-lg z- transition"
+        >
+          &#8592;
+        </button>
+
+        {/* Right Arrow */}
+        <button
+          onClick={() => scroll("right")}
+          aria-label="Scroll Right"
+          className="absolute top-1/2 right-2 -translate-y-1/2 bg-orange-400 bg-opacity-80 hover:bg-opacity-100 text-white rounded-full p-2 shadow-lg z-0 transition"
+        >
+          &#8594;
+        </button>
+        <div 
+        className="absolute inset-0 items-center justify-center opacity-30 z-0">
+          <img src="web1.jpg" alt="image" className="py-15 w-full mx-auto z-0"/>
+        </div>
+      <header className="flex flex-col justify-center items-center h-screen text-center px-5 relative z-0">
+        <div className="space-y-6 max-w-xl -mt-20">
+          <h1 className="text-5xl font-extrabold tracking-tight text-gray-300 z-0">Find Your Perfect Developer</h1>
           <p className="text-lg text-gray-300">
             Connect with skilled developers to bring your project to life.
           </p>
           <Link href="/contact">
-            <button className="border border-white px-8 py-3 rounded-md font-semibold hover:bg-white hover:text-black transition">
+            <button className="z-50 border-y px-8 py-3 rounded-md font-semibold hover:bg-white hover:text-black transition">
               Get Started
             </button>
           </Link>
@@ -57,9 +74,11 @@ async function DevelopersPage() {
       </header>
 
       {/* Why Hire Section */}
-      <section className="py-16 border-t border-gray-700">
+      <section className="py-1 border-t border-gray-700 max-md:-mt-35">
         <div className="max-w-6xl mx-auto px-5">
           <h2 className="text-3xl font-bold text-center mb-12">Why Hire Our Developers?</h2>
+          <img src="web14.jpg" alt="image" className="mx-auto min-md:hidden"/>
+          <h1 className="text-sm text-center border-b border-x mb-5 text-gray-400 lg:hidden">contact us to build your own system</h1>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             <div className="p-6 border border-gray-700 rounded-lg hover:border-white transition">
               <h3 className="text-xl font-semibold mb-2">Expertise & Skill</h3>
@@ -84,10 +103,10 @@ async function DevelopersPage() {
       </section>
 
       {/* Developers Section */}
-      <section className="py-16 border-t border-gray-700 bg-gray-900">
+      <section className="py-16 border-t  bg-gray-400/10 border-x ">
         <div className="max-w-7xl mx-auto px-5">
           <h2 className="text-4xl font-bold text-center mb-10">Meet Our Developers</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 ">
             {developersData.map((dev, idx) => (
               <div
                 key={idx}
@@ -107,7 +126,7 @@ async function DevelopersPage() {
                     <Link
                       key={i}
                       href={link.href}
-                      className="border border-white px-4 py-2 rounded hover:bg-white hover:text-black transition text-sm"
+                      className=" border-r px-4 py-2 rounded hover:bg-white hover:text-black transition text-sm z-50"
                       target={link.href.startsWith("http") ? "_blank" : undefined}
                       rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     >
@@ -129,7 +148,7 @@ async function DevelopersPage() {
             Contact us today to discuss your project requirements and find the perfect developer for your needs.
           </p>
           <Link href="/contact">
-            <button className="border border-white px-10 py-4 rounded font-semibold hover:bg-white hover:text-black transition text-xl">
+            <button className="bg-gray-400/5 border-x  px-10 py-4 rounded font-semibold hover:bg-white hover:text-black transition text-xl">
               Contact Us
             </button>
           </Link>

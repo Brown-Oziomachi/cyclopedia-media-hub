@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     question: "How do I interact with other users?",
-    answer: "Engage by commenting, following developers, and participating in community discussions.",
+    answer: "Engage by commenting, following developers, and participating in community discussions in our blog.",
   },
   {
     question: "Can I edit my published projects?",
@@ -59,8 +59,8 @@ export default function Faqs() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 py-30 bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-lg shadow-lg">
-      <h1 className="text-4xl font-extrabold text-center mb-8 text-cyan-400">FAQs</h1>
+    <div className="max-w-3xl mx-auto p-6 py-30 bg-gray-400/5 rounded-lg shadow-lg">
+      <h1 className="text-4xl font-extrabold text-center mb-8 text-white">FAQs</h1>
       {faqs.map((faq, index) => (
         <Accordion
           key={index}
@@ -69,7 +69,7 @@ export default function Faqs() {
           className="border border-cyan-500 rounded-lg mb-4 bg-gray-700"
         >
           <AccordionSummary
-            expandIcon={<ChevronDown className={`transform transition-transform ${expanded === index ? "rotate-180" : "rotate-0"} text-cyan-400`} />}
+            expandIcon={<ChevronDown className={`transform transition-transform ${expanded === index ? "rotate-180" : "rotate-0"} text-gray-400/`} />}
             className="text-white px-4 py-3 hover:bg-cyan-600 rounded-lg"
           >
             <h2 className="text-lg font-semibold">{faq.question}</h2>

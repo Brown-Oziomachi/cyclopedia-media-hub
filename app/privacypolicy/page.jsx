@@ -2,17 +2,17 @@ import Link from 'next/link';
 
 const PrivacyPolicy = () => {
   return (
-    <div className="max-w-3xl mx-auto p-6 py-30 bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-lg shadow-lg ">
-      <h1 className="text-4xl font-extrabold mb-6 text-cyan-400 text-center">Privacy Policy</h1>
+    <div className="max-w-3xl mx-auto p-6 py-30 bg-gray-400/5  rounded-lg shadow-lg ">
+      <h1 className="text-4xl font-extrabold mb-6 text-white text-center">Privacy Policy</h1>
       <section className="mb-10">
-        <h2 className="text-2xl font-bold mb-4 text-blue-400">1. Introduction</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-500">1. Introduction</h2>
         <p className="text-gray-300 leading-relaxed">
           Webwiz Creation is committed to protecting your privacy. This Privacy Policy explains how
           we collect, use, and disclose your personal data.
         </p>
       </section>
       <section className="mb-10">
-        <h2 className="text-2xl font-bold mb-4 text-blue-400">2. Information We Collect</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-500">2. Information We Collect</h2>
         <p className="text-gray-300 leading-relaxed">
           We collect the following types of information:
         </p>
@@ -22,7 +22,7 @@ const PrivacyPolicy = () => {
         </ul>
       </section>
       <section className="mb-10">
-        <h2 className="text-2xl font-bold mb-4 text-blue-400">3. How We Use Your Information</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-500">3. How We Use Your Information</h2>
         <p className="text-gray-300 leading-relaxed">
           We use your information to:
         </p>
@@ -33,7 +33,7 @@ const PrivacyPolicy = () => {
         </ul>
       </section>
       <section className="mb-10">
-        <h2 className="text-2xl font-bold mb-4 text-blue-400">4. Disclosure of Your Information</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-500">4. Disclosure of Your Information</h2>
         <p className="text-gray-300 leading-relaxed">
           We may disclose your information to:
         </p>
@@ -44,7 +44,7 @@ const PrivacyPolicy = () => {
         </ul>
       </section>
       <section className="mb-10">
-        <h2 className="text-2xl font-bold mb-4 text-blue-400">5. Your Rights</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-500">5. Your Rights</h2>
         <p className="text-gray-300 leading-relaxed">
           You have the right to:
         </p>
@@ -55,18 +55,18 @@ const PrivacyPolicy = () => {
         </ul>
       </section>
       <section className="mb-10">
-        <h2 className="text-2xl font-bold mb-4 text-blue-400">6. Changes to This Policy</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-500">6. Changes to This Policy</h2>
         <p className="text-gray-300 leading-relaxed">
           We may update this Privacy Policy from time to time. We will notify you of any changes by
           posting the new policy on our website.
         </p>
       </section>
       <section className="mb-10">
-        <h2 className="text-2xl font-bold mb-4 text-blue-400">7. Contact Us</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-500">7. Contact Us</h2>
         <p className="text-gray-300 leading-relaxed">
           If you have any questions about this Privacy Policy, please contact us at{' '}
           <Link href="mailto:support@webwizcreation.com">
-            <p className="text-cyan-400 hover:text-cyan-600 underline">support@webwizcreation.com</p>
+            <p className="text-gray-400/ hover:text-cyan-600 underline">support@webwizcreation.com</p>
           </Link>
           .
         </p>
