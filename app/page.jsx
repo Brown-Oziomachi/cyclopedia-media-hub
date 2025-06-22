@@ -53,13 +53,13 @@ const Page = () => {
           />
         </div>
       ) : (
-        <div className="py-20 text-white rounded-tr-full rounded-ss-full relative overflow-hidden bg-gray-400/5">
+        <div className="py-18 text-white relative overflow-hidden bg-gray-400/5">
           {/* Hero Section */}
           <div>
             <img
               src="web18.jpg"
               alt="image"
-              className="w-full h-fit opacity-30 "
+              className="w-full h-fit opacity-100 "
             />
           </div>
           <main className=" flex flex-col justify-center items-center h- lg:h-2 text-center px-4 lg:px-0 max-lg:mt-10 opacity-100 lg:-mt-100">
@@ -329,7 +329,7 @@ const Page = () => {
               },
               {
                 icon: <LaptopMinimal className="mx-auto text-3xl" />,
-                img: "web13.png",
+                img: "web13.jpg",
                 title: "Website Development",
                 description:
                   "Building powerful custom web applications and software solutions.",

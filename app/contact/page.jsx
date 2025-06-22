@@ -70,7 +70,7 @@ const ContactPage = () => {
               <h1 className="text-5xl font-extrabold text-white text-center">Contact WebWiz</h1>
               <div className="container mx-auto lg:space-x-2">
                 <img
-                  src="web9.jpg"
+                  src="web22.jpg"
                   alt="Webwiz Logo"
                   className="w-full mx-auto "
                 />

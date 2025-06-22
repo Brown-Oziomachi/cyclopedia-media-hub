@@ -29,7 +29,7 @@ const About = () => {
             <h1 className="text-5xl font-extrabold mb-8 tracking-tight mt-20">
               About Webwiz Creation
             </h1>
-            <img src="web3.jpg" alt="image"/>
+            <img src="web23.jpg" alt="image"/>
             <p className="text-gray-400 mb-10 text-xs border-b border-x">webwiz creation is a dynamic software development company.  <br />Developed by: Brown Code</p>
             <p className="max-w-3xl leading-relaxed mb-6 text-gray-400">
               At Webwiz Creation, we transform your ideas into exceptional digital experiences. Our expert team combines creativity and technical expertise to deliver tailored web solutions that empower your business.
