@@ -267,7 +267,7 @@ const BlogPage = () => {
         </header>
 
         {/* Toggle */}
-        <div className="flex gap-4 mb-6 justify-center">
+        <div className="flex gap-4 mb-5 justify-center">
       {["blog", "video", "reels"].map((type) => (
         <button
           key={type}
