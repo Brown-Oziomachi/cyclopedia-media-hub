@@ -57,7 +57,7 @@ const Page = () => {
           {/* Hero Section */}
           <div>
             <img
-              src="web7.jpg"
+              src="web18.jpg"
               alt="image"
               className="w-full h-fit opacity-30 "
             />
@@ -119,7 +119,7 @@ const Page = () => {
         <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb- py-1">
           <div>
             <img
-              src="web2.jpg"
+              src="web20.jpg"
               alt="Elevate Your Digital Presence"
               className="mt-5 w-400 lg:h-200 rounded-t-lg group-hover:opacity-80 transition duration-300"
             />

@@ -38,9 +38,9 @@ const ProfileCard = () => {
       {/* Header Section */}
       <div className="relative h-64 mt-17 rounded-b-xl overflow-hidden">
         <img
-          src="/web1.jpg"
+          src="/web21.jpg"
           alt="Header Background"
-          className="w-full h-full object-cover brightness-75 opacity-30"
+          className="w-full lg:h-150 brightness-75 opacity-80"
         />
         <div className="absolute inset-0 flex items-center justify-center">
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-wide drop-shadow-lg">
@@ -54,7 +54,7 @@ const ProfileCard = () => {
       <section className="p-8 lg:flex lg:justify-between lg:items-center space-y-8 lg:space-y-0">
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-md mx-auto lg:mx-0">
           <img
-            src="/coderr.png"
+            src="/web19.jpg"
             alt="Profile Picture"
             className="w-40 h-40 lg:h-52 lg:w-52 object-cover rounded-full border-4 border-gray-400/5 shadow-lg transition-transform hover:scale-105"
           />

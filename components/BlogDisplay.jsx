@@ -18,13 +18,16 @@ const BlogDisplay = ({ title, genre, image, body }) => {
           />
         </div>
       )}
-      <h1 className="text-4xl font-bold text-white text-center">
+      <h1 className="text-4xl py-10 font-bold text-white text-center">
         <ReactMarkdown>{title}</ReactMarkdown>
       </h1>
+      <h2>
+        <img src="web1.jpg" alt="image" />
+      </h2>
       <p className="text-gray-400 text-sm text-center">
         <ReactMarkdown>{genre}</ReactMarkdown>
       </p>
-      <div className="mt-4 space-y-3 rounded-lg text-white">
+      <div className="mt-4 space-y-5 rounded-lg text-white">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
       </div>
     </div>

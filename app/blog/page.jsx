@@ -246,16 +246,21 @@ const BlogPage = () => {
   }, []);
 
   return (
-    <main className="min-h-screen bg-gray-400/5 border-x text-white px-8 py-30">
+    <main className="min-h-screen bg-gray-400/5 text-white px-8 py-30">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <header className="text-center mb-12">
-          <h1 className="text-6xl font-bold tracking-tight mt-5">
+          <div className="lg:flex items-center justify-center gap-20">
+          <div className="max-lg:relative">
+          <img src="web19.jpg" alt="Blog image" className="rounded-md w-full"/>
+          </div>
+          <p className="text-xl text-gray-400 ">
+          <h1 className="text-6xl font-bold tracking-tight mt-5 max-lg:absolute max-lg:inset-0 max-lg:top-8 lg:py-10">
             Wiz {showContentType === "blog" ? "Blog " : "Videos"}
           </h1>
-          <p className="text-xl text-gray-400 mt-3 ">
-            Explore unique insights, stories, and expert opinions
+            Explore unique insights, stories, and expert opinions.
           </p>
+          </div>
         </header>
 
         {/* Toggle */}
@@ -358,7 +363,7 @@ const BlogPage = () => {
               {filteredPosts.map((post) => (
                 <article
                   key={post.id}
-                  className=" rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit"
+                  className=" rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit border-x"
                 >
                   <span className="absolute top-4 left-4 bg-white text-black text-xs px-3 py-1 rounded-full">
                     {post.genre || "General"}
