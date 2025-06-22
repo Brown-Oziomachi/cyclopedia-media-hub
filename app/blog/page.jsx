@@ -252,10 +252,13 @@ const BlogPage = () => {
         <header className="text-center mb-12">
           <div className="lg:flex items-center justify-center gap-20">
           <div className="max-lg:relative">
+          <h1 className="text-6xl font-bold tracking-tight   max-lg:inset-0 max-lg:top-8 lg:py-10 lg:hidden text-gray-400 mb-5">
+            Wiz {showContentType === "blog" ? "Blog " : "Videos"}
+          </h1>
           <img src="web19.jpg" alt="Blog image" className="rounded-md w-full"/>
           </div>
           <p className="text-xl text-gray-400 ">
-          <h1 className="text-6xl font-bold tracking-tight mt-5 max-lg:absolute max-lg:inset-0 max-lg:top-8 lg:py-10">
+             <h1 className="text-6xl font-bold tracking-tight mt-5  max-lg:inset-0 max-lg:top-8 lg:py-10 max-lg:hidden">
             Wiz {showContentType === "blog" ? "Blog " : "Videos"}
           </h1>
             Explore unique insights, stories, and expert opinions.
@@ -271,7 +274,7 @@ const BlogPage = () => {
           className={`px-6 py-3 rounded-xl font-semibold transition ${
             showContentType === type
               ? "bg-white text-black"
-              : "bg-white text-black hover:bg-gray-400/5 border-x"
+              : "bg-white text-black hover:bg-gray-400/5 border-r"
           }`}
           onClick={() => handleClick(type)}
         >
