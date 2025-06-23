@@ -19,6 +19,7 @@ import { LoaderCircle, Heart, Share, LinkIcon } from "lucide-react";
 import Link from "next/link";
 import BlogDisplay from "@/components/BlogDisplay";
 import Ads from "@/components/Ads";
+import Image from "next/image";
 
 const BlogDetails = ({ params }) => {
 const resolvedParams = use(params);
@@ -242,6 +243,9 @@ return (
     <div className="bg-gray-400/5 rounded-xl shadow-lg p-6 border border-gray-700">
      <h1 className="text-3xl font-extrabold text-white text-center drop-shadow-lg">
         {blog.title}
+      <div className="">
+      <img src="web19.jpg" alt="" className="w-full"/>
+      </div>
       </h1>
       <BlogDisplay body={blog.body} />
     </div>

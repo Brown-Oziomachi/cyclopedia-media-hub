@@ -252,6 +252,7 @@ const UploadBlog = ({ session }) => {
                     </h3>
                     <BlogDisplay
                       title={values.title}
+                      image={values.image}
                       genre={values.genre}
                       body={previewBody}
                     />
@@ -318,6 +319,7 @@ const UploadBlog = ({ session }) => {
                   <option value="Wealth">Wealth</option>
                   <option value="Business">Business</option>
                   <option value="Ideas">Ideas</option>
+                  <option value="Facts">Facts</option>
                   <option value="Comedy">Comedy</option>
                   <option value="Motivation">Motivation</option>
                   <option value="Education">Education</option>
@@ -386,4 +388,4 @@ const UploadBlog = ({ session }) => {
   );
 };
 
-export default UploadBlog
+export default UploadBlog;

@@ -11,7 +11,7 @@ const BlogDisplay = ({ title, genre, image, body }) => {
       {/* Poster Image: rendered in a circular shape */}
       {image && (
         <div className="flex justify-center mb-4">
-          <img
+          <image
             src={image}
             alt="Blog Poster"
             className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg"
@@ -21,8 +21,8 @@ const BlogDisplay = ({ title, genre, image, body }) => {
       <h1 className="text-4xl py-10 font-bold text-white text-center">
         <ReactMarkdown>{title}</ReactMarkdown>
       </h1>
-      <h2>
-        <img src="web1.jpg" alt="image" />
+      <h2 className="mx-auto">
+        <ReactMarkdown>{image}</ReactMarkdown>
       </h2>
       <p className="text-gray-400 text-sm text-center">
         <ReactMarkdown>{genre}</ReactMarkdown>

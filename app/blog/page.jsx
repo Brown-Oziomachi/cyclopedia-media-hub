@@ -248,25 +248,45 @@ const BlogPage = () => {
   return (
     <main className="min-h-screen bg-gray-400/5 text-white px-8 py-30">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <header className="text-center mb-12">
-          <div className="lg:flex items-center justify-center gap-20">
-          <div className="max-lg:relative">
-          <h1 className="text-6xl font-bold tracking-tight   max-lg:inset-0 max-lg:top-8 lg:py-10 lg:hidden text-gray-400 mb-5">
+          <header className="text-center mb-12">
+            <div className="lg:flex items-center justify-center gap-20">
+              <div className="max-lg:relative">
+                <h1 className="text-6xl font-bold tracking-tight   max-lg:inset-0 max-lg:top-8 lg:py-10 lg:hidden text-gray-400 mb-5">
             Wiz {showContentType === "blog" ? "Blog " : "Videos"}
-          </h1>
-          <img src="web19.jpg" alt="Blog image" className="rounded-md w-full"/>
-          </div>
-          <p className="text-xl text-gray-400 ">
-             <h1 className="text-6xl font-bold tracking-tight mt-5  max-lg:inset-0 max-lg:top-8 lg:py-10 max-lg:hidden">
+                </h1>
+                <img src="web19.jpg" alt="Blog image" className="rounded-md w-full"/>
+              </div>
+              <p className="text-xl text-gray-400 ">
+                <h1 className="text-6xl font-bold tracking-tight mt-5  max-lg:inset-0 max-lg:top-8 lg:py-10 max-lg:hidden">
             Wiz {showContentType === "blog" ? "Blog " : "Videos"}
-          </h1>
-            Explore unique insights, stories, and expert opinions.
-          </p>
-          </div>
-        </header>
+                </h1>
+                Explore unique insights, stories, and expert opinions.
+              </p>
+            </div>
+            <div>
+              <p className="text-gray-400 text-sm mt-4">
+                Discover a world of knowledge and creativity. Whether you're looking for in-depth articles, engaging videos, or quick reels, we've got you covered.
+              </p>
+            </div>
+            <div>
+              <p className="text-gray-400 text-sm mt-4">
+                Join our community of creators and thinkers. Share your thoughts, ideas, and experiences with us.
+              </p>
+            </div>
+            <div>
+              <h1
+                className="font-bold font-serif cursor-pointer text-blue-700"
+                onClick={() => {
+            const el = document.getElementById("services-section");
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Have something to Share? ⬇
+              </h1>
+            </div>
+          </header>
 
-        {/* Toggle */}
+          {/* Toggle */}
         <div className="flex gap-4 mb-5 justify-center">
       {["blog", "video", "reels"].map((type) => (
         <button
@@ -366,9 +386,9 @@ const BlogPage = () => {
               {filteredPosts.map((post) => (
                 <article
                   key={post.id}
-                  className=" rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit border-x"
+                  className=" rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit border-r"
                 >
-                  <span className="absolute top-4 left-4 bg-white text-black text-xs px-3 py-1 rounded-full">
+                  <span className="absolute top-4 left-4 bg-orange-400 text-black text-xs px-3 py-1 rounded-full">
                     {post.genre || "General"}
                   </span>
                   <h1 className="text-xs text-gray-400 text-center absolute top-4 right-4">
@@ -390,10 +410,13 @@ const BlogPage = () => {
                         <h2 className="text-xl font-bold mb-3 mt-5">
                           {post.title}
                         </h2>
-                        <p className="text-sm text-gray-400 mb-4 line-clamp-2">
+                         <h3 className="w-full h-24 mx-auto mb-3 object-cover opacity-30">
+                          <img src="web19.jpg" alt="" />
+                        </h3>
+                        <p className="text-sm text-white mb-4 line-clamp-2">
                           {post.body}
                         </p>
-                        <p className="text-xs text-gray-400 text-right">
+                        <p className="text-xs text-gray-100 text-right mr-2">
                           Posted on {formatTimestamp(post.timestamp)}
                         </p>
                       </div>
@@ -482,6 +505,19 @@ const BlogPage = () => {
             <div className="w-14 h-14 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
         )}
+      </div>
+        <div id="services-section"></div>
+      <div className=" mt-10">
+        <h1 className="font-bold font-serif">Have something to Share?</h1>
+        <h2 className="font-mono">We value your thoughts and ideas! feel free to share your opinions, Suggestions, or topics you'd love to see on our blog.
+          <h3>📩Reach out to us directly on WhatsApp:</h3>
+        </h2>
+          <a
+           href="https://wa.me/message/R4UKUMFIH22RJ1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold text-blue-700 cursor-pointer hover:underline"
+          >Click here to chat</a>
       </div>
     </main>
   );

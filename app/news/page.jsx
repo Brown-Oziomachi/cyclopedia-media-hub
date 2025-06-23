@@ -13,7 +13,7 @@ const Page = () => {
 
   useEffect(() => {
     if (!apiKey) {
-      setError("API Key is missing! Please set it in your environment variables.");
+      setError("API Key is missing!.");
       setLoading(false);
       return;
     }
@@ -51,7 +51,7 @@ const Page = () => {
   return (
     <>
       {loading ? (
-        <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-r from-orange-400 via-gray-900 to-gray-900 gap-6">
+        <div className="flex flex-col justify-center items-center h-screen bg-gray-400/5 gap-6">
           <h1 className="text-xl lg:text-6xl font-extrabold tracking-wide leading-tight text-white relative">
             Fetching News
           </h1>
