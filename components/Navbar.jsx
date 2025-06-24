@@ -73,11 +73,11 @@ const ProfileDropdownNavbar = () => {
                     alt={session?.user?.name}
                     width={40}
                     height={40}
-                    className="rounded-full shadow-md hover:shadow-lg transition-shadow duration-300 object-cover"
+                    className="rounded-full shadow-md hover:shadow-lg transition-shadow duration-300 object-cover ml-auto"
                   />
                   <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full ring-2 ring-gray-900"></span>
                 </div>
-                <span className="text-sm font-semibold text-gray-200 hover:text-cyan-400 transition-colors duration-300 hidden md:inline-block">
+                <span className="text-sm font-semibold text-gray-200 hover:text-cyan-400 transition-colors duration-300 lg:hidden md:inline-block">
                   {session?.user?.name}
                 </span>
                 <ChevronDown className="text-xl text-cyan-400 transition-transform duration-200" />
@@ -90,7 +90,7 @@ const ProfileDropdownNavbar = () => {
               >
                 <Box
                   sx={{
-                    width: 280,
+                    width: 350,
                     bgcolor: "black",
                     height: "50em",
                     p: 3,
@@ -103,12 +103,17 @@ const ProfileDropdownNavbar = () => {
                   onKeyDown={toggleDrawer(false)}
                 >
                   <div className="">
-                    <p className="font-semibold text-base truncate text-white">
-                      {session.user.name}
-                    </p>
-                    <p className="text-gray-400 text-xs truncate mb-4">
-                      {session.user.email}
-                    </p>
+                    <Link
+                      href="/profile"
+                      className="hover:text-cyan-400 transition-colors duration-200"
+                    >
+                      <p className="font-semibold text-base truncate text-white text-center ">
+                        {session.user.name}
+                      </p>
+                      <p className="text-gray-400 text-xs truncate mb-4 text-center">
+                        {session.user.email}
+                      </p>
+                    </Link>
                     <hr className="my-4 border-gray-600" />
                     <nav className="flex flex-col space-y-2 text-gray-300 text-sm font-normal">
                       <Link
@@ -130,11 +135,26 @@ const ProfileDropdownNavbar = () => {
                         News
                       </Link>
                       <Link
-                        href="/notifications"
+                        href="/blog"
                         className="hover:text-cyan-400 transition-colors duration-200"
                       >
                         Notifications
                       </Link>
+                      <div>
+                        <h1
+                          className="font-bold font-serif cursor-pointer text-blue-700 text-center mt-5"
+                          onClick={() => {
+                            const el =
+                              document.getElementById("services-section");
+                            if (el) el.scrollIntoView({ behavior: "smooth" });
+                          }}
+                        >
+                          Have something to Share? ⬇
+                          <div>
+                            <img src="web25.jpg" alt="owner image" className="mt-5" />
+                          </div>
+                        </h1>
+                      </div>
                     </nav>
                   </div>
                   <button
@@ -158,12 +178,14 @@ const ProfileDropdownNavbar = () => {
           )}
         </div>
 
+            <div className="flex">
         {/* Mobile Avatar Drawer Toggle */}
         {session && (
           <button
             onClick={toggleDrawer(true)}
-            className="lg:hidden focus:outline-none mr-4 z-50"
+            className="lg:hidden focus:outline-none mr-4 z-50 items-center justify-center"
           >
+
             <img
               src={session.user.image || "/default-avatar.png"}
               alt={session.user.name}
@@ -173,6 +195,12 @@ const ProfileDropdownNavbar = () => {
             />
           </button>
         )}
+        <div>
+        <Link href="/myprofile">
+        <img src="web21.jpg" alt="" className=" rounded-full" width={36} height={36}/>
+        </Link>
+        </div>
+            </div>
 
         {/* Mobile Menu Toggle */}
         <button

@@ -52,11 +52,11 @@ const BlogPage = () => {
   const [showContentType, setShowContentType] = useState("blog");
   const [adShown, setAdShown] = useState({
     video: false,
-    reels: false,
+    Gallery: false,
   });
 
   const handleClick = (type) => {
-    if (( type === "reels") && !adShown[type]) {
+    if (( type === "Gallery") && !adShown[type]) {
       window.open("https://otieu.com/4/9366150", "_blank");
       setAdShown((prev) => ({ ...prev, [type]: true }));
       return;
@@ -163,7 +163,7 @@ const BlogPage = () => {
           basePosts = blogs.filter((post) => !post.isVideo);
         } else if (showContentType === "video") {
           basePosts = blogs.filter((post) => post.isVideo && !post.isReel);
-        } else if (showContentType === "reels") {
+        } else if (showContentType === "Gallery") {
           basePosts = blogs.filter((post) => post.isReel);
         }
 
@@ -187,7 +187,7 @@ const BlogPage = () => {
       basePosts = blogPosts.filter((post) => !post.isVideo);
     } else if (type === "video") {
       basePosts = blogPosts.filter((post) => post.isVideo && !post.isReel);
-    } else if (type === "reels") {
+    } else if (type === "Gallery") {
       basePosts = blogPosts.filter((post) => post.isReel);
     }
 
@@ -202,7 +202,7 @@ const BlogPage = () => {
       basePosts = blogPosts.filter((post) => !post.isVideo);
     } else if (showContentType === "video") {
       basePosts = blogPosts.filter((post) => post.isVideo && !post.isReel);
-    } else if (showContentType === "reels") {
+    } else if (showContentType === "Gallery") {
       basePosts = blogPosts.filter((post) => post.isReel);
     }
 
@@ -256,7 +256,7 @@ const BlogPage = () => {
                 </h1>
                 <img src="web19.jpg" alt="Blog image" className="rounded-md w-full"/>
               </div>
-              <p className="text-xl text-gray-400 ">
+              <p className="text-sm text-gray-400 font-mono">
                 <h1 className="text-6xl font-bold tracking-tight mt-5  max-lg:inset-0 max-lg:top-8 lg:py-10 max-lg:hidden">
             Wiz {showContentType === "blog" ? "Blog " : "Videos"}
                 </h1>
@@ -288,7 +288,7 @@ const BlogPage = () => {
 
           {/* Toggle */}
         <div className="flex gap-4 mb-5 justify-center">
-      {["blog", "video", "reels"].map((type) => (
+      {["blog", "video", ].map((type) => (
         <button
           key={type}
           className={`px-6 py-3 rounded-xl font-semibold transition ${
@@ -301,6 +301,11 @@ const BlogPage = () => {
           {type.charAt(0).toUpperCase() + type.slice(1)}
         </button>
       ))}
+       <div>
+      <Link href="/gallery">
+      <div className="bg-white text-black px-6 py-3 rounded-xl font-semibold transition" >Gallery</div>
+      </Link>
+    </div>
     </div>
         {/* Search */}
         <div className="mb-8">
@@ -318,7 +323,7 @@ const BlogPage = () => {
                 basePosts = blogPosts.filter(
                   (post) => post.isVideo && !post.isReel
                 );
-              } else if (showContentType === "reels") {
+              } else if (showContentType === "Gallery") {
                 basePosts = blogPosts.filter((post) => post.isReel);
               }
 
@@ -367,7 +372,7 @@ const BlogPage = () => {
                   basePosts = blogPosts.filter(
                     (post) => post.isVideo && !post.isReel
                   );
-                } else if (showContentType === "reels") {
+                } else if (showContentType === "/gallery") {
                   basePosts = blogPosts.filter((post) => post.isReel);
                 }
                 setFilteredPosts(basePosts);
@@ -381,7 +386,7 @@ const BlogPage = () => {
         {/* Posts */}
         {!loading &&
           filteredPosts.length > 0 &&
-          showContentType !== "reels" && (
+          showContentType !== "gallery" && (
             <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
               {filteredPosts.map((post) => (
                 <article
@@ -463,35 +468,35 @@ const BlogPage = () => {
         {/* Reels */}
         {!loading &&
           filteredPosts.length > 0 &&
-          showContentType === "reels" && (
+          showContentType === <Link href="/gallery">gallery</Link> && (
             <section className="flex flex-col gap-8 max-w-xl mx-auto">
               {filteredPosts.map((reel) => (
                 <div
                   key={reel.id}
                   className="relative cursor-pointer rounded-xl shadow-lg overflow-hidden bg-black"
-                  onClick={() => openVideo(reel)}
+                  onClick={() => openGallery(gallery)}
                 >
                   <div className="aspect-[9/16] w-full relative">
                     <img
                       src={
-                        reel.thumbnail
-                          ? reel.thumbnail
-                          : reel.videoURL?.includes("youtube.com") ||
-                            reel.videoURL?.includes("youtu.be")
+                        gallery.thumbnail
+                          ? gallery.thumbnail
+                          : gallery.videoURL?.includes("youtube.com") ||
+                            gallery.videoURL?.includes("youtu.be")
                           ? `https://img.youtube.com/vi/${extractYouTubeId(
-                              reel.videoURL
+                              gallery.videoURL
                             )}/hqdefault.jpg`
                           : "/video-placeholder.jpg"
                       }
-                      alt={reel.title}
+                      alt={gallery.title}
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
                       <h2 className="text-white text-lg font-bold line-clamp-2">
-                        {reel.title}
+                        {gallery.title}
                       </h2>
                       <p className="text-gray-300 text-sm line-clamp-2 mt-1">
-                        {reel.description || reel.body}
+                        {gallery.description || reel.body}
                       </p>
                     </div>
                   </div>
