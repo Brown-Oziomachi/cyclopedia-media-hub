@@ -1,16 +1,22 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { LoaderCircle } from "lucide-react";
+import Link from "next/link";
 
 const imageData = [
-  { src: "reno1.jpg", title: "Why Tithing Is a Big Scam in Christianity", link: "https://webwizcreation-y7vx.vercel.app/blog/I0dA4zrCTd7ik2dKiyil" },
   { src: "ma.jpg", title: "Billionaire Jack Ma shows us how to be successful in our 20s, 30s, 40s and beyond", link: "https://webwizcreation-y7vx.vercel.app/blog/3W9lOrKuvHVimWAdB3qx" },
+  { src: "reno1.jpg", title: "Why Tithing Is a Big Scam in Christianity", link: "https://webwizcreation-y7vx.vercel.app/blog/I0dA4zrCTd7ik2dKiyil" },
   { src: "sadhguru.jpg", title: "Higher Salary vs A Job You Enjoy: Which Should You Choose?", link: "https://webwizcreation-y7vx.vercel.app/blog/f21UAfA1F094wsO5FQt0" },
   { src: "society.jpg", title: "How will you define a society without science and technology?", link: "https://webwizcreation-y7vx.vercel.app/blog/0mSBXAvjWZBSD5NfWHcb" },
-  { src: "reno2.png", title: "WHAT ARE YOUR THOUGHTS ON GOING TO CHURCH ON SUNDAY", link: "https://example.com/image5" },
+  { src: "reno2.png", title: "WHAT ARE YOUR THOUGHTS ON GOING TO CHURCH ON SUNDAY", link: "https://webwizcreation-y7vx.vercel.app/blog/ZaoGbdtKLBOHAXWTY1Fe" },
   { src: "project.jpg", title: "Here are seven top coding projects to work on:", link: "https://webwizcreation-y7vx.vercel.app/blog/uMnLfrqwyE7C2xzPV6TJ" },
-  { src: "salary.jpg", title: "", link: "https://webwizcreation-y7vx.vercel.app/blog/f21UAfA1F094wsO5FQt0" },
   { src: "being.jpg", title: "THE PROBLEM OF FINDING A WORD FOR THE SUPREME BEING", link: "https://webwizcreation-y7vx.vercel.app/blog/uRpGwukHugfLW08Rthvh" },
+
+  { src: "wrong.jpg", title: "The Wrong Thing At The Wrong Time", link: "https://webwizcreation-y7vx.vercel.app/blog/6PkM2Tw6h72Zx51CXhAb" },
+  { src: "sex.jpg", title: "Sex: Sacred or Sinful?", link: "https://webwizcreation-y7vx.vercel.app/blog/1HXqx2I2Sb7K6p5FWiel" },
+  { src: "marryme.jpg", title: "THINK BEFORE GETTING MARRIED", link: "https://webwizcreation-y7vx.vercel.app/blog/ODs7l1jjtQ6M3bTmtucY" },
+  { src: "web21.jpg", title: "MASTERING SKILLS: A STEP BY STEP GUIDE?", link: "https://webwizcreation-y7vx.vercel.app/blog/QmpY76ELg3ZSEiRoDIXI" },
+ 
 ];
 
 const SupportCard = () => {
@@ -48,11 +54,11 @@ const SupportCard = () => {
           <LoaderCircle size={50} className="animate-spin" />
         </div>
       ) : (
-        <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto">
+        <div className="max-lg:flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto">
           
           {/* Left Vertical Scrolling/Sliding Section */}
+            <h2 className="text-3xl font-semibold mb-4 mt-20 text-center border-x rounded-md">Learn From The <span className="font-serif text-blue-700 line-clamp-3 gap-2 tracking-widest text-4xl">Gallery</span></h2>
           <aside className="w-full lg:w-1/4 bg-gray-400/5 rounded-lg p-4 flex flex-col items-center">
-            <h2 className="text-lg font-semibold mb-4 mt-10 border-x rounded-md font-serif">Learn from wise people</h2>
             <div className="relative h-64 w-full overflow-hidden rounded-md border border-white/20">
               {slidingImages.map((img, i) => (
                 <div
@@ -91,6 +97,12 @@ const SupportCard = () => {
                   </div>
                 </div>
               ))}
+               <div className="flex items-center justify-center gap-1"> 
+              <Link href="/gallery">
+            <h1 className="mt-10 text-center text-blue-700 underline font-bold">UPDATING GALLERY </h1>
+            </Link>
+             <h2 className="animate-pulse text-5xl mt-3 text-blue-700">.......</h2>
+             </div>
             </div>
           </section>
 

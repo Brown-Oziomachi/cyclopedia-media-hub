@@ -109,7 +109,7 @@ const ProfileCard = () => {
 
       {/* Skills Section */}
       <section className="px-8 py-10">
-        <h1 className="text-center text-3xl font-extrabold mb-6 tracking-wide">Skills</h1>
+        <h1 className="text-center text-3xl font-extrabold mb-6 tracking-widest">Skills</h1>
         <div className="flex flex-wrap gap-4 justify-center max-w-3xl mx-auto">
           {[
             "HTML",
@@ -134,7 +134,7 @@ const ProfileCard = () => {
 
       {/* Services Section */}
       <section className="px-8 py-10 bg-gray-400/5 border-y rounded-lg mx-8 text-center text-white">
-        <h2 className="text-4xl font-bold mb-5 tracking-tight">Services Offered</h2>
+        <h2 className="text-4xl font-bold mb-5 tracking-widest">Services Offered</h2>
         <p className="text-lg leading-relaxed max-w-3xl mx-auto mb-10">
           I offer a range of services to meet your web development needs.
         </p>
@@ -168,7 +168,7 @@ const ProfileCard = () => {
 
       {/* Hobbies Section */}
       <section className="px-8 py-10">
-        <h2 className="text-center text-3xl font-extrabold mb-6 tracking-wide">Hobbies</h2>
+        <h2 className="text-center text-3xl font-extrabold mb-6 tracking-widest">Hobbies</h2>
         <div className="flex flex-wrap justify-center gap-5 max-w-3xl mx-auto ">
           {["Coding", "Gaming", "Praying", "Traveling", "Reading"].map((hobby, index) => (
             <span
