@@ -4,6 +4,8 @@ import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
 
 const imageData = [
+    { src: "ma1.jpg", title: "Jack Ma: Why I flew 15 hours just to visit Nigeria", link: "http://localhost:3000/blog/crMFd0tsdFuVCLSRuYor" },
+    { src: "atti.jpg", title: "Attitude is Everything, Best Motivational Speech by Jack Ma", link: "http://localhost:3000/blog/TIcJic9GTFSypm63zqoR" },
   { src: "ma.jpg", title: "Billionaire Jack Ma shows us how to be successful in our 20s, 30s, 40s and beyond", link: "https://webwizcreation-y7vx.vercel.app/blog/3W9lOrKuvHVimWAdB3qx" },
   { src: "reno1.jpg", title: "Why Tithing Is a Big Scam in Christianity", link: "https://webwizcreation-y7vx.vercel.app/blog/I0dA4zrCTd7ik2dKiyil" },
   { src: "sadhguru.jpg", title: "Higher Salary vs A Job You Enjoy: Which Should You Choose?", link: "https://webwizcreation-y7vx.vercel.app/blog/f21UAfA1F094wsO5FQt0" },
@@ -12,7 +14,7 @@ const imageData = [
   { src: "project.jpg", title: "Here are seven top coding projects to work on:", link: "https://webwizcreation-y7vx.vercel.app/blog/uMnLfrqwyE7C2xzPV6TJ" },
   { src: "being.jpg", title: "THE PROBLEM OF FINDING A WORD FOR THE SUPREME BEING", link: "https://webwizcreation-y7vx.vercel.app/blog/uRpGwukHugfLW08Rthvh" },
 
-  { src: "wrong.jpg", title: "The Wrong Thing At The Wrong Time", link: "https://webwizcreation-y7vx.vercel.app/blog/6PkM2Tw6h72Zx51CXhAb" },
+  { src: "wrong1.jpg", title: "The Wrong Thing At The Wrong Time", link: "https://webwizcreation-y7vx.vercel.app/blog/6PkM2Tw6h72Zx51CXhAb" },
   { src: "sex.jpg", title: "Sex: Sacred or Sinful?", link: "https://webwizcreation-y7vx.vercel.app/blog/1HXqx2I2Sb7K6p5FWiel" },
   { src: "marryme.jpg", title: "THINK BEFORE GETTING MARRIED", link: "https://webwizcreation-y7vx.vercel.app/blog/ODs7l1jjtQ6M3bTmtucY" },
   { src: "web21.jpg", title: "MASTERING SKILLS: A STEP BY STEP GUIDE?", link: "https://webwizcreation-y7vx.vercel.app/blog/QmpY76ELg3ZSEiRoDIXI" },
@@ -27,7 +29,7 @@ const SupportCard = () => {
   const slidingImages = imageData.slice(0, 5); // first 5 slide vertically
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
+    const timer = setTimeout(() => setLoading(false), 6000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -47,7 +49,7 @@ const SupportCard = () => {
   };
 
   return (
-    <main className="bg-gray-800 min-h-screen text-white p-6">
+    <main className="bg-black/90 min-h-screen text-white p-6">
       {loading ? (
         <div className="flex flex-col justify-center items-center h-screen">
           <h1 className="text-4xl font-extrabold mb-6">Loading Gallery</h1>
@@ -73,7 +75,7 @@ const SupportCard = () => {
                     alt={img.title}
                     className="object-cover w-full h-full rounded cursor-pointer"
                   />
-                  <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-sm p-2 text-center">
+                  <div className="absolute top-0 left-0 right-0 bg-black/70 text-sm p-2 text-center">
                     {img.title}
                   </div>
                 </div>
@@ -95,6 +97,10 @@ const SupportCard = () => {
                   <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-sm text-center p-2 opacity-0 group-hover:opacity-100 transition">
                     {img.title}
                   </div>
+                   <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-xs p-2 text-center">
+                    {img.title}
+                  </div>
+                    <p className="text-xs text-right  text-gray-500 absolute top-0 right-0"> <span className="text-gray-800">✅</span>wiz Blog</p>
                 </div>
               ))}
                <div className="flex items-center justify-center gap-1"> 
@@ -108,16 +114,16 @@ const SupportCard = () => {
 
           {/* Modal Popup */}
           {activeImage && (
-            <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-              <div className="bg-white text-black rounded-lg p-6 max-w-md w-full shadow-lg relative">
+            <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50">
+              <div className="bg-black  text-black rounded-lg p-6 max-w-md w-full shadow-xl relative border border-white  border-x-10 border-b-10 border-s-10 border-b-blue-700">
                 <button
                   onClick={closeModal}
-                  className="absolute top-2 right-2 text-white bg-red-500 px-3 py-1 rounded hover:bg-red-600"
+                  className="absolute top-6 right-6 text-white bg-gray-400/5 border-x border-x-blue-600 px-3 py-1 rounded hover:bg-red-600 tracking-widest font-serif"
                 >
                   Close
                 </button>
-                <img src={activeImage.src} alt={activeImage.title} className="rounded w-full h-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2">{activeImage.title}</h3>
+                <img src={activeImage.src} alt={activeImage.title} className="rounded w-full h-auto mb-4 " />
+                <h3 className="text-xl font-semibold mb-2 text-white text-center">{activeImage.title}</h3>
                 <div className="flex items-center justify-between mt-4">
                 <a
                   href={activeImage.link}
@@ -126,7 +132,7 @@ const SupportCard = () => {
                 >
                   Visit Article →
                 </a>
-                <a href="/blog" className=" text-blue-600">Wiz Blog →</a>
+                <a href="/blog" className=" text-blue-600 ">Wiz Blog →</a>
                 </div>
               </div>
             </div>

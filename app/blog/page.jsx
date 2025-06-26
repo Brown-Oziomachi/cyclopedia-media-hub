@@ -252,13 +252,13 @@ const BlogPage = () => {
             <div className="lg:flex items-center justify-center gap-20">
               <div className="max-lg:relative">
                 <h1 className="text-6xl font-bold tracking-tight   max-lg:inset-0 max-lg:top-8 lg:py-10 lg:hidden text-gray-400 mb-5">
-            Wiz {showContentType === "blog" ? "Blog " : "Videos"}
+            ✅Wiz {showContentType === "blog" ? "Blog " : "Videos"}
                 </h1>
                 <img src="web19.jpg" alt="Blog image" className="rounded-md w-full"/>
               </div>
               <p className="text-sm text-gray-400 font-mono">
-                <h1 className="text-6xl font-bold tracking-tight mt-5  max-lg:inset-0 max-lg:top-8 lg:py-10 max-lg:hidden">
-            Wiz {showContentType === "blog" ? "Blog " : "Videos"}
+                <h1 className="text-6xl font-bold tracking-tight mt-5 space-x-5 max-lg:inset-0 max-lg:top-8 lg:py-10 max-lg:hidden">
+            ✅Wiz {showContentType === "blog" ? "Blog " : "Videos"}
                 </h1>
                 Explore unique insights, stories, and expert opinions.
               </p>

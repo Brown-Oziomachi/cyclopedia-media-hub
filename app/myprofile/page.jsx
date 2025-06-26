@@ -34,7 +34,7 @@ const ProfileCard = () => {
   };
 
   return (
-    <main className="z-50 max-w-5xl mx-auto bg-gray-400/5 border-x rounded-xl shadow-xl mb-12 overflow-hidden text-white font-sans">
+    <main className="z-50 max-w-5xl mx-auto bg-gray-400/5  rounded-xl shadow-xl mb-12 overflow-hidden text-white font-sans">
       {/* Header Section */}
       <div className="relative h-64 mt-17 rounded-b-xl overflow-hidden">
         <img
@@ -60,11 +60,18 @@ const ProfileCard = () => {
           />
           <div className="mt-6 space-y-1">
             <h3 className="text-2xl font-serif font-semibold">Brown Oziomachi</h3>
+            <div className="flex items-center justify-center gap-5">
             <h4 className="text-sm text-gray-300">
               <Link href="/" className="text-gray-400 underline hover:text-orange-500">
                 webwiz creation
               </Link>
             </h4>
+             <h4 className="text-sm text-gray-300">
+              <Link href="/blog" className="text-gray-400 underline hover:text-orange-500">
+                Wiz Blog
+              </Link>
+            </h4>
+            </div>
             <h2 className="text-xl font-bold mt-2 text-gray-500">Full-Stack Developer|Python Developer|Data Scientist|</h2>
             <p className="text-gray-400 mt-3 leading-relaxed">
               Passionate about crafting scalable and intuitive user experiences with modern web

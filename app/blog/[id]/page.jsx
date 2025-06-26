@@ -218,19 +218,19 @@ return (
         THE <span className="text-orange-400">SUN</span> WEB
       </h1>
 
-     
-      
       <div className="flex flex-col items-center mb-6">
-        <Link href={`/profile/${blog.author}`}>
+        <Link href={'/myprofile'}>
           <img
             title="View Profile"
-            src={session?.user?.image}
+            src="/web20.jpg"
             alt="User"
             className="w-24 h-24 rounded-full  shadow-lg cursor-pointer hover:scale-105 transition-transform"
           />
         </Link>
-        <h3 className="mt-2 text-lg font-semibold text-blue-600">{blog.author}</h3>
-
+        <Link href="/myprofile">
+        <h3 className="mt-2  font-semibold text-blue-600 text-2xl">Brown Code</h3>
+          <h4 className="underline text-xs text-blue-600 text-center">VIEW PROFILE</h4>
+        </Link>
           <p className="text-gray-500 text-sm mt-1">
             Posted on {blog.timestamp || "Unknown Date"}
           </p>

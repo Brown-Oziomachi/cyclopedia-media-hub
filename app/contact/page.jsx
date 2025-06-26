@@ -8,6 +8,7 @@ import { Field, Form, Formik, ErrorMessage } from "formik";
 import { db2 } from "@/lib/firebaseConfig";
 import { LoaderCircle, ThumbsUp } from "lucide-react";
 import ChatDropdown from "@/components/Chat";
+import Footer from "@/components/Footer";
 
 // Validation Schema
 const valSchema = Yup.object({
@@ -185,13 +186,13 @@ const ContactPage = () => {
           </section>
 
           {/* Footer */}
-          <footer className="text-center py-8 text-gray-400 text-sm">
+          <Footer className="text-center py-8 text-gray-400 text-sm">
             <span>© 2025 WebWiz Creation. Designed and developed for excellence.</span>
             <br />
             <Link href="/">
               <p className="underline text-gray-300 hover:text-white">www.webwizcreation.com</p>
             </Link>
-          </footer>
+          </Footer>
         </main>
       )}
     </>

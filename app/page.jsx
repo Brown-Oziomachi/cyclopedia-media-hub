@@ -37,22 +37,11 @@ const Page = () => {
 
   return (
     <>
-      {loading ? (
-        <div className="flex justify-center items-center h-dvh z-50 bg-gray-400/5">
-          <h1 className="text-4xl lg:text-6xl font-extrabold z-50 tracking-wide leading-tight text-white relative"></h1>
-          <LoaderCircle
-            size="50"
-            speed="1.10"
-            color="white"
-            className="animate-spin"
-          />
-          <img
-            src="logo.png"
-            alt="My Logo"
-            className="h-30 lg:h-30 mt-10 animate-pulse absolute top-30 left-0 right-0 bottom-0 mx-auto"
-          />
-        </div>
-      ) : (
+       {loading ? (
+              <div className="flex justify-center items-center h-screen bg-gray-400/5">
+                <LoaderCircle size={50} speed={1.1} color="white" className="animate-spin" />
+              </div>
+            ) : (
         <div className="py-18 text-white relative overflow-hidden bg-gray-400/5">
           {/* Hero Section */}
           <div>

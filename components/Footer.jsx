@@ -35,15 +35,18 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-400/5 text-white py-14 px-6">
+    <footer className="bg-gray-400/5 text-white py-14 px-6 text-center">
       <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
         {/* Brand */}
         <div>
-          <img src="/logo.png" alt="Webwiz Logo" className="w-28 mb-4" />
-          <p className="text-gray-400 text-sm">
+          <div className="text-4xl">
+            ✅
+          </div>         
+           <p className="text-gray-400 text-sm">
+            
             &copy; 2025 Webwiz Creation. All rights reserved.
           </p>
-          <div className="mt-4 flex gap-4 text-sm">
+          <div className="mt-4 flex gap-4 text-sm items-center justify-center">
             <Link
               href="https://www.facebook.com/profile.php?id=61575479727679"
               className="text-gray-300 hover:text-white"
@@ -82,7 +85,7 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-4">Subscribe to Updates</h3>
           {/* Mailchimp subscription form */}
-          <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-10 items-center justify-center ">
+          <div className="max-w-7xl gap-10 flex flex-col ">
 
       <form
         action="https://app.us13.list-manage.com/subscribe/post?u=43a30bccc98acfbb16a52d1eb&amp;id=4f4f321a7e&amp;f_id=00bb5fe1f0"
@@ -116,22 +119,47 @@ const Footer = () => {
       </div>
 
       {/* Divider */}
-      <div className="border-t border-gray-700 mb-5 pt-6 text-center">
-        <h4 className="text-md font-semibold mb-10">Quick Links</h4>
-        <ul className="flex justify-center flex-wrap gap-6 text-sm text-gray-300">
+      <div className="border-t border-gray-700 mb-5 pt-6 text-center ">
+        <h4 className="text-md font-semibold mb-5 text-xl">Quick Links</h4>
+        <ul className="lg:flex justify-center md:flex-wrap gap-6 text-sm text-gray-300 space-y-6">
+           <li>
+            <Link href="/blog" className="hover:text-white underline">
+              Blog
+            </Link>
+          </li>
+           <li>
+            <Link href="/gallery" className="hover:text-white underline">
+              Gallery
+            </Link>
+          </li>
+           <li>
+            <Link href="/contact" className="hover:text-white underline">
+              Contact us
+            </Link>
+          </li>
+           <li>
+            <Link href="/about" className="hover:text-white underline">
+              About
+            </Link>
+          </li>
+           <li>
+            <Link href="/#services-section" className="hover:text-white underline">
+              Services
+            </Link>
+          </li>
           <li>
-            <Link href="/privacypolicy" className="hover:text-white">
+            <Link href="/privacypolicy" className="hover:text-white underline">
               Privacy Policy
             </Link>
           </li>
           <li>
-            <Link href="/termsofservices" className="hover:text-white">
+            <Link href="/termsofservices" className="hover:text-white underline">
               Terms of Service
             </Link>
           </li>
           <li>
-            <Link href="/faq" className="hover:text-white">
-              FAQ
+            <Link href="/faq" className="hover:text-white underline">
+              FAQs
             </Link>
           </li>
         </ul>

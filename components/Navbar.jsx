@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { BellRing, ChevronDown, ListCollapse, LogIn, Menu } from "lucide-react";
 import logo from "../public/logo.png";
@@ -33,16 +33,11 @@ const ProfileDropdownNavbar = () => {
     <main className="fixed w-full bg-gray-400/5 border-x shadow-xl border-b border z-50">
       <section className="px-5 py-4 flex items-center justify-between">
         {/* Logo */}
-        <span className="flex items-center border px-2 border-gray-400 rounded-md font-extralight">
-          <Link href="/">
-            <Image
-              src={logo}
-              width={50}
-              height={50}
-              alt="WebWiz Logo"
-              className="rounded-full shadow-xl hover:scale-110 transition-transform duration-100 z-50"
-            />
+        <span className="flex items-center border px-2 border-gray-400 rounded-md font-extralight gap-5">
+          <Link href="/" >
+            ✅
           </Link>
+          
           <h1 className="text-white -ml-5 border-b">WebWiz</h1>
         </span>
 
