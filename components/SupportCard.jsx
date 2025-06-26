@@ -54,15 +54,15 @@ const SupportCard = () => {
       {loading ? (
         <div className="flex flex-col justify-center items-center h-screen">
           <h1 className="text-4xl font-extrabold mb-6">Loading Gallery</h1>
-          <LoaderCircle size={50} className="animate-spin" />
+          <LoaderCircle size={50} className="animate-spin text-green-600" />
         </div>
       ) : (
         <div className="max-lg:flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto">
           
           {/* Left Vertical Scrolling/Sliding Section */}
-            <h2 className="text-3xl font-semibold mb-4 mt-20 text-center border-x rounded-md">Learn From The <span className="font-serif text-blue-700 line-clamp-3 gap-2 tracking-widest text-4xl">Gallery</span></h2>
-          <aside className="w-full lg:w-1/4 bg-gray-400/5 rounded-lg p-4 flex flex-col items-center">
-            <div className="relative h-64 w-full overflow-hidden rounded-md border border-white/20">
+            <h2 className="text-3xl font-semibold mb-4 mt-20 text-center border-x rounded-md">Learn From The <span className="font-serif text-green-700 line-clamp-3 gap-2 tracking-widest text-4xl">G a l l e r y</span></h2>
+          <aside className="w-full max-md:h-64 bg-gray-400/5 rounded-lg p-4 flex flex-col items-center">
+            <div className="relative h-100 w-full overflow-hidden rounded-md border border-white/20">
               {slidingImages.map((img, i) => (
                 <div
                   key={i}
@@ -83,9 +83,20 @@ const SupportCard = () => {
               ))}
             </div>
           </aside>
-
+          <h1 className="text-2xl font-serif text-center border-b border-b-green-600"><span className="text-4xl text-green-600">L</span>atest <span className="text-4xl text-green-600">U</span>pdates</h1>
+                <div>
+              <h1
+                className="font-bold font-serif text-center -mt-8 cursor-pointer text-green-700 lg:mt-5"
+                onClick={() => {
+            const el = document.getElementById("services-section");
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Have something to Share? ⬇
+              </h1>
+            </div>
           {/* Main Grid Gallery */}
-          <section className="w-full lg:w-3/4">
+          <section className="w-full ">
             <h2 className="text-3xl font-bold mb-6 text-center"></h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
               {imageData.map((img, index) => (
@@ -101,14 +112,20 @@ const SupportCard = () => {
                    <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-xs p-2 text-center">
                     {img.title}
                   </div>
-                    <p className="text-xs text-right  text-gray-500 absolute top-0 right-0"> <span className="text-gray-800">✅</span>wiz Blog</p>
+
+                      <div className="flex items-center justify-center space-x-6">
+                        <img src="logo.jpg" alt="logo" className="w-5 h-5 absolute top-0 right-6"/>
+                    <p className="text-xs  text-gray-500 absolute top-0 right-0">
+                       <span className="text-gray-800">
+                       </span>wiz Blog</p>
+                      </div>
                 </div>
               ))}
                <div className="flex items-center justify-center gap-1"> 
               <Link href="/gallery">
-            <h1 className="mt-10 text-center text-blue-700 underline font-bold">UPDATING GALLERY </h1>
+            <h1 className="mt-10 text-center text-green-600 underline font-bold">UPDATING GALLERY </h1>
             </Link>
-             <h2 className="animate-pulse text-5xl mt-3 text-blue-700">.......</h2>
+             <h2 className="animate-pulse text-5xl mt-3 text-green-600">.......</h2>
              </div>
             </div>
           </section>
@@ -116,30 +133,44 @@ const SupportCard = () => {
           {/* Modal Popup */}
           {activeImage && (
             <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50">
-              <div className="bg-black  text-black rounded-lg p-6 max-w-md w-full shadow-xl relative border border-white  border-x-10 border-b-10 border-s-10 border-b-blue-700">
+              <div className="bg-black  text-black rounded-lg p-6 max-w-md w-full shadow-xl relative border border-white  border-x-10 border-b-10 border-s-10 border-b-green-600">
                 <button
                   onClick={closeModal}
-                  className="absolute top-6 right-6 text-white bg-gray-400/5 border-x border-x-blue-600 px-3 py-1 rounded hover:bg-red-600 tracking-widest font-serif"
+                  className="absolute top-6 right-6 text-green-600 font-bold bg-gray-400/5 border-x border-x-green-600 px-3 py-1 rounded hover:bg-red-600 tracking-widest font-serif"
                 >
                   Close
                 </button>
                 <img src={activeImage.src} alt={activeImage.title} className="rounded w-full h-auto mb-4 " />
-                <h3 className="text-xl font-semibold mb-2 text-white text-center">{activeImage.title}</h3>
+                <a href={activeImage.link} className="text-xl font-semibold mb-2 text-white text-center underline">{activeImage.title}</a>
                 <div className="flex items-center justify-between mt-4">
                 <a
                   href={activeImage.link}
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
+                  className="text-green-600 hover:underline"
                 >
                   Visit Article →
                 </a>
-                <a href="/blog" className=" text-blue-600 ">Wiz Blog →</a>
+                <a href="/blog" className=" text-green-600 ">Wiz Blog →</a>
                 </div>
               </div>
             </div>
           )}
         </div>
       )}
+
+       <div id="services-section"></div>
+      <div className=" mt-10">
+        <h1 className="font-bold font-serif">Have something to Share?</h1>
+        <h2 className="font-mono">We value your thoughts and ideas! feel free to share your opinions, Suggestions, or topics you'd love to see on our <a href="/blog" className="text-green-600">blog.</a>.
+          <h3>📩Reach out to us directly on WhatsApp:</h3>
+        </h2>
+          <a
+           href="https://wa.me/message/R4UKUMFIH22RJ1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold text-green-600 cursor-pointer hover:underline"
+          >Click here to chat</a>
+      </div>
     </main>
   );
 };

@@ -40,7 +40,7 @@ const Footer = () => {
         {/* Brand */}
         <div>
           <div className="text-4xl">
-            ✅
+            <img src="logo.jpg" alt="logo" className="w-15 h-15 mx-auto"/>
           </div>         
            <p className="text-gray-400 text-sm">
             

@@ -35,6 +35,8 @@ const ProfileCard = () => {
 
   return (
     <main className="z-50 max-w-5xl mx-auto bg-gray-400/5  rounded-xl shadow-xl mb-12 overflow-hidden text-white font-sans">
+
+      
       {/* Header Section */}
       <div className="relative h-64 mt-17 rounded-b-xl overflow-hidden">
         <img
@@ -53,11 +55,13 @@ const ProfileCard = () => {
       {/* Profile Section */}
       <section className="p-8 lg:flex lg:justify-between lg:items-center space-y-8 lg:space-y-0">
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-md mx-auto lg:mx-0">
+          <Link href="/blog">
           <img
             src="/web19.jpg"
             alt="Profile Picture"
             className="w-40 h-40 lg:h-52 lg:w-52 object-cover rounded-full border-4 border-gray-400/5 shadow-lg transition-transform hover:scale-105"
           />
+          </Link>
           <div className="mt-6 space-y-1">
             <h3 className="text-2xl font-serif font-semibold">Brown Oziomachi</h3>
             <div className="flex items-center justify-center gap-5">

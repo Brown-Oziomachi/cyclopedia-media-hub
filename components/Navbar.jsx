@@ -33,12 +33,12 @@ const ProfileDropdownNavbar = () => {
     <main className="fixed w-full bg-gray-400/5 border-x shadow-xl border-b border z-50">
       <section className="px-5 py-4 flex items-center justify-between">
         {/* Logo */}
-        <span className="flex items-center border px-2 border-gray-400 rounded-md font-extralight gap-6">
+        <span className="flex items-center border px-2 py-1 border-gray-400 rounded-md font-extralight gap-6">
           <Link href="/" >
             <img src="logo.jpg" alt="" className="w-7 h-5"/>
           </Link>
           
-          <h1 className="text-white -ml-5 border-b">WebWiz</h1>
+          <h1 className="text-white -ml-5 border-b border-b-green-600">WebWiz</h1>
         </span>
 
         {/* Desktop Navigation */}

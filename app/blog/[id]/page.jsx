@@ -222,7 +222,7 @@ return (
         <Link href={'/myprofile'}>
           <img
             title="View Profile"
-            src="/web20.jpg"
+            src="/web19.jpg"
             alt="User"
             className="w-24 h-24 rounded-full  shadow-lg cursor-pointer hover:scale-105 transition-transform"
           />
