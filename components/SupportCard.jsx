@@ -4,8 +4,8 @@ import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
 
 const imageData = [
-    { src: "ma1.jpg", title: "Jack Ma: Why I flew 15 hours just to visit Nigeria", link: "http://localhost:3000/blog/crMFd0tsdFuVCLSRuYor" },
-    { src: "why.jpg", title: "Attitude is Everything, Best Motivational Speech by Jack Ma", link: "http://localhost:3000/blog/TIcJic9GTFSypm63zqoR" },
+    { src: "ma1.jpg", title: "Jack Ma: Why I flew 15 hours just to visit Nigeria", link: "https://webwizcreation-y7vx.vercel.app/blog/crMFd0tsdFuVCLSRuYor" },
+    { src: "why.jpg", title: "Attitude is Everything, Best Motivational Speech by Jack Ma", link: "https://webwizcreation-y7vx.vercel.app/blog/TIcJic9GTFSypm63zqoR" },
   { src: "ma.jpg", title: "Billionaire Jack Ma shows us how to be successful in our 20s, 30s, 40s and beyond", link: "https://webwizcreation-y7vx.vercel.app/blog/3W9lOrKuvHVimWAdB3qx" },
   { src: "reno1.jpg", title: "Why Tithing Is a Big Scam in Christianity", link: "https://webwizcreation-y7vx.vercel.app/blog/I0dA4zrCTd7ik2dKiyil" },
   { src: "sadhguru.jpg", title: "Higher Salary vs A Job You Enjoy: Which Should You Choose?", link: "https://webwizcreation-y7vx.vercel.app/blog/f21UAfA1F094wsO5FQt0" },
