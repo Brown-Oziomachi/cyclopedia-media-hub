@@ -5,6 +5,7 @@ import Link from "next/link";
 
 const imageData = [
     { src: "ma1.jpg", title: "Jack Ma: Why I flew 15 hours just to visit Nigeria", link: "https://webwizcreation-y7vx.vercel.app/blog/crMFd0tsdFuVCLSRuYor" },
+       { src: "tech.jpg", title: "Jack Ma Calls for Wisdom and Innovation at World AI Conference", link: "https://webwizcreation-y7vx.vercel.app/blog/ZAVCyn24lV5brija4ahE" },
     { src: "why.jpg", title: "Attitude is Everything, Best Motivational Speech by Jack Ma", link: "https://webwizcreation-y7vx.vercel.app/blog/TIcJic9GTFSypm63zqoR" },
   { src: "ma.jpg", title: "Billionaire Jack Ma shows us how to be successful in our 20s, 30s, 40s and beyond", link: "https://webwizcreation-y7vx.vercel.app/blog/3W9lOrKuvHVimWAdB3qx" },
   { src: "reno1.jpg", title: "Why Tithing Is a Big Scam in Christianity", link: "https://webwizcreation-y7vx.vercel.app/blog/I0dA4zrCTd7ik2dKiyil" },
