@@ -70,7 +70,7 @@ const Footer = () => {
 
         {/* Contact Info */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+          <h3 className="text-lg font-semibold mb-4 text-green-600">Contact Us</h3>
           <p>
             Email:{" "}
             <span className="text-gray-300">webwizcreation.web@gmail.com</span>
@@ -83,7 +83,7 @@ const Footer = () => {
 
         {/* Newsletter */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Subscribe to Updates</h3>
+          <h3 className="text-lg font-semibold mb-4 text-green-600">Subscribe to Updates</h3>
           {/* Mailchimp subscription form */}
           <div className="max-w-7xl gap-10 flex flex-col ">
 
@@ -100,7 +100,7 @@ const Footer = () => {
           name="EMAIL"
           placeholder="Your email"
           required
-          className="flex-grow px-4 py-3 rounded-md bg-gray-400/5 border-x placeholder-gray-500 text-white focus:outline-none focus:ring-2 focus:ring-white transition"
+          className="flex-grow px-4 py-3 rounded-md bg-gray-400/5 border-x border-x-green-600 placeholder-gray-500 text-white focus:outline-none focus:ring-2 focus:ring-white transition"
           aria-label="Email address"
         />
         <button
@@ -112,7 +112,7 @@ const Footer = () => {
         </button>
       </form>
           </div>
-          <p className="text-sm text-gray-400 mt-3">
+          <p className="text-sm text-green-600 mt-3">
             Get exclusive tips and updates in your inbox.
           </p>
         </div>
@@ -120,7 +120,7 @@ const Footer = () => {
 
       {/* Divider */}
       <div className="border-t border-gray-700 mb-5 pt-6 text-center ">
-        <h4 className="text-md font-semibold mb-5 text-xl">Quick Links</h4>
+        <h4 className="text-md font-semibold mb-5 text-xl text-green-600">Quick Links</h4>
         <ul className="lg:flex justify-center md:flex-wrap gap-6 text-sm text-gray-300 space-y-6">
            <li>
             <Link href="/blog" className="hover:text-white underline">

@@ -8,6 +8,7 @@ const imageData = [
        { src: "tech.jpg", title: "Jack Ma Calls for Wisdom and Innovation at World AI Conference", link: "https://webwizcreation-y7vx.vercel.app/blog/ZAVCyn24lV5brija4ahE" },
     { src: "why.jpg", title: "Attitude is Everything, Best Motivational Speech by Jack Ma", link: "https://webwizcreation-y7vx.vercel.app/blog/TIcJic9GTFSypm63zqoR" },
   { src: "ma.jpg", title: "Billionaire Jack Ma shows us how to be successful in our 20s, 30s, 40s and beyond", link: "https://webwizcreation-y7vx.vercel.app/blog/3W9lOrKuvHVimWAdB3qx" },
+
   { src: "reno1.jpg", title: "Why Tithing Is a Big Scam in Christianity", link: "https://webwizcreation-y7vx.vercel.app/blog/I0dA4zrCTd7ik2dKiyil" },
   { src: "sadhguru.jpg", title: "Higher Salary vs A Job You Enjoy: Which Should You Choose?", link: "https://webwizcreation-y7vx.vercel.app/blog/f21UAfA1F094wsO5FQt0" },
   { src: "society.jpg", title: "How will you define a society without science and technology?", link: "https://webwizcreation-y7vx.vercel.app/blog/0mSBXAvjWZBSD5NfWHcb" },
@@ -52,9 +53,14 @@ const SupportCard = () => {
   return (
     <main className="bg-black/90 min-h-screen text-white p-6">
       {loading ? (
-        <div className="flex flex-col justify-center items-center h-screen">
-          <h1 className="text-4xl font-extrabold mb-6">Loading Gallery</h1>
+        <div className="flex flex-col justify-center items-center h-screen mt-20">
+          <h1 className="text-4xl font-extrabold mb-6">Loading <span className="text-green-600">Gallery</span></h1>
           <LoaderCircle size={50} className="animate-spin text-green-600" />
+           <img
+            src="logo.jpg"
+            alt="My Logo"
+            className="h-30 lg:h-30 mt-10 animate-pulse absolute top-50 left-0 right-0 bottom-0 mx-auto"
+          />
         </div>
       ) : (
         <div className="max-lg:flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto">
@@ -83,7 +89,10 @@ const SupportCard = () => {
               ))}
             </div>
           </aside>
-          <h1 className="text-2xl font-serif text-center border-b border-b-green-600"><span className="text-4xl text-green-600">L</span>atest <span className="text-4xl text-green-600">U</span>pdates</h1>
+          <div className="items-center justify-center flex border-b space-x-5 border-b-green-600">
+            <img src="logo.jpg" alt="logo" className="w-5 h-5 mr-auto"/>
+          <h1 className="text-2xl font-serif text-center mr-auto"><span className="text-4xl text-green-600">L</span>atest <span className="text-4xl text-green-600">U</span>pdates</h1>
+          </div>
                 <div>
               <h1
                 className="font-bold font-serif text-center -mt-8 cursor-pointer text-green-700 lg:mt-5"

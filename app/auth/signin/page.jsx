@@ -16,7 +16,7 @@ const page = async () => {
           <h1 className="text-3xl font-extrabold text-white mb-2">
             Welcome to WebWiz Creation
           </h1>
-          <p className="text-gray-300">
+          <p className="text-green-600">
             Sign in to unlock your creative potential.
           </p>
         </header>
@@ -30,7 +30,7 @@ const page = async () => {
           >
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-3 bg-white/50 border-x text-black font-semibold py-3 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-500 transition"
+              className="w-full flex items-center justify-center border border-green-600 gap-3 border-b-4 bg-white/5 border-x text-white font-semibold py-3 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-500 transition"
               aria-label="Sign in with Google"
             >
               <ChartPie className="text-2xl" />
@@ -46,7 +46,7 @@ const page = async () => {
           >
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-3 bg-gray-400/5 border-x text-white font-semibold py-3 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-500 transition"
+              className="w-full flex items-center justify-center  border border-green-600 border-b-4 gap-3 bg-gray-400/5 border-x text-white font-semibold py-3 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-500 transition"
               aria-label="Sign in with Github"
             >
               <Github className="text-2xl" />
@@ -60,14 +60,14 @@ const page = async () => {
             By signing in, you agree to our{" "}
             <Link
               href="/privacypolicy"
-              className="text-gray-300 hover:underline focus:outline-none focus:ring-1 focus:ring-gray-400"
+              className="text-green-600 hover:underline focus:outline-none focus:ring-1 focus:ring-gray-400"
             >
               Privacy Policy
             </Link>{" "}
             and{" "}
             <Link
               href="/termsofservices"
-              className="text-gray-300 hover:underline focus:outline-none focus:ring-1 focus:ring-gray-400"
+              className="text-green-600 hover:underline focus:outline-none focus:ring-1 focus:ring-gray-400"
             >
               Terms of Service
             </Link>

@@ -15,7 +15,7 @@ const ChatDropdown = () => {
           sx={{ position: "absolute", bottom: 0, right: 0 }}
           icon={<SpeedDialIcon />}
           onClick={() => setIsOpen(!isOpen)}
-          FabProps={{ sx: { backgroundColor: "#fff", color: "#000" } }}
+          FabProps={{ sx: { backgroundColor: "green", color: "white" } }}
         />
       </div>
 

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { db1 } from "@/lib/firebaseConfig";
 import { useRouter } from "next/navigation";
 import { serverTimestamp } from "firebase/firestore";
+import { LoaderCircle } from "lucide-react";
 
 const formatTimestamp = (timestamp) => {
   if (!timestamp) return "Unknown Date";
@@ -44,7 +45,6 @@ const formatTimestamp = (timestamp) => {
 
 const BlogPage = () => {
   const router = useRouter();
-
   const [blogPosts, setBlogPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -232,11 +232,20 @@ const BlogPage = () => {
     const title = encodeURIComponent(post.title);
     const desc = encodeURIComponent(post.description || post.body || "");
 
+    
     router.push(
       `/video/${post.id}?url=${videoURL}&title=${title}&desc=${desc}`
     );
   };
-
+  
+  useEffect(() => {
+   const timer = setTimeout( ()=> {
+     setLoading(false)
+   }, 20000)
+ 
+   return ()=> clearTimeout(timer)
+  },[]);
+  
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -246,20 +255,37 @@ const BlogPage = () => {
   }, []);
 
   return (
-    <main className="min-h-screen bg-gray-400/5 text-white px-8 py-30">
+    <>
+    {loading ? (
+      <div className="flex justify-center items-center h-screen bg-gray-400/5 ">
+      <LoaderCircle
+      size={50}
+      speed={1.1}
+            color="white"
+            className="animate-spin text-green-600 mt-10"
+          />
+          <img
+            src="logo.jpg"
+            alt="My Logo"
+            className="h-30 lg:h-30 mt-10 animate-pulse absolute top-40 left-0 right-0 bottom-0 mx-auto"
+          />
+        </div>
+      ) : (
+        <main className="min-h-screen bg-gray-400/5 text-white px-8 py-30">
       <div className="max-w-7xl mx-auto">
           <header className="text-center mb-12">
             <div className="lg:flex items-center justify-center gap-20">
               <div className="max-lg:relative">
                 <h1 className="text-6xl font-bold tracking-tight   max-lg:inset-0 max-lg:top-8 lg:py-10 lg:hidden text-gray-400 mb-5">
-                  <img src="blog.jpg" alt="" className="w-fit"/>
+                  <img src="blog.jpg" alt="" className="w-fit border-x-green-600 border border-green-600 rounded-md b border-r-white"/>
              {showContentType === "blog" ? " " : "Videos"}
                 </h1>
                 <img src="web19.jpg" alt="Blog image" className="rounded-md w-full"/>
               </div>
+               
               <p className="text-sm text-gray-400 font-mono">
-                <h1 className="text-6xl font-bold tracking-tight mt-5 space-x-5 max-lg:inset-0 max-lg:top-8 lg:py-10 max-lg:hidden">
-                                    <img src="blog.jpg" alt="" className="w-fit"/>
+                <h1 className="text-6xl font-bold tracking-tight mt-5 space-x-5 lg:border-x-green-600 max-lg:inset-0 max-lg:top-8 lg:py-10 max-lg:hidden">
+                                    <img src="blog.jpg" alt="" className="w-fit border-x-green-600 border-r-white"/>
 
              {showContentType === "blog" ? " " : "Videos"}
                 </h1>
@@ -278,7 +304,7 @@ const BlogPage = () => {
             </div>
             <div>
               <h1
-                className="font-bold font-serif cursor-pointer text-blue-700"
+                className="font-bold font-serif cursor-pointer text-green-600"
                 onClick={() => {
             const el = document.getElementById("services-section");
             if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -315,7 +341,7 @@ const BlogPage = () => {
           <input
             type="text"
             placeholder={`Search ${showContentType} by genre...`}
-            className="w-full px-4 py-2 rounded-md text-white focus:ring focus:ring-yellow-500 border border-white bg-gray-400/10 border-x"
+            className="w-full px-4 py-2 rounded-md text-white focus:ring focus:ring-yellow-500 border border-green-600 bg-gray-400/10 border-x"
             onChange={(e) => {
               const searchTerm = e.target.value.toLowerCase();
               let basePosts = [];
@@ -356,7 +382,7 @@ const BlogPage = () => {
               className={`flex-shrink-0 px-4 py-2 rounded-md font-medium transition cursor-pointer ${
                 selectedCategory === genre
                   ? "bg-yellow-500 text-black"
-                  : "bg-gray-400/5 border-x text-white hover:bg-gray-400/10"
+                  : "bg-gray-400/5 border-x border-x-green-600 text-white hover:bg-gray-400/10"
               }`}
               onClick={() => filterByCategory(genre)}
             >
@@ -394,13 +420,13 @@ const BlogPage = () => {
               {filteredPosts.map((post) => (
                 <article
                   key={post.id}
-                  className=" rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit border-r"
+                  className=" rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit border-r-green-600 border-r"
                 >
-                  <span className="absolute top-4 left-4 bg-orange-400 text-black text-xs px-3 py-1 rounded-full">
+                  <span className="absolute top-4 left-4 bg-green-600 text-black text-xs px-3 py-1 rounded-full">
                     {post.genre || "General"}
                   </span>
                   <h1 className="text-xs text-gray-400 text-center absolute top-4 right-4">
-                    THE <span className="text-orange-400">SUN</span> WEB
+                    THE <span className="text-green-600">SUN</span> WEB
                   </h1>
 
                   {showContentType === "blog" ? (
@@ -424,7 +450,7 @@ const BlogPage = () => {
                         <p className="text-sm text-white mb-4 line-clamp-2">
                           {post.body}
                         </p>
-                        <p className="text-xs text-gray-100 text-right mr-2">
+                        <p className="text-xs text-green-600 text-right mr-2">
                           Posted on {formatTimestamp(post.timestamp)}
                         </p>
                       </div>
@@ -524,11 +550,14 @@ const BlogPage = () => {
            href="https://wa.me/message/R4UKUMFIH22RJ1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-blue-700 cursor-pointer hover:underline"
+                className="font-bold text-green-600 cursor-pointer hover:underline"
           >Click here to chat</a>
       </div>
-    </main>
-  );
-};
+      </main>
+      )}
+  </>
+  )
+}
 
+  
 export default BlogPage;

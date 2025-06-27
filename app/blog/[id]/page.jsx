@@ -209,13 +209,13 @@ return (
     {/* Blog Header Section */}
     <div className="bg-gray-400/5 shadow-xl rounded-2xl p-10 relative border border-gray-700 space-y-6">
       <Link href={`/blog/${blog.id}`}>
-        <span className="inline-block px-5 py-2 bg-gradient-to-r from-blue-500 text-black font-semibold text-sm rounded-full shadow-md transition-transform hover:scale-105">
+        <span className="inline-block px-5 py-2 bg-gradient-to-r from-green-600 text-black font-semibold text-sm rounded-full shadow-md transition-transform hover:scale-105">
           {blog.genre}
         </span>
       </Link>
 
       <h1 className="text-xs text-gray-400 text-center absolute top-10 right-6 font-mono tracking-widest">
-        THE <span className="text-orange-400">SUN</span> WEB
+        THE <span className="text-green-600">SUN</span> WEB
       </h1>
 
       <div className="flex flex-col items-center mb-6">
@@ -224,19 +224,19 @@ return (
             title="View Profile"
             src="/web19.jpg"
             alt="User"
-            className="w-24 h-24 rounded-full  shadow-lg cursor-pointer hover:scale-105 transition-transform"
+            className="w-24 h-24 rounded-full  shadow-lg cursor-pointer hover:scale-105 transition-transform border border-s-green-600 border-r-green-600"
           />
         </Link>
         <Link href="/myprofile">
-        <h3 className="mt-2  font-semibold text-blue-600 text-2xl">Brown Code</h3>
-          <h4 className="underline text-xs text-blue-600 text-center">VIEW PROFILE</h4>
+        <h3 className="mt-2  font-semibold text-green-600 text-2xl ">Brown Code</h3>
+          <h4 className="underline text-xs text-green-600 text-center font-serif">VIEW PROFILE</h4>
         </Link>
           <p className="text-gray-500 text-sm mt-1">
             Posted on {blog.timestamp || "Unknown Date"}
           </p>
         </div>
     </div>
-      <p className="-mt-15 text-center text-xs text-shadow-2xs border-b border-x px-0 border-gray-400/20 rounded-md">Learn, unlearn and relearn.</p>
+      <p className="-mt-15 text-center text-xs text-shadow-2xs border-b border-x border-x-green-600 px-0 border-gray-400/20 rounded-md">Learn, unlearn and relearn.</p>
 
     {/* Blog Body Content */}
 
@@ -298,19 +298,20 @@ return (
       <div className="lg:flex items-center space-x-5 grid space-y-4 lg:space-y-0">
         <img
           src={session?.user?.image || "/default-avatar.png"}
+          scr={session?.user?.profile || "/Unknown person"}
           alt="Avatar"
           className="w-12 h-12 rounded-full shadow-md"
         />
         <input
           type="text"
           placeholder="What's on your mind?"
-          className="flex-grow p-5 rounded-lg bg-gray-400/5 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+          className="flex-grow p-5 rounded-lg bg-gray-400/5 text-white border border-green-600 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         />
         <button
-          onClick={handleCommentSubmit}
-          className="lg:px-5 lg:py-2 px-3 py-2 max-md:w-1/2  bg-gradient-to-r from-blue-500 to-yellow-400 text-black font-semibold rounded-lg shadow-md hover:from-orange-600 hover:to-yellow-500 transition"
+          onClick={session? handleCommentSubmit : "/auth/signin"}
+          className="lg:px-5 lg:py-2 px-3 py-2 max-md:w-1/2  bg-gradient-to-r from-green-600 to-green-400 text-black font-semibold rounded-lg shadow-md hover:from-orange-600 hover:to-yellow-500 transition"
         >
           Post
         </button>
@@ -329,6 +330,7 @@ return (
                 <div className="flex items-center space-x-4 mb-3">
                   <img
                     src={comment.userImage || "/default-avatar.png"}
+                    scr={comment.profile || "/unknown person"}
                     alt="User"
                     className="w-10 h-10 rounded-full  shadow-sm"
                   />
@@ -361,7 +363,7 @@ return (
                       onChange={(e) => setReplyText(e.target.value)}
                     />
                     <button
-                      className="px-5 py-2 bg-orange-400 text-black font-semibold rounded-lg shadow-md hover:bg-orange-500 transition"
+                      className="px-5 py-2 bg-green-600 text-black font-semibold rounded-lg shadow-md hover:bg-orange-500 transition"
                       onClick={() =>
                         handleReplySubmit(
                           comment.id,
@@ -407,15 +409,15 @@ return (
     {otherBlogs.length > 0 && (
       <div className="space-y-6">
         <Link href="/blog">
-        <h1 className="mb-2 underline  text-center text-xs">Read more blog post</h1>
+        <h1 className="mb-2 underline  text-center text-xs text-green-600">Read more blog post</h1>
         </Link>
-        <h2 className="text-3xl font-extrabold text-white tracking-wide text-center text-clip py-10 border-t border-x">Recommended</h2>
+        <h2 className="text-3xl font-extrabold text-white tracking-wide text-center text-clip py-10 border-t border-t-green-600 border-r-green-600 border-x"><span className="text-green-600">Re</span>commen<span className="text-green-600">ded</span></h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {otherBlogs.map((other) => (
             <Link key={other.id} href={`/blog/${other.id}`}>
-              <div className="bg-gray-400/5 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition cursor-pointer border-r">
+              <div className="bg-gray-400/5 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition cursor-pointer border-r border-r-green-600">
                 <h3 className="text-2xl font-bold text-white mb-2">{other.title}</h3>
-                <p className="text-orange-400 font-semibold text-sm mb-3">{other.genre}</p>
+                <p className="text-green-600 font-semibold text-sm mb-3">{other.genre}</p>
                 <p className="text-gray-300 text-sm line-clamp-3">{other.body?.slice(0, 100)}...</p>
               </div>
             </Link>

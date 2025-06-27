@@ -61,46 +61,69 @@ const ContactPage = () => {
     <>
       {loading ? (
         <div className="flex justify-center items-center h-screen bg-gray-400/5">
-          <LoaderCircle size={50} speed={1.1} color="white" className="animate-spin" />
+          <LoaderCircle
+            size={50}
+            speed={1.1}
+            color="white"
+            className="animate-spin"
+          />
+          <img
+            src="logo.jpg"
+            alt="My Logo"
+            className="h-30 lg:h-30 mt-10 animate-pulse absolute top-30 left-0 right-0 bottom-0 mx-auto"
+          />
         </div>
       ) : (
         <main className="bg-gray-400/5 border-y text-white min-h-screen ">
           <section className="container mx-auto px-6 py-6 lg:flex lg:gap-20 ">
             {/* Left Info */}
             <div className="flex-1 space-y-6 max-w-xl mx-auto lg:mx-0 space-x-20 mt-20">
-              <h1 className="text-5xl font-extrabold text-white text-center">Contact WebWiz</h1>
+              <h1 className="text-5xl font-extrabold text-white text-center">
+                Contact WebWiz
+              </h1>
               <div className="container mx-auto lg:space-x-2">
                 <img
                   src="web22.jpg"
                   alt="Webwiz Logo"
                   className="w-full mx-auto "
                 />
-              <h2 className="text-xl text-gray-400 uppercase tracking-wider mb-4 text-center border-b border-x">BUILD A SYSTEM WITH <br /> THE SUN WEB</h2>
-              <p className="text-gray-300 leading-relaxed text-x1">
-                At WebWiz, we are dedicated to bringing your ideas to life. Whether you're looking
-                for expert web solutions, custom designs, or seamless functionality, we're here to help.
-                 <br /> <br />
-                Drop us a message and let’s collaborate to build something extraordinary for you!
-              </p>
-              <p className="text-gray-400 text-lg leading-relaxed">
-                📞 Have a question? Call us at{" "}
-                <a href="tel:+2348142995114" className="underline text-gray-200">
-                  +234 8142 995114
-                </a>
-                <br />
-                ✉️ Prefer email? Reach out at{" "}
-                <a href="mailto:webwizcreation.web@gmail.com" className="underline text-gray-200">
-                  webwizcreation.web@gmail.com
-                </a>
-              </p>
-              <p className="text-gray-300">or chat us via the circle you see on the screen
-                <ChatDropdown/>
-              </p>
-            </div>
+                <h2 className="text-xl text-gray-400 uppercase tracking-wider mb-4 text-center border-b border-x border-x-green-600 border-b-green-600">
+                  BUILD A SYSTEM WITH <br /> THE SUN WEB
+                </h2>
+                <p className="text-gray-300 leading-relaxed text-x1">
+                  At WebWiz, we are dedicated to bringing your ideas to life.
+                  Whether you're looking for expert web solutions, custom
+                  designs, or seamless functionality, we're here to help.
+                  <br /> <br />
+                  Drop us a message and let’s collaborate to build something
+                  extraordinary for you!
+                </p>
+                <p className="text-gray-400 text-lg leading-relaxed">
+                  📞 Have a question? Call us at{" "}
+                  <a
+                    href="tel:+2348142995114"
+                    className="border-b-green-600 border-b text-gray-200"
+                  >
+                    +234 8142 995114
+                  </a>
+                  <br />
+                  ✉️ Prefer email? Reach out at{" "}
+                  <a
+                    href="mailto:webwizcreation.web@gmail.com"
+                    className="border-b border-b-green-600 text-gray-200"
+                  >
+                    webwizcreation.web@gmail.com
+                  </a>
+                </p>
+                <p className="text-gray-300">
+                  or chat us via the circle you see on the screen
+                  <ChatDropdown />
+                </p>
               </div>
+            </div>
 
             {/* Form */}
-            <div className="flex-1 bg-gray-400/5 border-x rounded-lg shadow-lg p-5 mx-auto mt-5 lg:mt-20 ">
+            <div className="flex-1 bg-gray-400/5 border-x border-x-green-600 rounded-lg shadow-lg p-5 mx-auto mt-5 lg:mt-20 ">
               <Formik
                 initialValues={{
                   name: "",
@@ -114,7 +137,9 @@ const ContactPage = () => {
               >
                 {() => (
                   <Form>
-                    <h2 className="text-3xl font-semibold max-md:mb-8 text-white text-center py-2 rounded-md border-t border-x">Contact Form</h2>
+                    <h2 className="text-3xl font-semibold max-md:mb-8 text-white text-center py-2 rounded-md border-t border-x border-x-green-600 border-t-green-600">
+                      Contact Form
+                    </h2>
 
                     {["name", "number", "email", "address"].map((field) => (
                       <div key={field} className="mb-6">
@@ -122,8 +147,11 @@ const ContactPage = () => {
                           name={field}
                           type={field === "email" ? "email" : "text"}
                           placeholder={
-                            field === "number" ? "+234..." : 
-                            field.charAt(0).toUpperCase() + field.slice(1) + "..."
+                            field === "number"
+                              ? "+234..."
+                              : field.charAt(0).toUpperCase() +
+                                field.slice(1) +
+                                "..."
                           }
                           className="w-full p-3 rounded border border-gray-700 bg-transparent text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white"
                         />
@@ -153,10 +181,13 @@ const ContactPage = () => {
                     <button
                       type="submit"
                       disabled={processing}
-                      className="w-full py-3 rounded bg-gray-400/10 border-b border-x text-white font-semibold hover:bg-gray-300 transition mb-0"
+                      className="w-full py-3 rounded bg-gray-400/10 border-b border-b-green-600 border-x border-x-green-600 text-white font-semibold hover:bg-gray-300 transition mb-0"
                     >
                       {processing ? (
-                        <LoaderCircle className="mx-auto animate-spin" size={24} />
+                        <LoaderCircle
+                          className="mx-auto animate-spin"
+                          size={24}
+                        />
                       ) : (
                         "Send Message"
                       )}
@@ -187,10 +218,14 @@ const ContactPage = () => {
 
           {/* Footer */}
           <Footer className="text-center py-8 text-gray-400 text-sm">
-            <span>© 2025 WebWiz Creation. Designed and developed for excellence.</span>
+            <span>
+              © 2025 WebWiz Creation. Designed and developed for excellence.
+            </span>
             <br />
             <Link href="/">
-              <p className="underline text-gray-300 hover:text-white">www.webwizcreation.com</p>
+              <p className="underline text-gray-300 hover:text-white">
+                www.webwizcreation.com
+              </p>
             </Link>
           </Footer>
         </main>

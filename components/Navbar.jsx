@@ -35,7 +35,7 @@ const ProfileDropdownNavbar = () => {
         {/* Logo */}
         <span className="flex items-center border px-2 py-1 border-gray-400 rounded-md font-extralight gap-6">
           <Link href="/" >
-            <img src="logo.jpg" alt="" className="w-7 h-5"/>
+            <img src="logo.jpg" alt="" className="w-7 h-5 brightness-120"/>
           </Link>
           
           <h1 className="text-white -ml-5 border-b border-b-green-600">WebWiz</h1>
@@ -138,11 +138,11 @@ const ProfileDropdownNavbar = () => {
                       <div>
                         <h1
                           className="font-bold font-serif cursor-pointer text-blue-700 text-center mt-5"
-                          onClick={() => {
-                            const el =
-                              document.getElementById("services-section");
-                            if (el) el.scrollIntoView({ behavior: "smooth" });
-                          }}
+                        onClick={() => {
+                          const el = document.getElementById("services-section");
+                          if (el) el.scrollIntoView({behavior: "smooth"});
+                        }}
+                        
                         >
                           Have something to Share? ⬇
                           <div>
@@ -213,7 +213,7 @@ const ProfileDropdownNavbar = () => {
 
       {/* Mobile Navigation Overlay */}
       <div
-        className={`fixed top-0 left-0 w-full h-full bg-neutral-900 opacity-90 border-x  text-white flex flex-col items-center justify-center z-40 transition-transform duration-500 ${
+        className={`fixed top-0 left-0 w-full h-full bg-neutral-900 opacity-90 border-x border-x-green-600  text-white flex flex-col items-center justify-center z-40 transition-transform duration-500 ${
           showNav ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -254,7 +254,7 @@ const ProfileDropdownNavbar = () => {
           <Link
             href="/auth/signin"
             onClick={() => setShowNav(false)}
-            className="text-md py-2 px-6 bg-gray-400/5 border-x text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md mt-4"
+            className="text-md py-2 px-6 bg-gray-400/5 border-x border-x-green-600 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md mt-4"
           >
             Sign In
           </Link>

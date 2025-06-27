@@ -42,7 +42,7 @@ import Link from "next/link";
         <button
           onClick={() => scroll("left")}
           aria-label="Scroll Left"
-          className="z-0 absolute top-1/2 left-2 -translate-y-1/2 bg-orange-400 bg-opacity-80 hover:bg-opacity-100 text-white rounded-full p-2 shadow-lg z- transition"
+          className="z-0 absolute top-1/2 left-2 -translate-y-1/2 bg-green-600 bg-opacity-80 hover:bg-opacity-100 text-white rounded-full p-2 shadow-lg z- transition"
         >
           &#8592;
         </button>
@@ -51,7 +51,7 @@ import Link from "next/link";
         <button
           onClick={() => scroll("right")}
           aria-label="Scroll Right"
-          className="absolute top-1/2 right-2 -translate-y-1/2 bg-orange-400 bg-opacity-80 hover:bg-opacity-100 text-white rounded-full p-2 shadow-lg z-0 transition"
+          className="absolute top-1/2 right-2 -translate-y-1/2 bg-green-600 bg-opacity-80 hover:bg-opacity-100 text-white rounded-full p-2 shadow-lg z-0 transition"
         >
           &#8594;
         </button>
@@ -66,7 +66,7 @@ import Link from "next/link";
             Connect with skilled developers to bring your project to life.
           </p>
           <Link href="/contact">
-            <button className="z-50 border-y px-8 py-3 rounded-md font-semibold hover:bg-white hover:text-black transition">
+            <button className="z-50 border-y px-8 py-3 border-y-green-600 rounded-md font-semibold hover:bg-white hover:text-black transition">
               Get Started
             </button>
           </Link>
@@ -74,25 +74,25 @@ import Link from "next/link";
       </header>
 
       {/* Why Hire Section */}
-      <section className="py-1 border-t border-gray-700 max-md:-mt-35">
+      <section className="py-1 border-t border-green-600 max-md:-mt-35">
         <div className="max-w-6xl mx-auto px-5">
           <h2 className="text-3xl font-bold text-center mb-12">Why Hire Our Developers?</h2>
           <img src="web14.jpg" alt="image" className="mx-auto min-md:hidden"/>
-          <h1 className="text-sm text-center border-b border-x mb-5 text-gray-400 lg:hidden">contact us to build your own system</h1>
+          <h1 className="text-sm text-center border-b border-x mb-5 text-gray-400 lg:hidden border-x-green-600 border-b-green-600">contact us to build your own system</h1>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div className="p-6 border border-gray-700 rounded-lg hover:border-white transition">
+            <div className="p-6 border border-green-600 rounded-lg hover:border-white transition">
               <h3 className="text-xl font-semibold mb-2">Expertise & Skill</h3>
               <p className="text-gray-400">
                 Our developers possess a wide range of skills and expertise to tackle any project.
               </p>
             </div>
-            <div className="p-6 border border-gray-700 rounded-lg hover:border-white transition">
+            <div className="p-6 border border-green-600 rounded-lg hover:border-white transition">
               <h3 className="text-xl font-semibold mb-2">Dedicated Support</h3>
               <p className="text-gray-400">
                 We provide dedicated support throughout the development process to ensure your satisfaction.
               </p>
             </div>
-            <div className="p-6 border border-gray-700 rounded-lg hover:border-white transition">
+            <div className="p-6 border border-green-600 rounded-lg hover:border-white transition">
               <h3 className="text-xl font-semibold mb-2">Timely Delivery</h3>
               <p className="text-gray-400">
                 We are committed to delivering high-quality solutions on time and within budget.
@@ -103,14 +103,14 @@ import Link from "next/link";
       </section>
 
       {/* Developers Section */}
-      <section className="py-16 border-t  bg-gray-400/10 border-x ">
+      <section className="py-16 bg-gray-400/10  ">
         <div className="max-w-7xl mx-auto px-5">
           <h2 className="text-4xl font-bold text-center mb-10">Meet Our Developers</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 ">
             {developersData.map((dev, idx) => (
               <div
                 key={idx}
-                className="border border-gray-700 rounded-lg p-6 flex flex-col items-center text-center hover:border-white transition"
+                className="border border-green-600 rounded-lg p-6 flex flex-col items-center text-center hover:border-white transition"
               >
                 <img
                   src={dev.image}
@@ -126,7 +126,7 @@ import Link from "next/link";
                     <Link
                       key={i}
                       href={link.href}
-                      className=" border-r px-4 py-2 rounded hover:bg-white hover:text-black transition text-sm z-50"
+                      className=" border-r border-r-green-600 px-4 py-2 rounded hover:bg-white hover:text-black transition text-sm z-50"
                       target={link.href.startsWith("http") ? "_blank" : undefined}
                       rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     >
@@ -148,7 +148,7 @@ import Link from "next/link";
             Contact us today to discuss your project requirements and find the perfect developer for your needs.
           </p>
           <Link href="/contact">
-            <button className="bg-gray-400/5 border-x  px-10 py-4 rounded font-semibold hover:bg-white hover:text-black transition text-xl">
+            <button className="bg-gray-400/5 border-x border-x-green-600  px-10 py-4 rounded font-semibold hover:bg-white hover:text-black transition text-xl">
               Contact Us
             </button>
           </Link>
