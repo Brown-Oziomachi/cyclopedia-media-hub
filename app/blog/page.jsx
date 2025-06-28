@@ -393,7 +393,7 @@ const BlogPage = () => {
                   key={genre}
                   className={`flex-shrink-0 px-4 py-2 rounded-md font-medium transition cursor-pointer ${
                     selectedCategory === genre
-                      ? "bg-yellow-500 text-black"
+                      ? "bg-green-500 text-black"
                       : "bg-gray-400/5 border-x border-x-green-600 text-white hover:bg-gray-400/10"
                   }`}
                   onClick={() => filterByCategory(genre)}

@@ -3,11 +3,11 @@ import Link from "next/link";
 
 const Page = () => {
   return (
-    <main className="bg-gray-400/5 border-x text-gray-200 min-h-screen px-6 py-12 flex flex-col items-center">
+    <main className="bg-gray-400/5 text-gray-200 min-h-screen px-6 py-12 flex flex-col items-center">
       {/* Header Section */}
       <section className="max-w-3xl text-center mb-16">
         <h1 className="text-4xl font-extrabold text-white mb-6 mt-10">
-          🌐 Your Website is Your Digital Storefront
+          🌐 Your <span className="text-green-600">Website</span> is Your Digital Storefront
         </h1>
         <p className="text-lg leading-relaxed text-gray-400">
           Imagine walking into a store that’s messy, outdated, and hard to navigate. Would you trust
@@ -71,10 +71,10 @@ const Page = () => {
         ].map(({ title, text }, i) => (
           <div
             key={i}
-            className="bg-gray-400/10 border-x rounded-lg p-8 shadow-md border border-gray-700 max-w-4xl mx-auto"
+            className="bg-gray-400/10 border-x rounded-lg p-8 shadow-md border border-green-600 max-w-4xl mx-auto"
           >
             <h2 className="text-2xl font-semibold text-white mb-4">{title}</h2>
-            <p className="text-gray-300 leading-relaxed border py-1 px-5 rounded-e-2xl">{text}</p>
+            <p className="text-gray-300 leading-relaxed border border-green-300 py-1 px-5 rounded-e-2xl">{text}</p>
           </div>
         ))}
       </section>
@@ -82,7 +82,7 @@ const Page = () => {
       {/* Conclusion Section */}
       <section className="max-w-3xl text-center mt-20 mb-12 px-4">
         <h2 className="text-3xl font-bold text-white mb-6">
-          Ready to Take Your Online Presence to the Next Level? 💻
+          Ready to Take Your <span className="text-green-600">online</span> Presence to the Next Level? 💻
         </h2>
         <p className="text-lg text-gray-300 mb-8 leading-relaxed">
           Let’s chat! I’d love to help you create a website that not only looks amazing but also
@@ -90,18 +90,18 @@ const Page = () => {
         </p>
         <div className="flex flex-wrap justify-center gap-6">
           <Link href="/">
-          <p className="line-block px-6 py-3 bg-gray-400/5 border-x hover:bg-gray-500/10 rounded-lg font-semibold text-white shadow-lg transition">Return </p>
+          <p className="line-block px-6 py-3 bg-gray-400/5 border-x border-x-green-600 hover:bg-gray-500/10 rounded-lg font-semibold text-white shadow-lg transition">Return </p>
           </Link>
           <p
             href="mailto:webwizcreation.web@gmail.com"
-            className="cursor-pointer inline-block px-6 py-3 bg-gray-400/5 border-x hover:bg-gray-500/10 rounded-lg font-semibold text-white shadow-lg transition"
+            className="cursor-pointer inline-block px-6 py-3 bg-gray-400/5 border-x border-x-green-600 hover:bg-gray-500/10 rounded-lg font-semibold text-white shadow-lg transition"
             aria-label="Send an email message"
           >
             Message us
           </p>
           <Link
-            href="/blog"
-            className="inline-block px-6 py-3 underline rounded-lg font-semibold text-white shadow-lg transition border-x hover:no-underline"
+            href="/blog" 
+            className="inline-block px-6 py-3 underline rounded-lg font-semibold text-white shadow-lg transition border-x border-x-green-600 hover:no-underline"
             aria-label="Visit blog page"
           >
             Visit Blog

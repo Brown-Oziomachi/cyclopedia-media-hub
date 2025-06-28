@@ -2,7 +2,7 @@
 import React, { use, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { db1, db3 } from "@/lib/firebaseConfig";
-
+import Navbar from "@/components/Navbar";
 import {
   doc,
   updateDoc,
@@ -425,6 +425,8 @@ return (
         </div>
       </div>
     )}
+              <Navbar />
+    
   </div>
 );
 }
