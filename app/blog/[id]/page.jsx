@@ -198,7 +198,7 @@ const handleReplySubmit = async (commentId, replyText, setReplyText, setReplying
   if (!blog) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <LoaderCircle className="text-gray-600 w-14 h-14 animate-spin" />
+        <LoaderCircle className="text-green-600 w-14 h-14 animate-spin" />
       </div>
     );
   }
@@ -231,7 +231,7 @@ return (
         <h3 className="mt-2  font-semibold text-green-600 text-2xl ">Brown Code</h3>
           <h4 className="underline text-xs text-green-600 text-center font-serif">VIEW PROFILE</h4>
         </Link>
-          <p className="text-gray-500 text-sm mt-1">
+          <p className="text-gray-500 text-sm mt-5">
             Posted on {blog.timestamp || "Unknown Date"}
           </p>
         </div>
@@ -335,7 +335,7 @@ return (
                     className="w-10 h-10 rounded-full  shadow-sm"
                   />
                   <div>
-                    <p className="text-white font-semibold">{comment.userName}</p>
+                    <p className="text-white font-semibold">{comment.userName} {comment.profile}</p>
                     {comment.timestamp && (
                       <p className="text-sm text-gray-400">
                         {new Date(comment.timestamp.seconds * 1000).toLocaleString()}
@@ -347,7 +347,7 @@ return (
                 <p className="text-gray-300 mb-3">{comment.text}</p>
 
                 <button
-                  className="text-blue-400 font-semibold hover:underline"
+                  className="text-green-600 font-semibold hover:underline"
                   onClick={() => setReplyingTo(comment.id)}
                 >
                   Reply
@@ -358,7 +358,7 @@ return (
                     <input
                       type="text"
                       placeholder="Write a reply..."
-                      className="w-full p-3 bg-gray-400/5 rounded-lg border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+                      className="w-full p-3 bg-gray-400/5 rounded-lg border border-green-600 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
                       value={replyText}
                       onChange={(e) => setReplyText(e.target.value)}
                     />
@@ -381,9 +381,9 @@ return (
                 )}
 
                 {comment.replies?.length > 0 && (
-                  <ul className="ml-4 mt-6 space-y-4 border-l border-gray-700 pl-4">
+                  <ul className="ml-4 mt-6 space-y-4 border-l border-green-600 pl-4">
                     {comment.replies.map((reply) => (
-                      <li key={reply.id} className="flex space-x-2 bg-gray-400/5 border-b border-r p-3 rounded-lg">
+                      <li key={reply.id} className="flex space-x-2 bg-gray-400/5 border-b border-r p-3 border-r-green-600 border-b-green-600 rounded-lg">
                         <img
                           src={reply.userImage || "/default-avatar.png"}
                           alt="Reply User"

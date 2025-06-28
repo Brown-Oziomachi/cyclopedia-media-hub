@@ -56,7 +56,7 @@ const BlogPage = () => {
   });
 
   const handleClick = (type) => {
-    if (( type === "Gallery") && !adShown[type]) {
+    if (type === "Gallery" && !adShown[type]) {
       window.open("https://otieu.com/4/9366150", "_blank");
       setAdShown((prev) => ({ ...prev, [type]: true }));
       return;
@@ -232,20 +232,19 @@ const BlogPage = () => {
     const title = encodeURIComponent(post.title);
     const desc = encodeURIComponent(post.description || post.body || "");
 
-    
     router.push(
       `/video/${post.id}?url=${videoURL}&title=${title}&desc=${desc}`
     );
   };
-  
+
   useEffect(() => {
-   const timer = setTimeout( ()=> {
-     setLoading(false)
-   }, 20000)
- 
-   return ()=> clearTimeout(timer)
-  },[]);
-  
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 20000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -256,308 +255,324 @@ const BlogPage = () => {
 
   return (
     <>
-    {loading ? (
-      <div className="flex justify-center items-center h-screen bg-gray-400/5 ">
-      <LoaderCircle
-      size={50}
-      speed={1.1}
-            color="white"
-            className="animate-spin text-green-600 mt-10"
-          />
-          <img
-            src="logo.jpg"
-            alt="My Logo"
+      {loading ? (
+        <div className="flex justify-center items-center h-screen bg-gray-400/5 ">
+          <LoaderCircle size={50} className="animate-spin text-green-600 mt-10" />
+                    <img
+                     src="logo.jpg"
+                     alt="My Logo"
             className="h-30 lg:h-30 mt-10 animate-pulse absolute top-40 left-0 right-0 bottom-0 mx-auto"
-          />
-        </div>
+                   />
+                 </div>
       ) : (
         <main className="min-h-screen bg-gray-400/5 text-white px-8 py-30">
-      <div className="max-w-7xl mx-auto">
-          <header className="text-center mb-12">
-            <div className="lg:flex items-center justify-center gap-20">
-              <div className="max-lg:relative">
-                <h1 className="text-6xl font-bold tracking-tight   max-lg:inset-0 max-lg:top-8 lg:py-10 lg:hidden text-gray-400 mb-5">
-                  <img src="blog.jpg" alt="" className="w-fit border-x-green-600 border border-green-600 rounded-md b border-r-white"/>
-             {showContentType === "blog" ? " " : "Videos"}
-                </h1>
-                <img src="web19.jpg" alt="Blog image" className="rounded-md w-full"/>
-              </div>
-               
-              <p className="text-sm text-gray-400 font-mono">
-                <h1 className="text-6xl font-bold tracking-tight mt-5 space-x-5 lg:border-x-green-600 max-lg:inset-0 max-lg:top-8 lg:py-10 max-lg:hidden">
-                                    <img src="blog.jpg" alt="" className="w-fit border-x-green-600 border-r-white"/>
-
-             {showContentType === "blog" ? " " : "Videos"}
-                </h1>
-                Explore unique insights, stories, and expert opinions.
-              </p>
-            </div>
-            <div>
-              <p className="text-gray-400 text-sm mt-4">
-                Discover a world of knowledge and creativity. Whether you're looking for in-depth articles, engaging videos, or quick reels, we've got you covered.
-              </p>
-            </div>
-            <div>
-              <p className="text-gray-400 text-sm mt-4">
-                Join our community of creators and thinkers. Share your thoughts, ideas, and experiences with us.
-              </p>
-            </div>
-            <div>
-              <h1
-                className="font-bold font-serif cursor-pointer text-green-600"
-                onClick={() => {
-            const el = document.getElementById("services-section");
-            if (el) el.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Have something to Share? ⬇
-              </h1>
-            </div>
-          </header>
-
-          {/* Toggle */}
-        <div className="flex gap-4 mb-5 justify-center">
-      {["blog", "video", ].map((type) => (
-        <button
-          key={type}
-          className={`px-6 py-3 rounded-xl font-semibold transition ${
-            showContentType === type
-              ? "bg-white text-black"
-              : "bg-white text-black hover:bg-gray-400/5 border-r"
-          }`}
-          onClick={() => handleClick(type)}
-        >
-          {type.charAt(0).toUpperCase() + type.slice(1)}
-        </button>
-      ))}
-       <div>
-      <Link href="/gallery">
-      <div className="bg-white text-black px-6 py-3 rounded-xl font-semibold transition" >Gallery</div>
-      </Link>
-    </div>
-    </div>
-        {/* Search */}
-        <div className="mb-8">
-          <input
-            type="text"
-            placeholder={`Search ${showContentType} by genre...`}
-            className="w-full px-4 py-2 rounded-md text-white focus:ring focus:ring-yellow-500 border border-green-600 bg-gray-400/10 border-x"
-            onChange={(e) => {
-              const searchTerm = e.target.value.toLowerCase();
-              let basePosts = [];
-
-              if (showContentType === "blog") {
-                basePosts = blogPosts.filter((post) => !post.isVideo);
-              } else if (showContentType === "video") {
-                basePosts = blogPosts.filter(
-                  (post) => post.isVideo && !post.isReel
-                );
-              } else if (showContentType === "Gallery") {
-                basePosts = blogPosts.filter((post) => post.isReel);
-              }
-
-              if (searchTerm) {
-                const filtered = basePosts.filter(
-                  (post) =>
-                    post.genre && post.genre.toLowerCase().includes(searchTerm)
-                );
-                setFilteredPosts(filtered);
-                setSelectedCategory(null);
-              } else {
-                setFilteredPosts(basePosts);
-                setSelectedCategory(null);
-              }
-            }}
-          />
-        </div>
-
-        {/* Genre Filter Buttons */}
-        <div
-          className="flex overflow-x-auto whitespace-nowrap gap-3 mb-6 px-4"
-          style={{ scrollbarWidth: "none" }}
-        >
-          {genres.map((genre) => (
-            <button
-              key={genre}
-              className={`flex-shrink-0 px-4 py-2 rounded-md font-medium transition cursor-pointer ${
-                selectedCategory === genre
-                  ? "bg-yellow-500 text-black"
-                  : "bg-gray-400/5 border-x border-x-green-600 text-white hover:bg-gray-400/10"
-              }`}
-              onClick={() => filterByCategory(genre)}
-            >
-              {genre}
-            </button>
-          ))}
-          {selectedCategory && (
-            <button
-              className="flex-shrink-0 px-4 py-2 rounded-md font-medium bg-red-600 text-white hover:bg-red-700"
-              onClick={() => {
-                setSelectedCategory(null);
-                let basePosts = [];
-                if (showContentType === "blog") {
-                  basePosts = blogPosts.filter((post) => !post.isVideo);
-                } else if (showContentType === "video") {
-                  basePosts = blogPosts.filter(
-                    (post) => post.isVideo && !post.isReel
-                  );
-                } else if (showContentType === "/gallery") {
-                  basePosts = blogPosts.filter((post) => post.isReel);
-                }
-                setFilteredPosts(basePosts);
-              }}
-            >
-              Clear Genre Filter
-            </button>
-          )}
-        </div>
-
-        {/* Posts */}
-        {!loading &&
-          filteredPosts.length > 0 &&
-          showContentType !== "gallery" && (
-            <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
-              {filteredPosts.map((post) => (
-                <article
-                  key={post.id}
-                  className=" rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit border-r-green-600 border-r"
-                >
-                  <span className="absolute top-4 left-4 bg-green-600 text-black text-xs px-3 py-1 rounded-full">
-                    {post.genre || "General"}
-                  </span>
-                  <h1 className="text-xs text-gray-400 text-center absolute top-4 right-4">
-                    THE <span className="text-green-600">SUN</span> WEB
+          <div className="max-w-7xl mx-auto">
+            <header className="text-center mb-12">
+              <div className="lg:flex items-center justify-center gap-20">
+                <div className="max-lg:relative">
+                  <h1 className="text-6xl font-bold tracking-tight   max-lg:inset-0 max-lg:top-8 lg:py-10 lg:hidden text-gray-400 mb-5">
+                    <img
+                      src="blog.jpg"
+                      alt=""
+                      className="w-fit border-x-green-600 border border-green-600 rounded-md b border-r-white"
+                    />
+                    {showContentType === "blog" ? " " : "Videos"}
                   </h1>
+                  <img
+                    src="web19.jpg"
+                    alt="Blog image"
+                    className="rounded-md w-full"
+                  />
+                </div>
 
-                  {showContentType === "blog" ? (
-                    <Link href={`/blog/${post.id}`} className="block">
-                      {post.image && (
-                        <div className="h-48 overflow-hidden">
-                          <img
-                            src={post.image}
-                            alt={post.title}
-                            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                          />
+                <p className="text-sm text-gray-400 font-mono">
+                  <h1 className="text-6xl font-bold tracking-tight mt-5 space-x-5 lg:border-x-green-600 max-lg:inset-0 max-lg:top-8 lg:py-10 max-lg:hidden">
+                    <img
+                      src="blog.jpg"
+                      alt=""
+                      className="w-fit border-x-green-600 border border-green-600 rounded-md b border-r-white"
+                    />
+
+                    {showContentType === "blog" ? " " : "Videos"}
+                  </h1>
+                  Explore unique insights, stories, and expert opinions.
+                </p>
+              </div>
+              <div>
+                <p className="text-gray-400 text-sm mt-4">
+                  Discover a world of knowledge and creativity. Whether you're
+                  looking for in-depth articles, engaging videos, or quick
+                  reels, we've got you covered.
+                </p>
+              </div>
+              <div>
+                <p className="text-gray-400 text-sm mt-4">
+                  Join our community of creators and thinkers. Share your
+                  thoughts, ideas, and experiences with us.
+                </p>
+              </div>
+              <div>
+                <h1
+                  className="font-bold font-serif cursor-pointer text-green-600"
+                  onClick={() => {
+                    const el = document.getElementById("services-section");
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  }}
+                >
+                  Have something to Share? ⬇
+                </h1>
+              </div>
+            </header>
+
+            {/* Toggle */}
+            <div className="flex gap-4 mb-5 justify-center">
+              {["blog", "video"].map((type) => (
+                <button
+                  key={type}
+                  className={`px-6 py-3 rounded-xl font-semibold transition ${
+                    showContentType === type
+                      ? "bg-white text-black"
+                      : "bg-white text-black hover:bg-gray-400/5 border-r"
+                  }`}
+                  onClick={() => handleClick(type)}
+                >
+                  {type.charAt(0).toUpperCase() + type.slice(1)}
+                </button>
+              ))}
+              <div>
+                <Link href="/gallery">
+                  <div className="bg-white text-black px-6 py-3 rounded-xl font-semibold transition">
+                    Gallery
+                  </div>
+                </Link>
+              </div>
+            </div>
+            {/* Search */}
+            <div className="mb-8">
+              <input
+                type="text"
+                placeholder={`Search ${showContentType} by genre...`}
+                className="w-full px-4 py-2 rounded-md text-white focus:ring focus:ring-yellow-500 border border-green-600 bg-gray-400/10 border-x"
+                onChange={(e) => {
+                  const searchTerm = e.target.value.toLowerCase();
+                  let basePosts = [];
+
+                  if (showContentType === "blog") {
+                    basePosts = blogPosts.filter((post) => !post.isVideo);
+                  } else if (showContentType === "video") {
+                    basePosts = blogPosts.filter(
+                      (post) => post.isVideo && !post.isReel
+                    );
+                  } else if (showContentType === "Gallery") {
+                    basePosts = blogPosts.filter((post) => post.isReel);
+                  }
+
+                  if (searchTerm) {
+                    const filtered = basePosts.filter(
+                      (post) =>
+                        post.genre &&
+                        post.genre.toLowerCase().includes(searchTerm)
+                    );
+                    setFilteredPosts(filtered);
+                    setSelectedCategory(null);
+                  } else {
+                    setFilteredPosts(basePosts);
+                    setSelectedCategory(null);
+                  }
+                }}
+              />
+            </div>
+
+            {/* Genre Filter Buttons */}
+            <div
+              className="flex overflow-x-auto whitespace-nowrap gap-3 mb-6 px-4"
+              style={{ scrollbarWidth: "none" }}
+            >
+              {genres.map((genre) => (
+                <button
+                  key={genre}
+                  className={`flex-shrink-0 px-4 py-2 rounded-md font-medium transition cursor-pointer ${
+                    selectedCategory === genre
+                      ? "bg-yellow-500 text-black"
+                      : "bg-gray-400/5 border-x border-x-green-600 text-white hover:bg-gray-400/10"
+                  }`}
+                  onClick={() => filterByCategory(genre)}
+                >
+                  {genre}
+                </button>
+              ))}
+              {selectedCategory && (
+                <button
+                  className="flex-shrink-0 px-4 py-2 rounded-md font-medium bg-red-600 text-white hover:bg-red-700"
+                  onClick={() => {
+                    setSelectedCategory(null);
+                    let basePosts = [];
+                    if (showContentType === "blog") {
+                      basePosts = blogPosts.filter((post) => !post.isVideo);
+                    } else if (showContentType === "video") {
+                      basePosts = blogPosts.filter(
+                        (post) => post.isVideo && !post.isReel
+                      );
+                    } else if (showContentType === "/gallery") {
+                      basePosts = blogPosts.filter((post) => post.isReel);
+                    }
+                    setFilteredPosts(basePosts);
+                  }}
+                >
+                  Clear Genre Filter
+                </button>
+              )}
+            </div>
+
+            {/* Posts */}
+            {!loading &&
+              filteredPosts.length > 0 &&
+              showContentType !== "gallery" && (
+                <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
+                  {filteredPosts.map((post) => (
+                    <article
+                      key={post.id}
+                      className=" rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit border-r-green-600 border-r"
+                    >
+                      <span className="absolute top-4 left-4 bg-green-600 text-black text-xs px-3 py-1 rounded-full">
+                        {post.genre || "General"}
+                      </span>
+                      <h1 className="text-xs text-gray-400 text-center absolute top-4 right-4">
+                        THE <span className="text-green-600">SUN</span> WEB
+                      </h1>
+
+                      {showContentType === "blog" ? (
+                        <Link href={`/blog/${post.id}`} className="block">
+                          {post.image && (
+                            <div className="h-48 overflow-hidden">
+                              <img
+                                src={post.image}
+                                alt={post.title}
+                                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                              />
+                            </div>
+                          )}
+                          <div className="py-5">
+                            <h2 className="text-xl font-bold mb-3 mt-5">
+                              {post.title}
+                            </h2>
+                            <h3 className="w-full h-24 mx-auto mb-3 object-cover opacity-30">
+                              <img src="web19.jpg" alt="" />
+                            </h3>
+                            <p className="text-sm text-white mb-4 line-clamp-2">
+                              {post.body}
+                            </p>
+                            <p className="text-xs text-green-600 text-right mr-2">
+                              Posted on {formatTimestamp(post.timestamp)}
+                            </p>
+                          </div>
+                        </Link>
+                      ) : (
+                        <div
+                          className="block cursor-pointer"
+                          onClick={() => openVideo(post)}
+                        >
+                          <div className="h-48 flex items-center justify-center">
+                            <img
+                              src={
+                                post.thumbnail
+                                  ? post.thumbnail
+                                  : post.videoURL?.includes("youtube.com") ||
+                                    post.videoURL?.includes("youtu.be")
+                                  ? `https://img.youtube.com/vi/${extractYouTubeId(
+                                      post.videoURL
+                                    )}/hqdefault.jpg`
+                                  : "/video-placeholder.jpg"
+                              }
+                              alt="Video thumbnail"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <div className="p-5">
+                            <h2 className="text-2xl font-bold mb-3 mt-5">
+                              {post.title}
+                            </h2>
+                            <p className="text-sm text-gray-400 mb-4 line-clamp-3">
+                              {post.description || post.body}
+                            </p>
+                            <p className="text-xs text-gray-400 text-right">
+                              Posted on {formatTimestamp(post.timestamp)}
+                            </p>
+                          </div>
                         </div>
                       )}
-                      <div className="py-5">
-                        <h2 className="text-xl font-bold mb-3 mt-5">
-                          {post.title}
-                        </h2>
-                         <h3 className="w-full h-24 mx-auto mb-3 object-cover opacity-30">
-                          <img src="web19.jpg" alt="" />
-                        </h3>
-                        <p className="text-sm text-white mb-4 line-clamp-2">
-                          {post.body}
-                        </p>
-                        <p className="text-xs text-green-600 text-right mr-2">
-                          Posted on {formatTimestamp(post.timestamp)}
-                        </p>
-                      </div>
-                    </Link>
-                  ) : (
+                    </article>
+                  ))}
+                </section>
+              )}
+
+            {/* Reels */}
+            {!loading &&
+              filteredPosts.length > 0 &&
+              showContentType === <Link href="/gallery">gallery</Link> && (
+                <section className="flex flex-col gap-8 max-w-xl mx-auto">
+                  {filteredPosts.map((reel) => (
                     <div
-                      className="block cursor-pointer"
-                      onClick={() => openVideo(post)}
+                      key={reel.id}
+                      className="relative cursor-pointer rounded-xl shadow-lg overflow-hidden bg-black"
+                      onClick={() => openGallery(gallery)}
                     >
-                      <div className="h-48 flex items-center justify-center">
+                      <div className="aspect-[9/16] w-full relative">
                         <img
                           src={
-                            post.thumbnail
-                              ? post.thumbnail
-                              : post.videoURL?.includes("youtube.com") ||
-                                post.videoURL?.includes("youtu.be")
+                            gallery.thumbnail
+                              ? gallery.thumbnail
+                              : gallery.videoURL?.includes("youtube.com") ||
+                                gallery.videoURL?.includes("youtu.be")
                               ? `https://img.youtube.com/vi/${extractYouTubeId(
-                                  post.videoURL
+                                  gallery.videoURL
                                 )}/hqdefault.jpg`
                               : "/video-placeholder.jpg"
                           }
-                          alt="Video thumbnail"
+                          alt={gallery.title}
                           className="w-full h-full object-cover"
                         />
-                      </div>
-                      <div className="p-5">
-                        <h2 className="text-2xl font-bold mb-3 mt-5">
-                          {post.title}
-                        </h2>
-                        <p className="text-sm text-gray-400 mb-4 line-clamp-3">
-                          {post.description || post.body}
-                        </p>
-                        <p className="text-xs text-gray-400 text-right">
-                          Posted on {formatTimestamp(post.timestamp)}
-                        </p>
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                          <h2 className="text-white text-lg font-bold line-clamp-2">
+                            {gallery.title}
+                          </h2>
+                          <p className="text-gray-300 text-sm line-clamp-2 mt-1">
+                            {gallery.description || reel.body}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  )}
-                </article>
-              ))}
-            </section>
-          )}
+                  ))}
+                </section>
+              )}
 
-        {/* Reels */}
-        {!loading &&
-          filteredPosts.length > 0 &&
-          showContentType === <Link href="/gallery">gallery</Link> && (
-            <section className="flex flex-col gap-8 max-w-xl mx-auto">
-              {filteredPosts.map((reel) => (
-                <div
-                  key={reel.id}
-                  className="relative cursor-pointer rounded-xl shadow-lg overflow-hidden bg-black"
-                  onClick={() => openGallery(gallery)}
-                >
-                  <div className="aspect-[9/16] w-full relative">
-                    <img
-                      src={
-                        gallery.thumbnail
-                          ? gallery.thumbnail
-                          : gallery.videoURL?.includes("youtube.com") ||
-                            gallery.videoURL?.includes("youtu.be")
-                          ? `https://img.youtube.com/vi/${extractYouTubeId(
-                              gallery.videoURL
-                            )}/hqdefault.jpg`
-                          : "/video-placeholder.jpg"
-                      }
-                      alt={gallery.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                      <h2 className="text-white text-lg font-bold line-clamp-2">
-                        {gallery.title}
-                      </h2>
-                      <p className="text-gray-300 text-sm line-clamp-2 mt-1">
-                        {gallery.description || reel.body}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </section>
-          )}
-
-        {loading && (
-          <div className="flex justify-center items-center h-[30vh]">
-            <div className="w-14 h-14 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
+            {loading && (
+              <div className="flex justify-center items-center h-[30vh]">
+                <div className="w-14 h-14 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-        <div id="services-section"></div>
-      <div className=" mt-10">
-        <h1 className="font-bold font-serif">Have something to Share?</h1>
-        <h2 className="font-mono">We value your thoughts and ideas! feel free to share your opinions, Suggestions, or topics you'd love to see on our blog.
-          <h3>📩Reach out to us directly on WhatsApp:</h3>
-        </h2>
-          <a
-           href="https://wa.me/message/R4UKUMFIH22RJ1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-bold text-green-600 cursor-pointer hover:underline"
-          >Click here to chat</a>
-      </div>
-      </main>
+          <div id="services-section"></div>
+          <div className=" mt-10">
+            <h1 className="font-bold font-serif">Have something to Share?</h1>
+            <h2 className="font-mono">
+              We value your thoughts and ideas! feel free to share your
+              opinions, Suggestions, or topics you'd love to see on our blog.
+              <h3>📩Reach out to us directly on WhatsApp:</h3>
+            </h2>
+            <a
+              href="https://wa.me/message/R4UKUMFIH22RJ1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-green-600 cursor-pointer hover:underline"
+            >
+              Click here to chat
+            </a>
+          </div>
+        </main>
       )}
-  </>
-  )
-}
+    </>
+  );
+};
 
-  
 export default BlogPage;

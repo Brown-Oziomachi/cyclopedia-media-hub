@@ -121,7 +121,7 @@ const VideoPage = () => {
       <div className="flex gap-4 mb-8 mt-20">
         <button
           onClick={handleBackClick}
-          className="px-6 py-2 bg-white text-black font-semibold rounded-lg shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-white transition"
+          className="px-6 py-2 bg-green-600 text-black font-semibold rounded-lg shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-white transition"
           aria-label="Go back to blog"
         >
           ← Back
@@ -129,7 +129,7 @@ const VideoPage = () => {
 
         <button
           onClick={handleCopyLink}
-          className="px-6 py-2 bg-white text-black font-semibold rounded-lg shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-white transition"
+          className="px-6 py-2 bg-green-600 text-black font-semibold rounded-lg shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-white transition"
           aria-label="Share video link"
         >
           Share
@@ -142,7 +142,7 @@ const VideoPage = () => {
         </div>
       )}
 
-      <div className="w-full aspect-video rounded-xl overflow-hidden shadow-lg border border-gray-700 mb-8">
+      <div className="w-full aspect-video rounded-xl overflow-hidden shadow-lg border border-green-600 mb-8">
         {isDirectVideo ? (
           <video controls className="w-full h-full bg-black">
             <source src={videoURL} />
@@ -161,10 +161,9 @@ const VideoPage = () => {
       </div>
 
       <h1 className="text-2xl font-bold mb-4 text-white">{decodedTitle}</h1>
-      <p className="text-gray-400 mb-8 leading-relaxed">{decodedDesc}</p>
+      <p className="mt-4 space-y-20 rounded-lg text-gray-400 leading-relaxed tracking-widest">{decodedDesc}</p>
 
       {/* Mailchimp subscription form */}
-      <h1>Subscribe to our email</h1>
       <form
         action="https://app.us13.list-manage.com/subscribe/post?u=43a30bccc98acfbb16a52d1eb&amp;id=4f4f321a7e&amp;f_id=00bb5fe1f0"
         method="post"
