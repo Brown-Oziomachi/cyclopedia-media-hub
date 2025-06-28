@@ -4,6 +4,8 @@ import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
 
 const imageData = [
+    { src: "Bill.jpg", title: "Only Three Jobs Will Survive AI", link: "https://webwizcreation-y7vx.vercel.app/blog/uo2soqxHXDFIlbocSpwN" },
+
     { src: "ma1.jpg", title: "Jack Ma: Why I flew 15 hours just to visit Nigeria", link: "https://webwizcreation-y7vx.vercel.app/blog/crMFd0tsdFuVCLSRuYor" },
        { src: "tech.jpg", title: "Jack Ma Calls for Wisdom and Innovation at World AI Conference", link: "https://webwizcreation-y7vx.vercel.app/blog/ZAVCyn24lV5brija4ahE" },
     { src: "why.jpg", title: "Attitude is Everything, Best Motivational Speech by Jack Ma", link: "https://webwizcreation-y7vx.vercel.app/blog/TIcJic9GTFSypm63zqoR" },
