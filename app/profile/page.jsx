@@ -15,15 +15,15 @@ async function ProfilePage() {
       {/* Header info bar */}
       <div className="bg-gray-400/5 h-auto w-full py-5 border-t border-x mt-10">
         <h1 className="text-center text-white/90 text-lg font-semibold">
-          Your access is confirmed.
+          Your access is <span className="text-green-600">confirmed.</span>
         </h1>
         <h2 className="text-center text-white/70 text-sm mt-1">
           We are building a better way.{" "}
         </h2>
           <h1
-            className="font-bold font-serif cursor-pointer text-blue-700 text-center"
+            className="font-bold font-serif cursor-pointer text-green-600 text-center"
             onClick={() => {
-              const el = document.getElementById("Your-Thoughts");
+              const el = document.getElementById("Share-mind");
               if (el) el.scrollIntoView({ behavior: "smooth" });
             }}
           >
@@ -58,7 +58,7 @@ async function ProfilePage() {
         <div className="bg-gray-400/5 p-6 rounded-lg shadow-md border-x ">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-1">
-              <p className="text-gray-400 uppercase tracking-wide text-xs">
+              <p className="text-green-600 uppercase tracking-wide text-xs">
                 Name
               </p>
               <p className="text-white font-semibold">
@@ -66,7 +66,7 @@ async function ProfilePage() {
               </p>
             </div>
             <div className="flex flex-col gap-1">
-              <p className="text-gray-400 uppercase tracking-wide text-xs">
+              <p className="text-green-600 uppercase tracking-wide text-xs">
                 Email
               </p>
               <p className="text-white font-semibold">
@@ -88,7 +88,7 @@ async function ProfilePage() {
             Want to explore more?{" "}
             <Link
               href="/"
-              className="underline hover:text-white cursor-pointer text-white"
+              className="underline hover:text-white cursor-pointer text-green-600"
             >
               Go to Home →
             </Link>
@@ -97,7 +97,7 @@ async function ProfilePage() {
         {/* User Blogs Section */}
 
         <div className=" mt-10">
-        <div id="Your-Thoughts"></div>
+        <div id="Share-mind"></div>
           <h1 className="font-bold font-serif">Have something to Share?</h1>
           <h2 className="font-mono">
             We value your thoughts and ideas! feel free to share your opinions,
@@ -108,19 +108,29 @@ async function ProfilePage() {
             href="https://wa.me/message/R4UKUMFIH22RJ1"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-bold text-blue-700 cursor-pointer hover:underline"
+            className="font-bold text-green-600 cursor-pointer hover:underline"
           >
             Click here to chat
           </a>
         </div>
         {/* View all posts link */}
-        <div className="mt-6 text-right">
+        <div className="items-center justify-center mx-auto">
+        <div className=" text-right">
           <Link
             href="/blog"
-            className="text-gray-400 hover:text-white underline"
+            className="text-green-600 hover:text-white underline"
           >
             View All Posts →
           </Link>
+        </div>
+        <div className=" text-right mt-2">
+          <Link
+            href="/blog"
+            className="text-green-600 hover:text-white underline"
+          >
+            Visit The Gallery →
+          </Link>
+        </div>
         </div>
       </div>
     </div>
