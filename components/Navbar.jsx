@@ -17,16 +17,16 @@ const ProfileDropdownNavbar = () => {
   };
 
   const navItems = [
-    { text: "HOME", url: "/" },
-    { text: "ABOUT", url: "/about" },
-    { text: "BLOG", url: "/blog" },
+    { text: "Home", url: "/" },
+    { text: "About", url: "/about" },
+    { text: "Blog", url: "/blog" },
     // { text: "POST", url: "/upload-to-blog" },
-    { text: "CONTACT", url: "/contact" },
-    { text: "SERVICES", url: "/#services-section" },
-    { text: "NEWS", url: "/news" },
-    { text: "DEVELOPERS", url: "/developers" },
-    { text: "PROJECTS", url: "/projects" },
-    { text: "YOUTUBE", url: "/youtubevideos" },
+    { text: "Contact", url: "/contact" },
+    { text: "Services", url: "/#services-section" },
+    { text: "News", url: "/news" },
+    { text: "Developers", url: "/developers" },
+    { text: "Project", url: "/projects" },
+    { text: "Youtube", url: "/youtubevideos" },
   ];
 
   return (
@@ -101,7 +101,7 @@ const ProfileDropdownNavbar = () => {
                     <Link
                       href="/profile"
                       className="hover:text-cyan-400 transition-colors duration-200"
-                    >
+                    ><h1 className="text-green-600 text-center text-2xl font-serif font-bold">Hello!!</h1>
                       <p className="font-semibold text-base truncate text-white text-center ">
                         {session.user.name}
                       </p>
@@ -137,7 +137,7 @@ const ProfileDropdownNavbar = () => {
                       </Link>
                       <div>
                         <h1
-                          className="font-bold font-serif cursor-pointer text-blue-700 text-center mt-5"
+                          className="font-bold font-serif cursor-pointer text-green-700 text-center mt-5"
                         onClick={() => {
                           const el = document.getElementById("services-section");
                           if (el) el.scrollIntoView({behavior: "smooth"});
@@ -154,7 +154,7 @@ const ProfileDropdownNavbar = () => {
                   </div>
                   <button
                     onClick={signOut}
-                    className="mt-6 w-full py-2 rounded bg-gray-400/5 border-x text-white text-sm font-semibold transition"
+                    className="mt-6 w-full py-2 rounded bg-gray-400/5 border-x border-x-green-600 text-white text-sm font-semibold transition"
                     aria-label="Sign out"
                   >
                     Sign Out
@@ -213,7 +213,7 @@ const ProfileDropdownNavbar = () => {
 
       {/* Mobile Navigation Overlay */}
       <div
-        className={`fixed top-0 left-0 w-full h-full bg-neutral-900 opacity-90 border-x border-x-green-600  text-white flex flex-col items-center justify-center z-40 transition-transform duration-500 ${
+        className={`fixed top-0 left-0 w-full h-full bg-neutral-900 opacity-90   text-white flex flex-col  p-5 z-40 transition-transform duration-500 ${
           showNav ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -254,7 +254,7 @@ const ProfileDropdownNavbar = () => {
           <Link
             href="/auth/signin"
             onClick={() => setShowNav(false)}
-            className="text-md py-2 px-6 bg-gray-400/5 border-x border-x-green-600 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md mt-4"
+            className="text-md py-2 px-6 bg-gray-400/5 border-x border-x-green-600 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md mt-4 w-80 text-center font-bold"
           >
             Sign In
           </Link>

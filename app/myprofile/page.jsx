@@ -100,19 +100,19 @@ useEffect(() =>{
             </h4>
               <h1 className="text-green-600/ border-t border-x mt-2 lg:text-center font-bold font-mono space-y-5">Join My Community</h1>
             <div className="flex items-center justify-center gap-5 mt-1">
-            <h4 className="text-sm text-gray-300">
+            <h4 className="text-sm px-5 rounded-md bg-green-600 text-white">
               <Link href="https://whatsapp.com/channel/0029Vb6BDcsJZg401UUoHA0T" 
-              target="_blank"
-              className="text-green-600 text-sm hover:text-orange-500">
+              target="_self"
+              className=" text-sm hover:text-orange-500 text-white">
                 WhatsApp Channel
               </Link>
             </h4>
                         <hr className=" border w-2/2"/>
 
-             <h4 className="text-sm text-gray-300">
+             <h4 className="text-sm text-gray-300 rounded-md bg-green-600 px-5 ">
               <a href="https://facebook.com/groups/195029009448884/" 
-              target="_blank"
-              className="text-green-600 hover:text-orange-500">
+              target="_self"
+              className="text-white hover:text-orange-500 ">
                 Facebook Group
               </a>
             </h4>

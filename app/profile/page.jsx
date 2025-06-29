@@ -15,7 +15,7 @@ async function ProfilePage() {
       {/* Header info bar */}
       <div className="bg-gray-400/5 h-auto w-full py-5 border-t border-x mt-10">
         <h1 className="text-center text-white/90 text-lg font-semibold">
-          Your access is <span className="text-green-600">confirmed.</span>
+      Hello {session?.user?.name} Your access is <span className="text-green-600">confirmed.</span>
         </h1>
         <h2 className="text-center text-white/70 text-sm mt-1">
           We are building a better way.{" "}
@@ -99,7 +99,7 @@ async function ProfilePage() {
         <div className=" mt-10">
         <div id="Share-mind"></div>
           <h1 className="font-bold font-serif">Have something to Share?</h1>
-          <h2 className="font-mono">
+          <h2 className="font-mono">{session?.user?.name}
             We value your thoughts and ideas! feel free to share your opinions,
             Suggestions, or topics you'd love to see on our blog.
             <h3>📩Reach out to us directly on WhatsApp:</h3>
