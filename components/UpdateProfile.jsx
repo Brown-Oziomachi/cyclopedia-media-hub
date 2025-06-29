@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
+import { db3 } from "@/lib/firebaseConfig";
 
 const UpdateProfile = ({ uid, currentName }) => {
   console.log(uid, currentName);
@@ -8,25 +9,24 @@ const UpdateProfile = ({ uid, currentName }) => {
   const [name, setName] = useState(currentName || "");
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!name.trim()) {
-      alert("name cannot be empty")
+      alert("name cannot be empty");
     }
 
     try {
-      const userRef = doc(db, "users", uid)
-      await updateDoc(userRef, {name})
-      alert("Name Updated Sucessfully")
+      const userRef = doc(db3, "users", uid);
+      await updateDoc(userRef, { name });
+      alert("Name Updated Sucessfully");
     } catch (error) {
-      console.error("Error updating profile", error)
-      alert("An eror occurred. Please try again later.")
+      console.error("Error updating profile", error);
+      alert("An eror occurred. Please try again later.");
     }
   };
 
   return (
     <main className="md:px-10 p-3">
-      <form onSubmit={handleSubmit} className="flex flex-col max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
-      
+      <form onSubmit={handleSubmit} className="mt-6">
         <input
           type="text"
           className="w-full p-2 rounded-md border border-gray-200 outline-none"
@@ -36,7 +36,7 @@ const UpdateProfile = ({ uid, currentName }) => {
         />
 
         <button className="mt-3 px-4 py-2 bg-blue-600 text-white rounded-md">
-          Update
+          Update Profile
         </button>
       </form>
     </main>
