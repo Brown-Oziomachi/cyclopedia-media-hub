@@ -314,7 +314,7 @@ return (
           alt="Avatar"
           className="w-12 h-12 rounded-full shadow-md"
         />
-        <h3 className="text-sm mb-1">Please signin to <span className="text-green-600">comment</span></h3>
+        <h3 className="text-sm mb-1">Please<a href="/auth/signin" className="text-green-600"> signin</a> to comment</h3>
         <input
           type="text"
           placeholder="What's on your mind?"
