@@ -259,7 +259,7 @@ const BlogPage = () => {
         <div className="flex justify-center items-center h-screen bg-gray-400/5 ">
           <LoaderCircle size={50} className="animate-spin text-green-600 mt-10" />
                     <img
-                     src="logo.jpg"
+                     src="/logo.jpg"
                      alt="My Logo"
             className="h-30 lg:h-30 mt-10 animate-pulse absolute top-40 left-0 right-0 bottom-0 mx-auto"
                    />
@@ -272,14 +272,14 @@ const BlogPage = () => {
                 <div className="max-lg:relative">
                   <h1 className="text-6xl font-bold tracking-tight   max-lg:inset-0 max-lg:top-8 lg:py-10 lg:hidden text-gray-400 mb-5">
                     <img
-                      src="blog.jpg"
+                      src="/blog.jpg"
                       alt=""
                       className="w-fit border-x-green-600 border border-green-600 rounded-md b border-r-white"
                     />
                     {showContentType === "blog" ? " " : "Videos"}
                   </h1>
                   <img
-                    src="web19.jpg"
+                    src="/web19.jpg"
                     alt="Blog image"
                     className="rounded-md w-full"
                   />
@@ -457,7 +457,7 @@ const BlogPage = () => {
                               {post.title}
                             </h2>
                             <h3 className="w-full h-24 mx-auto mb-3 object-cover opacity-30">
-                              <img src="web19.jpg" alt="" />
+                              <img src="/web19.jpg" alt="" />
                             </h3>
                             <p className="text-sm text-white mb-4 line-clamp-2">
                               {post.body}

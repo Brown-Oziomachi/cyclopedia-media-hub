@@ -31,13 +31,18 @@ const ProfileDropdownNavbar = () => {
 
   return (
     <main className="fixed w-full bg-gray-400/5 border-x shadow-xl border-b border z-50">
-      <section className="px-5 py-4 flex items-center justify-between">
+      <section className="px-5 py-4 flex items-center justify-between z-50">
         {/* Logo */}
         <span className="flex items-center border px-2 py-1 border-gray-400 rounded-md font-extralight gap-6">
           <Link href="/" >
-            <img src="logo.jpg" alt="" className="w-7 h-5 brightness-120"/>
-          </Link>
-          
+          <Image
+            src="/logo.jpg"
+            alt="/Logo"
+            width={30}
+            height={30}
+            className=" shadow-md hover:shadow-lg transition-shadow duration-300 object-cover"
+          /></Link>
+
           <h1 className="text-white -ml-5 border-b border-b-green-600">WebWiz</h1>
         </span>
 
@@ -146,7 +151,7 @@ const ProfileDropdownNavbar = () => {
                         >
                           Have something to Share? ⬇
                           <div>
-                            <img src="web25.jpg" alt="owner image" className="mt-5" />
+                            <img src="/share.jpg" alt="owner image" className="mt-5" />
                           </div>
                         </h1>
                       </div>
@@ -192,7 +197,7 @@ const ProfileDropdownNavbar = () => {
         )}
         <div>
         <Link href="/myprofile">
-        <img src="web21.jpg" alt="" className=" rounded-full" width={36} height={36}/>
+        <img src="/web21.jpg" alt="" className=" rounded-full" width={36} height={36}/>
         </Link>
         </div>
             </div>
@@ -246,7 +251,7 @@ const ProfileDropdownNavbar = () => {
               signOut();
               setShowNav(false);
             }}
-            className="text-md py-2 px-6 bg-gray-400/5 border-x text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md mt-4"
+            className="text-md py-2 px-6 bg-gray-400/5 border-x border-x-green-600 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md mt-4"
           >
             Sign Out
           </button>
