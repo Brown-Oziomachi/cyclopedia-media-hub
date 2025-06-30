@@ -294,6 +294,7 @@ return (
     </div>
 
     {/* Comment Section */}
+   {/* Comment Section */}
     <div className="bg-gray-400/5 shadow-xl rounded-2xl p-8 border border-gray-700 space-y-8">
       <h2 className="text-3xl font-extrabold text-white tracking-wide">
         Join the Conversation
@@ -322,98 +323,96 @@ return (
         </button>
       </div>
 
-        <ul className="space-y-6 max-h-[420px] overflow-y-auto pr-2">
-          {comments.length > 0 ? (
-        comments
-          .sort((a, b) => b.timestamp?.seconds - a.timestamp?.seconds)
-          .map((comment) => (
-        <li
-          key={comment.id}
-          className="bg-gray-400/5 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition"
-        >
-          <div className="flex items-center space-x-4 mb-3">
-            <Link href={`/users/${comment.myProfile || comment.userName}`} className="flex items-center space-x-3">
-          <img
-            src={comment.userImage || "/default-avatar.png"}
-            alt="User"
-            className="w-10 h-10 rounded-full shadow-sm cursor-pointer"
-            title="View Profile"
-          />
-          <div>
-            <p className="text-white font-semibold">{comment.userName}</p>
-            {comment.timestamp && (
-              <p className="text-sm text-gray-400">
-            {new Date(comment.timestamp.seconds * 1000).toLocaleString()}
-              </p>
-            )}
-          </div>
-            </Link>
-          </div>
+      {/* List of Comments */}
+      <ul className="space-y-6 max-h-[420px] overflow-y-auto pr-2">
+        {comments.length > 0 ? (
+          comments
+            .sort((a, b) => b.timestamp?.seconds - a.timestamp?.seconds)
+            .map((comment) => (
+              <li
+                key={comment.id}
+                className="bg-gray-400/5 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition"
+              >
 
-          <p className="text-gray-300 mb-3">{comment.text}</p>
+                <div className="flex items-center space-x-4 mb-3">
+                  <img
+                    src={comment.userImage || "/default-avatar.png"}
+                    scr={comment.profile || "/unknown person"}
+                    alt="User"
+                    className="w-10 h-10 rounded-full  shadow-sm"
+                  />
+                  <div>
+                    <Link href={'/users/${post.profile}'}>
+                    <p className="text-white font-semibold">{comment.userName} {comment.profile}</p>
+                    {comment.timestamp && (
+                      <p className="text-sm text-gray-400">
+                        {new Date(comment.timestamp.seconds * 1000).toLocaleString()}
+                      </p>
+                    )}
+                    </Link>
+                  </div>
+                </div>
 
-          <button
-            className="text-green-600 font-semibold hover:underline"
-            onClick={() => setReplyingTo(comment.id)}
-          >
-            Reply
-          </button>
+                <p className="text-gray-300 mb-3">{comment.text}</p>
 
-          {replyingTo === comment.id && (
-            <div className="mt-4 space-y-3">
-          <input
-            type="text"
-            placeholder="Write a reply..."
-            className="w-full p-3 bg-gray-400/5 rounded-lg border border-green-600 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
-            value={replyText}
-            onChange={(e) => setReplyText(e.target.value)}
-          />
-          <button
-            className="px-5 py-2 bg-green-600 text-black font-semibold rounded-lg shadow-md hover:bg-orange-500 transition"
-            onClick={() =>
-              handleReplySubmit(
-            comment.id,
-            replyText,
-            setReplyText,
-            setReplyingTo,
-            setComments
-              )
-            }
-          >
-            Submit
-          </button>
-            </div>
-          )}
+                <button
+                  className="text-green-600 font-semibold hover:underline"
+                  onClick={() => setReplyingTo(comment.id)}
+                >
+                  Reply
+                </button>
 
-          {comment.replies?.length > 0 && (
-            <ul className="ml-4 mt-6 space-y-4 border-l border-green-600 pl-4">
-          {comment.replies.map((reply) => (
-            <li
-              key={reply.id}
-              className="flex space-x-2 bg-gray-400/5 border-b border-r p-3 border-r-green-600 border-b-green-600 rounded-lg"
-            >
-              <Link href={`/users/${reply.userName}`}>
-            <img
-              src={reply.userImage || "/default-avatar.png"}
-              alt="Reply User"
-              className="w-8 h-8 rounded-full shadow cursor-pointer"
-              title="View Profile"
-            />
-              </Link>
-              <div>
-            <p className="text-white font-semibold">{reply.userName}</p>
-            <p className="text-gray-400">{reply.text}</p>
-              </div>
-            </li>
-          ))}
-            </ul>
-          )}
-        </li>
-          ))
-      ) : (
-        <p className="text-gray-400">Be the first to comment!</p>
-      )}
-        </ul>
+                {replyingTo === comment.id && (
+                  <div className="mt-4 space-y-3">
+                    <input
+                      type="text"
+                      placeholder="Write a reply..."
+                      className="w-full p-3 bg-gray-400/5 rounded-lg border border-green-600 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+                      value={replyText}
+                      onChange={(e) => setReplyText(e.target.value)}
+                    />
+                    <button
+                      className="px-5 py-2 bg-green-600 text-black font-semibold rounded-lg shadow-md hover:bg-orange-500 transition"
+                      onClick={() =>
+                        handleReplySubmit(
+                          comment.id,
+                          replyText,
+                          setReplyText,
+                          setReplyingTo,
+                          setComments,
+                          db3
+                        )
+                      }
+                    >
+                      Submit
+                    </button>
+                  </div>
+                )}
+
+                {comment.replies?.length > 0 && (
+                  <ul className="ml-4 mt-6 space-y-4 border-l border-green-600 pl-4">
+                    {comment.replies.map((reply) => (
+                      <li key={reply.id} className="flex space-x-2 bg-gray-400/5 border-b border-r p-3 border-r-green-600 border-b-green-600 rounded-lg">
+                        <img
+                          src={reply.userImage || "/default-avatar.png"}
+                          alt="Reply User"
+                          className="w-8 h-8 rounded-full  shadow"
+                        />
+                        <div>
+                          <p className="text-white font-semibold">{reply.userName}</p>
+                          <p className="text-gray-400">{reply.text}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))
+        ) : (
+          <p className="text-gray-400">Be the first to comment!</p>
+        )}
+      </ul>
+    </div>
 
           {/* Other Blog Suggestions */}
     {otherBlogs.length > 0 && (
@@ -436,9 +435,6 @@ return (
       </div>
     )}
     </div>
-
-    {/* Ads Section */}    
-  </div>
-);
+)
 }
 export default BlogDetails;
