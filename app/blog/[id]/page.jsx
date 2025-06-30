@@ -18,7 +18,7 @@ import {
 import { LoaderCircle, Heart, Share, LinkIcon } from "lucide-react";
 import Link from "next/link";
 import BlogDisplay from "@/components/BlogDisplay";
-import Ads from "@/components/Ads";
+import Ads from "@/components/community";
 import Image from "next/image";
 
 const BlogDetails = ({ params }) => {

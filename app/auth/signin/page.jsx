@@ -17,7 +17,7 @@ const page = async () => {
             Welcome to WebWiz Creation
           </h1>
           <p className="text-green-600">
-            Sign in to unlock your creative potential.
+            Sign in to explore the full potentials of our website.
           </p>
         </header>
 

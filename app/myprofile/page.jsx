@@ -98,7 +98,7 @@ useEffect(() =>{
             >
               Contact me ⬇
             </h4>
-              <h1 className="text-green-600/ border-t border-x mt-2 lg:text-center font-bold font-mono space-y-5">Join My Community</h1>
+              <h1 className="text-green-600/ border-t border-x mt-2 lg:text-center font-bold font-mono space-y-5">Join My <a href="/community" className="text-green-600">Community</a></h1>
             <div className="flex items-center justify-center gap-5 mt-1">
             <h4 className="text-sm px-5 rounded-md bg-green-600 text-white">
               <Link href="https://whatsapp.com/channel/0029Vb6BDcsJZg401UUoHA0T" 

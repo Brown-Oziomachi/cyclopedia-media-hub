@@ -307,7 +307,7 @@ const BlogPage = () => {
               </div>
               <div>
                 <p className="text-gray-400 text-sm mt-4">
-                  Join our community of creators and thinkers. Share your
+                  Join our <a href="/community" className="text-green-600">community</a> of <a href="/community" className="text-green-600">creators</a> and <a href="/community" className="text-green-600">thinkers.</a> Share your
                   thoughts, ideas, and experiences with us.
                 </p>
               </div>

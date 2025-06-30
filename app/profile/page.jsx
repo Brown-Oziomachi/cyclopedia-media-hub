@@ -2,7 +2,7 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import Link from "next/link";
-import Ads from "@/components/Ads";
+import Ads from "@/components/community";
 
 async function ProfilePage() {
   const session = await auth();
@@ -52,10 +52,12 @@ async function ProfilePage() {
         </div>
         {/* Spacer for profile image overlay */}
         <div className="h-16"></div>
+        <Link href="/community">
             <div className="flex bg-green-600 items-center justify-center w-1/2 rounded-full">
               <img src="logo.jpg" alt="" className="h-5 w-5"/>
-              <h1 className="text-xl font-semibold font-stretch-75%">Message</h1>
+              <h1 className="text-xl font-semibold font-stretch-75%">Community</h1>
             </div>
+        </Link>
 
         {/* Profile Details Section */}
         <div className="bg-gray-400/5 p-6 rounded-lg shadow-md border-x ">

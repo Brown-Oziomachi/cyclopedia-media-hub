@@ -4,7 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { app1 } from "@/lib/firebaseConfig";
-import Ads from "@/components/Ads";
+import Ads from "@/components/community";
 
 function getYouTubeEmbedURL(url) {
   try {
