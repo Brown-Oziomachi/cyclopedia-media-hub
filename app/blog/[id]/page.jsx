@@ -236,9 +236,13 @@ return (
         <h3 className="mt-2  font-semibold text-green-600 text-2xl ">Brown Code</h3>
           <h4 className="underline text-xs text-green-600 text-center font-serif">VIEW PROFILE</h4>
         </Link>
-          <p className="text-gray-500 text-sm mt-5">
-            Posted on {blog.timestamp || "Unknown Date"}
-          </p>
+            {/* <h5>Follow me on</h5>
+          <div className=" flex gap-5 ">
+            <a href="/">facebook</a>
+            <a href="/">Instagram</a>
+            <a href="/">TikTok</a>
+            <a href="/">LinkIn</a>
+          </div> */}
         </div>
     </div>
       <p className="-mt-15 text-center text-xs text-shadow-2xs border-b border-x border-x-green-600 px-0 border-gray-400/20 rounded-md">Learn, unlearn and relearn.</p>
@@ -248,6 +252,9 @@ return (
     <div className="bg-gray-400/5 rounded-xl shadow-lg p-6 border border-gray-700">
      <h1 className="text-3xl font-extrabold text-white text-center drop-shadow-lg">
         {blog.title}
+          <p className="text-gray-500 text-sm mt-5">
+            Posted on {blog.timestamp || "Unknown Date"}
+          </p>
       <div className="">
       <img src="/web19.jpg" alt="" className="w-full rounded-md mt-2 lg:object-cover"/>
       </div>
@@ -256,40 +263,40 @@ return (
     </div>
 
     {/* Like / Share Section */}
-    <div className="flex flex-wrap justify-center gap-6 items-center shadow-lg">
+    <div className="flex flex-col-1 justify-center gap-4 items-center shadow-lg text-sm">
       <button
         onClick={handleLikeClick}
         className="flex items-center text-gray-300 hover:text-blue-500 transition-all"
         aria-label="Like Button"
       >
         <Heart
-          className={`h-7 w-7 mr-2 transition-transform ${liked ? "fill-red-500 scale-110" : "fill-none"}`}
+          className={`h-5 w-5 mr-2 transition-transform ${liked ? "fill-red-500 scale-110" : "fill-none"}`}
         />
         {liked ? "Liked" : "Like"} ({likes})
       </button>
 
-      <button
-        onClick={handleCopyLink}
-        className="flex items-center gap-2 text-gray-400 font-semibold py-2 px-5 rounded-lg hover:bg-gray-800 transition"
-      >
-        <LinkIcon className="h-6 w-6" /> Copy Link
-      </button>
 
       <button
         onClick={handleShareClick}
         className="flex items-center gap-2 text-gray-400 font-semibold py-2 px-5 rounded-lg hover:bg-gray-800 transition relative"
       >
-        <Share className="h-6 w-6" /> Share
+        <Share className="h-5 w-5" /> Share
         {showShareMenu && (
-          <div className="absolute top-full mt-3 right-0bg-gray-400/5 shadow-xl rounded-lg p-4 flex flex-col gap-3 text-sm w-56 z-50 border border-gray-700">
-            <a href={`https://twitter.com/intent/tweet?url=${window.location.href}`} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Share on Twitter</a>
-            <a href={`https://www.linkedin.com/shareArticle?mini=true&url=${window.location.href}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Share on LinkedIn</a>
-            <a href={`https://api.whatsapp.com/send?text=${window.location.href}`} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:underline">Share on WhatsApp</a>
+          <div className="absolute mr-50 top-full left-0bg-gray-400/5 shadow-xl rounded-lg p-4 flex flex-col gap-3 text-sm w-56 z-50 border border-green-600">
+            <a href={`https://twitter.com/intent/tweet?url=${window.location.href}`} target="_self" rel="noopener noreferrer" className="text-blue-400 hover:underline">Share on Twitter</a>
+            <a href={`https://www.linkedin.com/shareArticle?mini=true&url=${window.location.href}`} target="_self" rel="noopener noreferrer" className="text-blue-600 hover:underline">Share on LinkedIn</a>
+            <a href={`https://api.whatsapp.com/send?text=${window.location.href}`} target="_self" rel="noopener noreferrer" className="text-green-500 hover:underline">Share on WhatsApp</a>
             <button onClick={() => setShowShareMenu(false)} className="flex items-center text-gray-400 hover:text-white mt-2">
-              <LinkIcon className="h-5 w-5 mr-2" /> Close
+              <h1 className="h-5 w-5 text-green-600"> Close </h1>
             </button>
           </div>
         )}
+      </button>
+      <button
+        onClick={handleCopyLink}
+        className="flex flex-col items-center justify-center gap-2 text-gray-400 font-semibold py-2 px-5 rounded-lg hover:bg-gray-800 transition"
+      >
+    Copy Link
       </button>
     </div>
 
@@ -299,26 +306,26 @@ return (
       <h2 className="text-3xl font-extrabold text-white tracking-wide">
         Join the Conversation
       </h2>
-        <h3>Please login to Comment</h3>
       {/* New Comment Input */}
       <div className="lg:flex items-center space-x-5 grid space-y-4 lg:space-y-0">
         <img
-          src={session?.user?.image || "/default-avatar.png"}
+          src={session ? session?.user?.image :"/logo.jpg"}
           scr={session?.user?.profile || "/Unknown person"}
           alt="Avatar"
           className="w-12 h-12 rounded-full shadow-md"
         />
+        <h3 className="text-sm mb-1">Please signin to <span className="text-green-600">comment</span></h3>
         <input
           type="text"
           placeholder="What's on your mind?"
-          className="flex-grow p-5 rounded-lg bg-gray-400/5 text-white border border-green-600 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+          className="flex-grow p-5 rounded-lg bg-gray-400/5 text-white border border-green-600 focus:outline-none focus:ring-2 focus:ring-green-600 transition"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         />
         <button
           onClick={session? handleCommentSubmit : "/auth/signin"}
-          className="lg:px-5 lg:py-2 px-3 py-2 max-md:w-1/2  bg-gradient-to-r from-green-600 to-green-400 text-black font-semibold rounded-lg shadow-md hover:from-orange-600 hover:to-yellow-500 transition"
-        >
+          className="lg:px-5 lg:py-2 px-3 py-2 max-md:w-1/2  bg-gradient-to-r from-green-600 to-green-400 text-black font-semibold rounded-lg shadow-md hover:from-green-600 hover:to-yellow-500 transition"
+        title={session ? "You can now post" : "Please signin to post"}>
           Post
         </button>
       </div>

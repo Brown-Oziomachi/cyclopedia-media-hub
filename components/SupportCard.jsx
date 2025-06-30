@@ -4,24 +4,24 @@ import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
 
 const imageData = [
-    { src: "Bill.jpg", title: "Only Three Jobs Will Survive AI", link: "https://webwizcreation-y7vx.vercel.app/blog/uo2soqxHXDFIlbocSpwN" },
+    { src: "/Bill.jpg", title: "Only Three Jobs Will Survive AI", link: "https://webwizcreation-y7vx.vercel.app/blog/uo2soqxHXDFIlbocSpwN" },
 
-    { src: "ma1.jpg", title: "Jack Ma: Why I flew 15 hours just to visit Nigeria", link: "https://webwizcreation-y7vx.vercel.app/blog/crMFd0tsdFuVCLSRuYor" },
-       { src: "tech.jpg", title: "Jack Ma Calls for Wisdom and Innovation at World AI Conference", link: "https://webwizcreation-y7vx.vercel.app/blog/ZAVCyn24lV5brija4ahE" },
-    { src: "why.jpg", title: "Attitude is Everything, Best Motivational Speech by Jack Ma", link: "https://webwizcreation-y7vx.vercel.app/blog/TIcJic9GTFSypm63zqoR" },
-  { src: "ma.jpg", title: "Billionaire Jack Ma shows us how to be successful in our 20s, 30s, 40s and beyond", link: "https://webwizcreation-y7vx.vercel.app/blog/3W9lOrKuvHVimWAdB3qx" },
+    { src: "/ma1.jpg", title: "Jack Ma: Why I flew 15 hours just to visit Nigeria", link: "https://webwizcreation-y7vx.vercel.app/blog/crMFd0tsdFuVCLSRuYor" },
+       { src: "/tech.jpg", title: "Jack Ma Calls for Wisdom and Innovation at World AI Conference", link: "https://webwizcreation-y7vx.vercel.app/blog/ZAVCyn24lV5brija4ahE" },
+    { src: "/why.jpg", title: "Attitude is Everything, Best Motivational Speech by Jack Ma", link: "https://webwizcreation-y7vx.vercel.app/blog/TIcJic9GTFSypm63zqoR" },
+  { src: "/ma.jpg", title: "Billionaire Jack Ma shows us how to be successful in our 20s, 30s, 40s and beyond", link: "https://webwizcreation-y7vx.vercel.app/blog/3W9lOrKuvHVimWAdB3qx" },
 
-  { src: "reno1.jpg", title: "Why Tithing Is a Big Scam in Christianity", link: "https://webwizcreation-y7vx.vercel.app/blog/I0dA4zrCTd7ik2dKiyil" },
-  { src: "sadhguru.jpg", title: "Higher Salary vs A Job You Enjoy: Which Should You Choose?", link: "https://webwizcreation-y7vx.vercel.app/blog/f21UAfA1F094wsO5FQt0" },
-  { src: "society.jpg", title: "How will you define a society without science and technology?", link: "https://webwizcreation-y7vx.vercel.app/blog/0mSBXAvjWZBSD5NfWHcb" },
-  { src: "reno2.png", title: "WHAT ARE YOUR THOUGHTS ON GOING TO CHURCH ON SUNDAY", link: "https://webwizcreation-y7vx.vercel.app/blog/ZaoGbdtKLBOHAXWTY1Fe" },
-  { src: "project.jpg", title: "Here are seven top coding projects to work on:", link: "https://webwizcreation-y7vx.vercel.app/blog/uMnLfrqwyE7C2xzPV6TJ" },
-  { src: "being.jpg", title: "THE PROBLEM OF FINDING A WORD FOR THE SUPREME BEING", link: "https://webwizcreation-y7vx.vercel.app/blog/uRpGwukHugfLW08Rthvh" },
+  { src: "/reno1.jpg", title: "Why Tithing Is a Big Scam in Christianity", link: "https://webwizcreation-y7vx.vercel.app/blog/I0dA4zrCTd7ik2dKiyil" },
+  { src: "/sadhguru.jpg", title: "Higher Salary vs A Job You Enjoy: Which Should You Choose?", link: "https://webwizcreation-y7vx.vercel.app/blog/f21UAfA1F094wsO5FQt0" },
+  { src: "/society.jpg", title: "How will you define a society without science and technology?", link: "https://webwizcreation-y7vx.vercel.app/blog/0mSBXAvjWZBSD5NfWHcb" },
+  { src: "/reno2.png", title: "WHAT ARE YOUR THOUGHTS ON GOING TO CHURCH ON SUNDAY", link: "https://webwizcreation-y7vx.vercel.app/blog/ZaoGbdtKLBOHAXWTY1Fe" },
+  { src: "/project.jpg", title: "Here are seven top coding projects to work on:", link: "https://webwizcreation-y7vx.vercel.app/blog/uMnLfrqwyE7C2xzPV6TJ" },
+  { src: "/being.jpg", title: "THE PROBLEM OF FINDING A WORD FOR THE SUPREME BEING", link: "https://webwizcreation-y7vx.vercel.app/blog/uRpGwukHugfLW08Rthvh" },
 
-  { src: "wrong1.jpg", title: "The Wrong Thing At The Wrong Time", link: "https://webwizcreation-y7vx.vercel.app/blog/6PkM2Tw6h72Zx51CXhAb" },
-  { src: "sex.jpg", title: "Sex: Sacred or Sinful?", link: "https://webwizcreation-y7vx.vercel.app/blog/1HXqx2I2Sb7K6p5FWiel" },
-  { src: "marryme.jpg", title: "THINK BEFORE GETTING MARRIED", link: "https://webwizcreation-y7vx.vercel.app/blog/ODs7l1jjtQ6M3bTmtucY" },
-  { src: "web21.jpg", title: "MASTERING SKILLS: A STEP BY STEP GUIDE?", link: "https://webwizcreation-y7vx.vercel.app/blog/QmpY76ELg3ZSEiRoDIXI" },
+  { src: "/wrong1.jpg", title: "The Wrong Thing At The Wrong Time", link: "https://webwizcreation-y7vx.vercel.app/blog/6PkM2Tw6h72Zx51CXhAb" },
+  { src: "/sex.jpg", title: "Sex: Sacred or Sinful?", link: "https://webwizcreation-y7vx.vercel.app/blog/1HXqx2I2Sb7K6p5FWiel" },
+  { src: "/marryme.jpg", title: "THINK BEFORE GETTING MARRIED", link: "https://webwizcreation-y7vx.vercel.app/blog/ODs7l1jjtQ6M3bTmtucY" },
+  { src: "/web21.jpg", title: "MASTERING SKILLS: A STEP BY STEP GUIDE?", link: "https://webwizcreation-y7vx.vercel.app/blog/QmpY76ELg3ZSEiRoDIXI" },
  
 ];
 
