@@ -39,11 +39,11 @@ const Page = () => {
     <>
        {loading ? (
               <div className="flex justify-center items-center h-screen bg-gray-400/5">
-                <LoaderCircle size={50} speed={1.1} color="white" className="animate-spin" />
+                <LoaderCircle size={50} speed={1.1} color="green" className="animate-spin" />
                 <img
                         src="logo.jpg"
                         alt="My Logo"
-                        className="h-30 lg:h-30 mt-10 animate-pulse absolute top-30 left-0 right-0 bottom-0 mx-auto"
+                        className="h-30 lg:h-30 mt-10 lg:object-cover animate-pulse absolute top-30 left-0 right-0 bottom-0 mx-auto"
                       />
               </div>
             ) : (
@@ -53,7 +53,7 @@ const Page = () => {
             <img
               src="web18.jpg"
               alt="image"
-              className="w-full h-fit opacity-100 border-b-4 border-b-green-600"
+              className="w-full h-fit lg:h-300 opacity-100 border-b-4 border-b-green-600"
             />
           </div>
           <main className=" flex flex-col justify-center items-center h- lg:h-2 text-center px-4 lg:px-0 max-lg:mt-10 opacity-100 lg:-mt-100">
@@ -192,7 +192,7 @@ const Page = () => {
             ],
           },
         ].map((item, index) => (
-          <div className="items-center justify-center flex flex-col">
+          <div className="items-center justify-center flex flex-col-2">
           <div
             key={index}
             className="bg-gray-400/10 z-0 p-5 -mt-15 rounded-lg flex flex-col items-center justify-center shadow-lg shadow-green-600 transition border-l-4 border-black mb-10 "
@@ -203,7 +203,7 @@ const Page = () => {
             <img
               src={item.img}
               alt={item.title}
-              className="w-fit ml-auto lg:h-200 rounded-t-lg mb-5 group-hover:opacity-80 transition duration-300"
+              className="w-fit ml-auto lg:h-300 rounded-t-lg mb-5 group-hover:opacity-80 transition duration-300"
             />{" "}
             <h6 className="text-gray-400 mb-6">{item.description}</h6>
             <div className="flex text-xs gap-4 group">
