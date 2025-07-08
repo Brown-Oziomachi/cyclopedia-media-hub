@@ -252,100 +252,108 @@ const BlogDetails = ({ params }) => {
         Learn, unlearn and relearn.
       </p>
 
-      {/* Blog Body Content */}
-
-      <div className="bg-gray-400/5 rounded-xl shadow-lg p-6 border border-gray-700">
-        <h1 className="text-3xl font-extrabold text-white text-center drop-shadow-lg">
-          {blog.title}
-          <p className="text-gray-500 text-sm mt-5">
-            Posted on {blog.timestamp || "Unknown Date"}
-          </p>
-          <div className="">
-            <img
-              src="/web19.jpg"
-              alt=""
-              className="w-full rounded-md mt-2 lg:object-cover"
-            />
-          </div>
-        </h1>
-        <BlogDisplay body={blog.body} />
-      </div>
-
-      {/* Like / Share Section */}
-      <div className="flex flex-col-1 justify-center gap-4 items-center shadow-lg text-sm">
-        <button
-          onClick={handleLikeClick}
-          className="border flex items-center text-gray-300 py-2 px-4 rounded-lg hover:text-blue-500 transition-all"
-          aria-label="Like Button"
-        >
-          <Heart
-            className={`h-4 w-4 mr-2 transition-transform ${
-              liked ? "fill-red-500 scale-110" : "fill-none"
-            }`}
+        <div className="bg-gray-400/5 rounded-xl shadow-lg p-6 border border-gray-700">
+          <h1 className="text-3xl font-extrabold text-white text-center drop-shadow-lg">
+            {blog.title}
+            <p className="text-gray-500 text-sm mt-5">
+          Posted on {blog.timestamp || "Unknown Date"}
+            </p>
+            <div className="">
+          <img
+            src="/web19.jpg"
+            alt=""
+            className="w-full rounded-md mt-2 lg:object-cover"
           />
-          {liked ? "" : "Like"} ({likes})
-        </button>
-
-        <button
-          onClick={handleCopyLink}
-          className="border flex flex-col items-center justify-center gap-2 text-gray-400 font-semibold py-2 px-7 rounded-lg hover:bg-gray-800 transition"
-        >
-          10
-        </button>
-
-        <button
-          onClick={handleShareClick}
-          className="border flex items-center gap-2 text-gray-400 font-semibold py-2 px-6 rounded-lg hover:bg-gray-800 transition relative"
-        >
-          <Share className="h-4 w-4" />
-          {showShareMenu && (
-            <div className="absolute mr-50 top-full left-0bg-gray-400/5 shadow-xl rounded-lg p-4 flex flex-col gap-3 text-sm w-56 z-50 border border-green-600">
-              <a
-                href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
-                target="_self"
-                rel="noopener noreferrer"
-                className="text-blue-400 hover:underline"
-              >
-                Share on Twitter
-              </a>
-              <a
-                href={`https://www.linkedin.com/shareArticle?mini=true&url=${window.location.href}`}
-                target="_self"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline"
-              >
-                Share on LinkedIn
-              </a>
-              <a
-                href={`https://api.whatsapp.com/send?text=${window.location.href}`}
-                target="_self"
-                rel="noopener noreferrer"
-                className="text-green-500 hover:underline"
-              >
-                Share on WhatsApp
-              </a>
-              <button
-                onClick={() => setShowShareMenu(false)}
-                className="flex items-center text-gray-400 hover:text-white mt-2"
-              >
-                <h1 className="h-5 w-5 text-green-600"> Close </h1>
-              </button>
             </div>
-          )}
-        </button>
-        <button
-          onClick={handleCopyLink}
-          className="border flex flex-col items-center justify-center gap-2 text-gray-400 font-semibold py-2 px-6 rounded-lg hover:bg-gray-800 transition"
-        >
-          <LinkIcon className="h-4 w-4" />
-        </button>
-      </div>
+          </h1>
+          <BlogDisplay body={blog.body} />
+        </div>
 
-      {/* Comment Section */}
-      {/* Comment Section */}
+        {/* Like / Share / Comment Count Section */}
+        <div className="flex flex-col-1 justify-center gap-4 items-center shadow-lg text-sm">
+          <button
+            onClick={handleLikeClick}
+            className="border flex items-center text-gray-300 py-2 px-4 rounded-lg hover:text-blue-500 transition-all"
+            aria-label="Like Button"
+          >
+            <Heart
+          className={`h-4 w-4 mr-2 transition-transform ${
+            liked ? "fill-red-500 scale-110" : "fill-none"
+          }`}
+            />
+            {liked ? "" : ""} ({likes})
+          </button>
+
+                <div
+                className="border flex items-center gap-1 text-gray-400 font-semibold py-2 px-6 rounded-lg hover:bg-gray-800 transition"
+                title="Number of Comments"
+                >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4 mr-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8h2a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2v-2m12-8V6a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2h2"
+                  />
+                </svg>
+                {
+                  // Count comments + all replies
+                  comments.reduce(
+                  (total, comment) => total + 1 + (comment.replies ? comment.replies.length : 0),
+                  0
+                  )
+                }
+                </div>
+
+                <button
+                onClick={handleShareClick}
+                className="border flex items-center gap-2 text-gray-400 font-semibold py-2 px-6 rounded-lg hover:bg-gray-800 transition relative"
+                >
+                <Share className="h-4 w-4" />
+                {showShareMenu && (
+                  <div className="absolute mr-50 top-full left-0 bg-gray-400/5 shadow-xl rounded-lg p-4 flex flex-col gap-3 text-sm w-56 z-50 border border-green-600">
+                  <a
+                    href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
+                    target="_self"
+                    rel="noopener noreferrer"
+                    className="text-blue-400 hover:underline"
+                  >
+                    Share on Twitter
+                  </a>
+                  <a
+                    href={`https://www.linkedin.com/shareArticle?mini=true&url=${window.location.href}`}
+                    target="_self"
+                    rel="noopener noreferrer"
+                    className="text"
+                  >
+                    Share on LinkedIn
+                  </a>
+                  <button
+                    onClick={handleShareClick}
+                    className="h-5 w-5 text-green-600"
+                  >
+                    Close
+                  </button>
+                  </div>
+                )}
+                </button>
+                <button
+                onClick={handleCopyLink}
+                className="border flex flex-col items-center justify-center gap-2 text-gray-400 font-semibold py-2 px-6 rounded-lg hover:bg-gray-800 transition"
+                >
+                <LinkIcon className="h-4 w-4" />
+                </button>
+              </div>
+              {/* Comment Section */}
       <div className="bg-gray-400/5 shadow-xl rounded-2xl p-2 border border-gray-700 space-y-8">
         <h2 className="text-3xl font-extrabold text-white tracking-wide">
-          Join the Conversation
+         Join <span className="text-green-600">the</span> Conversation
         </h2>
         {/* New Comment Input */}
         <div className="lg:flex items-center space-x-5 grid space-y-4 lg:space-y-0">

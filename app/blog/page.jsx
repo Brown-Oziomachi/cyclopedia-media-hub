@@ -363,7 +363,7 @@ const BlogPage = () => {
                     basePosts = blogPosts.filter(
                       (post) => post.isVideo && !post.isReel
                     );
-                  } else if (showContentType === "Gallery") {
+                  } else if (showContentType === "reel") {
                     basePosts = blogPosts.filter((post) => post.isReel);
                   }
 
@@ -413,7 +413,7 @@ const BlogPage = () => {
                       basePosts = blogPosts.filter(
                         (post) => post.isVideo && !post.isReel
                       );
-                    } else if (showContentType === "/gallery") {
+                    } else if (showContentType === "/video") {
                       basePosts = blogPosts.filter((post) => post.isReel);
                     }
                     setFilteredPosts(basePosts);

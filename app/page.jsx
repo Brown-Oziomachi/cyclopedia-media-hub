@@ -39,12 +39,17 @@ const Page = () => {
     <>
        {loading ? (
               <div className="flex justify-center items-center h-screen bg-gray-400/5">
-                <LoaderCircle size={50} speed={1.1} color="green" className="animate-spin" />
+               
                 <img
                         src="logo.jpg"
                         alt="My Logo"
                         className="h-30 lg:h-30 mt-10 lg:object-cover animate-pulse absolute top-30 left-0 right-0 bottom-0 mx-auto"
                       />
+                      <div className="text-center space-y-20 mt-10">
+                <LoaderCircle size={50} speed={1.1} color="green" className="animate-spin ml-20" />
+
+                      <h1 className="text-green-600  text-center text-2xl"><span className="text-3xl">W</span>eb<span className="text-3xl">W</span>iz Creation</h1>
+                      </div>
               </div>
             ) : (
         <div className="py-18 text-white relative overflow-hidden bg-gray-400/5">
