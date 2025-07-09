@@ -52,11 +52,11 @@ const BlogPage = () => {
   const [showContentType, setShowContentType] = useState("blog");
   const [adShown, setAdShown] = useState({
     video: false,
-    Gallery: false,
+    reel: false,
   });
 
   const handleClick = (type) => {
-    if (type === "Gallery" && !adShown[type]) {
+    if (type === "reel" && !adShown[type]) {
       window.open("https://otieu.com/4/9366150", "_blank");
       setAdShown((prev) => ({ ...prev, [type]: true }));
       return;
@@ -163,7 +163,7 @@ const BlogPage = () => {
           basePosts = blogs.filter((post) => !post.isVideo);
         } else if (showContentType === "video") {
           basePosts = blogs.filter((post) => post.isVideo && !post.isReel);
-        } else if (showContentType === "Gallery") {
+        } else if (showContentType === "reel") {
           basePosts = blogs.filter((post) => post.isReel);
         }
 
@@ -187,7 +187,7 @@ const BlogPage = () => {
       basePosts = blogPosts.filter((post) => !post.isVideo);
     } else if (type === "video") {
       basePosts = blogPosts.filter((post) => post.isVideo && !post.isReel);
-    } else if (type === "Gallery") {
+    } else if (type === "reel") {
       basePosts = blogPosts.filter((post) => post.isReel);
     }
 
@@ -202,7 +202,7 @@ const BlogPage = () => {
       basePosts = blogPosts.filter((post) => !post.isVideo);
     } else if (showContentType === "video") {
       basePosts = blogPosts.filter((post) => post.isVideo && !post.isReel);
-    } else if (showContentType === "Gallery") {
+    } else if (showContentType === "reel") {
       basePosts = blogPosts.filter((post) => post.isReel);
     }
 
@@ -211,6 +211,7 @@ const BlogPage = () => {
   };
 
   const extractYouTubeId = (url) => {
+    if (!url || typeof url !== "string") return null;
     try {
       const parsedUrl = new URL(url);
       if (parsedUrl.hostname === "youtu.be") {
@@ -226,10 +227,13 @@ const BlogPage = () => {
     }
     return null;
   };
-
   const openVideo = (post) => {
+    if (!post.videoURL || typeof post.videoURL !== "string") {
+      alert("Video URL is missing or invalid.");
+      return;
+    }
     const videoURL = encodeURIComponent(post.videoURL);
-    const title = encodeURIComponent(post.title);
+    const title = encodeURIComponent(post.title || "");
     const desc = encodeURIComponent(post.description || post.body || "");
 
     router.push(
@@ -258,12 +262,12 @@ const BlogPage = () => {
       {loading ? (
         <div className="flex justify-center items-center h-screen bg-gray-400/5 ">
           <LoaderCircle size={50} className="animate-spin text-green-600 mt-10" />
-                    <img
-                     src="/logo.jpg"
-                     alt="My Logo"
+          <img
+            src="/logo.jpg"
+            alt="My Logo"
             className="h-30 lg:h-30 mt-10 animate-pulse absolute top-40 left-0 right-0 bottom-0 mx-auto"
-                   />
-                 </div>
+          />
+        </div>
       ) : (
         <main className="min-h-screen bg-gray-400/5 text-white px-8 py-30">
           <div className="max-w-7xl mx-auto">
@@ -305,12 +309,15 @@ const BlogPage = () => {
                   reels, we've got you covered.
                 </p>
               </div>
-              <div>
-                <p className="text-gray-400 text-sm mt-4">
-                  Join our <a href="/community" className="text-green-600">community</a> of <a href="/community" className="text-green-600">creators</a> and <a href="/community" className="text-green-600">thinkers.</a> Share your
-                  thoughts, ideas, and experiences with us.
-                </p>
-              </div>
+              {/* Only show community section on blog, not video or reel */}
+              {showContentType === "blog" && (
+                <div>
+                  <p className="text-gray-400 text-sm mt-4">
+                    Join our <a href="/community" className="text-green-600">community</a> of <a href="/community" className="text-green-600">creators</a> and <a href="/community" className="text-green-600">thinkers.</a> Share your
+                    thoughts, ideas, and experiences with us.
+                  </p>
+                </div>
+              )}
               <div>
                 <h1
                   className="font-bold font-serif cursor-pointer text-green-600"
@@ -326,7 +333,7 @@ const BlogPage = () => {
 
             {/* Toggle */}
             <div className="flex gap-4 mb-5 justify-center">
-              {["blog", "video"].map((type) => (
+              {["blog", "video", "reel"].map((type) => (
                 <button
                   key={type}
                   className={`px-6 py-3 rounded-xl font-semibold transition ${
@@ -339,13 +346,6 @@ const BlogPage = () => {
                   {type.charAt(0).toUpperCase() + type.slice(1)}
                 </button>
               ))}
-              <div>
-                <Link href="/gallery">
-                  <div className="bg-white text-black px-6 py-3 rounded-xl font-semibold transition">
-                    Gallery
-                  </div>
-                </Link>
-              </div>
             </div>
             {/* Search */}
             <div className="mb-8">
@@ -468,26 +468,24 @@ const BlogPage = () => {
                           </div>
                         </Link>
                       ) : (
-                        <div
-                          className="block cursor-pointer"
-                          onClick={() => openVideo(post)}
-                        >
-                          <div className="h-48 flex items-center justify-center">
-                            <img
-                              src={
-                                post.thumbnail
-                                  ? post.thumbnail
-                                  : post.videoURL?.includes("youtube.com") ||
-                                    post.videoURL?.includes("youtu.be")
+                        <div>
+                          <img
+                            src={
+                              post.thumbnail
+                                ? post.thumbnail
+                                : (post.videoURL &&
+                                  (post.videoURL.includes("youtube.com") ||
+                                    post.videoURL.includes("youtu.be")) &&
+                                  extractYouTubeId(post.videoURL)
                                   ? `https://img.youtube.com/vi/${extractYouTubeId(
                                       post.videoURL
                                     )}/hqdefault.jpg`
                                   : "/video-placeholder.jpg"
-                              }
-                              alt="Video thumbnail"
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
+                                )
+                            }
+                            alt="Video thumbnail"
+                            className="w-full h-full object-cover"
+                          />
                           <div className="p-5">
                             <h2 className="text-2xl font-bold mb-3 mt-5">
                               {post.title}
@@ -506,46 +504,6 @@ const BlogPage = () => {
                 </section>
               )}
 
-            {/* Reels */}
-            {!loading &&
-              filteredPosts.length > 0 &&
-              showContentType === <Link href="/gallery">gallery</Link> && (
-                <section className="flex flex-col gap-8 max-w-xl mx-auto">
-                  {filteredPosts.map((reel) => (
-                    <div
-                      key={reel.id}
-                      className="relative cursor-pointer rounded-xl shadow-lg overflow-hidden bg-black"
-                      onClick={() => openGallery(gallery)}
-                    >
-                      <div className="aspect-[9/16] w-full relative">
-                        <img
-                          src={
-                            gallery.thumbnail
-                              ? gallery.thumbnail
-                              : gallery.videoURL?.includes("youtube.com") ||
-                                gallery.videoURL?.includes("youtu.be")
-                              ? `https://img.youtube.com/vi/${extractYouTubeId(
-                                  gallery.videoURL
-                                )}/hqdefault.jpg`
-                              : "/video-placeholder.jpg"
-                          }
-                          alt={gallery.title}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                          <h2 className="text-white text-lg font-bold line-clamp-2">
-                            {gallery.title}
-                          </h2>
-                          <p className="text-gray-300 text-sm line-clamp-2 mt-1">
-                            {gallery.description || reel.body}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </section>
-              )}
-
             {loading && (
               <div className="flex justify-center items-center h-[30vh]">
                 <div className="w-14 h-14 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
@@ -553,7 +511,7 @@ const BlogPage = () => {
             )}
           </div>
           <div id="services-section"></div>
-          <div className=" mt-10">
+          <div className="mt-10">
             <h1 className="font-bold font-serif">Have something to Share?</h1>
             <h2 className="font-mono">
               We value your thoughts and ideas! feel free to share your
@@ -573,6 +531,5 @@ const BlogPage = () => {
       )}
     </>
   );
-};
-
+}
 export default BlogPage;

@@ -240,69 +240,77 @@ const BlogDetails = ({ params }) => {
             </h4>
           </Link>
           {/* <h5>Follow me on</h5>
-          <div className=" flex gap-5 ">
-            <a href="/">facebook</a>
-            <a href="/">Instagram</a>
-            <a href="/">TikTok</a>
-            <a href="/">LinkIn</a>
-          </div> */}
-        </div>
-      </div>
-      <p className="-mt-15 text-center text-xs text-shadow-2xs border-b border-x border-x-green-600 px-0 border-gray-400/20 rounded-md">
-        Learn, unlearn and relearn.
-      </p>
+            <div className=" flex gap-5 ">
+              <a href="/">facebook</a>
+              <a href="/">Instagram</a>
+              <a href="/">TikTok</a>
+              <a href="/">LinkIn</a>
+            </div> */}
+          </div>
+          </div>
+          <p className="-mt-15 text-center text-xs text-shadow-2xs border-b border-x border-x-green-600 px-0 border-gray-400/20 rounded-md">
+            Learn, unlearn and relearn.
+          </p>
 
-        <div className="bg-gray-400/5 rounded-xl shadow-lg p-6 border border-gray-700">
-          <h1 className="text-3xl font-extrabold text-white text-center drop-shadow-lg">
-            {blog.title}
-            <p className="text-gray-500 text-sm mt-5">
-          Posted on {blog.timestamp || "Unknown Date"}
-            </p>
-            <div className="">
-          <img
-            src="/web19.jpg"
-            alt=""
-            className="w-full rounded-md mt-2 lg:object-cover"
-          />
-            </div>
-          </h1>
-          <BlogDisplay body={blog.body} />
-        </div>
+          <div className="bg-gray-400/5 rounded-xl shadow-lg p-6 border border-gray-700">
+            <h1 className="text-3xl font-extrabold text-white text-center drop-shadow-lg">
+              {blog.title}
+              <p className="text-gray-500 text-sm mt-5">
+                Posted on {blog.timestamp || "Unknown Date"}
+              </p>
+              <div className="">
+                <img
+                  src="/web19.jpg"
+                  alt=""
+                  className="w-full rounded-md mt-2 lg:object-cover"
+                />
+                {/* Show video if blog.video exists */}
+                {blog.video && (
+                  <video
+                    src={blog.video}
+                    controls
+                    className="w-full rounded-md mt-4"
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                )}
+                </div>
+                </h1>
+                <BlogDisplay body={blog.body} />
+                </div>
+                <div className="flex flex-col-1 justify-center gap-4 items-center shadow-lg text-sm">
+                  <button
+                    onClick={handleLikeClick}
+                    className="border flex items-center text-gray-300 py-2 px-4 rounded-lg hover:text-blue-500 transition-all"
+                    aria-label="Like Button"
+                  >
+                    <Heart
+                      className={`h-4 w-4 mr-2 transition-transform ${
+                        liked ? "fill-red-500 scale-110" : "fill-none"
+                      }`}
+                    />
+                    {liked ? "" : ""} ({likes})
+                  </button>
 
-        {/* Like / Share / Comment Count Section */}
-        <div className="flex flex-col-1 justify-center gap-4 items-center shadow-lg text-sm">
-          <button
-            onClick={handleLikeClick}
-            className="border flex items-center text-gray-300 py-2 px-4 rounded-lg hover:text-blue-500 transition-all"
-            aria-label="Like Button"
-          >
-            <Heart
-          className={`h-4 w-4 mr-2 transition-transform ${
-            liked ? "fill-red-500 scale-110" : "fill-none"
-          }`}
-            />
-            {liked ? "" : ""} ({likes})
-          </button>
-
-                <div
-                className="border flex items-center gap-1 text-gray-400 font-semibold py-2 px-6 rounded-lg hover:bg-gray-800 transition"
-                title="Number of Comments"
-                >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 mr-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8h2a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2v-2m12-8V6a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2h2"
-                  />
-                </svg>
-                {
+                  <div
+                    className="border flex items-center gap-1 text-gray-400 font-semibold py-2 px-6 rounded-lg hover:bg-gray-800 transition"
+                    title="Number of Comments"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 mr-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8h2a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2v-2m12-8V6a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2h2"
+                      />
+                    </svg>
+                    {
                   // Count comments + all replies
                   comments.reduce(
                   (total, comment) => total + 1 + (comment.replies ? comment.replies.length : 0),

@@ -3,6 +3,7 @@
 import { Github, Instagram, Linkedin, LoaderCircle } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 const ProfileCard = () => {
   const scrollRef = useRef(null);
@@ -93,38 +94,73 @@ useEffect(() =>{
             <h4 className="cursor-pointer text-2xl border border-green-600 rounded-3xl bg-green-600 text-white lg:text-center font-semibold font-serif" 
             onClick={() => {
               const el = document.getElementById("contact-me");
-              if (el) el.scrollIntoView({behavior: "smooth"});
-            }}
-            >
-              Contact me ⬇
-            </h4>
-              <h1 className="text-green-600/ border-t border-x mt-2 lg:text-center font-bold font-mono space-y-5">Join My <a href="/community" className="text-green-600">Community</a></h1>
-            <div className="flex items-center justify-center gap-5 mt-1">
-            <h4 className="text-sm px-5 rounded-md bg-green-600 text-white animate-pulse">
-              <Link href="https://whatsapp.com/channel/0029Vb6BDcsJZg401UUoHA0T" 
-              target="_self"
-              className=" text-sm hover:text-orange-500 text-white ">
-                WhatsApp Channel
-              </Link>
-            </h4>
-                        <hr className=" border w-2/2"/>
-
-             <h4 className="text-sm text-gray-300 rounded-md bg-green-600 px-5 animate-pulse">
-              <a href="https://facebook.com/groups/195029009448884/" 
-              target="_self"
-              className="text-white hover:text-orange-500 ">
-                Facebook Group
-              </a>
-            </h4>
-            </div>
-            <h2 className="text-xl font-bold mt-2 text-gray-500">Full-Stack Developer <span className="text-green-600">|</span> Python Developer <span className="text-green-600">|</span> Data Scientist</h2>
-            <p className="text-gray-400 mt-3 leading-relaxed">
-              Passionate about crafting scalable and intuitive user experiences with modern web
-              technologies.
-            </p>
-          </div>
-        </div>
-
+               el.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    >
+                      Contact me ⬇
+                    </h4>
+                    <h1 className="text-green-600 border-t border-x mt-2 lg:text-center font-bold font-mono space-y-5">
+                      Join My <a href="/community" className="text-green-600 underline hover:text-cyan-400 transition">Community</a>
+                    </h1>
+                    {/* Framer Motion Animations */}
+                    <div className="flex items-center justify-center gap-5 mt-1"></div>
+                      <motion.h4
+                      className="text-sm px-5 rounded-md bg-green-600 text-white animate-pulse"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                      whileHover={{ scale: 1.08, backgroundColor: "#059669" }}
+                      >
+                      <Link href="https://whatsapp.com/channel/0029Vb6BDcsJZg401UUoHA0T"
+                        target="_self"
+                        className="text-sm hover:text-orange-500 text-white"
+                      >
+                        WhatsApp Channel
+                      </Link>
+                      </motion.h4>
+                      <hr className="border w-2/2" />
+                      <motion.h4
+                      className="text-sm text-gray-300 rounded-md bg-green-600 px-5 animate-pulse"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.4 }}
+                      whileHover={{ scale: 1.08, backgroundColor: "#059669" }}
+                      >
+                      <a href="https://facebook.com/groups/195029009448884/"
+                        target="_self"
+                        className="text-white hover:text-orange-500"
+                      >
+                        Facebook Group
+                      </a>
+                      </motion.h4>
+                    </div>
+                    <motion.h2
+                      className="text-xl font-bold mt-2 text-gray-500"
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.7, delay: 0.6 }}
+                    >
+                      Full-Stack Developer <span className="text-green-600">|</span> Python Developer <span className="text-green-600">|</span> Data Scientist
+                    </motion.h2>
+                    <motion.p
+                      className="text-gray-400 mt-3 leading-relaxed"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.7, delay: 0.8 }}
+                    >
+                      Passionate about crafting scalable and intuitive user experiences with modern web
+                      technologies.
+                    </motion.p>
+                    {/* New Feature: Quick Links */}
+                    <motion.div
+                      className="flex gap-4 mt-4 justify-center"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5, delay: 1 }}
+                    >
+                    
+                    </motion.div>
+                  </div>
         {/* Social Links */}
         <div className="flex space-x-8 justify-center lg:justify-start text-2xl">
           <a
@@ -216,103 +252,99 @@ useEffect(() =>{
       </section>
 
 
-      {/* Hobbies Section */}
-      <section className="px-8 py-10">
-        <h2 className="text-center text-3xl font-extrabold mb-6 tracking-widest">Hobbies</h2>
-        <div className="flex flex-wrap justify-center gap-5 max-w-3xl mx-auto ">
-          {["Coding", "Gaming", "Praying", "Traveling", "Reading"].map((hobby, index) => (
-            <span
-              key={index}
-              className="bg-gray-400/5 border-y border-y-green-600 text-white py-2 px-6 rounded-xl shadow-md hover:bg-gray-800 transition duration-300 select-none cursor-default font-medium"
-            >
-              {hobby}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      <hr className="border-green-600 mx-8 mt-12" />
-
-      {/* Gallery Section with sliding arrows */}
-      <section className="px-8 py-10 relative">
-        <h2 className="text-center text-3xl font-extrabold mb-8 tracking-widest">Gallery Me</h2>
-
-        {/* Left Arrow */}
-        <button
-          onClick={() => scroll("left")}
-          aria-label="Scroll Left"
-          className="absolute top-1/2 left-2 -translate-y-1/2 bg-green-600 bg-opacity-80 hover:bg-opacity-100 text-white rounded-full p-2 shadow-lg z-20 transition"
+  {/* Hobbies Section */}
+  <section className="px-8 py-10">
+    <h2 className="text-center text-3xl font-extrabold mb-6 tracking-widest">Hobbies</h2>
+    <div className="flex flex-wrap justify-center gap-5 max-w-3xl mx-auto ">
+      {["Coding", "Gaming", "Praying", "Traveling", "Reading"].map((hobby, index) => (
+        <span
+          key={index}
+          className="bg-gray-400/5 border-y border-y-green-600 text-white py-2 px-6 rounded-xl shadow-md hover:bg-gray-800 transition duration-300 select-none cursor-default font-medium"
         >
-          &#8592;
-        </button>
+          {hobby}
+        </span>
+      ))}
+    </div>
+  </section>
+  <hr className="border-green-600 mx-8 mt-12" />
+  {/* Gallery Section with sliding arrows */}
+  <section className="px-8 py-10 relative">
+    <h2 className="text-center text-3xl font-extrabold mb-8 tracking-widest">Gallery Me</h2>
 
-        {/* Right Arrow */}
-        <button
-          onClick={() => scroll("right")}
-          aria-label="Scroll Right"
-          className="absolute top-1/2 right-2 -translate-y-1/2 bg-green-600 bg-opacity-80 hover:bg-opacity-100 text-white rounded-full p-2 shadow-lg z-20 transition"
-        >
-          &#8594;
-        </button>
+    {/* Left Arrow */}
+    <button
+      onClick={() => scroll("left")}
+      aria-label="Scroll Left"
+      className="absolute top-1/2 left-2 -translate-y-1/2 bg-green-600 bg-opacity-80 hover:bg-opacity-100 text-white rounded-full p-2 shadow-lg z-20 transition"
+    >
+      &#8592;
+    </button>
 
-        <div
-          ref={scrollRef}
-          className="overflow-x-auto whitespace-nowrap snap-x snap-mandatory scrollbar-thin scrollbar-thumb-cyan-600 scrollbar-track-gray-800 scroll-smooth"
-        >
-          <div className="inline-flex gap-6 px-4">
-            {images.map((image, index) => (
-              <div
-                key={index}
-                className=" border-green-600 border-2 overflow-hidden rounded-lg shadow-lg snap-start w-64 h-48 flex-shrink-0 transform transition-transform hover:scale-105 cursor-pointer"
-              >
-                <img
-                  src={`/${image}`}
-                  alt={`Gallery Image ${index + 1}`}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            ))}
+    {/* Right Arrow */}
+    <button
+      onClick={() => scroll("right")}
+      aria-label="Scroll Right"
+      className="absolute top-1/2 right-2 -translate-y-1/2 bg-green-600 bg-opacity-80 hover:bg-opacity-100 text-white rounded-full p-2 shadow-lg z-20 transition"
+    >
+      &#8594;
+    </button>
+
+    <div
+      ref={scrollRef}
+      className="overflow-x-auto whitespace-nowrap snap-x snap-mandatory scrollbar-thin scrollbar-thumb-cyan-600 scrollbar-track-gray-800 scroll-smooth"
+    >
+      <div className="inline-flex gap-6 px-4">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className=" border-green-600 border-2 overflow-hidden rounded-lg shadow-lg snap-start w-64 h-48 flex-shrink-0 transform transition-transform hover:scale-105 cursor-pointer"
+          >
+            <img
+              src={`/${image}`}
+              alt={`Gallery Image ${index + 1}`}
+              className="w-full h-full object-cover"
+              loading="lazy" />
           </div>
-        </div>
-      </section>
-
-      <hr className="border-green-600 mx-8 mt-12" />
-
-      {/* Contact Section */}
-      <section className="px-8 py-5 mb-12 text-center max-w-3xl mx-auto">
-        <div id="contact-me"></div>
-        <h2 className="text-3xl font-extrabold mb-6 tracking-widest">Contact Me</h2>
-        <p className="text-gray-400 mb-8 text-lg leading-relaxed">
-          Interested in collaborating or hiring me? Feel free to reach out!
-        </p>
-        <div className="flex justify-center gap-5">
-          <a
-            href="mailto:browncemmanuel@gmail.com"
-            className="bg-gray-00/50 border-x border-x-green-600 text-white py-5 rounded-lg shadow-lg hover:bg-cyan-800 transition duration-300"
-          >
-            Email Me ✉️
-          </a>
-          <a
-            href="https://docs.google.com/document/d/1qOyfN6tep1N_eR8wgfoKTPxCeH7FP3e7J-VKJjwbeAI/edit?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-5 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
-          >
-            Resume ☑️
-          </a>
-          <a
-            href="https://wa.me/qr/RX4M5D4PGB7CO1"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-5 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
-          >
-            Private Chat ☑️
-          </a>
-        </div>
-      </section>
-    </main>
-           )}
-           </>
+        ))}
+      </div>
+    </div>
+  </section>
+  <hr className="border-green-600 mx-8 mt-12" />
+  {/* Contact Section */}
+  <section className="px-8 py-5 mb-12 text-center max-w-3xl mx-auto">
+    <div id="contact-me"></div>
+    <h2 className="text-3xl font-extrabold mb-6 tracking-widest">Contact Me</h2>
+    <p className="text-gray-400 mb-8 text-lg leading-relaxed">
+      Interested in collaborating or hiring me? Feel free to reach out!
+    </p>
+    <div className="flex justify-center gap-5">
+      <a
+        href="mailto:browncemmanuel@gmail.com"
+        className="bg-gray-00/50 border-x border-x-green-600 text-white py-5 rounded-lg shadow-lg hover:bg-cyan-800 transition duration-300"
+      >
+        Email Me ✉️
+      </a>
+      <a
+        href="https://docs.google.com/document/d/1qOyfN6tep1N_eR8wgfoKTPxCeH7FP3e7J-VKJjwbeAI/edit?usp=sharing"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-5 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
+      >
+        Resume ☑️
+      </a>
+      <a
+        href="https://wa.me/qr/RX4M5D4PGB7CO1"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-5 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
+      >
+        Private Chat ☑️
+      </a>
+    </div>
+  </section>
+  </main>
   )}
+  </>
+  );
+}
 export default ProfileCard;

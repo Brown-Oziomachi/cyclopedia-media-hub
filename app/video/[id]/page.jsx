@@ -142,7 +142,14 @@ const VideoPage = () => {
         </div>
       )}
 
-      <div className="w-full aspect-video rounded-xl overflow-hidden shadow-lg border border-green-600 mb-8">
+      <a
+        href={decodedUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block w-full aspect-video rounded-xl overflow-hidden shadow-lg border border-green-600 mb-8"
+        title="Open original video in new tab"
+        style={{ textDecoration: "none" }}
+      >
         {isDirectVideo ? (
           <video controls className="w-full h-full bg-black">
             <source src={videoURL} />
@@ -153,53 +160,55 @@ const VideoPage = () => {
             src={videoURL}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            className="w-full h-full"
+            className="w-full h-full pointer-events-none"
             title={decodedTitle}
             frameBorder="0"
           ></iframe>
         )}
-      </div>
+      </a>
 
       <h1 className="text-2xl font-bold mb-4 text-white">{decodedTitle}</h1>
       <p className="mt-4 space-y-20 rounded-lg text-gray-400 leading-relaxed tracking-widest">{decodedDesc}</p>
 
       {/* Mailchimp subscription form */}
-      <form
-        action="https://app.us13.list-manage.com/subscribe/post?u=43a30bccc98acfbb16a52d1eb&amp;id=4f4f321a7e&amp;f_id=00bb5fe1f0"
-        method="post"
-        id="mc-embedded-subscribe-form"
-        name="mc-embedded-subscribe-form"
-        className="validate"
-        target="_blank"
-      >
-        <input
-          type="email"
-          name="EMAIL"
-          placeholder="Your email"
-          required
-          className="flex-grow px-4 py-3 rounded-md bg-gray-900 border border-gray-700 placeholder-gray-500 text-white focus:outline-none focus:ring-2 focus:ring-white transition"
-          aria-label="Email address"
-        />
-        <button
-  type="button"
-  onClick={handleSubscribeClick}
-  className="flex items-center gap-2 px-8 py-3 rounded-md bg-black text-white font-semibold hover:bg-white hover:text-black border-2 border-white transition focus:outline-none focus:ring-2 focus:ring-white cursor-pointer"
-  aria-label="Subscribe for updates"
+<form
+  action="https://app.us13.list-manage.com/subscribe/post?u=43a30bccc98acfbb16a52d1eb&amp;id=4f4f321a7e&amp;f_id=00bb5fe1f0"
+  method="post"
+  id="mc-embedded-subscribe-form"
+  name="mc-embedded-subscribe-form"
+  className="validate flex gap-2 mt-8"
+  target="_blank"
+  onSubmit={(e) => {
+    e.preventDefault();
+    // handleSubscribeClick();
+  }}
 >
-  Subscribe for Updates
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-    strokeWidth={2}
+  <input
+    type="email"
+    name="EMAIL"
+    placeholder="Your email"
+    required
+    className="flex-grow px-4 py-3 rounded-md bg-gray-900 border border-gray-700 placeholder-gray-500 text-white focus:outline-none focus:ring-2 focus:ring-white transition"
+    aria-label="Email address"
+  />
+  <button
+    type="submit"
+    className="flex items-center gap-2 px-8 py-3 rounded-md bg-black text-white font-semibold hover:bg-white hover:text-black border-2 border-white transition focus:outline-none focus:ring-2 focus:ring-white cursor-pointer"
+    aria-label="Subscribe for updates"
   >
-    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-  </svg>
-</button>
-
-      </form>
+    Subscribe for Updates
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-5 w-5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+  </button>
+</form>
     </main>
   );
 };
