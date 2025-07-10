@@ -22,7 +22,7 @@ async function ProfilePage() {
           <h1
             className="font-bold font-serif cursor-pointer text-green-600 text-center"
             onClick={() => {
-              const el = document.getElementById("Share-mind");
+              const el = document.getElementById("Shared-mind");
               if (el) el.scrollIntoView({ behavior: "smooth" });
             }}
           >
@@ -102,7 +102,7 @@ async function ProfilePage() {
         {/* User Blogs Section */}
 
         <div className=" mt-10">
-        <div id="Share-mind"></div>
+        <div id="Shared-mind"></div>
           <h1 className="font-bold font-serif">Have something to Share?</h1>
           <h2 className="font-mono"><span className="text-green-600">{session?.user?.name}</span> We value your thoughts and ideas! feel free to share your opinions,
             Suggestions, or topics you'd love to see on our blog.
@@ -127,9 +127,10 @@ async function ProfilePage() {
             View All Posts →
           </Link>
         </div>
+
         <div className=" text-right mt-2">
           <Link
-            href="/blog"
+            href="/gallery"
             className="text-green-600 hover:text-white underline"
           >
             Visit The Gallery →

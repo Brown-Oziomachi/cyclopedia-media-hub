@@ -332,8 +332,10 @@ const BlogPage = () => {
             </header>
 
             {/* Toggle */}
-            <div className="flex gap-4 mb-5 justify-center">
-              {["blog", "video", "reel"].map((type) => (
+            <div className="flex gap-4 mb-5 justify-center items-center">
+              <a href="/gallery" className="bg-white text-black px-6 py-3 rounded-xl font-semibold transition">Gallery</a>
+              {["blog", "video",].map((type) => (
+
                 <button
                   key={type}
                   className={`px-6 py-3 rounded-xl font-semibold transition ${
@@ -411,10 +413,10 @@ const BlogPage = () => {
                       basePosts = blogPosts.filter((post) => !post.isVideo);
                     } else if (showContentType === "video") {
                       basePosts = blogPosts.filter(
-                        (post) => post.isVideo && !post.isReel
+                        (post) => post.isVideo && !post.isVideo
                       );
                     } else if (showContentType === "/video") {
-                      basePosts = blogPosts.filter((post) => post.isReel);
+                      basePosts = blogPosts.filter((post) => post.isVideo);
                     }
                     setFilteredPosts(basePosts);
                   }}
