@@ -7,6 +7,7 @@ import { db1 } from "@/lib/firebaseConfig";
 import { useRouter } from "next/navigation";
 import { serverTimestamp } from "firebase/firestore";
 import { LoaderCircle } from "lucide-react";
+import Popup from "@/components/Popup";
 
 const formatTimestamp = (timestamp) => {
   if (!timestamp) return "Unknown Date";
@@ -529,6 +530,7 @@ const BlogPage = () => {
               Click here to chat
             </a>
           </div>
+          <Popup />
         </main>
       )}
     </>

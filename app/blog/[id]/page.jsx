@@ -23,6 +23,7 @@ import Ads from "@/components/community";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation"; // for redirect
+import Popup from "@/components/Popup";
 
 
 const BlogDetails = ({ params }) => {
@@ -543,7 +544,8 @@ const BlogDetails = ({ params }) => {
          >
            Click here to chat
          </a>
-       </div>
+          </div>
+          <Popup />
         </div>
       )}
     </motion.div>
