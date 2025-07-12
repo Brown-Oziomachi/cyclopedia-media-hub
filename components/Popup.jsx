@@ -56,7 +56,7 @@ const Popup = () => {
                   Wiz Blog.
                 </h2>
                 <img
-                  src="web19.jpg"
+                  src="/web19.jpg"
                   alt="wiz blog image"
                   className="h-40 w-40 mx-auto"
                 />
