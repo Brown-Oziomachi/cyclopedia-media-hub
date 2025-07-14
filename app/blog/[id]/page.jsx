@@ -357,149 +357,150 @@ const BlogDetails = ({ params }) => {
       </div>
       {/* Comment Section */}
       <motion.div
-  initial={{ opacity: 0, y: 30 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  transition={{ duration: 0.6, delay: 0.3 }}
-  className="bg-gray-400/5 shadow-xl rounded-2xl p-2 border border-gray-700 space-y-8"
->
-  <h2 className="text-3xl font-extrabold text-white tracking-wide">
-    Join <span className="text-green-600">the</span> Conversation
-  </h2>
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="bg-gray-400/5 shadow-xl rounded-2xl p-2 border border-gray-700 space-y-8"
+      >
+        <h2 className="text-3xl font-extrabold text-white tracking-wide">
+          Join <span className="text-green-600">the</span> Conversation
+        </h2>
 
-  {/* New Comment Input */}
-  <div className="lg:flex items-center space-x-5 grid space-y-4 lg:space-y-0">
-    <img
-      src={session ? session?.user?.image : "/logo.jpg"}
-      alt="Avatar"
-      className="w-12 h-12 rounded-full shadow-md"
-    />
+        {/* New Comment Input */}
+        <div className="lg:flex items-center space-x-5 grid space-y-4 lg:space-y-0 overflow-auto md:overflow-scroll">
+          <img
+            src={session ? session?.user?.image : "/logo.jpg"}
+            alt="Avatar"
+            className="w-12 h-12 rounded-full shadow-md"
+          />
 
-    <input
-      type="text"
-      placeholder={
-        session ? "What's on your mind?" : "Please sign in to comment"
-      }
-      disabled={!session}
-      className="flex-grow p-5 rounded-lg bg-gray-400/5 text-white border border-green-600 focus:outline-none focus:ring-2 focus:ring-green-600 transition disabled:opacity-50"
-      value={newComment}
-      onChange={(e) => setNewComment(e.target.value)}
-    />
-<a href="/auth/signin" className="text-green-600" disable={session}>Signin here</a>
-    <button
-      onClick={() => {
-        if (!session) {
-          router.push("/auth/signin");
-        } else {
-          handleCommentSubmit();
-        }
-      }}
-      className="lg:px-5 lg:py-2 px-3 py-2 max-md:w-1/2 bg-gradient-to-r from-green-600 to-green-400 text-black font-semibold rounded-lg shadow-md hover:from-green-600 hover:to-yellow-500 transition"
-      title={session ? "You can now post" : "Please sign in to post"}
-    >
-      Post
-    </button>
-  </div>
-</motion.div>      
+          <input
+            type="text"
+            placeholder={
+              session ? "What's on your mind?" : "Please sign in to comment"
+            }
+            disabled={!session}
+            className="flex-grow p-5 rounded-lg bg-gray-400/5 text-white border border-green-600 focus:outline-none focus:ring-2 focus:ring-green-600 transition disabled:opacity-50"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+          />
+          <a href="/auth/signin" className="text-green-600" disable={session}>
+            Signin here
+          </a>
+          <button
+            onClick={() => {
+              if (!session) {
+                router.push("/auth/signin");
+              } else {
+                handleCommentSubmit();
+              }
+            }}
+            className="lg:px-5 lg:py-2 px-3 py-2 max-md:w-1/2 bg-gradient-to-r from-green-600 to-green-400 text-black font-semibold rounded-lg shadow-md hover:from-green-600 hover:to-yellow-500 transition"
+            title={session ? "You can now post" : "Please sign in to post"}
+          >
+            Post
+          </button>
+        </div>
+      </motion.div>
 
-        {/* List of Comments */}
-        <ul className=" space-y-6 max-h-[6500px]  -pr-3">
-          {comments.length > 0 ? (
-            comments
-              .sort((a, b) => b.timestamp?.seconds - a.timestamp?.seconds)
-              .map((comment) => (
-                <li
-                  key={comment.id}
-                  className="bg-gray-400/5 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition"
-                >
-                  <div className=" items-center space-x-4">
-                    <img
-                      src={comment.userImage || "/default-avatar.png"}
-                      scr={comment.profile || "/unknown person"}
-                      alt="Wiz"
-                      className="w-10 h-10 rounded-full mt-0 shadow-sm -ml-5"
-                    />
-                    <div className=" bg-gray-700/10 rounded-lg  ml-5 ">
-                      <Link href={"/users/${post.profile}"}>
-                        <p className="text-white font-semibold ml-5">
-                          {comment.userName} {comment.profile}
+      {/* List of Comments */}
+      <ul className=" space-y-6 max-h-[500px] overflow-y-auto  pr-3 scrollbar-thin scrolbar-thumb-green-600 scrollbar-track-gray-800">
+        {comments.length > 0 ? (
+          comments
+            .sort((a, b) => b.timestamp?.seconds - a.timestamp?.seconds)
+            .map((comment) => (
+              <li
+                key={comment.id}
+                className="bg-gray-400/5 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition"
+              >
+                <div className=" items-center space-x-4">
+                  <img
+                    src={comment.userImage || "/default-avatar.png"}
+                    scr={comment.profile || "/unknown person"}
+                    alt="Wiz"
+                    className="w-10 h-10 rounded-full mt-0 shadow-sm -ml-5"
+                  />
+                  <div className=" bg-gray-700/10 rounded-lg  ml-5 ">
+                    <Link href={"/users/${post.profile}"}>
+                      <p className="text-white font-semibold ml-5">
+                        {comment.userName} {comment.profile}
+                      </p>
+                      {comment.timestamp && (
+                        <p className="text-sm text-gray-400 ml-5">
+                          {/* {new Date(comment.timestamp.seconds * 1000).toLocaleString()} */}
                         </p>
-                        {comment.timestamp && (
-                          <p className="text-sm text-gray-400 ml-5">
-                            {/* {new Date(comment.timestamp.seconds * 1000).toLocaleString()} */}
-                          </p>
-                        )}
-                      </Link>
-                      <p className="text-gray-300 mb-3 ml-5">{comment.text}</p>
-                    </div>
+                      )}
+                    </Link>
+                    <p className="text-gray-300 mb-3 ml-5">{comment.text}</p>
                   </div>
+                </div>
 
-                  <button
-                    className="text-green-600 font-semibold hover:underline"
-                    onClick={() => setReplyingTo(comment.id)}
-                  >
-                    Reply
-                  </button>
+                <button
+                  className="text-green-600 font-semibold hover:underline"
+                  onClick={() => setReplyingTo(comment.id)}
+                >
+                  Reply
+                </button>
 
-                  {replyingTo === comment.id && (
-                    <div className="mt-4 space-y-3">
-                      <input
-                        type="text"
-                        placeholder="Write a reply..."
-                        className="w-full p-3 bg-gray-400/5 rounded-lg border border-green-600 text-white focus:outline-none focus:ring-2 focus:ring-green-600 transition"
-                        value={replyText}
-                        onChange={(e) => setReplyText(e.target.value)}
-                      />
-                      <button
-                        className="px-5 py-2 bg-green-600 text-black font-semibold rounded-lg shadow-md hover:bg-orange-500 transition"
-                        onClick={
-                          session
-                            ? handleReplySubmit(
-                                comment.id,
-                                replyText,
-                                setReplyText,
-                                setReplyingTo,
-                                setComments,
-                                db3
-                              )
-                            : "/auth/signin"
-                        }
+                {replyingTo === comment.id && (
+                  <div className="mt-4 space-y-3">
+                    <input
+                      type="text"
+                      placeholder="Write a reply..."
+                      className="w-full p-3 bg-gray-400/5 rounded-lg border border-green-600 text-white focus:outline-none focus:ring-2 focus:ring-green-600 transition"
+                      value={replyText}
+                      onChange={(e) => setReplyText(e.target.value)}
+                    />
+                    <button
+                      className="px-5 py-2 bg-green-600 text-black font-semibold rounded-lg shadow-md hover:bg-orange-500 transition"
+                      onClick={
+                        session
+                          ? handleReplySubmit(
+                              comment.id,
+                              replyText,
+                              setReplyText,
+                              setReplyingTo,
+                              setComments,
+                              db3
+                            )
+                          : "/auth/signin"
+                      }
+                    >
+                      Submit
+                    </button>
+                  </div>
+                )}
+
+                {comment.replies?.length > 0 && (
+                  <ul className="ml-4 mt-6 space-y-4 border-l border-green-600 border-b-green-600 pl-4">
+                    {comment.replies.map((reply) => (
+                      <li
+                        key={reply.id}
+                        className="flex space-x-2 bg-gray-400/5 border-b border-r p-3 border-r-green-600 border-b-green-600 rounded-lg"
                       >
-                        Submit
-                      </button>
-                    </div>
-                  )}
+                        <img
+                          src={reply.userImage || "/default-avatar.png"}
+                          alt="Reply User"
+                          className="w-8 h-8 rounded-full  shadow"
+                        />
+                        <div>
+                          <p className="text-white font-semibold">
+                            {reply.userName}
+                          </p>
+                          <p className="text-gray-400">{reply.text}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))
+        ) : (
+          <p className="text-gray-400">Be the first to comment!</p>
+        )}
+      </ul>
 
-                  {comment.replies?.length > 0 && (
-                    <ul className="ml-4 mt-6 space-y-4 border-l border-green-600 border-b-green-600 pl-4">
-                      {comment.replies.map((reply) => (
-                        <li
-                          key={reply.id}
-                          className="flex space-x-2 bg-gray-400/5 border-b border-r p-3 border-r-green-600 border-b-green-600 rounded-lg"
-                        >
-                          <img
-                            src={reply.userImage || "/default-avatar.png"}
-                            alt="Reply User"
-                            className="w-8 h-8 rounded-full  shadow"
-                          />
-                          <div>
-                            <p className="text-white font-semibold">
-                              {reply.userName}
-                            </p>
-                            <p className="text-gray-400">{reply.text}</p>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))
-          ) : (
-            <p className="text-gray-400">Be the first to comment!</p>
-          )}
-        </ul>
-    
-      
       {/* Other Blog Suggestions */}
       {otherBlogs.length > 0 && (
         <div className="space-y-6">
@@ -529,21 +530,21 @@ const BlogDetails = ({ params }) => {
               </Link>
             ))}
           </div>
-         <div className="mt-10">
-         <h1 className="font-bold font-serif">Have something to Share?</h1>
-         <h2 className="font-mono">
-           We value your thoughts and ideas! feel free to share your
-           opinions, Suggestions, or topics you'd love to see on our blog.
-           <h3>📩Reach out to us directly on WhatsApp:</h3>
-         </h2>
-         <a
-           href="https://wa.me/message/R4UKUMFIH22RJ1"
-           target="_blank"
-           rel="noopener noreferrer"
-           className="font-bold text-green-600 cursor-pointer hover:underline"
-         >
-           Click here to chat
-         </a>
+          <div className="mt-10">
+            <h1 className="font-bold font-serif">Have something to Share?</h1>
+            <h2 className="font-mono">
+              We value your thoughts and ideas! feel free to share your
+              opinions, Suggestions, or topics you'd love to see on our blog.
+              <h3>📩Reach out to us directly on WhatsApp:</h3>
+            </h2>
+            <a
+              href="https://wa.me/message/R4UKUMFIH22RJ1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-green-600 cursor-pointer hover:underline"
+            >
+              Click here to chat
+            </a>
           </div>
           <Popup />
         </div>
