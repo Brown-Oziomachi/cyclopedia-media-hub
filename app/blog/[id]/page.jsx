@@ -16,7 +16,7 @@ import {
   getDoc,
   where,
 } from "firebase/firestore";
-import { LoaderCircle, Heart, Share, LinkIcon, Facebook, Instagram, Linkedin, MessageCircle } from "lucide-react";
+import { LoaderCircle, Heart, Share, LinkIcon, Facebook, Instagram, Linkedin,  Youtube, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import BlogDisplay from "@/components/BlogDisplay";
 import Ads from "@/components/community";
@@ -270,7 +270,16 @@ const BlogDetails = ({ params }) => {
               rel="noopener noreferrer"
               className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-lg hover:bg-blue-800 transition duration-300"
             >
-              <Linkedin  className="text-blue-800 size-4 mx-auto"/>
+              <Linkedin  className="text-blue-400 size-4 mx-auto"/>
+
+            </a>
+            <a
+              href="https://youtube.com/@webwizcreation?si=LpNgM7MwIkgYJg5X"
+              target="_self"
+              rel="noopener noreferrer"
+              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-lg hover:bg-blue-800 transition duration-300"
+            >
+              <Youtube className="text-red-600 size-4 mx-auto"/>
 
             </a>
           </div>
