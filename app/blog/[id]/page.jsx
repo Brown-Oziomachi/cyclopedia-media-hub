@@ -16,7 +16,7 @@ import {
   getDoc,
   where,
 } from "firebase/firestore";
-import { LoaderCircle, Heart, Share, LinkIcon } from "lucide-react";
+import { LoaderCircle, Heart, Share, LinkIcon, Facebook, Instagram, Linkedin, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import BlogDisplay from "@/components/BlogDisplay";
 import Ads from "@/components/community";
@@ -224,42 +224,70 @@ const BlogDetails = ({ params }) => {
               title="View Profile"
               src="/web19.jpg"
               alt="User"
-              className="w-24 h-24 rounded-full  shadow-lg cursor-pointer hover:scale-105 transition-transform border border-s-green-600 border-r-green-600"
+              className="relative w-24 h-24 rounded-full  shadow-lg cursor-pointer hover:scale-105 transition-transform border border-s-green-600 border-r-green-600"
             />
           </Link>
           <Link href="/myprofile">
-            <h3 className="mt-2  font-semibold text-green-600 text-2xl ">
-              Brown Code
+            <h3 className="mt-2  font-semibold text-white text-2xl ">
+             <span className="text-green-600">B</span>row<span className="text-green-600">n</span> <span className="text-green-600">C</span>od<span className="text-green-600">e</span>
             </h3>
-            <h4 className="underline text-xs text-green-600 text-center font-serif">
-              VIEW PROFILE
+            <h4 className="absolute inset-0 -top-30 items-center justify-center flex  underline text-xs text-green-600 text-center font-serif">
+              VIEW <br /> PROFILE
             </h4>
           </Link>
-          {/* <h5>Follow me on</h5>
-            <div className=" flex gap-5 ">
-              <a href="/">facebook</a>
-              <a href="/">Instagram</a>
-              <a href="/">TikTok</a>
-              <a href="/">LinkIn</a>
-            </div> */}
+          <h5 className="mt-2 mb-2 bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-md hover:shadow-lg transition duration-300 shadow-black ">Follow me on</h5>
+          <div className=" flex gap-5 shadow-black">
+            <a
+              href="https://whatsapp.com/channel/0029Vb6BDcsJZg401UUoHA0T"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-1 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
+            >
+              <MessageCircle className="text-green-600 shadow-black size-5"/>
+            </a>
+            <a
+              href="https://www.facebook.com/mazi.brown.oziomachi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-1 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
+            >
+              <Facebook className="text-blue-600 size-5"/>
+            </a>
+            <a
+              href="https://www.instagram.com/webwiz_creation_webdevelopers?igsh=MThvdDEwa3c3aGpsMQ=="
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-1 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
+            >
+              <Instagram  className="text-pink-600 size-5"/>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/brownoziomachi72a5a3229?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-1 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
+            >
+              <Linkedin  className="text-blue-800 size-5"/>
+            </a>
+          </div>
         </div>
       </div>
       <p className="-mt-15 text-center text-xs text-shadow-2xs border-b border-x border-x-green-600 px-0 border-gray-400/20 rounded-md">
-        Learn, unlearn and relearn.
+        Learn, unlearn <span className="text-green-600">and</span> relearn.
       </p>
 
       <div className="bg-gray-400/5 rounded-xl shadow-lg p-6 border border-gray-700">
         <h1 className="text-3xl font-extrabold text-white text-center drop-shadow-lg">
           {blog.title}
-          <p className="text-gray-500 text-sm mt-5">
-            Posted on {blog.timestamp || "Unknown Date"}
-          </p>
           <div className="">
             <img
               src="/web19.jpg"
               alt=""
               className="w-full rounded-md mt-2 lg:object-cover"
             />
+            <p className="text-gray-500 text-sm mt-5">
+              Posted on {blog.timestamp || "Unknown Date"}
+            </p>
             {/* Show video if blog.video exists */}
             {blog.video && (
               <video
@@ -396,7 +424,7 @@ const BlogDetails = ({ params }) => {
                 handleCommentSubmit();
               }
             }}
-            className="lg:px-5 lg:py-2 px-3 py-2 max-md:w-1/2 bg-gradient-to-r from-green-600 to-green-400 text-black font-semibold rounded-lg shadow-md hover:from-green-600 hover:to-yellow-500 transition"
+            className="shadow-black lg:px-5 lg:py-2 px-3 py-2 max-md:w-1/2 bg-gradient-to-r from-green-600 to-green-400 text-black font-semibold rounded-lg shadow-md hover:from-green-600 hover:to-yellow-500 transition"
             title={session ? "You can now post" : "Please sign in to post"}
           >
             Post
