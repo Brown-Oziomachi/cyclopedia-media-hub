@@ -204,7 +204,7 @@ const BlogDetails = ({ params }) => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="min-h-screen px-2 py-16 max-w-5xl mx-auto bg-gray-400/5 text-gray-300 font-sans leading-relaxed space-y-14"
+      className="min-h-screen px-2 py-19 max-w-5xl mx-auto bg-gray-400/5 text-gray-300 font-sans leading-relaxed space-y-14"
     >
       {/* Blog Header Section */}
       <div className="bg-gray-400/5 shadow-xl rounded-2xl p-10 relative border border-gray-700 space-y-6">
@@ -223,8 +223,8 @@ const BlogDetails = ({ params }) => {
               alt="User"
               className="relative w-24 h-24 rounded-full  shadow-lg cursor-pointer hover:scale-105 transition-transform border border-s-green-600 border-r-green-600"
             />
-            <div>
-<h4 className="absolute inset-0 -top-25 items-center justify-center flex  underline text-xs text-green-600 text-center font-serif">
+            <div> 
+            <h4 className="absolute inset-0 -top-20 items-center justify-center flex  underline text-xs text-green-600 text-center font-serif">
           <Link href="/myprofile">
               VIEW <br /> PROFILE
           </Link>
@@ -236,39 +236,42 @@ const BlogDetails = ({ params }) => {
           </div>
 
           <h5 className="lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-md hover:shadow-lg transition duration-300 shadow-black ">Follow me on</h5>
-          <div className=" flex gap-5 shadow-black items-center justify-center z-50">
+          <div className=" flex gap-4 shadow-black items-center justify-center ">
           <h5 className="max-lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-md hover:shadow-lg transition duration-300 shadow-black ">Follow me on</h5>
             <a
               href="https://whatsapp.com/channel/0029Vb6BDcsJZg401UUoHA0T"
-              target="_blank"
+              target="_self"
               rel="noopener noreferrer"
-              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-1 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
+              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-lg hover:bg-blue-800 transition duration-300"
             >
-              <MessageCircle className="text-green-600 shadow-black size-5"/>
+              <MessageCircle className="text-green-600 shadow-black size-4 mx-auto"/>
             </a>
             <a
               href="https://www.facebook.com/mazi.brown.oziomachi"
-              target="_blank"
+              target="_self"
               rel="noopener noreferrer"
-              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-1 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
+              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-lg hover:bg-blue-800 transition duration-300"
             >
-              <Facebook className="text-blue-600 size-5"/>
+              <Facebook className="text-blue-600 size-4 mx-auto"/>
+
             </a>
             <a
               href="https://www.instagram.com/webwiz_creation_webdevelopers?igsh=MThvdDEwa3c3aGpsMQ=="
-              target="_blank"
+              target="_self"
               rel="noopener noreferrer"
-              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-1 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
+              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-lg hover:bg-blue-800 transition duration-300"
             >
-              <Instagram  className="text-pink-600 size-5"/>
+              <Instagram  className="text-pink-600 size-4 mx-auto"/>
+
             </a>
             <a
               href="https://www.linkedin.com/in/brownoziomachi72a5a3229?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-              target="_blank"
+              target="_self"
               rel="noopener noreferrer"
-              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-1 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
+              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-lg hover:bg-blue-800 transition duration-300"
             >
-              <Linkedin  className="text-blue-800 size-5"/>
+              <Linkedin  className="text-blue-800 size-4 mx-auto"/>
+
             </a>
           </div>
       </div>
@@ -277,7 +280,7 @@ const BlogDetails = ({ params }) => {
         Learn, unlearn <span className="text-green-600">and</span> relearn.
       </p>
 
-      <div className="bg-gray-400/5 rounded-xl shadow-lg p-6 border border-gray-700">
+      <div className="bg-gray-400/5 rounded-xl shadow-lg p-2 border border-gray-700">
         <h1 className="text-3xl font-extrabold text-white text-center drop-shadow-lg">
           {blog.title}
           <div className="">

@@ -41,18 +41,18 @@ const Popup = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center"
+          className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50"
         >
           <motion.div
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.5, opacity: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-white p-4 rounded-lg shadow-lg max-w-md relative"
+            className="bg-white p-4 rounded-lg shadow-lg max-w-md relative z-50"
           >
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
               <div className="bg-green-200/15 border-2 border-green-600 text-gray-900 p-6 rounded-lg shadow-lg w-11/12 sm:w-1/3 z-50">
-                <h2 className="text-xl font-serif font-bold mb-4 text-center text-green-600">
+                <h2 className="text-xl font-serif font-bold mb-4 text-center text-green-600 ">
                   Wiz Blog.
                 </h2>
                 <img
