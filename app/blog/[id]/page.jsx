@@ -208,40 +208,41 @@ const BlogDetails = ({ params }) => {
     >
       {/* Blog Header Section */}
       <div className="bg-gray-400/5 shadow-xl rounded-2xl p-10 relative border border-gray-700 space-y-6">
-        <Link href={`/blog/${blog.id}`}>
           <span className="inline-block px-5 py-2 bg-gradient-to-r from-green-600 text-black font-semibold text-sm rounded-full shadow-md transition-transform hover:scale-105">
             {blog.genre}
           </span>
-        </Link>
 
         <h1 className="text-xs text-gray-400 text-center absolute top-10 right-6 font-mono tracking-widest">
           THE <span className="text-green-600">SUN</span> WEB
         </h1>
 
         <div className="flex flex-col items-center mb-6">
-          <Link href={"/myprofile"}>
             <img
               title="View Profile"
               src="/web19.jpg"
               alt="User"
               className="relative w-24 h-24 rounded-full  shadow-lg cursor-pointer hover:scale-105 transition-transform border border-s-green-600 border-r-green-600"
             />
-          </Link>
+            <div>
+<h4 className="absolute inset-0 -top-25 items-center justify-center flex  underline text-xs text-green-600 text-center font-serif">
           <Link href="/myprofile">
-            <h3 className="mt-2  font-semibold text-white text-2xl ">
-             <span className="text-green-600">B</span>row<span className="text-green-600">n</span> <span className="text-green-600">C</span>od<span className="text-green-600">e</span>
-            </h3>
-            <h4 className="absolute inset-0 -top-30 items-center justify-center flex  underline text-xs text-green-600 text-center font-serif">
               VIEW <br /> PROFILE
-            </h4>
           </Link>
-          <h5 className="mt-2 mb-2 bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-md hover:shadow-lg transition duration-300 shadow-black ">Follow me on</h5>
-          <div className=" flex gap-5 shadow-black">
+            </h4>
+            <h5 className="mt-2  font-semibold text-white text-2xl ">
+             <span className="text-green-600">B</span>row<span className="text-green-600">n</span> <span className="text-green-600">C</span>od<span className="text-green-600">e</span>
+            </h5>
+          </div>
+          </div>
+
+          <h5 className="lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-md hover:shadow-lg transition duration-300 shadow-black ">Follow me on</h5>
+          <div className=" flex gap-5 shadow-black items-center justify-center z-50">
+          <h5 className="max-lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-md hover:shadow-lg transition duration-300 shadow-black ">Follow me on</h5>
             <a
               href="https://whatsapp.com/channel/0029Vb6BDcsJZg401UUoHA0T"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-1 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
+              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-1 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
             >
               <MessageCircle className="text-green-600 shadow-black size-5"/>
             </a>
@@ -249,7 +250,7 @@ const BlogDetails = ({ params }) => {
               href="https://www.facebook.com/mazi.brown.oziomachi"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-1 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
+              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-1 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
             >
               <Facebook className="text-blue-600 size-5"/>
             </a>
@@ -257,7 +258,7 @@ const BlogDetails = ({ params }) => {
               href="https://www.instagram.com/webwiz_creation_webdevelopers?igsh=MThvdDEwa3c3aGpsMQ=="
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-1 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
+              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-1 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
             >
               <Instagram  className="text-pink-600 size-5"/>
             </a>
@@ -265,13 +266,13 @@ const BlogDetails = ({ params }) => {
               href="https://www.linkedin.com/in/brownoziomachi72a5a3229?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-1 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
+              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-1 px-2 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
             >
               <Linkedin  className="text-blue-800 size-5"/>
             </a>
           </div>
-        </div>
       </div>
+
       <p className="-mt-15 text-center text-xs text-shadow-2xs border-b border-x border-x-green-600 px-0 border-gray-400/20 rounded-md">
         Learn, unlearn <span className="text-green-600">and</span> relearn.
       </p>
