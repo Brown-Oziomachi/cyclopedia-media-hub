@@ -279,14 +279,14 @@ const BlogPage = () => {
                     <img
                       src="/blog.jpg"
                       alt=""
-                      className="w-fit border-x-green-600 border border-green-600 rounded-md b border-r-white"
+                      className="w-fit border-x-green-600 border border-green-600 rounded-md b border-r-white shadow-black shadow-2xl"
                     />
                     {showContentType === "blog" ? " " : "Videos"}
                   </h1>
                   <img
                     src="/web19.jpg"
                     alt="Blog image"
-                    className="rounded-md w-full"
+                    className="rounded-md w-full shadow-black shadow-2xl"
                   />
                 </div>
 
@@ -295,7 +295,7 @@ const BlogPage = () => {
                     <img
                       src="blog.jpg"
                       alt=""
-                      className="w-fit border-x-green-600 border border-green-600 rounded-md b border-r-white"
+                      className="w-fit border-x-green-600 border border-green-600 rounded-md b border-r-white shadow-black shadow-2xl"
                     />
 
                     {showContentType === "blog" ? " " : "Videos"}
@@ -435,7 +435,7 @@ const BlogPage = () => {
                   {filteredPosts.map((post) => (
                     <article
                       key={post.id}
-                      className=" rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-fit border-r-green-600 border-r"
+                      className=" rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 shadow-black shadow-2xl relative overflow-hidden h-fit "
                     >
                       <span className="absolute top-4 left-4 bg-green-600 text-black text-xs px-3 py-1 rounded-full">
                         {post.genre || "General"}
@@ -447,7 +447,7 @@ const BlogPage = () => {
                       {showContentType === "blog" ? (
                         <Link href={`/blog/${post.id}`} className="block">
                           {post.image && (
-                            <div className="h-48 overflow-hidden">
+                            <div className="h-40 overflow-hidden">
                               <img
                                 src={post.image}
                                 alt={post.title}
@@ -456,13 +456,13 @@ const BlogPage = () => {
                             </div>
                           )}
                           <div className="py-5">
-                            <h2 className="text-xl font-bold mb-3 mt-5">
-                              {post.title}
-                            </h2>
                             <h3 className="w-full h-24 mx-auto mb-3 object-cover opacity-30">
                               <img src="/web19.jpg" alt="" />
                             </h3>
-                            <p className="text-sm text-white mb-4 line-clamp-2">
+                            <h2 className="text-xl font-bold mb-5 mt-2 text-center p-3">
+                              {post.title}
+                            </h2>
+                            <p className="text-sm text-white mb-4 line-clamp-4 bg-gray-950 p-1">
                               {post.body}
                             </p>
                             <p className="text-xs text-green-600 text-right mr-2">
@@ -523,7 +523,7 @@ const BlogPage = () => {
             </h2>
             <a
               href="https://wa.me/message/R4UKUMFIH22RJ1"
-              target="_blank"
+              target="_self"
               rel="noopener noreferrer"
               className="font-bold text-green-600 cursor-pointer hover:underline"
             >

@@ -193,7 +193,7 @@ const BlogDetails = ({ params }) => {
         <img
           src="/logo.jpg"
           alt="My Logo"
-          className="h-30 lg:h-30 mt-10 animate-pulse absolute top-40 left-0 right-0 bottom-0 mx-auto"
+          className="h-30 lg:h-30 mt-10 animate-pulse absolute top-40 left-0 right-0 bottom-0 mx-auto shadow-xl "
         />
       </div>
     );
@@ -203,12 +203,12 @@ const BlogDetails = ({ params }) => {
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.10 }}
       className="min-h-screen px-2 py-19 max-w-5xl mx-auto bg-gray-400/5 text-gray-300 font-sans leading-relaxed space-y-14"
     >
       {/* Blog Header Section */}
       <div className="bg-gray-400/5 shadow-xl rounded-2xl p-10 relative border border-gray-700 space-y-6">
-          <span className="inline-block px-5 py-2 bg-gradient-to-r from-green-600 text-black font-semibold text-sm rounded-full shadow-md transition-transform hover:scale-105">
+          <span className="inline-block px-5 py-2 bg-gradient-to-r from-green-600 text-black font-semibold text-sm rounded-full shadow-md shadow-black transition-transform hover:scale-105">
             {blog.genre}
           </span>
 
@@ -221,7 +221,7 @@ const BlogDetails = ({ params }) => {
               title="View Profile"
               src="/web19.jpg"
               alt="User"
-              className="relative w-24 h-24 rounded-full  shadow-lg cursor-pointer hover:scale-105 transition-transform border border-s-green-600 border-r-green-600"
+              className="relative w-24 h-24 rounded-full   shadow-black shadow-xl cursor-pointer hover:scale-105 transition-transform border border-s-green-600 border-r-green-600"
             />
             <div> 
             <h4 className="absolute inset-0 -top-20 items-center justify-center flex  underline text-xs text-green-600 text-center font-serif">
@@ -235,14 +235,14 @@ const BlogDetails = ({ params }) => {
           </div>
           </div>
 
-          <h5 className="lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-md hover:shadow-lg transition duration-300 shadow-black ">Follow me on</h5>
+          <h5 className="lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-black shadow-xl hover:shadow-xl transition duration-300 shadow-black ">Follow me on</h5>
           <div className=" flex gap-4 shadow-black items-center justify-center ">
-          <h5 className="max-lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-md hover:shadow-lg transition duration-300 shadow-black ">Follow me on</h5>
+          <h5 className="max-lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-black shadow-xl hover:shadow-xl transition duration-300 shadow-black ">Follow me on</h5>
             <a
               href="https://whatsapp.com/channel/0029Vb6BDcsJZg401UUoHA0T"
               target="_self"
               rel="noopener noreferrer"
-              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-lg hover:bg-blue-800 transition duration-300"
+              className="z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
             >
               <MessageCircle className="text-green-600 shadow-black size-4 mx-auto"/>
             </a>
@@ -250,7 +250,7 @@ const BlogDetails = ({ params }) => {
               href="https://www.facebook.com/mazi.brown.oziomachi"
               target="_self"
               rel="noopener noreferrer"
-              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-lg hover:bg-blue-800 transition duration-300"
+              className="z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
             >
               <Facebook className="text-blue-600 size-4 mx-auto"/>
 
@@ -259,7 +259,7 @@ const BlogDetails = ({ params }) => {
               href="https://www.instagram.com/webwiz_creation_webdevelopers?igsh=MThvdDEwa3c3aGpsMQ=="
               target="_self"
               rel="noopener noreferrer"
-              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-lg hover:bg-blue-800 transition duration-300"
+              className="z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
             >
               <Instagram  className="text-pink-600 size-4 mx-auto"/>
 
@@ -268,7 +268,7 @@ const BlogDetails = ({ params }) => {
               href="https://www.linkedin.com/in/brownoziomachi72a5a3229?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
               target="_self"
               rel="noopener noreferrer"
-              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-lg hover:bg-blue-800 transition duration-300"
+              className="z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
             >
               <Linkedin  className="text-blue-400 size-4 mx-auto"/>
 
@@ -277,7 +277,7 @@ const BlogDetails = ({ params }) => {
               href="https://youtube.com/@webwizcreation?si=LpNgM7MwIkgYJg5X"
               target="_self"
               rel="noopener noreferrer"
-              className="z-50 text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-lg hover:bg-blue-800 transition duration-300"
+              className=" z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
             >
               <Youtube className="text-red-600 size-4 mx-auto"/>
 
@@ -290,7 +290,7 @@ const BlogDetails = ({ params }) => {
       </p>
 
       <div className="bg-gray-400/5 rounded-xl shadow-lg p-2 border border-gray-700">
-        <h1 className="text-3xl font-extrabold text-white text-center drop-shadow-lg">
+        <h1 className="text-3xl font-extrabold text-white text-center drop-shadow-lg  shadow-black shadow-xl">
           {blog.title}
           <div className="">
             <img
@@ -298,7 +298,7 @@ const BlogDetails = ({ params }) => {
               alt=""
               className="w-full rounded-md mt-2 lg:object-cover"
             />
-            <p className="text-gray-500 text-sm mt-5">
+            <p className="text-gray-500 text-sm py-5">
               Posted on {blog.timestamp || "Unknown Date"}
             </p>
             {/* Show video if blog.video exists */}
@@ -437,7 +437,7 @@ const BlogDetails = ({ params }) => {
                 handleCommentSubmit();
               }
             }}
-            className="shadow-black lg:px-5 lg:py-2 px-3 py-2 max-md:w-1/2 bg-gradient-to-r from-green-600 to-green-400 text-black font-semibold rounded-lg shadow-md hover:from-green-600 hover:to-yellow-500 transition"
+            className="shadow-black lg:px-5 lg:py-2 px-3 py-2 max-md:w-1/2 bg-gradient-to-r from-green-600 to-green-400 text-black font-semibold rounded-lg shadow-xl hover:from-green-600 hover:to-yellow-500 transition"
             title={session ? "You can now post" : "Please sign in to post"}
           >
             Post
@@ -550,14 +550,14 @@ const BlogDetails = ({ params }) => {
               Read more blog post
             </h1>
           </Link>
-          <h2 className="text-3xl font-extrabold text-white tracking-wide text-center text-clip py-10 border-t border-t-green-600 border-r-green-600 border-x">
+          <h2 className=" shadow-black shadow-xl text-3xl font-extrabold text-white tracking-wide text-center text-clip py-10 border-t border-t-green-600 border-r-green-600 border-x">
             <span className="text-green-600">Re</span>commen
             <span className="text-green-600">ded</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6  shadow-black shadow-xl">
             {otherBlogs.map((other) => (
               <Link key={other.id} href={`/blog/${other.id}`}>
-                <div className="bg-gray-400/5 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition cursor-pointer border-r border-r-green-600">
+                <div className="  shadow-black shadow-xl bg-gray-400/5 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition cursor-pointer border-r border-r-green-600">
                   <h3 className="text-2xl font-bold text-white mb-2">
                     {other.title}
                   </h3>

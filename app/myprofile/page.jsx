@@ -1,6 +1,6 @@
 "use client";
 
-import { Github, Instagram, Linkedin, LoaderCircle } from "lucide-react";
+import { Github, LoaderCircle, Facebook, Instagram, Linkedin,  Youtube, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -99,7 +99,7 @@ const fadeIn = {
               />
               <div className="absolute inset-0 flex items-center justify-center">
                 <motion.h1
-                  className="text-5xl md:text-6xl font-extrabold tracking-wide drop-shadow-lg"
+                  className="text-5xl md:text-6xl font-extrabold tracking-wide drop-shadow-xl shadow-xl"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.8 }}
@@ -145,7 +145,7 @@ const fadeIn = {
                     Brown Oziomachi. A
                   </h3>
                   <h4
-                    className="cursor-pointer text-2xl border border-green-600 rounded-3xl bg-green-600 text-white lg:text-center font-semibold font-serif"
+                    className=" shadow-black shadow-xl cursor-pointer text-2xl border border-green-600 rounded-3xl bg-green-600 text-white lg:text-center font-semibold font-serif"
                     onClick={() => {
                       const el = document.getElementById("contact-me");
                       el.scrollIntoView({ behavior: "smooth" });
@@ -165,7 +165,7 @@ const fadeIn = {
                   {/* Framer Motion Animations */}
                   <div className="flex items-center justify-center gap-5 mt-1"></div>
                   <motion.h4
-                    className="text-sm px-5 rounded-md bg-green-600 text-white animate-pulse"
+                    className="text-sm px-5 rounded-md bg-green-600 text-white animate-pulse  shadow-black shadow-xl"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
@@ -181,7 +181,7 @@ const fadeIn = {
                   </motion.h4>
                   <hr className="border w-2/2" />
                   <motion.h4
-                    className="text-sm text-gray-300 rounded-md bg-green-600 px-5 animate-pulse"
+                    className="text-sm text-gray-300 rounded-md bg-green-600 px-5 animate-pulse  shadow-black shadow-xl"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
@@ -190,7 +190,7 @@ const fadeIn = {
                     <a
                       href="https://facebook.com/groups/195029009448884/"
                       target="_self"
-                      className="text-white hover:text-orange-500"
+                      className="text-white hover:text-orange-500 "
                     >
                       Facebook Group
                     </a>
@@ -224,35 +224,54 @@ const fadeIn = {
                 ></motion.div>
               </div>
               {/* Social Links */}
-              <div className="flex space-x-8 justify-center lg:justify-start text-2xl">
-                <a
-                  href="http://www.linkedin.com/in/brownoziomachi72a5a3229"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-cyan-400 hover:text-cyan-600 transition-colors"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin />
-                </a>
-                <a
-                  href="https://www.instagram.com/webwiz_creation_webdevelopers/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-400 hover:text-blue-600 transition-colors"
-                  aria-label="Instagram"
-                >
-                  <Instagram />
-                </a>
-                <a
-                  href="https://github.com/Brown-Oziomachi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-gray-600 transition-colors"
-                  aria-label="GitHub"
-                >
-                  <Github />
-                </a>
-              </div>
+             <h5 className="lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-black shadow-xl hover:shadow-xl transition duration-300 shadow-black ">Follow me on</h5>
+          <div className=" flex gap-4 shadow-black items-center justify-center ">
+          <h5 className="max-lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-black shadow-xl hover:shadow-xl transition duration-300 shadow-black ">Follow me on</h5>
+            <a
+              href="https://whatsapp.com/channel/0029Vb6BDcsJZg401UUoHA0T"
+              target="_self"
+              rel="noopener noreferrer"
+              className="z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
+            >
+              <MessageCircle className="text-green-600 shadow-black size-4 mx-auto"/>
+            </a>
+            <a
+              href="https://www.facebook.com/mazi.brown.oziomachi"
+              target="_self"
+              rel="noopener noreferrer"
+              className="z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
+            >
+              <Facebook className="text-blue-600 size-4 mx-auto"/>
+
+            </a>
+            <a
+              href="https://www.instagram.com/webwiz_creation_webdevelopers?igsh=MThvdDEwa3c3aGpsMQ=="
+              target="_self"
+              rel="noopener noreferrer"
+              className="z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
+            >
+              <Instagram  className="text-pink-600 size-4 mx-auto"/>
+
+            </a>
+            <a
+              href="https://www.linkedin.com/in/brownoziomachi72a5a3229?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              target="_self"
+              rel="noopener noreferrer"
+              className="z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
+            >
+              <Linkedin  className="text-blue-400 size-4 mx-auto"/>
+
+            </a>
+            <a
+              href="https://youtube.com/@webwizcreation?si=LpNgM7MwIkgYJg5X"
+              target="_self"
+              rel="noopener noreferrer"
+              className=" z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
+            >
+              <Youtube className="text-red-600 size-4 mx-auto"/>
+
+            </a>
+          </div>
             </section>
 
             <hr className="border-green-600 mx-8" />
