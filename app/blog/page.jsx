@@ -283,11 +283,10 @@ const BlogPage = () => {
                     />
                     {showContentType === "blog" ? " " : "Videos"}
                   </h1>
-                  <img
-                    src="/web19.jpg"
-                    alt="Blog image"
-                    className="rounded-md w-full shadow-black shadow-2xl"
-                  />
+                  <video width="640" height="360" autoPlay loop muted playsInline>
+                    <source src="wiz Video.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+              </video>
                 </div>
 
                 <p className="text-sm text-gray-400 font-mono">

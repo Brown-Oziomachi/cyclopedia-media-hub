@@ -287,7 +287,7 @@ const fadeIn = {
               <h1 className="text-center text-3xl font-extrabold mb-6 tracking-widest">
                 Skills
               </h1>
-              <div className="flex flex-wrap gap-4 justify-center max-w-3xl mx-auto">
+              <div className="flex flex-wrap gap-4 justify-center max-w-3xl mx-auto shadow-black shadow-2xl">
                 {[
                   "HTML",
                   "CSS",
