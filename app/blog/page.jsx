@@ -480,7 +480,11 @@ const BlogPage = () => {
                           )}
                           <div className="">
                             <h3 className="w-full h-20 mx-auto mb-3 object-cover opacity-50">
-                              <img src="/new.jpeg" alt="" className="bg-black"/>
+                              <img
+                                src="/new.jpeg"
+                                alt=""
+                                className="bg-black"
+                              />
                             </h3>
                             <h2 className="text-xl font-bold bg-black shadow-2xl shadow-black  text-center p-10 ">
                               {post.title}
@@ -488,8 +492,8 @@ const BlogPage = () => {
                             <p className="text-sm text-white mb- line-clamp-4 -mt-5 bg-gray-950 p-2">
                               {post.body}
                             </p>
-                            <p className="text-xs text-green-600 text-right mr-2">
-                              Posted on {formatTimestamp(post.timestamp)}
+                            <p className="text-gray-500 text-sm py-5">
+                              Posted On: {post.timestamp || "Unknown Date"}
                             </p>
                           </div>
                         </Link>
