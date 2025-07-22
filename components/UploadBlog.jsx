@@ -302,6 +302,8 @@ const UploadBlog = ({ session }) => {
                   <option value="Economics">Economics</option>
                   <option value="Law">Law</option>
                   <option value="AI">AI</option>
+                  <option value="Relationships">Relationships</option>
+                  <option value="Marriage">Marriage</option>
                   <option value="Machine Learning">Machine Learning</option>
                   <option value="Data Science">Data Science</option>
                   <option value="Cybersecurity">Cybersecurity</option>
@@ -320,6 +322,18 @@ const UploadBlog = ({ session }) => {
                   <option value="Business">Business</option>
                   <option value="Ideas">Ideas</option>
                   <option value="Facts">Facts</option>
+                  <option value="Drama">Drama</option>
+                  <option value="Documentary">Documentary</option>
+                  <option value="Teens">Teens</option>
+                  <option value="Family">Family</option>
+                  <option value="Divorce">Divorce</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Street">Street</option>
+                  <option value="Strategy">Strategy</option>
+                  <option value="Animals">Animals</option>
+                  <option value="News">News</option>
+                  <option value="Politics">Politics</option>
+                  <option value="Music">Music</option>
                   <option value="Comedy">Comedy</option>
                   <option value="Motivation">Motivation</option>
                   <option value="Education">Education</option>

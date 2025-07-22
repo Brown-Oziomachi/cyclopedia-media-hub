@@ -144,7 +144,7 @@ const BlogPage = () => {
     "News",
     "Politics",
     "Prayer",
-    "Relationship",
+    "Relationships",
     "Wisdom",
   ];
 
@@ -262,7 +262,10 @@ const BlogPage = () => {
     <>
       {loading ? (
         <div className="flex justify-center items-center h-screen bg-gray-400/5 ">
-          <LoaderCircle size={50} className="animate-spin text-green-600 mt-10" />
+          <LoaderCircle
+            size={50}
+            className="animate-spin text-green-600 mt-10"
+          />
           <img
             src="/logo.jpg"
             alt="My Logo"
@@ -270,10 +273,10 @@ const BlogPage = () => {
           />
         </div>
       ) : (
-        <main className="min-h-screen bg-gray-400/5 text-white px-8 py-30">
-          <div className="max-w-7xl mx-auto">
-            <header className="text-center mb-12">
-              <div className="lg:flex items-center justify-center gap-20">
+        <main className="min-h-screen bg-gray-400/5 text-white px-2 py-20">
+          <div className="max-w-7xl mx-auto ">
+            <header className="text-center mb-12 bg-amber-950 text-white rounded-bl-full">
+              <div className="lg:flex items-center justify-center gap-20 bg-amber-950 rounded-br-full">
                 <div className="max-lg:relative">
                   <h1 className="text-6xl font-bold tracking-tight   max-lg:inset-0 max-lg:top-8 lg:py-10 lg:hidden text-gray-400 mb-5">
                     <img
@@ -281,12 +284,18 @@ const BlogPage = () => {
                       alt=""
                       className="w-fit border-x-green-600 border border-green-600 rounded-md b border-r-white shadow-black shadow-2xl"
                     />
-                    {showContentType === "blog" ? " " : "Videos"}
+                    {showContentType === "" ? " " : ""}
                   </h1>
-                  <video width="640" height="360" autoPlay loop muted playsInline>
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full shadow-2xl shadow-gray-400 rounded-lg brightness-150 mb-5"
+                  >
                     <source src="wiz Video.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
-              </video>
+                  </video>
                 </div>
 
                 <p className="text-sm text-gray-400 font-mono">
@@ -297,7 +306,7 @@ const BlogPage = () => {
                       className="w-fit border-x-green-600 border border-green-600 rounded-md b border-r-white shadow-black shadow-2xl"
                     />
 
-                    {showContentType === "blog" ? " " : "Videos"}
+                    {showContentType === "" ? " " : ""}
                   </h1>
                   Explore unique insights, stories, and expert opinions.
                 </p>
@@ -313,8 +322,19 @@ const BlogPage = () => {
               {showContentType === "blog" && (
                 <div>
                   <p className="text-gray-400 text-sm mt-4">
-                    Join our <a href="/community" className="text-green-600">community</a> of <a href="/community" className="text-green-600">creators</a> and <a href="/community" className="text-green-600">thinkers.</a> Share your
-                    thoughts, ideas, and experiences with us.
+                    Join our{" "}
+                    <a href="/community" className="text-green-600">
+                      community
+                    </a>{" "}
+                    of{" "}
+                    <a href="/community" className="text-green-600">
+                      creators
+                    </a>{" "}
+                    and{" "}
+                    <a href="/community" className="text-green-600">
+                      thinkers.
+                    </a>{" "}
+                    Share your thoughts, ideas, and experiences with us.
                   </p>
                 </div>
               )}
@@ -333,15 +353,19 @@ const BlogPage = () => {
 
             {/* Toggle */}
             <div className="flex gap-4 mb-5 justify-center items-center">
-              <a href="/gallery" className="bg-white text-black px-6 py-3 rounded-xl font-semibold transition">Gallery</a>
-              {["blog", "video",].map((type) => (
-
+              <a
+                href="/gallery"
+                className="bg-green-600 text-black px-6 py-3 rounded-xl font-semibold transition"
+              >
+                Gallery
+              </a>
+              {["blog", "video"].map((type) => (
                 <button
                   key={type}
                   className={`px-6 py-3 rounded-xl font-semibold transition ${
                     showContentType === type
-                      ? "bg-white text-black"
-                      : "bg-white text-black hover:bg-gray-400/5 border-r"
+                      ? "bg-green-600 text-black"
+                      : "bg-green-600 text-black hover:bg-gray-400/5 border-r"
                   }`}
                   onClick={() => handleClick(type)}
                 >
@@ -350,7 +374,7 @@ const BlogPage = () => {
               ))}
             </div>
             {/* Search */}
-            <div className="mb-8">
+            <div className="mb-8 bg-amber-950">
               <input
                 type="text"
                 placeholder={`Search ${showContentType} by genre...`}
@@ -387,7 +411,7 @@ const BlogPage = () => {
 
             {/* Genre Filter Buttons */}
             <div
-              className="flex overflow-x-auto whitespace-nowrap gap-3 mb-6 px-4"
+              className="flex overflow-x-auto whitespace-nowrap gap-3 mb-6 px-4 "
               style={{ scrollbarWidth: "none" }}
             >
               {genres.map((genre) => (
@@ -430,17 +454,17 @@ const BlogPage = () => {
             {!loading &&
               filteredPosts.length > 0 &&
               showContentType !== "gallery" && (
-                <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
+                <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 ">
                   {filteredPosts.map((post) => (
                     <article
                       key={post.id}
-                      className=" rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 shadow-black shadow-2xl relative overflow-hidden h-fit "
+                      className=" rounded-xl  hover:shadow-2xl transition-all duration-300 shadow-black shadow-2xl relative overflow-hidden h-fit "
                     >
                       <span className="absolute top-4 left-4 bg-green-600 text-black text-xs px-3 py-1 rounded-full">
                         {post.genre || "General"}
                       </span>
                       <h1 className="text-xs text-gray-400 text-center absolute top-4 right-4">
-                        THE <span className="text-green-600">SUN</span> WEB
+                        <span className="text-green-600">Wiz-</span>Blog
                       </h1>
 
                       {showContentType === "blog" ? (
@@ -454,14 +478,14 @@ const BlogPage = () => {
                               />
                             </div>
                           )}
-                          <div className="py-5">
-                            <h3 className="w-full h-24 mx-auto mb-3 object-cover opacity-30">
-                              <img src="/web19.jpg" alt="" />
+                          <div className="">
+                            <h3 className="w-full h-20 mx-auto mb-3 object-cover opacity-50">
+                              <img src="/new.jpeg" alt="" className="bg-black"/>
                             </h3>
-                            <h2 className="text-xl font-bold mb-5 mt-2 text-center p-3">
+                            <h2 className="text-xl font-bold bg-black shadow-2xl shadow-black  text-center p-10 ">
                               {post.title}
                             </h2>
-                            <p className="text-sm text-white mb-4 line-clamp-4 bg-gray-950 p-1">
+                            <p className="text-sm text-white mb- line-clamp-4 -mt-5 bg-gray-950 p-2">
                               {post.body}
                             </p>
                             <p className="text-xs text-green-600 text-right mr-2">
@@ -475,15 +499,14 @@ const BlogPage = () => {
                             src={
                               post.thumbnail
                                 ? post.thumbnail
-                                : (post.videoURL &&
+                                : post.videoURL &&
                                   (post.videoURL.includes("youtube.com") ||
                                     post.videoURL.includes("youtu.be")) &&
                                   extractYouTubeId(post.videoURL)
-                                  ? `https://img.youtube.com/vi/${extractYouTubeId(
-                                      post.videoURL
-                                    )}/hqdefault.jpg`
-                                  : "/video-placeholder.jpg"
-                                )
+                                ? `https://img.youtube.com/vi/${extractYouTubeId(
+                                    post.videoURL
+                                  )}/hqdefault.jpg`
+                                : "/video-placeholder.jpg"
                             }
                             alt="Video thumbnail"
                             className="w-full h-full object-cover"
@@ -513,9 +536,11 @@ const BlogPage = () => {
             )}
           </div>
           <div id="services-section"></div>
-          <div className="mt-10">
-            <h1 className="font-bold font-serif">Have something to Share?</h1>
-            <h2 className="font-mono">
+          <div className="mt-10 ">
+            <h1 className="font-bold font-serif text-green-600">
+              Have something to Share?
+            </h1>
+            <h2 className="font-mono ">
               We value your thoughts and ideas! feel free to share your
               opinions, Suggestions, or topics you'd love to see on our blog.
               <h3>📩Reach out to us directly on WhatsApp:</h3>

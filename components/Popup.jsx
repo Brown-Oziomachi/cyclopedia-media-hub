@@ -48,20 +48,27 @@ const Popup = () => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.5, opacity: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-white p-4 rounded-lg shadow-lg max-w-md relative z-50"
+            className="bg-white rounded-lg shadow-lg max-w-md relative z-50"
           >
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-              <div className="bg-green-200/15 border-2 border-green-600 text-gray-900 p-6 rounded-lg shadow-lg w-11/12 sm:w-1/3 z-50">
+              <div className="bg-green-200/15 border-2 border-green-600 text-gray-900 p-2 rounded-lg shadow-lg w-11/12 sm:w-1/3 z-50">
                 <h2 className="text-xl font-serif font-bold mb-4 text-center text-green-600 ">
                   Wiz Blog.
                 </h2>
-                <img
-                  src="/web19.jpg"
-                  alt="wiz blog image"
-                  className="h-40 w-40 mx-auto"
-                />
+                <video
+                  width="640"
+                  height="360"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="shadow-2xl shadow-gray-400 rounded-lg brightness-150"
+                >
+                  <source src="wiz Video.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
 
-                <h1 className="font-bold font-serif py-2 text-center text-clip text-white">
+                <h1 className="font-bold font-serif py-2 text-center text-clip text-white ">
                   Have something to Share?
                 </h1>
                 <h2 className="font-mono text-gray-400">

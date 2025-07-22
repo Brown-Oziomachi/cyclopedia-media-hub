@@ -203,86 +203,89 @@ const BlogDetails = ({ params }) => {
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.10 }}
+      transition={{ duration: 0.1 }}
       className="min-h-screen px-2 py-19 max-w-5xl mx-auto bg-gray-400/5 text-gray-300 font-sans leading-relaxed space-y-14"
     >
       {/* Blog Header Section */}
       <div className="bg-gray-400/5 shadow-xl rounded-2xl p-10 relative border border-gray-700 space-y-6">
-          <span className="inline-block px-5 py-2 bg-gradient-to-r from-green-600 text-black font-semibold text-sm rounded-full shadow-md shadow-black transition-transform hover:scale-105">
-            {blog.genre}
-          </span>
+        <span className="inline-block px-5 py-2 bg-gradient-to-r from-green-600 text-black font-semibold text-sm rounded-full shadow-md shadow-black transition-transform hover:scale-105">
+          {blog.genre}
+        </span>
 
         <h1 className="text-xs text-gray-400 text-center absolute top-10 right-6 font-mono tracking-widest">
           THE <span className="text-green-600">SUN</span> WEB
         </h1>
 
         <div className="flex flex-col items-center mb-6">
-            <img
-              title="View Profile"
-              src="/web19.jpg"
-              alt="User"
-              className="relative w-24 h-24 rounded-full   shadow-black shadow-xl cursor-pointer hover:scale-105 transition-transform border border-s-green-600 border-r-green-600"
-            />
-            <div> 
+          <img
+            title="View Profile"
+            src="/web19.jpg"
+            alt="User"
+            className="relative w-24 h-24 rounded-full   shadow-black shadow-xl cursor-pointer hover:scale-105 transition-transform border border-s-green-600 border-r-green-600"
+          />
+          <div>
             <h4 className="absolute inset-0 -top-20 items-center justify-center flex  underline text-xs text-green-600 text-center font-serif">
-          <Link href="/myprofile">
-              VIEW <br /> PROFILE
-          </Link>
+              <Link href="/myprofile">
+                VIEW <br /> PROFILE
+              </Link>
             </h4>
             <h5 className="mt-2  font-semibold text-white text-2xl ">
-             <span className="text-green-600">B</span>row<span className="text-green-600">n</span> <span className="text-green-600">C</span>od<span className="text-green-600">e</span>
+              <span className="text-green-600">B</span>row
+              <span className="text-green-600">n</span>{" "}
+              <span className="text-green-600">C</span>od
+              <span className="text-green-600">e</span>
             </h5>
           </div>
-          </div>
+        </div>
 
-          <h5 className="lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-black shadow-xl hover:shadow-xl transition duration-300 shadow-black ">Follow me on</h5>
-          <div className=" flex gap-4 shadow-black items-center justify-center ">
-          <h5 className="max-lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-black shadow-xl hover:shadow-xl transition duration-300 shadow-black ">Follow me on</h5>
-            <a
-              href="https://whatsapp.com/channel/0029Vb6BDcsJZg401UUoHA0T"
-              target="_self"
-              rel="noopener noreferrer"
-              className="z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
-            >
-              <MessageCircle className="text-green-600 shadow-black size-4 mx-auto"/>
-            </a>
-            <a
-              href="https://www.facebook.com/mazi.brown.oziomachi"
-              target="_self"
-              rel="noopener noreferrer"
-              className="z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
-            >
-              <Facebook className="text-blue-600 size-4 mx-auto"/>
-
-            </a>
-            <a
-              href="https://www.instagram.com/webwiz_creation_webdevelopers?igsh=MThvdDEwa3c3aGpsMQ=="
-              target="_self"
-              rel="noopener noreferrer"
-              className="z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
-            >
-              <Instagram  className="text-pink-600 size-4 mx-auto"/>
-
-            </a>
-            <a
-              href="https://www.linkedin.com/in/brownoziomachi72a5a3229?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-              target="_self"
-              rel="noopener noreferrer"
-              className="z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
-            >
-              <Linkedin  className="text-blue-400 size-4 mx-auto"/>
-
-            </a>
-            <a
-              href="https://youtube.com/@webwizcreation?si=LpNgM7MwIkgYJg5X"
-              target="_self"
-              rel="noopener noreferrer"
-              className=" z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
-            >
-              <Youtube className="text-red-600 size-4 mx-auto"/>
-
-            </a>
-          </div>
+        <h5 className="lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-black shadow-xl hover:shadow-xl transition duration-300 shadow-black ">
+          Follow me on
+        </h5>
+        <div className=" flex gap-4 shadow-black items-center justify-center ">
+          <h5 className="max-lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-black shadow-xl hover:shadow-xl transition duration-300 shadow-black ">
+            Follow me on
+          </h5>
+          <a
+            href="https://whatsapp.com/channel/0029Vb6BDcsJZg401UUoHA0T"
+            target="_self"
+            rel="noopener noreferrer"
+            className="z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
+          >
+            <MessageCircle className="text-green-600 shadow-black size-4 mx-auto" />
+          </a>
+          <a
+            href="https://www.facebook.com/mazi.brown.oziomachi"
+            target="_self"
+            rel="noopener noreferrer"
+            className="z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
+          >
+            <Facebook className="text-blue-600 size-4 mx-auto" />
+          </a>
+          <a
+            href="https://www.instagram.com/webwiz_creation_webdevelopers?igsh=MThvdDEwa3c3aGpsMQ=="
+            target="_self"
+            rel="noopener noreferrer"
+            className="z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
+          >
+            <Instagram className="text-pink-600 size-4 mx-auto" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/brownoziomachi72a5a3229?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            target="_self"
+            rel="noopener noreferrer"
+            className="z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
+          >
+            <Linkedin className="text-blue-400 size-4 mx-auto" />
+          </a>
+          <a
+            href="https://youtube.com/@webwizcreation?si=LpNgM7MwIkgYJg5X"
+            target="_self"
+            rel="noopener noreferrer"
+            className=" z-50 text-sm bg-gray-400/5 shadow-black border-x border-x-green-600 text-white py-4 px-4 rounded-full shadow-xl hover:bg-blue-800 transition duration-300"
+          >
+            <Youtube className="text-red-600 size-4 mx-auto" />
+          </a>
+        </div>
       </div>
 
       <p className="-mt-15 text-center text-xs text-shadow-2xs border-b border-x border-x-green-600 px-0 border-gray-400/20 rounded-md">
@@ -292,15 +295,15 @@ const BlogDetails = ({ params }) => {
       <div className="bg-gray-400/5 rounded-xl shadow-lg p-2 border border-gray-700">
         <h1 className="text-3xl font-extrabold text-white text-center drop-shadow-lg  shadow-black shadow-xl">
           {blog.title}
+          <p className="text-gray-500 text-sm py-5">
+            Posted On: {blog.timestamp || "Unknown Date"}
+          </p>
           <div className="">
             <img
-              src="/web19.jpg"
+              src="/id.jpeg"
               alt=""
               className="w-full rounded-md mt-2 lg:object-cover"
             />
-            <p className="text-gray-500 text-sm py-5">
-              Posted on {blog.timestamp || "Unknown Date"}
-            </p>
             {/* Show video if blog.video exists */}
             {blog.video && (
               <video
@@ -557,14 +560,14 @@ const BlogDetails = ({ params }) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6  shadow-black shadow-xl">
             {otherBlogs.map((other) => (
               <Link key={other.id} href={`/blog/${other.id}`}>
-                <div className="  shadow-black shadow-xl bg-gray-400/5 p-6 rounded-xl shadow-lg hover:bg-gray-800 transition cursor-pointer border-r border-r-green-600">
+                <div className="  shadow-black shadow-xl bg-gray-400/5 p-6 rounded-xl  hover:bg-gray-800 transition cursor-pointer border-r border-r-green-600">
                   <h3 className="text-2xl font-bold text-white mb-2">
                     {other.title}
                   </h3>
                   <p className="text-green-600 font-semibold text-sm mb-3">
                     {other.genre}
                   </p>
-                  <p className="text-gray-300 text-sm line-clamp-3">
+                  <p className="text-gray-300 text-sm line-clamp-4">
                     {other.body?.slice(0, 100)}...
                   </p>
                 </div>
@@ -572,7 +575,9 @@ const BlogDetails = ({ params }) => {
             ))}
           </div>
           <div className="mt-10">
-            <h1 className="font-bold font-serif">Have something to Share?</h1>
+            <h1 className="font-bold font-serif text-green-600">
+              Have something to Share?
+            </h1>
             <h2 className="font-mono">
               We value your thoughts and ideas! feel free to share your
               opinions, Suggestions, or topics you'd love to see on our blog.
