@@ -446,7 +446,7 @@ const BlogDetails = ({ params }) => {
           >
             Post
           </button>
-          <a href="/auth/signin" className="text-green-600 underline" disable={session}>
+          <a href="/auth/signin" className="text-green-600 underline" >
             Signin here
           </a>
         </div>
