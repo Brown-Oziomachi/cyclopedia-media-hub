@@ -118,7 +118,7 @@ const ProfileDropdownNavbar = () => {
                     <nav className="flex flex-col space-y-2 text-gray-300 text-sm font-normal">
                       <Link
                         href="/profile"
-                        className="hover:text-cyan-400 transition-colors duration-200"
+                        className="hover:text-cyan-400 transition-colors duration-200 shadow-2xl shadow-black"
                       >
                         My Profile
                       </Link>
@@ -209,7 +209,7 @@ const ProfileDropdownNavbar = () => {
           aria-label="Toggle navigation menu"
         >
           {showNav ? (
-            <ListCollapse className="text-white" />
+            <ListCollapse className="text-green-600" />
           ) : (
             <Menu className="text-white" />
           )}
@@ -251,7 +251,7 @@ const ProfileDropdownNavbar = () => {
               signOut();
               setShowNav(false);
             }}
-            className="text-md py-2 px-6 bg-gray-400/5 border-x border-x-green-600 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md mt-4"
+            className="shadow-2xl shadow-black text-md py-2 px-6 bg-gray-400/5 border-x border-x-green-600 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md mt-4"
           >
             Sign Out
           </button>
@@ -259,7 +259,7 @@ const ProfileDropdownNavbar = () => {
           <Link
             href="/auth/signin"
             onClick={() => setShowNav(false)}
-            className="text-md py-2 px-6 bg-gray-400/5 border-x border-x-green-600 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md mt-4 w-80 text-center font-bold"
+            className="shadow-2xl shadow-black text-md py-2 px-6 bg-gray-400/5 border-x border-x-green-600 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md mt-4 w-80 text-center font-bold text-green-600"
           >
             Sign In
           </Link>

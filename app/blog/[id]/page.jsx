@@ -405,14 +405,15 @@ const BlogDetails = ({ params }) => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="bg-gray-400/5 shadow-xl rounded-2xl p-2 border border-gray-700 space-y-8"
+        className="bg-gray-400/5 shadow-xl rounded-2xl p-2 border border-gray-700 space-y-8 shadow-4xl shadow-black"
       >
         <h2 className="text-3xl font-extrabold text-white tracking-wide">
-          Join <span className="text-green-600">the</span> Conversation
+          Join <span className="text-green-600">The</span> Conversation
         </h2>
 
         {/* New Comment Input */}
         <div className="lg:flex items-center space-x-5 grid space-y-4 lg:space-y-0 overflow-auto md:overflow-scroll">
+          <div className="flex gap-2">
           <img
             src={session ? session?.user?.image : "/logo.jpg"}
             alt="Avatar"
@@ -429,9 +430,9 @@ const BlogDetails = ({ params }) => {
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
           />
-          <a href="/auth/signin" className="text-green-600" disable={session}>
-            Signin here
-          </a>
+          </div>
+
+            <div className="flex gap-15 items-center justify-center">
           <button
             onClick={() => {
               if (!session) {
@@ -445,7 +446,11 @@ const BlogDetails = ({ params }) => {
           >
             Post
           </button>
+          <a href="/auth/signin" className="text-green-600 underline" disable={session}>
+            Signin here
+          </a>
         </div>
+            </div>
       </motion.div>
 
       {/* List of Comments */}
@@ -549,24 +554,24 @@ const BlogDetails = ({ params }) => {
       {otherBlogs.length > 0 && (
         <div className="space-y-6">
           <Link href="/blog">
-            <h1 className="mb-2 underline  text-center text-xs text-green-600">
-              Read more blog post
+            <h1 className="mb-2 underline  text-center text-xs text-green-600 tracking-widest">
+              Read more blog
             </h1>
           </Link>
-          <h2 className=" shadow-black shadow-xl text-3xl font-extrabold text-white tracking-wide text-center text-clip py-10 border-t border-t-green-600 border-r-green-600 border-x">
-            <span className="text-green-600">Re</span>commen
+          <h2 className="tracking-widest shadow-black shadow-xl text-3xl font-extrabold text-white tracking-wide text-center text-clip py-10 border-t border-t-green-600 border-r-green-600 border-x">
+            <span className="text-green-600 ">Re</span>commen
             <span className="text-green-600">ded</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6  shadow-black shadow-xl">
             {otherBlogs.map((other) => (
               <Link key={other.id} href={`/blog/${other.id}`}>
                 <div className="  shadow-black shadow-xl bg-gray-400/5 p-6 rounded-xl  hover:bg-gray-800 transition cursor-pointer border-r border-r-green-600">
-                  <h3 className="text-2xl font-bold text-white mb-2">
-                    {other.title}
-                  </h3>
                   <p className="text-green-600 font-semibold text-sm mb-3">
                     {other.genre}
                   </p>
+                  <h3 className="text-2xl font-bold text-white mb-2 text-center">
+                    {other.title}
+                  </h3>
                   <p className="text-gray-300 text-sm line-clamp-4">
                     {other.body?.slice(0, 100)}...
                   </p>

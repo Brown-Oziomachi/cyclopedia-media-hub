@@ -489,7 +489,7 @@ const BlogPage = () => {
                             <h2 className="text-xl font-bold bg-black shadow-2xl shadow-black  text-center p-10 text-white">
                               {post.title}
                             </h2>
-                            <p className="text-sm text-white mb- line-clamp-4 -mt-5 bg-gray-950 p-2 z-50">
+                            <p className="text-sm text-white line-clamp-4 -mt-5 bg-black p-2 z-50">
                               {post.body}
                             </p>
                           </div>
