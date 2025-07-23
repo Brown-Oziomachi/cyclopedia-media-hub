@@ -7,9 +7,9 @@ export const metadata = {
   description: "A website development company",
   keywords: "web development, web design, software development",
   icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
-    apple: "/logo.png",
+    icon: "/logo.jpg",
+    shortcut: "/logo.jpg",
+    apple: "/logo.jpg",
   },
 };
 

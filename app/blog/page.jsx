@@ -355,14 +355,14 @@ const BlogPage = () => {
             <div className="flex gap-4 mb-5 justify-center items-center">
               <a
                 href="/gallery"
-                className="bg-green-600 text-black px-6 py-3 rounded-xl font-semibold transition"
+                className="bg-green-600 text-black px-6 py-3 rounded-xl font-semibold transition shadow-2xl shadow-green-600 hover:bg-gray-400/5"
               >
                 Gallery
               </a>
               {["blog", "video"].map((type) => (
                 <button
                   key={type}
-                  className={`px-6 py-3 rounded-xl font-semibold transition ${
+                  className={`px-6 py-3 rounded-xl font-semibold transition shadow-2xl shadow-green-600 hover:bg-gray-400/5 ${
                     showContentType === type
                       ? "bg-green-600 text-black"
                       : "bg-green-600 text-black hover:bg-gray-400/5 border-r"
@@ -460,10 +460,10 @@ const BlogPage = () => {
                       key={post.id}
                       className=" rounded-xl  hover:shadow-2xl transition-all duration-300 shadow-black shadow-2xl relative overflow-hidden h-fit "
                     >
-                      <span className="absolute top-4 left-4 bg-green-600 text-black text-xs px-3 py-1 rounded-full">
+                      <span className="absolute top-10 left-7 bg-green-600 text-white z-50 text-xs px-3 py-1 rounded-lg shadow-2xl shadow-black">
                         {post.genre || "General"}
                       </span>
-                      <h1 className="text-xs text-gray-400 text-center absolute top-4 right-4">
+                      <h1 className="text-xs text-white text-center absolute top-10 right-7 z-50">
                         <span className="text-green-600">Wiz-</span>Blog
                       </h1>
 
@@ -478,55 +478,69 @@ const BlogPage = () => {
                               />
                             </div>
                           )}
-                          <div className="">
+                          <div className="z-50 p-5 bg-gray-950/50 backdrop-blur-md rounded-b-xl shadow-2xl shadow-black hover:bg-gray-400/5">
                             <h3 className="w-full h-20 mx-auto mb-3 object-cover opacity-50">
                               <img
                                 src="/new.jpeg"
                                 alt=""
-                                className="bg-black"
+                                className="bg-black shadow-2xl shadow-black hover:bg-gray-400/5"
                               />
                             </h3>
-                            <h2 className="text-xl font-bold bg-black shadow-2xl shadow-black  text-center p-10 ">
+                            <h2 className="text-xl font-bold bg-black shadow-2xl shadow-black  text-center p-10 text-white">
                               {post.title}
                             </h2>
-                            <p className="text-sm text-white mb- line-clamp-4 -mt-5 bg-gray-950 p-2">
+                            <p className="text-sm text-white mb- line-clamp-4 -mt-5 bg-gray-950 p-2 z-50">
                               {post.body}
                             </p>
-                            <p className="text-gray-500 text-sm py-5">
-                              Posted On: {post.timestamp || "Unknown Date"}
-                            </p>
                           </div>
+                          <p className="text-gray-500 text-sm py-5">
+                            Posted On: {post.timestamp || "Unknown Date"}
+                          </p>
                         </Link>
                       ) : (
-                        <div>
-                          <img
-                            src={
-                              post.thumbnail
-                                ? post.thumbnail
-                                : post.videoURL &&
-                                  (post.videoURL.includes("youtube.com") ||
-                                    post.videoURL.includes("youtu.be")) &&
-                                  extractYouTubeId(post.videoURL)
-                                ? `https://img.youtube.com/vi/${extractYouTubeId(
-                                    post.videoURL
-                                  )}/hqdefault.jpg`
-                                : "/video-placeholder.jpg"
-                            }
-                            alt="Video thumbnail"
-                            className="w-full h-full object-cover"
-                          />
-                          <div className="p-5">
-                            <h2 className="text-2xl font-bold mb-3 mt-5">
-                              {post.title}
-                            </h2>
-                            <p className="text-sm text-gray-400 mb-4 line-clamp-3">
-                              {post.description || post.body}
-                            </p>
-                            <p className="text-xs text-gray-400 text-right">
-                              Posted on {formatTimestamp(post.timestamp)}
-                            </p>
-                          </div>
-                        </div>
+                       <div>
+  {(() => {
+    // Extract YouTube ID safely
+    const extractYouTubeId = (url) => {
+      if (!url) return null;
+      try {
+        const regExp = /^.*(?:youtu.be\/|v\/|embed\/|watch\?v=)([^#\&\?]{11}).*/;
+        const match = url.match(regExp);
+        return match ? match[1] : null;
+      } catch (err) {
+        return null;
+      }
+    };
+
+    const videoId = extractYouTubeId(post.videoURL);
+
+    const thumbnailUrl = post.thumbnail
+      ? post.thumbnail
+      : videoId
+      ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+      : "/video-placeholder.jpg"; // Make sure this file exists in /public
+
+    return (
+      <>
+        <img
+          src={thumbnailUrl}
+          alt="Video thumbnail"
+          className="w-full h-full object-cover"
+        />
+        <div className="p-5">
+          <h2 className="text-2xl font-bold mb-3 mt-5 text-center">{post.title}</h2>
+          <p className="text-sm text-gray-400 mb-4 line-clamp-3">
+            {post.description || post.body}
+          </p>
+          <p className="text-xs text-gray-400 text-right">
+            Posted on {formatTimestamp(post.timestamp)}
+          </p>
+        </div>
+      </>
+    );
+  })()}
+</div>
+
                       )}
                     </article>
                   ))}
