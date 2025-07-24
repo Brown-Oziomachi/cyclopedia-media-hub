@@ -269,7 +269,7 @@ const BlogPage = () => {
           <img
             src="/logo.jpg"
             alt="My Logo"
-            className="h-30 lg:h-30 mt-10 animate-pulse absolute top-40 left-0 right-0 bottom-0 mx-auto"
+            className="h-30 lg:h-30 mt-10 animate-pulse absolute top-40 left-0 right-0 bottom-0 mx-auto "
           />
         </div>
       ) : (
@@ -282,7 +282,7 @@ const BlogPage = () => {
                     <img
                       src="/blog.jpg"
                       alt=""
-                      className="w-fit border-x-green-600 border border-green-600 rounded-md b border-r-white shadow-black shadow-2xl"
+                      className="z-50 w-fit h-10 max-md:fixed ml-1 mt-1  border-x-green-600 border border-green-600 rounded-md  border-r-white shadow-black shadow-xl"
                     />
                     {showContentType === "" ? " " : ""}
                   </h1>
@@ -291,7 +291,7 @@ const BlogPage = () => {
                     loop
                     muted
                     playsInline
-                    className="w-full h-full shadow-2xl shadow-gray-400 rounded-lg brightness-150 mb-5"
+                    className="w-full h-full shadow-xl shadow-gray-400 rounded-lg brightness-150 mb-5"
                   >
                     <source src="wiz Video.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
@@ -308,7 +308,7 @@ const BlogPage = () => {
 
                     {showContentType === "" ? " " : ""}
                   </h1>
-                  Explore unique insights, stories, and expert opinions.
+                  Explore unique insights, stories, histories, news, politics and expert opinions.
                 </p>
               </div>
               <div>
@@ -378,7 +378,7 @@ const BlogPage = () => {
               <input
                 type="text"
                 placeholder={`Search ${showContentType} by genre...`}
-                className="w-full px-4 py-2 rounded-md text-white focus:ring focus:ring-yellow-500 border border-green-600 bg-gray-400/10 border-x"
+                className="w-full px-4 py-2 rounded-full text-white focus:ring focus:ring-yellow-500 border border-green-600 bg-gray-400/10 border-x"
                 onChange={(e) => {
                   const searchTerm = e.target.value.toLowerCase();
                   let basePosts = [];
@@ -411,13 +411,13 @@ const BlogPage = () => {
 
             {/* Genre Filter Buttons */}
             <div
-              className="flex overflow-x-auto whitespace-nowrap gap-3 mb-6 px-4 "
+              className="flex overflow-x-auto whitespace-nowrap gap-1 mb-6 px-4 "
               style={{ scrollbarWidth: "none" }}
             >
               {genres.map((genre) => (
                 <button
                   key={genre}
-                  className={`flex-shrink-0 px-4 py-2 rounded-md font-medium transition cursor-pointer ${
+                  className={`flex-shrink-0 px-4 py-2 rounded-full font-medium transition cursor-pointer ${
                     selectedCategory === genre
                       ? "bg-green-500 text-black"
                       : "bg-gray-400/5 border-x border-x-green-600 text-white hover:bg-gray-400/10"
@@ -429,7 +429,7 @@ const BlogPage = () => {
               ))}
               {selectedCategory && (
                 <button
-                  className="flex-shrink-0 px-4 py-2 rounded-md font-medium bg-red-600 text-white hover:bg-red-700"
+                  className="flex-shrink-0 px-4 py-2 rounded-md font-medium bg-red-600 text-white hover:bg-red-700 "
                   onClick={() => {
                     setSelectedCategory(null);
                     let basePosts = [];

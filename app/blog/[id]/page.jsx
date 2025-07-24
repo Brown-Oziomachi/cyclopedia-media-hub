@@ -432,7 +432,7 @@ const BlogDetails = ({ params }) => {
           />
           </div>
 
-            <div className="flex gap-15 items-center justify-center">
+            <div className="flex gap-16 items-center justify-center">
           <button
             onClick={() => {
               if (!session) {
