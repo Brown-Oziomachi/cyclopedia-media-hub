@@ -563,17 +563,17 @@ const BlogDetails = ({ params }) => {
             <span className="text-green-600">ded</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6  shadow-black shadow-xl">
-            {otherBlogs.map((other) => (
+            {otherBlogs.slice(0,5).map((other) => (
               <Link key={other.id} href={`/blog/${other.id}`}>
                 <div className="  shadow-black shadow-xl bg-gray-400/5 p-6 rounded-xl  hover:bg-gray-800 transition cursor-pointer border-r border-r-green-600">
                   <p className="text-green-600 font-semibold text-sm mb-3">
                     {other.genre}
                   </p>
-                  <h3 className="text-2xl font-bold text-white mb-2 text-center">
+                  <h3 className="text-sm font-bold text-white mb-2 text-center">
                     {other.title}
                   </h3>
-                  <p className="text-gray-300 text-sm line-clamp-4">
-                    {other.body?.slice(0, 100)}...
+                  <p className="text-xs text-gray-300 text-sm line-clamp-4 text-center">
+                    {other.body?.slice(0, 50)}...
                   </p>
                 </div>
               </Link>

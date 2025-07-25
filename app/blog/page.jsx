@@ -279,13 +279,17 @@ const BlogPage = () => {
               <div className="lg:flex items-center justify-center gap-20 bg-amber-950 rounded-br-full">
                 <div className="max-lg:relative">
                   <h1 className="text-6xl font-bold tracking-tight   max-lg:inset-0 max-lg:top-8 lg:py-10 lg:hidden text-gray-400 mb-5">
-                    <Link href="/blog">
+                    <div id="ups-go"></div>
+                    <div className="" onClick={() => {
+                    const el = document.getElementById("ups-go");
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  }}>
                     <img
                       src="/blog.jpg"
                       alt=""
-                      className="z-50 w-fit h-10 max-md:fixed ml-1 mt-1  border-x-green-600 border border-green-600 rounded-md  border-r-white shadow-black shadow-xl"
+                      className="z-50 w-fit h-10 max-lg:fixed ml-1 mt-1  border-b-green-600 border border-green-600 rounded-md  border-x-white shadow-black shadow-xl"
                     />
-                    </Link>
+                    </div>
                     {showContentType === "" ? " " : ""}
                   </h1>
                   <video
@@ -293,7 +297,7 @@ const BlogPage = () => {
                     loop
                     muted
                     playsInline
-                    className="w-full h-full shadow-xl shadow-gray-400 rounded-lg brightness-150 mb-5"
+                    className="w-full h-full shadow-xl shadow-gray-400 rounded-lg brightness-150 mb-5 "
                   >
                     <source src="wiz Video.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
@@ -305,7 +309,7 @@ const BlogPage = () => {
                     <img
                       src="blog.jpg"
                       alt=""
-                      className="w-fit border-x-green-600 border border-green-600 rounded-md b border-r-white shadow-black shadow-2xl"
+                      className="w-fit border-x-green-600 border border-green-600 rounded-md  border-r-white shadow-black shadow-2xl"
                     />
 
                     {showContentType === "" ? " " : ""}
@@ -462,10 +466,10 @@ const BlogPage = () => {
                       key={post.id}
                       className=" rounded-xl  hover:shadow-2xl transition-all duration-300 shadow-black shadow-2xl relative overflow-hidden h-fit "
                     >
-                      <span className="absolute top-10 left-7 bg-green-600 text-white z-50 text-xs px-3 py-1 rounded-lg shadow-2xl shadow-black">
+                      <span className="absolute top-5 left-7 bg-green-600 text-white z-20 text-xs px-3 py-1 rounded-lg shadow-2xl shadow-black">
                         {post.genre || "General"}
                       </span>
-                      <h1 className="text-xs text-white text-center absolute top-10 right-7 z-50">
+                      <h1 className="text-xs text-white text-center absolute top-5 right-7 z-50">
                         <span className="text-green-600">Wiz-</span>Blog
                       </h1>
 
@@ -480,24 +484,24 @@ const BlogPage = () => {
                               />
                             </div>
                           )}
-                          <div className="z-50 p-5 bg-gray-950/50 backdrop-blur-md rounded-b-xl shadow-2xl shadow-black hover:bg-gray-400/5">
-                            <h3 className="w-full h-20 mx-auto mb-3 object-cover opacity-50">
-                              <img
+                          <div className="z-50 p-5 bg-gray-950 backdrop-blur-md rounded-b-xl shadow-2xl shadow-black hover:bg-gray-400/5 h-50">
+                            <h3 className="w-10 h-5 mx-auto mb-3 object-cover opacity-50">
+                              {/* <img
                                 src="/new.jpeg"
                                 alt=""
                                 className="bg-black shadow-2xl shadow-black hover:bg-gray-400/5"
-                              />
+                              /> */}
                             </h3>
-                            <h2 className="text-xl font-bold bg-black shadow-2xl shadow-black  text-center p-10 text-white">
+                          <p className="text-gray-500 text-sm py-2 text-center">
+                            Posted On: {post.timestamp || "Unknown Date"}
+                          </p>
+                            <h2 className="text-sm font-bold bg-black shadow-2xl shadow-black  text-center p-10 text-white -mt-10">
                               {post.title}
                             </h2>
-                            <p className="text-sm text-white line-clamp-4 -mt-5 bg-black p-2 z-50">
+                            <p className="text-xs text-white line-clamp-2 -mt-7 bg-black p-2 z-50 text-center">
                               {post.body}
                             </p>
                           </div>
-                          <p className="text-gray-500 text-sm py-5">
-                            Posted On: {post.timestamp || "Unknown Date"}
-                          </p>
                         </Link>
                       ) : (
                        <div>
