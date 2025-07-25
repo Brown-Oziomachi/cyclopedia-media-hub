@@ -279,11 +279,13 @@ const BlogPage = () => {
               <div className="lg:flex items-center justify-center gap-20 bg-amber-950 rounded-br-full">
                 <div className="max-lg:relative">
                   <h1 className="text-6xl font-bold tracking-tight   max-lg:inset-0 max-lg:top-8 lg:py-10 lg:hidden text-gray-400 mb-5">
+                    <Link href="/blog">
                     <img
                       src="/blog.jpg"
                       alt=""
                       className="z-50 w-fit h-10 max-md:fixed ml-1 mt-1  border-x-green-600 border border-green-600 rounded-md  border-r-white shadow-black shadow-xl"
                     />
+                    </Link>
                     {showContentType === "" ? " " : ""}
                   </h1>
                   <video
