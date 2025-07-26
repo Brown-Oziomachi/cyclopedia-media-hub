@@ -296,7 +296,7 @@ const BlogDetails = ({ params }) => {
         <h1 className="text-2xl font-extrabold text-white text-center drop-shadow-lg mt-5 shadow-black shadow-xl">
           {blog.title}
           <p className="text-gray-500 text-sm py-5">
-           {blog.timestamp || "Unknown Date"}
+            {blog.timestamp || "Unknown Date"}
           </p>
           <div className="">
             <img
@@ -399,6 +399,7 @@ const BlogDetails = ({ params }) => {
           <LinkIcon className="h-4 w-4" />
         </button>
       </div>
+
       {/* Comment Section */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -407,9 +408,16 @@ const BlogDetails = ({ params }) => {
         transition={{ duration: 0.6, delay: 0.3 }}
         className="bg-gray-400/5 shadow-xl rounded-2xl p-2 border border-gray-700 space-y-8 shadow-4xl shadow-black"
       >
-        <h2 className="text-3xl font-extrabold text-white tracking-wide">
-          Join <span className="text-green-600">The</span> Conversation
+        <div className="flex flex-col items-center space-y-4">
+
+        <h2 className="text-2xl font-extrabold text-white tracking-wide">
+          Join <span className="text-green-600 mb-0">The</span> Conversation
         </h2>
+        <span
+          className="star-rating "
+          data-rating="4.2"
+        ></span>
+        </div>
 
         {/* New Comment Input */}
         <div className="lg:flex items-center space-x-5 grid space-y-4 lg:space-y-0 overflow-auto md:overflow-scroll">

@@ -10,4 +10,7 @@ body {
   background-color: #171717;
 }
 
-
+.star-rating::after {
+  content: "★ ★ ★ ★ ★";
+  color: yellow;
+}
