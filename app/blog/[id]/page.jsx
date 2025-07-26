@@ -293,16 +293,16 @@ const BlogDetails = ({ params }) => {
       </p>
 
       <div className="bg-gray-400/5 rounded-xl shadow-lg p-2 border border-gray-700">
-        <h1 className="text-3xl font-extrabold text-white text-center drop-shadow-lg  shadow-black shadow-xl">
+        <h1 className="text-2xl font-extrabold text-white text-center drop-shadow-lg mt-5 shadow-black shadow-xl">
           {blog.title}
           <p className="text-gray-500 text-sm py-5">
-            Posted On: {blog.timestamp || "Unknown Date"}
+           {blog.timestamp || "Unknown Date"}
           </p>
           <div className="">
             <img
               src="/id.jpeg"
               alt=""
-              className="w-full rounded-md mt-2 lg:object-cover"
+              className="w-full rounded-md mt-2 object-cover border-b-black "
             />
             {/* Show video if blog.video exists */}
             {blog.video && (
@@ -414,43 +414,43 @@ const BlogDetails = ({ params }) => {
         {/* New Comment Input */}
         <div className="lg:flex items-center space-x-5 grid space-y-4 lg:space-y-0 overflow-auto md:overflow-scroll">
           <div className="flex gap-2">
-          <img
-            src={session ? session?.user?.image : "/logo.jpg"}
-            alt="Avatar"
-            className="w-12 h-12 rounded-full shadow-md"
-          />
+            <img
+              src={session ? session?.user?.image : "/logo.jpg"}
+              alt="Avatar"
+              className="w-12 h-12 rounded-full shadow-md"
+            />
 
-          <input
-            type="text"
-            placeholder={
-              session ? "What's on your mind?" : "Please sign in to comment"
-            }
-            disabled={!session}
-            className="flex-grow p-5 rounded-lg bg-gray-400/5 text-white border border-green-600 focus:outline-none focus:ring-2 focus:ring-green-600 transition disabled:opacity-50"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-          />
+            <input
+              type="text"
+              placeholder={
+                session ? "What's on your mind?" : "Please sign in to comment"
+              }
+              disabled={!session}
+              className="flex-grow p-5 rounded-lg bg-gray-400/5 text-white border border-green-600 focus:outline-none focus:ring-2 focus:ring-green-600 transition disabled:opacity-50"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+            />
           </div>
 
-            <div className="flex gap-16 items-center justify-center">
-          <button
-            onClick={() => {
-              if (!session) {
-                router.push("/auth/signin");
-              } else {
-                handleCommentSubmit();
-              }
-            }}
-            className="shadow-black lg:px-5 lg:py-2 px-3 py-2 max-md:w-1/2 bg-gradient-to-r from-green-600 to-green-400 text-black font-semibold rounded-lg shadow-xl hover:from-green-600 hover:to-yellow-500 transition"
-            title={session ? "You can now post" : "Please sign in to post"}
-          >
-            Post
-          </button>
-          <a href="/auth/signin" className="text-green-600 underline" >
-            Signin here
-          </a>
+          <div className="flex gap-16 items-center justify-center">
+            <button
+              onClick={() => {
+                if (!session) {
+                  router.push("/auth/signin");
+                } else {
+                  handleCommentSubmit();
+                }
+              }}
+              className="shadow-black lg:px-5 lg:py-2 px-3 py-2 max-md:w-1/2 bg-gradient-to-r from-green-600 to-green-400 text-black font-semibold rounded-lg shadow-xl hover:from-green-600 hover:to-yellow-500 transition"
+              title={session ? "You can now post" : "Please sign in to post"}
+            >
+              Post
+            </button>
+            <a href="/auth/signin" className="text-green-600 underline">
+              Signin here
+            </a>
+          </div>
         </div>
-            </div>
       </motion.div>
 
       {/* List of Comments */}
@@ -553,17 +553,12 @@ const BlogDetails = ({ params }) => {
       {/* Other Blog Suggestions */}
       {otherBlogs.length > 0 && (
         <div className="space-y-6">
-          <Link href="/blog">
-            <h1 className="mb-2 underline  text-center text-xs text-green-600 tracking-widest">
-              Read more blog
-            </h1>
-          </Link>
-          <h2 className="tracking-widest shadow-black shadow-xl text-3xl font-extrabold text-white tracking-wide text-center text-clip py-10 border-t border-t-green-600 border-r-green-600 border-x">
+          <h2 className="tracking-widest shadow-black shadow-xl text-3xl font-extrabold text-white text-center text-clip py-10 border-t border-t-green-600 border-r-green-600 border-x">
             <span className="text-green-600 ">Re</span>commen
             <span className="text-green-600">ded</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6  shadow-black shadow-xl">
-            {otherBlogs.slice(0,5).map((other) => (
+            {otherBlogs.slice(0, 5).map((other) => (
               <Link key={other.id} href={`/blog/${other.id}`}>
                 <div className="  shadow-black shadow-xl bg-gray-400/5 p-6 rounded-xl  hover:bg-gray-800 transition cursor-pointer border-r border-r-green-600">
                   <p className="text-green-600 font-semibold text-sm mb-3">
@@ -572,13 +567,19 @@ const BlogDetails = ({ params }) => {
                   <h3 className="text-sm font-bold text-white mb-2 text-center">
                     {other.title}
                   </h3>
-                  <p className="text-xs text-gray-300 text-sm line-clamp-4 text-center">
+                  <p className="text-xs text-gray-300 line-clamp-4 text-center">
                     {other.body?.slice(0, 50)}...
                   </p>
                 </div>
               </Link>
             ))}
           </div>
+          <Link href="/blog">
+            <h1 className="mb-2 text-center text-sm font-bold text-green-600 tracking-widest border border-green-600 px-5 py-2 shadow-black shadow-xl rounded-lg hover:bg-green-600 hover:text-black transition duration-300 w-fit mx-auto">
+              More Blog
+            </h1>
+          </Link>
+
           <div className="mt-10">
             <h1 className="font-bold font-serif text-green-600">
               Have something to Share?

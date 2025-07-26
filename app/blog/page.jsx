@@ -460,7 +460,7 @@ const BlogPage = () => {
             {!loading &&
               filteredPosts.length > 0 &&
               showContentType !== "gallery" && (
-                <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 ">
+                <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 ">
                   {filteredPosts.map((post) => (
                     <article
                       key={post.id}
@@ -479,8 +479,8 @@ const BlogPage = () => {
                             <div className="h-40 overflow-hidden">
                               <img
                                 src={post.image}
-                                alt={post.title}
-                                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                                alt="Blog Poster"
+                                className="w-full h-full object-cover rounded-t-xl"
                               />
                             </div>
                           )}
@@ -492,13 +492,13 @@ const BlogPage = () => {
                                 className="bg-black shadow-2xl shadow-black hover:bg-gray-400/5"
                               /> */}
                             </h3>
-                          <p className="text-gray-500 text-sm py-2 text-center">
-                            Posted On: {post.timestamp || "Unknown Date"}
+                          <p className="text-gray-500 text-sm py-2">
+                          {post.timestamp || "Unknown Date"}
                           </p>
-                            <h2 className="text-sm font-bold bg-black shadow-2xl shadow-black  text-center p-10 text-white -mt-10">
+                            <h2 className="text-sm font-bold bg-black shadow-2xl shadow-black text-white mt-2">
                               {post.title}
                             </h2>
-                            <p className="text-xs text-white line-clamp-2 -mt-7 bg-black p-2 z-50 text-center">
+                            <p className="text-xs text-white line-clamp-2 mt-3 bg-black p- z-50">
                               {post.body}
                             </p>
                           </div>
