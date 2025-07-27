@@ -280,15 +280,18 @@ const BlogPage = () => {
                 <div className="max-lg:relative">
                   <h1 className="text-6xl font-bold tracking-tight   max-lg:inset-0 max-lg:top-8 lg:py-10 lg:hidden text-gray-400 mb-5">
                     <div id="ups-go"></div>
-                    <div className="" onClick={() => {
-                    const el = document.getElementById("ups-go");
-                    if (el) el.scrollIntoView({ behavior: "smooth" });
-                  }}>
-                    <img
-                      src="/blog.jpg"
-                      alt=""
-                      className="z-50 w-fit h-10 max-lg:fixed ml-1 mt-1  border-b-green-600 border border-green-600 rounded-md  border-x-white shadow-black shadow-xl"
-                    />
+                    <div
+                      className=""
+                      onClick={() => {
+                        const el = document.getElementById("ups-go");
+                        if (el) el.scrollIntoView({ behavior: "smooth" });
+                      }}
+                    >
+                      <img
+                        src="/blog.jpg"
+                        alt=""
+                        className="z-50 w-fit h-10 max-lg:fixed ml-1 mt-1  border-b-green-600 border border-green-600 rounded-md  border-x-white shadow-black shadow-xl"
+                      />
                     </div>
                     {showContentType === "" ? " " : ""}
                   </h1>
@@ -314,7 +317,8 @@ const BlogPage = () => {
 
                     {showContentType === "" ? " " : ""}
                   </h1>
-                  Explore unique insights, stories, histories, news, politics and expert opinions.
+                  Explore unique insights, stories, histories, news, politics
+                  and expert opinions.
                 </p>
               </div>
               <div>
@@ -492,9 +496,9 @@ const BlogPage = () => {
                                 className="bg-black shadow-2xl shadow-black hover:bg-gray-400/5"
                               /> */}
                             </h3>
-                          <p className="text-gray-500 text-sm py-2">
-                          {post.timestamp || "Unknown Date"}
-                          </p>
+                            <p className="text-gray-500 text-sm py-2">
+                              {post.timestamp || "Unknown Date"}
+                            </p>
                             <h2 className="text-sm font-bold bg-black shadow-2xl shadow-black text-white mt-2">
                               {post.title}
                             </h2>
@@ -504,49 +508,51 @@ const BlogPage = () => {
                           </div>
                         </Link>
                       ) : (
-                       <div>
-  {(() => {
-    // Extract YouTube ID safely
-    const extractYouTubeId = (url) => {
-      if (!url) return null;
-      try {
-        const regExp = /^.*(?:youtu.be\/|v\/|embed\/|watch\?v=)([^#\&\?]{11}).*/;
-        const match = url.match(regExp);
-        return match ? match[1] : null;
-      } catch (err) {
-        return null;
-      }
-    };
+                        <div>
+                          {(() => {
+                            // Extract YouTube ID safely
+                            const extractYouTubeId = (url) => {
+                              if (!url) return null;
+                              try {
+                                const regExp =
+                                  /^.*(?:youtu.be\/|v\/|embed\/|watch\?v=)([^#\&\?]{11}).*/;
+                                const match = url.match(regExp);
+                                return match ? match[1] : null;
+                              } catch (err) {
+                                return null;
+                              }
+                            };
 
-    const videoId = extractYouTubeId(post.videoURL);
+                            const videoId = extractYouTubeId(post.videoURL);
 
-    const thumbnailUrl = post.thumbnail
-      ? post.thumbnail
-      : videoId
-      ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
-      : "/video-placeholder.jpg"; // Make sure this file exists in /public
+                            const thumbnailUrl = post.thumbnail
+                              ? post.thumbnail
+                              : videoId
+                              ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+                              : "/video-placeholder.jpg"; // Make sure this file exists in /public
 
-    return (
-      <>
-        <img
-          src={thumbnailUrl}
-          alt="Video thumbnail"
-          className="w-full h-full object-cover"
-        />
-        <div className="p-5">
-          <h2 className="text-2xl font-bold mb-3 mt-5 text-center">{post.title}</h2>
-          <p className="text-sm text-gray-400 mb-4 line-clamp-3">
-            {post.description || post.body}
-          </p>
-          <p className="text-xs text-gray-400 text-right">
-            Posted on {formatTimestamp(post.timestamp)}
-          </p>
-        </div>
-      </>
-    );
-  })()}
-</div>
-
+                            return (
+                              <>
+                                <img
+                                  src={thumbnailUrl}
+                                  alt="Video thumbnail"
+                                  className="w-full h-full object-cover"
+                                />
+                                <div className="p-5">
+                                  <h2 className="text-2xl font-bold mb-3 mt-5 text-center">
+                                    {post.title}
+                                  </h2>
+                                  <p className="text-sm text-gray-400 mb-4 line-clamp-3">
+                                    {post.description || post.body}
+                                  </p>
+                                  <p className="text-xs text-gray-400 text-right">
+                                    Posted on {formatTimestamp(post.timestamp)}
+                                  </p>
+                                </div>
+                              </>
+                            );
+                          })()}
+                        </div>
                       )}
                     </article>
                   ))}
@@ -570,7 +576,7 @@ const BlogPage = () => {
               <h3>📩Reach out to us directly on WhatsApp:</h3>
             </h2>
             <a
-              href="https://wa.me/message/R4UKUMFIH22RJ1"
+              href="https://wa.me/+2348142995114?text=Hello,%20my%20name%20is%20[Your%20Name].%20I'd%20like%20to%20share%20some%20information%20with%20Wiz-Blog."
               target="_self"
               rel="noopener noreferrer"
               className="font-bold text-green-600 cursor-pointer hover:underline"

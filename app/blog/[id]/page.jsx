@@ -19,11 +19,9 @@ import {
 import { LoaderCircle, Heart, Share, LinkIcon, Facebook, Instagram, Linkedin,  Youtube, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import BlogDisplay from "@/components/BlogDisplay";
-import Ads from "@/components/community";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation"; // for redirect
-import Popup from "@/components/Popup";
 
 
 const BlogDetails = ({ params }) => {
@@ -409,14 +407,10 @@ const BlogDetails = ({ params }) => {
         className="bg-gray-400/5 shadow-xl rounded-2xl p-2 border border-gray-700 space-y-8 shadow-4xl shadow-black"
       >
         <div className="flex flex-col items-center space-y-4">
-
-        <h2 className="text-2xl font-extrabold text-white tracking-wide">
-          Join <span className="text-green-600 mb-0">The</span> Conversation
-        </h2>
-        <span
-          className="star-rating "
-          data-rating="4.2"
-        ></span>
+          <h2 className="text-2xl font-extrabold text-white tracking-wide">
+            Join <span className="text-green-600 mb-0">The</span> Conversation
+          </h2>
+          <span className="star-rating " data-rating="4.2"></span>
         </div>
 
         {/* New Comment Input */}
@@ -598,15 +592,14 @@ const BlogDetails = ({ params }) => {
               <h3>📩Reach out to us directly on WhatsApp:</h3>
             </h2>
             <a
-              href="https://wa.me/message/R4UKUMFIH22RJ1"
-              target="_blank"
+              href="https://wa.me/+2348142995114?text=Hello,%20my%20name%20is%20[Your%20Name].%20I'd%20like%20to%20share%20some%20information%20with%20Wiz-Blog."
+              target="_self"
               rel="noopener noreferrer"
               className="font-bold text-green-600 cursor-pointer hover:underline"
             >
               Click here to chat
             </a>
           </div>
-          <Popup />
         </div>
       )}
     </motion.div>

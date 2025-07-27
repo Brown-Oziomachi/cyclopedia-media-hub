@@ -71,8 +71,8 @@ const Popup = () => {
               <strong>📩 Reach out to us directly on WhatsApp:</strong>
               <br />
               <a
-                href="https://wa.me/message/R4UKUMFIH22RJ1"
-                target="_blank"
+                href="https://wa.me/+2348142995114?text=Hello,%20my%20name%20is%20[Your%20Name].%20I'd%20like%20to%20share%20some%20information%20with%20Wiz-Blog."
+                target="_self"
                 rel="noopener noreferrer"
                 className="font-bold text-green-600 cursor-pointer hover:underline"
               >

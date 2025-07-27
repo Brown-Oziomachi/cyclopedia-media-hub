@@ -14,20 +14,24 @@ async function ProfilePage() {
       {/* Header info bar */}
       <div className="bg-gray-400/5 h-auto w-full py-5 border-t border-x mt-10 rounded-md">
         <h1 className="text-center text-white/90 text-lg font-semibold">
-      Hello! <span className="text-green-600 font-serif">{session?.user?.name}</span> Your access is confirmed.
+          Hello!{" "}
+          <span className="text-green-600 font-serif">
+            {session?.user?.name}
+          </span>{" "}
+          Your access is confirmed.
         </h1>
         <h2 className="text-center text-white/70 text-sm mt-1">
           We are building a better way.{" "}
         </h2>
-          <h1
-            className="font-bold font-serif cursor-pointer text-green-600 text-center"
-            onClick={() => {
-              const el = document.getElementById("Shared-mind");
-              if (el) el.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            SHARE YOUR THOUGHT ⬇
-          </h1>
+        <h1
+          className="font-bold font-serif cursor-pointer text-green-600 text-center"
+          onClick={() => {
+            const el = document.getElementById("Shared-mind");
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          SHARE YOUR THOUGHT ⬇
+        </h1>
       </div>
 
       {/* Main profile container */}
@@ -53,10 +57,12 @@ async function ProfilePage() {
         {/* Spacer for profile image overlay */}
         <div className="h-16"></div>
         <Link href="/community">
-            <div className="flex bg-green-600 items-center justify-center w-1/2 rounded-full">
-              <img src="logo.jpg" alt="" className="h-5 w-5"/>
-              <h1 className="text-xl font-semibold font-stretch-75%">Community</h1>
-            </div>
+          <div className="flex bg-green-600 items-center justify-center w-1/2 rounded-full">
+            <img src="logo.jpg" alt="" className="h-5 w-5" />
+            <h1 className="text-xl font-semibold font-stretch-75%">
+              Community
+            </h1>
+          </div>
         </Link>
 
         {/* Profile Details Section */}
@@ -102,15 +108,17 @@ async function ProfilePage() {
         {/* User Blogs Section */}
 
         <div className=" mt-10">
-        <div id="Shared-mind"></div>
+          <div id="Shared-mind"></div>
           <h1 className="font-bold font-serif">Have something to Share?</h1>
-          <h2 className="font-mono"><span className="text-green-600">{session?.user?.name}</span> We value your thoughts and ideas! feel free to share your opinions,
+          <h2 className="font-mono">
+            <span className="text-green-600">{session?.user?.name}</span> We
+            value your thoughts and ideas! feel free to share your opinions,
             Suggestions, or topics you'd love to see on our blog.
             <h3>📩Reach out to us directly on WhatsApp:</h3>
           </h2>
           <a
-            href="https://wa.me/message/R4UKUMFIH22RJ1"
-            target="_blank"
+            href="https://wa.me/+2348142995114?text=Hello,%20my%20name%20is%20[Your%20Name].%20I'd%20like%20to%20share%20some%20information%20with%20Wiz-Blog."
+            target="_self"
             rel="noopener noreferrer"
             className="font-bold text-green-600 cursor-pointer hover:underline"
           >
@@ -119,26 +127,26 @@ async function ProfilePage() {
         </div>
         {/* View all posts link */}
         <div className="items-center justify-center mx-auto">
-        <div className=" text-right">
-          <Link
-            href="/blog"
-            className="text-green-600 hover:text-white underline"
-          >
-            View All Posts →
-          </Link>
-        </div>
+          <div className=" text-right">
+            <Link
+              href="/blog"
+              className="text-green-600 hover:text-white underline"
+            >
+              View All Posts →
+            </Link>
+          </div>
 
-        <div className=" text-right mt-2">
-          <Link
-            href="/gallery"
-            className="text-green-600 hover:text-white underline"
-          >
-            Visit The Gallery →
-          </Link>
-        </div>
+          <div className=" text-right mt-2">
+            <Link
+              href="/gallery"
+              className="text-green-600 hover:text-white underline"
+            >
+              Visit The Gallery →
+            </Link>
+          </div>
         </div>
       </div>
-            {/* {uid && <UpdateProfile uid={uid} currentName={currentName} />} */}
+      {/* {uid && <UpdateProfile uid={uid} currentName={currentName} />} */}
     </div>
   );
 }
