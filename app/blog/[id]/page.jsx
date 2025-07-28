@@ -38,8 +38,8 @@ const BlogDetails = ({ params }) => {
   const [comments, setComments] = useState([]);
   const [replyingTo, setReplyingTo] = useState(null);
   const [replyText, setReplyText] = useState("");
- 
-  
+  const [loading, setLoading] = useState(false);
+
   // Inside your component
   const router = useRouter();
   const handleReplySubmit = async (
@@ -197,6 +197,12 @@ const BlogDetails = ({ params }) => {
     );
   }
 
+  const handleMoreBlogClick = ()=>{
+    setLoading(true);
+    setTimeout(() => {
+      router.push("/blog");
+    }, 1000);
+  }
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -577,9 +583,13 @@ const BlogDetails = ({ params }) => {
             ))}
           </div>
           <Link href="/blog">
-            <h1 className="mb-2 text-center text-sm font-bold text-green-600 tracking-widest border border-green-600 px-5 py-2 shadow-black shadow-xl rounded-lg hover:bg-green-600 hover:text-black transition duration-300 w-fit mx-auto">
-              More Blog
-            </h1>
+            <div className="space-y-6 text-center">
+              <button onClick={handleMoreBlogClick} className="mb-2 text-center text-sm font-bold text-green-600 tracking-widest border border-green-600 px-5 py-2 shadow-black shadow-xl rounded-lg hover:bg-green-600 hover:text-black transition duration-300 w-fit mx-auto" disabled={loading}
+              >
+                {loading? "Loading" : "Read more blog"}
+              </button>
+            </div>
+           
           </Link>
 
           <div className="mt-10">
