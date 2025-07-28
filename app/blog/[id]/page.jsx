@@ -201,7 +201,7 @@ const BlogDetails = ({ params }) => {
     setLoading(true);
     setTimeout(() => {
       router.push("/blog");
-    }, 1000);
+    }, 3000);
   }
   return (
     <motion.div
