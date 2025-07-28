@@ -184,6 +184,13 @@ const BlogDetails = ({ params }) => {
     }
   };
 
+  const handleMoreBlogClick = ()=>{
+    setLoading(true);
+    setTimeout(() => {
+      router.push("/myprofile");
+    }, 3000);
+  }
+  
   if (!blog) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -197,12 +204,6 @@ const BlogDetails = ({ params }) => {
     );
   }
 
-  const handleMoreBlogClick = ()=>{
-    setLoading(true);
-    setTimeout(() => {
-      router.push("/blog");
-    }, 3000);
-  }
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -230,9 +231,17 @@ const BlogDetails = ({ params }) => {
           <div>
             <h4 className="absolute inset-0 -top-20 items-center justify-center flex  underline text-xs text-green-600 text-center font-serif">
               <Link href="/myprofile">
-                VIEW <br /> PROFILE
+                  <button
+                    onClick={ handleMoreBlogClick}
+                    className="mb-2 text-center text-sm text-green-600 tracking-widest  border-green-600 px-5 py-2 shadow-black shadow-xl rounded-lg hover:bg-green-600 hover:text-black transition duration-300 w-fit mx-auto"
+                    disabled={loading}
+                  >
+                    {loading ? "Loading..." : "View profile"}
+                  </button>
+                 <br /> 
               </Link>
             </h4>
+
             <h5 className="mt-2  font-semibold text-white text-2xl ">
               <span className="text-green-600">B</span>row
               <span className="text-green-600">n</span>{" "}
@@ -584,12 +593,14 @@ const BlogDetails = ({ params }) => {
           </div>
           <Link href="/blog">
             <div className="space-y-6 text-center">
-              <button onClick={handleMoreBlogClick} className="mb-2 text-center text-sm font-bold text-green-600 tracking-widest border border-green-600 px-5 py-2 shadow-black shadow-xl rounded-lg hover:bg-green-600 hover:text-black transition duration-300 w-fit mx-auto" disabled={loading}
+              <button
+                onClick={handleMoreBlogClick}
+                className="mb-2 text-center text-sm font-bold text-green-600 tracking-widest border border-green-600 px-5 py-2 shadow-black shadow-xl rounded-lg hover:bg-green-600 hover:text-black transition duration-300 w-fit mx-auto"
+                disabled={loading}
               >
-                {loading? "Loading" : "Read more blog"}
+                {loading ? "Loading" : "Read more blog"}
               </button>
             </div>
-           
           </Link>
 
           <div className="mt-10">

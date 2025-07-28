@@ -3,12 +3,23 @@ import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import Link from "next/link";
 import Ads from "@/components/community";
+import { useState } from "react";
 
 async function ProfilePage() {
   const session = await auth();
+  const [loading, setLoading] = useState(false);
+    const router = router();
   if (!session) {
     redirect("/");
   }
+
+  const handleMoreBlogClick = () => {
+    setLoading(true);
+    setTimeout(() => {
+      router.push("/blog");
+    }, 3000);
+  };
+
   return (
     <div className="min-h-screen bg-gray-400/5 text-white py-12 lg:px-12 mb-10">
       {/* Header info bar */}
@@ -57,11 +68,14 @@ async function ProfilePage() {
         {/* Spacer for profile image overlay */}
         <div className="h-16"></div>
         <Link href="/community">
-          <div className="flex bg-green-600 items-center justify-center w-1/2 rounded-full">
-            <img src="logo.jpg" alt="" className="h-5 w-5" />
-            <h1 className="text-xl font-semibold font-stretch-75%">
-              Community
-            </h1>
+          <div className="space-y-6 text-center">
+            <button
+              onClick={handleMoreBlogClick}
+              className="mb-2 text-center text-sm font-bold text-green-600 tracking-widest border border-green-600 px-5 py-2 shadow-black shadow-xl rounded-lg hover:bg-green-600 hover:text-black transition duration-300 w-fit mx-auto"
+              disabled={loading}
+            >
+              {loading ? "Loading" : "Community"}
+            </button>
           </div>
         </Link>
 
