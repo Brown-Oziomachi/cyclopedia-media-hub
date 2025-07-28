@@ -193,12 +193,19 @@ const BlogDetails = ({ params }) => {
     }
   };
 
-  const handleMoreBlogClick = () => {
+const handleMoreBlogClick = () => {
     setLoading(true);
     setTimeout(() => {
-      router.push("/myprofile");
+      router.push("/blog");
     }, 3000);
-  };
+  };  
+
+  // const handleProfile = () => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     router.push("/myprofile");
+  //   }, 3000);
+  // };
 
   if (!blog) {
     return (
@@ -239,7 +246,7 @@ const BlogDetails = ({ params }) => {
           />
           <div>
             <h4 className="absolute inset-0 -top-20 items-center justify-center flex  underline text-xs text-green-600 text-center font-serif">
-              <Link href="/myprofile">
+              <Link href="/blog">
                 <button
                   onClick={handleMoreBlogClick}
                   className="mb-2 text-center text-sm text-green-600 tracking-widest  border-green-600 px-5 py-2 shadow-black shadow-xl rounded-lg hover:bg-green-600 hover:text-black transition duration-300 w-fit mx-auto"
