@@ -2,6 +2,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import AuthProvider from "@/components/AuthProvider";
 
+
+
 export const metadata = {
   title: "Webwiz Creation - The Sun Web",
   description: "A website development company",

@@ -16,13 +16,22 @@ import {
   getDoc,
   where,
 } from "firebase/firestore";
-import { LoaderCircle, Heart, Share, LinkIcon, Facebook, Instagram, Linkedin,  Youtube, MessageCircle } from "lucide-react";
+import {
+  LoaderCircle,
+  Heart,
+  Share,
+  LinkIcon,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Youtube,
+  MessageCircle,
+} from "lucide-react";
 import Link from "next/link";
 import BlogDisplay from "@/components/BlogDisplay";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation"; // for redirect
-
 
 const BlogDetails = ({ params }) => {
   const resolvedParams = use(params);
@@ -31,7 +40,7 @@ const BlogDetails = ({ params }) => {
   const { data: session } = useSession();
   const [blog, setBlog] = useState(null);
   const [likes, setLikes] = useState(0);
-  const [liked, setLiked] = useState(false);
+  const [Agreed, setAgreed] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
   const [otherBlogs, setOtherBlogs] = useState([]);
   const [newComment, setNewComment] = useState("");
@@ -118,7 +127,7 @@ const BlogDetails = ({ params }) => {
   useEffect(() => {
     const storedLiked = localStorage.getItem(`liked-${id}`);
     if (storedLiked) {
-      setLiked(true);
+      setAgreed(true);
     }
   }, [id]);
 
@@ -172,10 +181,10 @@ const BlogDetails = ({ params }) => {
   };
 
   const handleLikeClick = async () => {
-    const newLikes = liked ? likes - 1 : likes + 1;
-    setLiked(!liked);
+    const newLikes = Agreed ? likes - 1 : likes + 1;
+    setAgreed(!Agreed);
     setLikes(newLikes);
-    localStorage.setItem(`liked-${id}`, (!liked).toString());
+    localStorage.setItem(`liked-${id}`, (!Agreed).toString());
     try {
       const blogRef = doc(db1, "blog", id);
       await updateDoc(blogRef, { likes: newLikes });
@@ -184,13 +193,13 @@ const BlogDetails = ({ params }) => {
     }
   };
 
-  const handleMoreBlogClick = ()=>{
+  const handleMoreBlogClick = () => {
     setLoading(true);
     setTimeout(() => {
       router.push("/myprofile");
     }, 3000);
-  }
-  
+  };
+
   if (!blog) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -231,14 +240,14 @@ const BlogDetails = ({ params }) => {
           <div>
             <h4 className="absolute inset-0 -top-20 items-center justify-center flex  underline text-xs text-green-600 text-center font-serif">
               <Link href="/myprofile">
-                  <button
-                    onClick={ handleMoreBlogClick}
-                    className="mb-2 text-center text-sm text-green-600 tracking-widest  border-green-600 px-5 py-2 shadow-black shadow-xl rounded-lg hover:bg-green-600 hover:text-black transition duration-300 w-fit mx-auto"
-                    disabled={loading}
-                  >
-                    {loading ? "Loading..." : "View profile"}
-                  </button>
-                 <br /> 
+                <button
+                  onClick={handleMoreBlogClick}
+                  className="mb-2 text-center text-sm text-green-600 tracking-widest  border-green-600 px-5 py-2 shadow-black shadow-xl rounded-lg hover:bg-green-600 hover:text-black transition duration-300 w-fit mx-auto"
+                  disabled={loading}
+                >
+                  {loading ? "Loading..." : "View profile"}
+                </button>
+                <br />
               </Link>
             </h4>
 
@@ -300,11 +309,9 @@ const BlogDetails = ({ params }) => {
           </a>
         </div>
       </div>
-
       <p className="-mt-15 text-center text-xs text-shadow-2xs border-b border-x border-x-green-600 px-0 border-gray-400/20 rounded-md">
         Learn, unlearn <span className="text-green-600">and</span> relearn.
       </p>
-
       <div className="bg-gray-400/5 rounded-xl shadow-lg p-2 border border-gray-700">
         <h1 className="text-2xl font-extrabold text-white text-center drop-shadow-lg mt-5 shadow-black shadow-xl">
           {blog.title}
@@ -318,52 +325,57 @@ const BlogDetails = ({ params }) => {
               className="w-full rounded-md mt-2 object-cover border-b-black "
             />
             {/* Show video if blog.video exists */}
-            {blog.video && (
-              <video
-                src={blog.video}
-                controls
-                className="w-full rounded-md mt-4"
-              >
-                Your browser does not support the video tag.
-              </video>
-            )}
-          </div>
-        </h1>
-        <BlogDisplay body={blog.body} />
-      </div>
-      <div className="flex flex-col-1 justify-center gap-4 items-center shadow-lg text-sm">
-        <button
-          onClick={handleLikeClick}
-          className="border flex items-center text-gray-300 py-2 px-4 rounded-lg hover:text-blue-500 transition-all"
-          aria-label="Like Button"
-        >
-          <Heart
-            className={`h-4 w-4 mr-2 transition-transform ${
-              liked ? "fill-red-500 scale-110" : "fill-none"
-            }`}
-          />
-          {liked ? "" : ""} ({likes})
-        </button>
+                  {blog.video && (
+                    <video
+                    src={blog.video}
+                    controls
+                    className="w-full rounded-md mt-4"
+                    >
+                    Your browser does not support the video tag.
+                    </video>
+                  )}
+                  </div>
+                </h1>
+                <BlogDisplay body={blog.body} />
+                </div>
+                
+                <div className="flex flex-col-1 justify-center gap-3 items-center shadow-lg text-sm ">
+                <button
+                  onClick={handleLikeClick}
+                  className={`border flex md:flex-row items-center justify-center text-sm py-2 px-5 rounded-lg transition-all ${
+                  Agreed
+                    ? "text-green-600 hover:text-green-700"
+                    : "text-gray-400 hover:text-red-600"
+                  }`}
+                  aria-label="Like Button"
+                >
+                  <div
+                  className={`transition-transform ${
+                    Agreed ? "scale-110 -ml-2" : ""
+                  }`}
+                  />
+                  {Agreed ? "Agreed" : "Agree"} ({likes})
+                </button>
 
-        <div
-          className="border flex items-center gap-1 text-gray-400 font-semibold py-2 px-6 rounded-lg hover:bg-gray-800 transition"
-          title="Number of Comments"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4 mr-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M17 8h2a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2v-2m12-8V6a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2h2"
-            />
-          </svg>
-          {
+                <div
+                  className="border flex items-center gap-1 text-gray-400 font-semibold py-2 px-6 rounded-lg hover:bg-gray-800 transition"
+                  title="Number of Comments"
+                >
+                  <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4 mr-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8h2a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2v-2m12-8V6a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2h2"
+                  />
+                  </svg>
+                  {
             // Count comments + all replies
             comments.reduce(
               (total, comment) =>
@@ -412,7 +424,6 @@ const BlogDetails = ({ params }) => {
           <LinkIcon className="h-4 w-4" />
         </button>
       </div>
-
       {/* Comment Section */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -425,7 +436,6 @@ const BlogDetails = ({ params }) => {
           <h2 className="text-2xl font-extrabold text-white tracking-wide">
             Join <span className="text-green-600 mb-0">The</span> Conversation
           </h2>
-          <span className="star-rating " data-rating="4.2"></span>
         </div>
 
         {/* New Comment Input */}
@@ -469,7 +479,6 @@ const BlogDetails = ({ params }) => {
           </div>
         </div>
       </motion.div>
-
       {/* List of Comments */}
       <ul className=" space-y-6 max-h-[500px] overflow-y-auto  pr-3 scrollbar-thin scrolbar-thumb-green-600 scrollbar-track-gray-800">
         {comments.length > 0 ? (
@@ -489,6 +498,9 @@ const BlogDetails = ({ params }) => {
                   />
                   <div className=" bg-gray-700/10 rounded-lg  ml-5 ">
                     <Link href={"/users/${post.profile}"}>
+                      
+                      <span className="star-rating ml-5" data-rating="4.2"></span>
+
                       <p className="text-white font-semibold ml-5">
                         {comment.userName} {comment.profile}
                       </p>
@@ -566,7 +578,6 @@ const BlogDetails = ({ params }) => {
           <p className="text-gray-400">Be the first to comment!</p>
         )}
       </ul>
-
       {/* Other Blog Suggestions */}
       {otherBlogs.length > 0 && (
         <div className="space-y-6">
