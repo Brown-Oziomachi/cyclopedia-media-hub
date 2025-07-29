@@ -91,19 +91,16 @@ const Page = () => {
           drives real results. Drop a comment or DM me to get started.
         </p>
         <div className="flex flex-wrap justify-center gap-6">
-          <Link href="/">
-          <p className="line-block px-6 py-3 bg-gray-400/5 border-x border-x-green-600 hover:bg-gray-500/10 rounded-lg font-semibold text-white shadow-lg transition">Return </p>
-          </Link>
-          <p
+          <a
             href="mailto:webwizcreation.web@gmail.com"
             className="cursor-pointer inline-block px-6 py-3 bg-gray-400/5 border-x border-x-green-600 hover:bg-gray-500/10 rounded-lg font-semibold text-white shadow-lg transition"
             aria-label="Send an email message"
           >
             Message us
-          </p>
+          </a>
           <Link
             href="/blog" 
-            className="inline-block px-6 py-3 underline rounded-lg font-semibold text-white shadow-lg transition border-x border-x-green-600 hover:no-underline"
+            className="inline-block px-6 py-3 rounded-lg font-semibold text-white shadow-lg transition border-x border-x-green-600 hover:no-underline"
             aria-label="Visit blog page"
           >
             Visit Blog

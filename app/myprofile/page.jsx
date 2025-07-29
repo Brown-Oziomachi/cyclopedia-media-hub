@@ -469,7 +469,7 @@ const fadeIn = {
                 </a>
                 <a
                   href="https://docs.google.com/document/d/1qOyfN6tep1N_eR8wgfoKTPxCeH7FP3e7J-VKJjwbeAI/edit?usp=sharing"
-                  target="_blank"
+                  target="_self"
                   rel="noopener noreferrer"
                   className="text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-5 px-4 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
                 >
@@ -477,7 +477,7 @@ const fadeIn = {
                 </a>
                 <a
                   href="https://wa.me/qr/RX4M5D4PGB7CO1"
-                  target="_blank"
+                  target="_self"
                   rel="noopener noreferrer"
                   className="text-sm bg-gray-400/5 border-x border-x-green-600 text-white py-5 px-4 rounded-lg shadow-lg hover:bg-blue-800 transition duration-300"
                 >
