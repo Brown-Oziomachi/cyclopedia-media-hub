@@ -58,7 +58,7 @@ const Page = () => {
             <img
               src="web18.jpg"
               alt="image"
-              className="w-full h-fit lg:h-300 opacity-100 border-b-4 border-b-green-600"
+              className="w-full h-fit lg:h-300 opacity-0 border-b-4 border-b-green-600 "
             />
           </div>
           <main className=" flex flex-col justify-center items-center h- lg:h-2 text-center px-4 lg:px-0 max-lg:mt-10 opacity-100 lg:-mt-100">

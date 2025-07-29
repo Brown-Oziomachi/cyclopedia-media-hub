@@ -14,3 +14,17 @@ body {
   content: "★ ★ ★ ★ ★";
   color: yellow;
 }
+
+@keyframes draw-border {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-borderline {
+  border-width: 2px;
+  border-style: solid;
+  border-image-slice: 1;
+  border-image-source: conic-gradient(from 0deg, blue 0%, transparent 0%);
+  animation: traceBorder 50s linear forwards;
+}
