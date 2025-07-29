@@ -260,7 +260,7 @@ const ProfileDropdownNavbar = () => {
         }`}
       >
         <div className="flex items-center justify-center mb-5">
-          <img src="logo.jpg" alt="logo" className="h-20 w-20 mt-10" />{" "}
+          <img src="/logo.jpg" alt="logo" className="h-20 w-20 mt-10" />{" "}
         </div>
 
         {session?.user?.image && (
