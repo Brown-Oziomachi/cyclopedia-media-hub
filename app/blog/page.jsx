@@ -317,7 +317,7 @@ const BlogPage = () => {
 
                     {showContentType === "" ? " " : ""}
                   </h1>
-                  Explore unique insights, stories, histories, news, politics
+                  Explore unique insights, research, trends, stories, histories, news, politics
                   and expert opinions.
                 </p>
               </div>

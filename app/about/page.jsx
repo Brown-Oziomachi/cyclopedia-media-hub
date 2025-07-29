@@ -34,7 +34,11 @@ const About = () => {
             <h1 className="text-5xl font-extrabold mb-8 tracking-tight mt-20">
               About Webwiz Creation
             </h1>
-            <img src="web23.jpg" alt="image" />
+            <img
+              src="web23.jpg"
+              alt="image"
+              className="shadow-2xl shadow-black rounded-b-4xl"
+            />
             <p className="text-gray-400 mb-10 text-xs border-b border-b-green-600 border-x border-x-green-600">
               webwiz creation is a dynamic software development company. <br />
               Developed by: Brown Code
@@ -66,7 +70,7 @@ const About = () => {
               <h2 className="text-4xl font-bold text-center mb-14 tracking-wide">
                 What Sets Us Apart
               </h2>
-              <div className="grid gap-10 md:grid-cols-3">
+              <div className="grid gap-10 md:grid-cols-3 shadow-2xl shadow-black">
                 {[
                   {
                     title: "Responsive Web Design",
@@ -83,7 +87,7 @@ const About = () => {
                 ].map(({ title, desc }) => (
                   <div
                     key={title}
-                    className="bg-gray-700/5 border-x border-x-green-600 rounded-lg p-8 shadow-md hover:shadow-xl transition-shadow"
+                    className="bg-gray-700/5 shadow-2xl shadow-black border-x border-x-green-600 rounded-lg p-8 shadow-md hover:shadow-xl transition-shadow"
                   >
                     <h3 className="text-2xl font-semibold mb-4">{title}</h3>
                     <p className="text-gray-700 leading-relaxed">{desc}</p>
@@ -94,20 +98,20 @@ const About = () => {
           </section>
 
           {/* Journey Section */}
-          <section className="py-16 bg-gray-400/5 border-x border-x-green-600 text-white">
+          <section className="py-16 bg-gray-400/5 shadow-2xl shadow-black border-x border-x-green-600 text-white">
             <div className="container mx-auto max-w-5xl px-6">
               <h2 className="text-4xl font-bold text-center mb-14 tracking-wide">
                 Our Journey
               </h2>
               <div className="grid gap-10 md:grid-cols-2">
-                <div className="bg-gray-400/5 border-x border-x-green-600 rounded-lg p-8 shadow-lg">
+                <div className="bg-gray-400/5 shadow-2xl shadow-black border-x border-x-green-600 rounded-lg p-8 ">
                   <h3 className="text-3xl font-semibold mb-3">2024</h3>
                   <p className="leading-relaxed text-gray-300">
                     Founded with a vision to revolutionize web design and
                     deliver value-driven, client-focused solutions.
                   </p>
                 </div>
-                <div className="bg-gray-400/5 border-x border-x-green-600 rounded-lg p-8 shadow-xl">
+                <div className="bg-gray-400/5 shadow-2xl shadow-black border-x border-x-green-600 rounded-lg p-8 ">
                   <h3 className="text-3xl font-semibold mb-3">2025</h3>
                   <p className="leading-relaxed text-gray-300">
                     Expanded our global footprint, serving clients across 10+
@@ -119,13 +123,13 @@ const About = () => {
           </section>
 
           {/* Testimonials Section */}
-          <section className="py-16 bg-gray-50">
+          <section className="py-16 bg-gray-50 shadow-2xl shadow-black">
             <div className="container mx-auto max-w-7xl px-6 text-center">
               <h2 className="text-4xl font-bold mb-14 tracking-wide text-gray-900">
                 What Our Clients Say
               </h2>
               <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3 border-b-5 rounded-lg border-b-green-600">
-                <blockquote className="bg-white p-8 rounded-lg shadow-md italic text-gray-700 border-b-5 border-b-green-600">
+                <blockquote className="bg-white shadow-2xl shadow-black p-8 rounded-lg  italic text-gray-700 border-b-5 border-b-green-600">
                   “Webwiz Creation turned our ideas into an incredible website!
                   Their attention to detail and creativity exceeded our
                   expectations.”
@@ -133,7 +137,7 @@ const About = () => {
                     — Sarah A.
                   </footer>
                 </blockquote>
-                <blockquote className="bg-white p-8 rounded-lg shadow-md italic text-gray-700">
+                <blockquote className="bg-white shadow-2xl shadow-black p-8 rounded-lg  italic text-gray-700 border-b-5 border-b-green-600">
                   “The team was professional, timely, and a pleasure to work
                   with. Highly recommended!”
                   <footer className="mt-6 font-semibold text-gray-900">

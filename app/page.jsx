@@ -37,31 +37,38 @@ const Page = () => {
 
   return (
     <>
-       {loading ? (
-              <div className="flex justify-center items-center h-screen bg-gray-400/5">
-               
-                <img
-                        src="logo.jpg"
-                        alt="My Logo"
-                        className="h-30 lg:h-30 mt-10 lg:object-cover animate-pulse absolute top-30 left-0 right-0 bottom-0 mx-auto"
-                      />
-                      <div className="text-center space-y-20 mt-10">
-                <LoaderCircle size={50} speed={1.1} color="green" className="animate-spin ml-20" />
+      {loading ? (
+        <div className="flex justify-center items-center h-screen bg-gray-400/5">
+          <img
+            src="logo.jpg"
+            alt="My Logo"
+            className="h-30 lg:h-30 mt-10 lg:object-cover animate-pulse absolute top-30 left-0 right-0 bottom-0 mx-auto"
+          />
+          <div className="text-center space-y-20 mt-10">
+            <LoaderCircle
+              size={50}
+              speed={1.1}
+              color="green"
+              className="animate-spin ml-20"
+            />
 
-                      <h1 className="text-green-600  text-center text-2xl"><span className="text-3xl">W</span>eb<span className="text-3xl">W</span>iz Creation</h1>
-                      </div>
-              </div>
-            ) : (
-        <div className="py-18 text-white relative overflow-hidden bg-gray-400/5">
+            <h1 className="text-green-600  text-center text-2xl">
+              <span className="text-3xl">W</span>eb
+              <span className="text-3xl">W</span>iz Creation
+            </h1>
+          </div>
+        </div>
+      ) : (
+        <div className="py-18 text-white relative overflow-hidden bg-black">
           {/* Hero Section */}
           <div>
             <img
-              src="web18.jpg"
+              src="code.png"
               alt="image"
-              className="w-full h-fit lg:h-300 opacity-0 border-b-4 border-b-green-600 "
+              className="w-full h-80 lg:h-200 opacity-0 bg-black border-b-4 border-b-green-600 "
             />
           </div>
-          <main className=" flex flex-col justify-center items-center h- lg:h-2 text-center px-4 lg:px-0 max-lg:mt-10 opacity-100 lg:-mt-100">
+          <main className=" flex flex-col justify-center items-center lg:h-2 text-center px-4 lg:px-0 max-lg:mt-10 opacity-100 lg:-mt-100">
             <div className="space-y-2 absolute">
               {/* Webwiz Creation Title */}
 
@@ -78,29 +85,28 @@ const Page = () => {
 
                 <h1 className="text-5xl font-bold text-white max-md:text-2xl flex items-center justify-center border border-{animate-ping} border-green-600 border-r-white border-b-white py-2 px-10 bg-gray-900 rounded-md gap-5">
                   <div className="absolute w-10 h-10 rounded-full z-0 mr-75 max-md:ml-30 bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse"></div>
-                  
                   <span className="text-green-600 "> | Sun </span>Web |
                 </h1>
               </div>
 
               {/* Description Text */}
-              <p className="text-lg lg:text-2xl text-gray-300 max-w-3xl mx-auto max-md:w-1/2">
+              <p className="text-sm lg:text-2xl text-gray-300 max-w-3xl mx-auto max-md:w-1/2">
                 "Where the <span className="text-green-600">Sun</span> Meets
                 Your Vision"
               </p>
 
               {/* Buttons */}
-              <div className="flex justify-center gap-4 mt-2 group">
+              <div className="flex justify-center gap-4 mt-2 group text-sm">
                 <Link href="/contact">
-                  <button className="bg-gray-400/5 border-x border-x-green-600 cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg group-hover:bg-white group-hover:text-black ">
+                  <button className="bg-gray-400/5 border-x border-x-green-600 cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-xl shadow-black group-hover:bg-white group-hover:text-black ">
                     Get Started
-                    <ArrowRightToLine className="text-green-600"/>
+                    <ArrowRightToLine className="text-green-600" />
                   </button>
                 </Link>
                 <Link href="/about">
-                  <button className="bg-gray-400/5 border-y border-y-green-600 cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg group-hover:bg-white group-hover:text-black ">
+                  <button className="bg-gray-400/5 shadow-black shadow-2xl cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all group-hover:bg-white group-hover:text-black ">
                     Learn More
-                    <ChevronRight className="text-green-600"/>
+                    <ChevronRight className="text-green-600" />
                   </button>
                 </Link>
               </div>
@@ -111,7 +117,7 @@ const Page = () => {
 
       <div className="relative bg-gray-400/5 mb-0  items-center justify-center"></div>
       {/* Mobile heading */}
-      <h1 className="mt-10 text-4xl lg:text-6xl font-extrabold text-white tracking-wide lg:hidden text-center">
+      <h1 className="mt-5 mb-5 text-4xl lg:text-6xl font-extrabold text-white tracking-wide lg:hidden text-center">
         Ready to Elevate Your Digital Presence?
       </h1>
       <div className="py-2 bg-gray-400/5 text-center lg:flex items-center justify-center">
@@ -120,7 +126,7 @@ const Page = () => {
             <img
               src="web20.jpg"
               alt="Elevate Your Digital Presence"
-              className="mt-5 w-400 lg:h-200 rounded-t-lg group-hover:opacity-80 transition duration-300"
+              className="mt-5 w-400 lg:h-200 rounded-t-lg group-hover:opacity-80 transition duration-300 shadow-2xl shadow-black"
             />
           </div>
         </h2>
@@ -151,11 +157,15 @@ const Page = () => {
       </div>
 
       {/* ACTION SECTION */}
-      <div className="mx-auto px-6 lg:px-50 py-16 bg-gray-400/10 border-green-600 border-x-green-600  border shadow-[0_0_40px_10px_rgba(255,165,0,0.3)] rounded-lg">
+      <div className="shadow-2xl shadow-black mx-auto px-6 lg:px-50 py-16 bg-gray-400/10 border-green-600 border-x-green-600  border shadow-[0_0_40px_10px_rgba(255,165,0,0.3)] rounded-lg">
         <h2 className="text-center text-5xl font-extrabold text-white mb-6 animate-fade-in">
           Join WebWiz Today!
         </h2>
-        <img src="web5.jpg" alt="image" className="mx-auto" />
+        <img
+          src="web5.jpg"
+          alt="image"
+          className="mx-auto shadow-2xl shadow-black"
+        />
         <hr className="border-gray-700 " />
         <p className="text-center text-gray-400 max-w-3xl mx-auto leading-loose">
           WebWiz isn’t just a platform; it’s a radiant space where innovation
@@ -198,29 +208,32 @@ const Page = () => {
           },
         ].map((item, index) => (
           <div className="items-center justify-center flex flex-col-2">
-          <div
-            key={index}
-            className="bg-gray-400/10 z-0 p-5 -mt-15 rounded-lg flex flex-col items-center justify-center shadow-lg shadow-green-600 transition border-l-4 border-black mb-10 "
-          >
-            <h3 className="text-2xl font-bold text-white mb-4 z-50">
-              {item.title}
-            </h3>
-            <img
-              src={item.img}
-              alt={item.title}
-              className="w-fit ml-auto lg:h-300 rounded-t-lg mb-5 group-hover:opacity-80 transition duration-300"
-            />{" "}
-            <h6 className="text-gray-400 mb-6">{item.description}</h6>
-            <div className="flex text-xs gap-4 group">
-              {item.buttons.map((button, i) => (
-                <Link key={i} href={button.href}>
-                  <p className="group-hover:text-black px-4 py-2 bg-gray-400/5 border-x border-x-green-600 text-white hover:text-white rounded-lg font-semibold hover:bg-orange-600 transition flex items-center gap-1">
-                    {button.text} {button.icon && <button.icon  className="text-green-600"/>}
-                  </p>
-                </Link>
-              ))}
+            <div
+              key={index}
+              className="bg-gray-400/10 shadow-2xl shadow-black z-0 p-5 -mt-15 rounded-lg flex flex-col items-center justify-center shadow-lg shadow-green-600 transition border-l-4 border-black mb-10 "
+            >
+              <h3 className="text-2xl font-bold text-white mb-4 z-50">
+                {item.title}
+              </h3>
+              <img
+                src={item.img}
+                alt={item.title}
+                className="w-fit ml-auto lg:h-300 rounded-t-lg mb-5 group-hover:opacity-80 transition duration-300"
+              />{" "}
+              <h6 className="text-gray-400 mb-6">{item.description}</h6>
+              <div className="flex text-xs gap-4 group">
+                {item.buttons.map((button, i) => (
+                  <Link key={i} href={button.href}>
+                    <p className="group-hover:text-black px-4 py-2 bg-gray-400/5 border-x border-x-green-600 text-white hover:text-white rounded-lg font-semibold hover:bg-orange-600 transition flex items-center gap-1">
+                      {button.text}{" "}
+                      {button.icon && (
+                        <button.icon className="text-green-600" />
+                      )}
+                    </p>
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
           </div>
         ))}
       </div>
@@ -268,12 +281,12 @@ const Page = () => {
           ].map((item, index) => (
             <div
               key={index}
-              className="bg-gray-400/10 hover:bg-gray-800 p-5 rounded-xl shadow-lg transition-transform transform hover:scale-105 text-center group"
+              className="bg-gray-400/10 shadow-2xl shadow-black hover:bg-gray-800 p-5 rounded-xl transition-transform transform hover:scale-105 text-center group"
             >
               <img
                 src={item.img}
                 alt={item.title}
-                className="w-full h-48 object-cover rounded-t-lg mb-5 group-hover:opacity-80 transition duration-300"
+                className="w-full h-48 shadow-2xl shadow-black object-cover rounded-t-lg mb-5 group-hover:opacity-80 transition duration-300"
               />
               <h3 className="text-2xl font-extrabold text-white group-hover:text-orange-500 transition duration-300 mb-3">
                 {item.title}
@@ -282,10 +295,10 @@ const Page = () => {
                 {item.description}
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                {item.buttons.map((button , btnIndex) => (
-                  <Link key={btnIndex} href={button.href} >
+                {item.buttons.map((button, btnIndex) => (
+                  <Link key={btnIndex} href={button.href}>
                     <p className="flex gap-1 cursor-pointer px-4 py-2 bg-gray-400/5 border-x border-x-green-600 hover:bg-orange-600 text-white font-medium rounded-full shadow-md transition duration-300">
-                      {button.text} <ChevronRight  className="text-green-600"/>
+                      {button.text} <ChevronRight className="text-green-600" />
                     </p>
                   </Link>
                 ))}
@@ -293,13 +306,13 @@ const Page = () => {
             </div>
           ))}
         </div>
-          <div 
-          showpopup
-          id="/corevalue">Hello</div>
+        <div showpopup id="/corevalue">
+          Hello
+        </div>
         {/* SERVICES SECTION */}
         <div id="services-section"></div>
         <div className=" text-white py-20 mt-20">
-        <div id="services"></div>
+          <div id="services"></div>
           <h2 className="text-center text-5xl font-extrabold text-white mb-12 tracking-wide uppercase animate-fade-in">
             Explore Our Exceptional Services
           </h2>
@@ -336,7 +349,7 @@ const Page = () => {
             ].map((service, index) => (
               <div
                 key={index}
-                className="bg-gray-400/10 text-black p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group"
+                className="bg-gray-400/10 shadow-2xl shadow-black text-black p-6 rounded-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group"
               >
                 <div className="group-hover:animate-bounce m-5 text-green-600">
                   {service.icon}
@@ -345,7 +358,7 @@ const Page = () => {
                   <img
                     src={service.img}
                     alt={service.title}
-                    className="w-full object-cover rounded-t-lg mb-3 group-hover:opacity-80 transition duration-300"
+                    className="w-full object-cover shadow-2xl shadow-black rounded-t-lg mb-3 group-hover:opacity-80 transition duration-300"
                   />
                 )}
                 <h3 className="text-center text-2xl font-bold mt-3 group-hover:text-cyan-400 transition text-white">
@@ -360,17 +373,17 @@ const Page = () => {
         </div>
         <div>
           <div id="/#services">
-          <h1 className="text-2xl text-gray-400 text-center border-x underline cursor-pointer">
-            MORE FEATURES
-          </h1>
-          <p className="text-center text-green-600 text-sm cursor-pointer ">
-            view all the services we can offer{" "}
-          </p>
+            <h1 className="text-2xl text-gray-400 text-center border-x underline cursor-pointer">
+              MORE FEATURES
+            </h1>
+            <p className="text-center text-green-600 text-sm cursor-pointer ">
+              view all the services we can offer{" "}
+            </p>
           </div>
         </div>
         {/* CTA SECTION */}
-        <section className="mt-20 bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.1)] animate-pulse">
-          <div className="container mx-auto px-5 lg:px-20 text-center bg-black py-20 rounded-md">
+        <section className="mt-20 bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.1)] ">
+          <div className="container mx-auto px-5 lg:px-20 text-center bg-black py-20 rounded-md shadow-2xl shadow-black">
             <h2 className="text-4xl font-bold text-white mb-5">
               Join Webwiz Today!
             </h2>

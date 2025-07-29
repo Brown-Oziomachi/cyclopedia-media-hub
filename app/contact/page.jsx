@@ -81,11 +81,11 @@ const ContactPage = () => {
               <h1 className="text-5xl font-extrabold text-white text-center">
                 Contact WebWiz
               </h1>
-              <div className="container mx-auto lg:space-x-2">
+              <div className="container mx-auto lg:space-x-2 shadow-2xl shadow-black ">
                 <img
                   src="web22.jpg"
                   alt="Webwiz Logo"
-                  className="w-full mx-auto "
+                  className="w-full mx-auto shadow-2xl shadow-black "
                 />
                 <h2 className="text-xl text-gray-400 uppercase tracking-wider mb-4 text-center border-b border-x border-x-green-600 border-b-green-600">
                   BUILD A SYSTEM WITH <br /> THE SUN WEB
@@ -137,7 +137,7 @@ const ContactPage = () => {
               >
                 {() => (
                   <Form>
-                    <h2 className="text-3xl font-semibold max-md:mb-8 text-white text-center py-2 rounded-md border-t border-x border-x-green-600 border-t-green-600">
+                    <h2 className=" shadow-2xl shadow-black  text-3xl font-semibold max-md:mb-8 text-white text-center py-2 rounded-md border-t border-x border-x-green-600 border-t-green-600">
                       Contact Form
                     </h2>
 
@@ -181,7 +181,7 @@ const ContactPage = () => {
                     <button
                       type="submit"
                       disabled={processing}
-                      className="w-full py-3 rounded bg-gray-400/10 border-b border-b-green-600 border-x border-x-green-600 text-white font-semibold hover:bg-gray-300 transition mb-0"
+                      className="shadow-2xl shadow-black  w-full py-3 rounded bg-gray-400/10 border-b border-b-green-600 border-x border-x-green-600 text-white font-semibold hover:bg-gray-300 transition mb-0"
                     >
                       {processing ? (
                         <LoaderCircle

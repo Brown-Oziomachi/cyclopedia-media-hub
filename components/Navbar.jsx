@@ -23,7 +23,7 @@ const ProfileDropdownNavbar = () => {
     // { text: "POST", url: "/upload-to-blog" },
     { text: "Contact", url: "/contact" },
     { text: "Services", url: "/#services-section" },
-    { text: "News", url: "/news" },
+    // { text: "News", url: "/news" },
     { text: "Developers", url: "/developers" },
     { text: "Project", url: "/projects" },
     { text: "Youtube", url: "/youtubevideos" },
@@ -40,10 +40,10 @@ const ProfileDropdownNavbar = () => {
             alt="/Logo"
             width={30}
             height={30}
-            className=" shadow-md hover:shadow-lg transition-shadow duration-300 object-cover"
+            className=" shadow-md hover:shadow-lg transition-shadow duration-300 object-cover animate-pulse brightness-125"
           /></Link>
 
-          <h1 className="text-white -ml-5 border-b border-b-green-600">WebWiz</h1>
+          <h1 className="text-white -ml-5 border-b border-t border-t-green-600 border-b-green-600">WebWiz</h1>
         </span>
 
         {/* Desktop Navigation */}

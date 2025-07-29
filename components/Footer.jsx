@@ -40,10 +40,14 @@ const Footer = () => {
         {/* Brand */}
         <div>
           <div className="text-4xl flex justify-center">
-            <img src="logo.jpg" alt="logo" className="w-20 h-20 mx-auto" />
+            <img
+              src="logo.jpg"
+              alt="logo"
+              className="w-20 h-20 mx-auto shadow-2xl shadow-black"
+            />
           </div>
           <p className="text-gray-400 text-sm mt-4">
-            &copy; 2025 Webwiz Creation. All rights reserved.
+            &copy; 2025 Webwizx Creation. All rights reserved.
           </p>
           <div className="mt-4 flex flex-col sm:flex-row gap-2 sm:gap-4 text-sm items-center justify-center">
             <Link
@@ -69,7 +73,9 @@ const Footer = () => {
 
         {/* Contact Info */}
         <div>
-          <h3 className="text-lg font-semibold mb-4 text-green-600">Contact Us</h3>
+          <h3 className="text-lg font-semibold mb-4 text-green-600">
+            Contact Us
+          </h3>
           <p>
             Email:{" "}
             <span className="text-gray-300">webwizcreation.web@gmail.com</span>
@@ -82,7 +88,9 @@ const Footer = () => {
 
         {/* Newsletter */}
         <div>
-          <h3 className="text-lg font-semibold mb-4 text-green-600">Subscribe to Updates</h3>
+          <h3 className="text-lg font-semibold mb-4 text-green-600">
+            Subscribe to Updates
+          </h3>
           {/* Mailchimp subscription form */}
           <div className="max-w-7xl gap-4 flex flex-col items-center">
             <form
@@ -117,8 +125,10 @@ const Footer = () => {
       </div>
 
       {/* Divider */}
-      <div className="border-t border-gray-700 mb-5 pt-6 text-center mt-10">
-        <h4 className="text-md font-semibold mb-5 text-xl text-green-600">Quick Links</h4>
+      <div className="border-t border-gray-700 mb-5 pt-6 text-center mt-10 lg:mb-10">
+        <h4 className="text-md font-semibold mb-5 text-xl text-green-600">
+          Quick Links
+        </h4>
         <ul className="flex flex-wrap  xs:flex-row sm:flex-row md:flex-wrap justify-center gap-2 sm:gap-4 md:gap-6 text-sm text-gray-300">
           <li>
             <Link href="/blog" className="hover:text-white underline">
@@ -141,7 +151,10 @@ const Footer = () => {
             </Link>
           </li>
           <li>
-            <Link href="/#services-section" className="hover:text-white underline">
+            <Link
+              href="/#services-section"
+              className="hover:text-white underline"
+            >
               Services
             </Link>
           </li>
@@ -151,7 +164,10 @@ const Footer = () => {
             </Link>
           </li>
           <li>
-            <Link href="/termsofservices" className="hover:text-white underline">
+            <Link
+              href="/termsofservices"
+              className="hover:text-white underline"
+            >
               Terms of Service
             </Link>
           </li>
