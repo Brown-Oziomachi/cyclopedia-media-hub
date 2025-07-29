@@ -30,20 +30,45 @@ const ProfileDropdownNavbar = () => {
   ];
 
   return (
-    <main className="fixed w-full bg-gray-400/5 border-x shadow-xl border-b border z-50">
+    <main className="fixed w-full bg-black border-x shadow-xl border-b border z-50">
       <section className="px-5 py-4 flex items-center justify-between z-50">
-        {/* Logo */}
-        <span className="flex items-center border px-2 py-1 border-gray-400 rounded-md font-extralight gap-6">
-          <Link href="/" >
-          <Image
-            src="/logo.jpg"
-            alt="/Logo"
-            width={30}
-            height={30}
-            className=" shadow-md hover:shadow-lg transition-shadow duration-300 object-cover animate-pulse brightness-125"
-          /></Link>
+        <span className="relative flex items-center px-2 py-1 rounded-md z-10 gap-6 z-50">
+          {/* Animated SVG border */}
+          <svg
+            className="absolute top-0 left-0 w-full h-full pointer-events-none z-0"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+          >
+            <rect
+              x="1"
+              y="1"
+              width="98"
+              height="98"
+              stroke="#10b981"
+              strokeWidth="2"
+              fill="none"
+              strokeDasharray="392"
+              strokeDashoffset="392"
+              style={{
+                animation: "draw-border 4s linear infinite", // loop forever
+              }}
+            />
+          </svg>
 
-          <h1 className="text-white -ml-5 border-b border-t border-t-green-600 border-b-green-600">WebWiz</h1>
+          {/* Logo + Text content */}
+          <Link href="/">
+            <Image
+              src="/logo.jpg"
+              alt="/Logo"
+              width={30}
+              height={30}
+              className="z-10 shadow-md hover:shadow-lg transition-shadow duration-300 object-cover animate-pulse brightness-125"
+            />
+          </Link>
+
+          <h1 className="z-10 text-white -ml-5 border-b border-t border-t-green-600 border-b-green-600">
+            WebWiz
+          </h1>
         </span>
 
         {/* Desktop Navigation */}
@@ -106,7 +131,10 @@ const ProfileDropdownNavbar = () => {
                     <Link
                       href="/profile"
                       className="hover:text-cyan-400 transition-colors duration-200"
-                    ><h1 className="text-green-600 text-center text-2xl font-serif font-bold">Hello!!</h1>
+                    >
+                      <h1 className="text-green-600 text-center text-2xl font-serif font-bold">
+                        Hello!!
+                      </h1>
                       <p className="font-semibold text-base truncate text-white text-center ">
                         {session.user.name}
                       </p>
@@ -143,15 +171,19 @@ const ProfileDropdownNavbar = () => {
                       <div>
                         <h1
                           className="font-bold font-serif cursor-pointer text-green-700 text-center mt-5"
-                        onClick={() => {
-                          const el = document.getElementById("services-section");
-                          if (el) el.scrollIntoView({behavior: "smooth"});
-                        }}
-                        
+                          onClick={() => {
+                            const el =
+                              document.getElementById("services-section");
+                            if (el) el.scrollIntoView({ behavior: "smooth" });
+                          }}
                         >
                           Have something to Share? ⬇
                           <div>
-                            <img src="/share.jpg" alt="owner image" className="mt-5" />
+                            <img
+                              src="/share.jpg"
+                              alt="owner image"
+                              className="mt-5"
+                            />
                           </div>
                         </h1>
                       </div>
@@ -178,29 +210,34 @@ const ProfileDropdownNavbar = () => {
           )}
         </div>
 
-            <div className="flex">
-        {/* Mobile Avatar Drawer Toggle */}
-        {session && (
-          <button
-            onClick={toggleDrawer(true)}
-            className="lg:hidden focus:outline-none mr-4 z-50 items-center justify-center"
-          >
-
-            <img
-              src={session.user.image || "/default-avatar.png"}
-              alt={session.user.name}
-              width={36}
-              height={36}
-              className="rounded-full shadow-md hover:shadow-lg object-cover border border-gray-500"
-            />
-          </button>
-        )}
-        <div>
-        <Link href="/myprofile">
-        <img src="/web21.jpg" alt="" className=" rounded-full" width={36} height={36}/>
-        </Link>
+        <div className="flex">
+          {/* Mobile Avatar Drawer Toggle */}
+          {session && (
+            <button
+              onClick={toggleDrawer(true)}
+              className="lg:hidden focus:outline-none mr-4 z-50 items-center justify-center"
+            >
+              <img
+                src={session.user.image || "/default-avatar.png"}
+                alt={session.user.name}
+                width={36}
+                height={36}
+                className="rounded-full shadow-md hover:shadow-lg object-cover border border-gray-500"
+              />
+            </button>
+          )}
+          <div>
+            <Link href="/myprofile">
+              <img
+                src="/web21.jpg"
+                alt=""
+                className=" rounded-full"
+                width={36}
+                height={36}
+              />
+            </Link>
+          </div>
         </div>
-            </div>
 
         {/* Mobile Menu Toggle */}
         <button
@@ -209,21 +246,21 @@ const ProfileDropdownNavbar = () => {
           aria-label="Toggle navigation menu"
         >
           {showNav ? (
-            <ListCollapse className="text-green-600" />
+            <ListCollapse className="text-green-600 border" />
           ) : (
-            <Menu className="text-white" />
+            <Menu className="text-white border rounded-sm" />
           )}
         </button>
       </section>
 
       {/* Mobile Navigation Overlay */}
       <div
-        className={`fixed top-0 left-0 w-full h-full bg-neutral-900 opacity-90   text-white flex flex-col  p-5 z-40 transition-transform duration-500 ${
+        className={`fixed top-0 left-0 w-full h-full bg-neutral-900 opacity-200 text-white flex flex-col  p-10 z-40 transition-transform duration-500 ${
           showNav ? "translate-y-0" : "-translate-y-full"
         }`}
       >
         <div className="flex items-center justify-center mb-5">
-          <div className="h-10 w-10 rounded-full bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse"></div>
+          <img src="logo.jpg" alt="logo" className="h-20 w-20 mt-10" />{" "}
         </div>
 
         {session?.user?.image && (
@@ -251,7 +288,7 @@ const ProfileDropdownNavbar = () => {
               signOut();
               setShowNav(false);
             }}
-            className="shadow-2xl shadow-black text-md py-2 px-6 bg-gray-400/5 border-x border-x-green-600 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md mt-4"
+            className="shadow-2xl shadow-black text-2xl py-4 px-6 bg-gray-400/5 border-x border-x-green-600 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300  mt-4"
           >
             Sign Out
           </button>
@@ -259,7 +296,7 @@ const ProfileDropdownNavbar = () => {
           <Link
             href="/auth/signin"
             onClick={() => setShowNav(false)}
-            className="shadow-2xl shadow-black text-md py-2 px-6 bg-gray-400/5 border-x border-x-green-600 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300 shadow-md mt-4 w-80 text-center font-bold text-green-600"
+            className="shadow-2xl shadow-black py-4 px-6 text-2xl bg-gray-400/5 border-x border-x-green-600  rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300  mt-4 w-80 text-center font-bold text-green-600"
           >
             Sign In
           </Link>

@@ -84,8 +84,11 @@ const Popup = () => {
                 <source src="wiz Video.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
-
-              <h1 className="font-bold font-serif py-2 text-center text-white">
+              <p className="text-center font-serif mt-5 text-white mb-2">
+                <span className="text-3xl text-green-600">E</span>xplore unique insights, research, trends, stories, histories,
+                news, politics and expert opinions.
+              </p>
+              <h1 className="font-bold font-serif py-2 text-center text-green-600">
                 Have something to Share?
               </h1>
               <h2 className="font-mono text-gray-400">
@@ -98,7 +101,7 @@ const Popup = () => {
                   href="https://wa.me/+2348142995114?text=Hello,%20my%20name%20is%20[Your%20Name].%20I'd%20like%20to%20share%20some%20information%20with%20Wiz-Blog."
                   target="_self"
                   rel="noopener noreferrer"
-                  className="font-bold text-green-600 cursor-pointer hover:underline"
+                  className="font-bold text-green-600 cursor-pointer hover:underline text-center"
                 >
                   Click here to chat
                 </a>

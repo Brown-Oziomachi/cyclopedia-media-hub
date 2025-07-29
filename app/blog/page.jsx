@@ -286,11 +286,12 @@ const BlogPage = () => {
                         const el = document.getElementById("ups-go");
                         if (el) el.scrollIntoView({ behavior: "smooth" });
                       }}
-                    >
+                      >
+                        {/* small Screen */}
                       <img
                         src="/blog.jpg"
-                        alt=""
-                        className="z-50 w-fit h-10 max-lg:fixed ml-1 mt-1  border-b-green-600 border border-green-600 rounded-md  border-x-white shadow-black shadow-xl"
+                        alt="wizblog"
+                        className="z-5 w-fit h-10 max-lg:fixed ml-1 mt-1  border-b-green-600 border border-green-600 rounded-md  border-x-white shadow-black shadow-xl"
                       />
                     </div>
                     {showContentType === "" ? " " : ""}
@@ -307,6 +308,7 @@ const BlogPage = () => {
                   </video>
                 </div>
 
+                  {/* big Screen */}
                 <p className="text-sm text-gray-400 font-mono">
                   <h1 className="text-6xl font-bold tracking-tight mt-5 space-x-5 lg:border-x-green-600 max-lg:inset-0 max-lg:top-8 lg:py-10 max-lg:hidden">
                     <img
