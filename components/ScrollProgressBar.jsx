@@ -26,7 +26,7 @@ export default function ScrollProgressBar() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 h-1 z-50"
+      className="fixed top-17 left-0 h-1 z-50"
       initial={{ width: 0 }}
       animate={{ width: `${scroll}%`, backgroundColor: getColor(scroll) }}
       transition={{ ease: "easeOut", duration: 0.2 }}
