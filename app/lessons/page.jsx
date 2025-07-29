@@ -1,4 +1,5 @@
 "use client";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 import Link from "next/link";
 
 const Page = () => {
@@ -6,6 +7,7 @@ const Page = () => {
     <main className="bg-gray-400/5 text-gray-200 min-h-screen px-6 py-12 flex flex-col items-center">
       {/* Header Section */}
       <section className="max-w-3xl text-center mb-16">
+              <ScrollProgressBar />
         <h1 className="text-4xl font-extrabold text-white mb-6 mt-10">
           🌐 Your <span className="text-green-600">Website</span> is Your Digital Storefront
         </h1>
