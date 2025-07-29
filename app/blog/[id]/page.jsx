@@ -32,6 +32,7 @@ import BlogDisplay from "@/components/BlogDisplay";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation"; // for redirect
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 const BlogDetails = ({ params }) => {
   const resolvedParams = use(params);
@@ -227,6 +228,7 @@ const handleMoreBlogClick = () => {
       transition={{ duration: 0.1 }}
       className="min-h-screen px-2 py-19 max-w-5xl mx-auto bg-gray-400/5 text-gray-300 font-sans leading-relaxed space-y-14"
     >
+      <ScrollProgressBar />
       {/* Blog Header Section */}
       <div className="bg-gray-400/5 shadow-xl rounded-2xl p-10 relative border border-gray-700 space-y-6">
         <span className="inline-block px-5 py-2 bg-gradient-to-r from-green-600 text-black font-semibold text-sm rounded-full shadow-md shadow-black transition-transform hover:scale-105">
