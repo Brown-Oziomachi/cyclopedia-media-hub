@@ -1,4 +1,5 @@
 "use client";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 import Link from "next/link";
 
  function DevelopersPage() {

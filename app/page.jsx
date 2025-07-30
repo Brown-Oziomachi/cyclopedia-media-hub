@@ -52,6 +52,7 @@ const Page = () => {
               color="green"
               className="animate-spin ml-20"
             />
+            <ScrollProgressBar />
 
             <h1 className="text-green-600  text-center text-2xl">
               <span className="text-3xl">W</span>eb
@@ -408,7 +409,6 @@ const Page = () => {
       </div>
       <BottomNav />
       <ChatDropdown />
-      <ScrollProgressBar />
 
       <Footer className="h-dvh" />
     </>

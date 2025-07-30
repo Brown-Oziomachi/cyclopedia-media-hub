@@ -86,7 +86,7 @@ const Popup = () => {
               </video>
               <p className="text-center font-serif mt-5 text-white mb-2">
                 <span className="text-3xl text-green-600">E</span>xplore unique insights, research, trends, stories, histories,
-                news, politics and expert opinions.
+                news, politics and expert opinions on Wiz-Blog.
               </p>
               <h1 className="font-bold font-serif py-2 text-center text-green-600">
                 Have something to Share?

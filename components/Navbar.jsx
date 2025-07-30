@@ -32,7 +32,7 @@ const ProfileDropdownNavbar = () => {
   return (
     <main className="fixed w-full bg-black border-x shadow-xl border-b border z-50">
       <section className="px-5 py-4 flex items-center justify-between z-50">
-        <span className="relative flex items-center px-2 py-1 rounded-md z-10 gap-6 z-50">
+        <span className="relative flex items-center px-2 py-1 rounded-md gap-6 z-50 bg-black">
           {/* Animated SVG border */}
           <svg
             className="absolute top-0 left-0 w-full h-full pointer-events-none z-0"
@@ -62,7 +62,7 @@ const ProfileDropdownNavbar = () => {
               alt="/Logo"
               width={30}
               height={30}
-              className="z-10 shadow-md hover:shadow-lg transition-shadow duration-300 object-cover animate-pulse brightness-125"
+              className="z-10 shadow-md hover:shadow-lg transition-shadow duration-300 object-cover animate-pulse brightness-125 shadow-black shadow-2xl"
             />
           </Link>
 

@@ -296,7 +296,7 @@ const BlogPage = () => {
                       <img
                         src="/blog.jpg"
                         alt="wizblog"
-                        className="z-5 w-fit h-10 max-lg:fixed ml-1 mt-1  border-b-green-600 border border-green-600 rounded-md  border-x-white shadow-black shadow-xl"
+                        className="z-50 w-fit h-10 max-lg:fixed ml-1 mt-1  border-b-green-600 border border-green-600 rounded-md  border-x-white shadow-black shadow-xl"
                       />
                     </div>
                     {showContentType === "" ? " " : ""}
@@ -477,10 +477,10 @@ const BlogPage = () => {
                       key={post.id}
                       className=" rounded-xl  hover:shadow-2xl transition-all duration-300 shadow-black shadow-2xl relative overflow-hidden h-fit "
                     >
-                      <span className="absolute top-5 left-7 bg-green-600 text-white z-20 text-xs px-3 py-1 rounded-lg shadow-2xl shadow-black">
+                      <span className="absolute top-5 left-7 bg-green-600 text-white z-10 text-xs px-3 py-1 rounded-lg shadow-2xl shadow-black">
                         {post.genre || "General"}
                       </span>
-                      <h1 className="text-xs text-white text-center absolute top-5 right-7 z-50">
+                      <h1 className="text-xs text-white text-center absolute top-5 right-7 z-30">
                         <span className="text-green-600">Wiz-</span>Blog
                       </h1>
 

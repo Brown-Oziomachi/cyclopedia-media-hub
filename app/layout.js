@@ -2,6 +2,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import AuthProvider from "@/components/AuthProvider";
 import { Analytics } from '@vercel/analytics/next';
+import ScrollProgressBar from "@/components/ScrollProgressBar";
  
 
 export const metadata = {
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
           <Navbar />
           {children}
           <Analytics />
+          <ScrollProgressBar />
         </AuthProvider>
       </body>
     </html>
