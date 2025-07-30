@@ -21,8 +21,8 @@ const ChatDropdown = () => {
 
       {/* Chat Dropdown Menu */}
       {isOpen && (
-        <div className="fixed bottom-28 right-6 z-50 w-60 bg-gray-400/5 text-white rounded-md shadow-xl border border-gray-600">
-          <ul className="flex flex-col">
+        <div className="fixed bottom-28 right-6 z-50 w-80 bg-gray-800 border text-white rounded-md shadow-xl  border-gray-200 top-30">
+          <ul className="flex flex-col items-center justify-center mx-auto mt-50 text-xl">
             <li>
               <a
                 href="https://wa.me/message/R4UKUMFIH22RJ1"
@@ -30,11 +30,7 @@ const ChatDropdown = () => {
                 rel="noopener noreferrer"
                 className="flex items-center p-3 hover:bg-gray-800"
               >
-                <img
-                  src="/whatsapp logo.png"
-                  alt="WhatsApp"
-                  className="w-8 h-8 mr-3"
-                />
+              
                 WhatsApp
               </a>
             </li>
@@ -45,11 +41,7 @@ const ChatDropdown = () => {
                 rel="noopener noreferrer"
                 className="flex items-center p-3 hover:bg-gray-800"
               >
-                <img
-                  src="/instagram.png"
-                  alt="Instagram"
-                  className="w-8 h-8 mr-3"
-                />
+                
                 Instagram
               </a>
             </li>
@@ -60,11 +52,7 @@ const ChatDropdown = () => {
                 rel="noopener noreferrer"
                 className="flex items-center p-3 hover:bg-gray-800"
               >
-                <img
-                  src="/linkedin.png"
-                  alt="LinkedIn"
-                  className="w-8 h-8 mr-3"
-                />
+               
                 LinkedIn
               </a>
             </li>

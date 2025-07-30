@@ -100,13 +100,13 @@ const Page = () => {
               {/* Buttons */}
               <div className="flex justify-center gap-4 mt-2 group text-sm">
                 <Link href="/contact">
-                  <button className="bg-gray-400/5 border-x border-x-green-600 cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-xl shadow-black group-hover:bg-white group-hover:text-black ">
+                  <button className=" border-x bg-green-600 border-x-green-600 cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-xl shadow-black group-hover:bg-white group-hover:text-black ">
                     Get Started
-                    <ArrowRightToLine className="text-green-600" />
+                    <ArrowRightToLine className="text-white" />
                   </button>
                 </Link>
                 <Link href="/about">
-                  <button className="bg-gray-400/5 shadow-black shadow-2xl cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all group-hover:bg-white group-hover:text-black ">
+                  <button className="bg-gray-400/5 border-2 border-green-600 shadow-black shadow-2xl cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all group-hover:bg-white group-hover:text-black ">
                     Learn More
                     <ChevronRight className="text-green-600" />
                   </button>
