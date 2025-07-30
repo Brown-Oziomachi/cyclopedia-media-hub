@@ -98,7 +98,7 @@ const ProfileDropdownNavbar = () => {
                     alt={session?.user?.name}
                     width={40}
                     height={40}
-                    className="rounded-full shadow-md hover:shadow-lg transition-shadow duration-300 object-cover ml-auto"
+                    className="rounded-full shadow-md hover:shadow-lg transition-shadow duration-300 object-cover ml-auto z-0"
                   />
                   <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full ring-2 ring-gray-900"></span>
                 </div>
@@ -127,9 +127,10 @@ const ProfileDropdownNavbar = () => {
                   onClick={toggleDrawer(false)}
                   onKeyDown={toggleDrawer(false)}
                 >
+                    
                   <div className="">
                     <Link
-                      href="/profile"
+                      href="/blog"
                       className="hover:text-cyan-400 transition-colors duration-200"
                     >
                       <h1 className="text-green-600 text-center text-2xl font-serif font-bold">
@@ -142,14 +143,15 @@ const ProfileDropdownNavbar = () => {
                         {session.user.email}
                       </p>
                     </Link>
+                    
                     <hr className="my-4 border-gray-600" />
                     <nav className="flex flex-col space-y-2 text-gray-300 text-sm font-normal">
-                      <Link
+                      {/* <Link
                         href="/profile"
                         className="hover:text-cyan-400 transition-colors duration-200 shadow-2xl shadow-black"
                       >
                         My Profile
-                      </Link>
+                      </Link> */}
                       <Link
                         href="/blog"
                         className="hover:text-cyan-400 transition-colors duration-200"
@@ -263,13 +265,13 @@ const ProfileDropdownNavbar = () => {
           <img src="/logo.jpg" alt="logo" className="h-20 w-20 mt-10" />{" "}
         </div>
 
-        {session?.user?.image && (
+        {/* {session?.user?.image && (
           <img
             src={session.user.image}
             alt={session.user.name}
             className="rounded-full mb-5 shadow-2xl max-w-[80px] max-h-[80px] object-cover"
           />
-        )}
+        )} */}
 
         {navItems.map((item, index) => (
           <Link

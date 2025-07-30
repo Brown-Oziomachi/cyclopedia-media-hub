@@ -12,39 +12,40 @@ function ProfilePage() {
 
   useEffect(() => {
     async function fetchSession() {
-      const sess = await auth();
-      setSession(sess);
-      if (!sess) {
-        router.replace("/");
+      const session = await auth();
+      setSession(session);
+      if (!session) {
+        router.push("/blog");
       }
     }
     fetchSession();
   }, [router]);
 
-  const handleMoreBlogClick = () => {
-    setLoading(true);
-    setTimeout(() => {
-      router.push("/blog");
-    }, 3000);
-  };
+  // const handleMoreBlogClick = () => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     router.push("/blog");
+  //   }, 3000);
+  // };
 
   return (
     <div className="min-h-screen bg-gray-400/5 text-white py-12 lg:px-12 mb-10">
-      {/* Header info bar */}
-      <div className="bg-gray-400/5 h-auto w-full py-5 border-t border-x mt-10 rounded-md">
-        <h1 className="text-center text-white/90 text-lg font-semibold">
-          Hello!
-          <span className="text-green-600 font-serif">
-            {session?.user?.name}
-          </span>{" "}
-          Your access is confirmed.
-        </h1>
-        <h2 className="text-center text-white/70 text-sm mt-1">
-          We are building a better way.{" "}
-        </h2>
-        <h1
-          className="font-bold font-serif cursor-pointer text-green-600 text-center"
-          onClick={() => {
+      /* Header info bar */
+        <div className="bg-gray-400/5 h-auto w-full py-5 border-t border-x mt-10 rounded-md">
+          <h1 className="text-center text-white/90 text-lg font-semibold">
+            Hello!
+            <span className="text-green-600 font-serif">
+          {session?.user?.name}
+            </span>{" "}
+            Your access is confirmed.
+          </h1>
+          <h2 className="text-center text-white/70 text-sm mt-1">
+            We are building a better way.{" "}
+          </h2>
+          
+          <h1
+            className="font-bold font-serif cursor-pointer text-green-600 text-center"
+            onClick={() => {
             const el = document.getElementById("Shared-mind");
             if (el) el.scrollIntoView({ behavior: "smooth" });
           }}
