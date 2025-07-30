@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import BottomNav from "@/components/BottomNav";
 import ChatDropdown from "@/components/Chat";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 const Page = () => {
   const [loading, setLoading] = useState(true); // Loading state
@@ -407,6 +408,8 @@ const Page = () => {
       </div>
       <BottomNav />
       <ChatDropdown />
+      <ScrollProgressBar />
+
       <Footer className="h-dvh" />
     </>
   );

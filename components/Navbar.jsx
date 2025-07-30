@@ -288,7 +288,7 @@ const ProfileDropdownNavbar = () => {
               signOut();
               setShowNav(false);
             }}
-            className="shadow-2xl shadow-black text-2xl py-4 px-6 bg-gray-400/5 border-x border-x-green-600 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300  mt-4"
+            className="shadow-2xl shadow-black text-xl py-3 px-6 bg-gray-400/5 border-x border-x-green-600 text-gray-200 rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300  mt-"
           >
             Sign Out
           </button>
@@ -296,7 +296,7 @@ const ProfileDropdownNavbar = () => {
           <Link
             href="/auth/signin"
             onClick={() => setShowNav(false)}
-            className="shadow-2xl shadow-black py-4 px-6 text-2xl bg-gray-400/5 border-x border-x-green-600  rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300  mt-4 w-80 text-center font-bold text-green-600"
+            className="shadow-2xl shadow-black py-3 px-6 text-xl bg-gray-400/5 border-x border-x-green-600  rounded-lg hover:text-cyan-400 hover:bg-cyan-500 transition-all duration-300  mt-4 w-80 text-center font-bold text-green-600"
           >
             Sign In
           </Link>

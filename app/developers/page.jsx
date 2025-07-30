@@ -38,6 +38,7 @@ import Link from "next/link";
   return (
     <main className="bg-gray-400/5 min-h-screen text-white z-0">
       {/* Hero Section */}
+              <ScrollProgressBar />
 
       <button
         onClick={() => scroll("left")}

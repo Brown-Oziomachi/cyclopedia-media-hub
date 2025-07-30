@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { serverTimestamp } from "firebase/firestore";
 import { LoaderCircle } from "lucide-react";
 import Popup from "@/components/Popup";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 const formatTimestamp = (timestamp) => {
   if (!timestamp) return "Unknown Date";
@@ -69,6 +70,7 @@ const BlogPage = () => {
     "Webwiz",
     "Technology",
     "Spirituality",
+    "Pp.Life Experience",
     "Science",
     "Art",
     "Entertainment",
@@ -275,6 +277,8 @@ const BlogPage = () => {
       ) : (
         <main className="min-h-screen bg-gray-400/5 text-white px-2 py-20">
           <div className="max-w-7xl mx-auto ">
+            <ScrollProgressBar />
+
             <header className="text-center mb-12 bg-amber-950 text-white rounded-bl-full">
               <div className="lg:flex items-center justify-center gap-20 bg-amber-950 rounded-br-full">
                 <div className="max-lg:relative">
@@ -286,8 +290,8 @@ const BlogPage = () => {
                         const el = document.getElementById("ups-go");
                         if (el) el.scrollIntoView({ behavior: "smooth" });
                       }}
-                      >
-                        {/* small Screen */}
+                    >
+                      {/* small Screen */}
                       <img
                         src="/blog.jpg"
                         alt="wizblog"
@@ -308,7 +312,7 @@ const BlogPage = () => {
                   </video>
                 </div>
 
-                  {/* big Screen */}
+                {/* big Screen */}
                 <p className="text-sm text-gray-400 font-mono">
                   <h1 className="text-6xl font-bold tracking-tight mt-5 space-x-5 lg:border-x-green-600 max-lg:inset-0 max-lg:top-8 lg:py-10 max-lg:hidden">
                     <img
@@ -319,8 +323,8 @@ const BlogPage = () => {
 
                     {showContentType === "" ? " " : ""}
                   </h1>
-                  Explore unique insights, research, trends, stories, histories, news, politics
-                  and expert opinions.
+                  Explore unique insights, research, trends, stories, histories,
+                  news, politics and expert opinions.
                 </p>
               </div>
               <div>
@@ -591,5 +595,5 @@ const BlogPage = () => {
       )}
     </>
   );
-}
+};
 export default BlogPage;

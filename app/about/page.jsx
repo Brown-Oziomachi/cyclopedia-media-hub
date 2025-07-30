@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import { Loader } from "lucide-react";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 const About = () => {
   const [loading, setLoading] = useState(true);
@@ -125,6 +126,8 @@ const About = () => {
           {/* Testimonials Section */}
           <section className="py-16 bg-gray-50 shadow-2xl shadow-black">
             <div className="container mx-auto max-w-7xl px-6 text-center">
+              <ScrollProgressBar />
+
               <h2 className="text-4xl font-bold mb-14 tracking-wide text-gray-900">
                 What Our Clients Say
               </h2>

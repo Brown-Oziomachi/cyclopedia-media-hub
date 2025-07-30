@@ -301,6 +301,7 @@ const UploadBlog = ({ session }) => {
                   <option value="Sociology">Sociology</option>
                   <option value="Economics">Economics</option>
                   <option value="Law">Law</option>
+                  <option value="Pp.L Experience">pp.Life Experience</option>
                   <option value="AI">AI</option>
                   <option value="Relationships">Relationships</option>
                   <option value="Marriage">Marriage</option>

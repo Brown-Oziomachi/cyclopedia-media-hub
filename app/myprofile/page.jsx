@@ -4,6 +4,7 @@ import { Github, LoaderCircle, Facebook, Instagram, Linkedin,  Youtube, MessageC
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 const ProfileCard = () => {
   const scrollRef = useRef(null);
@@ -115,6 +116,7 @@ const fadeIn = {
                 </motion.h1>
               </div>
             </motion.div>
+              <ScrollProgressBar />
 
             <div className="absolute top-60 mx-auto max-md:right-45 mt-5">
               <img

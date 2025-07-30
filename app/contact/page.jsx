@@ -9,6 +9,7 @@ import { db2 } from "@/lib/firebaseConfig";
 import { LoaderCircle, ThumbsUp } from "lucide-react";
 import ChatDropdown from "@/components/Chat";
 import Footer from "@/components/Footer";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 // Validation Schema
 const valSchema = Yup.object({
@@ -76,6 +77,8 @@ const ContactPage = () => {
       ) : (
         <main className="bg-gray-400/5 border-y text-white min-h-screen ">
           <section className="container mx-auto px-6 py-6 lg:flex lg:gap-20 ">
+            <ScrollProgressBar />
+
             {/* Left Info */}
             <div className="flex-1 space-y-6 max-w-xl mx-auto lg:mx-0 space-x-20 mt-20">
               <h1 className="text-5xl font-extrabold text-white text-center">

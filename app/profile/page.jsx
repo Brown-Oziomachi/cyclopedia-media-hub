@@ -1,17 +1,25 @@
 "use client";
-import { redirect } from "next/navigation";
-import { auth } from "@/auth";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Ads from "@/components/community";
-import { useState } from "react";
+import { auth } from "@/auth";
 
-async function ProfilePage() {
-  const session = await auth();
+function ProfilePage() {
+  const router = useRouter();
+  const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(false);
-    const router = router();
-  if (!session) {
-    redirect("/");
-  }
+
+  useEffect(() => {
+    async function fetchSession() {
+      const sess = await auth();
+      setSession(sess);
+      if (!sess) {
+        router.replace("/");
+      }
+    }
+    fetchSession();
+  }, [router]);
 
   const handleMoreBlogClick = () => {
     setLoading(true);
@@ -25,7 +33,7 @@ async function ProfilePage() {
       {/* Header info bar */}
       <div className="bg-gray-400/5 h-auto w-full py-5 border-t border-x mt-10 rounded-md">
         <h1 className="text-center text-white/90 text-lg font-semibold">
-          Hello!{" "}
+          Hello!
           <span className="text-green-600 font-serif">
             {session?.user?.name}
           </span>{" "}
@@ -68,14 +76,7 @@ async function ProfilePage() {
         {/* Spacer for profile image overlay */}
         <div className="h-16"></div>
         <Link href="/community">
-          <div className="space-y-6 text-center">
-            <button
-              onClick={handleMoreBlogClick}
-              className="mb-2 text-center text-sm font-bold text-green-600 tracking-widest border border-green-600 px-5 py-2 shadow-black shadow-xl rounded-lg hover:bg-green-600 hover:text-black transition duration-300 w-fit mx-auto"
-              disabled={loading}
-            >
-              {loading ? "Loading" : "Community"}
-            </button>
+          <div className="space-y-6 text-center">  
           </div>
         </Link>
 
@@ -119,27 +120,26 @@ async function ProfilePage() {
             </Link>
           </div>
         </div>
-        {/* User Blogs Section */}
 
-        <div className=" mt-10">
-          <div id="Shared-mind"></div>
-          <h1 className="font-bold font-serif">Have something to Share?</h1>
-          <h2 className="font-mono">
-            <span className="text-green-600">{session?.user?.name}</span> We
-            value your thoughts and ideas! feel free to share your opinions,
-            Suggestions, or topics you'd love to see on our blog.
+          <div className=" mt-10">
+            <div id="Shared-mind"></div>
+            <h1 className="font-bold font-serif">Have something to Share?</h1>
+            <h2 className="font-mono">
+              <span className="text-green-600">{session?.user?.name}</span> We
+              value your thoughts and ideas! feel free to share your opinions,
+              Suggestions, or topics you'd love to see on our blog.
+            </h2>
             <h3>📩Reach out to us directly on WhatsApp:</h3>
-          </h2>
-          <a
-            href="https://wa.me/+2348142995114?text=Hello,%20my%20name%20is%20[Your%20Name].%20I'd%20like%20to%20share%20some%20information%20with%20Wiz-Blog."
-            target="_self"
-            rel="noopener noreferrer"
-            className="font-bold text-green-600 cursor-pointer hover:underline"
-          >
-            Click here to chat
-          </a>
-        </div>
-        {/* View all posts link */}
+            <a
+              href="https://wa.me/+2348142995114?text=Hello,%20my%20name%20is%20[Your%20Name].%20I'd%20like%20to%20share%20some%20information%20with%20Wiz-Blog."
+              target="_self"
+              rel="noopener noreferrer"
+              className="font-bold text-green-600 cursor-pointer hover:underline"
+            >
+              Click here to chat
+            </a>
+          </div>
+          {/* View all posts link */}
         <div className="items-center justify-center mx-auto">
           <div className=" text-right">
             <Link
