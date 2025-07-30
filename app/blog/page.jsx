@@ -72,6 +72,7 @@ const BlogPage = () => {
     "Spirituality",
     "Pp.Life Experience",
     "Science",
+    "Quotes",
     "Art",
     "Entertainment",
     "Crypto",

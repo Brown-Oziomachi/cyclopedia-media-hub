@@ -303,6 +303,7 @@ const UploadBlog = ({ session }) => {
                   <option value="Law">Law</option>
                   <option value="Pp.L Experience">pp.Life Experience</option>
                   <option value="AI">AI</option>
+                  <option value="Quotes">Quotes</option>
                   <option value="Relationships">Relationships</option>
                   <option value="Marriage">Marriage</option>
                   <option value="Machine Learning">Machine Learning</option>
