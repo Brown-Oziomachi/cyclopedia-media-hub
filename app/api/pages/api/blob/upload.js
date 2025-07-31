@@ -1,46 +1,41 @@
-// pages/api/blob/upload.js
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-import { put } from "@vercel/blob";
-
-const { url } = await put("articles/blob.txt", "Hello World!", {
-  access: "public",
-});
-
-export default async function handler(req, res) {
-  const form = new formidable.IncomingForm();
-
-  form.parse(req, async (err, fields, files) => {
-    if (err) {
-      res.status(500).json({ error: "Form parsing failed" });
-      return;
-    }
-
-    const file = files.file;
-
-    if (!file || !file.filepath) {
-      res.status(400).json({ error: "No file uploaded" });
-      return;
-    }
-
-    try {
-      const blob = await put(
-        file.originalFilename,
-        fs.createReadStream(file.filepath),
-        {
-          access: "public",
-          token: process.env.BLOB_READ_WRITE_TOKEN, // ✅ Must be in .env.local
-        }
-      );
-
-      res.status(200).json({ url: blob.url });
-    } catch (error) {
-      console.error("Upload failed:", error);
-      res.status(500).json({ error: "Upload failed" });
-    }
-  });
+import { upload } from '@vercel/blob/client';
+import { useState, useRef } from 'react';
+ 
+export default function AvatarUploadPage() {
+  const inputFileRef = useRef(null);
+  const [blob, setBlob] = useState(null);
+  return (
+    <>
+      <h1>Upload Your Avatar</h1>
+ 
+      <form
+        onSubmit={async (event) => {
+          event.preventDefault();
+ 
+          const file = inputFileRef.current.files[0];
+ 
+          const newBlob = await upload(file.name, file, {
+            access: 'public',
+            handleUploadUrl: '/api/avatar/upload',
+          });
+ 
+          setBlob(newBlob);
+        }}
+      >
+        <input
+          name="file"
+          ref={inputFileRef}
+          type="file"
+          accept="image/jpeg, image/png, image/webp"
+          required
+        />
+        <button type="submit">Upload</button>
+      </form>
+      {blob && (
+        <div>
+          Blob url: <a href={blob.url}>{blob.url}</a>
+        </div>
+      )}
+    </>
+  );
 }
