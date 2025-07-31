@@ -329,17 +329,18 @@ const BlogDetails = ({ params }) => {
           </p>
           <div className="">
             {blog.imageUrl && (
-              <div className="relative w-full h-64 md:h-96">
+              <div className="relative w-full h-64 md:h-96 mx-auto">
                 <Image
-                  src={blog.imageUrl} // <-- your Blob URL from Firestore
+                  // <-- your Blob URL from Firestore
+                  src={blog.imageUrl}
                   alt={blog.title}
                   width={800}
                   height={400}
-                  className="rounded-lg"
+                  className="rounded-lg mx-auto mb-10 shadow-lg shadow-black object-cover w-full h-64 md:h-96"
+                  style={{ objectFit: "cover" }}
                 />
               </div>
             )}
-            {/* Show video if blog.video exists */}
             {blog.video && (
               <video
                 src={blog.video}

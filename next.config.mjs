@@ -1,36 +1,15 @@
+// next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
-      // Vercel Blob
       {
         protocol: "https",
-        hostname: "blob.vercel-storage.com",
+        hostname: "cwoel4rgy59p0nml.public.blob.vercel-storage.com", // ✅ Your exact blob hostname
       },
-      // Imgur
       {
         protocol: "https",
-        hostname: "i.imgur.com",
-      },
-      // Cloudinary
-      {
-        protocol: "https",
-        hostname: "res.cloudinary.com",
-      },
-      // Your own site on Vercel
-      {
-        protocol: "https",
-        hostname: "zimio.vercel.app",
-      },
-      // Google Photos or short links
-      {
-        protocol: "https",
-        hostname: "images.app.goo.gl",
-      },
-      // Google profile images
-      {
-        protocol: "https",
-        hostname: "lh3.googleusercontent.com",
+        hostname: "blob.vercel-storage.com", // (Optional) for general blob domains
       },
     ],
   },
