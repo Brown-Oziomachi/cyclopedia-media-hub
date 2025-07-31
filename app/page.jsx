@@ -39,7 +39,7 @@ const Page = () => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen bg-gray-400/5">
+        <div className="flex justify-center items-center h-screen bg-black">
           <img
             src="logo.jpg"
             alt="My Logo"
@@ -122,7 +122,7 @@ const Page = () => {
       <h1 className="mt-5 mb-5 text-4xl lg:text-6xl font-extrabold text-white tracking-wide lg:hidden text-center">
         Ready to Elevate Your Digital Presence?
       </h1>
-      <div className="py-2 bg-gray-400/5 text-center lg:flex items-center justify-center">
+      <div className="py-2 bg-black text-center lg:flex items-center justify-center">
         <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb- py-1">
           <div>
             <img
@@ -159,7 +159,7 @@ const Page = () => {
       </div>
 
       {/* ACTION SECTION */}
-      <div className="shadow-2xl shadow-black mx-auto px-6 lg:px-50 py-16 bg-gray-400/10 border-green-600 border-x-green-600  border shadow-[0_0_40px_10px_rgba(255,165,0,0.3)] rounded-lg">
+      <div className="shadow-2xl shadow-black mx-auto px-6 lg:px-50 py-16 bg-black border-green-600 border-x-green-600  border shadow-[0_0_40px_10px_rgba(255,165,0,0.3)] rounded-lg">
         <h2 className="text-center text-5xl font-extrabold text-white mb-6 animate-fade-in">
           Join WebWiz Today!
         </h2>
@@ -212,7 +212,7 @@ const Page = () => {
           <div className="items-center justify-center flex flex-col-2">
             <div
               key={index}
-              className="bg-gray-400/10 shadow-2xl shadow-black z-0 p-5 -mt-15 rounded-lg flex flex-col items-center justify-center shadow-lg shadow-green-600 transition border-l-4 border-black mb-10 "
+              className="bg-black shadow-2xl shadow-black z-0 p-5 -mt-15 rounded-lg flex flex-col items-center justify-center  shadow-green-600 transition border-l-4 border-black mb-10 "
             >
               <h3 className="text-2xl font-bold text-white mb-4 z-50">
                 {item.title}

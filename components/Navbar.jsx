@@ -23,7 +23,7 @@ const ProfileDropdownNavbar = () => {
     // { text: "POST", url: "/upload-to-blog" },
     { text: "Contact", url: "/contact" },
     { text: "Services", url: "/#services-section" },
-    // { text: "News", url: "/news" },
+    { text: "News", url: "/blog?genre/news" },
     { text: "Developers", url: "/developers" },
     { text: "Project", url: "/projects" },
     { text: "Youtube", url: "/youtubevideos" },
@@ -45,12 +45,12 @@ const ProfileDropdownNavbar = () => {
               width="98"
               height="98"
               stroke="#10b981"
-              strokeWidth="2"
+              strokeWidth="3"
               fill="none"
               strokeDasharray="392"
               strokeDashoffset="392"
               style={{
-                animation: "draw-border 4s linear infinite", // loop forever
+                animation: "draw-border 2s linear infinite", // loop forever
               }}
             />
           </svg>
@@ -62,7 +62,7 @@ const ProfileDropdownNavbar = () => {
               alt="/Logo"
               width={30}
               height={30}
-              className="z-10 shadow-md hover:shadow-lg transition-shadow duration-300 object-cover animate-pulse brightness-125 shadow-black shadow-2xl"
+              className="z-10 hover:shadow-lg transition-shadow duration-300 object-cover animate-pulse brightness-125 shadow-black shadow-2xl"
             />
           </Link>
 
@@ -158,8 +158,9 @@ const ProfileDropdownNavbar = () => {
                       >
                         Blog
                       </Link>
+                      
                       <Link
-                        href="/news"
+                        href="/blog?genre=news"
                         className="hover:text-cyan-400 transition-colors duration-200"
                       >
                         News

@@ -118,12 +118,7 @@ const fadeIn = {
             </motion.div>
               <ScrollProgressBar />
 
-            <div className="absolute top-60 mx-auto max-md:right-45 mt-5">
-              <img
-                src="ng.png"
-                alt=""
-                className=" border-s-3 mx-auto h-10 w-10 ml-auto items-center justify-center"
-              />
+            <div className="absolute top-60 mx-auto max-md:right-45 mt-10">
             </div>
             <div>
               <img
@@ -205,8 +200,6 @@ const fadeIn = {
                   transition={{ duration: 0.7, delay: 0.6 }}
                 >
                   Full-Stack Developer <span className="text-green-600">|</span>{" "}
-                  Python Developer <span className="text-green-600">|</span>{" "}
-                  Data Scientist
                 </motion.h2>
                 <motion.p
                   className="text-gray-400 mt-3 leading-relaxed"

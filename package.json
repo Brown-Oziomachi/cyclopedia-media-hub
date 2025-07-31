@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.9",
     "@vercel/analytics": "^1.5.0",
+    "@vercel/blob": "^1.1.1",
     "firebase": "^11.6.0",
     "formik": "^2.4.6",
     "io": "^1.5.3",

@@ -15,7 +15,6 @@ const valSchema = Yup.object({
     .required("Please add your content")
     .min(10, "Minimum of 10 characters"),
   genre: Yup.string().required("Please select a genre"),
-  link: Yup.string().url("Must be a valid URL").nullable(),
 });
 
 const UploadBlog = ({ session }) => {
@@ -73,76 +72,6 @@ const UploadBlog = ({ session }) => {
           </nav>
         </header>
 
-        <button
-          onClick={() => setShowPopup(true)}
-          className="mb-8 text-sm text-orange-400 hover:text-orange-500 underline transition focus:outline-none"
-          aria-label="Learn how to upload"
-        >
-          (!) Learn to Upload
-        </button>
-
-        {showPopup && (
-          <div
-            role="dialog"
-            aria-modal="true"
-            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-6 z-50"
-          >
-            <div className="max-w-lg bg-gray-800 rounded-lg p-6 text-gray-200 shadow-lg overflow-y-auto max-h-[80vh]">
-              <h2 className="text-2xl font-semibold mb-4 text-center text-orange-400">
-                Follow These Simple Steps:
-              </h2>
-              <ol className="list-decimal list-inside space-y-3 text-sm leading-relaxed">
-                <li>
-                  <strong>Log In:</strong> Please log in to your Webwiz Creation
-                  account before uploading your blog post. This ensures your
-                  name appears as the author.
-                  <div className="mt-2">
-                    <Link href="/auth/signin">
-                      <p className="inline-block text-orange-400 border border-orange-400 rounded-md px-4 py-1 hover:bg-orange-400 hover:text-gray-900 transition">
-                        Log in here
-                      </p>
-                    </Link>
-                  </div>
-                </li>
-                <li>
-                  <strong>Write Your Blog Title:</strong> Craft a catchy,
-                  concise, and descriptive title.
-                </li>
-                <li>
-                  <strong>Add Your Content:</strong> Write engaging content
-                  relevant to your title. Use clear language and format for
-                  readability.
-                </li>
-                <li>
-                  <strong>Add a Link (Optional):</strong> Include any relevant
-                  URLs (must be valid).
-                </li>
-                <li>
-                  <strong>Select a Genre:</strong> Choose the genre that fits
-                  your content best for better categorization.
-                </li>
-                <li>
-                  <strong>Submit:</strong> Review and submit your blog post. It
-                  will be reviewed and published accordingly.
-                </li>
-              </ol>
-              <div className="mt-6 flex justify-end gap-4">
-                <Link href="/auth/signin">
-                  <p className="bg-orange-500 px-6 py-2 rounded-md font-semibold text-gray-900 hover:bg-orange-600 transition shadow">
-                    Get Started
-                  </p>
-                </Link>
-                <button
-                  onClick={() => setShowPopup(false)}
-                  className="bg-gray-700 px-6 py-2 rounded-md font-semibold hover:bg-gray-600 transition"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
         <Formik
           initialValues={{
             title: "",
@@ -156,11 +85,9 @@ const UploadBlog = ({ session }) => {
         >
           {({ values, setFieldValue }) => (
             <Form className="space-y-6">
+              {/* Title */}
               <div>
-                <label
-                  htmlFor="title"
-                  className="block mb-1 font-medium text-gray-300"
-                >
+                <label className="block mb-1 font-medium text-gray-300">
                   Blog Title <span className="text-red-600">*</span>
                 </label>
                 <Field
@@ -168,7 +95,6 @@ const UploadBlog = ({ session }) => {
                   type="text"
                   placeholder="Enter your blog title..."
                   className="w-full p-3 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
-                  aria-required="true"
                 />
                 <ErrorMessage
                   name="title"
@@ -177,66 +103,67 @@ const UploadBlog = ({ session }) => {
                 />
               </div>
 
-              <div>
-                <label
-                  htmlFor="image"
-                  className="block mb-1 font-medium text-gray-300"
-                >
-                  Image URL (Optional)
-                </label>
-                <Field
-                  name="image"
-                  type="url"
-                  placeholder="Enter image URL"
-                  className="w-full p-3 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
-                />
-                <ErrorMessage
-                  name="image"
-                  component="p"
-                  className="mt-1 text-sm text-red-500"
-                />
-              </div>
+              {/* Image Upload */}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={async (e) => {
+                  const file = e.target.files[0];
+                  if (!file) return;
 
+                  // Show preview immediately
+                  const previewURL = URL.createObjectURL(file);
+                  setFieldValue("image", previewURL); // Temporary preview
+
+                  // Prepare for upload
+                  const formData = new FormData();
+                  formData.append("file", file);
+
+                  try {
+                    const res = await fetch("/api/blob/upload", {
+                      method: "POST",
+                      body: formData,
+                    });
+
+                    const data = await res.json();
+
+                    if (data?.url) {
+                      setFieldValue("image", data.url); // Replace with uploaded URL
+                    } else {
+                      alert("Image upload failed");
+                    }
+                  } catch (error) {
+                    alert("Error uploading image");
+                  }
+                }}
+                className="w-full p-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+              />
+
+              {/* Preview Uploaded Image */}
               {values.image && (
                 <div className="mb-6 rounded-md overflow-hidden border border-gray-700">
                   <img
                     src={values.image}
-                    alt="Image Preview"
+                    alt="Preview"
                     className="w-full h-auto object-contain"
                   />
                 </div>
               )}
 
+              {/* Body */}
               <div>
-                <label
-                  htmlFor="body"
-                  className="block mb-1 font-medium text-gray-300"
-                >
+                <label className="block mb-1 font-medium text-gray-300">
                   Content <span className="text-red-600">*</span>
                 </label>
-                <small className="block mb-2 text-xs text-gray-400">
-                  Tip: To add a link use{" "}
-                  <code className="bg-gray-700 px-1 rounded text-orange-400">
-                    [text](https://your-link.com)
-                  </code>
-                  , and for
-                  <strong> bold</strong> wrap text with{" "}
-                  <code className="bg-gray-700 px-1 rounded text-orange-400">
-                    **double asterisks**
-                  </code>
-                  .
-                </small>
                 <Field
                   as="textarea"
                   name="body"
-                  placeholder="Enter your blog content..."
-                  rows={7}
+                  rows={6}
                   className="w-full p-3 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 transition resize-none"
                   onChange={(e) => {
                     setFieldValue("body", e.target.value);
                     setPreviewBody(e.target.value);
                   }}
-                  aria-required="true"
                 />
                 <ErrorMessage
                   name="body"
@@ -244,7 +171,7 @@ const UploadBlog = ({ session }) => {
                   className="mt-1 text-sm text-red-500"
                 />
 
-                {/* Preview Section */}
+                {/* Preview */}
                 {pathname?.includes("/upload") && (
                   <section className="mt-6 p-4 bg-gray-900 rounded-md border border-gray-700">
                     <h3 className="mb-2 text-sm font-semibold text-orange-400">
@@ -260,22 +187,20 @@ const UploadBlog = ({ session }) => {
                 )}
               </div>
 
+              {/* Genre */}
               <div>
-                <label
-                  htmlFor="genre"
-                  className="block mb-1 font-medium text-gray-300"
-                >
+                <label className="block mb-1 font-medium text-gray-300">
                   Genre <span className="text-red-600">*</span>
                 </label>
                 <Field
                   name="genre"
                   as="select"
                   className="w-full p-3 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
-                  aria-required="true"
                 >
                   <option value="" disabled>
                     Select a genre
                   </option>
+
                   <option value="Webwiz">Webwiz</option>
                   <option value="Technology">Technology</option>
                   <option value="Spirituality">Spirituality</option>
@@ -347,6 +272,26 @@ const UploadBlog = ({ session }) => {
                   className="mt-1 text-sm text-red-500"
                 />
               </div>
+
+              {/* Link (Optional) */}
+              <div>
+                <label className="block mb-1 font-medium text-gray-300">
+                  Optional Link
+                </label>
+                <Field
+                  name="link"
+                  type="url"
+                  placeholder="https://example.com"
+                  className="w-full p-3 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+                />
+                <ErrorMessage
+                  name="link"
+                  component="p"
+                  className="mt-1 text-sm text-red-500"
+                />
+              </div>
+
+              {/* Submit */}
               <div className="flex items-center justify-between">
                 <button
                   type="submit"
@@ -369,25 +314,13 @@ const UploadBlog = ({ session }) => {
 
         {/* Success Modal */}
         {modalVisibility && (
-          <div
-            role="alertdialog"
-            aria-modal="true"
-            aria-labelledby="upload-success-title"
-            aria-describedby="upload-success-desc"
-            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 p-4 z-50"
-          >
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 p-4 z-50">
             <div className="bg-gray-800 rounded-xl p-6 max-w-sm w-full text-center shadow-lg">
               <ThumbsUp className="mx-auto mb-4 h-10 w-10 text-orange-400" />
-              <h2
-                id="upload-success-title"
-                className="text-lg font-semibold text-orange-400 mb-2"
-              >
+              <h2 className="text-lg font-semibold text-orange-400 mb-2">
                 Your blog was uploaded successfully!
               </h2>
-              <p
-                id="upload-success-desc"
-                className="text-sm text-gray-300 mb-6"
-              >
+              <p className="text-sm text-gray-300 mb-6">
                 Thanks for sharing your blog post with the community.
               </p>
               <button

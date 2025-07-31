@@ -61,7 +61,7 @@ const ContactPage = () => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen bg-gray-400/5">
+        <div className="flex justify-center items-center h-screen bg-black">
           <LoaderCircle
             size={50}
             speed={1.1}

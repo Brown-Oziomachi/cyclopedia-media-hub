@@ -194,23 +194,23 @@ const BlogDetails = ({ params }) => {
     }
   };
 
-const handleMoreBlogClick = () => {
+  const handleMoreBlogClick = () => {
     setLoading(true);
     setTimeout(() => {
       router.push("/blog");
     }, 3000);
-  };  
+  };
 
-  // const handleProfile = () => {
-  //   setLoading(true);
-  //   setTimeout(() => {
-  //     router.push("/myprofile");
-  //   }, 3000);
-  // };
+  const handleProfile = () => {
+    setLoading(true);
+    setTimeout(() => {
+      router.push("/myprofile");
+    }, 3000);
+  };
 
   if (!blog) {
     return (
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center h-screen bg-black">
         <LoaderCircle className="text-green-600 w-14 h-14 animate-spin" />
         <img
           src="/logo.jpg"
@@ -230,7 +230,7 @@ const handleMoreBlogClick = () => {
     >
       <ScrollProgressBar />
       {/* Blog Header Section */}
-      <div className="bg-gray-400/5 shadow-xl rounded-2xl p-10 relative border border-gray-700 space-y-6">
+      <div className="bg-black shadow-xl rounded-2xl p-10 relative border border-gray-700 space-y-6">
         <span className="inline-block px-5 py-2 bg-gradient-to-r from-green-600 text-black font-semibold text-sm rounded-full shadow-md shadow-black transition-transform hover:scale-105">
           {blog.genre}
         </span>
@@ -248,9 +248,9 @@ const handleMoreBlogClick = () => {
           />
           <div>
             <h4 className="absolute inset-0 -top-20 items-center justify-center flex  underline text-xs text-green-600 text-center font-serif">
-              <Link href="/blog">
+              <Link href="/myprofile">
                 <button
-                  onClick={handleMoreBlogClick}
+                  onClick={handleProfile}
                   className="mb-2 text-center text-sm text-green-600 tracking-widest  border-green-600 px-5 py-2 shadow-black shadow-xl rounded-lg hover:bg-green-600 hover:text-black transition duration-300 w-fit mx-auto"
                   disabled={loading}
                 >
@@ -269,10 +269,10 @@ const handleMoreBlogClick = () => {
           </div>
         </div>
 
-        <h5 className="lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-black shadow-xl hover:shadow-xl transition duration-300 shadow-black ">
+        <h5 className="lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-gray-800 shadow-xl hover:shadow-xl transition duration-300 shadow-black ">
           Follow me on
         </h5>
-        <div className=" flex gap-4 shadow-black items-center justify-center ">
+        <div className=" flex gap-4 shadow-gray-800 items-center justify-center ">
           <h5 className="max-lg:hidden mt-2 mb-2 text-center bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded shadow-black shadow-xl hover:shadow-xl transition duration-300 shadow-black ">
             Follow me on
           </h5>
@@ -321,70 +321,76 @@ const handleMoreBlogClick = () => {
       <p className="-mt-15 text-center text-xs text-shadow-2xs border-b border-x border-x-green-600 px-0 border-gray-400/20 rounded-md">
         Learn, unlearn <span className="text-green-600">and</span> relearn.
       </p>
-      <div className="bg-gray-400/5 rounded-xl shadow-lg p-2 border border-gray-700">
+      <div className="bg-black rounded-xl shadow-lg p-2 border border-gray-700">
         <h1 className="text-2xl font-extrabold text-white text-center drop-shadow-lg mt-5 shadow-black shadow-xl">
           {blog.title}
           <p className="text-gray-500 text-sm py-5">
             {blog.timestamp || "Unknown Date"}
           </p>
           <div className="">
-            <img
-              src="/id.jpeg"
-              alt=""
-              className="w-full rounded-md mt-2 object-cover border-b-black "
-            />
+            {blog.imageUrl && (
+              <div className="relative w-full h-64 md:h-96">
+                <Image
+                  src={blog.imageUrl}
+                  alt={blog.title || "Blog image"}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-md"
+                />
+              </div>
+            )}
             {/* Show video if blog.video exists */}
-                  {blog.video && (
-                    <video
-                    src={blog.video}
-                    controls
-                    className="w-full rounded-md mt-4"
-                    >
-                    Your browser does not support the video tag.
-                    </video>
-                  )}
-                  </div>
-                </h1>
-                <BlogDisplay body={blog.body} />
-                </div>
-                
-                <div className="flex flex-col-1 justify-center gap-3 items-center shadow-lg text-sm ">
-                <button
-                  onClick={handleLikeClick}
-                  className={`border flex md:flex-row items-center justify-center text-sm py-2 px-5 rounded-lg transition-all ${
-                  Agreed
-                    ? "text-green-600 hover:text-green-700"
-                    : "text-gray-400 hover:text-red-600"
-                  }`}
-                  aria-label="Like Button"
-                >
-                  <div
-                  className={`transition-transform ${
-                    Agreed ? "scale-110 -ml-2" : ""
-                  }`}
-                  />
-                  {Agreed ? "Agreed" : "Agree"} ({likes})
-                </button>
+            {blog.video && (
+              <video
+                src={blog.video}
+                controls
+                className="w-full rounded-md mt-4"
+              >
+                Your browser does not support the video tag.
+              </video>
+            )}
+          </div>
+        </h1>
+        <BlogDisplay body={blog.body} />
+      </div>
 
-                <div
-                  className="border flex items-center gap-1 text-gray-400 font-semibold py-2 px-6 rounded-lg hover:bg-gray-800 transition"
-                  title="Number of Comments"
-                >
-                  <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 mr-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 8h2a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2v-2m12-8V6a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2h2"
-                  />
-                  </svg>
-                  {
+      <div className="flex flex-col-1 justify-center gap-3 items-center shadow-lg text-sm ">
+        <button
+          onClick={handleLikeClick}
+          className={`border flex md:flex-row items-center justify-center text-sm py-2 px-5 rounded-lg transition-all ${
+            Agreed
+              ? "text-green-600 hover:text-green-700"
+              : "text-gray-400 hover:text-red-600"
+          }`}
+          aria-label="Like Button"
+        >
+          <div
+            className={`transition-transform ${
+              Agreed ? "scale-110 -ml-2" : ""
+            }`}
+          />
+          {Agreed ? "Agreed" : "Agree"} ({likes})
+        </button>
+
+        <div
+          className="border flex items-center gap-1 text-gray-400 font-semibold py-2 px-6 rounded-lg hover:bg-gray-800 transition"
+          title="Number of Comments"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 mr-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M17 8h2a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2v-2m12-8V6a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2h2"
+            />
+          </svg>
+          {
             // Count comments + all replies
             comments.reduce(
               (total, comment) =>
@@ -507,8 +513,10 @@ const handleMoreBlogClick = () => {
                   />
                   <div className=" bg-gray-700/10 rounded-lg  ml-5 ">
                     <Link href={"/users/${post.profile}"}>
-                      
-                      <span className="star-rating ml-5" data-rating="4.2"></span>
+                      <span
+                        className="star-rating ml-5"
+                        data-rating="4.2"
+                      ></span>
 
                       <p className="text-white font-semibold ml-5">
                         {comment.userName} {comment.profile}

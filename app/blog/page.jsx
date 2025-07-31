@@ -264,7 +264,7 @@ const BlogPage = () => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen bg-gray-400/5 ">
+        <div className="flex justify-center items-center h-screen bg-black ">
           <LoaderCircle
             size={50}
             className="animate-spin text-green-600 mt-10"

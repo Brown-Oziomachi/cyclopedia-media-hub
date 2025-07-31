@@ -55,7 +55,7 @@ const SupportCard = () => {
   return (
     <main className="bg-black/90 min-h-screen text-white p-6">
       {loading ? (
-        <div className="flex flex-col justify-center items-center h-screen mt-20">
+        <div className="flex flex-col justify-center items-center h-screen mt-20 bg-black">
           <h1 className="text-4xl font-extrabold mb-6">Loading <span className="text-green-600">Gallery</span></h1>
           <LoaderCircle size={50} className="animate-spin text-green-600" />
            <img

@@ -20,7 +20,7 @@ const About = () => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen bg-gray-400/5">
+        <div className="flex justify-center items-center h-screen bg-black">
           <Loader size={50} className="animate-spin text-gray-400" />
           <img
             src="logo.jpg"
