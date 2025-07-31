@@ -471,13 +471,13 @@ const BlogPage = () => {
             {!loading &&
               filteredPosts.length > 0 &&
               showContentType !== "gallery" && (
-                <section className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 ">
+                <section className=" lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
                   {filteredPosts.map((post) => (
                     <article
                       key={post.id}
-                      className=" rounded-xl  hover:shadow-2xl transition-all duration-300 shadow-black shadow-2xl relative overflow-hidden h-fit "
+                      className=" rounded-xl hover:shadow-2xl transition-all duration-300 shadow-black shadow-2xl relative  "
                     >
-                      <span className="absolute top-5 left-7 bg-green-600 text-white z-10 text-xs px-3 py-1 rounded-lg shadow-2xl shadow-black">
+                      <span className="absolute top-0 -mt-5 left-7 bg-green-600 text-white z-10 text-xs px-3 py-1 rounded-lg shadow-2xl shadow-black">
                         {post.genre || "General"}
                       </span>
                       <h1 className="text-xs text-white text-center absolute top-5 right-7 z-30">
@@ -486,31 +486,26 @@ const BlogPage = () => {
 
                       {showContentType === "blog" ? (
                         <Link href={`/blog/${post.id}`} className="block">
-                          {post.image && (
-                            <div className="h-40 overflow-hidden">
-                              <img
-                                src={post.image}
-                                alt="Blog Poster"
-                                className="w-full h-full object-cover rounded-t-xl"
-                              />
-                            </div>
-                          )}
-                          <div className="z-50 p-5 bg-gray-950 backdrop-blur-md rounded-b-xl shadow-2xl shadow-black hover:bg-gray-400/5 h-50">
-                            <h3 className="w-10 h-5 mx-auto mb-3 object-cover opacity-50">
-                              {/* <img
-                                src="/new.jpeg"
-                                alt=""
-                                className="bg-black shadow-2xl shadow-black hover:bg-gray-400/5"
-                              /> */}
+                          <div className="z-50 p-5  bg-gray-950 backdrop-blur-md rounded-b-xl shadow-2xl shadow-black hover:bg-gray-400/5 h-50 items-center justify-center">
+                            <h3 className="w-30 h-25 rounded-t-xl object-right ml-auto">
+                              {post.imageUrl && (
+                                <div className=" overflow-hidden">
+                                  <img
+                                    src={post.imageUrl}
+                                    alt="Blog Poster"
+                                    className="w-40 h-28 rounded-t-xl object-right ml-auto"
+                                  />
+                                </div>
+                              )}
                             </h3>
-                            <p className="text-gray-500 text-sm py-2">
-                              {post.timestamp || "Unknown Date"}
-                            </p>
-                            <h2 className="text-sm font-bold bg-black shadow-2xl shadow-black text-white mt-2">
+                            <h2 className="text-sm font-bold bg-black shadow-2xl shadow-black text-white text-left -mt-28 w-1/2">
                               {post.title}
                             </h2>
-                            <p className="text-xs text-white line-clamp-2 mt-3 bg-black p- z-50">
+                            <p className="text-xs text-white line-clamp-2 mt-3 bg-black p- z-50 w-1/2">
                               {post.body}
+                            </p>
+                            <p className="text-gray-500 text-sm py-2">
+                              {post.timestamp || "Unknown Date"}
                             </p>
                           </div>
                         </Link>
