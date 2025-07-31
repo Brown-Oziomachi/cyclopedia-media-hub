@@ -331,11 +331,11 @@ const BlogDetails = ({ params }) => {
             {blog.imageUrl && (
               <div className="relative w-full h-64 md:h-96">
                 <Image
-                  src={blog.imageUrl}
-                  alt={blog.title || "Blog image"}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-md"
+                  src={blog.imageUrl} // <-- your Blob URL from Firestore
+                  alt={blog.title}
+                  width={800}
+                  height={400}
+                  className="rounded-lg"
                 />
               </div>
             )}

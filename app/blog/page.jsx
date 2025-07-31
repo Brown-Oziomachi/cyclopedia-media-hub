@@ -276,7 +276,7 @@ const BlogPage = () => {
           />
         </div>
       ) : (
-        <main className="min-h-screen bg-gray-400/5 text-white px-2 py-20">
+        <main className="min-h-screen bg-black text-white px-2 py-20">
           <div className="max-w-7xl mx-auto ">
             <ScrollProgressBar />
 

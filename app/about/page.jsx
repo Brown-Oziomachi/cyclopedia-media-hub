@@ -31,7 +31,7 @@ const About = () => {
       ) : (
         <main className=" min-h-screen text-gray-900 font-sans">
           {/* Hero Section */}
-          <header className="flex flex-col justify-center items-center min-h-screen text-center bg-gray-400/5 text-white px-6 md:px-20">
+          <header className="flex flex-col justify-center items-center min-h-screen text-center bg-black text-white px-6 md:px-20">
             <h1 className="text-5xl font-extrabold mb-8 tracking-tight mt-20">
               About Webwiz Creation
             </h1>

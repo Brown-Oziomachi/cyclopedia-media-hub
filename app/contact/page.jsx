@@ -75,7 +75,7 @@ const ContactPage = () => {
           />
         </div>
       ) : (
-        <main className="bg-gray-400/5 border-y text-white min-h-screen ">
+        <main className="bg-black border-y text-white min-h-screen ">
           <section className="container mx-auto px-6 py-6 lg:flex lg:gap-20 ">
             <ScrollProgressBar />
 
