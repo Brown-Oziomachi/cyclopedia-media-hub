@@ -1,418 +1,693 @@
-"use client";
+'use client';
+
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 import Popup from "@/components/Popup";
-import {
-  ArrowRight,
-  ArrowRightToLine,
-  ChevronRight,
-  LaptopMinimal,
-  LoaderCircle,
-  Palette,
-  PersonStanding,
-  Play,
-  Store,
-  Webhook,
+import { motion } from "framer-motion";
+import { 
+  ArrowRight, 
+  ArrowRightToLine, 
+  ChevronRight, 
+  LaptopMinimal, 
+  LoaderCircle, 
+  Palette, 
+  Play, 
+  Store, 
+  Webhook, 
 } from "lucide-react";
 import BottomNav from "@/components/BottomNav";
 import ChatDropdown from "@/components/Chat";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
+import LogoSplash from "@/components/LogoSplash";
+
 
 const Page = () => {
   const [loading, setLoading] = useState(true); // Loading state
-  const [session] = useState();
+  const [session] = useState(); 
   const [showpopup, setShowPopup] = useState(true);
+  const [showSplash, setShowSplash] = useState(true);
+
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
+    const seen = sessionStorage.getItem("hasSeenSplash");
+    if (seen) {
+      setShowSplash(false);
+    }
   }, []);
 
-  useEffect(() => {
-    setShowPopup(false);
-  });
+  const handleFinish = () => {
+    sessionStorage.setItem("hasSeenSplash", "true");
+    setShowSplash(false);
+  };
+
+
 
   return (
     <>
-      {loading ? (
-        <div className="flex justify-center items-center h-screen bg-black">
-          <img
-            src="logo.jpg"
-            alt="My Logo"
-            className="h-30 lg:h-30 mt-10 lg:object-cover animate-pulse absolute top-30 left-0 right-0 bottom-0 mx-auto"
-          />
-          <div className="text-center space-y-20 mt-10">
-            <LoaderCircle
-              size={50}
-              speed={1.1}
-              color="green"
-              className="animate-spin ml-20"
-            />
-            <ScrollProgressBar />
-
-            <h1 className="text-green-600  text-center text-2xl">
-              <span className="text-3xl">W</span>eb
-              <span className="text-3xl">W</span>iz Creation
-            </h1>
-          </div>
-        </div>
+      {showSplash ? (
+        <LogoSplash onFinish={handleFinish} />
       ) : (
-        <div className="py-18 text-white relative overflow-hidden bg-black">
+        <div className="py-18 lg:-mt-60 text-white relative overflow-hidden bg-gradient-to-r from-purple-900 z-0 bg-black to-black">
           {/* Hero Section */}
-          <div>
+          <div className=" z-0 ">
             <img
-              src="code.png"
+              src="hid.png"
               alt="image"
-              className="w-full h-80 lg:h-200 opacity-0 bg-black border-b-4 border-b-green-600 "
+              className="z-50 w-fit h-fit opacity-15 fixed"
             />
           </div>
-          <main className=" flex flex-col justify-center items-center lg:h-2 text-center px-4 lg:px-0 max-lg:mt-10 opacity-100 lg:-mt-100">
-            <div className="space-y-2 absolute">
-              {/* Webwiz Creation Title */}
 
-              <h1 className="text-4xl font-bold lg:text-7xl text-gray-400 -mt-80">
-                WEBWIZ
-                <span className="text-green-600">
-                  {" "}
-                  CREA<span className="text-green-600">TION</span>
-                </span>
-              </h1>
-              {/* The Sun Web Title */}
-              <div className="flex items-center justify-center ">
-                {/* Sun Glow (white pulse instead of orange) */}
+          <main className="z-50  flex flex-col justify-center items-center  px-4 lg:px-0 max-lg:mt-40 opacity-100 lg:mt-20">
+            <div className="space-y-2 ">
+              {/* Cyclopedia Creation Title */}
+              <img
+                src="hid.png"
+                alt="image"
+                className="z-0 w-fit lg:w-200 lg:h-200 h-fit opacity-"
+              />
 
-                <h1 className="text-5xl font-bold text-white max-md:text-2xl flex items-center justify-center border border-{animate-ping} border-green-600 border-r-white border-b-white py-2 px-10 bg-gray-900 rounded-md gap-5">
-                  <div className="absolute w-10 h-10 rounded-full z-0 mr-75 max-md:ml-30 bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse"></div>
-                  <span className="text-green-600 "> | Sun </span>Web |
-                </h1>
-              </div>
-
-              {/* Description Text */}
-              <p className="text-sm lg:text-2xl text-gray-300 max-w-3xl mx-auto max-md:w-1/2">
-                "Where the <span className="text-green-600">Sun</span> Meets
-                Your Vision"
+              <p className="text-sm lg:text-2xl text-gray-300 max-w-3xl mx-auto lg:-mt-30 -mt-10 text-center">
+                Uncovering the Unseen, Revealing the Real.
               </p>
 
               {/* Buttons */}
-              <div className="flex justify-center gap-4 mt-2 group text-sm">
-                <Link href="/contact">
-                  <button className=" border-x bg-green-600 border-x-green-600 cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-xl shadow-black group-hover:bg-white group-hover:text-black ">
-                    Get Started
-                    <ArrowRightToLine className="text-white" />
-                  </button>
-                </Link>
-                <Link href="/about">
-                  <button className="bg-gray-400/5 border-2 border-green-600 shadow-black shadow-2xl cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all group-hover:bg-white group-hover:text-black ">
-                    Learn More
-                    <ChevronRight className="text-green-600" />
-                  </button>
-                </Link>
-              </div>
+            </div>
+            <div className="flex  gap-4 mt-2 group text-sm z-0  lg:mb-20">
+              <Link href="/about">
+                <button className="z-50 border-purple-400 shadow-black shadow-2xl cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all group-hover:bg-white group-hover:text-black ">
+                  Learn More
+                  <ChevronRight className="text-purple-300" />
+                </button>
+              </Link>
             </div>
           </main>
         </div>
       )}
 
-      <div className="relative bg-gray-400/5 mb-0  items-center justify-center"></div>
-      {/* Mobile heading */}
-      <h1 className="mt-5 mb-5 text-4xl lg:text-6xl font-extrabold text-white tracking-wide lg:hidden text-center">
-        Ready to Elevate Your Digital Presence?
-      </h1>
-      <div className="py-2 bg-black text-center lg:flex items-center justify-center">
-        <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb- py-1">
-          <div>
+      <section className="px-6 py-10 md:py-20 bg-white text-black text-center max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 items-stretch">
+        {/* First Card */}
+        <div className="relative w-full lg:w-1/2">
+          <img
+            src="erik.png"
+            alt="News Image"
+            className="w-full h-auto object-cover rounded-md"
+          />
+          <div className="absolute z-10 bottom-4 left-4 right-4 bg-white bg-opacity-90 p-4 ">
+            <Link href="/">
+              <h2 className="text-sm font-bold text-black hover:underline">
+                Erik Prince Calls for U.S. to Colonize Africa and Latin America
+              </h2>
+            </Link>
+            <p className="text-xs text-gray-800 mt-1">
+              Jon Schwarz February 10 2024,
+            </p>
+            <p className="mt-2 text-gray-900 text-xs">
+              If so many of these countries around the world are incapable of
+              governing themselves, it’s time for us to just put the imperial
+              hat back on, to say, we’re going to govern those countries
+            </p>
+          </div>
+        </div>
+
+        {/* Second Card */}
+        <div className="relative w-full lg:w-1/2">
+          <img
+            src="/Ame.png"
+            alt="News 4"
+            className="w-full h-auto object-cover rounded-md"
+          />
+          <div className="absolute z-10 bottom-4 left-4 right-4 bg-white bg-opacity-90 p-4 ">
+            <Link href="/">
+              <h2 className="text-sm font-bold text-black hover:underline">
+                Americans Leaving Religion
+              </h2>
+            </Link>
+            <p className="text-xs text-gray-800 mt-1">
+              By Ryan T. Cragun & Jesse M. Smith — Published on May 7, 2025
+            </p>
+            <p className="mt-2 text-gray-900 text-xs">
+              An excerpt from “Goodbye Religion: The Causes and Consequences of
+              Secularization”
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div className="px-4 py-6 lg:mt-20 max-lg:mt-4  ">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {/* Card 1 */}
+          <div className="relative rounded-xl overflow-hidden shadow-md group h-40 sm:h-48 md:h-full lg:h-64">
             <img
-              src="web20.jpg"
-              alt="Elevate Your Digital Presence"
-              className="mt-5 w-400 lg:h-200 rounded-t-lg group-hover:opacity-80 transition duration-300 shadow-2xl shadow-black"
+              src="/va.png"
+              alt="Politics"
+              fill
+              className=" group-hover:scale-105 transition-transform duration-300"
             />
+            <div className="absolute inset-0  bg-opacity-40 flex items-center justify-center">
+            </div>
+            <Link href="/">
+              <h2 className="text-black underline text-sm md:text-sm font-bold text-center px-2">
+                Trump Prepares to Revoke Lifesaving Abortion Care for Veterans
+              </h2>
+            </Link>
           </div>
-        </h2>
-        <div className="lg:grid lg:space-y-10 lg:mt-50">
-          {/* Desktop heading */}
-          <h1 className="mt-20 text-4xl lg:text-6xl font-extrabold text-white tracking-wide text-center max-lg:hidden">
-            Ready to Elevate <br /> Your Digital Presence?
-          </h1>
-          <div className="text-lg text-gray-400 mx-auto mb-1 border-b border-x border-x-green-600 border-b-green-600">
-            The <span className="text-green-600">Sun</span> Web: Bringing Light
-            to Your Digital Presence
+
+          {/* Card 2 */}
+          <div className="relative rounded-xl overflow-hidden shadow-md group h-40 sm:h-48 md:h-56 lg:h-64">
+            <img
+              src="/ghost.png"
+              alt="Religion"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div className="absolute inset-0 bg-opacity-40 flex items-center justify-center">
+            </div>
+              <h2 className="text-black text-sm md:text-sm font-bold text-center px-2">
+                ‘Ghost soldiers’ – Britain’s shadow war in west Africa
+              </h2>
           </div>
-          <h4 className="text-3xl text-white">Why the Sun Web?</h4>
-          <h5 className="lg:w-1/2 mx-auto text-white ">
-            The sun is a universal symbol of growth, clarity, and inspiration.
-            At Webwiz Creation, we channel this energy to help your ideas
-            thrive. With personalized strategies, unparalleled creativity, and a
-            commitment to excellence, we empower you to shine brighter in your
-            industry
-          </h5>
-          <Link href="/contact" className="cursor-pointer">
-            <button className="mb-10 shadow-2xl flex mx-auto gap-2 cursor-pointer hover:bg-white hover:text-black hover:animate-pulse text-white px-8 py-4 text-lg rounded-lg font-bold border-x border-x-green-600 transition-all">
-              Connect
-              <ArrowRight className="hover:animate-pulse text-green-600" />
+
+          {/* Card 3 */}
+          <div className="relative rounded-xl overflow-hidden shadow-md group h-40 sm:h-48 md:h-56 lg:h-64">
+            <img
+              src="/med.png"
+              alt="Science & Tech"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div className="absolute inset-0 bg-opacity-40 flex items-center justify-center">
+            </div>
+              <h2 className="text-black text-sm md:text-sm font-bold text-center px-2">
+UK media are covering up British spy flights for Israel
+              </h2>
+          </div>
+
+          {/* Card 4 */}
+          <div className="relative rounded-xl overflow-hidden shadow-md group h-40 sm:h-48 md:h-56 lg:h-64">
+            <img
+              src="/war.png"
+              alt="Surveillance"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div className="absolute inset-0 bg-opacity-40 flex items-center justify-center">
+            </div>
+              <h2 className="text-black text-sm md:text-sm font-bold text-center px-2">
+How Britain’s Labour government facilitated the massacre of Biafrans in Nigeria – to protect its oil interests
+              </h2>
+          </div>
+        </div>
+           
+      </div>
+
+
+
+<div className=" mx-auto items-center justify-center">
+
+   <div className="w-full lg:w-1/2">
+            <div className="bg-white text-black p-4  h-full">
+              <Link href="https://webwizcreation-y7vx.vercel.app/blog/wVh7CTJIgai3XKZ966xO">
+                <img
+                  src="leba.png"
+                  alt="News Image"
+                  className="mt-3 w-full h-full"
+                />
+                <h3 className="text-lg font-semibold mt-4">
+The Exploitative System that Traps Nigerian Women as Slaves in Lebanon
+                </h3>
+                <p className="text-sm text-gray-400 mt-2 line-clamp-3">
+Nigerian migrants arrive in Lagos from Libya. Nigeria has, in the last two years, evacuated thousands of its citizens from Libya and Lebanon after they suffered several forms of abuses, including enslavement. (Sam Olukoya/IPS)
+
+
+                </p>
+              </Link>
+            </div>
+            </div>
+ <div className="w-full lg:w-1/2">
+            <div className="bg-white text-black p-4  h-full">
+              <Link href="">
+                <img
+                  src="teen.png"
+                  alt="News Image"
+                  className="mt-3 w-full h-full"
+                />
+                <h3 className="text-lg font-semibold mt-4">
+Teens are increasingly turning to AI companions, and it could be harming them
+                </h3>
+                <p className="text-sm text-gray-400 mt-2 line-clamp-3">
+                  Teenagers are increasingly turning to AI companions for friendship, support, and even romance. But these apps could be changing how young people connect to others, both online and off.
+                </p>
+              </Link>
+            </div>
+</div>
+<div className="w-full lg:w-1/2">
+            <div className="bg-white text-black p-4  h-full">
+              <Link href="https://webwizcreation-y7vx.vercel.app/blog/wVh7CTJIgai3XKZ966xO">
+                <img
+                  src="hiden.png"
+                  alt="News Image"
+                  className="mt-3 w-full h-full"
+                />
+                <h3 className="text-lg font-semibold mt-4">
+Britain’s Hidden Helicopter War in Niger
+                </h3>
+                <p className="text-sm text-gray-400 mt-2 line-clamp-3">
+As Niger expels US troops, Declassified reveals British helicopters operated a taxi service for French forces in the uranium-rich African state.
+                </p>
+              </Link>
+            </div>
+</div>
+
+</div>
+      {/* Mobile heading */}
+      <div id="News-cpd" className="w-full px-4 mt-10">
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Feature Card */}
+          <div className="w-full lg:w-1/2">
+            <div className="bg-white text-black p-4  h-full">
+              <Link href="https://webwizcreation-y7vx.vercel.app/blog/wVh7CTJIgai3XKZ966xO">
+                <img
+                  src="slave.png"
+                  alt="News Image"
+                  className="mt-3 w-full h-full"
+                />
+                <h3 className="text-lg font-semibold mt-4">
+                  The “Slave Bible” is Not What You Think
+                </h3>
+                <p className="text-sm text-gray-400 mt-2 line-clamp-3">
+                  The Museum of the Bible presented misleading information to
+                  attract people of color to the museum.
+                </p>
+              </Link>
+            </div>
+          </div>
+
+          {/* Cards Grid */}
+          <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[600px] overflow-y-auto pr-2">
+            {/* Card 1 */}
+            <div className="bg-white text-black  p-4 ">
+              <Link href="https://webwizcreation-y7vx.vercel.app/blog/wVh7CTJIgai3XKZ966xO">
+                <img
+                  src="sup.jpg"
+                  alt="News Image"
+                  className="w-full h-32 object-cover "
+                />
+                <h3 className="text-sm font-semibold mt-2">
+                  How are Christians persecuted in Nigeria
+                </h3>
+                <p className="text-sm text-gray-400 line-clamp-3 mt-1">
+                  Independent thinkers, researchers, and digital
+                  truth-seekers...
+                </p>
+              </Link>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-white text-black  p-4 ">
+              <Link href="https://webwizcreation-y7vx.vercel.app/blog/vDRvVo48m4oCV4Hwiykk">
+                <img
+                  src="chr.png"
+                  alt="News image"
+                  className="w-full h-32 object-cover"
+                />
+                <h3 className="text-sm font-semibold mt-2">
+                  As Christians Are Slaughtered, the World Looks Away
+                </h3>
+                <p className="text-sm text-gray-400 line-clamp-3 mt-1">
+                  Islamists massacred 200+ in Nigeria. Media silence.
+                </p>
+              </Link>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-white text-black p-4">
+              <Link href="https://webwizcreation-y7vx.vercel.app/blog/O9O1DyrTgb70TCemuETa">
+                <img
+                  src="para.jpg"
+                  alt="News Image"
+                  className="w-full h-32 object-cover "
+                />
+                <h3 className="text-sm font-semibold mt-2">
+                  The Paranoid Policy of Affirmative Consent
+                </h3>
+                <p className="text-sm text-gray-400 line-clamp-3 mt-1">
+                  Consent now means exact, performative agreement.
+                </p>
+              </Link>
+            </div>
+
+            {/* Card 4 */}
+            <div className="bg-white text-black p-4 ">
+              <Link href="">
+                <img
+                  src="trump.png"
+                  alt="Trump"
+                  className="w-full h-32 object-cover"
+                />
+                <h3 className="text-sm font-semibold mt-2">
+                  Authoritarian Christianity Targets Christians
+                </h3>
+                <p className="text-sm text-gray-400 line-clamp-3 mt-1">
+                  Trump’s Christian nationalism may hurt Christians.
+                </p>
+              </Link>
+            </div>
+
+            {/* Card 5 */}
+            <div className="bg-white text-black p-4">
+              <Link href="">
+                <img
+                  src="sha.png"
+                  alt="Sharia"
+                  className="w-full h-32 object-cover "
+                />
+                <h3 className="text-sm font-semibold mt-2">
+                  Identity Crisis: Shari'a Law in Nigeria
+                </h3>
+                <p className="text-sm text-gray-400 line-clamp-3 mt-1">
+                  In 1999, Sharia shocked the world. What now?
+                </p>
+              
+              </Link>
+            </div>
+
+            {/* Card 6 */}
+            <div className="bg-white text-black p-4 ">
+              <Link href="">
+                <img
+                  src="nig.png"
+                  alt="Nigeria"
+                  className="w-full h-32 object-cover "
+                />
+                <h3 className="text-sm font-semibold mt-2">
+                  Nigeria: An Ephemeral Peace
+                </h3>
+                <p className="text-sm text-gray-400 line-clamp-3 mt-1">
+                  Ceasefire raised false hopes. Boko Haram strikes back.
+                </p>
+              
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center mt-8">
+          <Link href="/global">
+            <button className="shadow-xl hover:bg-white hover:text-black transition-all px-6 py-2 text-white bg-purple-600 font-bold rounded-lg">
+              Global News
             </button>
           </Link>
         </div>
       </div>
 
-      {/* ACTION SECTION */}
-      <div className="shadow-2xl shadow-black mx-auto px-6 lg:px-50 py-16 bg-black border-green-600 border-x-green-600  border shadow-[0_0_40px_10px_rgba(255,165,0,0.3)] rounded-lg">
-        <h2 className="text-center text-5xl font-extrabold text-white mb-6 animate-fade-in">
-          Join WebWiz Today!
-        </h2>
+      <div className="bg-white lg:flex items-center justify-center gap-8">
         <img
-          src="web5.jpg"
-          alt="image"
-          className="mx-auto shadow-2xl shadow-black"
+          src="untold.png"
+          alt="Elevate Your Digital Presence"
+          className="mt-5 z-0 w-full lg:w-fit lg:h-50 h-50 rounded-t-lg group-hover:opacity-0 transition duration-300 shadow-2xl shadow-black"
         />
-        <hr className="border-gray-700 " />
-        <p className="text-center text-gray-400 max-w-3xl mx-auto leading-loose">
-          WebWiz isn’t just a platform; it’s a radiant space where innovation
-          meets opportunity. Like the sun illuminating all it touches, WebWiz
-          empowers developers, innovators, and collaborators to shine.
-        </p>
-
-        <p className="py-2 text-center text-gray-400">
-          Whether you're a developer or a business, WebWiz is the sunlit hub for
-          endless opportunities. Let us brighten your journey.
-          <Link href={session ? "/registration" : "/auth/signin"}>
-            <p className="text-green-600 hover:text-cyan-400 underline ">
-              Register <span>here!</span>
-            </p>
-          </Link>
-        </p>
+        <Link href="/religion">
+          <button className="text-purple text-xl text-center mask-b-from-10%  z-50">
+            Read....
+          </button>
+        </Link>
       </div>
 
-      {/* MOON SECTION */}
-      <div className=" py-1 overflow-hidden z-50">
-        <div className="relative z-0 py-20 flex items-center justify-center mb-25">
-          <div className="absolute w-20 h-20 rounded-full bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.8)] animate-pulse"></div>
-        </div>
-
-        {[
-          {
-            title: "Why Your Business Needs a Professional Website",
-            img: "web6.jpg",
-            description:
-              "In today’s digital age, a professional website isn’t just a nice-to-have—it’s a necessity. Discover why a stunning and functional online presence matters more than ever.",
-            buttons: [
-              { text: "Read More", href: "/lessons", icon: ChevronRight },
-              {
-                text: "Hire a Developer",
-                href: "/developers",
-                icon: PersonStanding,
-              },
-              { text: "Get Started", href: "/contact", icon: ArrowRightToLine },
-            ],
-          },
-        ].map((item, index) => (
-          <div className="items-center justify-center flex flex-col-2">
-            <div
-              key={index}
-              className="bg-black shadow-2xl shadow-black z-0 p-5 -mt-15 rounded-lg flex flex-col items-center justify-center  shadow-green-600 transition border-l-4 border-black mb-10 "
-            >
-              <h3 className="text-2xl font-bold text-white mb-4 z-50">
-                {item.title}
-              </h3>
-              <img
-                src={item.img}
-                alt={item.title}
-                className="w-fit ml-auto lg:h-300 rounded-t-lg mb-5 group-hover:opacity-80 transition duration-300"
-              />{" "}
-              <h6 className="text-gray-400 mb-6">{item.description}</h6>
-              <div className="flex text-xs gap-4 group">
-                {item.buttons.map((button, i) => (
-                  <Link key={i} href={button.href}>
-                    <p className="group-hover:text-black px-4 py-2 bg-gray-400/5 border-x border-x-green-600 text-white hover:text-white rounded-lg font-semibold hover:bg-orange-600 transition flex items-center gap-1">
-                      {button.text}{" "}
-                      {button.icon && (
-                        <button.icon className="text-green-600" />
-                      )}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* DIGITAL AGENCY SECTION */}
-      <div className="container mx-auto px-6 py-16">
-        <h2 className="text-center text-5xl font-extrabold text-white mb-12 tracking-wide animate-fade-in">
-          We Are More Than <br /> A Digital Agency
-        </h2>
-        <p className="text-center text-gray-400 text-lg max-w-3xl mx-auto mb-12 leading-relaxed">
-          At the heart of our work lies passion and innovation. We are a vibrant
-          team committed to delivering excellence in web development, design,
-          and digital strategy.
-        </p>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      {/* Featured Topics */}
+      <div id="read-more">{/* Your "Explore more" content goes here */}</div>
+      <section className="px-6 py-10 md:py-20 max-w-6xl mx-auto bg-white text-black z-0">
+       
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
             {
-              img: "web7.jpg",
-              title: "Our Mission",
-              description:
-                "Empowering businesses with innovative web solutions.",
-              buttons: [{ text: "Learn More", href: "/about" }],
+              emoji: "🌍",
+              title: "History",
+              desc: "The Civilizations They Erased from Our Books",
+              link: "/history",
             },
             {
-              img: "web8.jpg",
-              title: "Our Vision",
-              description:
-                "To be the leading provider of cutting-edge web solutions.",
-              buttons: [{ text: "Learn More", href: "/about" }],
+              emoji: "🧨",
+              title: "Politics",
+              desc: "Who Really Profits from War?",
+              link: "/politics",
             },
             {
-              img: "web17.jpg",
-              title: "Core Values",
-              description: "Dedicated to building impactful online presences.",
-              buttons: [{ text: "Learn More", href: "/about" }],
+              emoji: "⛪",
+              title: "Religion",
+              desc: "The Crisis They Orchestrated in God’s Name",
+              link: "/religion",
+            },
+            // {
+            //   emoji: "🛰",
+            //   title: "Surveillance",
+            //   desc: "Digital Prison: How Your Data Builds Your Cage",
+            //   link: "/surveillance",
+            // },
+            {
+              emoji: "🧬",
+              title: "Science & Tech",
+              desc: "Breakthroughs They Buried",
+              link: "/science",
             },
             {
-              img: "web14.jpg",
-              title: "Discover Developers",
-              description:
-                "Web developers at Webwiz excel at turning ideas into reality.",
-              buttons: [{ text: "Find Talent", href: "/developers" }],
+              emoji: "👁",
+              title: "Control & Media",
+              desc: "Programming the Masses: The True Role of News",
+              link: "/media",
             },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="bg-gray-400/10 shadow-2xl shadow-black hover:bg-gray-800 p-5 rounded-xl transition-transform transform hover:scale-105 text-center group"
+          ].map((item, i) => (
+            <Link key={i} href={item.link} passHref legacyBehavior>
+              <a className="z-10">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.2, duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className=" p-6 z-50  transition-colors cursor-pointer"
+                >
+                  <h3 className="text-xl font-semibold mb-2 z-50">
+                    {item.emoji} {item.title}
+                  </h3>
+                  <p className="text-sm text-gray-300">{item.desc}</p>
+                </motion.div>
+              </a>
+            </Link>
+          ))}
+        </div>
+
+        {/* <div className="text-center mt-10">
+          <Link
+            href="/category/hidden-truth"
+            className="bg-linear-to-tr bg-purple-900 to-black text-white px-6 py-3 rounded-full font-semibold hover:bg-purple-600 transition"
+          >
+            Start Exploring
+          </Link>
+        </div> */}
+      </section>
+
+      {/* Timeline of Hidden Events */}
+      <section className="px-6 py-16 bg-white text-black max-w-6xl mx-auto">
+        <h2 className="text-2xl md:text-4xl font-bold mb-10 text-center">
+          Unfolding the Timeline of Truth
+        </h2>
+        <div className="relative border-l border-purple-700 ml-4">
+          {[
+            {
+              year: "1947",
+              title: "Roswell Incident",
+              desc: "The birth of UFO conspiracy theories after a mysterious crash in New Mexico.",
+            },
+            {
+              year: "1963",
+              title: "JFK Assassination",
+              desc: "Endless speculation over CIA, mafia, and deep state involvement.",
+            },
+            {
+              year: "2001",
+              title: "9/11 Attacks",
+              desc: "Theories still question the full story behind the towers' fall and geopolitical outcomes.",
+            },
+            {
+              year: "2020",
+              title: "Pandemic Power Shift",
+              desc: "COVID-19 reshaped the global economy, surveillance, and public trust.",
+            },
+            {
+              year: "Ongoing",
+              title: "Digital Censorship",
+              desc: "Algorithms now shape what we think, see, and believe online.",
+            },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.2 }}
+              className="mb-10 ml-6"
             >
-              <img
-                src={item.img}
-                alt={item.title}
-                className="w-full h-48 shadow-2xl shadow-black object-cover rounded-t-lg mb-5 group-hover:opacity-80 transition duration-300"
-              />
-              <h3 className="text-2xl font-extrabold text-white group-hover:text-orange-500 transition duration-300 mb-3">
-                {item.title}
+              <span className="absolute w-3 h-3 bg-purple-700 rounded-full -left-1.5 mt-1.5"></span>
+              <h3 className="text-lg font-semibold">
+                {item.year} — {item.title}
               </h3>
-              <p className="text-gray-300 text-sm leading-relaxed mb-5">
-                {item.description}
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                {item.buttons.map((button, btnIndex) => (
-                  <Link key={btnIndex} href={button.href}>
-                    <p className="flex gap-1 cursor-pointer px-4 py-2 bg-gray-400/5 border-x border-x-green-600 hover:bg-orange-600 text-white font-medium rounded-full shadow-md transition duration-300">
-                      {button.text} <ChevronRight className="text-green-600" />
-                    </p>
-                  </Link>
-                ))}
-              </div>
+              <p className="text-sm text-gray-400 mt-1">{item.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <section className="px-6 py-16 bg-white">
+        <h2 className="text-3xl md:text-4xl mb-10 font-semibold text-center">
+          Timeline of Suppressed Events
+        </h2>
+        <div className="space-y-8 max-w-3xl mx-auto">
+          {[
+            "1963 – JFK Assassination",
+            "2001 – 9/11 Inconsistencies",
+            "2020 – Global Info Control",
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.2 }}
+              className="border-l-4 border-green-500 pl-4"
+            >
+              <p className="text-lg">{item}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Interactive World Map (Placeholder) */}
+
+      {/* Real-Time Feed (Mock) */}
+      <section className="px-6 py-16 bg-black">
+        <h2 className="text-3xl md:text-4xl mb-10 font-semibold text-center text-white">
+          Live Truth Feed
+        </h2>
+        <ul className="space-y-4 max-w-2xl mx-auto text-sm ">
+          <li className="border p-4 border-gray-700 bg-white">
+            🔴 Leak: Secret meetings between tech giants & security agencies
+            revealed.
+          </li>
+          <li className="border p-4 border-gray-700 bg-white">
+            📡 Anonymous whistleblower exposes bio-surveillance projects in
+            Africa.
+          </li>
+          <li className="border p-4 border-gray-700 bg-white">
+            🌐 Censored protest footage resurfaces from Middle East.
+          </li>
+        </ul>
+      </section>
+
+      {/* Voices of the Silenced */}
+
+      {/* Mini Documentaries */}
+      <section className="px-6 py-16 bg-gradient-to-b from-white to-gray-200">
+        <h2 className="text-3xl md:text-4xl mb-10 font-semibold text-center">
+          Short Truth Documentaries
+        </h2>
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {["banporn.mp4", "truth2.mp4", "truth3.mp4"].map((vid, i) => (
+            <video
+              key={i}
+              src={`/${vid}`}
+              controls
+              className="w-full h-64 object-cover rounded-xl"
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Declassified Section */}
+      <section className="px-6 py-16 bg-gradient-to-b from-black to-purple-900">
+        <h2 className="text-3xl md:text-4xl mb-10 font-semibold text-center">
+          Declassified Files
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            "CIA Mind Control",
+            "Black Budget Programs",
+            "The Vatican Archives",
+          ].map((title, i) => (
+            <div
+              key={i}
+              className="bg-white p-5 border border-green-500 rounded-xl"
+            >
+              <p className="text-sm text-green-400 uppercase">REDACTED</p>
+              <h3 className="text-xl font-bold mt-2">{title}</h3>
+              <p className="text-sm mt-2">Click to unlock classified truths.</p>
             </div>
           ))}
         </div>
-        <div showpopup id="/corevalue">
-          Hello
-        </div>
-        {/* SERVICES SECTION */}
-        <div id="services-section"></div>
-        <div className=" text-white py-20 mt-20">
-          <div id="services"></div>
-          <h2 className="text-center text-5xl font-extrabold text-white mb-12 tracking-wide uppercase animate-fade-in">
-            Explore Our Exceptional Services
-          </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10  w-full rounded-lg shadow-lg">
-            {[
-              {
-                icon: <Palette className="mx-auto text-3xl" />,
-                img: "web10.png",
-                title: "Website Design",
-                description:
-                  "Crafting stunning, user-friendly websites tailored to your unique vision.",
-              },
-              {
-                icon: <Webhook className="mx-auto text-3xl" />,
-                img: "web12.png",
-                title: "Website Maintenance",
-                description:
-                  "No worries, trust us we will Keep your website secure, efficient, and running like clockwork.",
-              },
-              {
-                icon: <Store className="mx-auto text-3xl" />,
-                img: "web15.jpg",
-                title: "Digital Marketing",
-                description:
-                  "Creating and optimizing online stores for maximum sales and engagement.",
-              },
-              {
-                icon: <LaptopMinimal className="mx-auto text-3xl" />,
-                img: "web13.jpg",
-                title: "Website Development",
-                description:
-                  "Building powerful custom web applications and software solutions.",
-              },
-            ].map((service, index) => (
-              <div
-                key={index}
-                className="bg-gray-400/10 shadow-2xl shadow-black text-black p-6 rounded-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group"
-              >
-                <div className="group-hover:animate-bounce m-5 text-green-600">
-                  {service.icon}
-                </div>
-                {service.img && (
-                  <img
-                    src={service.img}
-                    alt={service.title}
-                    className="w-full object-cover shadow-2xl shadow-black rounded-t-lg mb-3 group-hover:opacity-80 transition duration-300"
-                  />
-                )}
-                <h3 className="text-center text-2xl font-bold mt-3 group-hover:text-cyan-400 transition text-white">
-                  {service.title}
-                </h3>
-                <p className="text-center text-gray-400 mt-3 group-hover:text-gray-300">
-                  {service.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div>
-          <div id="/#services">
-            <h1 className="text-2xl text-gray-400 text-center border-x underline cursor-pointer">
-              MORE FEATURES
-            </h1>
-            <p className="text-center text-green-600 text-sm cursor-pointer ">
-              view all the services we can offer{" "}
-            </p>
-          </div>
-        </div>
-        {/* CTA SECTION */}
-        <section className="mt-20 bg-orange-400 shadow-[0_0_80px_40px_rgba(255,165,0,0.1)] ">
-          <div className="container mx-auto px-5 lg:px-20 text-center bg-black py-20 rounded-md shadow-2xl shadow-black">
-            <h2 className="text-4xl font-bold text-white mb-5">
-              Join Webwiz Today!
-            </h2>
-            <p className="text-lg text-gray-300 lg:w-2/3 mx-auto leading-relaxed">
-              Webwiz isn't just a platform for developers; it's a space where
-              you can uncover talent, collaborate, and thrive.
-              <Link href={session ? "/registration" : "/auth/signin"}>
-                <span className="text-green-600 underline"> Register Now</span>
-              </Link>
-            </p>
-            <div className="flex justify-center mt-8">
-              <Link
-                href={session ? "/contact" : "/auth/signin"}
-                className="flex gap-2 bg-black text-white py-3 px-10 rounded-md text-lg font-semibold hover:bg-orange-600 shadow-lg transition-all"
-              >
-                Connect <ArrowRight className="hover:animate-bounce" />
-              </Link>
-            </div>
-          </div>
-        </section>
-      </div>
-      <BottomNav />
-      <ChatDropdown />
+      </section>
 
-      <Footer className="h-dvh" />
+      {/* Manifesto */}
+      <section className="px-6 py-20 bg-gradient-to-b from-black to-gray-200 text-center">
+        <motion.h2
+          className="text-4xl md:text-5xl font-extrabold mb-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+        >
+          What We Fight For
+        </motion.h2>
+        <p className="text-lg max-w-2xl mx-auto mask-b-from-10% ">
+          We are not conspiracy theorists. We are truth seekers. We are the ones
+          who question what they tell us, challenge the narrative, and expose
+          what lies behind the curtain.
+        </p>
+      </section>
+
+      {/* Coming Soon Teaser */}
+      <p className="text-sm text-gray-200 mb-2 text-center mt-10">Next Drop</p>
+      <section className="px-6 py-16 bg-gradient-to-t from-black text-center grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <h2 className="text-xl font-bold text-white text-left mask-b-from-zinc-300">
+          Project 2025 Co-Author Caught Admitting the Secret Conservative Plan
+          to Ban Porn
+        </h2>
+        <p className="text-sm mt-2 text-gray-500 text-left max-md:-mt-10 mask-b-from-10%">
+          “We’d have a national ban on pornography if we could, right?” he
+          added. Vought contributed a chapter to the Project 2025 manifesto,
+          which argues in the foreword that all pornography “should be outlawed”
+          and its producers “imprisoned.”
+        </p>
+        <p className="text-purple-900 underline -mt-15 lg:mt-5">Read More</p>
+
+        <h2 className="text-xl font-bold text-white text-left mask-b-from-zinc-300">
+          How Britain’s Labour government facilitated the massacre of Biafrans
+          in Nigeria – to protect its oil interests
+        </h2>
+        <p className="text-sm mt-2 text-gray-500 text-left max-md:-mt-10 mask-b-from-10%">
+          On the 50th anniversary of the end of the Biafran war, the world’s
+          worst humanitarian crisis in the late 1960s, declassified British
+          files show that Harold Wilson’s government secretly armed and backed
+          Nigeria’s aggression against the secessionist region.
+        </p>
+        <p className="text-purple-900 underline -mt-15 lg:mt-5">Read More</p>
+
+        <h2 className="text-xl font-bold text-white text-left mt-5 mask-b-from-zinc-300">
+          The Real Intentions Of The Abuja Declaration-1989
+        </h2>
+        <p className="text-sm  text-gray-500 text-left max-md:-mt-10 mask-b-from-10%">
+          Apparently, as a result of the growing awareness amongst Christians of
+          the evil planned by the Muslims against the Church, the Muslims went
+          online to edit and distort the information on the Abuja Declaration of
+          1989. The information on Wikipedia was edited on Monday, 21st July,
+          2014
+        </p>
+        <p className="text-purple-900 underline -mt-15 lg:mt-5">Read More</p>
+        <a
+          href="/drop"
+          className="text-purple-900 lg:mt-5 mt-5 z-20 border py-2 px-3 mx-auto rounded-md text-xl bg-purple-400"
+        >
+          Find More
+        </a>
+      </section>
     </>
   );
-};
+}
 
-export default Page;
+      export default Page;

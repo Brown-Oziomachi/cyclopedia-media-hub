@@ -1,4 +1,6 @@
-import ScrollProgressBar from '@/components/ScrollProgressBar';
+"use client"
+
+import { Suspense } from "react";
 import Link from 'next/link';
 
 const PrivacyPolicy = () => {
@@ -78,3 +80,4 @@ const PrivacyPolicy = () => {
 };
 
 export default PrivacyPolicy;
+

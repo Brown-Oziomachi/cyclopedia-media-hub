@@ -1,9 +1,9 @@
 "use client";
 
-import ScrollProgressBar from "@/components/ScrollProgressBar";
+import {Suspense } from "react";
+import { useState } from "react";
 import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import { ChevronDown } from "lucide-react";
-import { useState } from "react";
 
 const faqs = [
   {
@@ -72,7 +72,6 @@ export default function Faqs() {
 
   return (
     <div className="max-w-3xl mx-auto p-6 py-30 bg-gray-400/5 rounded-lg shadow-lg">
-      <ScrollProgressBar />
 
       <h1 className="text-4xl font-extrabold text-center mb-8 text-white">
         FAQs
@@ -94,13 +93,19 @@ export default function Faqs() {
             }
             className="text-white px-4 py-3 hover:bg-cyan-600 rounded-lg"
           >
-            <h2 className="text-lg font-semibold">{faq.question}</h2>
+            <h2 className="text-lg font-semibold">
+              {faq.question.replace(/Webwiz Creation/gi, "Cyclopedia")}
+            </h2>
           </AccordionSummary>
           <AccordionDetails>
-            <p className="text-black leading-relaxed">{faq.answer}</p>
+            <p className="text-black leading-relaxed">
+              {faq.answer.replace(/Webwiz Creation/gi, "Cyclopedia")}
+            </p>
           </AccordionDetails>
         </Accordion>
       ))}
     </div>
   );
 }
+
+

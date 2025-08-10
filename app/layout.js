@@ -1,41 +1,43 @@
+
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import AuthProvider from "@/components/AuthProvider";
-import { Analytics } from '@vercel/analytics/next';
-import ScrollProgressBar from "@/components/ScrollProgressBar";
- 
+import { Analytics } from "@vercel/analytics/next";
+import Footer from "@/components/Footer";
+import { Suspense } from "react";
 
 export const metadata = {
-  title: "Webwiz Creation - The Sun Web",
-  description: "A website development company",
-  keywords: "web development, web design, software development",
+  title: "Cyclopedia",
   icons: {
-    icon: "/logo.jpg",
-    shortcut: "/logo.jpg",
-    apple: "/logo.jpg",
+    icon: "/hid.png",
+    shortcut: "/hid.png",
+    apple: "/hid.png",
   },
 };
+
+function Loader() {
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-white">
+      <div className="w-12 h-12 border-4 border-gray-300 border-t-black rounded-full animate-spin"></div>
+    </div>
+  );
+}
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <meta name="google-adsense-account" content="ca-pub-8408243121163767" />
-
-        {/* Other meta tags */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8408243121163767"
-          crossorigin="anonymous"
-        ></script>
+       
       </head>
       <body className="antialiased">
+          <Suspense fallback={<div>Loading page...</div>}>
         <AuthProvider>
           <Navbar />
-          {children}
+            {children}
+          <Footer />
           <Analytics />
-          <ScrollProgressBar />
         </AuthProvider>
+          </Suspense>
       </body>
     </html>
   );

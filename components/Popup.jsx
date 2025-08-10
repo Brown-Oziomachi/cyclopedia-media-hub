@@ -12,7 +12,6 @@ const Popup = () => {
       setShowPopup(true);
     }
   }, []);
-
   const handleClose = () => {
     setShowPopup(false);
     sessionStorage.setItem("popupShown", "true");
@@ -24,6 +23,7 @@ const Popup = () => {
         setShowPopup(false);
         sessionStorage.setItem("popupShown", "true");
       }, 50000);
+
       return () => clearTimeout(timer);
     }
   }, [showPopup]);
@@ -124,3 +124,4 @@ const Popup = () => {
 };
 
 export default Popup;
+

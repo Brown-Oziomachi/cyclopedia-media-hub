@@ -1,159 +1,104 @@
 "use client";
 
+import { Suspense } from "react";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import { Loader } from "lucide-react";
-import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 const About = () => {
   const [loading, setLoading] = useState(true);
-  const [session] = useState();
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
-
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <>
-      {loading ? (
-        <div className="flex justify-center items-center h-screen bg-black">
-          <Loader size={50} className="animate-spin text-gray-400" />
-          <img
-            src="logo.jpg"
-            alt="My Logo"
-            className="h-30 lg:h-30 mt-10 animate-pulse absolute top-30 left-0 right-0 bottom-0 mx-auto"
-          />
-        </div>
-      ) : (
-        <main className=" min-h-screen text-gray-900 font-sans">
-          {/* Hero Section */}
+ 
+        <main className="min-h-screen text-gray-900 font-sans">
           <header className="flex flex-col justify-center items-center min-h-screen text-center bg-black text-white px-6 md:px-20">
-            <h1 className="text-5xl font-extrabold mb-8 tracking-tight mt-20">
-              About Webwiz Creation
+            <h1 className="text-5xl font-extrabold mt-30 mb-8 tracking-tigh mask-b-from-70%">
+              About{" "}
+              <span className="bg-gradient-to-r from-purple-500 to-cyan-400 text-transparent bg-clip-text font-serif mask-t-from-black to-70%">
+                Cyclopedia
+              </span>
             </h1>
             <img
-              src="web23.jpg"
-              alt="image"
-              className="shadow-2xl shadow-black rounded-b-4xl"
+              src="hid.png"
+              alt="Cyclopedia image"
+              className="shadow-2xl rounded-b-4xl mask-b-from-5%"
             />
-            <p className="text-gray-400 mb-10 text-xs border-b border-b-green-600 border-x border-x-green-600">
-              webwiz creation is a dynamic software development company. <br />
-              Developed by: Brown Code
+            <p className="text-gray-400 mb-2 -mt-10 text-xs">
+              Uncovering the Unseen, Revealing the Real.
             </p>
-            <p className="max-w-3xl leading-relaxed mb-6 text-gray-400">
-              At Webwiz Creation, we transform your ideas into exceptional
-              digital experiences. Our expert team combines creativity and
-              technical expertise to deliver tailored web solutions that empower
-              your business.
-            </p>
-            <p className="max-w-3xl leading-relaxed mb-10 text-gray-400">
-              Our mission is to turn your vision into reality through innovative
-              solutions and relentless dedication. Partner with us for digital
-              products designed to exceed expectations.
-            </p>
-            <p className="text-gray-400 text-sm">
-              Are you a developer seeking collaboration?{" "}
-              <Link href={session ? "/registration" : "/auth/signin"}>
-                <p className="text-green-600 underline hover:text-gray-300 transition mb-5">
-                  Register now to join the Webwiz team.
-                </p>
-              </Link>{" "}
+            <p className="max-w-3xl leading-relaxed text-sm text-gray-400">
+              <span className="text-3xl text-purple-400">W</span>e are not just
+              another media outlet. We are a movement of minds — built for those
+              who question, research, and seek the truth behind the curtain.
             </p>
           </header>
 
-          {/* Services Section */}
-          <section className="py-16 bg-gray-50">
-            <div className="container mx-auto max-w-7xl px-6">
-              <h2 className="text-4xl font-bold text-center mb-14 tracking-wide">
-                What Sets Us Apart
-              </h2>
-              <div className="grid gap-10 md:grid-cols-3 shadow-2xl shadow-black">
-                {[
-                  {
-                    title: "Responsive Web Design",
-                    desc: "Crafting visually stunning, mobile-optimized websites that adapt flawlessly across devices.",
-                  },
-                  {
-                    title: "SEO Optimization",
-                    desc: "Boosting your brand's visibility with strategic and ethical search engine optimization.",
-                  },
-                  {
-                    title: "User-Centric Development",
-                    desc: "Designing intuitive interfaces focused on user engagement and satisfaction.",
-                  },
-                ].map(({ title, desc }) => (
-                  <div
-                    key={title}
-                    className="bg-gray-700/5 shadow-2xl shadow-black border-x border-x-green-600 rounded-lg p-8 shadow-md hover:shadow-xl transition-shadow"
-                  >
-                    <h3 className="text-2xl font-semibold mb-4">{title}</h3>
-                    <p className="text-gray-700 leading-relaxed">{desc}</p>
-                  </div>
-                ))}
+          <section className="px-4 md:px-10 py-10">
+            <h2 className="text-center text-3xl font-bold mb-6 bg-gradient-to-r from-purple-500 to-cyan-400 text-transparent bg-clip-text">
+              Who We Are
+            </h2>
+
+            <div className="flex overflow-x-auto space-x-4 scrollbar-hide snap-x snap-mandatory pb-4">
+              {/* Card 1 */}
+              <div className="snap-start flex-shrink-0 w-64 bg-white text-black rounded-xl p-4 shadow-md border border-purple-400">
+                <h3 className="text-lg font-semibold mb-2">👁 Our Identity</h3>
+                <p className="text-sm text-gray-700">
+                  We are independent thinkers, digital truth-seekers, and
+                  investigators who believe the world is deeper than headlines.
+                </p>
+                <ul className="mt-2 text-sm list-disc list-inside text-gray-700">
+                  <li>Story analysts</li>
+                  <li>Alternative historians</li>
+                  <li>Independent journalists</li>
+                  <li>Cultural observers</li>
+                </ul>
+              </div>
+
+              {/* Card 2 */}
+              <div className="snap-start flex-shrink-0 w-64 bg-white text-black rounded-xl p-4 shadow-md border border-purple-400">
+                <h3 className="text-lg font-semibold mb-2">🎯 Our Purpose</h3>
+                <p className="text-sm text-gray-700">
+                  We ask questions and connect dots others ignore. Because
+                  truth isn’t always comfortable — but it’s necessary.
+                </p>
+              </div>
+
+              {/* Card 3 */}
+              <div className="snap-start flex-shrink-0 w-64 bg-white text-black rounded-xl p-4 shadow-md border border-purple-400">
+                <h3 className="text-lg font-semibold mb-2">✒ Why We Exist</h3>
+                <p className="text-sm text-gray-700">
+                  Because information is often filtered. We re-examine history,
+                  narratives, and the facts you were taught.
+                </p>
               </div>
             </div>
           </section>
 
           {/* Journey Section */}
-          <section className="py-16 bg-gray-400/5 shadow-2xl shadow-black border-x border-x-green-600 text-white">
-            <div className="container mx-auto max-w-5xl px-6">
-              <h2 className="text-4xl font-bold text-center mb-14 tracking-wide">
-                Our Journey
-              </h2>
-              <div className="grid gap-10 md:grid-cols-2">
-                <div className="bg-gray-400/5 shadow-2xl shadow-black border-x border-x-green-600 rounded-lg p-8 ">
-                  <h3 className="text-3xl font-semibold mb-3">2024</h3>
-                  <p className="leading-relaxed text-gray-300">
-                    Founded with a vision to revolutionize web design and
-                    deliver value-driven, client-focused solutions.
-                  </p>
-                </div>
-                <div className="bg-gray-400/5 shadow-2xl shadow-black border-x border-x-green-600 rounded-lg p-8 ">
-                  <h3 className="text-3xl font-semibold mb-3">2025</h3>
-                  <p className="leading-relaxed text-gray-300">
-                    Expanded our global footprint, serving clients across 10+
-                    countries with diverse industry expertise.
-                  </p>
-                </div>
-              </div>
-            </div>
+          <section className="px-4 md:px-20 py-10 text-center">
+            <h2 className="text-2xl font-bold mb-4 text-purple-600">Our Journey</h2>
+            <p className="max-w-3xl mx-auto text-sm text-gray-700">
+              Cyclopedia was founded out of a need for honest inquiry and open
+              minds. We began as a small community sharing unconventional
+              insights and evolved into a platform for collective awareness. Our
+              journey continues — and you’re part of it.
+            </p>
           </section>
-
-          {/* Testimonials Section */}
-          <section className="py-16 bg-gray-50 shadow-2xl shadow-black">
-            <div className="container mx-auto max-w-7xl px-6 text-center">
-              <ScrollProgressBar />
-
-              <h2 className="text-4xl font-bold mb-14 tracking-wide text-gray-900">
-                What Our Clients Say
-              </h2>
-              <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3 border-b-5 rounded-lg border-b-green-600">
-                <blockquote className="bg-white shadow-2xl shadow-black p-8 rounded-lg  italic text-gray-700 border-b-5 border-b-green-600">
-                  “Webwiz Creation turned our ideas into an incredible website!
-                  Their attention to detail and creativity exceeded our
-                  expectations.”
-                  <footer className="mt-6 font-semibold text-gray-900">
-                    — Sarah A.
-                  </footer>
-                </blockquote>
-                <blockquote className="bg-white shadow-2xl shadow-black p-8 rounded-lg  italic text-gray-700 border-b-5 border-b-green-600">
-                  “The team was professional, timely, and a pleasure to work
-                  with. Highly recommended!”
-                  <footer className="mt-6 font-semibold text-gray-900">
-                    — Mike T.
-                  </footer>
-                </blockquote>
-              </div>
-            </div>
-          </section>
+          <div>
+      {/* Footer */}
+      <footer className="py-10 text-center text-gray-500 text-sm bg-black border-t border-gray-800">
+        &copy; 2025 Cyclopedia. All rights reserved.
+       </footer>
+       </div>
         </main>
-      )}
-      <Footer />
-    </>
   );
 };
 

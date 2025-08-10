@@ -1,3 +1,6 @@
+"use client"
+
+import { Suspense } from "react";
 import Link from 'next/link';
 
 const TermsOfService = () => {
@@ -71,3 +74,4 @@ const TermsOfService = () => {
 };
 
 export default TermsOfService;
+

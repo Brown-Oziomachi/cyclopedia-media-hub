@@ -7,8 +7,14 @@
 
 body {
   color: #000;
-  background-color: #171717;
+  background-color: white;
 }
+
+.ql-container {
+  background: white;
+  color: black;
+}
+
 
 .star-rating::after {
   content: "★ ★ ★ ★ ★";
@@ -33,4 +39,9 @@ body {
   to {
     stroke-dashoffset: 0;
   }
+}
+
+.blog-body p {
+  margin-bottom: 1.25rem; /* 20px spacing between paragraphs */
+  line-height: 1.6;
 }
