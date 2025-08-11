@@ -41,7 +41,44 @@ const Page = () => {
     setShowSplash(false);
   };
 
-
+  const categories = [
+    {
+      emoji: "🌍",
+      title: "History",
+      link: "/history",
+      imgSrc: "/history.png", // Replace with your actual image URLs or remove to fallback on emoji
+    },
+    {
+      emoji: "🧨",
+      title: "Politics",
+      link: "/politics",
+      imgSrc: "/politics.png",
+    },
+    {
+      emoji: "⛪",
+      title: "Religion",
+      link: "/religion",
+      imgSrc: "/religion.png",
+    },
+    {
+      emoji: "🧬",
+      title: "Science & Tech",
+      link: "/science",
+      imgSrc: "/science.png",
+    },
+    {
+      emoji: "👁",
+      title: "Control & Media",
+      link: "/media",
+      imgSrc: "/media.png",
+    },
+    {
+      emoji: "👁",
+      title: "Global News",
+      link: "/global",
+      imgSrc: "/joins.png",
+    },
+  ];
 
   return (
     <>
@@ -85,6 +122,37 @@ const Page = () => {
         </div>
       )}
 
+      <section className="px-6 py-5 md:py-20 max-w-4xl mx-auto bg-white text-black z-0">
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-6 justify-center">
+          {categories.map((item, i) => (
+            <Link key={i} href={item.link} passHref legacyBehavior>
+              <a aria-label={item.title} className="group">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.15, duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full bg-gray-100 shadow-md flex items-center justify-center cursor-pointer transition-transform group-hover:scale-110"
+                >
+                  {item.imgSrc ? (
+                    <img
+                      src={item.imgSrc}
+                      alt={item.title}
+                      className="w-25 h-25 object-cover sm:w-20 sm:h-20 rounded-full"
+                    />
+                  ) : (
+                    <span className="text-4xl">{item.emoji}</span>
+                  )}
+                </motion.div>
+                <p className="text-center mt-3 text-sm font-medium text-gray-700 group-hover:text-purple-700 transition-colors">
+                  {item.title}
+                </p>
+              </a>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="px-6 py-10 md:py-20 bg-white text-black text-center max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 items-stretch">
         {/* First Card */}
         <div className="relative w-full lg:w-1/2">
@@ -94,7 +162,7 @@ const Page = () => {
             className="w-full h-auto object-cover rounded-md"
           />
           <div className="absolute z-10 bottom-4 left-4 right-4 bg-white bg-opacity-90 p-4 ">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/Tc0W4qUPzj7ytY7UB5fs">
               <h2 className="text-sm font-bold text-black hover:underline">
                 Erik Prince Calls for U.S. to Colonize Africa and Latin America
               </h2>
@@ -118,7 +186,7 @@ const Page = () => {
             className="w-full h-auto object-cover rounded-md"
           />
           <div className="absolute z-10 bottom-4 left-4 right-4 bg-white bg-opacity-90 p-4 ">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/dTksJYvlMiYC3QJ2BVa3">
               <h2 className="text-sm font-bold text-black hover:underline">
                 Americans Leaving Religion
               </h2>
@@ -134,141 +202,100 @@ const Page = () => {
         </div>
       </section>
 
-      <div className="px-4 py-6 lg:mt-20 max-lg:mt-4  ">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {/* Card 1 */}
-          <div className="relative rounded-xl overflow-hidden shadow-md group h-40 sm:h-48 md:h-full lg:h-64">
-            <img
-              src="/va.png"
-              alt="Politics"
-              fill
-              className=" group-hover:scale-105 transition-transform duration-300"
-            />
-            <div className="absolute inset-0  bg-opacity-40 flex items-center justify-center">
-            </div>
-            <Link href="/">
-              <h2 className="text-black underline text-sm md:text-sm font-bold text-center px-2">
-                Trump Prepares to Revoke Lifesaving Abortion Care for Veterans
-              </h2>
-            </Link>
-          </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto items-start justify-center z-50 p-4">
+        {/* Card 1 */}
+        <Link
+          href="https://cyclopedia-media-hub.vercel.app/blog/nVmpG0se1lyhis8uRH9y"
+          className="block bg-white text-black p-4 h-full hover:shadow-lg transition rounded"
+        >
+          <img
+            src="/leba.png"
+            alt="News Image"
+            className="mt-3 w-full h-40 object-cover rounded"
+          />
+          <h3 className="text-lg font-semibold mt-4">
+            The Exploitative System that Traps Nigerian Women as Slaves in
+            Lebanon
+          </h3>
+          <p className="text-sm text-gray-400 mt-2 line-clamp-3">
+            Nigerian migrants arrive in Lagos from Libya. Nigeria has, in the
+            last two years, evacuated thousands of its citizens from Libya and
+            Lebanon after they suffered several forms of abuses, including
+            enslavement. (Sam Olukoya/IPS)
+          </p>
+        </Link>
 
-          {/* Card 2 */}
-          <div className="relative rounded-xl overflow-hidden shadow-md group h-40 sm:h-48 md:h-56 lg:h-64">
-            <img
-              src="/ghost.png"
-              alt="Religion"
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-            <div className="absolute inset-0 bg-opacity-40 flex items-center justify-center">
-            </div>
-              <h2 className="text-black text-sm md:text-sm font-bold text-center px-2">
-                ‘Ghost soldiers’ – Britain’s shadow war in west Africa
-              </h2>
-          </div>
+        {/* Card 2 */}
+        <Link
+          href="https://cyclopedia-media-hub.vercel.app/blog/91mdgClamjnMtE6v0yQf"
+          className="block bg-white text-black p-4 h-full hover:shadow-lg transition rounded"
+        >
+          <img
+            src="/teen.png"
+            alt="News Image"
+            className="mt-3 w-full h-40 object-cover rounded"
+          />
+          <h3 className="text-lg font-semibold mt-4">
+            Teens are increasingly turning to AI companions, and it could be
+            harming them
+          </h3>
+          <p className="text-sm text-gray-400 mt-2 line-clamp-3">
+            Teenagers are increasingly turning to AI companions for friendship,
+            support, and even romance. But these apps could be changing how
+            young people connect to others, both online and off.
+          </p>
+        </Link>
 
-          {/* Card 3 */}
-          <div className="relative rounded-xl overflow-hidden shadow-md group h-40 sm:h-48 md:h-56 lg:h-64">
-            <img
-              src="/med.png"
-              alt="Science & Tech"
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-            <div className="absolute inset-0 bg-opacity-40 flex items-center justify-center">
-            </div>
-              <h2 className="text-black text-sm md:text-sm font-bold text-center px-2">
-UK media are covering up British spy flights for Israel
-              </h2>
-          </div>
+        {/* Card 3 */}
+        <Link
+          href="https://cyclopedia-media-hub.vercel.app/blog/QSmmSGdGenuMSwIRTWpJ"
+          className="block bg-white text-black p-4 h-full hover:shadow-lg transition rounded"
+        >
+          <img
+            src="/hiden.png"
+            alt="News Image"
+            className="mt-3 w-full h-40 object-cover rounded"
+          />
+          <h3 className="text-lg font-semibold mt-4">
+            Britain’s Hidden Helicopter War in Niger
+          </h3>
+          <p className="text-sm text-gray-400 mt-2 line-clamp-3">
+            As Niger expels US troops, Declassified reveals British helicopters
+            operated a taxi service for French forces in the uranium-rich
+            African state.
+          </p>
+        </Link>
 
-          {/* Card 4 */}
-          <div className="relative rounded-xl overflow-hidden shadow-md group h-40 sm:h-48 md:h-56 lg:h-64">
-            <img
-              src="/war.png"
-              alt="Surveillance"
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-            <div className="absolute inset-0 bg-opacity-40 flex items-center justify-center">
-            </div>
-              <h2 className="text-black text-sm md:text-sm font-bold text-center px-2">
-How Britain’s Labour government facilitated the massacre of Biafrans in Nigeria – to protect its oil interests
-              </h2>
-          </div>
-        </div>
-           
+        {/* Card 4 */}
+        <Link
+          href="https://cyclopedia-media-hub.vercel.app/blog/eLBxs8nuMz9j0OrJ3Pm3"
+          className="block bg-white text-black p-4 h-full hover:shadow-lg transition rounded"
+        >
+          <img
+            src="/mini.png"
+            alt="News Image"
+            className="mt-3 w-full h-40 object-cover rounded"
+          />
+          <h3 className="text-lg font-semibold mt-4">
+            Breaking America’s Bonds With Israel
+          </h3>
+          <p className="text-sm text-gray-400 mt-2 line-clamp-3">
+            Taking a cue from the Declaration of Independence, M. Reza Behnam
+            submits facts “to a candid world” that impel the dissolution of a
+            destructive liaison.
+          </p>
+        </Link>
       </div>
 
-
-
-<div className=" mx-auto items-center justify-center">
-
-   <div className="w-full lg:w-1/2">
-            <div className="bg-white text-black p-4  h-full">
-              <Link href="https://webwizcreation-y7vx.vercel.app/blog/wVh7CTJIgai3XKZ966xO">
-                <img
-                  src="leba.png"
-                  alt="News Image"
-                  className="mt-3 w-full h-full"
-                />
-                <h3 className="text-lg font-semibold mt-4">
-The Exploitative System that Traps Nigerian Women as Slaves in Lebanon
-                </h3>
-                <p className="text-sm text-gray-400 mt-2 line-clamp-3">
-Nigerian migrants arrive in Lagos from Libya. Nigeria has, in the last two years, evacuated thousands of its citizens from Libya and Lebanon after they suffered several forms of abuses, including enslavement. (Sam Olukoya/IPS)
-
-
-                </p>
-              </Link>
-            </div>
-            </div>
- <div className="w-full lg:w-1/2">
-            <div className="bg-white text-black p-4  h-full">
-              <Link href="">
-                <img
-                  src="teen.png"
-                  alt="News Image"
-                  className="mt-3 w-full h-full"
-                />
-                <h3 className="text-lg font-semibold mt-4">
-Teens are increasingly turning to AI companions, and it could be harming them
-                </h3>
-                <p className="text-sm text-gray-400 mt-2 line-clamp-3">
-                  Teenagers are increasingly turning to AI companions for friendship, support, and even romance. But these apps could be changing how young people connect to others, both online and off.
-                </p>
-              </Link>
-            </div>
-</div>
-<div className="w-full lg:w-1/2">
-            <div className="bg-white text-black p-4  h-full">
-              <Link href="https://webwizcreation-y7vx.vercel.app/blog/wVh7CTJIgai3XKZ966xO">
-                <img
-                  src="hiden.png"
-                  alt="News Image"
-                  className="mt-3 w-full h-full"
-                />
-                <h3 className="text-lg font-semibold mt-4">
-Britain’s Hidden Helicopter War in Niger
-                </h3>
-                <p className="text-sm text-gray-400 mt-2 line-clamp-3">
-As Niger expels US troops, Declassified reveals British helicopters operated a taxi service for French forces in the uranium-rich African state.
-                </p>
-              </Link>
-            </div>
-</div>
-
-</div>
       {/* Mobile heading */}
       <div id="News-cpd" className="w-full px-4 mt-10">
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Feature Card */}
           <div className="w-full lg:w-1/2">
-            <div className="bg-white text-black p-4  h-full">
-              <Link href="https://webwizcreation-y7vx.vercel.app/blog/wVh7CTJIgai3XKZ966xO">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/DkwQs35ZgaKbfYnH0fOg">
+              <div className="bg-white text-black p-4  h-full">
                 <img
-                  src="slave.png"
+                  src="/slave.png"
                   alt="News Image"
                   className="mt-3 w-full h-full"
                 />
@@ -279,69 +306,74 @@ As Niger expels US troops, Declassified reveals British helicopters operated a t
                   The Museum of the Bible presented misleading information to
                   attract people of color to the museum.
                 </p>
-              </Link>
-            </div>
+              </div>
+            </Link>
           </div>
 
           {/* Cards Grid */}
           <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[600px] overflow-y-auto pr-2">
             {/* Card 1 */}
-            <div className="bg-white text-black  p-4 ">
-              <Link href="https://webwizcreation-y7vx.vercel.app/blog/wVh7CTJIgai3XKZ966xO">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/up07d67GdXw6WP116uxQ">
+              <div className="bg-white text-black  p-4 ">
                 <img
-                  src="sup.jpg"
+                  src="/border.png"
                   alt="News Image"
                   className="w-full h-32 object-cover "
                 />
                 <h3 className="text-sm font-semibold mt-2">
-                  How are Christians persecuted in Nigeria
+                  American Border Religion{" "}
                 </h3>
                 <p className="text-sm text-gray-400 line-clamp-3 mt-1">
-                  Independent thinkers, researchers, and digital
-                  truth-seekers...
+                  An excerpt from "Heaven Has a Wall: Religion, Borders, and the
+                  Global United States"{" "}
                 </p>
-              </Link>
-            </div>
+              </div>
+            </Link>
 
             {/* Card 2 */}
-            <div className="bg-white text-black  p-4 ">
-              <Link href="https://webwizcreation-y7vx.vercel.app/blog/vDRvVo48m4oCV4Hwiykk">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/nJeaLwjnuQnYii18kKvL">
+              <div className="bg-white text-black  p-4 ">
                 <img
-                  src="chr.png"
+                  src="/arr.png"
                   alt="News image"
                   className="w-full h-32 object-cover"
                 />
                 <h3 className="text-sm font-semibold mt-2">
-                  As Christians Are Slaughtered, the World Looks Away
+                  Hundreds Arrested In London for Opposing Ban on Nonviolent
+                  Group Palestine Action{" "}
                 </h3>
                 <p className="text-sm text-gray-400 line-clamp-3 mt-1">
-                  Islamists massacred 200+ in Nigeria. Media silence.
+                  Let us be under no illusion," said one organizer. "The
+                  government is criminalizing the people of Britain for standing
+                  up against the biggest genocide of the 21st century, as it's
+                  livestreamed from Gaza."
                 </p>
-              </Link>
-            </div>
+              </div>
+            </Link>
 
             {/* Card 3 */}
-            <div className="bg-white text-black p-4">
-              <Link href="https://webwizcreation-y7vx.vercel.app/blog/O9O1DyrTgb70TCemuETa">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/6cC1bNTyfe7MwciAmvtg">
+              <div className="bg-white text-black p-4">
                 <img
-                  src="para.jpg"
+                  src="/white.png"
                   alt="News Image"
                   className="w-full h-32 object-cover "
                 />
                 <h3 className="text-sm font-semibold mt-2">
-                  The Paranoid Policy of Affirmative Consent
+                  From Good Christian Boys to White Nationalists{" "}
                 </h3>
                 <p className="text-sm text-gray-400 line-clamp-3 mt-1">
-                  Consent now means exact, performative agreement.
+                  An excerpt from “Disciples of White Jesus: The Radicalization
+                  of American Boyhood”{" "}
                 </p>
-              </Link>
-            </div>
+              </div>
+            </Link>
 
             {/* Card 4 */}
-            <div className="bg-white text-black p-4 ">
-              <Link href="">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/UAekeH5vur8lBd9DHKCr">
+              <div className="bg-white text-black p-4 ">
                 <img
-                  src="trump.png"
+                  src="/trump.png"
                   alt="Trump"
                   className="w-full h-32 object-cover"
                 />
@@ -351,12 +383,12 @@ As Niger expels US troops, Declassified reveals British helicopters operated a t
                 <p className="text-sm text-gray-400 line-clamp-3 mt-1">
                   Trump’s Christian nationalism may hurt Christians.
                 </p>
-              </Link>
-            </div>
+              </div>
+            </Link>
 
             {/* Card 5 */}
-            <div className="bg-white text-black p-4">
-              <Link href="">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/4LiDW10fO3UQx56I4mqB">
+              <div className="bg-white text-black p-4">
                 <img
                   src="sha.png"
                   alt="Sharia"
@@ -368,13 +400,12 @@ As Niger expels US troops, Declassified reveals British helicopters operated a t
                 <p className="text-sm text-gray-400 line-clamp-3 mt-1">
                   In 1999, Sharia shocked the world. What now?
                 </p>
-              
-              </Link>
-            </div>
+              </div>
+            </Link>
 
             {/* Card 6 */}
-            <div className="bg-white text-black p-4 ">
-              <Link href="">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/eRNFoxbcDwyL000C9dFi">
+              <div className="bg-white text-black p-4 ">
                 <img
                   src="nig.png"
                   alt="Nigeria"
@@ -386,12 +417,10 @@ As Niger expels US troops, Declassified reveals British helicopters operated a t
                 <p className="text-sm text-gray-400 line-clamp-3 mt-1">
                   Ceasefire raised false hopes. Boko Haram strikes back.
                 </p>
-              
-              </Link>
-            </div>
+              </div>
+            </Link>
           </div>
         </div>
-
         <div className="text-center mt-8">
           <Link href="/global">
             <button className="shadow-xl hover:bg-white hover:text-black transition-all px-6 py-2 text-white bg-purple-600 font-bold rounded-lg">
@@ -416,107 +445,63 @@ As Niger expels US troops, Declassified reveals British helicopters operated a t
 
       {/* Featured Topics */}
       <div id="read-more">{/* Your "Explore more" content goes here */}</div>
-      <section className="px-6 py-10 md:py-20 max-w-6xl mx-auto bg-white text-black z-0">
-       
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            {
-              emoji: "🌍",
-              title: "History",
-              desc: "The Civilizations They Erased from Our Books",
-              link: "/history",
-            },
-            {
-              emoji: "🧨",
-              title: "Politics",
-              desc: "Who Really Profits from War?",
-              link: "/politics",
-            },
-            {
-              emoji: "⛪",
-              title: "Religion",
-              desc: "The Crisis They Orchestrated in God’s Name",
-              link: "/religion",
-            },
-            // {
-            //   emoji: "🛰",
-            //   title: "Surveillance",
-            //   desc: "Digital Prison: How Your Data Builds Your Cage",
-            //   link: "/surveillance",
-            // },
-            {
-              emoji: "🧬",
-              title: "Science & Tech",
-              desc: "Breakthroughs They Buried",
-              link: "/science",
-            },
-            {
-              emoji: "👁",
-              title: "Control & Media",
-              desc: "Programming the Masses: The True Role of News",
-              link: "/media",
-            },
-          ].map((item, i) => (
+
+      <section className="px-6 py-5 md:py-20 max-w-4xl mx-auto bg-white text-black z-0">
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-6 justify-center">
+          {categories.map((item, i) => (
             <Link key={i} href={item.link} passHref legacyBehavior>
-              <a className="z-10">
+              <a aria-label={item.title} className="group">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.2, duration: 0.5 }}
+                  transition={{ delay: i * 0.15, duration: 0.5 }}
                   viewport={{ once: true }}
-                  className=" p-6 z-50  transition-colors cursor-pointer"
+                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full bg-gray-100 shadow-md flex items-center justify-center cursor-pointer transition-transform group-hover:scale-110"
                 >
-                  <h3 className="text-xl font-semibold mb-2 z-50">
-                    {item.emoji} {item.title}
-                  </h3>
-                  <p className="text-sm text-gray-300">{item.desc}</p>
+                  {item.imgSrc ? (
+                    <img
+                      src={item.imgSrc}
+                      alt={item.title}
+                      className="w-25 h-25 object-cover sm:w-20 sm:h-20 rounded-full"
+                    />
+                  ) : (
+                    <span className="text-4xl">{item.emoji}</span>
+                  )}
                 </motion.div>
+                <p className="text-center mt-3 text-sm font-medium text-gray-700 group-hover:text-purple-700 transition-colors">
+                  {item.title}
+                </p>
               </a>
             </Link>
           ))}
         </div>
-
-        {/* <div className="text-center mt-10">
-          <Link
-            href="/category/hidden-truth"
-            className="bg-linear-to-tr bg-purple-900 to-black text-white px-6 py-3 rounded-full font-semibold hover:bg-purple-600 transition"
-          >
-            Start Exploring
-          </Link>
-        </div> */}
       </section>
 
       {/* Timeline of Hidden Events */}
-      <section className="px-6 py-16 bg-white text-black max-w-6xl mx-auto">
-        <h2 className="text-2xl md:text-4xl font-bold mb-10 text-center">
-          Unfolding the Timeline of Truth
-        </h2>
+      <section className="px-6 py-16 bg-black text-white max-w-6xl mx-auto">
         <div className="relative border-l border-purple-700 ml-4">
           {[
             {
-              year: "1947",
-              title: "Roswell Incident",
-              desc: "The birth of UFO conspiracy theories after a mysterious crash in New Mexico.",
+              year: "1945.",
+              title: "80 Years of Living and Writing in the Shadow of the Bomb",
+              link: "https://cyclopedia-media-hub.vercel.app/blog/ttRDjI40RVXDo1Em5GUr",
             },
             {
-              year: "1963",
-              title: "JFK Assassination",
-              desc: "Endless speculation over CIA, mafia, and deep state involvement.",
+              title: "War Makes the World Sick... Literally",
+              link: "https://cyclopedia-media-hub.vercel.app/blog/H8mhMQhTEzRC5kRGiJfK",
             },
             {
-              year: "2001",
-              title: "9/11 Attacks",
-              desc: "Theories still question the full story behind the towers' fall and geopolitical outcomes.",
+              title: "Endless War as Forever Terrorism",
+              link: ".https://cyclopedia-media-hub.vercel.app/blog/jYPO6EK2aqDmHqgxVPiJ",
             },
             {
-              year: "2020",
-              title: "Pandemic Power Shift",
-              desc: "COVID-19 reshaped the global economy, surveillance, and public trust.",
+              title: "How War Targets the Young",
+              link: "https://cyclopedia-media-hub.vercel.app/blog/rfhXdNNhP1a4vYqUkXc9.",
             },
             {
               year: "Ongoing",
-              title: "Digital Censorship",
-              desc: "Algorithms now shape what we think, see, and believe online.",
+              title: "The World's War on Children",
+              link: "https://cyclopedia-media-hub.vercel.app/blog/1y7LqhTeBaVGbGUMOREC",
             },
           ].map((item, i) => (
             <motion.div
@@ -525,12 +510,25 @@ As Niger expels US troops, Declassified reveals British helicopters operated a t
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.2 }}
-              className="mb-10 ml-6"
+              className="mb-10 ml-6 relative"
             >
-              <span className="absolute w-3 h-3 bg-purple-700 rounded-full -left-1.5 mt-1.5"></span>
+              <span className="absolute w-3 h-3 bg-purple-700 rounded-full -left-4.5 mt-1.5"></span>
               <h3 className="text-lg font-semibold">
                 {item.year} — {item.title}
               </h3>
+
+              {/* Show clickable link if exists */}
+              {item.link && (
+                <a
+                  href={item.link}
+                  target="_self"
+                  rel="noopener noreferrer"
+                  className="text-purple-700 hover:underline break-all"
+                >
+                  Read more
+                </a>
+              )}
+
               <p className="text-sm text-gray-400 mt-1">{item.desc}</p>
             </motion.div>
           ))}
@@ -591,13 +589,21 @@ As Niger expels US troops, Declassified reveals British helicopters operated a t
           Short Truth Documentaries
         </h2>
         <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {["banporn.mp4", "truth2.mp4", "truth3.mp4"].map((vid, i) => (
-            <video
-              key={i}
-              src={`/${vid}`}
-              controls
-              className="w-full h-64 object-cover rounded-xl"
-            />
+          {[
+            { file: "banporn.mp4", title: "Ban Porn Documentary" },
+            { file: "truth2.mp4", title: "Truth Revealed Part 2" },
+            { file: "truth3.mp4", title: "Truth Revealed Part 3" },
+          ].map((vid, i) => (
+            <div key={i} className="flex flex-col">
+              <h3 className="mb-2 text-lg font-semibold text-center">
+                {vid.title}
+              </h3>
+              <video
+                src={`/${vid.file}`}
+                controls
+                className="w-full h-64 object-cover rounded-xl"
+              />
+            </div>
           ))}
         </div>
       </section>
@@ -634,7 +640,7 @@ As Niger expels US troops, Declassified reveals British helicopters operated a t
         >
           What We Fight For
         </motion.h2>
-        <p className="text-lg max-w-2xl mx-auto mask-b-from-10% ">
+        <p className="text-lg max-w-2xl mx-auto mask-b-from-90% ">
           We are not conspiracy theorists. We are truth seekers. We are the ones
           who question what they tell us, challenge the narrative, and expose
           what lies behind the curtain.
@@ -642,50 +648,44 @@ As Niger expels US troops, Declassified reveals British helicopters operated a t
       </section>
 
       {/* Coming Soon Teaser */}
-      <p className="text-sm text-gray-200 mb-2 text-center mt-10">Next Drop</p>
-      <section className="px-6 py-16 bg-gradient-to-t from-black text-center grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        <h2 className="text-xl font-bold text-white text-left mask-b-from-zinc-300">
-          Project 2025 Co-Author Caught Admitting the Secret Conservative Plan
-          to Ban Porn
-        </h2>
-        <p className="text-sm mt-2 text-gray-500 text-left max-md:-mt-10 mask-b-from-10%">
-          “We’d have a national ban on pornography if we could, right?” he
-          added. Vought contributed a chapter to the Project 2025 manifesto,
-          which argues in the foreword that all pornography “should be outlawed”
-          and its producers “imprisoned.”
-        </p>
-        <p className="text-purple-900 underline -mt-15 lg:mt-5">Read More</p>
-
-        <h2 className="text-xl font-bold text-white text-left mask-b-from-zinc-300">
-          How Britain’s Labour government facilitated the massacre of Biafrans
-          in Nigeria – to protect its oil interests
-        </h2>
-        <p className="text-sm mt-2 text-gray-500 text-left max-md:-mt-10 mask-b-from-10%">
-          On the 50th anniversary of the end of the Biafran war, the world’s
-          worst humanitarian crisis in the late 1960s, declassified British
-          files show that Harold Wilson’s government secretly armed and backed
-          Nigeria’s aggression against the secessionist region.
-        </p>
-        <p className="text-purple-900 underline -mt-15 lg:mt-5">Read More</p>
-
-        <h2 className="text-xl font-bold text-white text-left mt-5 mask-b-from-zinc-300">
-          The Real Intentions Of The Abuja Declaration-1989
-        </h2>
-        <p className="text-sm  text-gray-500 text-left max-md:-mt-10 mask-b-from-10%">
-          Apparently, as a result of the growing awareness amongst Christians of
-          the evil planned by the Muslims against the Church, the Muslims went
-          online to edit and distort the information on the Abuja Declaration of
-          1989. The information on Wikipedia was edited on Monday, 21st July,
-          2014
-        </p>
-        <p className="text-purple-900 underline -mt-15 lg:mt-5">Read More</p>
+   <section className="px-6 py-16 bg-black text-white max-w-6xl mx-auto mask-t-from-90%">
+  <div className="grid gap-12 lg:grid-cols-3">
+    {[{
+      title: "Project 2025 Co-Author Caught Admitting the Secret Conservative Plan to Ban Porn",
+      desc: `“We’d have a national ban on pornography if we could, right?” he added. Vought contributed a chapter to the Project 2025 manifesto, which argues in the foreword that all pornography “should be outlawed” and its producers “imprisoned.”`,
+      link: "/project-2025-ban-porn",
+    }, {
+      title: "How Britain’s Labour government facilitated the massacre of Biafrans in Nigeria – to protect its oil interests",
+      desc: `On the 50th anniversary of the end of the Biafran war, the world’s worst humanitarian crisis in the late 1960s, declassified British files show that Harold Wilson’s government secretly armed and backed Nigeria’s aggression against the secessionist region.`,
+      link: "/biafran-war-oil-interests",
+    }, {
+      title: "The Real Intentions Of The Abuja Declaration-1989",
+      desc: `Apparently, as a result of the growing awareness amongst Christians of the evil planned by the Muslims against the Church, the Muslims went online to edit and distort the information on the Abuja Declaration of 1989. The information on Wikipedia was edited on Monday, 21st July, 2014.`,
+      link: "/abuja-declaration-1989",
+    }].map(({ title, desc, link }, i) => (
+      <article key={i} className="flex flex-col justify-between bg-black p-6 rounded-lg shadow-xl shadow-purple-700 transition-shadow duration-300">
+        <h2 className="text-xl font-bold mb-3">{title}</h2>
+        <p className="text-gray-300 flex-grow">{desc}</p>
         <a
-          href="/drop"
-          className="text-purple-900 lg:mt-5 mt-5 z-20 border py-2 px-3 mx-auto rounded-md text-xl bg-purple-400"
+          href={link}
+          className="mt-5 inline-block text-purple-400 hover:text-purple-600 underline font-semibold transition-colors"
         >
-          Find More
+          Read More
         </a>
-      </section>
+      </article>
+    ))}
+  </div>
+
+  <div className="mt-12 text-center">
+    <a
+      href="/drop"
+      className="inline-block bg-purple-600 hover:bg-purple-700 text-white py-3 px-8 rounded-md text-lg font-semibold transition-colors"
+    >
+      Find More
+    </a>
+  </div>
+</section>
+
     </>
   );
 }

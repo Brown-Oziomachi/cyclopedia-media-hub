@@ -35,7 +35,7 @@ const About = () => {
               Uncovering the Unseen, Revealing the Real.
             </p>
             <p className="max-w-3xl leading-relaxed text-sm text-gray-400">
-              <span className="text-3xl text-purple-400">W</span>e are not just
+              <span className="text-3xl text-purple-400">We</span> are not just
               another media outlet. We are a movement of minds — built for those
               who question, research, and seek the truth behind the curtain.
             </p>

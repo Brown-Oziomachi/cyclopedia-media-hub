@@ -34,7 +34,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/news" className="mr-5 lg:-mt-3">
+                <a href="/global" className="mr-5 lg:-mt-3">
                   News
                 </a>
               </li>

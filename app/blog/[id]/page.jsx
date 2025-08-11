@@ -12,10 +12,15 @@ import { motion } from "framer-motion";
 import { useRouter, useParams } from "next/navigation";
 
 const BlogDisplay = ({ body }) => {
+  const isHTML = /<\/?[a-z][\s\S]*>/i.test(body || "");
   return (
     <div
-      className="prose max-w-none text-gray-900"
-      dangerouslySetInnerHTML={{ __html: body }}
+      className={`prose max-w-none text-gray-900 ${
+        !isHTML ? "whitespace-pre-line space-y-4" : ""
+      }`}
+      dangerouslySetInnerHTML={{
+        __html: isHTML ? body : body?.replace(/\n/g, "<br />"),
+      }}
     />
   );
 };
@@ -42,7 +47,6 @@ export default function BlogDetails() {
         setBlog({ id, ...data });
         setLikes(data.likes || 0);
         setSubtitle(data.subtitle || "");
-        console.log("Fetched blog body:", data.body);
       }
     }
     fetchBlog();
@@ -54,9 +58,7 @@ export default function BlogDetails() {
     if (storedLiked) setLiked(true);
   }, [id]);
 
-  const handleShareClick = () => {
-    setShowShareMenu(!showShareMenu);
-  };
+  const handleShareClick = () => setShowShareMenu(!showShareMenu);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -84,16 +86,17 @@ export default function BlogDetails() {
     }, 3000);
   };
 
-  if (!blog) return <div>Loading blog...</div>;
+  if (!blog) return <div className="text-center py-10">Loading blog...</div>;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.1 }}
-      className="min-h-screen px-2 py-19 max-w-6xl mx-auto text-gray-900 font-sans leading-relaxed space-y-20"
+      className="min-h-screen px-3 sm:px-5 md:px-10 lg:px-20 py-10 mx-auto text-gray-900 font-sans leading-relaxed space-y-20"
     >
-      <div className="w-full relative h-80 max-md:mt-60 lg:mt-10">
+      {/* Header image + title */}
+      <div className="w-full relative h-64 sm:h-80 md:h-[30rem] mt-15 ">
         {blog.imageUrl && (
           <Image
             src={blog.imageUrl}
@@ -104,26 +107,28 @@ export default function BlogDetails() {
           />
         )}
 
-        <div className="absolute bottom-80 left-0 w-full lg:mt-10 bg-opacity-75 bg-white bg-opacity-90 text-black p-4 z-20">
-          <h1 className="text-3xl font-bold font-playfair lg:text-4xl tracking-wide">
+        <div className="absolute -bottom-20 left-0 w-full bg-white/90 text-black p-4 sm:p-6 md:p-8 z-20 ">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold font-playfair tracking-wide">
             {blog.title}
           </h1>
           {subtitle && (
-            <h2 className="text-xs font-semibold mt-1 font-playfair lg:text-2xl text-gray-700 ">
+            <h2 className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold mt-1 font-playfair text-gray-700">
               {subtitle}
             </h2>
           )}
         </div>
       </div>
 
-      <div>
+      {/* Blog content */}
+      <div className="prose max-w-none px-2 sm:px-4 space-y-5 gap-5 ">
         <BlogDisplay body={blog.body} />
       </div>
 
-      <div className="flex gap-5 text-sm">
+      {/* Action buttons */}
+      <div className="flex flex-wrap gap-3 sm:gap-5 text-sm px-2 sm:px-4">
         <button
           onClick={handleLikeClick}
-          className={`flex items-center justify-center text-sm py-2 px-5 transition-all ${
+          className={`flex items-center justify-center text-sm py-2 px-4 sm:px-5 transition-all rounded-md ${
             liked
               ? "text-green-600 hover:text-green-700"
               : "text-gray-400 hover:text-red-600"
@@ -135,11 +140,11 @@ export default function BlogDetails() {
 
         <button
           onClick={handleShareClick}
-          className="border items-center gap-2 text-gray-400 font-semibold py-2 px-6 rounded-lg hover:bg-gray-800 transition relative"
+          className="border flex items-center gap-2 text-gray-400 font-semibold py-2 px-4 sm:px-6 rounded-lg hover:bg-gray-800 transition relative"
         >
           <Share className="h-4 w-4" />
           {showShareMenu && (
-            <div className="absolute top-full left-0 bg-gray-400/5 shadow-xl rounded-lg p-4 flex flex-col gap-3 text-sm w-56 z-50 border border-green-600">
+            <div className="absolute top-full left-0 bg-white shadow-xl rounded-lg p-4 flex flex-col gap-3 text-sm w-56 z-50 border border-green-600">
               <a
                 href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
                 target="_blank"
@@ -168,57 +173,68 @@ export default function BlogDetails() {
 
         <button
           onClick={handleCopyLink}
-          className="border flex items-center gap-2 text-gray-400 font-semibold py-2 px-6 rounded-lg hover:bg-gray-800 transition"
+          className="border flex items-center gap-2 text-gray-400 font-semibold py-2 px-4 sm:px-6 rounded-lg hover:bg-gray-800 transition"
         >
           <LinkIcon className="h-4 w-4" />
         </button>
       </div>
 
-      <h1 className="text-3xl lg:text-5xl font-bold text-center px-5 w-full border py-3 bg-gray-900 z-50 text-white shadow-b-black shadow-black shadow-2xl ">
+      {/* Latest news section */}
+      <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-center px-4 py-3 w-full border bg-gray-900 text-white shadow-xl">
         Latest News
       </h1>
 
-      {/* Sample News Cards */}
-      <div className="grid md:grid-cols-2 gap-8 mt-20">
-        <div className="relative shadow-2xl">
-          <div className="relative w-full h-[220px]">
-            <Image src="/shari.png" alt="News 2" fill className="object-cover" />
+      {/* News grid */}
+      <div className="grid sm:grid-cols-2 gap-8 mt-20 px-2 sm:px-4">
+        {[
+          // Two news items
+          {
+            img: "/shari.png",
+            title: "Three Key Moments for Shari’a in Nigeria",
+            author: "Alex Thurston",
+            desc: "The re-implementation of shari’a, however, caused conflict. Muslims and Christians clashed in several Northern states. Shari’a became a campaign issue in 2003.",
+            href: "/",
+          },
+          {
+            img: "/strug.png",
+            title:
+              "Violent Dissent, Intra-Muslim Struggles, and Political Crisis in Northern Nigeria",
+            author: "Alex Thurston",
+            desc: "Political struggles in Northern Nigeria have often been religious struggles as well. New leaders have often sought political and religious authority simultaneously.",
+            href: "/",
+          },
+        ].map((news, i) => (
+          <div key={i} className="relative shadow-2xl">
+            <div className="relative w-full h-48 sm:h-[220px]">
+              <Image
+                src={news.img}
+                alt={news.title}
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4 rounded-md shadow-lg">
+              <Link href={news.href}>
+                <h2 className="text-sm sm:text-base font-bold text-black hover:underline">
+                  {news.title}
+                </h2>
+              </Link>
+              <p className="text-xs sm:text-sm text-gray-800 mt-1">
+                by {news.author}
+              </p>
+              <p className="mt-2 text-gray-900 text-xs sm:text-sm">
+                {news.desc}
+              </p>
+            </div>
           </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                Three Key Moments for Shari’a in Nigeria
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">by Alex Thurston</p>
-            <p className="mt-2 text-gray-900 text-xs">
-              The re-implementation of shari’a, however, caused conflict. Muslims and Christians clashed in several Northern states. Shari’a became a campaign issue in 2003.
-            </p>
-          </div>
-        </div>
-
-        <div className="relative shadow-2xl">
-          <div className="relative w-full h-[220px]">
-            <Image src="/strug.png" alt="News 3" fill className="object-cover" />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                Violent Dissent, Intra-Muslim Struggles, and Political Crisis in Northern Nigeria
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">by Alex Thurston</p>
-            <p className="mt-2 text-gray-900 text-xs">
-              Political struggles in Northern Nigeria have often been religious struggles as well. New leaders have often sought political and religious authority simultaneously.
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
 
-      <div className="text-center mt-24">
+      {/* More news button */}
+      <div className="text-center mt-28">
         <button
           onClick={handleMoreBlogClick}
-          className="text-sm font-bold text-green-600 tracking-widest border border-green-600 px-5 py-2 shadow-black shadow-xl rounded-lg hover:bg-green-600 hover:text-black transition duration-300"
+          className="text-sm sm:text-base font-bold text-green-600 tracking-widest border border-green-600 px-4 sm:px-5 py-2 shadow-black shadow-xl rounded-lg hover:bg-green-600 hover:text-black transition duration-300"
           disabled={loading}
         >
           {loading ? "Loading..." : "More News"}
@@ -227,4 +243,3 @@ export default function BlogDetails() {
     </motion.div>
   );
 }
-

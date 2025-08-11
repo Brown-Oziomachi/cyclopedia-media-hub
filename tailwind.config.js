@@ -11,5 +11,12 @@ export default {
     },
   },
   plugins: [require("@tailwindcss/typography")],
+
+  safelist: [
+    "prose",
+    "prose-lg",
+    "space-y-4",
+    "whitespace-pre-line",
+    "whitespace-pre-wrap", // ✅ added so it won't be purged
+  ],
 };
-  

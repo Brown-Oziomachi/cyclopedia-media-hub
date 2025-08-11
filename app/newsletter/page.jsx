@@ -1,18 +1,23 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-// Include the SearchParamsDisplay child
-function SearchParamsDisplay() {
-  const searchParams = useSearchParams();
-  const paramValue = searchParams.get("someKey") || "No param";
-
-  return <p className="mb-4 text-sm text-gray-600">Param from URL: {paramValue}</p>;
-}
-
 export default function CyclopediaNewsletterForm() {
+  const searchParams = useSearchParams();
+  const [paramValue, setParamValue] = useState("No param");
+
+  useEffect(() => {
+    const val = searchParams.get("someKey");
+    if (val) {
+      setParamValue(val);
+    } else {
+      setParamValue("No param");
+    }
+  }, [searchParams]);
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -53,13 +58,12 @@ export default function CyclopediaNewsletterForm() {
 
         {/* RIGHT - Form */}
         <div className="bg-white p-6 rounded-lg shadow-inner">
-          {/* Wrap the search param display in Suspense */}
-          <Suspense fallback={<div>Loading URL params...</div>}>
-            <SearchParamsDisplay />
-          </Suspense>
+          {/* Display paramValue here */}
+          <p className="mb-4 text-sm text-gray-600">
+            Param from URL: {paramValue}
+          </p>
 
           <form onSubmit={formik.handleSubmit} className="space-y-4">
-            {/* form inputs... */}
             <div>
               <label className="block font-semibold">
                 First name <span className="text-red-500">*</span>
@@ -125,4 +129,3 @@ export default function CyclopediaNewsletterForm() {
     </div>
   );
 }
-
