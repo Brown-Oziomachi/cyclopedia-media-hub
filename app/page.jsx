@@ -91,7 +91,7 @@ const Page = () => {
             <img
               src="hid.png"
               alt="image"
-              className="z-50 w-fit h-fit opacity-15 fixed"
+              className="z-0 w-fit h-fit opacity-15 fixed"
             />
           </div>
 
