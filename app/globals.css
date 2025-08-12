@@ -1,4 +1,16 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* spacing for blog content */
+.tiptap p {
+  margin-bottom: 1rem;
+}
+
+.tiptap p:last-child {
+  margin-bottom: 0;
+}
 
 :root {
   --background: #ffffff;
@@ -40,4 +52,18 @@ body {
     stroke-dashoffset: 0;
   }
 }
+/* globals.css or wherever your global Tailwind imports are */
+.tiptap p {
+  margin-bottom: 1rem;
+  /* adjust size */
+  line-height: 1.6;
+}
 
+/* remove bottom margin on last child */
+.tiptap p:last-child {
+  margin-bottom: 0;
+}
+
+p {
+  margin: 1em 0;
+}

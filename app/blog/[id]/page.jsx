@@ -95,33 +95,40 @@ export default function BlogDetails() {
       transition={{ duration: 0.1 }}
       className="min-h-screen px-3 sm:px-5 md:px-10 lg:px-20 py-10 mx-auto text-gray-900 font-sans leading-relaxed space-y-20"
     >
-      {/* Header image + title */}
-      <div className="w-full relative h-64 sm:h-80 md:h-[30rem] mt-15 ">
-        {blog.imageUrl && (
-          <Image
-            src={blog.imageUrl}
-            alt={blog.title}
-            fill
-            style={{ objectFit: "cover" }}
-            className="z-10"
-          />
-        )}
+    
+<div className="w-full relative h-64 sm:h-80 md:h-[30rem] mt-15">
 
-        <div className="absolute -bottom-20 left-0 w-full bg-white/90 text-black p-4 sm:p-6 md:p-8 z-20 ">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold font-playfair tracking-wide">
-            {blog.title}
-          </h1>
-          {subtitle && (
-            <h2 className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold mt-1 font-playfair text-gray-700">
-              {subtitle}
-            </h2>
-          )}
-        </div>
-      </div>
+  {/* Image */}
+  {blog.imageUrl && (
+    <Image
+      src={blog.imageUrl}
+      alt={blog.title}
+      fill
+      style={{ objectFit: "cover" }}
+      className="z-10 lg:mt-20"
+    />
+  )}
 
+  {/* Gradient overlay for better text visibility */}
+  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent z-20"></div>
+
+  {/* Title + Subtitle */}
+  <div className="absolute top-0 left-0 w-full p-6 sm:p-5 md:p-7 z-30 text-black mt-60 lg:text-white max-lg:text-white max-md:text-black">
+    <h1 className="text-3xl md:text-2xl font-bold font-playfair tracking-wide drop-shadow-lg">
+      {blog.title}
+    </h1>
+    {subtitle && (
+      <h2 className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold mt-1 font-playfair drop-shadow-md border py-2 px-3 shadow-2xl mask-b-from-60% ">
+        {subtitle}
+      </h2>
+    )}
+  </div>
+
+</div>
       {/* Blog content */}
-      <div className="prose max-w-none px-2 sm:px-4 space-y-5 gap-5 ">
-        <BlogDisplay body={blog.body} />
+      <div className="blog-content prose max-w-none px-2 sm:px-4 space-y-5 gap-5 font-serif text-sm max-md:mt-110">
+<hr/>
+        <BlogDisplay body={blog.body } />
       </div>
 
       {/* Action buttons */}

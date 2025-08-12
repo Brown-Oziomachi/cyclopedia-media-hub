@@ -12,9 +12,9 @@ export default function BlogDisplay({ title, subtitle, body, imageUrl }) {
     if (hasHTML) return text; // TipTap HTML — leave as is
 
     return text
-      .split(/\n{2,}|\r{2,}|\n|\r/)
+      .split(/\n{2,}|\r{2,}|\n|\r/) // Split on newlines
       .filter((line) => line.trim() !== "")
-      .map((line) => `<p>${line.trim()}</p>`)
+      .map((line) => `<p>${line.trim()}</p>`) // Wrap each in <p>
       .join("");
   };
 
@@ -36,14 +36,9 @@ export default function BlogDisplay({ title, subtitle, body, imageUrl }) {
       )}
 
       {/* Body */}
-      <div
-        className={`prose prose-invert max-w-none space-y-7 gap-y-5 ${
-          hasHTML ? "whitespace-pre-wrap" : ""
-        }`}
-        dangerouslySetInnerHTML={{
-          __html: formattedBody,
-        }}
-      />
+      <div className="tiptap max-w-3xl mx-auto px-6">
+        <div dangerouslySetInnerHTML={{ __html: formattedBody }} />
+      </div>
     </article>
   );
 }

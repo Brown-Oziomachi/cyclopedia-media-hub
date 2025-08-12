@@ -87,19 +87,19 @@ const Page = () => {
       ) : (
         <div className="py-18 lg:-mt-60 text-white relative overflow-hidden bg-gradient-to-r from-purple-900 z-0 bg-black to-black">
           {/* Hero Section */}
-          <div className=" z-0 ">
+          {/* <div className=" z-0 ">
             <img
               src="hid.png"
               alt="image"
-              className="z-0 w-fit h-fit opacity-15 fixed"
+              className=" w-fit h-fit opacity-5 z-[-0]  fixed"
             />
-          </div>
+          </div> */}
 
           <main className="z-50  flex flex-col justify-center items-center  px-4 lg:px-0 max-lg:mt-40 opacity-100 lg:mt-20">
             <div className="space-y-2 ">
               {/* Cyclopedia Creation Title */}
               <img
-                src="hid.png"
+                src="/hid.png"
                 alt="image"
                 className="z-0 w-fit lg:w-200 lg:h-200 h-fit opacity-"
               />
@@ -121,6 +121,25 @@ const Page = () => {
           </main>
         </div>
       )}
+
+      <div className="bg-gray-950 p-6 text-white max-w-3xl">
+        {/* Title */}
+        <a
+          href="https://cyclopedia-media-hub.vercel.app/blog/9dhLYxSLB0fLLRPFBX1Z"
+          className="text-blue-400 hover:underline text-lg font-medium cursor-pointer"
+        >
+          The World's Crisis in War Reporting
+        </a>
+
+        {/* Date + Description */}
+        <p className="text-sm text-gray-400 mt-1">
+          Cyclopedia — As{" "}
+          <span className="font-bold text-white">journalists</span> are laid off
+          and newspapers cut back or shut down, whole sectors of our civic life
+          disappear from public view and go dark. Much of local and state
+          governments, whole federal departments...
+        </p>
+      </div>
 
       <section className="px-6 py-5 md:py-20 max-w-4xl mx-auto bg-white text-black z-0">
         <div className="grid grid-cols-3 sm:grid-cols-5 gap-6 justify-center">
@@ -648,44 +667,52 @@ const Page = () => {
       </section>
 
       {/* Coming Soon Teaser */}
-   <section className="px-6 py-16 bg-black text-white max-w-6xl mx-auto mask-t-from-90%">
-  <div className="grid gap-12 lg:grid-cols-3">
-    {[{
-      title: "Project 2025 Co-Author Caught Admitting the Secret Conservative Plan to Ban Porn",
-      desc: `“We’d have a national ban on pornography if we could, right?” he added. Vought contributed a chapter to the Project 2025 manifesto, which argues in the foreword that all pornography “should be outlawed” and its producers “imprisoned.”`,
-      link: "/project-2025-ban-porn",
-    }, {
-      title: "How Britain’s Labour government facilitated the massacre of Biafrans in Nigeria – to protect its oil interests",
-      desc: `On the 50th anniversary of the end of the Biafran war, the world’s worst humanitarian crisis in the late 1960s, declassified British files show that Harold Wilson’s government secretly armed and backed Nigeria’s aggression against the secessionist region.`,
-      link: "/biafran-war-oil-interests",
-    }, {
-      title: "The Real Intentions Of The Abuja Declaration-1989",
-      desc: `Apparently, as a result of the growing awareness amongst Christians of the evil planned by the Muslims against the Church, the Muslims went online to edit and distort the information on the Abuja Declaration of 1989. The information on Wikipedia was edited on Monday, 21st July, 2014.`,
-      link: "/abuja-declaration-1989",
-    }].map(({ title, desc, link }, i) => (
-      <article key={i} className="flex flex-col justify-between bg-black p-6 rounded-lg shadow-xl shadow-purple-700 transition-shadow duration-300">
-        <h2 className="text-xl font-bold mb-3">{title}</h2>
-        <p className="text-gray-300 flex-grow">{desc}</p>
-        <a
-          href={link}
-          className="mt-5 inline-block text-purple-400 hover:text-purple-600 underline font-semibold transition-colors"
-        >
-          Read More
-        </a>
-      </article>
-    ))}
-  </div>
+      <section className="px-6 py-16 bg-black text-white max-w-6xl mx-auto mask-t-from-90%">
+        <div className="grid gap-12 lg:grid-cols-3">
+          {[
+            {
+              title:
+                "Project 2025 Co-Author Caught Admitting the Secret Conservative Plan to Ban Porn",
+              desc: `“We’d have a national ban on pornography if we could, right?” he added. Vought contributed a chapter to the Project 2025 manifesto, which argues in the foreword that all pornography “should be outlawed” and its producers “imprisoned.”`,
+              link: "/project-2025-ban-porn",
+            },
+            {
+              title:
+                "How Britain’s Labour government facilitated the massacre of Biafrans in Nigeria – to protect its oil interests",
+              desc: `On the 50th anniversary of the end of the Biafran war, the world’s worst humanitarian crisis in the late 1960s, declassified British files show that Harold Wilson’s government secretly armed and backed Nigeria’s aggression against the secessionist region.`,
+              link: "/biafran-war-oil-interests",
+            },
+            {
+              title: "The Real Intentions Of The Abuja Declaration-1989",
+              desc: `Apparently, as a result of the growing awareness amongst Christians of the evil planned by the Muslims against the Church, the Muslims went online to edit and distort the information on the Abuja Declaration of 1989. The information on Wikipedia was edited on Monday, 21st July, 2014.`,
+              link: "/abuja-declaration-1989",
+            },
+          ].map(({ title, desc, link }, i) => (
+            <article
+              key={i}
+              className="flex flex-col justify-between bg-black p-6 rounded-lg shadow-xl shadow-purple-700 transition-shadow duration-300"
+            >
+              <h2 className="text-xl font-bold mb-3">{title}</h2>
+              <p className="text-gray-300 flex-grow">{desc}</p>
+              <a
+                href={link}
+                className="mt-5 inline-block text-purple-400 hover:text-purple-600 underline font-semibold transition-colors"
+              >
+                Read More
+              </a>
+            </article>
+          ))}
+        </div>
 
-  <div className="mt-12 text-center">
-    <a
-      href="/drop"
-      className="inline-block bg-purple-600 hover:bg-purple-700 text-white py-3 px-8 rounded-md text-lg font-semibold transition-colors"
-    >
-      Find More
-    </a>
-  </div>
-</section>
-
+        <div className="mt-12 text-center">
+          <a
+            href="/drop"
+            className="inline-block bg-purple-600 hover:bg-purple-700 text-white py-3 px-8 rounded-md text-lg font-semibold transition-colors"
+          >
+            Find More
+          </a>
+        </div>
+      </section>
     </>
   );
 }

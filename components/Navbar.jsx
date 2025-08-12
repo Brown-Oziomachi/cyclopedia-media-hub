@@ -258,7 +258,7 @@ const ProfileDropdownNavbar = () => {
         </div>
 
         {/* Mobile menu & profile */}
-        <div className="flex lg:hidden items-center gap-3">
+        <div className="flex lg:hidden items-center gap-10">
           {session && (
             <button
               onClick={toggleDrawer(true)}
@@ -292,7 +292,7 @@ const ProfileDropdownNavbar = () => {
       {/* Mobile Navigation Drawer */}
       {showNav && (
         <nav
-          className="fixed inset-0 bg-white bg-opacity-95 flex flex-col text-black p-5 z-[100] mt-20 overflow-y-auto"
+          className="fixed inset-0 bg-white bg-opacity-95 flex flex-col text-black p-5 z-[100] mt-27 overflow-y-auto"
           aria-label="Mobile navigation"
         >
           {/* Small screen search */}
@@ -307,7 +307,7 @@ const ProfileDropdownNavbar = () => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search tags like politics, cyclopedia..."
-              className="px-3 py-1 rounded-l-md border border-black text-black focus:outline-none focus:ring-2 focus:ring-cyan-400 w-64"
+              className="px-5 py-2 rounded-l-md border border-black text-black focus:outline-none focus:ring-2 focus:ring-cyan-400 w-64"
               aria-label="Search input"
             />
             <button
@@ -364,7 +364,7 @@ const ProfileDropdownNavbar = () => {
           <hr className="my-4 border-gray-600" />
 
           {/* Regions Links for mobile */}
-          <div className="space-y-4 space-x-8 text-gray-400 text-sm">
+          <div className="grid space-y-3 text-gray-400 text-sm">
             {regions.map((region) => (
               <Link
                 key={region.name}
@@ -375,6 +375,7 @@ const ProfileDropdownNavbar = () => {
               </Link>
             ))}
           </div>
+          <hr className="my-4 border-gray-600" />
 
           <nav className="flex flex-col gap-6 mt-8">
             {navItems.map((item, index) => (
@@ -402,13 +403,13 @@ const ProfileDropdownNavbar = () => {
               </button>
             ) : (
               <>
-                <Link
+                {/* <Link
                   href="/contact"
                   onClick={() => setShowNav(false)}
                   className="py-3 w-3/4 rounded-lg bg-gradient-to-r from-purple-500 to-cyan-500 hover:bg-cyan-500 text-white font-medium text-center"
                 >
                   Join Us
-                </Link>
+                </Link> */}
                 <Link
                   href="/auth/signin"
                   onClick={() => setShowNav(false)}
