@@ -33,7 +33,7 @@ export default function SearchResults() {
 
   return (
     <div className="max-w-3xl mx-auto py-2 max-lg:mt-50 mt-25 p-5 lg:mt-50">
-      <h1 className="text-lg mb-3">Search results for: <span className="font-semibold">{term}</span></h1>
+      <h1 className="text-lg mb-3">Search results for: <span className="font-semibold">{term}</span> in <span className="text-purple-700">cyclopedia</span></h1>
 
       {results.length > 0 ? (
         results.map(post => (
@@ -49,7 +49,7 @@ export default function SearchResults() {
           </div>
         ))
       ) : (
-        <p>No results found.</p>
+        <p>No results found. Or check your network connection</p>
       )}
     </div>
   );

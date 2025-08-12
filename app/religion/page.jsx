@@ -31,7 +31,7 @@ const Page = () => {
             <Image src="/rel.png" alt="News 1" fill className="object-cover" />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/enupjwyWCCP7OS0h77TQ">
               <h2 className="text-sm font-bold text-black hover:underline">
                 From Missionaries to Settler-Colonialists for Christian
                 Supremacy
@@ -57,7 +57,7 @@ const Page = () => {
             />
           </div>
           <div className="absolute z-10 -bottom-20   left-4 right-4 bg-white p-4 ">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/yQ5FJS6IFfe7zpQ8gzk7">
               <h2 className="text-sm font-bold text-black hover:underline">
                 Three Key Moments for Shari’a in Nigeria
               </h2>
@@ -81,7 +81,7 @@ const Page = () => {
             />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4 ">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/sVYggqD0kTZjrZsC7GIb">
               <h2 className="text-sm font-bold text-black hover:underline">
                 Violent Dissent, Intra-Muslim Struggles, and Political Crisis in
                 Northern Nigeria{" "}
@@ -106,7 +106,7 @@ const Page = () => {
             />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4 ">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/VfaKVglfMBiX8qNlgaQd">
               <h2 className="text-sm font-bold text-black hover:underline">
                 Christianity Without God
               </h2>
@@ -126,7 +126,7 @@ const Page = () => {
             <Image src="/mod.png" alt="News 4" fill className="object-cover " />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/NhDvvZoRYdUU6hrpMABv">
               <h2 className="text-sm font-bold text-black hover:underline">
                 Modified Christianity
               </h2>
@@ -149,7 +149,7 @@ const Page = () => {
             />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/u4GeCPrM7sddaF5dEKsD">
               <h2 className="text-sm font-bold text-black hover:underline">
                 Islamophobia and Americans’ Problems with Face Masks{" "}
               </h2>
