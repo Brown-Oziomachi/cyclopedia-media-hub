@@ -14,9 +14,7 @@ const Page = () => {
 
   return (
     <main className="w-full bg-white">
-
       <div className="max-w-7xl mx-auto px-4 py-10 mt-13 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-     
         {/* === NEWS CARD 1 === */}
         <div className="relative">
           <div className="relative w-full h-[220px] mt-20">
@@ -28,7 +26,7 @@ const Page = () => {
             />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/JElHfoJnZD1gcwiIGeCJ">
               <h2 className="text-sm font-bold text-black hover:underline">
                 What Ghana's Anti-LGBTQ Bill Means for Queer Christians
               </h2>
@@ -41,7 +39,9 @@ const Page = () => {
             </p>
           </div>
         </div>
+
         {/* === NEWS CARD 2 === */}
+
         <div className="relative">
           <div className="relative w-full h-[220px] mt-20">
             <Image
@@ -52,7 +52,7 @@ const Page = () => {
             />
           </div>
           <div className="absolute z-10 -bottom-20   left-4 right-4 bg-white p-4 ">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/BoCzv81kzGkogglYKMWI">
               <h2 className="text-sm font-bold text-black hover:underline">
                 What Ghana's Anti-LGBTQ Bill Means for Queer Christians(Part 2)
               </h2>
@@ -73,7 +73,7 @@ const Page = () => {
             <Image src="/good.png" alt="News 3" fill className="object-cover" />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4 ">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/yzfpPgCR3bLZwOwgdV24">
               <h2 className="text-sm font-bold text-black hover:underline">
                 Schooling Muslims in Northern Nigeria: Politics, Policies and
                 Conclusions
@@ -90,10 +90,15 @@ const Page = () => {
         </div>
         <div className="relative">
           <div className="relative w-full h-[220px] mt-20">
-            <Image src="/kuti.png" alt="News 4" fill className="object-cover " />
+            <Image
+              src="/kuti.png"
+              alt="News 4"
+              fill
+              className="object-cover "
+            />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4 ">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/P0QXLGH9s4I54ZhxRYVv">
               <h2 className="text-sm font-bold text-black hover:underline ">
                 Revolutionary Musical Artist Seun Kuti Carries Fela’s Afrobeat
                 Torch Into a New Era{" "}
@@ -136,7 +141,7 @@ const Page = () => {
             <Image src="/fem.png" alt="News 4" fill className="object-cover " />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/aZAtmF05qthPayc1Y4bi">
               <h2 className="text-sm font-bold text-black hover:underline">
                 Defending against Feminism
               </h2>
@@ -182,7 +187,7 @@ const Page = () => {
             />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/e44H7WXhRoVxHVRHqEOP">
               <h2 className="text-sm font-bold text-black hover:underline">
                 Defending Polygamy
               </h2>
@@ -198,7 +203,7 @@ const Page = () => {
           </div>
         </div>
 
-         <div className="relative">
+        <div className="relative">
           <div className="relative w-full h-[220px] mt-20">
             <Image
               src="/year.png"
@@ -208,18 +213,18 @@ const Page = () => {
             />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/QHpiFlLpECstUre5D3nh">
               <h2 className="text-sm font-bold text-black hover:underline">
-Columbus Day Is the Most Important Day of Every Year
+                Columbus Day Is the Most Important Day of Every Year
               </h2>
             </Link>
             <p className="text-xs text-gray-800 mt-1">
-Jon Schwarz
-October 12 2015,            </p>
+              Jon Schwarz October 12 2015,{" "}
+            </p>
             <p className="mt-2 text-gray-900 text-xs">
-           We shouldn’t celebrate Columbus Day. But if we want to comprehend the world — and we should, since our lives depend on it — we have to understand it.
-
-
+              We shouldn’t celebrate Columbus Day. But if we want to comprehend
+              the world — and we should, since our lives depend on it — we have
+              to understand it.
             </p>
           </div>
         </div>
@@ -233,7 +238,6 @@ October 12 2015,            </p>
           </button>
         </div>
       </div>
-     
     </main>
   );
 };
