@@ -9,11 +9,15 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "blob.vercel-storage.com", // Optional
+        hostname: "blob.vercel-storage.com", // Optional Vercel
       },
       {
         protocol: "https",
-        hostname: "jqijjwkgjavuqxjtwver.supabase.co", // ✅ Supabase bucket hostname
+        hostname: "jqijjwkgjavuqxjtwver.supabase.co", // Supabase
+      },
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com", // GitHub raw file hosting
       },
     ],
   },

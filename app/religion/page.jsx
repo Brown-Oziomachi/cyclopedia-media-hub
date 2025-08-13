@@ -165,7 +165,6 @@ const Page = () => {
           </div>
         </div>
 
-        
         <div className="relative focuse-ring-purple-600 hover:purple-600 hover:shadow-purple-600 hover:shadow-2xl">
           <div className="relative w-full h-[220px] mt-20">
             <Image
@@ -176,44 +175,39 @@ const Page = () => {
             />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/75ZM0N5NXt3cMFHkbUKS">
               <h2 className="text-sm font-bold text-black hover:underline">
-How They Met Their Mother
+                How They Met Their Mother
               </h2>
             </Link>
             <p className="text-xs text-gray-800 mt-1">
-by 
-Kelsey Osgood
-Published on August 1, 2023            </p>
+              by Kelsey Osgood Published on August 1, 2023{" "}
+            </p>
             <p className="mt-2 text-gray-900 text-xs">
-             In the Church of Jesus Christ of Latter-day Saints, the divine figure of Heavenly Mother is shrouded in secrecy. Some Mormons are trying to bring Her out into the light.
+              In the Church of Jesus Christ of Latter-day Saints, the divine
+              figure of Heavenly Mother is shrouded in secrecy. Some Mormons are
+              trying to bring Her out into the light.
             </p>
           </div>
         </div>
 
-         <div className="relative focuse-ring-purple-600 hover:purple-600 hover:shadow-purple-600 hover:shadow-2xl">
+        <div className="relative focuse-ring-purple-600 hover:purple-600 hover:shadow-purple-600 hover:shadow-2xl">
           <div className="relative w-full h-[220px] mt-20">
-            <Image
-              src="/Ame.png"
-              alt="News 4"
-              fill
-              className="object-cover "
-            />
+            <Image src="/Ame.png" alt="News 4" fill className="object-cover " />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/dTksJYvlMiYC3QJ2BVa3">
               <h2 className="text-sm font-bold text-black hover:underline">
-Americans Leaving Religion
+                Americans Leaving Religion
               </h2>
             </Link>
             <p className="text-xs text-gray-800 mt-1">
-ns Leaving Religion
-by 
-Ryan T. Cragun
-Jesse M. Smith
-Published on May 7, 2025            </p>
+              ns Leaving Religion by Ryan T. Cragun Jesse M. Smith Published on
+              May 7, 2025{" "}
+            </p>
             <p className="mt-2 text-gray-900 text-xs">
-              An excerpt from “Goodbye Religion: The Causes and Consequences of Secularization”
+              An excerpt from “Goodbye Religion: The Causes and Consequences of
+              Secularization”
             </p>
           </div>
         </div>
@@ -230,20 +224,19 @@ Published on May 7, 2025            </p>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
             <Link href="/">
               <h2 className="text-sm font-bold text-black hover:underline">
-More than Missionary
-A Life in the Struggle for Reproductive Freedom              </h2>
+                More than Missionary A Life in the Struggle for Reproductive
+                Freedom{" "}
+              </h2>
             </Link>
             <p className="text-xs text-gray-800 mt-1">
-              by Liz Bby 
-Gillian Frank
-Published on May 7, 2025ucar Published on September 3, 2020
+              by Liz Bby Gillian Frank Published on May 7, 2025ucar Published on
+              September 3, 2020
             </p>
             <p className="mt-2 text-gray-900 text-xs">
-             The doctors and religious organizers who risk everything
+              The doctors and religious organizers who risk everything
             </p>
           </div>
         </div>
-
 
         <div className="relative focuse-ring-purple-600 hover:purple-600 hover:shadow-purple-600 hover:shadow-2xl">
           <div className="relative w-full h-[220px] mt-20">
@@ -257,45 +250,38 @@ Published on May 7, 2025ucar Published on September 3, 2020
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
             <Link href="/">
               <h2 className="text-sm font-bold text-black hover:underline">
-Daily News: Blasphemy in Saudi Arabia, Religious Freedom              </h2>
+                Daily News: Blasphemy in Saudi Arabia, Religious Freedom{" "}
+              </h2>
             </Link>
             <p className="text-xs text-gray-800 mt-1">
-Published on August 1, 2013
+              Published on August 1, 2013
             </p>
             <p className="mt-2 text-gray-900 text-xs">
-            Daily round-up of religion in the news.
-
+              Daily round-up of religion in the news.
             </p>
           </div>
         </div>
 
-          <div className="relative focuse-ring-purple-600 hover:purple-600 hover:shadow-purple-600 hover:shadow-2xl">
+        <div className="relative focuse-ring-purple-600 hover:purple-600 hover:shadow-purple-600 hover:shadow-2xl">
           <div className="relative w-full h-[220px] mt-20">
-            <Image
-              src="/BLM.png"
-              alt="News 4"
-              fill
-              className="object-cover "
-            />
+            <Image src="/BLM.png" alt="News 4" fill className="object-cover " />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
             <Link href="/">
               <h2 className="text-sm font-bold text-black hover:underline">
-Tragedy, Spirituality, and Black Justice
-</h2>
+                Tragedy, Spirituality, and Black Justice
+              </h2>
             </Link>
             <p className="text-xs text-gray-800 mt-1">
-by 
-Vincent Lloyd &
-Terrence L. Johnson
-Published on April 5, 2023            </p>
+              by Vincent Lloyd & Terrence L. Johnson Published on April 5, 2023{" "}
+            </p>
             <p className="mt-2 text-gray-900 text-xs">
-A conversation about religion in Black protest movements
+              A conversation about religion in Black protest movements
             </p>
           </div>
         </div>
 
- <div className="relative focuse-ring-purple-600 hover:purple-600 hover:shadow-purple-600 hover:shadow-2xl">
+        <div className="relative focuse-ring-purple-600 hover:purple-600 hover:shadow-purple-600 hover:shadow-2xl">
           <div className="relative w-full h-[220px] mt-20">
             <Image
               src="/cath.png"
@@ -307,16 +293,14 @@ A conversation about religion in Black protest movements
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
             <Link href="/">
               <h2 className="text-sm font-bold text-black hover:underline">
-AIDS and the Hidden Catholic Church
-</h2>
+                AIDS and the Hidden Catholic Church
+              </h2>
             </Link>
             <p className="text-xs text-gray-800 mt-1">
-by 
-Michael J. O’Loughlin
-Published on June 3, 2020
-          </p>
+              by Michael J. O’Loughlin Published on June 3, 2020
+            </p>
             <p className="mt-2 text-gray-900 text-xs">
-Catholic leaders responded to the AIDS epidemic in complex ways
+              Catholic leaders responded to the AIDS epidemic in complex ways
             </p>
           </div>
         </div>
