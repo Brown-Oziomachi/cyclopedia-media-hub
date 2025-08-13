@@ -4,6 +4,7 @@ import {Suspense } from "react";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import ViewMoreSearchPopup from "../view/page";
 
 const Page = () => {
   const [visibleCount, setVisibleCount] = useState(4); // 4 items shown initially
@@ -14,7 +15,7 @@ const Page = () => {
 
   return (
     <main className="w-full bg-white">
-      <div className="max-w-7xl mx-auto px-4 py-10 mt-13 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="max-w-7xl mx-auto px-4 py-10 mt-30 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {/* === NEWS CARD 1 === */}
         <div className="relative">
           <div className="relative w-full h-[220px] mt-20">
@@ -118,20 +119,19 @@ const Page = () => {
         {/* === NEWS CARD 4 === */}
         <div className="relative">
           <div className="relative w-full h-[220px] mt-20">
-            <Image src="/sup.jpg" alt="News 4" fill className="object-cover " />
+            <Image src="/BLM.png" alt="News 4" fill className="object-cover " />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/0oE5AkuF09zxe4F8u3gb">
               <h2 className="text-sm font-bold text-black hover:underline">
-                Breakthrough in Cancer Research
+                Tragedy, Spirituality, and Black Justice
               </h2>
             </Link>
             <p className="text-xs text-gray-800 mt-1">
-              By Dr. May — July 25, 2025
+              by Vincent LloydTerrence L. Johnson Published on April 5, 2023{" "}
             </p>
             <p className="mt-2 text-gray-900 text-xs">
-              Scientists claim progress in targeting rare cancer cells through
-              mRNA innovations...
+              A conversation about religion in Black protest movements
             </p>
           </div>
         </div>
@@ -163,7 +163,7 @@ const Page = () => {
             <Image src="/mom.png" alt="News 4" fill className="object-cover " />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/YSd450HzXZaUJm4f1J39">
               <h2 className="text-sm font-bold text-black hover:underline">
                 Mothers in Zion
               </h2>
@@ -229,14 +229,9 @@ const Page = () => {
           </div>
         </div>
         {/* === VIEW MORE BUTTON === */}
-        <div className="col-span-full flex justify-center mt-24">
-          <button
-            onClick={showMore}
-            className="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition"
-          >
-            View More
-          </button>
-        </div>
+      </div>
+      <div className="mx-auto text-center">
+        <ViewMoreSearchPopup />
       </div>
     </main>
   );

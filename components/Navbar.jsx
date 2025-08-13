@@ -71,79 +71,118 @@ const ProfileDropdownNavbar = () => {
     { name: "Global", emoji: "🌐", url: "/global" },
   ];
 
+   
   return (
     <main className="fixed top-0 left-0 w-full bg-black text-white shadow-lg z-50">
       <p className="text-center bg-white text-black text-xs py-1 font-semibold">
         INFORMATION IS FREEDOM
       </p>
 
-      {/* Top bar with Regions dropdown (hidden on mobile) */}
-      <div className="relative max-md:hidden px-4 py-1 text-black">
-        <button
-          onClick={() => setShowRegionsDropdown((v) => !v)}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-md shadow hover:bg-gray-100 font-medium text-sm"
-          aria-haspopup="true"
-          aria-expanded={showRegionsDropdown}
-        >
-          Regions <ChevronDown className="h-4 w-4" />
-        </button>
-
-        {showRegionsDropdown && (
-          <div
-            className="absolute bg-white shadow-lg rounded-md mt-2 w-56 max-h-60 overflow-y-auto ring-1 ring-black ring-opacity-5 z-50"
-            role="menu"
-            aria-orientation="vertical"
-          >
-            {regions.map((region) => (
-              <Link
-                key={region.name}
-                href={region.url}
-                className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                onClick={() => setShowRegionsDropdown(false)}
-              >
-                {region.emoji} {region.name}
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
-
       {/* Main navbar */}
+      <Link href="/">
+        <Image
+          src="/hid.png"
+          alt="Logo"
+          width={40}
+          height={40}
+          className="rounded-full border-3 border-purple-500"
+        />
+      </Link>
       <section className="flex items-center justify-between px-5 py-3">
         {/* Logo */}
-        <Link href="/">
-          <Image
-            src="/hid.png"
-            alt="Logo"
-            width={40}
-            height={40}
-            className="rounded-full border-3 border-purple-500"
-          />
-        </Link>
 
         {/* Title */}
-        <h1 className="font-playfair text-4xl lg:text-6xl font-bold bg-gradient-to-r from-purple-500 to-cyan-400 text-transparent bg-clip-text tracking-wide select-none">
+        <h1 className="font-playfair max-lg:-mt-20 lg:ml-10 text-4xl max-lg:mx-auto lg:text-6xl font-bold bg-gradient-to-r from-purple-500 to-cyan-400 text-transparent bg-clip-text tracking-wide select-none">
           Cyclopedia
         </h1>
+        {/* Top bar with Regions dropdown (hidden on mobile) */}
+        <div className="relative max-md:hidden px-4 py-1 text-black max-lg:hidden">
+          <button
+            onClick={() => setShowRegionsDropdown((v) => !v)}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-md shadow hover:bg-gray-100 font-medium text-sm"
+            aria-haspopup="true"
+            aria-expanded={showRegionsDropdown}
+          >
+            Regions <ChevronDown className="h-4 w-4" />
+          </button>
 
-        {/* Desktop nav links */}
-        <section className="hidden lg:flex bg-gray-900 text-white select-none shadow-md px-2 py-1">
-          <nav className="flex space-x-1 max-w-full overflow-x-auto no-scrollbar">
+          {showRegionsDropdown && (
+            <div
+              className="absolute bg-white shadow-lg rounded-md mt-2 w-56 max-h-60 overflow-y-auto ring-1 ring-black ring-opacity-5 z-50"
+              role="menu"
+              aria-orientation="vertical"
+            >
+              {regions.map((region) => (
+                <Link
+                  key={region.name}
+                  href={region.url}
+                  className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                  onClick={() => setShowRegionsDropdown(false)}
+                >
+                  {region.emoji} {region.name}
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+        <section className="hidden lg:flex text-white select-none shadow-md px-2 py-1 ml-0">
+          <nav className="flex space-x-4 max-w-full overflow-x-auto no-scrollbar">
+            {/* Nav Items */}
             {navItems.map((item) => (
               <Link
                 key={item.text}
                 href={item.url}
-                className="px-4 py-2 bg-gray-800 hover:bg-gray-700 whitespace-nowrap text-sm font-semibold transition"
+                className="px-4 py-2 hover:bg-gray-700 whitespace-nowrap text-sm font-semibold transition"
               >
                 {item.text}
               </Link>
             ))}
+
+            {/* Categories */}
           </nav>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href="/politics"
+              className="px-3 py-1 bg-blue-100 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+            >
+              politics
+            </Link>
+            <Link
+              href="/religion"
+              className="px-3 py-1 bg-blue-100 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+            >
+              Religion
+            </Link>
+            <Link
+              href="/history"
+              className="px-3 py-1 bg-blue-100 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+            >
+              History
+            </Link>
+            <Link
+              href="/science"
+              className="px-3 py-1 bg-blue-100 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+            >
+              Science
+            </Link>
+            <Link
+              href="/media"
+              className="px-3 py-1 bg-blue-100 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+            >
+              Media
+            </Link>
+            <Link
+              href="/global"
+              className="px-3 py-1 bg-blue-100 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+            >
+              News
+            </Link>
+          </div>
         </section>
 
         <form
           onSubmit={handleSearch}
-          className="hidden lg:flex items-center ml-auto mr-6"
+          className="hidden lg:flex items-center -ml-70 mr-6 -mt-30"
           role="search"
           aria-label="Site Search"
         >
@@ -152,18 +191,18 @@ const ProfileDropdownNavbar = () => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search tags like politics, cyclopedia..."
-            className="px-3 py-1 rounded-l-md border border-white text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 w-64"
+            className="px-8 py-4 rounded-l-md shadow-2xl shadow-purple-500 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 w-64"
             aria-label="Search input"
           />
           <button
             type="submit"
-            className="bg-purple-500 hover:bg-purple-600 px-4 py-1 rounded-r-md text-white font-semibold transition"
+            className="bg-purple-500 hover:bg-purple-600 px-4 py-4 rounded-r-md text-white font-semibold transition"
           >
             Search
           </button>
         </form>
 
-        {/* Profile / Auth Buttons */}
+        {/* Profile / Auth Buttons
         <div className="hidden lg:flex items-center gap-4">
           {session ? (
             <>
@@ -241,7 +280,7 @@ const ProfileDropdownNavbar = () => {
 
                 <button
                   onClick={signOut}
-                  className="mt-6 w-full py-2 rounded bg-gradient-to-r from-purple-500 to-cyan-500 text-white text-sm font-semibold hover:opacity-90"
+                  className="mt- w-full py-2 rounded bg-gradient-to-r from-purple-500 to-cyan-500 text-white text-sm font-semibold hover:opacity-90"
                 >
                   Sign Out
                 </button>
@@ -255,7 +294,7 @@ const ProfileDropdownNavbar = () => {
               Sign In <LogIn className="inline-block ml-2" size={16} />
             </Link>
           )}
-        </div>
+        </div> */}
 
         {/* Mobile menu & profile */}
         <div className="flex lg:hidden items-center gap-10">
@@ -277,7 +316,7 @@ const ProfileDropdownNavbar = () => {
 
           <button
             onClick={() => setShowNav((v) => !v)}
-            className="text-3xl text-orange-400 focus:outline-none"
+            className="text-3xl text-orange-400 focus:outline-none -mt-15"
             aria-label="Toggle navigation menu"
           >
             {showNav ? (
@@ -307,19 +346,19 @@ const ProfileDropdownNavbar = () => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search tags like politics, cyclopedia..."
-              className="px-5 py-2 rounded-l-md border border-black text-black focus:outline-none focus:ring-2 focus:ring-cyan-400 w-64"
+              className="px-5 py-4 rounded-l-md shadow-2xl text-black focus:outline-none focus:ring-2 focus:ring-purple-400 w-64"
               aria-label="Search input"
             />
             <button
               type="submit"
               // onClick={() => setShowNav(false)}
-              className="bg-purple-500 hover:bg-purple-600 px-4 py-1 rounded-r-md text-white font-semibold transition"
+              className="bg-purple-500 hover:bg-purple-600 px-4 py-3 rounded-r-md text-white font-semibold transition"
             >
               Search
             </button>
           </form>
 
-          <ul className="space-y-3 text-sm font-medium text-gray-800 bg-gradient-to-r from-purple-400 to-cyan-400 text-transparent bg-clip-text">
+          <ul className="space-y-3 text-sm font-medium mt-5 text-gray-800 bg-gradient-to-r from-purple-400 to-cyan-400 text-transparent bg-clip-text">
             <li>
               <Link href="/politics" onClick={() => setShowNav(false)}>
                 Politics

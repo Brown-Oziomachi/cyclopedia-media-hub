@@ -20,7 +20,7 @@ const About = () => {
  
         <main className="min-h-screen text-gray-900 font-sans">
           <header className="flex flex-col justify-center items-center min-h-screen text-center bg-black text-white px-6 md:px-20">
-            <h1 className="text-5xl font-extrabold mt-30 mb-8 tracking-tigh mask-b-from-70%">
+            <h1 className="text-5xl font-extrabold mt-30 lg:mt-50 mb-8 tracking-tigh mask-b-from-70%">
               About{" "}
               <span className="bg-gradient-to-r from-purple-500 to-cyan-400 text-transparent bg-clip-text font-serif mask-t-from-black to-70%">
                 Cyclopedia
@@ -41,14 +41,14 @@ const About = () => {
             </p>
           </header>
 
-          <section className="px-4 md:px-10 py-10">
+          <section className="px-4 md:px-10 py-10 ">
             <h2 className="text-center text-3xl font-bold mb-6 bg-gradient-to-r from-purple-500 to-cyan-400 text-transparent bg-clip-text">
               Who We Are
             </h2>
 
-            <div className="flex overflow-x-auto space-x-4 scrollbar-hide snap-x snap-mandatory pb-4">
+            <div className="flex overflow-x-auto space-x-4 scrollbar-hide snap-x snap-mandatory pb-4 ">
               {/* Card 1 */}
-              <div className="snap-start flex-shrink-0 w-64 bg-white text-black rounded-xl p-4 shadow-md border border-purple-400">
+              <div className="snap-start flex-shrink-0 w-64 bg-white text-black rounded-xl p-4 shadow-md border border-purple-400 ">
                 <h3 className="text-lg font-semibold mb-2">👁 Our Identity</h3>
                 <p className="text-sm text-gray-700">
                   We are independent thinkers, digital truth-seekers, and

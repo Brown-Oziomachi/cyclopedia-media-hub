@@ -105,15 +105,15 @@ export default function BlogDetails() {
       alt={blog.title}
       fill
       style={{ objectFit: "cover" }}
-      className="z-10 lg:mt-20"
+      className="z-10 lg:mt-20 max-md:mt-5 max-lg:mt-20"
     />
   )}
 
   {/* Gradient overlay for better text visibility */}
-  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent z-20"></div>
+  <div className="absolute inset-0 bg-gradient-to-t from-black/6 via-black/30 to-transparent z-20"></div>
 
   {/* Title + Subtitle */}
-  <div className="absolute top-0 left-0 w-full p-6 sm:p-5 md:p-7 z-30 text-black mt-60 lg:text-white max-lg:text-white max-md:text-black">
+  <div className="absolute top-0 left-0 w-full p-6 sm:p-5 md:p-7 z-30 text-black mt-65 lg:text-white max-lg:text-white max-md:text-black">
     <h1 className="text-3xl md:text-2xl font-bold font-playfair tracking-wide drop-shadow-lg">
       {blog.title}
     </h1>

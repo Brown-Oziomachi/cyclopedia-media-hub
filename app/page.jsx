@@ -126,13 +126,13 @@ const Page = () => {
         {/* Title */}
         <a
           href="https://cyclopedia-media-hub.vercel.app/blog/9dhLYxSLB0fLLRPFBX1Z"
-          className="text-blue-400 hover:underline text-lg font-medium cursor-pointer"
+          className="text-blue-400 hover:underline text-lg font-medium cursor-pointer "
         >
           The World's Crisis in War Reporting
         </a>
 
         {/* Date + Description */}
-        <p className="text-sm text-gray-400 mt-1">
+        <p className="text-xs text-gray-400">
           Cyclopedia — As{" "}
           <span className="font-bold text-white">journalists</span> are laid off
           and newspapers cut back or shut down, whole sectors of our civic life
@@ -306,51 +306,51 @@ const Page = () => {
         </Link>
       </div>
 
- <section className="px-6 py-16 text-center grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto mt-5 ">
-      <div className="mt-5 text-black">
-        <img src="british.png" alt="" />
-        <Link href="https://cyclopedia-media-hub.vercel.app/blog/DxewHf37R7X7ZBzQRLE5">
-          <h2 className="text-xl font-bold text-left hover:underline text-black">
-            Britain’s secret state and the need for whistle-blowing
-          </h2>
-        </Link>
-        <p className="text-sm text-gray-500 text-left mt-5">
-          In November 2003, I was charged with a breach of the Official Secrets
-          Act in the UK. My ‘crime’ had been to reveal an email from the US
-          National Security Agency (NSA) to Britain's intelligence agency, the
-          Government Communications Headquarters (GCHQ) where I was working at
-          the time.
-        </p>
-      </div>
+      <section className="px-6 py-16 text-center grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto mt-5 ">
+        <div className="mt-5 text-black">
+          <img src="british.png" alt="" />
+          <Link href="https://cyclopedia-media-hub.vercel.app/blog/DxewHf37R7X7ZBzQRLE5">
+            <h2 className="text-xl font-bold text-left hover:underline text-black">
+              Britain’s secret state and the need for whistle-blowing
+            </h2>
+          </Link>
+          <p className="text-sm text-gray-500 text-left mt-5">
+            In November 2003, I was charged with a breach of the Official
+            Secrets Act in the UK. My ‘crime’ had been to reveal an email from
+            the US National Security Agency (NSA) to Britain's intelligence
+            agency, the Government Communications Headquarters (GCHQ) where I
+            was working at the time.
+          </p>
+        </div>
 
-      <div>
-        <img src="uk.png" alt="" />
-        <Link href="https://cyclopedia-media-hub.vercel.app/blog/HYhefDd7rXfAAzKBJCyb">
-          <h2 className="text-xl font-bold text-left hover:underline text-black">
-            UK government secretly paid foreign YouTube stars for ‘propaganda’{" "}
-          </h2>
-        </Link>
-        <p className="text-sm text-gray-500 text-left mt-5 ">
-          The past five months have been clarifying. What was supposed to be
-          hidden has been thrust into the light. What was supposed to be
-          obscured has come sharply into focus.
-        </p>
-      </div>
+        <div>
+          <img src="uk.png" alt="" />
+          <Link href="https://cyclopedia-media-hub.vercel.app/blog/HYhefDd7rXfAAzKBJCyb">
+            <h2 className="text-xl font-bold text-left hover:underline text-black">
+              UK government secretly paid foreign YouTube stars for ‘propaganda’{" "}
+            </h2>
+          </Link>
+          <p className="text-sm text-gray-500 text-left mt-5 ">
+            The past five months have been clarifying. What was supposed to be
+            hidden has been thrust into the light. What was supposed to be
+            obscured has come sharply into focus.
+          </p>
+        </div>
 
-      <div>
-        <img src="som.png" alt="" className="mt-10" />
-        <Link href="https://cyclopedia-media-hub.vercel.app/blog/OjdVfovsON2pJsJU9yJr">
-        <h2 className="text-xl font-bold text-black text-left hover:underline">
-          How the Western media helped build the case for genocide in Gaza
-        </h2>
-        </Link>
-        <p className="text-sm text-gray-500 text-left mt-5 ">
-          The past five months have been clarifying. What was supposed to be
-          hidden has been thrust into the light. What was supposed to be
-          obscured has come sharply into focus.
-        </p>
-      </div>
-    </section>
+        <div>
+          <img src="som.png" alt="" className="mt-10" />
+          <Link href="https://cyclopedia-media-hub.vercel.app/blog/OjdVfovsON2pJsJU9yJr">
+            <h2 className="text-xl font-bold text-black text-left hover:underline">
+              How the Western media helped build the case for genocide in Gaza
+            </h2>
+          </Link>
+          <p className="text-sm text-gray-500 text-left mt-5 ">
+            The past five months have been clarifying. What was supposed to be
+            hidden has been thrust into the light. What was supposed to be
+            obscured has come sharply into focus.
+          </p>
+        </div>
+      </section>
 
       {/* Mobile heading */}
       <div id="News-cpd" className="w-full px-4 mt-10">
@@ -501,7 +501,7 @@ const Page = () => {
           alt="Elevate Your Digital Presence"
           className="mt-5 z-0 w-full lg:w-fit lg:h-50 h-50 rounded-t-lg group-hover:opacity-0 transition duration-300 shadow-2xl shadow-black"
         />
-        <Link href="/religion">
+        <Link href="https://cyclopedia-media-hub.vercel.app/blog/jeixznhQcoRJKNT9X6eE">
           <button className="text-purple text-xl text-center mask-b-from-10%  z-50">
             Read....
           </button>
@@ -557,11 +557,11 @@ const Page = () => {
             },
             {
               title: "Endless War as Forever Terrorism",
-              link: ".https://cyclopedia-media-hub.vercel.app/blog/jYPO6EK2aqDmHqgxVPiJ",
+              link: "https://cyclopedia-media-hub.vercel.app/blog/jYPO6EK2aqDmHqgxVPiJ",
             },
             {
               title: "How War Targets the Young",
-              link: "https://cyclopedia-media-hub.vercel.app/blog/rfhXdNNhP1a4vYqUkXc9.",
+              link: "https://cyclopedia-media-hub.vercel.app/blog/rfhXdNNhP1a4vYqUkXc9",
             },
             {
               year: "Ongoing",
@@ -605,22 +605,74 @@ const Page = () => {
           Timeline of Suppressed Events
         </h2>
         <div className="space-y-8 max-w-3xl mx-auto">
-          {[
-            "1963 – JFK Assassination",
-            "2001 – 9/11 Inconsistencies",
-            "2020 – Global Info Control",
-          ].map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.2 }}
-              className="border-l-4 border-green-500 pl-4"
+          {/* 1963 */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0 }}
+            className="border-l-4 border-green-500 pl-4"
+          >
+            <Link
+              href="https://cyclopedia-media-hub.vercel.app/blog/TbFiS5ZquOw69jl1Vjsu"
+              className="flex items-center gap-4 hover:underline"
             >
-              <p className="text-lg">{item}</p>
-            </motion.div>
-          ))}
+              <img
+                src="/major.png"
+                alt="Soleimani"
+                width={40}
+                height={40}
+                className="rounded-full h-20 w-20"
+              />
+              <span className="text-lg"> Soleimani's Assassination</span>
+            </Link>
+          </motion.div>
+
+          {/* 2001 */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="border-l-4 border-green-500 pl-4"
+          >
+            <Link
+              href="/timeline/2001-9-11-inconsistencies"
+              className="flex items-center gap-4 hover:underline"
+            >
+              <img
+                src="/images/911.jpg"
+                alt="9/11"
+                width={40}
+                height={40}
+                className="rounded-full object-cover"
+              />
+              <span className="text-lg">2001 – 9/11 Inconsistencies</span>
+            </Link>
+          </motion.div>
+
+          {/* 2020 */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="border-l-4 border-green-500 pl-4"
+          >
+            <Link
+              href="/timeline/2020-global-info-control"
+              className="flex items-center gap-4 hover:underline"
+            >
+              <img
+                src="/images/2020.jpg"
+                alt="2020 Info"
+                width={40}
+                height={40}
+                className="rounded-full object-cover"
+              />
+              <span className="text-lg">2020 – Global Info Control</span>
+            </Link>
+          </motion.div>
         </div>
       </section>
 

@@ -5,6 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
+import ViewMoreSearchPopup from "../view/page";
 
 const Page = () => {
   const [visibleCount, setVisibleCount] = useState(4); // 4 items shown initially
@@ -15,11 +16,11 @@ const Page = () => {
 
   return (
     <main className="w-full bg-white">
-      <h1 className="text-3xl lg:text-5xl font-bold text-center mt-30 text-black mb-2">
+      <h1 className="text-3xl lg:text-5xl font-bold text-center mt-30 lg:mt-50 text-black mb-2">
         Faith, Belief, and Beyond
       </h1>
-      <p className="text-sm lg:text-base text-center text-gray-700 max-w-3xl mx-auto">
-        Explore ancient scriptures, divine mysteries, and the role of religion
+      <p className="text-sm text-center  text-gray-700 lg:text-base ">
+        Explore ancient scriptures, divine mysteries, and the role of religion <br className="max-md:hidden"/>
         in shaping societies and ideologies. A closer look at beliefs that unite
         — and divide — billions.
       </p>
@@ -222,7 +223,7 @@ const Page = () => {
             />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/wuagVdBpN45n8CuQa65d">
               <h2 className="text-sm font-bold text-black hover:underline">
                 More than Missionary A Life in the Struggle for Reproductive
                 Freedom{" "}
@@ -248,9 +249,9 @@ const Page = () => {
             />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/FM2i8368RY3xpHvH9D6K">
               <h2 className="text-sm font-bold text-black hover:underline">
-                Daily News: Blasphemy in Saudi Arabia, Religious Freedom{" "}
+                Blasphemy in Saudi Arabia, Religious Freedom{" "}
               </h2>
             </Link>
             <p className="text-xs text-gray-800 mt-1">
@@ -267,7 +268,7 @@ const Page = () => {
             <Image src="/BLM.png" alt="News 4" fill className="object-cover " />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/0oE5AkuF09zxe4F8u3gb">
               <h2 className="text-sm font-bold text-black hover:underline">
                 Tragedy, Spirituality, and Black Justice
               </h2>
@@ -291,7 +292,7 @@ const Page = () => {
             />
           </div>
           <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/jeixznhQcoRJKNT9X6eE">
               <h2 className="text-sm font-bold text-black hover:underline">
                 AIDS and the Hidden Catholic Church
               </h2>
@@ -306,15 +307,10 @@ const Page = () => {
         </div>
 
         {/* === VIEW MORE BUTTON === */}
-        <div className="col-span-full flex justify-center mt-24">
-          <button
-            onClick={showMore}
-            className="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition"
-          >
-            View More
-          </button>
-        </div>
       </div>
+       <div className="mx-auto text-center">
+             <ViewMoreSearchPopup />
+             </div>
     </main>
   );
 };
