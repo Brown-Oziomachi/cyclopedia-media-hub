@@ -149,7 +149,7 @@ export default function BlogDetails() {
         
   <button
           onClick={handleCopyLink}
-          className="border flex items-center max-md:top-70 max-lg:top-150 lg:top-150 z-40 right-0 absolute gap-2 text-gray-400 font-semibold py-4 bg-black text-white px-4 sm:px-6 rounded-full hover:bg-gray-800"
+          className="border flex items-center max-md:top-80 max-lg:top-150 lg:top-150 z-40 -right-8 absolute gap-2 text-gray-400 font-semibold py-3 bg-black text-white px-3  rounded-full hover:bg-gray-800"
         >
           <LinkIcon className="h-4 w-4" />
         </button>
@@ -217,13 +217,123 @@ export default function BlogDetails() {
         >
           {/* {liked ? "Liked" : "Likes"} ({likes}) */}
         </button>
+</div>
+<hr/>
+ <div className="border p-5 max-w-xl mx-auto">
+      <h2 className="font-semibold">
+        Subscribe to the <em>Cyclopedia</em> newsletter for weekly insights on the
+        world's most pressing topics. <span className="text-red-600">*</span>
+      </h2>
+      <p className="text-sm text-gray-700 mt-1">Required</p>
 
-       
-      </div>
+  <form action="YOUR_MAILCHIMP_FORM_ACTION_URL" method="post" target="_blank" novalidate>
+        {/* Email Address */}
+        <div>
+          <label className="block text-xs font-semibold text-gray-800 mb-1">
+            * EMAIL ADDRESS
+          </label>
+          <input
+            type="email"
+            className="w-full border border-green-600 rounded-sm px-3 py-2 focus:outline-none focus:ring-1 focus:ring-green-600"
+          />
+        </div>
+
+        {/* Country or Region */}
+        <div>
+          <label className="block text-xs font-semibold text-gray-800 mb-1">
+            * COUNTRY OR REGION
+          </label>
+          <select className="w-full border border-green-600 rounded-sm px-3 py-2 focus:outline-none focus:ring-1 focus:ring-green-600">
+            <option>Select One</option>
+            <option>United States</option>
+            <option>United Kingdom</option>
+            <option>Canada</option>
+            <option>Australia</option>
+            <option>Algeria</option>
+<option>Angola</option>
+<option>Benin</option>
+<option>Botswana</option>
+<option>Burkina Faso</option>
+<option>Burundi</option>
+<option>Cabo Verde</option>
+<option>Cameroon</option>
+<option>Central African Republic</option>
+<option>Chad</option>
+<option>Comoros</option>
+<option>Congo (Republic)</option>
+<option>Congo (Democratic Republic)</option>
+<option>Côte d'Ivoire</option>
+<option>Djibouti</option>
+<option>Egypt</option>
+<option>Equatorial Guinea</option>
+<option>Eritrea</option>
+<option>Eswatini</option>
+<option>Ethiopia</option>
+<option>Gabon</option>
+<option>Gambia</option>
+<option>Ghana</option>
+<option>Guinea</option>
+<option>Guinea-Bissau</option>
+<option>Kenya</option>
+<option>Lesotho</option>
+<option>Liberia</option>
+<option>Libya</option>
+<option>Madagascar</option>
+<option>Malawi</option>
+<option>Mali</option>
+<option>Mauritania</option>
+<option>Mauritius</option>
+<option>Morocco</option>
+<option>Mozambique</option>
+<option>Namibia</option>
+<option>Niger</option>
+<option>Nigeria</option>
+<option>Rwanda</option>
+<option>Sao Tome and Principe</option>
+<option>Senegal</option>
+<option>Seychelles</option>
+<option>Sierra Leone</option>
+<option>Somalia</option>
+<option>South Africa</option>
+<option>South Sudan</option>
+<option>Sudan</option>
+<option>Tanzania</option>
+<option>Togo</option>
+<option>Tunisia</option>
+<option>Uganda</option>
+<option>Zambia</option>
+<option>Zimbabwe</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        {/* Privacy note */}
+        <p className="text-xs text-gray-700">
+          This site is protected by reCAPTCHA and the Google{" "}
+          <a href="#" className="underline">
+            Privacy Policy
+          </a>{" "}
+          and{" "}
+          <a href="#" className="underline">
+            Terms of Service
+          </a>{" "}
+          apply.
+        </p>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="bg-green-600 text-white px-4 py-2 text-sm font-semibold rounded-sm hover:bg-green-700"
+        >
+          SIGN UP
+        </button>
+      </form>
+    </div>
       
+      <hr/>
 {/* Related Blogs */}
 <div className="mt-10">
-  <h2 className="text-xl font-bold mb-4">Related Blogs</h2>
+  <h2 className="text-xl font-bold mb-4">Related</h2>
   <div className="grid sm:grid-cols-2 gap-6">
 
     {/* Blog 1 */}
@@ -514,24 +624,27 @@ Nigerians Deeply Divided by Religion on Key Issues            </h2>
     </div>
 
       {/* More Blogs Button */}
-      <div className="text-center mt-28">
-     <input
-              type="text"
-              placeholder="search anything in cyclopedia"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+     <div className="text-center mt-28 lg:space-x-5">
+  <div className="relative inline-block w-full lg:w-1/4 max-md:w-1/2">
+    <input
+      type="text"
+      placeholder="search anything in cyclopedia"
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+      className="w-full border border-gray-300 rounded-lg px-4 py-2 pr-16 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
 
-            {/* Search Button */}
-            <button
-              onClick={handleSearch}
-              className="mt-4 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg w-full"
-            >
-              Search
-            </button>
-      </div>
+    {/* Search Button Inside Input */}
+    <button
+      onClick={handleSearch}
+      className="absolute right-1 top-1 bottom-1 bg-purple-600 hover:bg-purple-700 text-white px-3 rounded-lg text-sm"
+    >
+      Search
+    </button>
+  </div>
+</div>
+
     </motion.div>
   );
 }

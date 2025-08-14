@@ -93,12 +93,11 @@ const ProfileDropdownNavbar = () => {
 
         {/* Title */}
         <div className="uppercase font-playfair max-lg:-mt-20 lg:ml-5 text-4xl max-lg:mx-auto lg:text-6xl font-bold bg-gradient-to-r from-purple-500 to-cyan-400 text-transparent bg-clip-text tracking-wide select-none">
-        <Link href="/">
-        <h1 className=" ">
-          Cyclopedia
-        </h1>
-        </Link>
+          <Link href="/">
+            <h1 className=" ">Cyclopedia</h1>
+          </Link>
         </div>
+
         {/* Top bar with Regions dropdown (hidden on mobile) */}
         <div className="relative max-md:hidden px-4 py-1 text-black max-lg:hidden">
           <button
@@ -129,6 +128,7 @@ const ProfileDropdownNavbar = () => {
             </div>
           )}
         </div>
+
         <section className="hidden lg:flex text-white select-none shadow-md px-2 py-1 ml-0">
           <nav className="flex space-x-4 max-w-full overflow-x-auto no-scrollbar">
             {/* Nav Items */}
@@ -190,6 +190,13 @@ const ProfileDropdownNavbar = () => {
           role="search"
           aria-label="Site Search"
         >
+          <Link
+            href="/newsletter"
+            onClick={() => setShowNav(false)}
+            className="text-gray-400 text-sm mb-4 -ml-30"
+          >
+            Newsletter
+          </Link>
           <input
             type="text"
             value={query}

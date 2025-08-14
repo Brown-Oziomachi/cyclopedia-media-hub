@@ -52,5 +52,6 @@
           <p>No results found. Or check your network connection</p>
         )}
       </div>
+      
     );
   }

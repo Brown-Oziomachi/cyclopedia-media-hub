@@ -20,6 +20,7 @@ import BottomNav from "@/components/BottomNav";
 import ChatDropdown from "@/components/Chat";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import LogoSplash from "@/components/LogoSplash";
+import { useRouter} from "next/navigation";
 
 
 const Page = () => {
@@ -27,6 +28,10 @@ const Page = () => {
   const [session] = useState(); 
   const [showpopup, setShowPopup] = useState(true);
   const [showSplash, setShowSplash] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
+  const [query, setQuery] = useState("");
+  const [showNav, setShowNav] = useState(false);
 
 
   useEffect(() => {
@@ -80,6 +85,17 @@ const Page = () => {
     },
   ];
 
+  
+    const handleSearch = (e) => {
+      e.preventDefault();
+      if (!query.trim()) return;
+      setShowNav(false); // Close nav here
+
+  router.push(
+        `/search?q=${encodeURIComponent(query.trim().toLowerCase())}`
+      );
+    };
+
   return (
     <>
       {showSplash ? (
@@ -95,16 +111,16 @@ const Page = () => {
             />
           </div> */}
 
-          <main className="z-50  flex flex-col justify-center items-center  px-4 lg:px-0 max-lg:mt-40 opacity-100 lg:mt-20">
+          <main className="z-50  flex flex-col justify-center items-center  px-4 lg:px-0 max-lg:mt-10 opacity-100 lg:mt-20">
             <div className="space-y-2 ">
               {/* Cyclopedia Creation Title */}
               <img
                 src="/hid.png"
                 alt="image"
-                className="z-0 w-fit lg:w-200 lg:h-200 h-fit opacity-"
+                className="z-0 w-fit lg:w-200 lg:h-200 h-fit opacity- lg:mt-30"
               />
 
-              <p className="text-sm lg:text-2xl text-gray-300 max-w-3xl mx-auto lg:-mt-30 -mt-10 text-center">
+              <p className="text-sm lg:text-2xl text-gray-300 max-w-3xl mx-auto lg:-mt-30 text-center">
                 Uncovering the Unseen, Revealing the Real.
               </p>
 
@@ -121,6 +137,33 @@ const Page = () => {
           </main>
         </div>
       )}
+
+  <div className="relative w-full lg:w-1/4 max-md:w-full mx-auto lg:hidden">
+  <form
+    onSubmit={handleSearch}
+    className="flex items-center"
+    role="search"
+    aria-label="Site Search"
+  >
+    <input
+      type="text"
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+      placeholder="Search anything in cyclopedia..."
+      className="px-5 py-3 pr-20 rounded-md shadow-2xl border-purple-600 border-2 text-black focus:outline-none focus:ring-2 focus:ring-purple-400 w-full"
+      aria-label="Search input"
+    />
+
+    {/* Search Button inside */}
+    <button
+      type="submit"
+      className="absolute -right-1 top-1/2 -translate-y-1/2 bg-purple-500 hover:bg-purple-600 px-5 py-3 rounded-md text-white font-semibold transition"
+    >
+      Search
+    </button>
+  </form>
+</div>
+
 
       <div className="bg-gray-950 p-6 text-white max-w-3xl">
         {/* Title */}
@@ -140,6 +183,7 @@ const Page = () => {
           governments, whole federal departments...
         </p>
       </div>
+      <div id="read-more">{/* Your "Explore more" content goes here */}</div>
 
       <section className="px-6 py-5 md:py-20 max-w-4xl mx-auto bg-white text-black z-0">
         <div className="grid grid-cols-3 sm:grid-cols-5 gap-6 justify-center">
@@ -174,6 +218,30 @@ const Page = () => {
 
       <section className="px-2 py-5 md:py-20 bg-white text-black text-center max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 items-stretch">
         {/* First Card */}
+
+<div className="relative w-full lg:w-1/2 ">
+          <img
+            src="inter.png"
+            alt="News Image"
+            className="w-full max-md:h-50 rounded-md"
+          />
+          <div className="absolute z-10 bottom-4 max-md:-bottom-5 left-4 right-4 bg-white bg-opacity-90 p-4">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/EBmJtaV9bZ6rmy8blKmw">
+              <h2 className="text-sm font-bold text-black hover:underline">
+International Medical Workers Decry Israel's 'Deliberate Assault' on Their Gaza Colleagues
+              </h2>
+            </Link>
+            <p className="text-xs text-gray-800 mt-1">
+Brett Wilkins
+
+Aug 13, 2025            </p>
+            <p className="mt-2 text-gray-900 text-xs">
+             Many Palestinian health workers 'suffer from hunger, dizziness and fainting episodes while performing operations and triaging patients,' reads an open letter signed by the healthcare professionals.
+
+            </p>
+          </div>
+        </div>
+
         <div className="relative w-full lg:w-1/2">
           <img
             src="erik.png"
@@ -509,41 +577,112 @@ const Page = () => {
       </div>
 
       {/* Featured Topics */}
-      <div id="read-more">{/* Your "Explore more" content goes here */}</div>
 
-      <section className="px-6 py-5 md:py-20 max-w-4xl mx-auto bg-white text-black z-0">
-        <div className="grid grid-cols-3 sm:grid-cols-5 gap-6 justify-center">
-          {categories.map((item, i) => (
-            <Link key={i} href={item.link} passHref legacyBehavior>
-              <a aria-label={item.title} className="group">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.15, duration: 0.5 }}
-                  viewport={{ once: true }}
-                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full bg-gray-100 shadow-md flex items-center justify-center cursor-pointer transition-transform group-hover:scale-110"
-                >
-                  {item.imgSrc ? (
-                    <img
-                      src={item.imgSrc}
-                      alt={item.title}
-                      className="w-25 h-25 object-cover sm:w-20 sm:h-20 rounded-full"
-                    />
-                  ) : (
-                    <span className="text-4xl">{item.emoji}</span>
-                  )}
-                </motion.div>
-                <p className="text-center mt-3 text-sm font-medium text-gray-700 group-hover:text-purple-700 transition-colors">
-                  {item.title}
-                </p>
-              </a>
-            </Link>
-          ))}
-        </div>
-      </section>
+      
+ <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+  {/* === NEWS CARD 1 === */}
+  <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div className="relative w-full h-[220px]">
+      <img src="/medi.png" alt="News 3" className="object-cover w-full h-full" />
+    </div>
+    <div className="p-4">
+      <Link href="https://cyclopedia-media-hub.vercel.app/blog/OjdVfovsON2pJsJU9yJr">
+        <h2 className="text-sm font-bold text-black hover:underline lowercase">
+          HOW THE WESTERN MEDIA HELPED BUILD THE CASE FOR GENOCIDE IN GAZA
+        </h2>
+      </Link>
+      <p className="text-xs text-gray-600 mt-1">By cyclopedia</p>
+      <p className="mt-2 text-gray-800 text-xs">
+        From obscuring the West’s role in starving Gaza to sensationalised
+        accounts of mass rape by Hamas, journalists are playing the role of
+        propagandists, not reporters.
+      </p>
+    </div>
+  </div>
+
+  {/* === NEWS CARD 2 === */}
+  <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div className="relative w-full h-[220px]">
+      <img src="/ed.png" alt="News 4" className="object-cover w-full h-full" />
+    </div>
+    <div className="p-4">
+      <Link href="https://cyclopedia-media-hub.vercel.app/blog/yr4GRaz6USfU5E9s2INA">
+        <h2 className="text-sm font-bold text-black hover:underline">
+          UK MEDIA ARE SUPPRESSING MENTIONS OF ISRAEL’S ‘GENOCIDE’ IN GAZA
+        </h2>
+      </Link>
+      <p className="text-xs text-gray-600 mt-1">
+        DES FREEDMAN — 18 December 2023
+      </p>
+      <p className="mt-2 text-gray-800 text-xs">
+        Analysis of British media reporting shows they are barely covering
+        allegations by UN officials and others that Israel is promoting
+        genocide against Palestinians. This is in complete contrast to their
+        reporting of Russia in Ukraine.
+      </p>
+    </div>
+  </div>
+
+  {/* === NEWS CARD 3 === */}
+  <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div className="relative w-full h-[220px]">
+      <img src="/fire.png" alt="News 5" className="object-cover w-full h-full" />
+    </div>
+    <div className="p-4">
+      <Link href="https://cyclopedia-media-hub.vercel.app/blog/TdKgQZy1WYBEHVhZ86HZ">
+        <h2 className="text-sm font-bold text-black hover:underline">
+'We Are Being Cooked Alive': Wildfires Driven by Climate Crisis Ravage Europe
+        </h2>
+      </Link>
+      <p className="text-xs text-gray-600 mt-1">By Author Name</p>
+      <p className="mt-2 text-gray-800 text-xs">
+Fire-related deaths were reported in Turkey, Spain, Montenegro, and Albania.
+      </p>
+    </div>
+  </div>
+
+  {/* === NEWS CARD 4 === */}
+  <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div className="relative w-full h-[220px]">
+      <img src="/news4.png" alt="News 6" className="object-cover w-full h-full" />
+    </div>
+    <div className="p-4">
+      <Link href="https://cyclopedia-media-hub.vercel.app/blog/sample4">
+        <h2 className="text-sm font-bold text-black hover:underline">
+          FOURTH POST TITLE HERE
+        </h2>
+      </Link>
+      <p className="text-xs text-gray-600 mt-1">By Author Name</p>
+      <p className="mt-2 text-gray-800 text-xs">
+        Another example description for a different news post or article.
+      </p>
+    </div>
+  </div>
+
+  {/* === NEWS CARD 5 === */}
+  <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div className="relative w-full h-[220px]">
+      <img src="/news5.png" alt="News 7" className="object-cover w-full h-full" />
+    </div>
+    <div className="p-4">
+      <Link href="https://cyclopedia-media-hub.vercel.app/blog/sample5">
+        <h2 className="text-sm font-bold text-black hover:underline">
+          FIFTH POST TITLE HERE
+        </h2>
+      </Link>
+      <p className="text-xs text-gray-600 mt-1">By Author Name</p>
+      <p className="mt-2 text-gray-800 text-xs">
+        Description for the fifth post. Keeps the same layout and design as others.
+      </p>
+    </div>
+  </div>
+
+</div>
+
 
       {/* Timeline of Hidden Events */}
-      <section className="px-6 py-16 bg-black text-white max-w-6xl mx-auto">
+      <section className="px-6 py-16 bg-black text-white max-w-6xl mx-auto mt-20">
         <div className="relative border-l border-purple-700 ml-4">
           {[
             {
@@ -600,155 +739,9 @@ const Page = () => {
         </div>
       </section>
 
-      <section className="px-6 py-16 bg-white">
-        <h2 className="text-3xl md:text-4xl mb-10 font-semibold text-center">
-          Timeline of Suppressed Events
-        </h2>
-        <div className="space-y-8 max-w-3xl mx-auto">
-          {/* 1963 */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0 }}
-            className="border-l-4 border-green-500 pl-4"
-          >
-            <Link
-              href="https://cyclopedia-media-hub.vercel.app/blog/TbFiS5ZquOw69jl1Vjsu"
-              className="flex items-center gap-4 hover:underline"
-            >
-              <img
-                src="/major.png"
-                alt="Soleimani"
-                width={40}
-                height={40}
-                className="rounded-full h-20 w-20"
-              />
-              <span className="text-lg"> Soleimani's Assassination</span>
-            </Link>
-          </motion.div>
 
-          {/* 2001 */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="border-l-4 border-green-500 pl-4"
-          >
-            <Link
-              href="/timeline/2001-9-11-inconsistencies"
-              className="flex items-center gap-4 hover:underline"
-            >
-              <img
-                src="/images/911.jpg"
-                alt="9/11"
-                width={40}
-                height={40}
-                className="rounded-full object-cover"
-              />
-              <span className="text-lg">2001 – 9/11 Inconsistencies</span>
-            </Link>
-          </motion.div>
 
-          {/* 2020 */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="border-l-4 border-green-500 pl-4"
-          >
-            <Link
-              href="/timeline/2020-global-info-control"
-              className="flex items-center gap-4 hover:underline"
-            >
-              <img
-                src="/images/2020.jpg"
-                alt="2020 Info"
-                width={40}
-                height={40}
-                className="rounded-full object-cover"
-              />
-              <span className="text-lg">2020 – Global Info Control</span>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Interactive World Map (Placeholder) */}
-
-      {/* Real-Time Feed (Mock) */}
-      <section className="px-6 py-16 bg-black">
-        <h2 className="text-3xl md:text-4xl mb-10 font-semibold text-center text-white">
-          Live Truth Feed
-        </h2>
-        <ul className="space-y-4 max-w-2xl mx-auto text-sm ">
-          <li className="border p-4 border-gray-700 bg-white">
-            🔴 Leak: Secret meetings between tech giants & security agencies
-            revealed.
-          </li>
-          <li className="border p-4 border-gray-700 bg-white">
-            📡 Anonymous whistleblower exposes bio-surveillance projects in
-            Africa.
-          </li>
-          <li className="border p-4 border-gray-700 bg-white">
-            🌐 Censored protest footage resurfaces from Middle East.
-          </li>
-        </ul>
-      </section>
-
-      {/* Voices of the Silenced */}
-
-      {/* Mini Documentaries */}
-      <section className="px-6 py-16 bg-gradient-to-b from-white to-gray-200">
-        <h2 className="text-3xl md:text-4xl mb-10 font-semibold text-center">
-          Short Truth Documentaries
-        </h2>
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {[
-            { file: "banporn.mp4", title: "Ban Porn Documentary" },
-            { file: "truth2.mp4", title: "Truth Revealed Part 2" },
-            { file: "truth3.mp4", title: "Truth Revealed Part 3" },
-          ].map((vid, i) => (
-            <div key={i} className="flex flex-col">
-              <h3 className="mb-2 text-lg font-semibold text-center">
-                {vid.title}
-              </h3>
-              <video
-                src={`/${vid.file}`}
-                controls
-                className="w-full h-64 object-cover rounded-xl"
-              />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Declassified Section */}
-      <section className="px-6 py-16 bg-gradient-to-b from-black to-purple-900">
-        <h2 className="text-3xl md:text-4xl mb-10 font-semibold text-center">
-          Declassified Files
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            "CIA Mind Control",
-            "Black Budget Programs",
-            "The Vatican Archives",
-          ].map((title, i) => (
-            <div
-              key={i}
-              className="bg-white p-5 border border-green-500 rounded-xl"
-            >
-              <p className="text-sm text-green-400 uppercase">REDACTED</p>
-              <h3 className="text-xl font-bold mt-2">{title}</h3>
-              <p className="text-sm mt-2">Click to unlock classified truths.</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Manifesto */}
+   
       <section className="px-6 py-20 bg-gradient-to-b from-black to-gray-200 text-center">
         <motion.h2
           className="text-4xl md:text-5xl font-extrabold mb-6"
