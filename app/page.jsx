@@ -172,7 +172,7 @@ const Page = () => {
         </div>
       </section>
 
-      <section className="px-6 py-10 md:py-20 bg-white text-black text-center max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 items-stretch">
+      <section className="px-2 py-5 md:py-20 bg-white text-black text-center max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 items-stretch">
         {/* First Card */}
         <div className="relative w-full lg:w-1/2">
           <img
@@ -180,7 +180,7 @@ const Page = () => {
             alt="News Image"
             className="w-full h-auto object-cover rounded-md"
           />
-          <div className="absolute z-10 bottom-4 left-4 right-4 bg-white bg-opacity-90 p-4 ">
+          <div className="absolute z-10 bottom-4 left-4 right-4 bg-white bg-opacity-90 p-4">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/Tc0W4qUPzj7ytY7UB5fs">
               <h2 className="text-sm font-bold text-black hover:underline">
                 Erik Prince Calls for U.S. to Colonize Africa and Latin America
@@ -225,7 +225,7 @@ const Page = () => {
         {/* Card 1 */}
         <Link
           href="https://cyclopedia-media-hub.vercel.app/blog/nVmpG0se1lyhis8uRH9y"
-          className="block bg-white text-black p-4 h-full hover:shadow-lg transition rounded"
+          className="block bg-white text-black h-full hover:shadow-lg transition rounded"
         >
           <img
             src="/leba.png"
@@ -247,7 +247,7 @@ const Page = () => {
         {/* Card 2 */}
         <Link
           href="https://cyclopedia-media-hub.vercel.app/blog/91mdgClamjnMtE6v0yQf"
-          className="block bg-white text-black p-4 h-full hover:shadow-lg transition rounded"
+          className="block bg-white text-black  h-full hover:shadow-lg transition rounded"
         >
           <img
             src="/teen.png"
@@ -268,7 +268,7 @@ const Page = () => {
         {/* Card 3 */}
         <Link
           href="https://cyclopedia-media-hub.vercel.app/blog/QSmmSGdGenuMSwIRTWpJ"
-          className="block bg-white text-black p-4 h-full hover:shadow-lg transition rounded"
+          className="block bg-white text-black  h-full hover:shadow-lg transition rounded"
         >
           <img
             src="/hiden.png"
@@ -288,7 +288,7 @@ const Page = () => {
         {/* Card 4 */}
         <Link
           href="https://cyclopedia-media-hub.vercel.app/blog/eLBxs8nuMz9j0OrJ3Pm3"
-          className="block bg-white text-black p-4 h-full hover:shadow-lg transition rounded"
+          className="block bg-white text-black  h-full hover:shadow-lg transition rounded"
         >
           <img
             src="/mini.png"
@@ -306,7 +306,7 @@ const Page = () => {
         </Link>
       </div>
 
-      <section className="px-6 py-16 text-center grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto mt-5 ">
+      <section className="px-2 text-center grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto  ">
         <div className="mt-5 text-black">
           <img src="british.png" alt="" />
           <Link href="https://cyclopedia-media-hub.vercel.app/blog/DxewHf37R7X7ZBzQRLE5">
@@ -358,7 +358,7 @@ const Page = () => {
           {/* Feature Card */}
           <div className="w-full lg:w-1/2">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/DkwQs35ZgaKbfYnH0fOg">
-              <div className="bg-white text-black p-4  h-full">
+              <div className="bg-white text-black h-full">
                 <img
                   src="/slave.png"
                   alt="News Image"
@@ -379,7 +379,7 @@ const Page = () => {
           <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[600px] overflow-y-auto pr-2">
             {/* Card 1 */}
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/up07d67GdXw6WP116uxQ">
-              <div className="bg-white text-black  p-4 ">
+              <div className="bg-white text-black ">
                 <img
                   src="/border.png"
                   alt="News Image"
@@ -397,7 +397,7 @@ const Page = () => {
 
             {/* Card 2 */}
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/nJeaLwjnuQnYii18kKvL">
-              <div className="bg-white text-black  p-4 ">
+              <div className="bg-white text-black ">
                 <img
                   src="/arr.png"
                   alt="News image"
@@ -418,7 +418,7 @@ const Page = () => {
 
             {/* Card 3 */}
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/6cC1bNTyfe7MwciAmvtg">
-              <div className="bg-white text-black p-4">
+              <div className="bg-white text-black">
                 <img
                   src="/white.png"
                   alt="News Image"
@@ -436,7 +436,7 @@ const Page = () => {
 
             {/* Card 4 */}
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/UAekeH5vur8lBd9DHKCr">
-              <div className="bg-white text-black p-4 ">
+              <div className="bg-white text-black ">
                 <img
                   src="/trump.png"
                   alt="Trump"
@@ -453,7 +453,7 @@ const Page = () => {
 
             {/* Card 5 */}
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/4LiDW10fO3UQx56I4mqB">
-              <div className="bg-white text-black p-4">
+              <div className="bg-white text-black ">
                 <img
                   src="sha.png"
                   alt="Sharia"
@@ -470,7 +470,7 @@ const Page = () => {
 
             {/* Card 6 */}
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/eRNFoxbcDwyL000C9dFi">
-              <div className="bg-white text-black p-4 ">
+              <div className="bg-white text-black ">
                 <img
                   src="nig.png"
                   alt="Nigeria"

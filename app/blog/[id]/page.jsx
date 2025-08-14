@@ -1,29 +1,35 @@
 "use client";
 
-import { Suspense } from "react";
-import React, { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import React from "react";
 import { useSession } from "next-auth/react";
 import { db1 } from "@/lib/firebaseConfig";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, collection, getDocs } from "firebase/firestore";
 import { Share, LinkIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter, useParams } from "next/navigation";
 
+// Blog content renderer
 const BlogDisplay = ({ body }) => {
   const isHTML = /<\/?[a-z][\s\S]*>/i.test(body || "");
   return (
     <div
-      className={`prose max-w-none text-gray-900 ${
-        !isHTML ? "whitespace-pre-line space-y-4" : ""
-      }`}
+      className={`prose max-w-none text-gray-900 ${!isHTML ? "whitespace-pre-line space-y-4" : ""}`}
       dangerouslySetInnerHTML={{
         __html: isHTML ? body : body?.replace(/\n/g, "<br />"),
       }}
     />
   );
 };
+
+// Static tags
+const staticTags = [
+  { name: "Politics", href: "/search?q=politics" },
+  { name: "Religion", href: "/search?q=religion" },
+  { name: "History", href: "/search?q=history" },
+];
 
 export default function BlogDetails() {
   const { id } = useParams();
@@ -36,14 +42,17 @@ export default function BlogDetails() {
   const [showShareMenu, setShowShareMenu] = useState(false);
   const [loading, setLoading] = useState(false);
   const [subtitle, setSubtitle] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [blogs, setBlogs] = useState([]);
 
+  // Fetch current blog
   useEffect(() => {
     if (!id) return;
     async function fetchBlog() {
-      const cyclopediaRef = doc(db1, "blogs", id);
-      const cyclopediaDoc = await getDoc(cyclopediaRef);
-      if (cyclopediaDoc.exists()) {
-        const data = cyclopediaDoc.data();
+      const blogRef = doc(db1, "blogs", id);
+      const blogDoc = await getDoc(blogRef);
+      if (blogDoc.exists()) {
+        const data = blogDoc.data();
         setBlog({ id, ...data });
         setLikes(data.likes || 0);
         setSubtitle(data.subtitle || "");
@@ -52,10 +61,29 @@ export default function BlogDetails() {
     fetchBlog();
   }, [id]);
 
+  // Check if liked
   useEffect(() => {
     if (!id) return;
     const storedLiked = localStorage.getItem(`liked-${id}`);
     if (storedLiked) setLiked(true);
+  }, [id]);
+
+  // Fetch related blogs
+  useEffect(() => {
+    if (!id) return;
+    const fetchBlogs = async () => {
+      try {
+        const snapshot = await getDocs(collection(db1, "blogs"));
+        const allBlogs = snapshot.docs
+          .map((doc) => ({ id: doc.id, ...doc.data() }))
+          .filter((b) => b.id !== id) // exclude current blog
+          .sort((a, b) => (b.date || 0) - (a.date || 0)); // newest first
+        setBlogs(allBlogs.slice(0, 4)); // only latest 4 blogs
+      } catch (err) {
+        console.error("Error fetching blogs:", err);
+      }
+    };
+    fetchBlogs();
   }, [id]);
 
   const handleShareClick = () => setShowShareMenu(!showShareMenu);
@@ -86,68 +114,58 @@ export default function BlogDetails() {
     }, 3000);
   };
 
+  const handleSearch = () => {
+    if (!searchQuery.trim()) return;
+    router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+  };
+
+  
+
   if (!blog) return <div className="text-center py-10">Loading blog...</div>;
 
   return (
-    <motion.div
+     <motion.div
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.1 }}
       className="min-h-screen px-3 sm:px-5 md:px-10 lg:px-20 py-10 mx-auto text-gray-900 font-sans leading-relaxed space-y-20"
     >
-    
-<div className="w-full relative h-64 sm:h-80 md:h-[30rem] mt-15">
+      <div className="w-full relative h-64 sm:h-80 md:h-[30rem] mt-15">
+        {/* Image */}
+        {blog.imageUrl && (
+          <Image
+            src={blog.imageUrl}
+            alt={blog.title}
+            fill
+            style={{ objectFit: "cover" }}
+            className="z-10 lg:mt-20 max-md:mt-5 max-lg:mt-20"
+          />
+        )}
 
-  {/* Image */}
-  {blog.imageUrl && (
-    <Image
-      src={blog.imageUrl}
-      alt={blog.title}
-      fill
-      style={{ objectFit: "cover" }}
-      className="z-10 lg:mt-20 max-md:mt-5 max-lg:mt-20"
-    />
-  )}
 
-  {/* Gradient overlay for better text visibility */}
-  <div className="absolute inset-0 bg-gradient-to-t from-black/6 via-black/30 to-transparent z-20"></div>
+        {/* Gradient overlay for better text visibility */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/6 via-black/30 to-transparent z-20"></div>
 
-  {/* Title + Subtitle */}
-  <div className="absolute top-0 left-0 w-full p-6 sm:p-5 md:p-7 z-30 text-black mt-65 lg:text-white max-lg:text-white max-md:text-black">
-    <h1 className="text-3xl md:text-2xl font-bold font-playfair tracking-wide drop-shadow-lg">
-      {blog.title}
-    </h1>
-    {subtitle && (
-      <h2 className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold mt-1 font-playfair drop-shadow-md border py-2 px-3 shadow-2xl mask-b-from-60% ">
-        {subtitle}
-      </h2>
-    )}
-  </div>
-
-</div>
-      {/* Blog content */}
-      <div className="blog-content prose max-w-none px-2 sm:px-4 space-y-5 gap-5 font-serif text-sm max-md:mt-110">
-<hr/>
-        <BlogDisplay body={blog.body } />
-      </div>
-
-      {/* Action buttons */}
-      <div className="flex flex-wrap gap-3 sm:gap-5 text-sm px-2 sm:px-4">
-        <button
-          onClick={handleLikeClick}
-          className={`flex items-center justify-center text-sm py-2 px-4 sm:px-5 transition-all rounded-md ${
-            liked
-              ? "text-green-600 hover:text-green-700"
-              : "text-gray-400 hover:text-red-600"
-          }`}
-          aria-label="Like Button"
+        
+  <button
+          onClick={handleCopyLink}
+          className="border flex items-center max-md:top-70 max-lg:top-150 lg:top-150 z-40 right-0 absolute gap-2 text-gray-400 font-semibold py-4 bg-black text-white px-4 sm:px-6 rounded-full hover:bg-gray-800"
         >
-          {liked ? "Liked" : "Likes"} ({likes})
+          <LinkIcon className="h-4 w-4" />
         </button>
-
-        <button
+        {/* Title + Subtitle */}
+        <div className="absolute top-0 left-0 w-full p-6 sm:p-5 md:p-7 z-30 text-black mt-65 lg:text-white max-lg:text-white max-md:text-black">
+          <h1 className="text-3xl md:text-2xl font-bold font-playfair tracking-wide drop-shadow-lg">
+            {blog.title}
+          </h1>
+          {subtitle && (
+            <h2 className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold mt-1 font-playfair drop-shadow-md border py-2 px-3 shadow-2xl mask-b-from-60% ">
+              {subtitle}
+            </h2>
+          )}
+           {/* <button
           onClick={handleShareClick}
-          className="border flex items-center gap-2 text-gray-400 font-semibold py-2 px-4 sm:px-6 rounded-lg hover:bg-gray-800 transition relative"
+          className="border mt-5 right-7 flex items-center gap-2 text-white bg-black font-semibold py-4 px-4 sm:px-6 rounded-full hover:bg-gray-800 relative"
         >
           <Share className="h-4 w-4" />
           {showShareMenu && (
@@ -170,82 +188,349 @@ export default function BlogDetails() {
               </a>
               <button
                 onClick={handleShareClick}
-                className="text-green-600 text-xs underline"
+                className="text-green-600 text-xs underline "
               >
                 Close
               </button>
             </div>
           )}
-        </button>
+        </button> */}
 
-        <button
-          onClick={handleCopyLink}
-          className="border flex items-center gap-2 text-gray-400 font-semibold py-2 px-4 sm:px-6 rounded-lg hover:bg-gray-800 transition"
-        >
-          <LinkIcon className="h-4 w-4" />
-        </button>
+      
+        </div>
+        
+      </div>
+      
+      {/* Blog content */}
+      <div className="blog-content prose max-w-none px-2 sm:px-4 space-y-5 gap-5 font-serif text-sm max-md:mt-110">
+        <hr />
+        <BlogDisplay body={blog.body} />
       </div>
 
-      {/* Latest news section */}
-      <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-center px-4 py-3 w-full border bg-gray-900 text-white shadow-xl">
-        Latest News
-      </h1>
+      {/* Action Buttons */}
+      <div className="flex flex-wrap gap-3 sm:gap-5 text-sm px-2 sm:px-4">
+        <button
+          onClick={handleLikeClick}
+          className={`flex items-center justify-center text-sm py-2 px-4 sm:px-5 rounded-md ${
+            liked ? "text-green-600" : "text-gray-400"
+          }`}
+        >
+          {/* {liked ? "Liked" : "Likes"} ({likes}) */}
+        </button>
 
-      {/* News grid */}
-      <div className="grid sm:grid-cols-2 gap-8 mt-20 px-2 sm:px-4">
-        {[
-          // Two news items
-          {
-            img: "/shari.png",
-            title: "Three Key Moments for Shari’a in Nigeria",
-            author: "Alex Thurston",
-            desc: "The re-implementation of shari’a, however, caused conflict. Muslims and Christians clashed in several Northern states. Shari’a became a campaign issue in 2003.",
-            href: "/",
-          },
-          {
-            img: "/strug.png",
-            title:
-              "Violent Dissent, Intra-Muslim Struggles, and Political Crisis in Northern Nigeria",
-            author: "Alex Thurston",
-            desc: "Political struggles in Northern Nigeria have often been religious struggles as well. New leaders have often sought political and religious authority simultaneously.",
-            href: "/",
-          },
-        ].map((news, i) => (
-          <div key={i} className="relative shadow-2xl">
-            <div className="relative w-full h-48 sm:h-[220px]">
-              <Image
-                src={news.img}
-                alt={news.title}
-                fill
-                className="object-cover"
+       
+      </div>
+      
+{/* Related Blogs */}
+<div className="mt-10">
+  <h2 className="text-xl font-bold mb-4">Related Blogs</h2>
+  <div className="grid sm:grid-cols-2 gap-6">
+
+    {/* Blog 1 */}
+    {blogs.length >= 1 && (
+      <Link href={`/blog/${blogs[0].id}`} className="block">
+        <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
+          {blogs[0].imageUrl && (
+            <div className="relative w-full h-48 sm:h-56">
+              <img
+                src={blogs[0].imageUrl}
+                alt={blogs[0].title}
+                className="object-cover w-full h-full"
               />
             </div>
-            <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4 rounded-md shadow-lg">
-              <Link href={news.href}>
-                <h2 className="text-sm sm:text-base font-bold text-black hover:underline">
-                  {news.title}
-                </h2>
-              </Link>
-              <p className="text-xs sm:text-sm text-gray-800 mt-1">
-                by {news.author}
-              </p>
-              <p className="mt-2 text-gray-900 text-xs sm:text-sm">
-                {news.desc}
-              </p>
+          )}
+          <div className="p-4">
+            <h2 className="text-base font-bold text-black hover:underline uppercase">
+              {blogs[0].title}
+            </h2>
+            <div className="flex gap-2 items-center mt-2 flex-wrap">
+              <span className="text-orange-600 text-sm uppercase">TAGGED:</span>
+              <Link href={`/search?q=politics`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">Politics</Link>
+              <Link href={`/search?q=religion`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">Religion</Link>
             </div>
           </div>
-        ))}
+        </div>
+      </Link>
+    )}
+
+    {/* Blog 2 */}
+    {blogs.length >= 2 && (
+      <Link href={`/blog/${blogs[1].id}`} className="block">
+        <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
+          {blogs[1].imageUrl && (
+            <div className="relative w-full h-48 sm:h-56">
+              <img
+                src={blogs[1].imageUrl}
+                alt={blogs[1].title}
+                className="object-cover w-full h-full"
+              />
+            </div>
+          )}
+          <div className="p-4">
+            <h2 className="text-base font-bold text-black hover:underline uppercase">
+              {blogs[1].title}
+            </h2>
+            <div className="flex gap-2 items-center mt-2 flex-wrap">
+              <span className="text-orange-600 text-sm uppercase">TAGGED:</span>
+              <Link href={`/search?q=history`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">History</Link>
+              <Link href={`/search?q=politics`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">Politics</Link>
+            </div>
+          </div>
+        </div>
+      </Link>
+    )}
+
+    {/* Blog 3 */}
+    {blogs.length >= 3 && (
+      <Link href={`/blog/${blogs[2].id}`} className="block">
+        <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
+          {blogs[2].imageUrl && (
+            <div className="relative w-full h-48 sm:h-56">
+              <img
+                src={blogs[2].imageUrl}
+                alt={blogs[2].title}
+                className="object-cover w-full h-full"
+              />
+            </div>
+          )}
+          <div className="p-4">
+            <h2 className="text-base font-bold text-black hover:underline uppercase">
+              {blogs[2].title}
+            </h2>
+            <div className="flex gap-2 items-center mt-2 flex-wrap">
+              <span className="text-orange-600 text-sm uppercase">TAGGED:</span>
+              <Link href={`/search?q=science`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">Science</Link>
+              <Link href={`/search?q=religion`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">Religion</Link>
+            </div>
+          </div>
+        </div>
+      </Link>
+    )}
+
+    {/* Blog 4 */}
+    {blogs.length >= 4 && (
+      <Link href={`/blog/${blogs[3].id}`} className="block">
+        <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
+          {blogs[3].imageUrl && (
+            <div className="relative w-full h-48 sm:h-56">
+              <img
+                src={blogs[3].imageUrl}
+                alt={blogs[3].title}
+                className="object-cover w-full h-full"
+              />
+            </div>
+          )}
+          <div className="p-4">
+            <h2 className="text-base font-bold text-black hover:underline uppercase">
+              {blogs[3].title}
+            </h2>
+            <div className="flex gap-2 items-center mt-2 flex-wrap">
+              <span className="text-orange-600 text-sm uppercase">TAGGED:</span>
+              <Link href={`/search?q=history`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">History</Link>
+              <Link href={`/search?q=politics`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">Politics</Link>
+            </div>
+          </div>
+        </div>
+      </Link>
+    )}
+
+    {/* Blog 5 */}
+    {blogs.length >= 5 && (
+      <Link href={`/blog/${blogs[4].id}`} className="block">
+        <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
+          {blogs[4].imageUrl && (
+            <div className="relative w-full h-48 sm:h-56">
+              <img
+                src={blogs[4].imageUrl}
+                alt={blogs[4].title}
+                className="object-cover w-full h-full"
+              />
+            </div>
+          )}
+          <div className="p-4">
+            <h2 className="text-base font-bold text-black hover:underline uppercase">
+              {blogs[4].title}
+            </h2>
+           
+           
+            <div className="flex gap-2 items-center mt-2 flex-wrap">
+              <span className="text-orange-600 text-sm uppercase">TAGGED:</span>
+              <Link href={`/search?q=science`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">Science</Link>
+              <Link href={`/search?q=history`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">History</Link>
+            </div>
+          </div>
+        </div>
+      </Link>
+    )}
+
+  </div>
+</div>
+
+      
+
+   <div className="grid sm:grid-cols-2 gap-8 mt-20 px-2 sm:px-4">
+
+      {/* News 1 */}
+      <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-2xl">
+        <div className="relative w-full h-48 sm:h-56">
+          <Image
+            src="/shari.png"
+            alt="Three Key Moments for Shari’a in Nigeria"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="p-4">
+          <Link href="https://cyclopedia-media-hub.vercel.app/blog/yQ5FJS6IFfe7zpQ8gzk7">
+            <h2 className="text-base font-bold text-black hover:underline uppercase">
+              Three Key Moments for Shari’a in Nigeria
+            </h2>
+          </Link>
+          <p className="text-xs text-orange-600 mt-1 uppercase">Alex Thurston</p>
+          <p className="text-orange-600 text-sm">20 MARCH 2025</p>
+          <div className="flex gap-4 items-center mt-2 flex-wrap">
+            <span className="text-orange-600 text-sm">TAGGED:</span>
+            <Link
+              href="/tags/africa"
+              className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+            >
+              Africa
+            </Link>
+            <Link
+              href="/tags/america"
+              className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+            >
+              America
+            </Link>
+          </div>
+        </div>
       </div>
 
-      {/* More news button */}
+      {/* News 2 */}
+      <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-2xl">
+        <div className="relative w-full h-48 sm:h-56">
+          <Image
+            src="/strug.png"
+            alt="Violent Dissent, Intra-Muslim Struggles, and Political Crisis in Northern Nigeria"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="p-4">
+          <Link href="https://cyclopedia-media-hub.vercel.app/blog/sVYggqD0kTZjrZsC7GIb">
+            <h2 className="text-base font-bold text-black hover:underline uppercase">
+              Violent Dissent, Intra-Muslim Struggles, and Political Crisis in Northern Nigeria
+            </h2>
+          </Link>
+          <p className="text-xs text-orange-600 mt-1 uppercase">Alex Thurston</p>
+          <p className="text-orange-600 text-sm">15 MARCH 2025</p>
+          <div className="flex gap-4 items-center mt-2 flex-wrap">
+            <span className="text-orange-600 text-sm">TAGGED:</span>
+            <Link
+              href="/tags/politics"
+              className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+            >
+              Politics
+            </Link>
+            <Link
+              href="/tags/religion"
+              className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+            >
+              Religion
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* News 3 */}
+      <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-2xl">
+        <div className="relative w-full h-48 sm:h-56">
+          <Image
+            src="/ngs.png"
+            alt="Mass Protests Against Corruption in Abuja"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="p-4">
+          <Link href="https://cyclopedia-media-hub.vercel.app/blog/XAwf0LrciDI0bYxkQdsb">
+            <h2 className="text-base font-bold text-black hover:underline uppercase">
+Nigerians See Mixed Economic Picture as Election Day Nears            </h2>
+          </Link>
+          <p className="text-orange-600 text-sm">10 MARCH 2025</p>
+          <div className="flex gap-4 items-center mt-2 flex-wrap">
+            <span className="text-orange-600 text-sm">TAGGED:</span>
+            <Link
+              href="/tags/africa"
+              className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+            >
+              Africa
+            </Link>
+            <Link
+              href="/tags/activism"
+              className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+            >
+              Activism
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* News 4 */}
+      <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-2xl">
+        <div className="relative w-full h-48 sm:h-56">
+          <Image
+            src="/ngd.png"
+            alt="Educational Reform Sparks Debate in Kano"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="p-4">
+          <Link href="https://cyclopedia-media-hub.vercel.app/blog/gSgBpeaXGNgVDYQWxIlT">
+            <h2 className="text-base font-bold text-black hover:underline uppercase">
+Nigerians Deeply Divided by Religion on Key Issues            </h2>
+          </Link>
+          <p className="text-xs text-orange-600 mt-1 uppercase">Musa Ibrahim</p>
+          <p className="text-orange-600 text-sm">5 MARCH 2025</p>
+          <div className="flex gap-4 items-center mt-2 flex-wrap">
+            <span className="text-orange-600 text-sm">TAGGED:</span>
+            <Link
+              href="/tags/education"
+              className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+            >
+              Education
+            </Link>
+            <Link
+              href="/tags/reform"
+              className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+            >
+              Reform
+            </Link>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+      {/* More Blogs Button */}
       <div className="text-center mt-28">
-        <button
-          onClick={handleMoreBlogClick}
-          className="text-sm sm:text-base font-bold text-green-600 tracking-widest border border-green-600 px-4 sm:px-5 py-2 shadow-black shadow-xl rounded-lg hover:bg-green-600 hover:text-black transition duration-300"
-          disabled={loading}
-        >
-          {loading ? "Loading..." : "More News"}
-        </button>
+     <input
+              type="text"
+              placeholder="search anything in cyclopedia"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+            {/* Search Button */}
+            <button
+              onClick={handleSearch}
+              className="mt-4 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg w-full"
+            >
+              Search
+            </button>
       </div>
     </motion.div>
   );

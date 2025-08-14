@@ -92,9 +92,13 @@ const ProfileDropdownNavbar = () => {
         {/* Logo */}
 
         {/* Title */}
-        <h1 className="font-playfair max-lg:-mt-20 lg:ml-10 text-4xl max-lg:mx-auto lg:text-6xl font-bold bg-gradient-to-r from-purple-500 to-cyan-400 text-transparent bg-clip-text tracking-wide select-none">
+        <div className="uppercase font-playfair max-lg:-mt-20 lg:ml-5 text-4xl max-lg:mx-auto lg:text-6xl font-bold bg-gradient-to-r from-purple-500 to-cyan-400 text-transparent bg-clip-text tracking-wide select-none">
+        <Link href="/">
+        <h1 className=" ">
           Cyclopedia
         </h1>
+        </Link>
+        </div>
         {/* Top bar with Regions dropdown (hidden on mobile) */}
         <div className="relative max-md:hidden px-4 py-1 text-black max-lg:hidden">
           <button
@@ -143,37 +147,37 @@ const ProfileDropdownNavbar = () => {
           <div className="flex flex-wrap gap-2">
             <Link
               href="/politics"
-              className="px-3 py-1 bg-blue-100 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-1 bg-purple-900 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
             >
               politics
             </Link>
             <Link
               href="/religion"
-              className="px-3 py-1 bg-blue-100 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-1 bg-purple-900 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
             >
               Religion
             </Link>
             <Link
               href="/history"
-              className="px-3 py-1 bg-blue-100 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-1 bg-purple-900 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
             >
               History
             </Link>
             <Link
               href="/science"
-              className="px-3 py-1 bg-blue-100 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-1 bg-purple-900 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
             >
               Science
             </Link>
             <Link
               href="/media"
-              className="px-3 py-1 bg-blue-100 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-1 bg-purple-900 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
             >
               Media
             </Link>
             <Link
               href="/global"
-              className="px-3 py-1 bg-blue-100 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-1 bg-purple-900 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
             >
               News
             </Link>
