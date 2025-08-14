@@ -149,7 +149,7 @@ export default function BlogDetails() {
         
   <button
           onClick={handleCopyLink}
-          className="border flex items-center max-md:top-80 max-lg:top-150 lg:top-150 z-40 -right-8 absolute gap-2 text-gray-400 font-semibold py-3 bg-black text-white px-3  rounded-full hover:bg-gray-800"
+          className="border flex items-center max-md:top-80 max-lg:top-150 lg:top-150 z-40 -right-2  absolute gap-2 text-gray-400 font-semibold py-3 bg-black text-white px-3  rounded-full hover:bg-gray-800"
         >
           <LinkIcon className="h-4 w-4" />
         </button>
