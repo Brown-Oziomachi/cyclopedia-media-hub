@@ -1,241 +1,98 @@
 "use client";
 
-import {Suspense } from "react";
-import { useState } from "react";
-import Image from "next/image";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import ViewMoreSearchPopup from "../view/page";
+import { db1 } from "@/lib/firebaseConfig";
+import {
+  collection,
+  getDocs,
+  query,
+  limit,
+  startAfter,
+} from "firebase/firestore";
 
-const Page = () => {
-  const [visibleCount, setVisibleCount] = useState(4); // 4 items shown initially
+export default function BlogsPage() {
+  const [blogs, setBlogs] = useState([]);
+  const [lastIndex, setLastIndex] = useState(0); // track last index for pagination
+  const [loading, setLoading] = useState(false);
 
-  const showMore = () => {
-    setVisibleCount((prev) => prev + 1);
+  const fetchBlogs = async (initial = false) => {
+    setLoading(true);
+    try {
+      const blogsRef = collection(db1, "blogs");
+      const snapshot = await getDocs(blogsRef);
+      const allBlogs = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      if (initial) {
+        setBlogs(allBlogs.slice(0, 15));
+        setLastIndex(15);
+      } else {
+        const nextBlogs = allBlogs.slice(lastIndex, lastIndex + 3);
+        setBlogs((prev) => [...prev, ...nextBlogs]);
+        setLastIndex((prev) => prev + 3);
+      }
+    } catch (err) {
+      console.error("Error fetching blogs:", err);
+    }
+    setLoading(false);
   };
 
+  useEffect(() => {
+    fetchBlogs(true); // initial fetch
+  }, []);
+
   return (
-    <main className="w-full bg-white">
-      <div className="max-w-7xl mx-auto px-4 py-10 mt-30 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {/* === NEWS CARD 1 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image
-              src="/ghana.png"
-              alt="News 1"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/JElHfoJnZD1gcwiIGeCJ">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                What Ghana's Anti-LGBTQ Bill Means for Queer Christians
+    <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-30 lg:mt-40">
+      <h1 className="text-center mb-5 font-bold text-4xl">Global</h1>
+      {blogs.map((blog) => (
+        <Link key={blog.id} href={`/blog/${blog.id}`} className="block">
+          <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
+            {blog.imageUrl && (
+              <div className="relative w-full h-48 sm:h-56">
+                <img
+                  src={blog.imageUrl}
+                  alt={blog.title}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+            )}
+            <div className="p-4">
+              <h2 className="text-base font-bold text-black hover:underline uppercase">
+                {blog.title}
               </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              by Ugonna-Ora Owoh Published on June 13, 2023{" "}
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              A new law could criminalize anyone who identifies as LGBTQ
-            </p>
+              <div className="flex gap-2 items-center mt-2 flex-wrap">
+                <span className="text-orange-600 text-sm uppercase">
+                  TAGGED:
+                </span>
+                {blog.tags?.map((tag, i) => (
+                  <Link
+                    key={i}
+                    href={`/search?q=${tag.toLowerCase()}`}
+                    className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+                  >
+                    {tag}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
+        </Link>
+      ))}
 
-        {/* === NEWS CARD 2 === */}
-
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image
-              src="/Ghanas.png"
-              alt="News 2"
-              fill
-              className="object-cover "
-            />
-          </div>
-          <div className="absolute z-10 -bottom-20   left-4 right-4 bg-white p-4 ">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/BoCzv81kzGkogglYKMWI">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                What Ghana's Anti-LGBTQ Bill Means for Queer Christians(Part 2)
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              by Ugonna-Ora Owoh Published on June 13, 2023{" "}
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              “We uphold the Bible as our Principal guide and consider the
-              LGBTQI+ in all its forms as unacceptable behavior that our God
-              frowns upon.”
-            </p>
-          </div>
+      {lastIndex < blogs.length + 3 && ( // show button only if there are more blogs
+        <div className="col-span-full text-center mt-6">
+          <button
+            onClick={() => fetchBlogs(false)}
+            className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-md transition"
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "View More"}
+          </button>
         </div>
-        {/* === NEWS CARD 3 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image src="/good.png" alt="News 3" fill className="object-cover" />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4 ">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/yzfpPgCR3bLZwOwgdV24">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                Schooling Muslims in Northern Nigeria: Politics, Policies and
-                Conclusions
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">by Alex Thurston</p>
-            <p className="mt-2 text-gray-900 text-xs">
-              by Alex Thurston Government-run Islamic schools, then, are to be a
-              source of “counter-radicalization” as well as a means of moving
-              almajirai into more “productive” schools. But the policy is
-              unlikely to succeed.
-            </p>
-          </div>
-        </div>
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image
-              src="/kuti.png"
-              alt="News 4"
-              fill
-              className="object-cover "
-            />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4 ">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/P0QXLGH9s4I54ZhxRYVv">
-              <h2 className="text-sm font-bold text-black hover:underline ">
-                Revolutionary Musical Artist Seun Kuti Carries Fela’s Afrobeat
-                Torch Into a New Era{" "}
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              By Jeremy Scahill January 28 2018
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              Like his father, Seun Kuti describes himself as a revolutionary
-              and he is a fierce critic of the corruption of Nigeria's rulers
-              and the U.S. and transnational corporations that prop them up.{" "}
-            </p>
-          </div>
-        </div>
-
-        {/* === NEWS CARD 4 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image src="/BLM.png" alt="News 4" fill className="object-cover " />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/0oE5AkuF09zxe4F8u3gb">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                Tragedy, Spirituality, and Black Justice
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              by Vincent LloydTerrence L. Johnson Published on April 5, 2023{" "}
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              A conversation about religion in Black protest movements
-            </p>
-          </div>
-        </div>
-
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image src="/fem.png" alt="News 4" fill className="object-cover " />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/aZAtmF05qthPayc1Y4bi">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                Defending against Feminism
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              by Amanda Hendrix-Komoto Published on October 4, 2023{" "}
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              Feminism called for women to shape political and business worlds
-              beyond the home. Latter-day Saint leaders worried that feminism
-              would desex women by masculinizing them and distance them from
-              their god-ordained role.
-            </p>
-          </div>
-        </div>
-
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image src="/mom.png" alt="News 4" fill className="object-cover " />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/YSd450HzXZaUJm4f1J39">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                Mothers in Zion
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              by Amanda Hendrix-Komoto Published on October 4, 2023{" "}
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              The longstanding pressures Mormon women face to be mothers
-            </p>
-          </div>
-        </div>
-
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image
-              src="/poly.png"
-              alt="News 4"
-              fill
-              className="object-cover "
-            />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/e44H7WXhRoVxHVRHqEOP">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                Defending Polygamy
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              by Amanda Hendrix-Komoto Published on October 4, 2023{" "}
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              In the nineteenth century, many Americans believed polygamy was as
-              horrible as slavery. The 1856 Republican National Convention
-              referred to polygamy and slavery as...
-            </p>
-          </div>
-        </div>
-
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image
-              src="/year.png"
-              alt="News 4"
-              fill
-              className="object-cover "
-            />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/QHpiFlLpECstUre5D3nh">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                Columbus Day Is the Most Important Day of Every Year
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              Jon Schwarz October 12 2015,{" "}
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              We shouldn’t celebrate Columbus Day. But if we want to comprehend
-              the world — and we should, since our lives depend on it — we have
-              to understand it.
-            </p>
-          </div>
-        </div>
-        {/* === VIEW MORE BUTTON === */}
-      </div>
-      <div className="mx-auto text-center">
-        <ViewMoreSearchPopup />
-      </div>
-    </main>
+      )}
+    </div>
   );
-};
-
-export default Page;
-
+}

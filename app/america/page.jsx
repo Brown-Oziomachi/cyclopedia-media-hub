@@ -1,177 +1,98 @@
 "use client";
-
-import { Suspense } from "react";
 import { useState } from "react";
-import Image from "next/image";
+import { motion } from "framer-motion";
 import Link from "next/link";
 
-const Page = () => {
-  const [visibleCount, setVisibleCount] = useState(4); // 4 items shown initially
+// All American countries
+const americaCountries = [
+  { name: "United States", tag: "usa", flag: "https://flagcdn.com/us.svg" },
+  { name: "Canada", tag: "canada", flag: "https://flagcdn.com/ca.svg" },
+  { name: "Mexico", tag: "mexico", flag: "https://flagcdn.com/mx.svg" },
+  { name: "Brazil", tag: "brazil", flag: "https://flagcdn.com/br.svg" },
+  { name: "Argentina", tag: "argentina", flag: "https://flagcdn.com/ar.svg" },
+  { name: "Colombia", tag: "colombia", flag: "https://flagcdn.com/co.svg" },
+  { name: "Chile", tag: "chile", flag: "https://flagcdn.com/cl.svg" },
+  { name: "Peru", tag: "peru", flag: "https://flagcdn.com/pe.svg" },
+  { name: "Venezuela", tag: "venezuela", flag: "https://flagcdn.com/ve.svg" },
+  { name: "Ecuador", tag: "ecuador", flag: "https://flagcdn.com/ec.svg" },
+  { name: "Guatemala", tag: "guatemala", flag: "https://flagcdn.com/gt.svg" },
+  { name: "Cuba", tag: "cuba", flag: "https://flagcdn.com/cu.svg" },
+  { name: "Haiti", tag: "haiti", flag: "https://flagcdn.com/ht.svg" },
+  {
+    name: "Dominican Republic",
+    tag: "dominican-republic",
+    flag: "https://flagcdn.com/do.svg",
+  },
+  { name: "Honduras", tag: "honduras", flag: "https://flagcdn.com/hn.svg" },
+  { name: "Paraguay", tag: "paraguay", flag: "https://flagcdn.com/py.svg" },
+  { name: "Bolivia", tag: "bolivia", flag: "https://flagcdn.com/bo.svg" },
+  {
+    name: "El Salvador",
+    tag: "el-salvador",
+    flag: "https://flagcdn.com/sv.svg",
+  },
+  { name: "Nicaragua", tag: "nicaragua", flag: "https://flagcdn.com/ni.svg" },
+  { name: "Costa Rica", tag: "costa-rica", flag: "https://flagcdn.com/cr.svg" },
+  { name: "Panama", tag: "panama", flag: "https://flagcdn.com/pa.svg" },
+  { name: "Jamaica", tag: "jamaica", flag: "https://flagcdn.com/jm.svg" },
+  {
+    name: "Trinidad and Tobago",
+    tag: "trinidad-and-tobago",
+    flag: "https://flagcdn.com/tt.svg",
+  },
+  { name: "Uruguay", tag: "uruguay", flag: "https://flagcdn.com/uy.svg" },
+  { name: "Guyana", tag: "guyana", flag: "https://flagcdn.com/gy.svg" },
+  { name: "Suriname", tag: "suriname", flag: "https://flagcdn.com/sr.svg" },
+  { name: "Belize", tag: "belize", flag: "https://flagcdn.com/bz.svg" },
+];
 
-  const showMore = () => {
-    setVisibleCount((prev) => prev + 1);
-  };
+export default function AmericaPage() {
+  const [selectedTag, setSelectedTag] = useState(null);
 
   return (
-    <main className="w-full bg-white">
-      <h1 className="text-3xl lg:text-5xl font-bold text-center text-black mb-2 mt-30 font-serif">
-        America
-      </h1>
+    <section className="px-6 py-10 max-w-5xl mx-auto mt-20 lg:mt-40">
+      <h1 className="text-3xl font-bold mb-8 text-center">America</h1>
 
-      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {/* === NEWS CARD 1 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-10">
-            <Image
-              src="/amir1.png"
-              alt="News 1"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                The inside story of how America sent nuclear weapons to Britain
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              NUKEWATCH UK 22 July 2025{" "}
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              Nukewatch UK explains how it tracked the bombs being flown across
-              the Atlantic.
-            </p>
-          </div>
-        </div>
-
-        {/* === NEWS CARD 2 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image
-              src="/amir2.png"
-              alt="News 2"
-              fill
-              className="object-cover "
-            />
-          </div>
-          <div className="absolute z-10 -bottom-20   left-4 right-4 bg-white p-4 ">
-            <Link href="/">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                How Britain allowed Pinochet to escape justice for atrocities
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              By Admin — July 24, 2025
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              25 years ago, the UK government allowed Chile’s former dictator to
-              evade extradition to Spain.
-            </p>
-          </div>
-        </div>
-
-        {/* === NEWS CARD 3 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image
-              src="/amir3.png"
-              alt="News 3"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4 ">
-            <Link href="/">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                Trump’s Vision for America: I Am God
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              By The Intercept Briefing March 7 2025.
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              Talia Lavin, journalist and author of “Wild Faith,” on the
-              right-wing Christian ideology and characters guiding Trump.
-            </p>
-          </div>
-        </div>
-
-        {/* === NEWS CARD 4 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image src="/amir4.png" alt="News 4" fill className="object-cover " />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                Racism Is Why Trump Is So Popular
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              James Risen August 10 2024{" "}
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              Trump’s popularity with his base isn’t the result of economic
-              anxiety, as many claimed in 2016. It’s about race and
-              demographics.
-            </p>
-          </div>
-        </div>
-
-        {/* === VIEW MORE BUTTON === */}
-        <div className="col-span-full flex justify-center mt-24">
-          <button
-            onClick={showMore}
-            className="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition"
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 justify-center">
+        {americaCountries.map((country, i) => (
+          <motion.div
+            key={country.tag}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.05, duration: 0.5 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-center cursor-pointer"
           >
-            View More
-          </button>
+            {/* Link to search results with query */}
+            <Link
+              href={`/search?q=${encodeURIComponent(country.tag)}`}
+              className="flex flex-col items-center"
+              onClick={() => setSelectedTag(country.tag)}
+            >
+              <div
+                className={`w-20 h-20 rounded-full overflow-hidden border-2 border-gray-300 transition-transform duration-300 hover:scale-110 ${
+                  selectedTag === country.tag ? "border-blue-500" : ""
+                }`}
+              >
+                <img
+                  src={country.flag}
+                  alt={country.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="mt-2 text-center text-sm font-medium text-gray-700">
+                {country.name}
+              </p>
+            </Link>
+          </motion.div>
+        ))}
+      </div>
+
+      {selectedTag && (
+        <div className="mt-8 text-center text-lg text-blue-600">
+          Showing results for tag: <strong>{selectedTag}</strong>
         </div>
-      </div>
-      <div className="border-t gap-6 border-gray-300">
-        <ul className="m-10 flex-nowrap gap-5 items-center justify-center lg:flex lg:items-center">
-          <li>
-            <a href="/politics" className="underline">
-              Politics
-            </a>
-          </li>
-          <li>
-            <a href="/religion" className="underline">
-              Religion
-            </a>
-          </li>
-          <li>
-            <a href="/history" className="underline">
-              History
-            </a>
-          </li>
-          <li>
-            <a href="/science" className="underline">
-              Science
-            </a>
-          </li>
-          <li>
-            <a href="/media" className="underline">
-              Media
-            </a>
-          </li>
-          <li>
-            <a href="/news" className="underline">
-              News
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div>
-        {/* Footer */}
-        <footer className="py-10 text-center text-gray-500 text-sm bg-black border-t border-gray-800">
-          &copy; 2025 Cyclopedia. All rights reserved.
-        </footer>
-      </div>
-    </main>
+      )}
+    </section>
   );
-};
-
-export default Page;
-
+}

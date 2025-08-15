@@ -67,3 +67,10 @@ body {
 p {
   margin: 1em 0;
 }
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}

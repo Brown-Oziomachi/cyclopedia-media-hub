@@ -66,8 +66,6 @@ const ProfileDropdownNavbar = () => {
     { name: "Asia", emoji: "🌏", url: "/asia" },
     { name: "America", emoji: "🌎", url: "/america" },
     { name: "Europe", emoji: "🌍", url: "/europe" },
-    { name: "Middle East", emoji: "🕌", url: "/middle-east" },
-    { name: "Oceania", emoji: "🌊", url: "/oceania" },
     { name: "Global", emoji: "🌐", url: "/global" },
   ];
 
@@ -207,7 +205,7 @@ const ProfileDropdownNavbar = () => {
           />
           <button
             type="submit"
-            className="bg-purple-500 hover:bg-purple-600 px-4 py-4 rounded-r-md text-white font-semibold transition"
+            className="bg-gradient-to-r from-purple-500 to-cyan-400 hover:bg-purple-600 px-4 py-4 rounded-r-md text-white font-semibold transition"
           >
             Search
           </button>
@@ -363,7 +361,7 @@ const ProfileDropdownNavbar = () => {
             <button
               type="submit"
               // onClick={() => setShowNav(false)}
-              className="bg-purple-500 hover:bg-purple-600 px-4 py-3 rounded-r-md text-white font-semibold transition"
+              className="bg-gradient-to-r from-purple-500 to-cyan-400 hover:bg-purple-600 px-4 py-3 rounded-r-md text-white font-semibold transition"
             >
               Search
             </button>

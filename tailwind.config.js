@@ -1,4 +1,5 @@
 export default {
+  darkMode: 'class', // ✅ enable dark mode using a class
   content: ["./src/**/*.{js,jsx,ts,tsx}"], // Adjust paths based on your project
   theme: {
     extend: {

@@ -44,7 +44,20 @@ export default function BlogDetails() {
   const [subtitle, setSubtitle] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [blogs, setBlogs] = useState([]);
+  const [query, setQuery] = useState("");
+  const [showNav, setShowNav] = useState(false);
 
+const handleSearch = (e) => {
+      e.preventDefault();
+      if (!query.trim()) return;
+
+      setShowNav(false); // Close nav here
+
+      // Navigate to search page with query param
+      router.push(
+        `/search?q=${encodeURIComponent(query.trim().toLowerCase())}`
+      );
+    };
   // Fetch current blog
   useEffect(() => {
     if (!id) return;
@@ -114,10 +127,7 @@ export default function BlogDetails() {
     }, 3000);
   };
 
-  const handleSearch = () => {
-    if (!searchQuery.trim()) return;
-    router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
-  };
+
 
   
 
@@ -218,18 +228,18 @@ export default function BlogDetails() {
           {/* {liked ? "Liked" : "Likes"} ({likes}) */}
         </button>
 </div>
-<hr/>
- <div className="border p-5 max-w-xl mx-auto">
+
+ <div className="border p-5 max-w-xl mx-auto bg-black text-white">
       <h2 className="font-semibold">
         Subscribe to the <em>Cyclopedia</em> newsletter for weekly insights on the
         world's most pressing topics. <span className="text-red-600">*</span>
       </h2>
-      <p className="text-sm text-gray-700 mt-1">Required</p>
+      <p className="text-sm text-gray-400 mt-1">Required</p>
 
   <form action="YOUR_MAILCHIMP_FORM_ACTION_URL" method="post" target="_blank" novalidate>
         {/* Email Address */}
         <div>
-          <label className="block text-xs font-semibold text-gray-800 mb-1">
+          <label className="block text-xs font-semibold text-gray-300 mb-1">
             * EMAIL ADDRESS
           </label>
           <input
@@ -240,11 +250,11 @@ export default function BlogDetails() {
 
         {/* Country or Region */}
         <div>
-          <label className="block text-xs font-semibold text-gray-800 mb-1">
+          <label className="block text-xs font-semibold text-gray-300 mb-1">
             * COUNTRY OR REGION
           </label>
-          <select className="w-full border border-green-600 rounded-sm px-3 py-2 focus:outline-none focus:ring-1 focus:ring-green-600">
-            <option>Select One</option>
+          <select className="w-full text-black bg-white border border-green-600 rounded-sm px-3 py-2 focus:outline-none focus:ring-1 focus:ring-green-600">
+            <option className="text-gray-200">Select One</option>
             <option>United States</option>
             <option>United Kingdom</option>
             <option>Canada</option>
@@ -501,13 +511,13 @@ export default function BlogDetails() {
           <div className="flex gap-4 items-center mt-2 flex-wrap">
             <span className="text-orange-600 text-sm">TAGGED:</span>
             <Link
-              href="/tags/africa"
+              href="/africa"
               className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
             >
               Africa
             </Link>
             <Link
-              href="/tags/america"
+              href="/america"
               className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
             >
               America
@@ -537,13 +547,13 @@ export default function BlogDetails() {
           <div className="flex gap-4 items-center mt-2 flex-wrap">
             <span className="text-orange-600 text-sm">TAGGED:</span>
             <Link
-              href="/tags/politics"
+              href="/politics"
               className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
             >
               Politics
             </Link>
             <Link
-              href="/tags/religion"
+              href="/religion"
               className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
             >
               Religion
@@ -571,13 +581,13 @@ Nigerians See Mixed Economic Picture as Election Day Nears            </h2>
           <div className="flex gap-4 items-center mt-2 flex-wrap">
             <span className="text-orange-600 text-sm">TAGGED:</span>
             <Link
-              href="/tags/africa"
+              href="/africa"
               className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
             >
               Africa
             </Link>
             <Link
-              href="/tags/activism"
+              href="/activism"
               className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
             >
               Activism
@@ -606,13 +616,13 @@ Nigerians Deeply Divided by Religion on Key Issues            </h2>
           <div className="flex gap-4 items-center mt-2 flex-wrap">
             <span className="text-orange-600 text-sm">TAGGED:</span>
             <Link
-              href="/tags/education"
+              href="/education"
               className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
             >
               Education
             </Link>
             <Link
-              href="/tags/reform"
+              href="/reform"
               className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
             >
               Reform
@@ -624,25 +634,30 @@ Nigerians Deeply Divided by Religion on Key Issues            </h2>
     </div>
 
       {/* More Blogs Button */}
-     <div className="text-center mt-28 lg:space-x-5">
-  <div className="relative inline-block w-full lg:w-1/4 max-md:w-1/2">
-    <input
-      type="text"
-      placeholder="search anything in cyclopedia"
-      value={searchQuery}
-      onChange={(e) => setSearchQuery(e.target.value)}
-      onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-      className="w-full border border-gray-300 rounded-lg px-4 py-2 pr-16 focus:outline-none focus:ring-2 focus:ring-blue-500"
-    />
+     <div className="mx-auto">
+<form
+            onSubmit={handleSearch}
+            className="flex lg:hidden items-center  mr-6 mx-auto"
+            role="search"
+            aria-label="Site Search"
+          >
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search anything in cyclopedia"
+              className="px-5 py-2 rounded-l-md shadow-2xl text-black focus:outline-none focus:ring-2 focus:ring-purple-400 w-64"
+              aria-label="Search input"
+            />
+            <button
+              type="submit"
+              // onClick={() => setShowNav(false)}
+              className="bg-gradient-to-r from-purple-500 to-cyan-400  px-6 py-2 rounded-r-md text-white font-semibold transition"
+            >
+              Search
+            </button>
+          </form>
 
-    {/* Search Button Inside Input */}
-    <button
-      onClick={handleSearch}
-      className="absolute right-1 top-1 bottom-1 bg-purple-600 hover:bg-purple-700 text-white px-3 rounded-lg text-sm"
-    >
-      Search
-    </button>
-  </div>
 </div>
 
     </motion.div>

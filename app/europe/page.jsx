@@ -1,164 +1,133 @@
 "use client";
-
-import { Suspense } from "react";
 import { useState } from "react";
-import Image from "next/image";
+import { motion } from "framer-motion";
 import Link from "next/link";
 
-const Page = () => {
-  const [visibleCount, setVisibleCount] = useState(4); // 4 items shown initially
+// All European countries
+const europeCountries = [
+  { name: "Albania", tag: "albania", flag: "https://flagcdn.com/al.svg" },
+  { name: "Andorra", tag: "andorra", flag: "https://flagcdn.com/ad.svg" },
+  { name: "Austria", tag: "austria", flag: "https://flagcdn.com/at.svg" },
+  { name: "Belarus", tag: "belarus", flag: "https://flagcdn.com/by.svg" },
+  { name: "Belgium", tag: "belgium", flag: "https://flagcdn.com/be.svg" },
+  {
+    name: "Bosnia and Herzegovina",
+    tag: "bosnia-and-herzegovina",
+    flag: "https://flagcdn.com/ba.svg",
+  },
+  { name: "Bulgaria", tag: "bulgaria", flag: "https://flagcdn.com/bg.svg" },
+  { name: "Croatia", tag: "croatia", flag: "https://flagcdn.com/hr.svg" },
+  { name: "Cyprus", tag: "cyprus", flag: "https://flagcdn.com/cy.svg" },
+  {
+    name: "Czech Republic",
+    tag: "czech-republic",
+    flag: "https://flagcdn.com/cz.svg",
+  },
+  { name: "Denmark", tag: "denmark", flag: "https://flagcdn.com/dk.svg" },
+  { name: "Estonia", tag: "estonia", flag: "https://flagcdn.com/ee.svg" },
+  { name: "Finland", tag: "finland", flag: "https://flagcdn.com/fi.svg" },
+  { name: "France", tag: "france", flag: "https://flagcdn.com/fr.svg" },
+  { name: "Germany", tag: "germany", flag: "https://flagcdn.com/de.svg" },
+  { name: "Greece", tag: "greece", flag: "https://flagcdn.com/gr.svg" },
+  { name: "Hungary", tag: "hungary", flag: "https://flagcdn.com/hu.svg" },
+  { name: "Iceland", tag: "iceland", flag: "https://flagcdn.com/is.svg" },
+  { name: "Ireland", tag: "ireland", flag: "https://flagcdn.com/ie.svg" },
+  { name: "Italy", tag: "italy", flag: "https://flagcdn.com/it.svg" },
+  { name: "Kosovo", tag: "kosovo", flag: "https://flagcdn.com/xk.svg" },
+  { name: "Latvia", tag: "latvia", flag: "https://flagcdn.com/lv.svg" },
+  {
+    name: "Liechtenstein",
+    tag: "liechtenstein",
+    flag: "https://flagcdn.com/li.svg",
+  },
+  { name: "Lithuania", tag: "lithuania", flag: "https://flagcdn.com/lt.svg" },
+  { name: "Luxembourg", tag: "luxembourg", flag: "https://flagcdn.com/lu.svg" },
+  { name: "Malta", tag: "malta", flag: "https://flagcdn.com/mt.svg" },
+  { name: "Moldova", tag: "moldova", flag: "https://flagcdn.com/md.svg" },
+  { name: "Monaco", tag: "monaco", flag: "https://flagcdn.com/mc.svg" },
+  { name: "Montenegro", tag: "montenegro", flag: "https://flagcdn.com/me.svg" },
+  {
+    name: "Netherlands",
+    tag: "netherlands",
+    flag: "https://flagcdn.com/nl.svg",
+  },
+  {
+    name: "North Macedonia",
+    tag: "north-macedonia",
+    flag: "https://flagcdn.com/mk.svg",
+  },
+  { name: "Norway", tag: "norway", flag: "https://flagcdn.com/no.svg" },
+  { name: "Poland", tag: "poland", flag: "https://flagcdn.com/pl.svg" },
+  { name: "Portugal", tag: "portugal", flag: "https://flagcdn.com/pt.svg" },
+  { name: "Romania", tag: "romania", flag: "https://flagcdn.com/ro.svg" },
+  { name: "Russia", tag: "russia", flag: "https://flagcdn.com/ru.svg" },
+  { name: "San Marino", tag: "san-marino", flag: "https://flagcdn.com/sm.svg" },
+  { name: "Serbia", tag: "serbia", flag: "https://flagcdn.com/rs.svg" },
+  { name: "Slovakia", tag: "slovakia", flag: "https://flagcdn.com/sk.svg" },
+  { name: "Slovenia", tag: "slovenia", flag: "https://flagcdn.com/si.svg" },
+  { name: "Spain", tag: "spain", flag: "https://flagcdn.com/es.svg" },
+  { name: "Sweden", tag: "sweden", flag: "https://flagcdn.com/se.svg" },
+  {
+    name: "Switzerland",
+    tag: "switzerland",
+    flag: "https://flagcdn.com/ch.svg",
+  },
+  { name: "Turkey", tag: "turkey", flag: "https://flagcdn.com/tr.svg" },
+  { name: "Ukraine", tag: "ukraine", flag: "https://flagcdn.com/ua.svg" },
+  { name: "United Kingdom", tag: "uk", flag: "https://flagcdn.com/gb.svg" },
+  {
+    name: "Vatican City",
+    tag: "vatican-city",
+    flag: "https://flagcdn.com/va.svg",
+  },
+];
 
-  const showMore = () => {
-    setVisibleCount((prev) => prev + 1);
-  };
+export default function EuropePage() {
+  const [selectedTag, setSelectedTag] = useState(null);
 
   return (
-    <main className="w-full bg-white">
-<h1 className="text-3xl lg:text-5xl font-bold text-center text-black mb-2 mt-30 font-serif">
-Europe</h1>
+    <section className="px-6 py-10 max-w-5xl mx-auto mt-20 lg:mt-40">
+      <h1 className="text-3xl font-bold mb-8 text-center">Europe</h1>
 
-
-      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {/* === NEWS CARD 1 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-10">
-            <Image
-              src="/teen.png"
-              alt="News 1"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
-              <h2 className="text-sm font-bold text-black hover:underline">
-Teenagers no longer answer the phone: is it a lack of manners or a new trend?
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-Published: August 6, 2025 4.39pm CEST            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-            Teenagers have phones glued to their hands… but often don’t answer when you call. Shutterstock
-
-            </p>
-          </div>
-        </div>
-
-        {/* === NEWS CARD 2 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image
-              src="/pro.png"
-              alt="News 2"
-              fill
-              className="object-cover "
-            />
-          </div>
-          <div className="absolute z-10 -bottom-20   left-4 right-4 bg-white p-4 ">
-            <Link href="/">
-              <h2 className="text-sm font-bold text-black hover:underline">
-US and European economies depend heavily on immigrants – decades of data reveal just how much
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">Published: July 23, 2025 12.35pm CEST
-</p>
-            <p className="mt-2 text-gray-900 text-xs">
-              Protest against Donald Trump’s immigration policies at the University of Texas on February 12, 2025. Vic Hinterlang/Shutterstock
-
-            </p>
-          </div>
-        </div>
-
-        {/* === NEWS CARD 3 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image
-              src="/summer.png"
-              alt="News 3"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4 ">
-            <Link href="/">
-              <h2 className="text-sm font-bold text-black hover:underline">
-2025’s first summer heatwave was early, and deadly, for all of Western Europe
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">Published: July 16, 2025 1.29pm CEST
-</p>
-            <p className="mt-2 text-gray-900 text-xs">
-             Share articlePrint article The first heatwave of the summer hit Spain, Portugal, France, Italy and Germany early in the year, breaking June temperature records in many areas.
-            </p>
-          </div>
-        </div>
-
-        {/* === NEWS CARD 4 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image
-              src="/va.png"
-              alt="News 4"
-              fill
-              className="object-cover "
-            />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
-              <h2 className="text-sm font-bold text-black hover:underline">
-Trump Prepares to Revoke Lifesaving Abortion Care for Veterans
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-Jessica Washington
-July 29 2025, 4:42 p.m</p>
-            <p className="mt-2 text-gray-900 text-xs">
-              A pending VA rule appears designed to strip crucial health care from hundreds of thousands of veterans in states with abortion bans.
-            </p>
-          </div>
-        </div>
-
-        {/* === VIEW MORE BUTTON === */}
-        <div className="col-span-full flex justify-center mt-24">
-          <button
-            onClick={showMore}
-            className="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition"
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 justify-center">
+        {europeCountries.map((country, i) => (
+          <motion.div
+            key={country.tag}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.05, duration: 0.5 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-center cursor-pointer"
           >
-            View More
-          </button>
+            <Link
+              href={`/search?q=${encodeURIComponent(country.tag)}`}
+              className="flex flex-col items-center"
+              onClick={() => setSelectedTag(country.tag)}
+            >
+              <div
+                className={`w-20 h-20 rounded-full overflow-hidden border-2 border-gray-300 transition-transform duration-300 hover:scale-110 ${
+                  selectedTag === country.tag ? "border-blue-500" : ""
+                }`}
+              >
+                <img
+                  src={country.flag}
+                  alt={country.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="mt-2 text-center text-sm font-medium text-gray-700">
+                {country.name}
+              </p>
+            </Link>
+          </motion.div>
+        ))}
+      </div>
+
+      {selectedTag && (
+        <div className="mt-8 text-center text-lg text-blue-600">
+          Showing results for tag: <strong>{selectedTag}</strong>
         </div>
-      </div>
-       <div className="border-t gap-6 border-gray-300">
-        <ul className="m-10 flex-nowrap gap-5 items-center justify-center lg:flex lg:items-center">
-          <li>
-            <a href="/politics" className="underline">Politics</a>
-          </li>
-          <li>
-            <a href="/religion" className="underline">Religion</a>
-          </li>
-          <li>
-            <a href="/history" className="underline">History</a>
-          </li>
-          <li>
-            <a href="/science" className="underline">Science</a>
-          </li>
-          <li>
-            <a href="/media" className="underline">Media</a>
-          </li>
-          <li>
-            <a href="/news" className="underline">News</a>
-          </li>
-        </ul>
-      </div>
-       <div>
-        {/* Footer */}
-        <footer className="py-10 text-center text-gray-500 text-sm bg-black border-t border-gray-800">
-          &copy; 2025 Cyclopedia. All rights reserved.
-        </footer>
-      </div>
-    </main>
+      )}
+    </section>
   );
-};
-
-export default Page;
-
+}

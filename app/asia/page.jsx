@@ -1,163 +1,125 @@
 "use client";
-
-import { Suspense } from "react";
 import { useState } from "react";
-import Image from "next/image";
+import { motion } from "framer-motion";
 import Link from "next/link";
 
-const Page = () => {
-  const [visibleCount, setVisibleCount] = useState(4); // 4 items shown initially
+// All Asian countries
+const asiaCountries = [
+  { name: "China", tag: "china", flag: "https://flagcdn.com/cn.svg" },
+  { name: "India", tag: "india", flag: "https://flagcdn.com/in.svg" },
+  { name: "Japan", tag: "japan", flag: "https://flagcdn.com/jp.svg" },
+  {
+    name: "South Korea",
+    tag: "south-korea",
+    flag: "https://flagcdn.com/kr.svg",
+  },
+  {
+    name: "North Korea",
+    tag: "north-korea",
+    flag: "https://flagcdn.com/kp.svg",
+  },
+  { name: "Indonesia", tag: "indonesia", flag: "https://flagcdn.com/id.svg" },
+  { name: "Pakistan", tag: "pakistan", flag: "https://flagcdn.com/pk.svg" },
+  { name: "Bangladesh", tag: "bangladesh", flag: "https://flagcdn.com/bd.svg" },
+  {
+    name: "Philippines",
+    tag: "philippines",
+    flag: "https://flagcdn.com/ph.svg",
+  },
+  { name: "Vietnam", tag: "vietnam", flag: "https://flagcdn.com/vn.svg" },
+  { name: "Thailand", tag: "thailand", flag: "https://flagcdn.com/th.svg" },
+  { name: "Malaysia", tag: "malaysia", flag: "https://flagcdn.com/my.svg" },
+  { name: "Singapore", tag: "singapore", flag: "https://flagcdn.com/sg.svg" },
+  { name: "Nepal", tag: "nepal", flag: "https://flagcdn.com/np.svg" },
+  { name: "Sri Lanka", tag: "sri-lanka", flag: "https://flagcdn.com/lk.svg" },
+  {
+    name: "Afghanistan",
+    tag: "afghanistan",
+    flag: "https://flagcdn.com/af.svg",
+  },
+  { name: "Iran", tag: "iran", flag: "https://flagcdn.com/ir.svg" },
+  { name: "Iraq", tag: "iraq", flag: "https://flagcdn.com/iq.svg" },
+  {
+    name: "Saudi Arabia",
+    tag: "saudi-arabia",
+    flag: "https://flagcdn.com/sa.svg",
+  },
+  {
+    name: "United Arab Emirates",
+    tag: "uae",
+    flag: "https://flagcdn.com/ae.svg",
+  },
+  { name: "Israel", tag: "israel", flag: "https://flagcdn.com/il.svg" },
+  { name: "Jordan", tag: "jordan", flag: "https://flagcdn.com/jo.svg" },
+  { name: "Kuwait", tag: "kuwait", flag: "https://flagcdn.com/kw.svg" },
+  { name: "Qatar", tag: "qatar", flag: "https://flagcdn.com/qa.svg" },
+  { name: "Bahrain", tag: "bahrain", flag: "https://flagcdn.com/bh.svg" },
+  { name: "Oman", tag: "oman", flag: "https://flagcdn.com/om.svg" },
+  { name: "Yemen", tag: "yemen", flag: "https://flagcdn.com/ye.svg" },
+  { name: "Kazakhstan", tag: "kazakhstan", flag: "https://flagcdn.com/kz.svg" },
+  { name: "Uzbekistan", tag: "uzbekistan", flag: "https://flagcdn.com/uz.svg" },
+  {
+    name: "Turkmenistan",
+    tag: "turkmenistan",
+    flag: "https://flagcdn.com/tm.svg",
+  },
+  { name: "Kyrgyzstan", tag: "kyrgyzstan", flag: "https://flagcdn.com/kg.svg" },
+  { name: "Tajikistan", tag: "tajikistan", flag: "https://flagcdn.com/tj.svg" },
+  { name: "Mongolia", tag: "mongolia", flag: "https://flagcdn.com/mn.svg" },
+  { name: "Bhutan", tag: "bhutan", flag: "https://flagcdn.com/bt.svg" },
+  { name: "Laos", tag: "laos", flag: "https://flagcdn.com/la.svg" },
+  { name: "Cambodia", tag: "cambodia", flag: "https://flagcdn.com/kh.svg" },
+  { name: "Brunei", tag: "brunei", flag: "https://flagcdn.com/bn.svg" },
+  { name: "Maldives", tag: "maldives", flag: "https://flagcdn.com/mv.svg" },
+];
 
-  const showMore = () => {
-    setVisibleCount((prev) => prev + 1);
-  };
+export default function AsiaPage() {
+  const [selectedTag, setSelectedTag] = useState(null);
 
   return (
-    <main className="w-full bg-white">
-<h1 className="text-3xl lg:text-5xl font-bold text-center text-black mb-2 mt-30 font-serif">
-Asia</h1>
+    <section className="px-6 py-10 max-w-5xl mx-auto mt-20">
+      <h1 className="text-3xl font-bold mb-8 text-center mt-30">Asia</h1>
 
-
-      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {/* === NEWS CARD 1 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-10">
-            <Image
-              src="/sup.jpg"
-              alt="News 1"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                Trump administration profile: Steve Witkoff
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              By Natalie Jonas — July 23, 2025
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              President Trump’s special envoy to the Middle East has become the
-              frontman in negotiations in three global...
-            </p>
-          </div>
-        </div>
-
-        {/* === NEWS CARD 2 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image
-              src="/sup.jpg"
-              alt="News 2"
-              fill
-              className="object-cover "
-            />
-          </div>
-          <div className="absolute z-10 -bottom-20   left-4 right-4 bg-white p-4 ">
-            <Link href="/">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                Political unrest in Asia rising
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">By Admin — July 24, 2025</p>
-            <p className="mt-2 text-gray-900 text-xs">
-              Protests have erupted again in key regions as officials push back
-              against economic reforms...
-            </p>
-          </div>
-        </div>
-
-        {/* === NEWS CARD 3 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image
-              src="/sup.jpg"
-              alt="News 3"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4 ">
-            <Link href="/">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                Climate Change Impacts 2025
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">By Zoe King — July 25, 2025</p>
-            <p className="mt-2 text-gray-900 text-xs">
-              A new UN report highlights rising sea levels and policy challenges
-              across developing nations...
-            </p>
-          </div>
-        </div>
-
-        {/* === NEWS CARD 4 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image
-              src="/sup.jpg"
-              alt="News 4"
-              fill
-              className="object-cover "
-            />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="/">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                Breakthrough in Cancer Research
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">By Dr. May — July 25, 2025</p>
-            <p className="mt-2 text-gray-900 text-xs">
-              Scientists claim progress in targeting rare cancer cells through
-              mRNA innovations...
-            </p>
-          </div>
-        </div>
-
-        {/* === VIEW MORE BUTTON === */}
-        <div className="col-span-full flex justify-center mt-24">
-          <button
-            onClick={showMore}
-            className="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition"
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 justify-center">
+        {asiaCountries.map((country, i) => (
+          <motion.div
+            key={country.tag}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.05, duration: 0.5 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-center cursor-pointer"
           >
-            View More
-          </button>
+            {/* Link to search results with query */}
+            <Link
+              href={`/search?q=${encodeURIComponent(country.tag)}`}
+              className="flex flex-col items-center"
+              onClick={() => setSelectedTag(country.tag)}
+            >
+              <div
+                className={`w-20 h-20 rounded-full overflow-hidden border-2 border-gray-300 transition-transform duration-300 hover:scale-110 ${
+                  selectedTag === country.tag ? "border-blue-500" : ""
+                }`}
+              >
+                <img
+                  src={country.flag}
+                  alt={country.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="mt-2 text-center text-sm font-medium text-gray-700">
+                {country.name}
+              </p>
+            </Link>
+          </motion.div>
+        ))}
+      </div>
+
+      {selectedTag && (
+        <div className="mt-8 text-center text-lg text-blue-600">
+          Showing results for tag: <strong>{selectedTag}</strong>
         </div>
-      </div>
-       <div className="border-t gap-6 border-gray-300">
-        <ul className="m-10 flex-nowrap gap-5 items-center justify-center lg:flex lg:items-center">
-          <li>
-            <a href="/politics" className="underline">Politics</a>
-          </li>
-          <li>
-            <a href="/religion" className="underline">Religion</a>
-          </li>
-          <li>
-            <a href="/history" className="underline">History</a>
-          </li>
-          <li>
-            <a href="/science" className="underline">Science</a>
-          </li>
-          <li>
-            <a href="/media" className="underline">Media</a>
-          </li>
-          <li>
-            <a href="/news" className="underline">News</a>
-          </li>
-        </ul>
-      </div>
-       <div>
-        {/* Footer */}
-        <footer className="py-10 text-center text-gray-500 text-sm bg-black border-t border-gray-800">
-          &copy; 2025 Cyclopedia. All rights reserved.
-        </footer>
-      </div>
-    </main>
+      )}
+    </section>
   );
-};
-
-export default Page;
-
+}
