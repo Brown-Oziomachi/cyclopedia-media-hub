@@ -106,7 +106,8 @@ export default function AfricaPage() {
 
   return (
     <section className="px-6 py-10 max-w-5xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8 text-center mt-40">Africa</h1>
+      <h1 className="text-3xl font-bold mb-2 text-center mt-40">Africa</h1>
+      <h2 className="text-xs text-center mb-10">Search the country of your choice:</h2>
 
       {/* Country flags */}
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 justify-center">

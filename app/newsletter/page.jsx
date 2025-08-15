@@ -60,7 +60,7 @@ export default function CyclopediaNewsletterForm() {
         <div className="bg-white p-6 rounded-lg shadow-inner">
           {/* Display paramValue here */}
           <p className="mb-4 text-sm text-gray-600">
-            Param from URL: {paramValue}
+            
           </p>
 
           <form onSubmit={formik.handleSubmit} className="space-y-4">

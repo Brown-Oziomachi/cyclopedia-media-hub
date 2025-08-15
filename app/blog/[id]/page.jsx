@@ -587,10 +587,10 @@ Nigerians See Mixed Economic Picture as Election Day Nears            </h2>
               Africa
             </Link>
             <Link
-              href="/activism"
+              href="/europe"
               className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
             >
-              Activism
+              Europe
             </Link>
           </div>
         </div>
@@ -616,16 +616,16 @@ Nigerians Deeply Divided by Religion on Key Issues            </h2>
           <div className="flex gap-4 items-center mt-2 flex-wrap">
             <span className="text-orange-600 text-sm">TAGGED:</span>
             <Link
-              href="/education"
+              href="/asia"
               className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
             >
-              Education
+              Asia
             </Link>
             <Link
-              href="/reform"
+              href="/america"
               className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
             >
-              Reform
+              America
             </Link>
           </div>
         </div>

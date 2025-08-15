@@ -37,21 +37,34 @@ export default function SearchResults() {
 
   return (
     <div className="max-w-3xl mx-auto py-2 max-lg:mt-50 mt-25 p-5 lg:mt-50">
-      <h1 className="text-lg mb-3">
-        Search results for: <span className="font-semibold">{term}</span> in <span className="text-purple-700">Cyclopedia</span>
+      <h1 className="text-lg mb-3 text-center">
+        Search results for: <span className="font-semibold">{term}</span> in{" "}
+        <span className="text-purple-700">Cyclopedia</span>
       </h1>
 
       {results.length > 0 ? (
-        results.map(post => (
+        results.map((post) => (
           <div key={post.id} className="mb-6">
             <Link href={`/blog/${post.id}`}>
-              <h2 className="text-lg text-blue-800 hover:underline">{post.title}</h2>
+              <h2 className="text-lg text-blue-800 hover:underline">
+                {post.title}
+              </h2>
             </Link>
-            <p className="text-sm text-gray-600">{post.subtitle || "No description available."}</p>
+            <p className="text-sm text-gray-600">
+              {post.subtitle || "No description available."}
+            </p>
           </div>
         ))
       ) : (
-        <p className="text-center"> <span className="font-semibold text-xl">{term}</span> is not found. We are adding more news. Check it later <br/>
+        <p className="text-center">
+          {" "}
+          <span className="font-semibold text-xl"></span> Content not
+          available:{" "}
+          <span className=" ">
+              We are currently expanding our coverage on <span className="font-bold text-xl">{term}</span>. Please check back
+            soon for updates.
+          </span>
+          . <br />
         </p>
       )}
     </div>

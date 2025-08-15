@@ -46,7 +46,12 @@ export default function BlogsPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-30 lg:mt-40">
-      <h1 className="text-center mb-5 font-bold text-4xl">Global</h1>
+      <h1 className="text-center  font-bold text-4xl">Global</h1>
+      <hr />
+      <h2 className="text-xs text-center mb-10">
+        Explore the global News  
+      </h2>
+
       {blogs.map((blog) => (
         <Link key={blog.id} href={`/blog/${blog.id}`} className="block">
           <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
@@ -86,7 +91,7 @@ export default function BlogsPage() {
         <div className="col-span-full text-center mt-6">
           <button
             onClick={() => fetchBlogs(false)}
-            className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-md transition"
+            className="bg-purple-600 hover:bg-purple-600 text-white px-6 py-3 rounded-md transition"
             disabled={loading}
           >
             {loading ? "Loading..." : "View More"}

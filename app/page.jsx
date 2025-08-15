@@ -189,50 +189,183 @@ const Page = () => {
       </div>
       <div id="read-more">{/* Your "Explore more" content goes here */}</div>
 
-       <section className="px-6 py-5 md:py-20 max-w-4xl mx-auto bg-white text-black z-0">
-      <div className="grid grid-cols-3 sm:grid-cols-5 gap-6 justify-center">
-        {categories.map((item, i) => (
-          <Link
-            key={i}
-            href={item.link}
-            passHref
-            legacyBehavior
-            onClick={() => handleClick(i)}
-            className={`
+      <section className="px-6 py-5 md:py-20 max-w-4xl mx-auto bg-white text-black z-0">
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-6 justify-center hover:shadow-2xl hover:shadow-purple-700">
+          {categories.map((item, i) => (
+            <Link
+              key={i}
+              href={item.link}
+              passHref
+              legacyBehavior
+              onClick={() => handleClick(i)}
+              className={`
               px-4 py-2
               border border-gray-300
               rounded
               transition duration-300
-              ${clickedIndex === i ? "bg-blue-700 text-white" : "bg-white text-black"}
+              ${
+                clickedIndex === i
+                  ? "bg-blue-700 text-white"
+                  : "bg-white text-black "
+              }
               hover:bg-blue-500 hover:text-white
             `}
-          >
-            <a aria-label={item.title} className="group">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.15, duration: 0.5 }}
-                viewport={{ once: true }}
-                className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full bg-gray-100 shadow-md flex items-center justify-center cursor-pointer transition-transform group-hover:scale-110 duration-300"
-              >
-                {item.imgSrc ? (
-                  <img
-                    src={item.imgSrc}
-                    alt={item.title}
-                    className="w-25 h-25 object-cover sm:w-20 sm:h-20 rounded-full"
-                  />
-                ) : (
-                  <span className="text-4xl">{item.emoji}</span>
-                )}
-              </motion.div>
-              <p className="text-center mt-3 text-sm font-medium text-gray-700 group-hover:text-purple-700 transition-colors">
-                {item.title}
+            >
+              <a aria-label={item.title} className="group ">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.15, duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full bg-gray-100 shadow-md flex items-center justify-center cursor-pointer transition-transform group-hover:scale-120 hover:shadow-purple-600 hover:shadow-2xl duration-300"
+                >
+                  {item.imgSrc ? (
+                    <img
+                      src={item.imgSrc}
+                      alt={item.title}
+                      className="w-25 h-25 object-cover sm:w-20 sm:h-20 rounded-full"
+                    />
+                  ) : (
+                    <span className="text-4xl">{item.emoji}</span>
+                  )}
+                </motion.div>
+                <p className="text-center mt-3 text-sm font-medium  text-gray-700 group-hover:text-purple-700 transition-colors">
+                  {item.title}
+                </p>
+              </a>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="px-2 py-5 md:py-20 bg-white text-black max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
+        {/* Left Column — Featured News (stacked vertically on large screens) */}
+        <div className="lg:w-2/3 flex flex-col gap-8">
+          {/* Card 1 */}
+          <div className="relative">
+            <img src="fun.png" alt="News Image" className="w-full rounded-md" />
+            <div className="absolute bottom-4 left-4 right-4 bg-white bg-opacity-90 p-4">
+              <Link href="https://cyclopedia-media-hub.vercel.app/blog/bmFfkpRJx9MceeUlcz5J">
+                <h2 className="text-lg font-bold hover:underline">
+                  The Strategic Fallout of the Israel-Iran War
+                </h2>
+              </Link>
+              <p className="text-xs text-gray-800 mt-1">June 27, 2025 </p>
+              <p className="mt-2 text-gray-900 text-sm">
+                Amid all the military calculations and geopolitical theater,
+                Ramzy Baroud says one truth stands out. When it mattered most,
+                the Iranian people stood united.
               </p>
-            </a>
-          </Link>
-        ))}
-      </div>
-    </section>
+            </div>
+          </div>
+
+          {/* Card 2 */}
+          <div className="relative">
+            <img src="oil.png" alt="News Image" className="w-full rounded-md" />
+            <div className="absolute bottom-4 left-4 right-4 bg-white bg-opacity-90 p-4">
+              <Link href="https://cyclopedia-media-hub.vercel.app/blog/5njbEcuqy6lFrrYdMS2p">
+                <h2 className="text-lg font-bold hover:underline">
+                  US Turning Oil-Rich Nigeria into Proxy for its Africa Wars
+                </h2>
+              </Link>
+              <p className="text-xs text-gray-800 mt-1">by Cyclopedia</p>
+              <p className="mt-2 text-gray-900 text-sm">
+                T.J. Coles reports on what AFRICOM is doing under the cover of
+                counterterrorism.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column — Bold List of Headlines */}
+        <aside className="lg:w-1/3 bg-gray-50 p-4 rounded-lg shadow-md">
+          <h3 className="text-xl font-bold mb-4">Top Stories:</h3>
+          <ul className="space-y-3">
+            <li>
+              <Link
+                href="https://cyclopedia-media-hub.vercel.app/blog/jeixznhQcoRJKNT9X6eE"
+                className="font-bold hover:underline block"
+              >
+                AIDS and the Hidden Catholic Church{" "}
+              </Link>
+            </li>
+            <hr />
+            <li>
+              <Link
+                href="https://cyclopedia-media-hub.vercel.app/blog/EBmJtaV9bZ6rmy8blKmw"
+                className="font-bold hover:underline block"
+              >
+                International Medical Workers Decry Israel's 'Deliberate
+                Assault' on Their Gaza Colleagues
+              </Link>
+            </li>
+            <hr />
+            <li>
+              <Link
+                href="https://cyclopedia-media-hub.vercel.app/blog/EJ5yu1vWyshhhKiylnRh"
+                className="font-bold hover:underline block lowercase"
+              >
+                TRUMP APPEARS TO BE TARGETING MUSLIM AND “NON-WHITE” STUDENTS
+                FOR DEPORTATION
+              </Link>
+            </li>
+            <hr />
+            <li>
+              <Link
+                href="https://cyclopedia-media-hub.vercel.app/blog/N5kZbtsiwriQCAzSfasc"
+                className="font-bold hover:underline block"
+              >
+                The Incredible Disappearing Human Rights Reports
+              </Link>
+            </li>
+            <hr />
+            <li>
+              <Link
+                href="https://cyclopedia-media-hub.vercel.app/blog/2kK65blBTEBBvG7zsSd4"
+                className="font-bold hover:underline block"
+              >
+                U.S. Catholics Have Backed Same-Sex Marriage Since 2011
+              </Link>
+            </li>
+            <hr />
+            <li>
+              <Link
+                href="https://cyclopedia-media-hub.vercel.app/blog/QCLPbZe4t9ZtB8uxx9OB"
+                className="font-bold hover:underline block"
+              >
+                Why Does It Seem Israel Is Always at War With Its Neighbors?
+              </Link>
+            </li>
+            <hr />
+            <li>
+              <Link
+                href="https://cyclopedia-media-hub.vercel.app/blog/7iAlk0vSi3FcX9nFpsox"
+                className="font-bold hover:underline block"
+              >
+                A Brief History Of Israel And Its Conflicts
+              </Link>
+            </li>
+            <hr />
+            <li>
+              <Link
+                href="https://cyclopedia-media-hub.vercel.app/blog/dMc1fv1eVWpeLPV1o0AQ"
+                className="font-bold hover:underline block"
+              >
+                Teens: Sex Can Wait{" "}
+              </Link>
+            </li>
+            <hr />
+            <li>
+              <Link
+                href="https://cyclopedia-media-hub.vercel.app/blog/WkyafCBzn61CEaw5ZfU3"
+                className="font-bold hover:underline block"
+              >
+                Untangling Americans' Complex Views of Morality{" "}
+              </Link>
+            </li>
+          </ul>
+        </aside>
+      </section>
 
       <section className="px-2 py-5 md:py-20 bg-white text-black text-center max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 items-stretch">
         {/* First Card */}
@@ -243,7 +376,7 @@ const Page = () => {
             alt="News Image"
             className="w-full max-md:h-50 rounded-md"
           />
-          <div className="absolute z-10 bottom-4 max-md:-bottom-5 left-4 right-4 bg-white bg-opacity-90 p-4">
+          <div className="absolute z-10 bottom-4 max-md:-bottom-5 left-4 right-4 bg-white bg-opacity-90 p-4 ">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/EBmJtaV9bZ6rmy8blKmw">
               <h2 className="text-sm font-bold text-black hover:underline">
                 International Medical Workers Decry Israel's 'Deliberate
@@ -309,7 +442,7 @@ const Page = () => {
         </div>
       </section>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto items-start justify-center z-50 p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto items-start justify-center z-50 p-4 bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
         {/* Card 1 */}
         <Link
           href="https://cyclopedia-media-hub.vercel.app/blog/nVmpG0se1lyhis8uRH9y"
@@ -394,15 +527,15 @@ const Page = () => {
         </Link>
       </div>
 
-      <section className="px-2 text-center grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto  ">
-        <div className="mt-5 text-black">
+      <section className="px-2 text-center grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto  mt-10 ">
+        <div className="mt-5 text-black bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <img src="british.png" alt="" />
           <Link href="https://cyclopedia-media-hub.vercel.app/blog/DxewHf37R7X7ZBzQRLE5">
-            <h2 className="text-xl font-bold text-left hover:underline text-black">
+            <h2 className="text-xl font-bold text-left hover:underline text-black p-5">
               Britain’s secret state and the need for whistle-blowing
             </h2>
           </Link>
-          <p className="text-sm text-gray-500 text-left mt-5">
+          <p className="text-sm text-gray-500 text-left mt-5 p-2">
             In November 2003, I was charged with a breach of the Official
             Secrets Act in the UK. My ‘crime’ had been to reveal an email from
             the US National Security Agency (NSA) to Britain's intelligence
@@ -411,21 +544,21 @@ const Page = () => {
           </p>
         </div>
 
-        <div>
+        <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <img src="uk.png" alt="" />
           <Link href="https://cyclopedia-media-hub.vercel.app/blog/HYhefDd7rXfAAzKBJCyb">
-            <h2 className="text-xl font-bold text-left hover:underline text-black">
+            <h2 className="text-xl font-bold text-left hover:underline text-black p-5">
               UK government secretly paid foreign YouTube stars for ‘propaganda’{" "}
             </h2>
           </Link>
-          <p className="text-sm text-gray-500 text-left mt-5 ">
+          <p className="text-sm text-gray-500 text-left mt-5 p-2">
             The past five months have been clarifying. What was supposed to be
             hidden has been thrust into the light. What was supposed to be
             obscured has come sharply into focus.
           </p>
         </div>
 
-        <div>
+        <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 p-5">
           <img src="som.png" alt="" className="mt-10" />
           <Link href="https://cyclopedia-media-hub.vercel.app/blog/OjdVfovsON2pJsJU9yJr">
             <h2 className="text-xl font-bold text-black text-left hover:underline">
@@ -678,20 +811,25 @@ const Page = () => {
         <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <div className="relative w-full h-[220px]">
             <img
-              src="/news4.png"
+              src="/amer.png"
               alt="News 6"
               className="object-cover w-full h-full"
             />
           </div>
           <div className="p-4">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/sample4">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/QUnWDFG1eBq2x4ejSLcs">
               <h2 className="text-sm font-bold text-black hover:underline">
-                FOURTH POST TITLE HERE
+                Americans Say Government Should Address Slavery Effects{" "}
               </h2>
             </Link>
             <p className="text-xs text-gray-600 mt-1">By Author Name</p>
             <p className="mt-2 text-gray-800 text-xs">
-              Another example description for a different news post or article.
+              Americans are more likely to think that the history of slavery has
+              at least some effect on Black people today than to think it has
+              little to no effect. Forty percent of Americans say Black people
+              are affected "a lot" by the history of slavery, with 27%
+              perceiving "some" effect, 16% "not much" of one and 17% no effect
+              at all.{" "}
             </p>
           </div>
         </div>
@@ -700,7 +838,7 @@ const Page = () => {
         <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <div className="relative w-full h-[220px]">
             <img
-              src="/news5.png"
+              src="/wa.png"
               alt="News 7"
               className="object-cover w-full h-full"
             />
@@ -708,13 +846,18 @@ const Page = () => {
           <div className="p-4">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/sample5">
               <h2 className="text-sm font-bold text-black hover:underline">
-                FIFTH POST TITLE HERE
+                Why Does It Seem Israel Is Always at War With Its Neighbors?
               </h2>
             </Link>
             <p className="text-xs text-gray-600 mt-1">By Author Name</p>
             <p className="mt-2 text-gray-800 text-xs">
-              Description for the fifth post. Keeps the same layout and design
-              as others.
+              The 7th century Muslim Conquest of Jerusalem, followed by the
+              Crusades (11th-13th centuries), continued the upheaval in the
+              Levant, even though the percentage of Jews living there was
+              limited. The one real window of post-New Testament peace in the
+              “Holy Land” took place during the Ottoman Era (1517-1917).
+              Throughout that period, 400 years passed without any significant
+              clashes in Jerusalem or the immediate vicinity..
             </p>
           </div>
         </div>
@@ -801,13 +944,13 @@ const Page = () => {
               title:
                 "Project 2025 Co-Author Caught Admitting the Secret Conservative Plan to Ban Porn",
               desc: `“We’d have a national ban on pornography if we could, right?” he added. Vought contributed a chapter to the Project 2025 manifesto, which argues in the foreword that all pornography “should be outlawed” and its producers “imprisoned.”`,
-              link: "/project-2025-ban-porn",
+              link: "https://cyclopedia-media-hub.vercel.app/blog/zOZ2D7vwGZFBARsYmPjq",
             },
             {
               title:
                 "How Britain’s Labour government facilitated the massacre of Biafrans in Nigeria – to protect its oil interests",
               desc: `On the 50th anniversary of the end of the Biafran war, the world’s worst humanitarian crisis in the late 1960s, declassified British files show that Harold Wilson’s government secretly armed and backed Nigeria’s aggression against the secessionist region.`,
-              link: "/biafran-war-oil-interests",
+              link: "https://cyclopedia-media-hub.vercel.app/blog/WzsZMEGNhs8e85Pr8hOg",
             },
             {
               title: "The Real Intentions Of The Abuja Declaration-1989",
@@ -831,14 +974,14 @@ const Page = () => {
           ))}
         </div>
 
-        <div className="mt-12 text-center">
+        {/* <div className="mt-12 text-center">
           <a
             href="/drop"
             className="inline-block bg-purple-600 hover:bg-purple-700 text-white py-3 px-8 rounded-md text-lg font-semibold transition-colors"
           >
             Find More
           </a>
-        </div>
+        </div> */}
       </section>
     </>
   );

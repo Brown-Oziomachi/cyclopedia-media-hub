@@ -90,9 +90,9 @@ const ProfileDropdownNavbar = () => {
         {/* Logo */}
 
         {/* Title */}
-        <div className="uppercase font-playfair max-lg:-mt-20 lg:ml-5 text-4xl max-lg:mx-auto lg:text-6xl font-bold bg-gradient-to-r from-purple-500 to-cyan-400 text-transparent bg-clip-text tracking-wide select-none">
+        <div className="uppercase font-playfair max-lg:-mt-17 lg:ml-2 max-lg:ml-15 text-3xl max-lg:mx-auto lg:text-6xl font-bold bg-gradient-to-r from-purple-500 to-cyan-400 text-transparent bg-clip-text tracking-wide select-none">
           <Link href="/">
-            <h1 className=" ">Cyclopedia</h1>
+            <h1 className=" ">Cyclopedia_</h1>
           </Link>
         </div>
 

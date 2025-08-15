@@ -78,7 +78,11 @@ export default function AsiaPage() {
 
   return (
     <section className="px-6 py-10 max-w-5xl mx-auto mt-20">
-      <h1 className="text-3xl font-bold mb-8 text-center mt-30">Asia</h1>
+      <h1 className="text-3xl font-bold mb-2 text-center mt-30 max-lg:mt-10">Asia</h1>
+      <hr />
+      <h2 className="text-xs text-center mb-10">
+        Search the country of your choice:
+      </h2>
 
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 justify-center">
         {asiaCountries.map((country, i) => (
