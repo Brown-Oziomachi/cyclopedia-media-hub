@@ -107,10 +107,13 @@ export default function AfricaPage() {
   return (
     <section className="px-6 py-10 max-w-5xl mx-auto">
       <h1 className="text-3xl font-bold mb-2 text-center mt-40">Africa</h1>
-      <h2 className="text-xs text-center mb-10">Search the country of your choice:</h2>
+      <hr className="text-purple-700"/>
+      <h2 className="text-xs text-center mb-10">
+        Search the country of your choice:
+      </h2>
 
       {/* Country flags */}
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 justify-center">
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 justify-center ">
         {africaCountries.map((country, i) => (
           <motion.div
             key={country.tag}
@@ -127,7 +130,7 @@ export default function AfricaPage() {
               onClick={() => setSelectedTag(country.tag)}
             >
               <div
-                className={`w-20 h-20 rounded-full overflow-hidden border-2 border-gray-300 transition-transform duration-300 hover:scale-110 ${
+                className={`w-20 h-20 rounded-full overflow-hidden border-2 border-gray-300 active:bg-purple-600 transition-transform duration-300 hover:scale-110 ${
                   selectedTag === country.tag ? "border-blue-500" : ""
                 }`}
               >

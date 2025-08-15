@@ -1,31 +1,30 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 import Popup from "@/components/Popup";
 import { motion } from "framer-motion";
-import { 
-  ArrowRight, 
-  ArrowRightToLine, 
-  ChevronRight, 
-  LaptopMinimal, 
-  LoaderCircle, 
-  Palette, 
-  Play, 
-  Store, 
-  Webhook, 
+import {
+  ArrowRight,
+  ArrowRightToLine,
+  ChevronRight,
+  LaptopMinimal,
+  LoaderCircle,
+  Palette,
+  Play,
+  Store,
+  Webhook,
 } from "lucide-react";
 import BottomNav from "@/components/BottomNav";
 import ChatDropdown from "@/components/Chat";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import LogoSplash from "@/components/LogoSplash";
-import { useRouter} from "next/navigation";
-
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const [loading, setLoading] = useState(true); // Loading state
-  const [session] = useState(); 
+  const [session] = useState();
   const [showpopup, setShowPopup] = useState(true);
   const [showSplash, setShowSplash] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -33,8 +32,7 @@ const Page = () => {
   const [query, setQuery] = useState("");
   const [showNav, setShowNav] = useState(false);
   const [clickedIndex, setClickedIndex] = useState(null);
-
-
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const seen = sessionStorage.getItem("hasSeenSplash");
@@ -87,16 +85,25 @@ const Page = () => {
     },
   ];
 
-  
-    const handleSearch = (e) => {
-      e.preventDefault();
-      if (!query.trim()) return;
-      setShowNav(false); // Close nav here
+  const items = [
+    { id: 1, title: "Education", img: "/educo.png", link: "/education" },
+    { id: 2, title: "Philosophy", img: "/philo.png", link: "/philosophy" },
+    { id: 3, title: "Health", img: "/hea.png", link: "/health" },
+    {
+      id: 4,
+      title: "wildlife",
+      img: "/wildlife.png",
+      link: "/wildlife",
+    },
+  ];
 
-  router.push(
-        `/search?q=${encodeURIComponent(query.trim().toLowerCase())}`
-      );
-    };
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (!query.trim()) return;
+    setShowNav(false); // Close nav here
+
+    router.push(`/search?q=${encodeURIComponent(query.trim().toLowerCase())}`);
+  };
 
   const handleClick = (i) => {
     setClickedIndex(i);
@@ -143,7 +150,7 @@ const Page = () => {
         </div>
       )}
 
-      <div className="relative w-full lg:w-1/4 max-md:w-full mx-auto lg:hidden">
+      <div className="relative w-full max-lg:w-1/2 max-md:w-full mx-auto lg:hidden">
         <form
           onSubmit={handleSearch}
           className="flex items-center"
@@ -235,18 +242,66 @@ const Page = () => {
               </a>
             </Link>
           ))}
+          <div className="p-6 mt-5 lg:ml-auto max-md:justify-center mx-auto">
+            {/* More Button */}
+            <button
+              onClick={() => setIsOpen(true)}
+              className="px-4 py-2 bg-purple-600 text-white rounded-lg  hover:bg-purple-300   "
+            >
+              More
+            </button>
+
+            {/* Overlay */}
+            {isOpen && (
+              <div className="fixed inset-0 bg-purple-600/50 flex items-center justify-center z-50">
+                {/* Popup */}
+                <div className="bg-white p-6 rounded-2xl max-w-lg w-full relative shadow-lg">
+                  {/* Close button */}
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
+                  >
+                    ✖
+                  </button>
+
+                  <h2 className="text-xl font-bold mb-4 text-center">
+                    More Categories
+                  </h2>
+
+                  {/* Items */}
+                  <div className="grid grid-cols-2 gap-4 ">
+                    {items.map((item) => (
+                      <Link
+                        key={item.id}
+                        href={item.link}
+                        className="flex flex-col items-center text-center hover:scale-105 rounded-full justify-center cursor-pointer transition-transform active:text-purple-600 hover:shadow-purple-600 hover:shadow-2xl duration-300"
+                        onClick={() => setIsOpen(false)} // Close popup on click
+                      >
+                        <img
+                          src={item.img}
+                          alt={item.title}
+                          className="w-25 h-25 rounded-full object-cover border-2 border-purple-200"
+                        />
+                        <p className="mt-2 font-medium">{item.title}</p>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </section>
 
-      <section className="px-2 py-5 md:py-20 bg-white text-black max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
+      <section className="px-2 py-5 md:py-20 bg-white text-black active:text-purple-600 max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
         {/* Left Column — Featured News (stacked vertically on large screens) */}
         <div className="lg:w-2/3 flex flex-col gap-8">
           {/* Card 1 */}
           <div className="relative">
             <img src="fun.png" alt="News Image" className="w-full rounded-md" />
-            <div className="absolute bottom-4 left-4 right-4 bg-white bg-opacity-90 p-4">
+            <div className="absolute bottom-1 left-4 right-4 bg-white max-lg:h-40 bg-opacity-90 p-4">
               <Link href="https://cyclopedia-media-hub.vercel.app/blog/bmFfkpRJx9MceeUlcz5J">
-                <h2 className="text-lg font-bold hover:underline">
+                <h2 className="text-sm font-bold hover:underline">
                   The Strategic Fallout of the Israel-Iran War
                 </h2>
               </Link>
@@ -262,9 +317,9 @@ const Page = () => {
           {/* Card 2 */}
           <div className="relative">
             <img src="oil.png" alt="News Image" className="w-full rounded-md" />
-            <div className="absolute bottom-4 left-4 right-4 bg-white bg-opacity-90 p-4">
+            <div className="absolute bottom-0 left-4 right-4 bg-white max-lg:h-35 bg-opacity-90 p-4 ">
               <Link href="https://cyclopedia-media-hub.vercel.app/blog/5njbEcuqy6lFrrYdMS2p">
-                <h2 className="text-lg font-bold hover:underline">
+                <h2 className="text-sm font-bold hover:underline">
                   US Turning Oil-Rich Nigeria into Proxy for its Africa Wars
                 </h2>
               </Link>
@@ -985,6 +1040,6 @@ const Page = () => {
       </section>
     </>
   );
-}
+};
 
-      export default Page;
+export default Page;
