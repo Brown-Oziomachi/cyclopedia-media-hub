@@ -21,6 +21,16 @@ import ChatDropdown from "@/components/Chat";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 import LogoSplash from "@/components/LogoSplash";
 import { useRouter } from "next/navigation";
+import { db1 } from "@/lib/firebaseConfig";
+import {
+  collection,
+  query as firestoreQuery, // ✅ rename Firestore's query
+  orderBy,
+  limit,
+  onSnapshot,
+} from "firebase/firestore";
+
+
 
 const Page = () => {
   const [loading, setLoading] = useState(true); // Loading state
@@ -33,7 +43,27 @@ const Page = () => {
   const [showNav, setShowNav] = useState(false);
   const [clickedIndex, setClickedIndex] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+ const [posts, setPosts] = useState([]);
 
+ useEffect(() => {
+    const q = firestoreQuery(
+      collection(db1, "blogs"),
+      orderBy("createdAt", "desc"),
+      limit(5) // always fetch only latest 3
+    );
+
+   const unsubscribe = onSnapshot(q, (snapshot) => {
+     const latestPosts = snapshot.docs.map((doc) => ({
+       id: doc.id,
+       ...doc.data(),
+     }));
+     setPosts(latestPosts);
+   });
+
+   return () => unsubscribe();
+ }, []);
+
+  
   useEffect(() => {
     const seen = sessionStorage.getItem("hasSeenSplash");
     if (seen) {
@@ -293,7 +323,39 @@ const Page = () => {
         </div>
       </section>
 
-      <section className="px-2 py-5 md:py-20 bg-white text-black active:text-purple-600 max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
+      <div className="max-w-5xl mx-auto py-10 px-4 bg-purple-600">
+      <h2 className="text-2xl font-bold mb-6">Latest News</h2>
+      {posts.length === 0 ? (
+        <p className="text-gray-500">No posts found.</p>
+      ) : (
+        <div className="grid md:grid-cols-3 gap-6">
+          {posts.map((post) => (
+            <Link
+              key={post.id}
+              href={`/blog/${post.id}`} // <-- Correct route
+              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition"
+            >
+              {post.imageUrl && (
+                <img
+                  src={post.imageUrl}
+                  alt={post.title}
+                  className="w-full h-40 object-cover"
+                />
+              )}
+              <div className="p-4">
+                <h3 className="text-lg font-semibold">{post.title}</h3>
+                <p className="text-sm text-gray-600 line-clamp-2">
+                  {post.subtitle || post.content?.slice(0, 100) + "..."}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+
+      
+      <section className="px-2 py-5 md:py-20  text-black active:text-purple-600 max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
         {/* Left Column — Featured News (stacked vertically on large screens) */}
         <div className="lg:w-2/3 flex flex-col gap-8">
           {/* Card 1 */}

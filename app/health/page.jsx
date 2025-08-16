@@ -1,124 +1,173 @@
 "use client";
-
-import { Suspense } from "react";
-import { useState } from "react";
-import ScrollProgressBar from "@/components/ScrollProgressBar";
-import Image from "next/image";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import ViewMoreSearchPopup from "../view/page";
+import { motion } from "framer-motion";
+import { collection, query, where, getDocs, orderBy, limit } from "firebase/firestore";
+import { db1 } from "@/lib/firebaseConfig";
 
-const Page = () => {
-  const [visibleCount, setVisibleCount] = useState(4); // 4 items shown initially
+export default function HealthSubHeadings() {
+  const subHeadings = [
+    {
+      title: "Nutrition & Balanced Diet",
+      subtitle: "Tips and research on healthy eating habits.",
+      img: "https://source.unsplash.com/80x80/?nutrition,food",
+      href: "/health/nutrition",
+    },
+    {
+      title: "Mental Health & Wellness",
+      subtitle: "Learn about mental wellness and stress management.",
+      img: "https://source.unsplash.com/80x80/?mental-health,wellness",
+      href: "/health/mental-health",
+    },
+    {
+      title: "Fitness & Exercise Routines",
+      subtitle: "Discover exercise routines for all levels.",
+      img: "https://source.unsplash.com/80x80/?fitness,exercise",
+      href: "/health/fitness",
+    },
+    {
+      title: "Preventive Healthcare",
+      subtitle: "Insights on screenings, vaccinations, and healthy habits.",
+      img: "https://source.unsplash.com/80x80/?healthcare,prevention",
+      href: "/health/preventive-care",
+    },
+    {
+      title: "Medical Breakthroughs",
+      subtitle: "Stay updated on the latest innovations in medicine.",
+      img: "https://source.unsplash.com/80x80/?medical,innovation",
+      href: "/health/medical-breakthroughs",
+    },
+    {
+      title: "Healthy Aging & Longevity",
+      subtitle: "Tips for living a longer, healthier life.",
+      img: "https://source.unsplash.com/80x80/?aging,longevity",
+      href: "/health/healthy-aging",
+    },
+    {
+      title: "Holistic & Alternative Medicine",
+      subtitle: "Explore natural remedies and alternative therapies.",
+      img: "https://source.unsplash.com/80x80/?holistic,medicine",
+      href: "/health/holistic-medicine",
+    },
+  ];
 
-  const showMore = () => {
-    setVisibleCount((prev) => prev + 1);
-  };
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [blogs, setBlogs] = useState([]);
+    const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+ useEffect(() => {
+    const fetchHealthPosts = async () => {
+      try {
+        const postsRef = collection(db1, "blogs");
+        const q = query(
+          postsRef,
+          where("category", "==", "health"),
+          orderBy("createdAt", "desc"),
+          limit(6)
+        );
+
+        const querySnapshot = await getDocs(q);
+        const data = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        console.log("Fetched Health posts:", data);
+        setPosts(data);
+      } catch (error) {
+        console.error("Error fetching Health posts:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHealthPosts();
+  }, []);
+
 
   return (
-    <main className="w-full bg-white">
-      <h1 className="text-3xl lg:text-5xl font-bold text-center mt-30 lg:mt-50  text-black mb-2">
-        The Battle for Truth
+    <section className="relative px-4 py-12 max-w-6xl mx-auto overflow-hidden">
+      <h1 className="text-4xl font-extrabold mb-12 text-center text-green-700 relative z-10 mt-30">
+        CYCLOPEDIA Health
       </h1>
-      <p className="text-sm lg:text-base text-center text-gray-700  mx-auto">
-        Unmask the forces behind curated narratives, censorship, propaganda,{" "}
-        <br className="max-md:hidden" />
-        and digital manipulation. Who controls the story — and what aren’t they
-        telling you?
-      </p>
 
-      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {/* === NEWS CARD 1 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-10">
-            <Image src="/plun.png" alt="News 1" fill className="object-cover" />
+      <div className="mt-12 relative z-10">
+        <h2 className="text-2xl font-bold mb-6 text-green-800">
+          Latest Health Articles
+        </h2>
+        {loading ? (
+          <p className="text-gray-500">Loading latest post</p>
+        ) : posts.length === 0 ? (
+          <p className="text-gray-500"></p>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post) => (
+              <motion.div
+                key={post.id}
+                whileHover={{ scale: 1.02 }}
+                className="p-5 bg-white border rounded-lg shadow hover:shadow-lg"
+              >
+                {posts.imageUrl && (
+                  <img
+                    src={post.imageUrl}
+                    alt={post.title}
+                    className="w-full h-40 object-cover rounded mb-4"
+                  />
+                )}
+                <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
+                {post.subtitle && (
+                  <p className="text-gray-600 text-sm mb-3">{post.subtitle}</p>
+                )}
+                <Link
+                  href={`/blogs/${blog.id}`}
+                  className="text-green-600 hover:underline text-sm font-medium"
+                >
+                  Read More →
+                </Link>
+              </motion.div>
+            ))}
           </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/I19iaUfjERIHIPAce3ps">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                The Forgotten Plunder of Iraq{" "}
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">By: cyclopedia</p>
-            <p className="mt-2 text-gray-900 text-xs">
-              Few talk or think about Iraq these days and the media ignores this
-              important but demolished nation.
-            </p>
-          </div>
-        </div>
-
-        {/* === NEWS CARD 2 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image src="/uks.png" alt="News 2" fill className="object-cover " />
-          </div>
-          <div className="absolute z-10 -bottom-20   left-4 right-4 bg-white p-4 ">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/NDX3C3o7duRdz7844LU6">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                UK media are covering up British spy flights for Israel{" "}
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              Published in collaboration with The National{" "}
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              Britain’s obedient defence correspondents are refusing to report a
-              story of clear public interest in the middle of a genocide.
-            </p>
-          </div>
-        </div>
-
-        {/* === NEWS CARD 3 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image src="/medi.png" alt="News 3" fill className="object-cover" />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4 ">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/OjdVfovsON2pJsJU9yJr">
-              <h2 className="text-sm font-bold text-black hover:underline lowercase">
-                HOW THE WESTERN MEDIA HELPED BUILD THE CASE FOR GENOCIDE IN GAZA{" "}
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">By cyclopedia</p>
-            <p className="mt-2 text-gray-900 text-xs">
-              From obscuring the West’s role in starving Gaza to sensationalised
-              accounts of mass rape by Hamas, journalists are playing the role
-              of propagandists, not reporters.
-            </p>
-          </div>
-        </div>
-
-        {/* === NEWS CARD 4 === */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
-            <Image src="/ed.png" alt="News 4" fill className="object-cover " />
-          </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/yr4GRaz6USfU5E9s2INA">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                UK MEDIA ARE SUPPRESSING MENTIONS OF ISRAEL’S ‘GENOCIDE’ IN GAZA{" "}
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              DES FREEDMAN 18 December 2023{" "}
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              Analysis of British media reporting shows they are barely covering
-              allegations by UN officials and others that Israel is promoting
-              genocide against Palestinians. This is in complete contrast to
-              their reporting of Russia in Ukraine.
-            </p>
-          </div>
-        </div>
-
-        {/* === VIEW MORE BUTTON === */}
+        )}
       </div>
 
-      <div className="mx-auto text-center">
-        <ViewMoreSearchPopup />
-      </div>
-    </main>
+      {/* Subheadings */}
+      <ul className="space-y-4 relative z-10">
+        {subHeadings.map((item, index) => (
+          <motion.li
+            key={index}
+            whileHover={{ scale: 1.03 }}
+            onClick={() => setActiveIndex(index)}
+            className={`p-4 rounded-lg border transition-shadow cursor-pointer
+              ${
+                activeIndex === index
+                  ? "bg-green-100 border-green-400 shadow-lg"
+                  : "bg-white border-gray-200 shadow-md hover:shadow-xl"
+              }`}
+          >
+            <Link href={item.href}>
+              <h2 className="flex items-center">
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  className="w-20 h-20 object-cover rounded-lg mr-4 flex-shrink-0"
+                />
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-800">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm">{item.subtitle}</p>
+                </div>
+              </h2>
+            </Link>
+          </motion.li>
+        ))}
+      </ul>
+
+      {/* Blogs from Firestore */}
+
+      {/* Magical glowing background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-green-50 via-green-100 to-green-50 opacity-30 rounded-lg pointer-events-none animate-pulse"></div>
+    </section>
   );
-};
-
-export default Page;
-
+}

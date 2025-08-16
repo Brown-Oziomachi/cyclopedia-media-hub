@@ -94,7 +94,7 @@ export default function BlogsPage() {
             className="bg-purple-600 hover:bg-purple-600 text-white px-6 py-3 rounded-md transition"
             disabled={loading}
           >
-            {loading ? "Loading..." : "View More"}
+            {loading ? "Loading News..." : "View More"}
           </button>
         </div>
       )}

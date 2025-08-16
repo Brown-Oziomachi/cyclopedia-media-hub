@@ -199,7 +199,7 @@ const ProfileDropdownNavbar = () => {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search tags like politics, cyclopedia..."
+            placeholder="What's on your mind"
             className="px-8 py-4 rounded-l-md shadow-2xl shadow-purple-500 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 w-64"
             aria-label="Search input"
           />

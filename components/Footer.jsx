@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="py-10 text-gray-500 text-sm bg-black border-t border-gray-800 items-center justify-center">
-      <div className="max-w-xl mx-auto px-4 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
+    <footer className="py-10 text-gray-500 text-sm bg-black border-t border-gray-800">
+      <div className="max-w-6xl mx-auto px-4 flex flex-col lg:flex-row justify-between items-start lg:items-start gap-8">
         {/* Left: Site links */}
         <div>
           <h2 className="text-white font-bold text-lg mb-4">Cyclopedia</h2>
@@ -41,7 +41,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Right: Continental links */}
+        {/* Middle: Continental links */}
         <div>
           <h2 className="text-white font-bold text-lg mb-4">Continental</h2>
           <ul className="space-y-2 font-mono">
@@ -63,6 +63,44 @@ const Footer = () => {
             <li>
               <a href="/america" className="hover:text-purple-400 transition">
                 America
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        {/* Right: Other sections or quick links */}
+        <div>
+          <h2 className="text-white font-bold text-lg mb-4">Explore</h2>
+          <ul className="space-y-2 font-mono">
+            <li>
+              <a
+                href="/technology"
+                className="hover:text-purple-400 transition"
+              >
+                Technology
+              </a>
+            </li>
+            <li>
+              <a href="/education" className="hover:text-purple-400 transition">
+                Education
+              </a>
+            </li>
+            <li>
+              <a href="/art" className="hover:text-purple-400 transition">
+                Art & Culture
+              </a>
+            </li>
+            <li>
+              <a href="/health" className="hover:text-purple-400 transition">
+                Health
+              </a>
+            </li>
+            <li>
+              <a
+                href="/philosophy"
+                className="hover:text-purple-400 transition"
+              >
+                Philosophy
               </a>
             </li>
           </ul>
