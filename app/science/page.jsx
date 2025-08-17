@@ -23,9 +23,9 @@ const Page = () => {
         const postsRef = collection(db1, "blogs");
         const q = query(
           postsRef,
-          where("category", "==", "politics"),
+          where("category", "==", "science"),
           orderBy("createdAt", "desc"),
-          limit(6)
+          limit(20)
         );
 
         const querySnapshot = await getDocs(q);
@@ -65,7 +65,7 @@ const Page = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
             {posts.map((post) => (
               <Link key={post.id} href={`/blog/${post.id}`}>
-                <div className="relative rounded-lg shadow shadow-xl transition overflow-hidden">
+                <div className="relative rounded-lg  shadow-xl transition overflow-hidden">
                   {post.imageUrl && (
                     <img
                       src={post.imageUrl}
@@ -89,7 +89,7 @@ const Page = () => {
       )}
 
       {/* 🔹 Static Science Cards */}
-      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="max-w-7xl mx-auto px-4 py-30 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {/* === Static NEWS CARD 1 === */}
         <div className="relative focuse-ring-purple-600 hover:purple-600 hover:shadow-purple-600 hover:shadow-2xl">
           <div className="relative w-full h-[220px] mt-20">

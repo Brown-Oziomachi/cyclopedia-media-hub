@@ -76,10 +76,9 @@ const ProfileDropdownNavbar = () => {
   };
 
   const navItems = [
-    { text: "Home", url: "/" },
-    { text: "News", url: "/#News-cpd" },
-    { text: "About", url: "/about" },
-    { text: "Contact", url: "/contact" },
+    { text: "Latest News", url: "/global" },
+    { text: "About us", url: "/about" },
+    { text: "Contact us", url: "/contact" },
   ];
 
   const regions = [
@@ -87,49 +86,45 @@ const ProfileDropdownNavbar = () => {
     { name: "Asia", emoji: "🌏", url: "/asia" },
     { name: "America", emoji: "🌎", url: "/america" },
     { name: "Europe", emoji: "🌍", url: "/europe" },
-    { name: "Global", emoji: "🌐", url: "/global" },
   ];
 
    
   return (
-    <main className="fixed top-10 left-0 w-full bg-bla text-white z-50">
+    <main className="fixed top-10 left-0 w-full bg-black text-white z-50">
       <header className="fixed  -top-5 left-0 w-full  z-50 transition-transform duration-300">
-        <div className="flex items-center justify-center mt-5 bg-white gap-5 ">
-          
-          <p className="text-sm z-40 bg-white text-center  text-black  font-semibold ">
-            CYCLOPEDIA
-          </p>
-      <Link href="/">
-        <Image
-          src="/hid.png"
-          alt="Logo"
-          width={20}
-          height={20}
-          className="rounded-full border-3 border-purple-500 bg-black "
-        />
-      </Link>
-         </div>
+        <div className="flex items-center text-2xl justify-center mt-5 h-10 bg-black gap-5 ">
+          <Link href="/">
+            <p className="text-[25px] z-40 bg-black text-center font-bold text-white  ">
+              CYCLOPEDIA
+            </p>
+          </Link>
+          <Link href="/">
+            <Image
+              src="/hid.png"
+              alt="Logo"
+              width={30}
+              height={30}
+              className="rounded-full border-3 border-purple-500 bg-black "
+            />
+          </Link>
+        </div>
         <div
           className={`bg- text-white text-center py-1 font-bold h-10 ${
             showHeader ? "-translate-y-5" : "-translate-y-4"
           }`}
-        >
-        </div>
+        ></div>
 
         <nav
           className={` text-white flex flex-items-center md:z-50 justify-between py-1 ${
             showHeader ? "translate-y-1" : "-translate-y-25"
           } transition-transform duration-300 `}
         >
-          
-      {/* Main navbar */}
+          {/* Main navbar */}
         </nav>
 
         {/* Sticky search input */}
-
-       
       </header>
-      <section className=" lg:z-50 flex items-center justify-between px-5 py-3">
+      <section className=" lg:z-50 flex items-center justify-between px-5 py-3 bg-black">
         {/* Logo */}
 
         {/* Title */}
@@ -142,7 +137,7 @@ const ProfileDropdownNavbar = () => {
             aria-haspopup="true"
             aria-expanded={showRegionsDropdown}
           >
-            Regions <ChevronDown className="h-4 w-4" />
+            Regions <ChevronDown className="h-4 w-4 z-50 " />
           </button>
 
           {showRegionsDropdown && (
@@ -165,7 +160,7 @@ const ProfileDropdownNavbar = () => {
           )}
         </div>
 
-        <section className="hidden z-50 w-full lg:bg-black lg:flex text-white select-none  px-2 py-1 lg:ml-40">
+        <section className="hidden z-50 w-full -mt-8 lg:bg-black lg:flex text-gray-300 select-none  px-2 py-1 lg:ml-35">
           <nav className="flex space-x-4 max-w-full overflow-x-auto no-scrollbar">
             {/* Nav Items */}
             {navItems.map((item) => (
@@ -183,39 +178,57 @@ const ProfileDropdownNavbar = () => {
           <div className="flex flex-wrap gap-2">
             <Link
               href="/politics"
-              className="px-3 py-1 bg-purple-900 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
             >
               politics
             </Link>
             <Link
               href="/religion"
-              className="px-3 py-1 bg-purple-900 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
             >
               Religion
             </Link>
             <Link
               href="/history"
-              className="px-3 py-1 bg-purple-900 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
             >
               History
             </Link>
             <Link
               href="/science"
-              className="px-3 py-1 bg-purple-900 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2  hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
             >
               Science
             </Link>
             <Link
               href="/media"
-              className="px-3 py-1 bg-purple-900 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2  hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
             >
               Media
             </Link>
             <Link
-              href="/global"
-              className="px-3 py-1 bg-purple-900 hover:bg-blue-200 rounded cursor-pointer text-sm font-medium"
+              href="/education"
+              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
             >
-              News
+              Education
+            </Link>
+            <Link
+              href="/health"
+              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+            >
+              Health
+            </Link>
+            <Link
+              href="/art"
+              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+            >
+              Art&Culture
+            </Link>
+            <Link
+              href="/technology"
+              className="px-3 py-2 hover:bg-purple-600  rounded cursor-pointer text-sm font-medium"
+            >
+              Technology
             </Link>
           </div>
         </section>
@@ -363,30 +376,36 @@ const ProfileDropdownNavbar = () => {
 
           <button
             onClick={() => setShowNav((v) => !v)}
-            className="text-3xl  z-50 -mt-10  bg-black"
+            className="text-3xl  z-[70] -mt-10  bg-black"
             aria-label="Toggle navigation menu"
-            
           >
             {showNav ? (
-              <ChevronsDownUp className={`text-purple-600 "${ showHeader ? "translate-y-0" : "-translate-y-10" }`} />
+              <ChevronsDownUp
+                className={`text-purple-600 "${
+                  showHeader ? "translate-y-0" : "-translate-y-10"
+                }`}
+              />
             ) : (
-                <ChevronDown className={`text-white" ${showHeader ? "translate-y-0" : "-translate-y-0"}`} />
+              <ChevronDown
+                className={`text-white" ${
+                  showHeader ? "translate-y-0" : "-translate-y-0"
+                }`}
+              />
             )}
           </button>
-
         </div>
       </section>
 
       {/* Mobile Navigation Drawer */}
       {showNav && (
         <nav
-          className="fixed inset-0 bg-black bg-opacity-95  flex flex-col text-black p-5 z-[0] mt-8 overflow-y-auto"
+          className="fixed inset-0 bg-black bg-opacity-95 flex flex-col text-black p-5 z-[50] mt-9 overflow-y-auto"
           aria-label="Mobile navigation"
         >
           {/* Small screen search */}
           <form
             onSubmit={handleSearch}
-            className="flex lg:hidden items-center ml-auto mr-6 "
+            className="flex lg:hidden items-center ml-auto mr-6 z-40 "
             role="search"
             aria-label="Site Search"
           >
@@ -395,19 +414,24 @@ const ProfileDropdownNavbar = () => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="What's on your mind?"
-              className="px-5 py-4 rounded-l-md shadow-2xl text-white focus:outline-none focus:ring-2 focus:ring-purple-400 w-64"
+              className="px-1 py-2 rounded-l-md shadow-2xl z-50 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 w-64"
               aria-label="Search input"
             />
             <button
               type="submit"
               // onClick={() => setShowNav(false)}
-              className="bg-gradient-to-r from-purple-500 to-cyan-400 hover:bg-purple-600 px-4 py-3 rounded-r-md text-white font-semibold transition"
+              className="bg-gradient-to-r z-40 from-purple-500 to-cyan-400 hover:bg-purple-600 px-4 py-3 rounded-r-md text-white font-semibold transition"
             >
               Search
             </button>
           </form>
 
-          <ul className="space-y-3 text-sm font-medium mt-5 text-gray-800 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text">
+          <ul className="space-y-3 font-bold mt-5 text-gray-400">
+            <li>
+              <Link href="/global" onClick={() => setShowNav(false)}>
+                Latest news
+              </Link>
+            </li>
             <li>
               <Link href="/politics" onClick={() => setShowNav(false)}>
                 Politics
@@ -423,21 +447,17 @@ const ProfileDropdownNavbar = () => {
                 History
               </Link>
             </li>
+            <li>
+              <Link href="/science" onClick={() => setShowNav(false)}>
+                Science
+              </Link>
+            </li>
+            <li>
+              <Link href="/media" onClick={() => setShowNav(false)}>
+                Media
+              </Link>
+            </li>
           </ul>
-
-          <Link
-            href="/#read-more"
-            onClick={() => {
-              setShowNav(false);
-              setShowRegionsDropdown(false);
-            }}
-            className="shadow-black w-1/2 shadow-xl cursor-pointer text-2xl border border-cyan-400 rounded-3xl bg-purple-600 text-white lg:text-center font-semibold font-serif mt-5 mx-auto"
-          >
-            <div className="flex items-center justify-center text-purple-300">
-              <ChevronRight />
-              <p className="text-xs font-extralight ml-1">Explore more</p>
-            </div>
-          </Link>
 
           <hr className="my-4 border-gray-600" />
 
@@ -465,7 +485,7 @@ const ProfileDropdownNavbar = () => {
           </div>
           <hr className="my-4 border-gray-600" />
 
-          <nav className="flex flex-col gap-6 mt-8 text-white">
+          <nav className="flex flex-col gap-6 mt-8 text-gray-300">
             {navItems.map((item, index) => (
               <Link
                 key={index}

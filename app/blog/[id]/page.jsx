@@ -4,7 +4,13 @@ import { Suspense, useEffect, useState } from "react";
 import React from "react";
 import { useSession } from "next-auth/react";
 import { db1 } from "@/lib/firebaseConfig";
-import { doc, getDoc, updateDoc, collection, getDocs } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 import { Share, LinkIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -16,7 +22,9 @@ const BlogDisplay = ({ body }) => {
   const isHTML = /<\/?[a-z][\s\S]*>/i.test(body || "");
   return (
     <div
-      className={`prose max-w-none text-gray-900 ${!isHTML ? "whitespace-pre-line space-y-4" : ""}`}
+      className={`prose max-w-none text-gray-900 ${
+        !isHTML ? "whitespace-pre-line space-y-4" : ""
+      }`}
       dangerouslySetInnerHTML={{
         __html: isHTML ? body : body?.replace(/\n/g, "<br />"),
       }}
@@ -47,17 +55,15 @@ export default function BlogDetails() {
   const [query, setQuery] = useState("");
   const [showNav, setShowNav] = useState(false);
 
-const handleSearch = (e) => {
-      e.preventDefault();
-      if (!query.trim()) return;
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (!query.trim()) return;
 
-      setShowNav(false); // Close nav here
+    setShowNav(false); // Close nav here
 
-      // Navigate to search page with query param
-      router.push(
-        `/search?q=${encodeURIComponent(query.trim().toLowerCase())}`
-      );
-    };
+    // Navigate to search page with query param
+    router.push(`/search?q=${encodeURIComponent(query.trim().toLowerCase())}`);
+  };
   // Fetch current blog
   useEffect(() => {
     if (!id) return;
@@ -127,20 +133,16 @@ const handleSearch = (e) => {
     }, 3000);
   };
 
-
-
-  
-
-  if (!blog) return <div className="text-center py-10">Loading blog...</div>;
+  if (!blog) return <div className="text-center py-20">Loading news...</div>;
 
   return (
-     <motion.div
+    <motion.div
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.1 }}
-      className="min-h-screen px-3 sm:px-5 md:px-10 lg:px-20 py-10 mx-auto text-gray-900 font-sans leading-relaxed space-y-20"
+      className="min-h-screen px- sm:px-5 md:px-10 lg:px-20 py-10 mx-auto text-gray-900 font-sans overflow-hidden leading-relaxed space-y-20"
     >
-      <div className="w-full relative h-64 sm:h-80 md:h-[30rem] mt-15">
+      <div className="w-full relative h-64 sm:h-80 md:h-[30rem] mt-1">
         {/* Image */}
         {blog.imageUrl && (
           <Image
@@ -152,12 +154,10 @@ const handleSearch = (e) => {
           />
         )}
 
-
         {/* Gradient overlay for better text visibility */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/6 via-black/30 to-transparent z-20"></div>
 
-        
-  <button
+        <button
           onClick={handleCopyLink}
           className="border flex items-center max-md:top-80 max-lg:top-150 lg:top-150 z-40 -right-2  absolute gap-2 text-gray-400 font-semibold py-3 bg-black text-white px-3  rounded-full hover:bg-gray-800"
         >
@@ -173,7 +173,7 @@ const handleSearch = (e) => {
               {subtitle}
             </h2>
           )}
-           {/* <button
+          {/* <button
           onClick={handleShareClick}
           className="border mt-5 right-7 flex items-center gap-2 text-white bg-black font-semibold py-4 px-4 sm:px-6 rounded-full hover:bg-gray-800 relative"
         >
@@ -205,12 +205,9 @@ const handleSearch = (e) => {
             </div>
           )}
         </button> */}
-
-      
         </div>
-        
       </div>
-      
+
       {/* Blog content */}
       <div className="blog-content prose max-w-none px-2 sm:px-4 space-y-5 gap-5 font-serif text-sm max-md:mt-110">
         <hr />
@@ -227,439 +224,505 @@ const handleSearch = (e) => {
         >
           {/* {liked ? "Liked" : "Likes"} ({likes}) */}
         </button>
-</div>
+      </div>
 
- <div className="border p-5 max-w-xl mx-auto bg-black text-white">
-      <h2 className="font-semibold">
-        Subscribe to the <em>Cyclopedia</em> newsletter for weekly insights on the
-        world's most pressing topics. <span className="text-red-600">*</span>
-      </h2>
-      <p className="text-sm text-gray-400 mt-1">Required</p>
+      <div className="border p-5 max-w-xl mx-auto bg-black text-white">
+        <h2 className="font-semibold">
+          Subscribe to the <em>Cyclopedia</em> newsletter for weekly insights on
+          the world's most pressing topics.{" "}
+          <span className="text-red-600">*</span>
+        </h2>
+        <p className="text-sm text-gray-400 mt-1">Required</p>
 
-  <form action="YOUR_MAILCHIMP_FORM_ACTION_URL" method="post" target="_blank" novalidate>
-        {/* Email Address */}
-        <div>
-          <label className="block text-xs font-semibold text-gray-300 mb-1">
-            * EMAIL ADDRESS
-          </label>
-          <input
-            type="email"
-            className="w-full border border-green-600 rounded-sm px-3 py-2 focus:outline-none focus:ring-1 focus:ring-green-600"
-          />
-        </div>
-
-        {/* Country or Region */}
-        <div>
-          <label className="block text-xs font-semibold text-gray-300 mb-1">
-            * COUNTRY OR REGION
-          </label>
-          <select className="w-full text-black bg-white border border-green-600 rounded-sm px-3 py-2 focus:outline-none focus:ring-1 focus:ring-green-600">
-            <option className="text-gray-200">Select One</option>
-            <option>United States</option>
-            <option>United Kingdom</option>
-            <option>Canada</option>
-            <option>Australia</option>
-            <option>Algeria</option>
-<option>Angola</option>
-<option>Benin</option>
-<option>Botswana</option>
-<option>Burkina Faso</option>
-<option>Burundi</option>
-<option>Cabo Verde</option>
-<option>Cameroon</option>
-<option>Central African Republic</option>
-<option>Chad</option>
-<option>Comoros</option>
-<option>Congo (Republic)</option>
-<option>Congo (Democratic Republic)</option>
-<option>Côte d'Ivoire</option>
-<option>Djibouti</option>
-<option>Egypt</option>
-<option>Equatorial Guinea</option>
-<option>Eritrea</option>
-<option>Eswatini</option>
-<option>Ethiopia</option>
-<option>Gabon</option>
-<option>Gambia</option>
-<option>Ghana</option>
-<option>Guinea</option>
-<option>Guinea-Bissau</option>
-<option>Kenya</option>
-<option>Lesotho</option>
-<option>Liberia</option>
-<option>Libya</option>
-<option>Madagascar</option>
-<option>Malawi</option>
-<option>Mali</option>
-<option>Mauritania</option>
-<option>Mauritius</option>
-<option>Morocco</option>
-<option>Mozambique</option>
-<option>Namibia</option>
-<option>Niger</option>
-<option>Nigeria</option>
-<option>Rwanda</option>
-<option>Sao Tome and Principe</option>
-<option>Senegal</option>
-<option>Seychelles</option>
-<option>Sierra Leone</option>
-<option>Somalia</option>
-<option>South Africa</option>
-<option>South Sudan</option>
-<option>Sudan</option>
-<option>Tanzania</option>
-<option>Togo</option>
-<option>Tunisia</option>
-<option>Uganda</option>
-<option>Zambia</option>
-<option>Zimbabwe</option>
-            <option>Other</option>
-          </select>
-        </div>
-
-        {/* Privacy note */}
-        <p className="text-xs text-gray-700">
-          This site is protected by reCAPTCHA and the Google{" "}
-          <a href="#" className="underline">
-            Privacy Policy
-          </a>{" "}
-          and{" "}
-          <a href="#" className="underline">
-            Terms of Service
-          </a>{" "}
-          apply.
-        </p>
-
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="bg-green-600 text-white px-4 py-2 text-sm font-semibold rounded-sm hover:bg-green-700"
+        <form
+          action="YOUR_MAILCHIMP_FORM_ACTION_URL"
+          method="post"
+          target="_blank"
+          novalidate
         >
-          SIGN UP
-        </button>
-      </form>
-    </div>
-      
-      <hr/>
-{/* Related Blogs */}
-<div className="mt-10">
-  <h2 className="text-xl font-bold mb-4">Related</h2>
-  <div className="grid sm:grid-cols-2 gap-6">
-
-    {/* Blog 1 */}
-    {blogs.length >= 1 && (
-      <Link href={`/blog/${blogs[0].id}`} className="block">
-        <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
-          {blogs[0].imageUrl && (
-            <div className="relative w-full h-48 sm:h-56">
-              <img
-                src={blogs[0].imageUrl}
-                alt={blogs[0].title}
-                className="object-cover w-full h-full"
-              />
-            </div>
-          )}
-          <div className="p-4">
-            <h2 className="text-base font-bold text-black hover:underline uppercase">
-              {blogs[0].title}
-            </h2>
-            <div className="flex gap-2 items-center mt-2 flex-wrap">
-              <span className="text-orange-600 text-sm uppercase">TAGGED:</span>
-              <Link href={`/search?q=politics`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">Politics</Link>
-              <Link href={`/search?q=religion`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">Religion</Link>
-            </div>
+          {/* Email Address */}
+          <div>
+            <label className="block text-xs font-semibold text-gray-300 mb-1">
+              * EMAIL ADDRESS
+            </label>
+            <input
+              type="email"
+              className="w-full border border-green-600 rounded-sm px-3 py-2 focus:outline-none focus:ring-1 focus:ring-green-600"
+            />
           </div>
-        </div>
-      </Link>
-    )}
 
-    {/* Blog 2 */}
-    {blogs.length >= 2 && (
-      <Link href={`/blog/${blogs[1].id}`} className="block">
-        <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
-          {blogs[1].imageUrl && (
-            <div className="relative w-full h-48 sm:h-56">
-              <img
-                src={blogs[1].imageUrl}
-                alt={blogs[1].title}
-                className="object-cover w-full h-full"
-              />
-            </div>
-          )}
-          <div className="p-4">
-            <h2 className="text-base font-bold text-black hover:underline uppercase">
-              {blogs[1].title}
-            </h2>
-            <div className="flex gap-2 items-center mt-2 flex-wrap">
-              <span className="text-orange-600 text-sm uppercase">TAGGED:</span>
-              <Link href={`/search?q=history`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">History</Link>
-              <Link href={`/search?q=politics`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">Politics</Link>
-            </div>
+          {/* Country or Region */}
+          <div>
+            <label className="block text-xs font-semibold text-gray-300 mb-1">
+              * COUNTRY OR REGION
+            </label>
+            <select className="w-full text-black bg-white border border-green-600 rounded-sm px-3 py-2 focus:outline-none focus:ring-1 focus:ring-green-600">
+              <option className="text-gray-200">Select One</option>
+              <option>United States</option>
+              <option>United Kingdom</option>
+              <option>Canada</option>
+              <option>Australia</option>
+              <option>Algeria</option>
+              <option>Angola</option>
+              <option>Benin</option>
+              <option>Botswana</option>
+              <option>Burkina Faso</option>
+              <option>Burundi</option>
+              <option>Cabo Verde</option>
+              <option>Cameroon</option>
+              <option>Central African Republic</option>
+              <option>Chad</option>
+              <option>Comoros</option>
+              <option>Congo (Republic)</option>
+              <option>Congo (Democratic Republic)</option>
+              <option>Côte d'Ivoire</option>
+              <option>Djibouti</option>
+              <option>Egypt</option>
+              <option>Equatorial Guinea</option>
+              <option>Eritrea</option>
+              <option>Eswatini</option>
+              <option>Ethiopia</option>
+              <option>Gabon</option>
+              <option>Gambia</option>
+              <option>Ghana</option>
+              <option>Guinea</option>
+              <option>Guinea-Bissau</option>
+              <option>Kenya</option>
+              <option>Lesotho</option>
+              <option>Liberia</option>
+              <option>Libya</option>
+              <option>Madagascar</option>
+              <option>Malawi</option>
+              <option>Mali</option>
+              <option>Mauritania</option>
+              <option>Mauritius</option>
+              <option>Morocco</option>
+              <option>Mozambique</option>
+              <option>Namibia</option>
+              <option>Niger</option>
+              <option>Nigeria</option>
+              <option>Rwanda</option>
+              <option>Sao Tome and Principe</option>
+              <option>Senegal</option>
+              <option>Seychelles</option>
+              <option>Sierra Leone</option>
+              <option>Somalia</option>
+              <option>South Africa</option>
+              <option>South Sudan</option>
+              <option>Sudan</option>
+              <option>Tanzania</option>
+              <option>Togo</option>
+              <option>Tunisia</option>
+              <option>Uganda</option>
+              <option>Zambia</option>
+              <option>Zimbabwe</option>
+              <option>Other</option>
+            </select>
           </div>
-        </div>
-      </Link>
-    )}
 
-    {/* Blog 3 */}
-    {blogs.length >= 3 && (
-      <Link href={`/blog/${blogs[2].id}`} className="block">
-        <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
-          {blogs[2].imageUrl && (
-            <div className="relative w-full h-48 sm:h-56">
-              <img
-                src={blogs[2].imageUrl}
-                alt={blogs[2].title}
-                className="object-cover w-full h-full"
-              />
-            </div>
-          )}
-          <div className="p-4">
-            <h2 className="text-base font-bold text-black hover:underline uppercase">
-              {blogs[2].title}
-            </h2>
-            <div className="flex gap-2 items-center mt-2 flex-wrap">
-              <span className="text-orange-600 text-sm uppercase">TAGGED:</span>
-              <Link href={`/search?q=science`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">Science</Link>
-              <Link href={`/search?q=religion`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">Religion</Link>
-            </div>
-          </div>
-        </div>
-      </Link>
-    )}
+          {/* Privacy note */}
+          <p className="text-xs text-gray-700">
+            This site is protected by reCAPTCHA and the Google{" "}
+            <a href="#" className="underline">
+              Privacy Policy
+            </a>{" "}
+            and{" "}
+            <a href="#" className="underline">
+              Terms of Service
+            </a>{" "}
+            apply.
+          </p>
 
-    {/* Blog 4 */}
-    {blogs.length >= 4 && (
-      <Link href={`/blog/${blogs[3].id}`} className="block">
-        <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
-          {blogs[3].imageUrl && (
-            <div className="relative w-full h-48 sm:h-56">
-              <img
-                src={blogs[3].imageUrl}
-                alt={blogs[3].title}
-                className="object-cover w-full h-full"
-              />
-            </div>
-          )}
-          <div className="p-4">
-            <h2 className="text-base font-bold text-black hover:underline uppercase">
-              {blogs[3].title}
-            </h2>
-            <div className="flex gap-2 items-center mt-2 flex-wrap">
-              <span className="text-orange-600 text-sm uppercase">TAGGED:</span>
-              <Link href={`/search?q=history`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">History</Link>
-              <Link href={`/search?q=politics`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">Politics</Link>
-            </div>
-          </div>
-        </div>
-      </Link>
-    )}
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="bg-green-600 text-white px-4 py-2 text-sm font-semibold rounded-sm hover:bg-green-700"
+          >
+            SIGN UP
+          </button>
+        </form>
+      </div>
 
-    {/* Blog 5 */}
-    {blogs.length >= 5 && (
-      <Link href={`/blog/${blogs[4].id}`} className="block">
-        <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
-          {blogs[4].imageUrl && (
-            <div className="relative w-full h-48 sm:h-56">
-              <img
-                src={blogs[4].imageUrl}
-                alt={blogs[4].title}
-                className="object-cover w-full h-full"
-              />
-            </div>
-          )}
-          <div className="p-4">
-            <h2 className="text-base font-bold text-black hover:underline uppercase">
-              {blogs[4].title}
-            </h2>
-           
-           
-            <div className="flex gap-2 items-center mt-2 flex-wrap">
-              <span className="text-orange-600 text-sm uppercase">TAGGED:</span>
-              <Link href={`/search?q=science`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">Science</Link>
-              <Link href={`/search?q=history`} className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50">History</Link>
-            </div>
-          </div>
-        </div>
-      </Link>
-    )}
-
-  </div>
-</div>
-
-      
-
-   <div className="grid sm:grid-cols-2 gap-8 mt-20 px-2 sm:px-4">
-
-      {/* News 1 */}
-      <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-2xl">
-        <div className="relative w-full h-48 sm:h-56">
-          <Image
-            src="/shari.png"
-            alt="Three Key Moments for Shari’a in Nigeria"
-            fill
-            className="object-cover"
-          />
-        </div>
-        <div className="p-4">
-          <Link href="https://cyclopedia-media-hub.vercel.app/blog/yQ5FJS6IFfe7zpQ8gzk7">
-            <h2 className="text-base font-bold text-black hover:underline uppercase">
-              Three Key Moments for Shari’a in Nigeria
-            </h2>
-          </Link>
-          <p className="text-xs text-orange-600 mt-1 uppercase">Alex Thurston</p>
-          <p className="text-orange-600 text-sm">20 MARCH 2025</p>
-          <div className="flex gap-4 items-center mt-2 flex-wrap">
-            <span className="text-orange-600 text-sm">TAGGED:</span>
-            <Link
-              href="/africa"
-              className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
-            >
-              Africa
+      <hr />
+      {/* Related Blogs */}
+      <div className="mt-10">
+        <h2 className="text-xl font-bold mb-4">Related</h2>
+        <div className="grid sm:grid-cols-2 gap-6">
+          {/* Blog 1 */}
+          {blogs.length >= 1 && (
+            <Link href={`/blog/${blogs[0].id}`} className="block">
+              <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
+                {blogs[0].imageUrl && (
+                  <div className="relative w-full h-48 sm:h-56">
+                    <img
+                      src={blogs[0].imageUrl}
+                      alt={blogs[0].title}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                )}
+                <div className="p-4">
+                  <h2 className="text-base font-bold text-black hover:underline uppercase">
+                    {blogs[0].title}
+                  </h2>
+                  <div className="flex gap-2 items-center mt-2 flex-wrap">
+                    <span className="text-orange-600 text-sm uppercase">
+                      TAGGED:
+                    </span>
+                    <Link
+                      href={`/search?q=politics`}
+                      className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+                    >
+                      Politics
+                    </Link>
+                    <Link
+                      href={`/search?q=religion`}
+                      className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+                    >
+                      Religion
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </Link>
-            <Link
-              href="/america"
-              className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
-            >
-              America
+          )}
+
+          {/* Blog 2 */}
+          {blogs.length >= 2 && (
+            <Link href={`/blog/${blogs[1].id}`} className="block">
+              <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
+                {blogs[1].imageUrl && (
+                  <div className="relative w-full h-48 sm:h-56">
+                    <img
+                      src={blogs[1].imageUrl}
+                      alt={blogs[1].title}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                )}
+                <div className="p-4">
+                  <h2 className="text-base font-bold text-black hover:underline uppercase">
+                    {blogs[1].title}
+                  </h2>
+                  <div className="flex gap-2 items-center mt-2 flex-wrap">
+                    <span className="text-orange-600 text-sm uppercase">
+                      TAGGED:
+                    </span>
+                    <Link
+                      href={`/search?q=history`}
+                      className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+                    >
+                      History
+                    </Link>
+                    <Link
+                      href={`/search?q=politics`}
+                      className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+                    >
+                      Politics
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </Link>
-          </div>
+          )}
+
+          {/* Blog 3 */}
+          {blogs.length >= 3 && (
+            <Link href={`/blog/${blogs[2].id}`} className="block">
+              <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
+                {blogs[2].imageUrl && (
+                  <div className="relative w-full h-48 sm:h-56">
+                    <img
+                      src={blogs[2].imageUrl}
+                      alt={blogs[2].title}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                )}
+                <div className="p-4">
+                  <h2 className="text-base font-bold text-black hover:underline uppercase">
+                    {blogs[2].title}
+                  </h2>
+                  <div className="flex gap-2 items-center mt-2 flex-wrap">
+                    <span className="text-orange-600 text-sm uppercase">
+                      TAGGED:
+                    </span>
+                    <Link
+                      href={`/search?q=science`}
+                      className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+                    >
+                      Science
+                    </Link>
+                    <Link
+                      href={`/search?q=religion`}
+                      className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+                    >
+                      Religion
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          )}
+
+          {/* Blog 4 */}
+          {blogs.length >= 4 && (
+            <Link href={`/blog/${blogs[3].id}`} className="block">
+              <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
+                {blogs[3].imageUrl && (
+                  <div className="relative w-full h-48 sm:h-56">
+                    <img
+                      src={blogs[3].imageUrl}
+                      alt={blogs[3].title}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                )}
+                <div className="p-4">
+                  <h2 className="text-base font-bold text-black hover:underline uppercase">
+                    {blogs[3].title}
+                  </h2>
+                  <div className="flex gap-2 items-center mt-2 flex-wrap">
+                    <span className="text-orange-600 text-sm uppercase">
+                      TAGGED:
+                    </span>
+                    <Link
+                      href={`/search?q=history`}
+                      className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+                    >
+                      History
+                    </Link>
+                    <Link
+                      href={`/search?q=politics`}
+                      className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+                    >
+                      Politics
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          )}
+
+          {/* Blog 5 */}
+          {blogs.length >= 5 && (
+            <Link href={`/blog/${blogs[4].id}`} className="block">
+              <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
+                {blogs[4].imageUrl && (
+                  <div className="relative w-full h-48 sm:h-56">
+                    <img
+                      src={blogs[4].imageUrl}
+                      alt={blogs[4].title}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                )}
+                <div className="p-4">
+                  <h2 className="text-base font-bold text-black hover:underline uppercase">
+                    {blogs[4].title}
+                  </h2>
+
+                  <div className="flex gap-2 items-center mt-2 flex-wrap">
+                    <span className="text-orange-600 text-sm uppercase">
+                      TAGGED:
+                    </span>
+                    <Link
+                      href={`/search?q=science`}
+                      className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+                    >
+                      Science
+                    </Link>
+                    <Link
+                      href={`/search?q=history`}
+                      className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+                    >
+                      History
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          )}
         </div>
       </div>
 
-      {/* News 2 */}
-      <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-2xl">
-        <div className="relative w-full h-48 sm:h-56">
-          <Image
-            src="/strug.png"
-            alt="Violent Dissent, Intra-Muslim Struggles, and Political Crisis in Northern Nigeria"
-            fill
-            className="object-cover"
-          />
+      <div className="grid sm:grid-cols-2 gap-8 mt-20 px-2 sm:px-4">
+        {/* News 1 */}
+        <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-2xl">
+          <div className="relative w-full h-48 sm:h-56">
+            <Image
+              src="/shari.png"
+              alt="Three Key Moments for Shari’a in Nigeria"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="p-4">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/yQ5FJS6IFfe7zpQ8gzk7">
+              <h2 className="text-base font-bold text-black hover:underline uppercase">
+                Three Key Moments for Shari’a in Nigeria
+              </h2>
+            </Link>
+            <p className="text-xs text-orange-600 mt-1 uppercase">
+              Alex Thurston
+            </p>
+            <p className="text-orange-600 text-sm">20 MARCH 2025</p>
+            <div className="flex gap-4 items-center mt-2 flex-wrap">
+              <span className="text-orange-600 text-sm">TAGGED:</span>
+              <Link
+                href="/africa"
+                className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+              >
+                Africa
+              </Link>
+              <Link
+                href="/america"
+                className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+              >
+                America
+              </Link>
+            </div>
+          </div>
         </div>
-        <div className="p-4">
-          <Link href="https://cyclopedia-media-hub.vercel.app/blog/sVYggqD0kTZjrZsC7GIb">
-            <h2 className="text-base font-bold text-black hover:underline uppercase">
-              Violent Dissent, Intra-Muslim Struggles, and Political Crisis in Northern Nigeria
-            </h2>
-          </Link>
-          <p className="text-xs text-orange-600 mt-1 uppercase">Alex Thurston</p>
-          <p className="text-orange-600 text-sm">15 MARCH 2025</p>
-          <div className="flex gap-4 items-center mt-2 flex-wrap">
-            <span className="text-orange-600 text-sm">TAGGED:</span>
-            <Link
-              href="/politics"
-              className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
-            >
-              Politics
+
+        {/* News 2 */}
+        <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-2xl">
+          <div className="relative w-full h-48 sm:h-56">
+            <Image
+              src="/strug.png"
+              alt="Violent Dissent, Intra-Muslim Struggles, and Political Crisis in Northern Nigeria"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="p-4">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/sVYggqD0kTZjrZsC7GIb">
+              <h2 className="text-base font-bold text-black hover:underline uppercase">
+                Violent Dissent, Intra-Muslim Struggles, and Political Crisis in
+                Northern Nigeria
+              </h2>
             </Link>
-            <Link
-              href="/religion"
-              className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
-            >
-              Religion
+            <p className="text-xs text-orange-600 mt-1 uppercase">
+              Alex Thurston
+            </p>
+            <p className="text-orange-600 text-sm">15 MARCH 2025</p>
+            <div className="flex gap-4 items-center mt-2 flex-wrap">
+              <span className="text-orange-600 text-sm">TAGGED:</span>
+              <Link
+                href="/politics"
+                className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+              >
+                Politics
+              </Link>
+              <Link
+                href="/religion"
+                className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+              >
+                Religion
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* News 3 */}
+        <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-2xl">
+          <div className="relative w-full h-48 sm:h-56">
+            <Image
+              src="/ngs.png"
+              alt="Mass Protests Against Corruption in Abuja"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="p-4">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/XAwf0LrciDI0bYxkQdsb">
+              <h2 className="text-base font-bold text-black hover:underline uppercase">
+                Nigerians See Mixed Economic Picture as Election Day Nears{" "}
+              </h2>
             </Link>
+            <p className="text-orange-600 text-sm">10 MARCH 2025</p>
+            <div className="flex gap-4 items-center mt-2 flex-wrap">
+              <span className="text-orange-600 text-sm">TAGGED:</span>
+              <Link
+                href="/africa"
+                className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+              >
+                Africa
+              </Link>
+              <Link
+                href="/europe"
+                className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+              >
+                Europe
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* News 4 */}
+        <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-2xl">
+          <div className="relative w-full h-48 sm:h-56">
+            <Image
+              src="/ngd.png"
+              alt="Educational Reform Sparks Debate in Kano"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="p-4">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/gSgBpeaXGNgVDYQWxIlT">
+              <h2 className="text-base font-bold text-black hover:underline uppercase">
+                Nigerians Deeply Divided by Religion on Key Issues{" "}
+              </h2>
+            </Link>
+            <p className="text-xs text-orange-600 mt-1 uppercase">
+              Musa Ibrahim
+            </p>
+            <p className="text-orange-600 text-sm">5 MARCH 2025</p>
+            <div className="flex gap-4 items-center mt-2 flex-wrap">
+              <span className="text-orange-600 text-sm">TAGGED:</span>
+              <Link
+                href="/asia"
+                className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+              >
+                Asia
+              </Link>
+              <Link
+                href="/america"
+                className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+              >
+                America
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* News 3 */}
-      <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-2xl">
-        <div className="relative w-full h-48 sm:h-56">
-          <Image
-            src="/ngs.png"
-            alt="Mass Protests Against Corruption in Abuja"
-            fill
-            className="object-cover"
-          />
-        </div>
-        <div className="p-4">
-          <Link href="https://cyclopedia-media-hub.vercel.app/blog/XAwf0LrciDI0bYxkQdsb">
-            <h2 className="text-base font-bold text-black hover:underline uppercase">
-Nigerians See Mixed Economic Picture as Election Day Nears            </h2>
-          </Link>
-          <p className="text-orange-600 text-sm">10 MARCH 2025</p>
-          <div className="flex gap-4 items-center mt-2 flex-wrap">
-            <span className="text-orange-600 text-sm">TAGGED:</span>
-            <Link
-              href="/africa"
-              className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
-            >
-              Africa
-            </Link>
-            <Link
-              href="/europe"
-              className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
-            >
-              Europe
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* News 4 */}
-      <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-2xl">
-        <div className="relative w-full h-48 sm:h-56">
-          <Image
-            src="/ngd.png"
-            alt="Educational Reform Sparks Debate in Kano"
-            fill
-            className="object-cover"
-          />
-        </div>
-        <div className="p-4">
-          <Link href="https://cyclopedia-media-hub.vercel.app/blog/gSgBpeaXGNgVDYQWxIlT">
-            <h2 className="text-base font-bold text-black hover:underline uppercase">
-Nigerians Deeply Divided by Religion on Key Issues            </h2>
-          </Link>
-          <p className="text-xs text-orange-600 mt-1 uppercase">Musa Ibrahim</p>
-          <p className="text-orange-600 text-sm">5 MARCH 2025</p>
-          <div className="flex gap-4 items-center mt-2 flex-wrap">
-            <span className="text-orange-600 text-sm">TAGGED:</span>
-            <Link
-              href="/asia"
-              className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
-            >
-              Asia
-            </Link>
-            <Link
-              href="/america"
-              className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
-            >
-              America
-            </Link>
-          </div>
-        </div>
-      </div>
-
-    </div>
 
       {/* More Blogs Button */}
-     <div className="mx-auto">
-<form
-            onSubmit={handleSearch}
-            className="flex lg:hidden items-center  mr-6 mx-auto"
-            role="search"
-            aria-label="Site Search"
+      <div className="mx-auto">
+        <form
+          onSubmit={handleSearch}
+          className="flex lg:hidden items-center  mr-6 mx-auto"
+          role="search"
+          aria-label="Site Search"
+        >
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search anything in cyclopedia"
+            className="px-5 py-2 rounded-l-md shadow-2xl text-black focus:outline-none focus:ring-2 focus:ring-purple-400 w-64"
+            aria-label="Search input"
+          />
+          <button
+            type="submit"
+            // onClick={() => setShowNav(false)}
+            className="bg-gradient-to-r from-purple-500 to-cyan-400  px-6 py-2 rounded-r-md text-white font-semibold transition"
           >
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search anything in cyclopedia"
-              className="px-5 py-2 rounded-l-md shadow-2xl text-black focus:outline-none focus:ring-2 focus:ring-purple-400 w-64"
-              aria-label="Search input"
-            />
-            <button
-              type="submit"
-              // onClick={() => setShowNav(false)}
-              className="bg-gradient-to-r from-purple-500 to-cyan-400  px-6 py-2 rounded-r-md text-white font-semibold transition"
-            >
-              Search
-            </button>
-          </form>
-
-</div>
-
+            Search
+          </button>
+        </form>
+      </div>
     </motion.div>
   );
 }

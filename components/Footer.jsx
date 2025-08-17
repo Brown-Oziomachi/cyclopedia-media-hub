@@ -35,7 +35,7 @@ const Footer = () => {
             </li>
             <li>
               <a href="/global" className="hover:text-purple-400 transition">
-                News
+               Latest News
               </a>
             </li>
           </ul>

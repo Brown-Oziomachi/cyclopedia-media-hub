@@ -49,7 +49,7 @@ const Page = () => {
     const q = firestoreQuery(
       collection(db1, "blogs"),
       orderBy("createdAt", "desc"),
-      limit(5) // always fetch only latest 3
+      limit(20) // always fetch only latest 3
     );
 
    const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -304,7 +304,7 @@ const Page = () => {
 
             {/* Overlay */}
             {isOpen && (
-              <div className="fixed inset-0 bg-purple-600/50 flex items-center justify-center z-50">
+              <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
                 {/* Popup */}
                 <div className="bg-white p-6 rounded-2xl max-w-lg w-full relative shadow-lg">
                   {/* Close button */}
@@ -343,9 +343,9 @@ const Page = () => {
           </div>
         </div>
       </section>
-
-      <div className="max-w-5xl mx-auto py-10 px-4 bg-purple-600">
-      <h2 className="text-2xl font-bold mb-6">Latest News</h2>
+<hr className="border-2"/>
+      <div className="max-w-5xl mx-auto py-10 px- bg-white">
+      <h2 className="text-2xl font-bold mb-6 text-black">Latest News</h2>
       {posts.length === 0 ? (
         <p className="text-gray-500">No posts found.</p>
       ) : (
@@ -354,17 +354,17 @@ const Page = () => {
             <Link
               key={post.id}
               href={`/blog/${post.id}`} // <-- Correct route
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition"
+              className="bg-white  shadow-md overflow-hidden hover:shadow-lg transition"
             >
               {post.imageUrl && (
                 <img
                   src={post.imageUrl}
                   alt={post.title}
-                  className="w-full h-40 object-cover"
+                  className="w-full h-50 object-cover"
                 />
               )}
               <div className="p-4">
-                <h3 className="text-lg font-semibold">{post.title}</h3>
+                <h3 className="text-lg font-semibold font-serif">{post.title}</h3>
                 <p className="text-sm text-gray-600 line-clamp-2">
                   {post.subtitle || post.content?.slice(0, 100) + "..."}
                 </p>
@@ -376,12 +376,12 @@ const Page = () => {
     </div>
 
       
-      <section className="px-2 py-5 md:py-20  text-black active:text-purple-600 max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
-        {/* Left Column — Featured News (stacked vertically on large screens) */}
+        <h1 className="text-center mt-19 mb-0 font-serif text-2xl ">Eplore more news </h1>
+      <section className="px- py-5 md:py-10   text-black active:text-purple-600 max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
         <div className="lg:w-2/3 flex flex-col gap-8">
           {/* Card 1 */}
           <div className="relative">
-            <img src="fun.png" alt="News Image" className="w-full rounded-md" />
+            <img src="fun.png" alt="News Image" className="w-full" />
             <div className="absolute bottom-1 left-4 right-4 bg-white max-lg:h-40 bg-opacity-90 p-4">
               <Link href="https://cyclopedia-media-hub.vercel.app/blog/bmFfkpRJx9MceeUlcz5J">
                 <h2 className="text-sm font-bold hover:underline">
@@ -399,8 +399,8 @@ const Page = () => {
 
           {/* Card 2 */}
           <div className="relative">
-            <img src="oil.png" alt="News Image" className="w-full rounded-md" />
-            <div className="absolute bottom-0 left-4 right-4 bg-white max-lg:h-35 bg-opacity-90 p-4 ">
+            <img src="oil.png" alt="News Image" className="w-full h-60" />
+            <div className="absolute bottom-0 left-4 right-4 bg-white max-lg:h-30 bg-opacity-90 p-4">
               <Link href="https://cyclopedia-media-hub.vercel.app/blog/5njbEcuqy6lFrrYdMS2p">
                 <h2 className="text-sm font-bold hover:underline">
                   US Turning Oil-Rich Nigeria into Proxy for its Africa Wars
@@ -504,15 +504,15 @@ const Page = () => {
           </ul>
         </aside>
       </section>
-
-      <section className="px-2 py-5 md:py-20 bg-white text-black text-center max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 items-stretch">
+<hr className="border-2"/>
+      <section className="px- py-10 md:py-20 bg-white text-black text-center max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 items-stretch">
         {/* First Card */}
 
         <div className="relative w-full lg:w-1/2 ">
           <img
             src="inter.png"
             alt="News Image"
-            className="w-full max-md:h-50 rounded-md"
+            className="w-full max-md:h-50"
           />
           <div className="absolute z-10 bottom-4 max-md:-bottom-5 left-4 right-4 bg-white bg-opacity-90 p-4 ">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/EBmJtaV9bZ6rmy8blKmw">
@@ -537,7 +537,7 @@ const Page = () => {
           <img
             src="erik.png"
             alt="News Image"
-            className="w-full h-auto object-cover rounded-md"
+            className="w-full h-auto object-cover "
           />
           <div className="absolute z-10 bottom-4 left-4 right-4 bg-white bg-opacity-90 p-4">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/Tc0W4qUPzj7ytY7UB5fs">
@@ -561,7 +561,7 @@ const Page = () => {
           <img
             src="/Ame.png"
             alt="News 4"
-            className="w-full h-auto object-cover rounded-md"
+            className="w-full h-auto object-cover "
           />
           <div className="absolute z-10 bottom-4 left-4 right-4 bg-white bg-opacity-90 p-4 ">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/dTksJYvlMiYC3QJ2BVa3">
@@ -580,22 +580,22 @@ const Page = () => {
         </div>
       </section>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto items-start justify-center z-50 p-4 bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto items-start justify-center z-50 p- bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
         {/* Card 1 */}
         <Link
           href="https://cyclopedia-media-hub.vercel.app/blog/nVmpG0se1lyhis8uRH9y"
-          className="block bg-white text-black h-full hover:shadow-lg transition rounded"
+          className="block bg-white text-black h-full hover:shadow-lg transition "
         >
           <img
             src="/leba.png"
             alt="News Image"
-            className="mt-3 w-full h-40 object-cover rounded"
+            className="mt-3 w-full h-40 object-cover "
           />
-          <h3 className="text-lg font-semibold mt-4">
+          <h3 className="text-lg font-semibold p-4">
             The Exploitative System that Traps Nigerian Women as Slaves in
             Lebanon
           </h3>
-          <p className="text-sm text-gray-400 mt-2 line-clamp-3">
+          <p className="text-sm text-gray-400 line-clamp-3 p-4">
             Nigerian migrants arrive in Lagos from Libya. Nigeria has, in the
             last two years, evacuated thousands of its citizens from Libya and
             Lebanon after they suffered several forms of abuses, including
@@ -611,13 +611,13 @@ const Page = () => {
           <img
             src="/teen.png"
             alt="News Image"
-            className="mt-3 w-full h-40 object-cover rounded"
+            className="mt-3 w-full h-40 object-cover "
           />
-          <h3 className="text-lg font-semibold mt-4">
+          <h3 className="text-lg font-semibold  p-4">
             Teens are increasingly turning to AI companions, and it could be
             harming them
           </h3>
-          <p className="text-sm text-gray-400 mt-2 line-clamp-3">
+          <p className="text-sm text-gray-400  line-clamp-3 p-4">
             Teenagers are increasingly turning to AI companions for friendship,
             support, and even romance. But these apps could be changing how
             young people connect to others, both online and off.
@@ -665,15 +665,15 @@ const Page = () => {
         </Link>
       </div>
 
-      <section className="px-2 text-center grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto  mt-10 ">
-        <div className="mt-5 text-black bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+      <section className="px- text-center grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto  mt-10 ">
+        <div className="mt-5 text-black bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <img src="british.png" alt="" />
           <Link href="https://cyclopedia-media-hub.vercel.app/blog/DxewHf37R7X7ZBzQRLE5">
             <h2 className="text-xl font-bold text-left hover:underline text-black p-5">
               Britain’s secret state and the need for whistle-blowing
             </h2>
           </Link>
-          <p className="text-sm text-gray-500 text-left mt-5 p-2">
+          <p className="text-sm text-gray-500 text-left mt p-4">
             In November 2003, I was charged with a breach of the Official
             Secrets Act in the UK. My ‘crime’ had been to reveal an email from
             the US National Security Agency (NSA) to Britain's intelligence
@@ -682,7 +682,7 @@ const Page = () => {
           </p>
         </div>
 
-        <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div className="bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <img src="uk.png" alt="" />
           <Link href="https://cyclopedia-media-hub.vercel.app/blog/HYhefDd7rXfAAzKBJCyb">
             <h2 className="text-xl font-bold text-left hover:underline text-black p-5">
@@ -696,7 +696,7 @@ const Page = () => {
           </p>
         </div>
 
-        <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 p-5">
+        <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 p-">
           <img src="som.png" alt="" className="mt-10" />
           <Link href="https://cyclopedia-media-hub.vercel.app/blog/OjdVfovsON2pJsJU9yJr">
             <h2 className="text-xl font-bold text-black text-left hover:underline">
@@ -712,7 +712,7 @@ const Page = () => {
       </section>
 
       {/* Mobile heading */}
-      <div id="News-cpd" className="w-full px-4 mt-10">
+      <div id="News-cpd" className="w-full  mt-10">
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Feature Card */}
           <div className="w-full lg:w-1/2">
@@ -846,11 +846,7 @@ const Page = () => {
           </div>
         </div>
         <div className="text-center mt-8">
-          <Link href="/global">
-            <button className="shadow-xl hover:bg-white hover:text-black transition-all px-6 py-2 text-white bg-purple-600 font-bold rounded-lg">
-              Global News
-            </button>
-          </Link>
+         
         </div>
       </div>
 
@@ -869,33 +865,10 @@ const Page = () => {
 
       {/* Featured Topics */}
 
-      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {/* === NEWS CARD 1 === */}
-        <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-          <div className="relative w-full h-[220px]">
-            <img
-              src="/medi.png"
-              alt="News 3"
-              className="object-cover w-full h-full"
-            />
-          </div>
-          <div className="p-4">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/OjdVfovsON2pJsJU9yJr">
-              <h2 className="text-sm font-bold text-black hover:underline lowercase">
-                HOW THE WESTERN MEDIA HELPED BUILD THE CASE FOR GENOCIDE IN GAZA
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-600 mt-1">By cyclopedia</p>
-            <p className="mt-2 text-gray-800 text-xs">
-              From obscuring the West’s role in starving Gaza to sensationalised
-              accounts of mass rape by Hamas, journalists are playing the role
-              of propagandists, not reporters.
-            </p>
-          </div>
-        </div>
+      <div className="max-w-7xl mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
         {/* === NEWS CARD 2 === */}
-        <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div className="bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <div className="relative w-full h-[220px]">
             <img
               src="/ed.png"
@@ -922,7 +895,7 @@ const Page = () => {
         </div>
 
         {/* === NEWS CARD 3 === */}
-        <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div className="bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <div className="relative w-full h-[220px]">
             <img
               src="/fire.png"
@@ -946,7 +919,7 @@ const Page = () => {
         </div>
 
         {/* === NEWS CARD 4 === */}
-        <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div className="bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <div className="relative w-full h-[220px]">
             <img
               src="/amer.png"
@@ -973,7 +946,7 @@ const Page = () => {
         </div>
 
         {/* === NEWS CARD 5 === */}
-        <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div className="bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <div className="relative w-full h-[220px]">
             <img
               src="/wa.png"
@@ -1067,7 +1040,7 @@ const Page = () => {
         >
           What We Fight For
         </motion.h2>
-        <p className="text-lg max-w-2xl mx-auto mask-b-from-90% ">
+        <p className="text-lg max-w-2xl mx-auto% ">
           We are not conspiracy theorists. We are truth seekers. We are the ones
           who question what they tell us, challenge the narrative, and expose
           what lies behind the curtain.
@@ -1075,7 +1048,7 @@ const Page = () => {
       </section>
 
       {/* Coming Soon Teaser */}
-      <section className="px-6 py-16 bg-black text-white max-w-6xl mx-auto mask-t-from-90%">
+      <section className="px-6 py-16 bg-black text-white max-w-6xl mx-auto %">
         <div className="grid gap-12 lg:grid-cols-3">
           {[
             {
@@ -1090,11 +1063,11 @@ const Page = () => {
               desc: `On the 50th anniversary of the end of the Biafran war, the world’s worst humanitarian crisis in the late 1960s, declassified British files show that Harold Wilson’s government secretly armed and backed Nigeria’s aggression against the secessionist region.`,
               link: "https://cyclopedia-media-hub.vercel.app/blog/WzsZMEGNhs8e85Pr8hOg",
             },
-            {
-              title: "The Real Intentions Of The Abuja Declaration-1989",
-              desc: `Apparently, as a result of the growing awareness amongst Christians of the evil planned by the Muslims against the Church, the Muslims went online to edit and distort the information on the Abuja Declaration of 1989. The information on Wikipedia was edited on Monday, 21st July, 2014.`,
-              link: "/abuja-declaration-1989",
-            },
+            // {
+            //   title: "The Real Intentions Of The Abuja Declaration-1989",
+            //   desc: `Apparently, as a result of the growing awareness amongst Christians of the evil planned by the Muslims against the Church, the Muslims went online to edit and distort the information on the Abuja Declaration of 1989. The information on Wikipedia was edited on Monday, 21st July, 2014.`,
+            //   link: "/",
+            // },
           ].map(({ title, desc, link }, i) => (
             <article
               key={i}
@@ -1106,7 +1079,7 @@ const Page = () => {
                 href={link}
                 className="mt-5 inline-block text-purple-400 hover:text-purple-600 underline font-semibold transition-colors"
               >
-                Read More
+                Read more
               </a>
             </article>
           ))}

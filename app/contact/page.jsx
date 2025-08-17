@@ -60,7 +60,7 @@ const ContactPage = () => {
           <section className="container mx-auto px-6 py-10 lg:flex gap-16">
 
             {/* Left Panel */}
-            <div className="flex-1 max-w-xl mx-auto mt-15 space-y-6">
+            <div className="flex-1 max-w-xl mx-auto mt-20 space-y-6">
               <h1 className="text-4xl font-extrabold text-center">
                 Connect with Cyclopedia
               </h1>
@@ -95,7 +95,7 @@ const ContactPage = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="flex-1 bg-gray-950 border border-purple-700 rounded-lg p-6 mt-10 shadow-lg">
+            <div className="flex-1 bg-gray-950 border border-purple-700 rounded-lg p-6 mt-20 shadow-lg">
               <Formik
                 initialValues={{
                   name: "",
@@ -110,7 +110,7 @@ const ContactPage = () => {
                 {() => (
                   <Form>
                     <h2 className="text-2xl text-center font-bold mb-4 border-b border-purple-600 pb-2">
-                      Message the Movement
+                      Message Us
                     </h2>
 
                     {["name", "number", "email", "address"].map((field) => (

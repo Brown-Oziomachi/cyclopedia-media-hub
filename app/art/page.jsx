@@ -64,7 +64,7 @@ const PoliticsPage = () => {
         {loading ? (
           <p className="text-center py-10">Loading latest posts...</p>
         ) : posts.length === 0 ? (
-          <p className="text-gray-500 text-center">No politics posts found.</p>
+          <p className="text-gray-500 text-center">No art & culture posts found.</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {posts.map((post) => (

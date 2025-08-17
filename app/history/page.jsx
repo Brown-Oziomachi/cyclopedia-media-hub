@@ -70,6 +70,7 @@ const Page = () => {
             {posts.map((post) => (
               <div
                 key={post.id}
+                href={`/blog/${post.id}`}
                 className="bg-white border rounded-lg shadow hover:shadow-lg p-4"
               >
                 {post.imageUrl && (
