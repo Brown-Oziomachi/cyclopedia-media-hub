@@ -26,18 +26,16 @@ function Loader() {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-       
-      </head>
+      <head></head>
       <body className="antialiased">
-          <Suspense fallback={<div>Loading page...</div>}>
-        <AuthProvider>
-          <Navbar />
+        <Suspense fallback={<div>Loading page...</div>}>
+          <AuthProvider>
+            <Navbar />
             {children}
-          <Footer />
-          <Analytics />
-        </AuthProvider>
-          </Suspense>
+            <Footer />
+            <Analytics />
+          </AuthProvider>
+        </Suspense>
       </body>
     </html>
   );

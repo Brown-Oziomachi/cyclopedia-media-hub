@@ -343,6 +343,8 @@ const Page = () => {
           </div>
         </div>
       </section>
+
+
 <hr className="border-2"/>
       <div className="max-w-5xl mx-auto py-10 px- bg-white">
       <h2 className="text-2xl font-bold mb-6 text-black">Latest News</h2>

@@ -123,7 +123,36 @@ const ProfileDropdownNavbar = () => {
         </nav>
 
         {/* Sticky search input */}
+      <form
+        onSubmit={handleSearch}
+        className="hidden lg:flex items-center mx-auto -mt-1 justify-center "
+        role="search"
+        aria-label="Site Search"
+      >
+        <Link
+          href="/newsletter"
+          onClick={() => setShowNav(false)}
+          className="text-gray-400 text-sm mb-4 "
+        >
+          Newsletter
+        </Link>
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="What's on your mind"
+          className="px-1 py-2 rounded-l-md shadow-2xl  shadow-purple-500 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 w-64"
+          aria-label="Search input"
+        />
+        <button
+          type="submit"
+          className="bg-gradient-to-r from-purple-500 to-cyan-400 hover:bg-purple-600 px-2 py-2 rounded-r-md text-white font-semibold transition"
+        >
+          Search
+        </button>
+      </form>
       </header>
+
       <section className=" lg:z-50 flex items-center justify-between px-5 py-3 bg-black">
         {/* Logo */}
 
@@ -160,7 +189,7 @@ const ProfileDropdownNavbar = () => {
           )}
         </div>
 
-        <section className="hidden z-50 w-full -mt-8 lg:bg-black lg:flex text-gray-300 select-none  px-2 py-1 lg:ml-35">
+        <section className="hidden z-50 w-full -mt-7 lg:bg-black lg:flex text-gray-300 select-none  px-2 py-1 lg:ml-">
           <nav className="flex space-x-4 max-w-full overflow-x-auto no-scrollbar">
             {/* Nav Items */}
             {navItems.map((item) => (
@@ -230,37 +259,14 @@ const ProfileDropdownNavbar = () => {
             >
               Technology
             </Link>
+            <Link
+              href="/live"
+              className="px-3 py-2 hover:bg-purple-600  rounded cursor-pointer text-sm font-medium"
+            >
+              Livestream
+            </Link>
           </div>
         </section>
-
-        <form
-          onSubmit={handleSearch}
-          className="hidden lg:flex items-center -ml-70 mr-6 -mt-30"
-          role="search"
-          aria-label="Site Search"
-        >
-          <Link
-            href="/newsletter"
-            onClick={() => setShowNav(false)}
-            className="text-gray-400 text-sm mb-4 -ml-30"
-          >
-            Newsletter
-          </Link>
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="What's on your mind"
-            className="px-8 py-4 rounded-l-md shadow-2xl shadow-purple-500 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 w-64"
-            aria-label="Search input"
-          />
-          <button
-            type="submit"
-            className="bg-gradient-to-r from-purple-500 to-cyan-400 hover:bg-purple-600 px-4 py-4 rounded-r-md text-white font-semibold transition"
-          >
-            Search
-          </button>
-        </form>
 
         {/* Profile / Auth Buttons
         <div className="hidden lg:flex items-center gap-4">
@@ -455,6 +461,11 @@ const ProfileDropdownNavbar = () => {
             <li>
               <Link href="/media" onClick={() => setShowNav(false)}>
                 Media
+              </Link>
+            </li>
+            <li>
+              <Link href="/live" onClick={() => setShowNav(false)}>
+                Livestream
               </Link>
             </li>
           </ul>
