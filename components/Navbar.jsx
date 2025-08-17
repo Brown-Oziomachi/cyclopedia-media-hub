@@ -42,6 +42,27 @@ const ProfileDropdownNavbar = () => {
     }
   }, [searchParams]);
 
+   const [showHeader, setShowHeader] = useState(true);
+   const [lastScroll, setLastScroll] = useState(0);
+
+   useEffect(() => {
+     const handleScroll = () => {
+       const currentScroll = window.scrollY;
+       if (currentScroll < lastScroll) {
+         // Scrolling up
+         setShowHeader(true);
+       } else {
+         // Scrolling down
+         setShowHeader(false);
+       }
+       setLastScroll(currentScroll);
+     };
+
+     window.addEventListener("scroll", handleScroll);
+     return () => window.removeEventListener("scroll", handleScroll);
+   }, [lastScroll]);
+
+  
   // const handleSearch = (e) => {
   //   e.preventDefault();
   //   if (query.trim()) {
@@ -71,36 +92,53 @@ const ProfileDropdownNavbar = () => {
 
    
   return (
-    <main className="fixed top-0 left-0 w-full bg-black text-white shadow-lg z-50">
-      <p className="text-center bg-white text-black text-xs py-1 font-semibold">
-        INFORMATION IS FREEDOM
-      </p>
-
-      {/* Main navbar */}
+    <main className="fixed top-10 left-0 w-full bg-bla text-white z-50">
+      <header className="fixed  -top-5 left-0 w-full  z-50 transition-transform duration-300">
+        <div className="flex items-center justify-center mt-5 bg-white gap-5 ">
+          
+          <p className="text-sm z-40 bg-white text-center  text-black  font-semibold ">
+            CYCLOPEDIA
+          </p>
       <Link href="/">
         <Image
           src="/hid.png"
           alt="Logo"
-          width={40}
-          height={40}
-          className="rounded-full border-3 border-purple-500"
+          width={20}
+          height={20}
+          className="rounded-full border-3 border-purple-500 bg-black "
         />
       </Link>
-      <section className="flex items-center justify-between px-5 py-3">
+         </div>
+        <div
+          className={`bg- text-white text-center py-1 font-bold h-10 ${
+            showHeader ? "-translate-y-5" : "-translate-y-4"
+          }`}
+        >
+        </div>
+
+        <nav
+          className={` text-white flex flex-items-center md:z-50 justify-between py-1 ${
+            showHeader ? "translate-y-1" : "-translate-y-25"
+          } transition-transform duration-300 `}
+        >
+          
+      {/* Main navbar */}
+        </nav>
+
+        {/* Sticky search input */}
+
+       
+      </header>
+      <section className=" lg:z-50 flex items-center justify-between px-5 py-3">
         {/* Logo */}
 
         {/* Title */}
-        <div className="uppercase font-playfair max-lg:-mt-17 lg:ml-2 max-lg:ml-15 text-3xl max-lg:mx-auto lg:text-6xl font-bold bg-gradient-to-r from-purple-500 to-cyan-400 text-transparent bg-clip-text tracking-wide select-none">
-          <Link href="/">
-            <h1 className=" ">Cyclopedia_</h1>
-          </Link>
-        </div>
 
         {/* Top bar with Regions dropdown (hidden on mobile) */}
         <div className="relative max-md:hidden px-4 py-1 text-black max-lg:hidden">
           <button
             onClick={() => setShowRegionsDropdown((v) => !v)}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-md shadow hover:bg-gray-100 font-medium text-sm"
+            className="inline-flex z-50 items-center gap-2 px-4 py-2 bg-white rounded-md shadow hover:bg-gray-100 font-medium text-sm"
             aria-haspopup="true"
             aria-expanded={showRegionsDropdown}
           >
@@ -127,7 +165,7 @@ const ProfileDropdownNavbar = () => {
           )}
         </div>
 
-        <section className="hidden lg:flex text-white select-none shadow-md px-2 py-1 ml-0">
+        <section className="hidden z-50 w-full lg:bg-black lg:flex text-white select-none  px-2 py-1 lg:ml-40">
           <nav className="flex space-x-4 max-w-full overflow-x-auto no-scrollbar">
             {/* Nav Items */}
             {navItems.map((item) => (
@@ -306,7 +344,7 @@ const ProfileDropdownNavbar = () => {
         </div> */}
 
         {/* Mobile menu & profile */}
-        <div className="flex lg:hidden items-center gap-10">
+        <div className="flex lg:hidden items-center gap-10 ">
           {session && (
             <button
               onClick={toggleDrawer(true)}
@@ -325,28 +363,30 @@ const ProfileDropdownNavbar = () => {
 
           <button
             onClick={() => setShowNav((v) => !v)}
-            className="text-3xl text-orange-400 focus:outline-none -mt-15"
+            className="text-3xl  z-50 -mt-10  bg-black"
             aria-label="Toggle navigation menu"
+            
           >
             {showNav ? (
-              <ChevronsDownUp className="text-purple-600" />
+              <ChevronsDownUp className={`text-purple-600 "${ showHeader ? "translate-y-0" : "-translate-y-10" }`} />
             ) : (
-              <ChevronDown className="text-white" />
+                <ChevronDown className={`text-white" ${showHeader ? "translate-y-0" : "-translate-y-0"}`} />
             )}
           </button>
+
         </div>
       </section>
 
       {/* Mobile Navigation Drawer */}
       {showNav && (
         <nav
-          className="fixed inset-0 bg-white bg-opacity-95 flex flex-col text-black p-5 z-[100] mt-27 overflow-y-auto"
+          className="fixed inset-0 bg-black bg-opacity-95  flex flex-col text-black p-5 z-[0] mt-8 overflow-y-auto"
           aria-label="Mobile navigation"
         >
           {/* Small screen search */}
           <form
             onSubmit={handleSearch}
-            className="flex lg:hidden items-center ml-auto mr-6"
+            className="flex lg:hidden items-center ml-auto mr-6 "
             role="search"
             aria-label="Site Search"
           >
@@ -354,8 +394,8 @@ const ProfileDropdownNavbar = () => {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search tags like politics, cyclopedia..."
-              className="px-5 py-4 rounded-l-md shadow-2xl text-black focus:outline-none focus:ring-2 focus:ring-purple-400 w-64"
+              placeholder="What's on your mind?"
+              className="px-5 py-4 rounded-l-md shadow-2xl text-white focus:outline-none focus:ring-2 focus:ring-purple-400 w-64"
               aria-label="Search input"
             />
             <button
@@ -367,7 +407,7 @@ const ProfileDropdownNavbar = () => {
             </button>
           </form>
 
-          <ul className="space-y-3 text-sm font-medium mt-5 text-gray-800 bg-gradient-to-r from-purple-400 to-cyan-400 text-transparent bg-clip-text">
+          <ul className="space-y-3 text-sm font-medium mt-5 text-gray-800 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text">
             <li>
               <Link href="/politics" onClick={() => setShowNav(false)}>
                 Politics
@@ -425,7 +465,7 @@ const ProfileDropdownNavbar = () => {
           </div>
           <hr className="my-4 border-gray-600" />
 
-          <nav className="flex flex-col gap-6 mt-8">
+          <nav className="flex flex-col gap-6 mt-8 text-white">
             {navItems.map((item, index) => (
               <Link
                 key={index}

@@ -76,6 +76,27 @@ const Page = () => {
     setShowSplash(false);
   };
 
+ const [showHeader, setShowHeader] = useState(true);
+ const [lastScroll, setLastScroll] = useState(0);
+
+ useEffect(() => {
+   const handleScroll = () => {
+     const currentScroll = window.scrollY;
+     if (currentScroll < lastScroll) {
+       // Scrolling up
+       setShowHeader(true);
+     } else {
+       // Scrolling down
+       setShowHeader(false);
+     }
+     setLastScroll(currentScroll);
+   };
+
+   window.addEventListener("scroll", handleScroll);
+   return () => window.removeEventListener("scroll", handleScroll);
+ }, [lastScroll]);
+
+
   const categories = [
     {
       emoji: "🌍",
@@ -143,7 +164,7 @@ const Page = () => {
       {showSplash ? (
         <LogoSplash onFinish={handleFinish} />
       ) : (
-        <div className="py-18 lg:-mt-60 text-white relative overflow-hidden bg-gradient-to-r from-purple-900 z-0 bg-black to-black">
+        <div className="py-18 lg:-mt-60 text-white relative overflow-hidden  bg-black to-black">
           {/* Hero Section */}
           {/* <div className=" z-0 ">
             <img
@@ -153,24 +174,24 @@ const Page = () => {
             />
           </div> */}
 
-          <main className="z-50  flex flex-col justify-center items-center  px-4 lg:px-0 max-lg:mt-10 opacity-100 lg:mt-20">
+          <main className="z-50 bg-black flex flex-col justify-center items-center  px-4 lg:px-0 max-lg:mt-0 opacity-100 lg:mt-20">
             <div className="space-y-2 ">
               {/* Cyclopedia Creation Title */}
               <img
                 src="/hid.png"
                 alt="image"
-                className="z-0 w-fit lg:w-200 lg:h-200 h-fit opacity- lg:mt-30"
+                className="z-0 w-fit lg:w-200 lg:h-200 h-fit opacity- lg:mt-30 max-md:hidden "
               />
 
-              <p className="text-sm lg:text-2xl text-gray-300 max-w-3xl mx-auto lg:-mt-30 text-center">
+              <p className="text-sm lg:text-2xl text-gray-300 max-w-3xl mx-auto lg:-mt-30 text-center max-md:hidden">
                 Uncovering the Unseen, Revealing the Real.
               </p>
 
               {/* Buttons */}
             </div>
-            <div className="flex  gap-4 mt-2 group text-sm z-0  lg:mb-20">
+            <div className="flex  gap-4  group text-sm z-0  lg:mb-20 ">
               <Link href="/about">
-                <button className="z-50 border-purple-400 shadow-black shadow-2xl cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all group-hover:bg-white group-hover:text-black ">
+                <button className="z-50 border-purple-400 max-md:hidden  shadow-black shadow-2xl cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all group-hover:bg-white group-hover:text-black ">
                   Learn More
                   <ChevronRight className="text-purple-300" />
                 </button>
@@ -180,7 +201,7 @@ const Page = () => {
         </div>
       )}
 
-      <div className="relative w-full max-lg:w-1/2 max-md:w-full mx-auto lg:hidden">
+      <div className="relative w-full  max-lg:w-1/2 max-md:w-full mx-auto lg:hidden -mt-16 mb-0 bg-black">
         <form
           onSubmit={handleSearch}
           className="flex items-center"
@@ -192,14 +213,14 @@ const Page = () => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search anything in cyclopedia..."
-            className="px-3 py-3 pr-20 rounded-md shadow-2xl border-purple-600 border-2 text-black focus:outline-none focus:ring-2 focus:ring-purple-400 w-full"
+            className="px-3 py-3 pr-20 rounded-md shadow-2xl text-white focus:outline-none  w-full"
             aria-label="Search input"
           />
 
           {/* Search Button inside */}
           <button
             type="submit"
-            className="absolute -right-1 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-500 to-cyan-400 hover:bg-purple-600 px-3 py-2 rounded-md text-white font-semibold transition"
+            className="absolute right-1 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-500 to-cyan-400 hover:bg-purple-600 px-3 py-1 rounded-md text-white font-semibold transition"
           >
             Search
           </button>
