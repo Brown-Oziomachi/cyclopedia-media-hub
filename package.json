@@ -24,7 +24,7 @@
     "mui": "^0.0.1",
     "next": "^15.3.1",
     "next-auth": "^5.0.0-beta.25",
-    "nodemailer": "^6.10.0",
+    "nodemailer": "^7.0.5",
     "quill": "^2.0.3",
     "react": "^19.1.0",
     "react-adsense": "^0.1.0",

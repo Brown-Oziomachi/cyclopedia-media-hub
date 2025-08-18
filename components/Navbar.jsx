@@ -92,7 +92,8 @@ const ProfileDropdownNavbar = () => {
   return (
     <main className="fixed top-10 left-0 w-full bg-black text-white z-50">
       <header className="fixed  -top-5 left-0 w-full  z-50 transition-transform duration-300">
-        <div className="flex items-center text-2xl justify-center mt-5 h-10 bg-black gap-5 ">
+   
+        <div className="flex items-center text-2xl justify-center mt-5 h-10 bg-black gap-5 relative top-0">
           <Link href="/">
             <p className="text-[25px] z-40 bg-black text-center font-bold text-white  ">
               CYCLOPEDIA
@@ -123,35 +124,29 @@ const ProfileDropdownNavbar = () => {
         </nav>
 
         {/* Sticky search input */}
+      </header>
       <form
         onSubmit={handleSearch}
-        className="hidden lg:flex items-center mx-auto -mt-1 justify-center "
+        className="hidden lg:absolute items-center mx-auto -mt-1 justify-center "
         role="search"
         aria-label="Site Search"
       >
-        <Link
-          href="/newsletter"
-          onClick={() => setShowNav(false)}
-          className="text-gray-400 text-sm mb-4 "
-        >
-          Newsletter
-        </Link>
+       
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="What's on your mind"
-          className="px-1 py-2 rounded-l-md shadow-2xl  shadow-purple-500 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 w-64"
+          placeholder="Search...."
+          className="px-1 py-1 rounded-l-md shadow-2xl ml-40 z-50 shadow-purple-500 text-white focus:outline-none focus:ring-2 max-lg:focus:ring-purple-400 w-64"
           aria-label="Search input"
         />
         <button
           type="submit"
-          className="bg-gradient-to-r from-purple-500 to-cyan-400 hover:bg-purple-600 px-2 py-2 rounded-r-md text-white font-semibold transition"
+          className="bg-gradient-to-r from-purple-500 lg:hidden to-cyan-400 hover:bg-purple-600 px-2 py-2 rounded-r-md text-white font-semibold transition"
         >
           Search
         </button>
       </form>
-      </header>
 
       <section className=" lg:z-50 flex items-center justify-between px-5 py-3 bg-black">
         {/* Logo */}

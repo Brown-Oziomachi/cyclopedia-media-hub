@@ -16,6 +16,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter, useParams } from "next/navigation";
+import NewsletterForm from "@/components/ContactForm";
 
 // Blog content renderer
 const BlogDisplay = ({ body }) => {
@@ -226,123 +227,9 @@ export default function BlogDetails() {
         </button>
       </div>
 
-      <div className="border p-5 max-w-xl mx-auto bg-black text-white">
-        <h2 className="font-semibold">
-          Subscribe to the <em>Cyclopedia</em> newsletter for weekly insights on
-          the world's most pressing topics.{" "}
-          <span className="text-red-600">*</span>
-        </h2>
-        <p className="text-sm text-gray-400 mt-1">Required</p>
+      
 
-        <form
-          action="YOUR_MAILCHIMP_FORM_ACTION_URL"
-          method="post"
-          target="_blank"
-          novalidate
-        >
-          {/* Email Address */}
-          <div>
-            <label className="block text-xs font-semibold text-gray-300 mb-1">
-              * EMAIL ADDRESS
-            </label>
-            <input
-              type="email"
-              className="w-full border border-green-600 rounded-sm px-3 py-2 focus:outline-none focus:ring-1 focus:ring-green-600"
-            />
-          </div>
-
-          {/* Country or Region */}
-          <div>
-            <label className="block text-xs font-semibold text-gray-300 mb-1">
-              * COUNTRY OR REGION
-            </label>
-            <select className="w-full text-black bg-white border border-green-600 rounded-sm px-3 py-2 focus:outline-none focus:ring-1 focus:ring-green-600">
-              <option className="text-gray-200">Select One</option>
-              <option>United States</option>
-              <option>United Kingdom</option>
-              <option>Canada</option>
-              <option>Australia</option>
-              <option>Algeria</option>
-              <option>Angola</option>
-              <option>Benin</option>
-              <option>Botswana</option>
-              <option>Burkina Faso</option>
-              <option>Burundi</option>
-              <option>Cabo Verde</option>
-              <option>Cameroon</option>
-              <option>Central African Republic</option>
-              <option>Chad</option>
-              <option>Comoros</option>
-              <option>Congo (Republic)</option>
-              <option>Congo (Democratic Republic)</option>
-              <option>Côte d'Ivoire</option>
-              <option>Djibouti</option>
-              <option>Egypt</option>
-              <option>Equatorial Guinea</option>
-              <option>Eritrea</option>
-              <option>Eswatini</option>
-              <option>Ethiopia</option>
-              <option>Gabon</option>
-              <option>Gambia</option>
-              <option>Ghana</option>
-              <option>Guinea</option>
-              <option>Guinea-Bissau</option>
-              <option>Kenya</option>
-              <option>Lesotho</option>
-              <option>Liberia</option>
-              <option>Libya</option>
-              <option>Madagascar</option>
-              <option>Malawi</option>
-              <option>Mali</option>
-              <option>Mauritania</option>
-              <option>Mauritius</option>
-              <option>Morocco</option>
-              <option>Mozambique</option>
-              <option>Namibia</option>
-              <option>Niger</option>
-              <option>Nigeria</option>
-              <option>Rwanda</option>
-              <option>Sao Tome and Principe</option>
-              <option>Senegal</option>
-              <option>Seychelles</option>
-              <option>Sierra Leone</option>
-              <option>Somalia</option>
-              <option>South Africa</option>
-              <option>South Sudan</option>
-              <option>Sudan</option>
-              <option>Tanzania</option>
-              <option>Togo</option>
-              <option>Tunisia</option>
-              <option>Uganda</option>
-              <option>Zambia</option>
-              <option>Zimbabwe</option>
-              <option>Other</option>
-            </select>
-          </div>
-
-          {/* Privacy note */}
-          <p className="text-xs text-gray-700">
-            This site is protected by reCAPTCHA and the Google{" "}
-            <a href="#" className="underline">
-              Privacy Policy
-            </a>{" "}
-            and{" "}
-            <a href="#" className="underline">
-              Terms of Service
-            </a>{" "}
-            apply.
-          </p>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="bg-green-600 text-white px-4 py-2 text-sm font-semibold rounded-sm hover:bg-green-700"
-          >
-            SIGN UP
-          </button>
-        </form>
-      </div>
-
+      <NewsletterForm />
       <hr />
       {/* Related Blogs */}
       <div className="mt-10">

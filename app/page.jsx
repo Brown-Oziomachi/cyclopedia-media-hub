@@ -197,6 +197,27 @@ const Page = () => {
                 </button>
               </Link>
             </div>
+            <form
+              onSubmit={handleSearch}
+              className=" items-center mx-auto -mt-1 justify-center max-lg:hidden"
+              role="search"
+              aria-label="Site Search"
+            >
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search...."
+                className="px-1 py-3 rounded-l-md shadow-2xl ml-4 z-50 shadow-purple-500 text-white focus:outline-none  focus:ring-2 max-lg:focus:ring-purple-400 w-64"
+                aria-label="Search input"
+              />
+              <button
+                type="submit"
+                className="bg-gradient-to-r from-purple-500  to-cyan-400 hover:bg-purple-600 px-2 py-2 rounded-r-md text-white font-semibold transition"
+              >
+                Search
+              </button>
+            </form>
           </main>
         </div>
       )}
@@ -212,7 +233,7 @@ const Page = () => {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search anything in cyclopedia..."
+            placeholder="Search..."
             className="px-3 py-3 pr-20 rounded-md shadow-2xl text-white focus:outline-none  w-full"
             aria-label="Search input"
           />
@@ -344,41 +365,43 @@ const Page = () => {
         </div>
       </section>
 
-
-<hr className="border-2"/>
+      <hr className="border-2" />
       <div className="max-w-5xl mx-auto py-10 px- bg-white">
-      <h2 className="text-2xl font-bold mb-6 text-black">Latest News</h2>
-      {posts.length === 0 ? (
-        <p className="text-gray-500">No posts found.</p>
-      ) : (
-        <div className="grid md:grid-cols-3 gap-6">
-          {posts.map((post) => (
-            <Link
-              key={post.id}
-              href={`/blog/${post.id}`} // <-- Correct route
-              className="bg-white  shadow-md overflow-hidden hover:shadow-lg transition"
-            >
-              {post.imageUrl && (
-                <img
-                  src={post.imageUrl}
-                  alt={post.title}
-                  className="w-full h-50 object-cover"
-                />
-              )}
-              <div className="p-4">
-                <h3 className="text-lg font-semibold font-serif">{post.title}</h3>
-                <p className="text-sm text-gray-600 line-clamp-2">
-                  {post.subtitle || post.content?.slice(0, 100) + "..."}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      )}
-    </div>
+        <h2 className="text-2xl font-bold mb-6 text-black">Latest News</h2>
+        {posts.length === 0 ? (
+          <p className="text-gray-500">No posts found.</p>
+        ) : (
+          <div className="grid md:grid-cols-3 gap-6">
+            {posts.map((post) => (
+              <Link
+                key={post.id}
+                href={`/blog/${post.id}`} // <-- Correct route
+                className="bg-white  shadow-md overflow-hidden hover:shadow-lg transition"
+              >
+                {post.imageUrl && (
+                  <img
+                    src={post.imageUrl}
+                    alt={post.title}
+                    className="w-full h-50 object-cover"
+                  />
+                )}
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold font-serif">
+                    {post.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 line-clamp-2">
+                    {post.subtitle || post.content?.slice(0, 100) + "..."}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
 
-      
-        <h1 className="text-center mt-19 mb-0 font-serif text-2xl ">Eplore more news </h1>
+      <h1 className="text-center mt-19 mb-0 font-serif text-2xl ">
+        Eplore more news{" "}
+      </h1>
       <section className="px- py-5 md:py-10   text-black active:text-purple-600 max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
         <div className="lg:w-2/3 flex flex-col gap-8">
           {/* Card 1 */}
@@ -506,7 +529,7 @@ const Page = () => {
           </ul>
         </aside>
       </section>
-<hr className="border-2"/>
+      <hr className="border-2" />
       <section className="px- py-10 md:py-20 bg-white text-black text-center max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 items-stretch">
         {/* First Card */}
 
@@ -847,9 +870,7 @@ const Page = () => {
             </Link>
           </div>
         </div>
-        <div className="text-center mt-8">
-         
-        </div>
+        <div className="text-center mt-8"></div>
       </div>
 
       <div className="bg-white lg:flex items-center justify-center gap-8">
@@ -868,7 +889,6 @@ const Page = () => {
       {/* Featured Topics */}
 
       <div className="max-w-7xl mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-
         {/* === NEWS CARD 2 === */}
         <div className="bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <div className="relative w-full h-[220px]">

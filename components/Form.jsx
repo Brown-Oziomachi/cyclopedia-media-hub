@@ -4,9 +4,9 @@ import Link from 'next/link';
 import * as Yup from 'yup';
 import React, { useEffect, useState } from 'react'
 import { collection, addDoc } from 'firebase/firestore';
-import { db } from '@/firebase/formDb';  // <--- UPDATED IMPORT
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import { Loader,ThumbsUp } from 'lucide-react';
+import { db2 } from '@/lib/firebaseConfig';
 
 // Validation schema
 const valSchema = Yup.object({
@@ -47,7 +47,7 @@ const ContactPage = ({ session }) => {
         timestamp: new Date().toLocaleDateString(),
       };
       
-      const webwizformRef = await addDoc(collection(db, "contactForm"), webwizformDoc);
+      const webwizformRef = await addDoc(collection(db2, "contactForm"), webwizformDoc);
       console.log(webwizformRef.id);
       
       resetForm();
