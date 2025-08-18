@@ -2,46 +2,67 @@
 import { useState, useEffect } from "react";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+} from "firebase/auth";
 
 export default function AdminPage() {
   const [url, setUrl] = useState("");
   const [platform, setPlatform] = useState("youtube");
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(null);
 
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+
+  // Monitor auth state
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return unsubscribe;
+  }, [auth]);
+
+  // Fetch existing livestream
   useEffect(() => {
     const fetchData = async () => {
-      const ref = doc(db, "settings", "liveStream");
-      const snap = await getDoc(ref);
-      if (snap.exists()) {
-        setUrl(snap.data().originalUrl || snap.data().url);
-        setPlatform(snap.data().platform);
+      try {
+        const ref = doc(db, "settings", "liveStream");
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+          setUrl(snap.data().originalUrl || snap.data().url);
+          setPlatform(snap.data().platform);
+        }
+      } catch (err) {
+        console.error("Error fetching livestream data:", err);
       }
     };
     fetchData();
   }, []);
 
-  // 🔹 Convert normal URL → embed URL
   const convertToEmbed = (url, platform) => {
     if (!url) return "";
 
     if (platform === "youtube") {
       let videoId = "";
-
-      if (url.includes("watch?v=")) {
-        videoId = url.split("v=")[1]?.split("&")[0];
-      } else if (url.includes("/live/")) {
+      if (url.includes("watch?v=")) videoId = url.split("v=")[1]?.split("&")[0];
+      else if (url.includes("/live/"))
         videoId = url.split("/live/")[1]?.split("?")[0];
-      } else if (url.includes("youtu.be/")) {
+      else if (url.includes("youtu.be/"))
         videoId = url.split("youtu.be/")[1]?.split("?")[0];
-      }
-
-      if (!videoId) return url; // fallback
-      return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      return videoId
+        ? `https://www.youtube.com/embed/${videoId}?autoplay=1`
+        : url;
     }
 
     if (platform === "twitch") {
       const channel = url.split("twitch.tv/")[1]?.split("?")[0];
       if (!channel) return url;
-      return `https://player.twitch.tv/?channel=${channel}&parent=localhost`; // change parent on deploy
+      const parent = window.location.hostname;
+      return `https://player.twitch.tv/?channel=${channel}&parent=${parent}`;
     }
 
     if (platform === "facebook") {
@@ -52,23 +73,52 @@ export default function AdminPage() {
 
     if (platform === "vimeo") {
       const id = url.split("/").pop()?.split("?")[0];
-      if (!id) return url;
-      return `https://player.vimeo.com/video/${id}?autoplay=1`;
+      return id ? `https://player.vimeo.com/video/${id}?autoplay=1` : url;
     }
 
     return url;
   };
 
   const handleSave = async () => {
-    const embedUrl = convertToEmbed(url, platform);
-    const ref = doc(db, "settings", "liveStream");
-    await setDoc(ref, {
-      url: embedUrl,
-      originalUrl: url, // keep original for editing later
-      platform,
-    });
-    alert("✅ Livestream updated!");
+    if (!user) return alert("❌ Please log in first.");
+    if (!url) return alert("❌ Please enter a valid livestream link.");
+
+    setLoading(true);
+    try {
+      const embedUrl = convertToEmbed(url, platform);
+      const ref = doc(db, "settings", "liveStream");
+      await setDoc(ref, { url: embedUrl, originalUrl: url, platform });
+      alert("✅ Livestream updated!");
+    } catch (err) {
+      console.error("Failed to update livestream:", err);
+      alert("❌ Failed to update livestream. Check console.");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const handleLogin = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (err) {
+      console.error("Login failed:", err);
+      alert("❌ Login failed. Check console.");
+    }
+  };
+
+  if (!user) {
+    return (
+      <div className="max-w-lg mx-auto p-5 text-center">
+        <h1 className="text-2xl font-bold mt-20 mb-4">Admin Login Required</h1>
+        <button
+          onClick={handleLogin}
+          className="bg-blue-600 text-white px-6 py-3 rounded-lg"
+        >
+          Sign in with Google
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-lg mx-auto p-5">
@@ -96,9 +146,12 @@ export default function AdminPage() {
 
       <button
         onClick={handleSave}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+        disabled={loading}
+        className={`px-4 py-2 rounded text-white ${
+          loading ? "bg-gray-500 cursor-not-allowed" : "bg-blue-600"
+        }`}
       >
-        Save
+        {loading ? "Saving..." : "Save"}
       </button>
     </div>
   );

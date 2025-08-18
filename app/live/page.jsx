@@ -14,54 +14,67 @@ function Loader() {
 export default function LiveStreamSwitcher() {
   const [platform, setPlatform] = useState("youtube");
   const [loading, setLoading] = useState(true);
-
-  const [youtubeLink, setYoutubeLink] = useState("");
-  const [twitchLink, setTwitchLink] = useState("");
-  const [facebookLink, setFacebookLink] = useState("");
-  const [vimeoLink, setVimeoLink] = useState("");
-
   const [currentVideo, setCurrentVideo] = useState(null);
+  const [videoList, setVideoList] = useState([]);
 
   const handleLoad = () => setLoading(false);
 
-  // Fetch live stream URLs from Firestore
+  // Fetch admin livestream from Firestore
   useEffect(() => {
     async function fetchLinks() {
-      const ref = doc(db, "settings", "liveStream");
-      const snap = await getDoc(ref);
-      if (snap.exists()) {
-        const data = snap.data();
-        const yt = data.platform === "youtube" ? data.url : "";
-        const tw = data.platform === "twitch" ? data.url : "";
-        const fb = data.platform === "facebook" ? data.url : "";
-        const vi = data.platform === "vimeo" ? data.url : "";
+      try {
+        const ref = doc(db, "settings", "liveStream");
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+          const data = snap.data();
+          const liveVideo = {
+            id: "admin-live",
+            title: "🔴 Cyclopedia Live Stream",
+            platform: data.platform,
+            url: data.url,
+          };
 
-        setYoutubeLink(yt);
-        setTwitchLink(tw);
-        setFacebookLink(fb);
-        setVimeoLink(vi);
+          // Add live video to video list
+          setVideoList((prev) => [liveVideo, ...prev]);
 
-        // Set first available link as default
-        const firstAvailable = yt || tw || fb || vi || null;
-
-        const defaultPlatform = yt
-          ? "youtube"
-          : tw
-          ? "twitch"
-          : fb
-          ? "facebook"
-          : vi
-          ? "vimeo"
-          : null;
-
-        if (firstAvailable) {
-          setPlatform(defaultPlatform);
-          setCurrentVideo({ platform: defaultPlatform, url: firstAvailable });
+          // Set as default if no current video
+          if (!currentVideo) setCurrentVideo(liveVideo);
+          setPlatform(data.platform);
         }
+      } catch (err) {
+        console.error("Failed to fetch live stream:", err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
+
     fetchLinks();
+  }, []);
+
+  // Sample fallback videos
+  useEffect(() => {
+    const fallbackVideos = [
+      {
+        id: 1,
+        title:
+          "Israeli strikes intensify on Gaza City as forced displacement plan advances",
+        platform: "youtube",
+        url: "https://www.youtube.com/embed/2-6n7_GxkwA?autoplay=1&mute=1",
+      },
+      {
+        id: 2,
+        title:
+          "Displaced Palestinians in Gaza City battle hunger as Israeli ground operations intensify",
+        platform: "youtube",
+        url: "https://www.youtube.com/embed/WptREEgMqI0?autoplay=1&mute=1",
+      },
+    ];
+
+    // Only add fallback if videoList is empty
+    setVideoList((prev) => (prev.length ? prev : fallbackVideos));
+
+    if (!currentVideo && fallbackVideos.length)
+      setCurrentVideo(fallbackVideos[0]);
   }, []);
 
   const embeds = {
@@ -111,24 +124,6 @@ export default function LiveStreamSwitcher() {
     ) : null,
   };
 
-  // Sample video list
-  const videoList = [
-    {
-      id: 1,
-      title:
-        "Israeli strikes intensify on Gaza City as forced displacement plan advances",
-      platform: "youtube",
-      url: "https://www.youtube.com/embed/2-6n7_GxkwA?autoplay=1&mute=1",
-    },
-    {
-      id: 2,
-      title:
-        "Displaced Palestinians in Gaza City battle hunger as Israeli ground operations intensify",
-      platform: "youtube",
-      url: "https://www.youtube.com/embed/WptREEgMqI0?autoplay=1&mute=1",
-    },
-  ];
-
   return (
     <div className="w-full flex flex-col items-center gap-6 py-10 bg-black text-white mt-10">
       <h2 className="text-2xl font-bold mt-20">📺 Live Broadcast</h2>
@@ -142,17 +137,10 @@ export default function LiveStreamSwitcher() {
         onChange={(e) => {
           const newPlatform = e.target.value;
           setPlatform(newPlatform);
+
+          const selected = videoList.find((v) => v.platform === newPlatform);
+          setCurrentVideo(selected || null);
           setLoading(true);
-
-          // Update currentVideo with the correct URL
-          let url = "";
-          if (newPlatform === "youtube") url = youtubeLink;
-          if (newPlatform === "twitch") url = twitchLink;
-          if (newPlatform === "facebook") url = facebookLink;
-          if (newPlatform === "vimeo") url = vimeoLink;
-
-          if (url) setCurrentVideo({ platform: newPlatform, url });
-          else setCurrentVideo(null);
         }}
         className="px-4 py-2 rounded-lg border border-gray-600 bg-black text-white mt-4"
       >
@@ -175,7 +163,11 @@ export default function LiveStreamSwitcher() {
         {videoList.map((video) => (
           <button
             key={video.id}
-            onClick={() => setCurrentVideo(video)}
+            onClick={() => {
+              setCurrentVideo(video);
+              setPlatform(video.platform);
+              setLoading(true);
+            }}
             className={`w-full p-5 text-center text-sm rounded-lg transition ${
               currentVideo?.id === video.id
                 ? "bg-purple-700"
