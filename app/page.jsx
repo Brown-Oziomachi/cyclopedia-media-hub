@@ -248,25 +248,7 @@ const Page = () => {
         </form>
       </div>
 
-      <div className="bg-gray-950 p-6 text-white max-w-3xl ">
-        {/* Title */}
-        <a
-          href="https://cyclopedia-media-hub.vercel.app/blog/9dhLYxSLB0fLLRPFBX1Z"
-          className="text-blue-400 hover:underline text-lg font-medium cursor-pointer duration-400 ease-in-out   active:text-purple-600 active:bg-purple-900 "
-        >
-          The World's Crisis in War Reporting
-        </a>
-
-        {/* Date + Description */}
-        <p className="text-xs text-gray-400">
-          Cyclopedia — As{" "}
-          <span className="font-bold text-white">journalists</span> are laid off
-          and newspapers cut back or shut down, whole sectors of our civic life
-          disappear from public view and go dark. Much of local and state
-          governments, whole federal departments...
-        </p>
-      </div>
-      <div id="read-more">{/* Your "Explore more" content goes here */}</div>
+     
 
       <section className="px-6 py-5 md:py-20 max-w-4xl mx-auto bg-white text-black z-0">
         <div className="grid grid-cols-3 sm:grid-cols-5 gap-6 justify-center hover:shadow-2xl hover:shadow-purple-700">
