@@ -210,3 +210,6 @@ const PoliticsPage = () => {
 };
 
 export default PoliticsPage;
+
+
+
