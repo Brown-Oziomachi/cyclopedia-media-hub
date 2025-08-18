@@ -92,10 +92,12 @@ const ProfileDropdownNavbar = () => {
   return (
     <main className="fixed top-10 left-0 w-full bg-black text-white z-50">
       <header className="fixed  -top-5 left-0 w-full  z-50 transition-transform duration-300">
-   
-        <div className="flex items-center text-2xl justify-center mt-5 h-10 bg-black gap-5 relative top-0">
+        <div className="flex items-center text-center w-full text-2xl justify-center mt-5 h-10 bg-black gap-5 relative top-0">
           <Link href="/">
-            <p className="text-[25px] z-40 bg-black text-center font-bold text-white  ">
+            <p
+              className="text-[35px]   z-40 bg-black text-center font-bold text-white  "
+              onClick={() => setShowNav(false)}
+            >
               CYCLOPEDIA
             </p>
           </Link>
@@ -106,6 +108,7 @@ const ProfileDropdownNavbar = () => {
               width={30}
               height={30}
               className="rounded-full border-3 border-purple-500 bg-black "
+              onClick={() => setShowNav(false)}
             />
           </Link>
         </div>
@@ -131,7 +134,6 @@ const ProfileDropdownNavbar = () => {
         role="search"
         aria-label="Site Search"
       >
-       
         <input
           type="text"
           value={query}
@@ -400,7 +402,7 @@ const ProfileDropdownNavbar = () => {
       {/* Mobile Navigation Drawer */}
       {showNav && (
         <nav
-          className="fixed inset-0 bg-black bg-opacity-95 flex flex-col text-black p-5 z-[50] mt-9 overflow-y-auto"
+          className="fixed inset-0  bg-black bg-opacity-95 flex flex-col text-black p-5 z-[50] mt-9 overflow-y-auto"
           aria-label="Mobile navigation"
         >
           {/* Small screen search */}

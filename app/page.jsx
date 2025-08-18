@@ -367,7 +367,7 @@ const Page = () => {
 
       <hr className="border-2" />
       <div className="max-w-5xl mx-auto py-10 px- bg-white">
-        <h2 className="text-2xl font-bold mb-6 text-black">Latest News</h2>
+        <h2 className="text-2xl font-bold mb-6 text-black p-4">Latest News</h2>
         {posts.length === 0 ? (
           <p className="text-gray-500">No posts found.</p>
         ) : (

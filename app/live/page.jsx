@@ -31,18 +31,33 @@ export default function LiveStreamSwitcher() {
       const snap = await getDoc(ref);
       if (snap.exists()) {
         const data = snap.data();
-        const yt = data.youtube + "?autoplay=1";
-        const tw = data.twitch + "&autoplay=true&parent=yourdomain.com";
-        const fb = data.facebook + "&autoplay=true";
-        const vi = data.vimeo + "?autoplay=1";
+        const yt = data.platform === "youtube" ? data.url : "";
+        const tw = data.platform === "twitch" ? data.url : "";
+        const fb = data.platform === "facebook" ? data.url : "";
+        const vi = data.platform === "vimeo" ? data.url : "";
 
         setYoutubeLink(yt);
         setTwitchLink(tw);
         setFacebookLink(fb);
         setVimeoLink(vi);
 
-        // set first video as default
-        setCurrentVideo({ platform: "youtube", url: yt });
+        // Set first available link as default
+        const firstAvailable = yt || tw || fb || vi || null;
+
+        const defaultPlatform = yt
+          ? "youtube"
+          : tw
+          ? "twitch"
+          : fb
+          ? "facebook"
+          : vi
+          ? "vimeo"
+          : null;
+
+        if (firstAvailable) {
+          setPlatform(defaultPlatform);
+          setCurrentVideo({ platform: defaultPlatform, url: firstAvailable });
+        }
       }
       setLoading(false);
     }
@@ -50,71 +65,69 @@ export default function LiveStreamSwitcher() {
   }, []);
 
   const embeds = {
-    youtube: (
+    youtube: currentVideo?.url ? (
       <iframe
         className="w-full h-full"
-        src={currentVideo?.url}
+        src={currentVideo.url}
         title="YouTube Live"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
         onLoad={handleLoad}
-      ></iframe>
-    ),
-    twitch: (
+      />
+    ) : null,
+    twitch: currentVideo?.url ? (
       <iframe
         className="w-full h-full"
-        src={currentVideo?.url}
+        src={currentVideo.url}
         title="Twitch Live"
         frameBorder="0"
         allow="autoplay"
         allowFullScreen
         onLoad={handleLoad}
-      ></iframe>
-    ),
-    facebook: (
+      />
+    ) : null,
+    facebook: currentVideo?.url ? (
       <iframe
         className="w-full h-full"
-        src={currentVideo?.url}
+        src={currentVideo.url}
         title="Facebook Live"
         frameBorder="0"
         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
         allowFullScreen
         onLoad={handleLoad}
-      ></iframe>
-    ),
-    vimeo: (
+      />
+    ) : null,
+    vimeo: currentVideo?.url ? (
       <iframe
         className="w-full h-full"
-        src={currentVideo?.url}
+        src={currentVideo.url}
         title="Vimeo Live"
         frameBorder="0"
         allow="autoplay; fullscreen; picture-in-picture"
         allowFullScreen
         onLoad={handleLoad}
-      ></iframe>
-    ),
+      />
+    ) : null,
   };
 
   // Sample video list
-const videoList = [
-  {
-    id: 1,
-    title:
-      "Israeli strikes intensify on Gaza City as forced displacement plan advances",
-    platform: "youtube",
-    url: "https://www.youtube.com/embed/2-6n7_GxkwA?autoplay=1&mute=1",
-  },
-{
-  id: 2,
-  title: "Displaced Palestinians in Gaza City battle hunger as Israeli ground operations intensify",
-  platform: "youtube",
-  url: "https://www.youtube.com/embed/WptREEgMqI0?autoplay=1&mute=1",
-},
-
-  // { id: 3, title: "Live Video 3", platform: "youtube", url: youtubeLink },
-];
-
+  const videoList = [
+    {
+      id: 1,
+      title:
+        "Israeli strikes intensify on Gaza City as forced displacement plan advances",
+      platform: "youtube",
+      url: "https://www.youtube.com/embed/2-6n7_GxkwA?autoplay=1&mute=1",
+    },
+    {
+      id: 2,
+      title:
+        "Displaced Palestinians in Gaza City battle hunger as Israeli ground operations intensify",
+      platform: "youtube",
+      url: "https://www.youtube.com/embed/WptREEgMqI0?autoplay=1&mute=1",
+    },
+  ];
 
   return (
     <div className="w-full flex flex-col items-center gap-6 py-10 bg-black text-white mt-10">
@@ -127,12 +140,19 @@ const videoList = [
       <select
         value={platform}
         onChange={(e) => {
+          const newPlatform = e.target.value;
+          setPlatform(newPlatform);
           setLoading(true);
-          setPlatform(e.target.value);
-          setCurrentVideo((prev) => ({
-            ...prev,
-            platform: e.target.value,
-          }));
+
+          // Update currentVideo with the correct URL
+          let url = "";
+          if (newPlatform === "youtube") url = youtubeLink;
+          if (newPlatform === "twitch") url = twitchLink;
+          if (newPlatform === "facebook") url = facebookLink;
+          if (newPlatform === "vimeo") url = vimeoLink;
+
+          if (url) setCurrentVideo({ platform: newPlatform, url });
+          else setCurrentVideo(null);
         }}
         className="px-4 py-2 rounded-lg border border-gray-600 bg-black text-white mt-4"
       >
@@ -146,7 +166,7 @@ const videoList = [
       <div className="w-full max-w-4xl aspect-video rounded-2xl overflow-hidden shadow-lg relative mt-4">
         {loading && <Loader />}
         <div className={loading ? "opacity-0 absolute inset-0" : "relative"}>
-          {embeds[platform]}
+          {currentVideo?.url ? embeds[platform] : null}
         </div>
       </div>
 
