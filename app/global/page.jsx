@@ -13,7 +13,7 @@ import {
 } from "firebase/firestore";
 
 export default function BlogsPage() {
-  const [blogs, setBlogs] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [lastDoc, setLastDoc] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -31,7 +31,7 @@ export default function BlogsPage() {
           id: doc.id,
           ...doc.data(),
         }));
-        setBlogs(docs);
+        setPosts(docs);
         setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
       }
     });
@@ -72,14 +72,14 @@ export default function BlogsPage() {
         Explore the global News
       </h2>
 
-      {blogs.map((blog) => (
-        <Link key={blog.id} href={`/blog/${blog.id}`} className="block">
+      {posts.map((post) => (
+        <Link key={post.id} href={`/blog/${post.id}`} className="block">
           <div className="flex flex-col bg-white overflow-hidden shadow-md cursor-pointer">
-            {blog.imageUrl && (
+            {post.imageUrl && (
               <div className="relative w-full h-60 sm:h-56">
                 <img
-                  src={blog.imageUrl}
-                  alt={blog.title}
+                  src={post.imageUrl}
+                  alt={post.title}
                   className="object-cover w-full h-full"
                 />
               </div>
@@ -87,11 +87,11 @@ export default function BlogsPage() {
             <div className="p-4">
               {/* Title */}
               <h2 className="text-sm font-bold text-black hover:underline uppercase">
-                {blog.title}
+                {post.title}
               </h2>
-              {blog.description && (
+              {post.subtitle && (
                 <p className="text-sm text-gray-600 line-clamp-3">
-                  {blog.description}
+                  {post.subtitle}
                 </p>
 
               )}

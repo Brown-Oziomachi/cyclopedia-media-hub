@@ -34,8 +34,13 @@ const Footer = () => {
               </a>
             </li>
             <li>
+              <a href="/sports" className="hover:text-purple-400 transition">
+                Sports News
+              </a>
+            </li>
+            <li>
               <a href="/global" className="hover:text-purple-400 transition">
-               Latest News
+                Latest News
               </a>
             </li>
           </ul>

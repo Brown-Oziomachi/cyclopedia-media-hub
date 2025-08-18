@@ -76,7 +76,6 @@ const ProfileDropdownNavbar = () => {
   };
 
   const navItems = [
-    { text: "Latest News", url: "/global" },
     { text: "About us", url: "/about" },
     { text: "Contact us", url: "/contact" },
   ];
@@ -255,6 +254,12 @@ const ProfileDropdownNavbar = () => {
               className="px-3 py-2 hover:bg-purple-600  rounded cursor-pointer text-sm font-medium"
             >
               Technology
+            </Link>
+            <Link
+              href="/sports"
+              className="px-3 py-2 hover:bg-purple-600  rounded cursor-pointer text-sm font-medium"
+            >
+              Sports news
             </Link>
             <Link
               href="/live"
@@ -458,6 +463,11 @@ const ProfileDropdownNavbar = () => {
             <li>
               <Link href="/media" onClick={() => setShowNav(false)}>
                 Media
+              </Link>
+            </li>
+            <li>
+              <Link href="/sports" onClick={() => setShowNav(false)}>
+                Sports
               </Link>
             </li>
             <li>

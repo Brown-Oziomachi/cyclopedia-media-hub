@@ -9,12 +9,12 @@ const LogoSplash = ({ onFinish }) => {
   useEffect(() => {
     const logoTimer = setTimeout(() => {
       setStep("text");
-    }, 4000); // logo visible for 4s
+    }, 2000); // logo visible for 4s
 
     const finishTimer = setTimeout(() => {
       setStep("done");
       if (onFinish) onFinish();
-    }, 20000); // total splash duration = 10s
+    }, 2000); // total splash duration = 10s
 
     return () => {
       clearTimeout(logoTimer);
