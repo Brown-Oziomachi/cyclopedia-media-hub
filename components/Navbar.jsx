@@ -467,7 +467,7 @@ const ProfileDropdownNavbar = () => {
             </li>
             <li>
               <Link href="/sports" onClick={() => setShowNav(false)}>
-                Sports
+                Sports news
               </Link>
             </li>
             <li>
