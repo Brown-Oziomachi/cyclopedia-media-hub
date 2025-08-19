@@ -61,9 +61,11 @@ const Page = () => {
       </p>
 
       {/* ✅ Dynamic Firestore Religion Posts */}
+      <p className="text-center">Latest News</p>
       {loading ? (
         <p className="text-center text-gray-500">Loading Latest posts...</p>
-      ) : posts.length > 0 ? (
+        
+      ) : posts.length > 0 ? ( 
         <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {posts.map((post) => (
             <div
@@ -103,6 +105,7 @@ const Page = () => {
 
       {/* ✅ Static Cards (kept intact) */}
       <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <h1 className="text-center">Explore more News</h1>
         {/* === Your Static Cards (unchanged) === */}
         {/* Just pasted your existing static cards here */}
         {/* === NEWS CARD 1 === */}

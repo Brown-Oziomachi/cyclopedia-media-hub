@@ -1,6 +1,4 @@
-
-
-"use client"
+"use client";
 import { useState, useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/auth";
@@ -24,20 +22,40 @@ export default function LiveStreamSwitcher() {
     fetchLiveVideos();
   }, []);
 
-  if (loading) return <div className="text-center mt-20">Loading...</div>;
+  if (loading) return <div className="text-center mt-28">Loading...</div>;
   if (!currentVideo)
     return <div className="text-center mt-20">No livestream available.</div>;
+
+  // Function to clean embed links (removes branding)
+  const getEmbedUrl = (video) => {
+    if (video.platform === "youtube") {
+      return `${video.url}?autoplay=1&modestbranding=1&showinfo=0&rel=0&controls=0`;
+    }
+    if (video.platform === "facebook") {
+      return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(
+        video.url
+      )}&show_text=false&autoplay=true`;
+    }
+    if (video.platform === "vimeo") {
+      return `${video.url}?autoplay=1&title=0&byline=0&portrait=0`;
+    }
+    if (video.platform === "twitch") {
+      return `https://player.twitch.tv/?channel=${video.url}&autoplay=true&parent=yourdomain.com`;
+    }
+    return video.url;
+  };
 
   return (
     <div className="max-w-4xl mx-auto p-5">
       {/* Main Video */}
-      <div className="w-full aspect-video overflow-hidden mb-6 relative mt-20 lg:mt-40">
+      <div className="w-full aspect-video overflow-hidden mb-6 relative mt-20 lg:mt-40 bg-black">
         <iframe
-          src={currentVideo.url}
-          title={currentVideo.title}
+          src={getEmbedUrl(currentVideo)}
+          title="Live Broadcast"
+          class
           className="w-full h-full"
           frameBorder="0"
-          allow="autoplay; fullscreen"
+          allow="autoplay; fullscreen; encrypted-media"
           allowFullScreen
         ></iframe>
         {/* LIVE NOW Badge with Dot */}
@@ -48,7 +66,9 @@ export default function LiveStreamSwitcher() {
       </div>
 
       {/* Other Livestreams */}
-      <h2 className="text-xl font-bold mb-2 text-center">Livestreams Section</h2>
+      <h2 className="text-xl font-bold mb-2 text-center">
+        Livestreams Section
+      </h2>
       <div className="flex flex-col gap-2">
         {liveVideos.map((video, index) => (
           <button
@@ -61,7 +81,7 @@ export default function LiveStreamSwitcher() {
             }`}
           >
             <span>
-              {video.title} ({video.platform})
+              {video.title} {/* 🔹 Removed platform name from here */}
             </span>
             {index === 0 && (
               <div className="flex items-center gap-1 bg-red-500 text-white text-xs px-2 py-1 rounded">

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
-import { ChevronDown, LogIn, ChevronsDownUp, ChevronRight } from "lucide-react";
+import { ChevronDown, LogIn, ChevronRight,  ChevronUp } from "lucide-react";
 import { Drawer, Box } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
 import SearchInput from "@/components/SearchInput"; // Assuming you have this component
@@ -94,7 +94,7 @@ const ProfileDropdownNavbar = () => {
         <div className="items-center text-center w-full text-2xl justify-center mt-5 h-7 bg-black gap-5 relative top-0">
           <Link href="/">
             <p
-              className="text-[35px] z-40 bg-black text-center font-bold text-white mt-1"
+              className="text-[35px] z-40 bg-black text-center font-bold text-white mt-1 "
               onClick={() => setShowNav(false)}
             >
               CYCLOPEDIA
@@ -104,9 +104,9 @@ const ProfileDropdownNavbar = () => {
             <Image
               src="/hid.png"
               alt="Logo"
-              width={30}
-              height={30}
-              className="rounded-full border-3 bg-black -mt-19 ml-auto"
+              width={50}
+              height={50}
+              className="rounded-full border-3 -mt-21 ml-78  max-lg:ml-auto opacity-100 brightness-100"
               onClick={() => setShowNav(false)}
             />
           </Link>
@@ -251,7 +251,7 @@ const ProfileDropdownNavbar = () => {
               href="/live"
               className="px-3 py-2 hover:bg-purple-600  rounded cursor-pointer text-sm font-medium"
             >
-              Livestream
+              Live Now
             </Link>
           </div>
         </section>
@@ -374,8 +374,8 @@ const ProfileDropdownNavbar = () => {
             aria-label="Toggle navigation menu"
           >
             {showNav ? (
-              <ChevronsDownUp
-                className={`text-purple-600 "${
+              <ChevronUp
+                className={`text-white "${
                   showHeader ? "translate-y-0" : "-translate-y-10"
                 }`}
               />
@@ -458,7 +458,7 @@ const ProfileDropdownNavbar = () => {
             </li>
             <li>
               <Link href="/live" onClick={() => setShowNav(false)}>
-                Livestream
+                Live Now
               </Link>
             </li>
           </ul>
@@ -522,13 +522,13 @@ const ProfileDropdownNavbar = () => {
                 >
                   Join Us
                 </Link> */}
-                <Link
+                {/* <Link
                   href="/auth/signin"
                   onClick={() => setShowNav(false)}
                   className="py-3 w-3/4 rounded-lg bg-gradient-to-r from-purple-500 to-cyan-500 hover:bg-cyan-500 text-white font-medium text-center"
                 >
                   Sign In
-                </Link>
+                </Link> */}
               </>
             )}
           </div>

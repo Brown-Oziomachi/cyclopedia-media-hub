@@ -2,23 +2,10 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import Footer from "@/components/Footer";
-import Popup from "@/components/Popup";
 import { motion } from "framer-motion";
 import {
-  ArrowRight,
-  ArrowRightToLine,
   ChevronRight,
-  LaptopMinimal,
-  LoaderCircle,
-  Palette,
-  Play,
-  Store,
-  Webhook,
 } from "lucide-react";
-import BottomNav from "@/components/BottomNav";
-import ChatDropdown from "@/components/Chat";
-import ScrollProgressBar from "@/components/ScrollProgressBar";
 import LogoSplash from "@/components/LogoSplash";
 import { useRouter } from "next/navigation";
 import { db1 } from "@/lib/firebaseConfig";
@@ -31,16 +18,10 @@ import {
 } from "firebase/firestore";
 
 
-
 const Page = () => {
-  const [loading, setLoading] = useState(true); // Loading state
-  const [session] = useState();
-  const [showpopup, setShowPopup] = useState(true);
   const [showSplash, setShowSplash] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
   const [query, setQuery] = useState("");
-  const [showNav, setShowNav] = useState(false);
   const [clickedIndex, setClickedIndex] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
  const [posts, setPosts] = useState([]);
@@ -102,7 +83,7 @@ const Page = () => {
       emoji: "🌍",
       title: "History",
       link: "/history",
-      imgSrc: "/history.png", // Replace with your actual image URLs or remove to fallback on emoji
+      imgSrc: "/history.png", 
     },
     {
       emoji: "🧨",
@@ -151,7 +132,7 @@ const Page = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (!query.trim()) return;
-    setShowNav(false); // Close nav here
+    setShowNav(false); 
 
     router.push(`/search?q=${encodeURIComponent(query.trim().toLowerCase())}`);
   };
@@ -164,26 +145,26 @@ const Page = () => {
       {showSplash ? (
         <LogoSplash onFinish={handleFinish} />
       ) : (
-        <div className="py-18 lg:-mt-50 text-white relative overflow-hidden  bg-black to-black">
-          {/* Hero Section */}
+        <div className="py-18 lg:mt-30 opacity- text-white relative overflow-hidden -mt-2 bg-black to-black">
           {/* <div className=" z-0 ">
             <img
               src="hid.png"
               alt="image"
-              className=" w-fit h-fit opacity-5 z-[-0]  fixed"
+              className=" w-fit fixed  -opacity-0 z-[-50] bg-black to-black "
             />
           </div> */}
+          {/* Hero Section */}
 
-          <main className="z-50 bg-black flex flex-col justify-center items-center  px-4 lg:px-0 max-lg:-mt-10 mb-10 opacity-100 lg:mt-20">
+          <main className="z-0 bg-black flex opacity flex-col justify-center items-center  px-4 lg:px-0 max-lg:-mt-10 mb-10 opacity-100 lg:mt-0">
             <div className="space-y-2 ">
               {/* Cyclopedia Creation Title */}
               <img
                 src="/hid.png"
                 alt="image"
-                className="z-0 w-fit lg:w-200 lg:h-200 h-fit opacity- lg:mt-30 "
+                className="z-0 w-fit lg:w-200 lg:h-200 h-fit opacity- lg:-mt-35 "
               />
 
-              <p className="text-sm lg:text-2xl text-gray-300 max-w-3xl mx-auto lg:-mt-30 text-center max-md:hidden">
+              <p className="text-sm lg:text-2xl text-gray-300 max-w-3xl mx-auto lg:-mt-30 text-center">
                 Uncovering the Unseen, Revealing the Real.
               </p>
 
@@ -191,7 +172,7 @@ const Page = () => {
             </div>
             <div className="flex  gap-4  group text-sm z-0  lg:mb-20 ">
               <Link href="/about">
-                <button className="z-50 border-purple-400 max-md:hidden  shadow-black shadow-2xl cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all group-hover:bg-white group-hover:text-black ">
+                <button className="z-50 border-purple-400 max-lg:hidden  shadow-black shadow-2xl cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all group-hover:bg-white group-hover:text-black ">
                   Learn More
                   <ChevronRight className="text-purple-300" />
                 </button>
@@ -199,7 +180,7 @@ const Page = () => {
             </div>
             <form
               onSubmit={handleSearch}
-              className="flex items-center max-lg:hidden"
+              className="flex items-center max-lg:hidden "
               role="search"
               aria-label="Site Search"
             >
@@ -224,7 +205,7 @@ const Page = () => {
         </div>
       )}
 
-      <div className="relative w-full  max-lg:w-1/2 max-md:w-full mx-auto lg:hidden -mt-25 mb-0 bg-black p-5">
+      <div className="relative w-full  max-lg:w-1/2 max-md:w-full mx-auto lg:hidden max-lg:-mt-30 max-md:-mt-25 mb-0 bg-black p-5">
         <form
           onSubmit={handleSearch}
           className="flex items-center"
@@ -268,104 +249,7 @@ const Page = () => {
           governments, whole federal departments...
         </p>
       </div>
-      <div id="read-more">{/* Your "Explore more" content goes here */}</div>
-
-      <section className="px-6 py-5 md:py-20 max-w-4xl mx-auto bg-white text-black z-0">
-        <div className="grid grid-cols-3 sm:grid-cols-5 gap-6 justify-center hover:shadow-2xl hover:shadow-purple-700">
-          {categories.map((item, i) => (
-            <Link
-              key={i}
-              href={item.link}
-              passHref
-              legacyBehavior
-              onClick={() => handleClick(i)}
-              className={`
-              px-4 py-2
-              border border-gray-300
-              rounded
-              transition duration-300
-              ${
-                clickedIndex === i
-                  ? "bg-blue-700 text-white"
-                  : "bg-white text-black "
-              }
-              hover:bg-blue-500 hover:text-white
-            `}
-            >
-              <a aria-label={item.title} className="group ">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.15, duration: 0.5 }}
-                  viewport={{ once: true }}
-                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full bg-gray-100 shadow-md flex items-center justify-center cursor-pointer transition-transform group-hover:scale-120 hover:shadow-purple-600 hover:shadow-2xl duration-300"
-                >
-                  {item.imgSrc ? (
-                    <img
-                      src={item.imgSrc}
-                      alt={item.title}
-                      className="w-25 h-25 object-cover sm:w-20 sm:h-20 rounded-full"
-                    />
-                  ) : (
-                    <span className="text-4xl">{item.emoji}</span>
-                  )}
-                </motion.div>
-                <p className="text-center mt-3 text-sm font-medium  text-gray-700 group-hover:text-purple-700 transition-colors">
-                  {item.title}
-                </p>
-              </a>
-            </Link>
-          ))}
-          <div className="p-6 mt-5 lg:ml-auto max-md:justify-center mx-auto">
-            {/* More Button */}
-            <button
-              onClick={() => setIsOpen(true)}
-              className="px-4 py-2 bg-purple-600 text-white rounded-lg  hover:bg-purple-300   "
-            >
-              More
-            </button>
-
-            {/* Overlay */}
-            {isOpen && (
-              <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-                {/* Popup */}
-                <div className="bg-white p-6 rounded-2xl max-w-lg w-full relative shadow-lg">
-                  {/* Close button */}
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
-                  >
-                    ✖
-                  </button>
-
-                  <h2 className="text-xl font-bold mb-4 text-center">
-                    More Categories
-                  </h2>
-
-                  {/* Items */}
-                  <div className="grid grid-cols-2 gap-4 ">
-                    {items.map((item) => (
-                      <Link
-                        key={item.id}
-                        href={item.link}
-                        className="flex flex-col items-center text-center hover:scale-105 rounded-full justify-center cursor-pointer transition-transform active:text-purple-600 hover:shadow-purple-600 hover:shadow-2xl duration-300"
-                        onClick={() => setIsOpen(false)} // Close popup on click
-                      >
-                        <img
-                          src={item.img}
-                          alt={item.title}
-                          className="w-25 h-25 rounded-full object-cover border-2 border-purple-200"
-                        />
-                        <p className="mt-2 font-medium">{item.title}</p>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
+      <div id="read-more ">{/* Your "Explore more" content goes here */}</div>
 
       <hr className="border-2" />
       <div className="max-w-5xl mx-auto py-10 px- bg-white">
@@ -401,15 +285,19 @@ const Page = () => {
         )}
       </div>
 
-      <h1 className="text-center mt-19 mb-0 font-serif text-2xl ">
+      <h1 className="text-center mb-10 font-serif text-2xl bg-white">
         Eplore more news{" "}
       </h1>
-      <section className="px- py-5 md:py-10   text-black active:text-purple-600 max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
+      <section className="px- py-5 md:py-10 -opacity-50  text-black active:text-purple-600 max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
         <div className="lg:w-2/3 flex flex-col gap-8">
           {/* Card 1 */}
           <div className="relative">
-            <img src="fun.png" alt="News Image" className="w-full" />
-            <div className="absolute bottom-1 left-4 right-4 bg-white max-lg:h-40 bg-opacity-90 p-4">
+            <img
+              src="fun.png"
+              alt="News Image"
+              className="w-full -mt-5 max-lg:-mt-10"
+            />
+            <div className="absolute bottom-1 left-4 right-4 bg-white max-lg:h-40  bg-opacity-90 p-4">
               <Link href="https://cyclopedia-media-hub.vercel.app/blog/bmFfkpRJx9MceeUlcz5J">
                 <h2 className="text-sm font-bold hover:underline">
                   The Strategic Fallout of the Israel-Iran War
@@ -426,14 +314,18 @@ const Page = () => {
 
           {/* Card 2 */}
           <div className="relative">
-            <img src="oil.png" alt="News Image" className="w-full h-60" />
+            <img
+              src="oil.png"
+              alt="News Image"
+              className="w-full h-60 -mt-5 max-lg:-mt-10"
+            />
             <div className="absolute bottom-0 left-4 right-4 bg-white max-lg:h-30 bg-opacity-90 p-4">
               <Link href="https://cyclopedia-media-hub.vercel.app/blog/5njbEcuqy6lFrrYdMS2p">
                 <h2 className="text-sm font-bold hover:underline">
                   US Turning Oil-Rich Nigeria into Proxy for its Africa Wars
                 </h2>
               </Link>
-              <p className="text-xs text-gray-800 mt-1">by Cyclopedia</p>
+              <p className="text-xs text-gray-800 mt-1 font-black">by Cyclopedia</p>
               <p className="mt-2 text-gray-900 text-sm">
                 T.J. Coles reports on what AFRICOM is doing under the cover of
                 counterterrorism.
@@ -661,10 +553,10 @@ const Page = () => {
             alt="News Image"
             className="mt-3 w-full h-40 object-cover rounded"
           />
-          <h3 className="text-lg font-semibold mt-4">
+          <h3 className="text-lg font-semibold max-md:-mb-8 mt-4 p-4">
             Britain’s Hidden Helicopter War in Niger
           </h3>
-          <p className="text-sm text-gray-400 mt-2 line-clamp-3">
+          <p className="text-sm text-gray-400 p-4 line-clamp-3">
             As Niger expels US troops, Declassified reveals British helicopters
             operated a taxi service for French forces in the uranium-rich
             African state.
@@ -681,10 +573,10 @@ const Page = () => {
             alt="News Image"
             className="mt-3 w-full h-40 object-cover rounded"
           />
-          <h3 className="text-lg font-semibold mt-4">
+          <h3 className="text-lg font-semibold mt-4 p-4 max-md:-mb-8">
             Breaking America’s Bonds With Israel
           </h3>
-          <p className="text-sm text-gray-400 mt-2 line-clamp-3">
+          <p className="text-sm text-gray-400 mt-2 line-clamp-3 p-4 ">
             Taking a cue from the Declaration of Independence, M. Reza Behnam
             submits facts “to a candid world” that impel the dissolution of a
             destructive liaison.
@@ -696,7 +588,7 @@ const Page = () => {
         <div className="mt-5 text-black bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <img src="british.png" alt="" />
           <Link href="https://cyclopedia-media-hub.vercel.app/blog/DxewHf37R7X7ZBzQRLE5">
-            <h2 className="text-xl font-bold text-left hover:underline text-black p-5">
+            <h2 className="text-xl font-bold text-left hover:underline text-black p-4 max-md:-mb-8">
               Britain’s secret state and the need for whistle-blowing
             </h2>
           </Link>
@@ -712,7 +604,7 @@ const Page = () => {
         <div className="bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <img src="uk.png" alt="" />
           <Link href="https://cyclopedia-media-hub.vercel.app/blog/HYhefDd7rXfAAzKBJCyb">
-            <h2 className="text-xl font-bold text-left hover:underline text-black p-5">
+            <h2 className="text-xl font-bold text-left hover:underline text-black p-4 max-md:-mb-8">
               UK government secretly paid foreign YouTube stars for ‘propaganda’{" "}
             </h2>
           </Link>
@@ -723,14 +615,14 @@ const Page = () => {
           </p>
         </div>
 
-        <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 p-">
+        <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ">
           <img src="som.png" alt="" className="mt-10" />
           <Link href="https://cyclopedia-media-hub.vercel.app/blog/OjdVfovsON2pJsJU9yJr">
-            <h2 className="text-xl font-bold text-black text-left hover:underline">
+            <h2 className="text-xl font-bold text-black text-left hover:underline p-4 max-md:-mb-8">
               How the Western media helped build the case for genocide in Gaza
             </h2>
           </Link>
-          <p className="text-sm text-gray-500 text-left mt-5 ">
+          <p className="text-sm text-gray-500 text-left mt-5 p-4">
             The past five months have been clarifying. What was supposed to be
             hidden has been thrust into the light. What was supposed to be
             obscured has come sharply into focus.
@@ -750,10 +642,10 @@ const Page = () => {
                   alt="News Image"
                   className="mt-3 w-full h-full"
                 />
-                <h3 className="text-lg font-semibold mt-4">
+                <h3 className="text-lg font-semibold mt-4 p-4 max-md:-mb-8">
                   The “Slave Bible” is Not What You Think
                 </h3>
-                <p className="text-sm text-gray-400 mt-2 line-clamp-3">
+                <p className="text-sm text-gray-400 mt-2 line-clamp-3 p-4">
                   The Museum of the Bible presented misleading information to
                   attract people of color to the museum.
                 </p>
@@ -771,10 +663,10 @@ const Page = () => {
                   alt="News Image"
                   className="w-full h-32 object-cover "
                 />
-                <h3 className="text-sm font-semibold mt-2">
+                <h3 className="text-sm font-semibold mt-2 p-4 max-md:-mb-8">
                   American Border Religion{" "}
                 </h3>
-                <p className="text-sm text-gray-400 line-clamp-3 mt-1">
+                <p className="text-sm text-gray-400 line-clamp-3 mt-1 p-4">
                   An excerpt from "Heaven Has a Wall: Religion, Borders, and the
                   Global United States"{" "}
                 </p>
@@ -789,11 +681,11 @@ const Page = () => {
                   alt="News image"
                   className="w-full h-32 object-cover"
                 />
-                <h3 className="text-sm font-semibold mt-2">
+                <h3 className="text-sm font-semibold mt-2 p-4 max-md:-mb-8">
                   Hundreds Arrested In London for Opposing Ban on Nonviolent
                   Group Palestine Action{" "}
                 </h3>
-                <p className="text-sm text-gray-400 line-clamp-3 mt-1">
+                <p className="text-sm text-gray-400 line-clamp-3 mt-1 p-4">
                   Let us be under no illusion," said one organizer. "The
                   government is criminalizing the people of Britain for standing
                   up against the biggest genocide of the 21st century, as it's
@@ -810,10 +702,10 @@ const Page = () => {
                   alt="News Image"
                   className="w-full h-32 object-cover "
                 />
-                <h3 className="text-sm font-semibold mt-2">
+                <h3 className="text-sm font-semibold mt-2 p-4 max-md:-mb-8">
                   From Good Christian Boys to White Nationalists{" "}
                 </h3>
-                <p className="text-sm text-gray-400 line-clamp-3 mt-1">
+                <p className="text-sm text-gray-400 line-clamp-3 mt-1 p-4">
                   An excerpt from “Disciples of White Jesus: The Radicalization
                   of American Boyhood”{" "}
                 </p>
@@ -828,10 +720,10 @@ const Page = () => {
                   alt="Trump"
                   className="w-full h-32 object-cover"
                 />
-                <h3 className="text-sm font-semibold mt-2">
+                <h3 className="text-sm font-semibold mt-2 p-4 max-md:-mb-8">
                   Authoritarian Christianity Targets Christians
                 </h3>
-                <p className="text-sm text-gray-400 line-clamp-3 mt-1">
+                <p className="text-sm text-gray-400 line-clamp-3 mt-1 p-4">
                   Trump’s Christian nationalism may hurt Christians.
                 </p>
               </div>
@@ -845,10 +737,10 @@ const Page = () => {
                   alt="Sharia"
                   className="w-full h-32 object-cover "
                 />
-                <h3 className="text-sm font-semibold mt-2">
+                <h3 className="text-sm font-semibold mt-2 p-4 max-md:-mb-8">
                   Identity Crisis: Shari'a Law in Nigeria
                 </h3>
-                <p className="text-sm text-gray-400 line-clamp-3 mt-1">
+                <p className="text-sm text-gray-400 line-clamp-3 mt-1 p-4">
                   In 1999, Sharia shocked the world. What now?
                 </p>
               </div>
@@ -862,10 +754,10 @@ const Page = () => {
                   alt="Nigeria"
                   className="w-full h-32 object-cover "
                 />
-                <h3 className="text-sm font-semibold mt-2">
+                <h3 className="text-sm font-semibold mt-2 p-4 max-md:-mb-8">
                   Nigeria: An Ephemeral Peace
                 </h3>
-                <p className="text-sm text-gray-400 line-clamp-3 mt-1">
+                <p className="text-sm text-gray-400 line-clamp-3 mt-1 p-4">
                   Ceasefire raised false hopes. Boko Haram strikes back.
                 </p>
               </div>
@@ -888,6 +780,102 @@ const Page = () => {
         </Link>
       </div>
 
+      <section className="px-6 py-5 md:py-20 max-w-5xl mx-auto bg-white text-black z-0">
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-6 justify-center hover:shadow-2xl hover:shadow-purple-700">
+          {categories.map((item, i) => (
+            <Link
+              key={i}
+              href={item.link}
+              passHref
+              legacyBehavior
+              onClick={() => handleClick(i)}
+              className={`
+              px-4 py-2
+              border border-gray-300
+              rounded
+              transition duration-300
+              ${
+                clickedIndex === i
+                  ? "bg-blue-700 text-white"
+                  : "bg-white text-black "
+              }
+              hover:bg-blue-500 hover:text-white
+            `}
+            >
+              <a aria-label={item.title} className="group ">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.15, duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full bg-gray-100 shadow-md flex items-center justify-center cursor-pointer transition-transform group-hover:scale-120 hover:shadow-purple-600 hover:shadow-2xl duration-300"
+                >
+                  {item.imgSrc ? (
+                    <img
+                      src={item.imgSrc}
+                      alt={item.title}
+                      className="w-25 h-25 object-cover sm:w-20 sm:h-20 rounded-full"
+                    />
+                  ) : (
+                    <span className="text-4xl">{item.emoji}</span>
+                  )}
+                </motion.div>
+                <p className="text-center mt-3 text-sm font-medium  text-gray-700 group-hover:text-purple-700 transition-colors">
+                  {item.title}
+                </p>
+              </a>
+            </Link>
+          ))}
+          <div className="p-6 mt-5 lg:ml-auto max-md:justify-center mx-auto">
+            {/* More Button */}
+            <button
+              onClick={() => setIsOpen(true)}
+              className="px-4 py-2 bg-purple-600 text-white rounded-lg  hover:bg-purple-300   "
+            >
+              More
+            </button>
+
+            {/* Overlay */}
+            {isOpen && (
+              <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+                {/* Popup */}
+                <div className="bg-white p-6 rounded-2xl max-w-lg w-full relative shadow-lg">
+                  {/* Close button */}
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
+                  >
+                    ✖
+                  </button>
+
+                  <h2 className="text-xl font-bold mb-4 text-center">
+                    More Categories
+                  </h2>
+
+                  {/* Items */}
+                  <div className="grid grid-cols-2 gap-4 ">
+                    {items.map((item) => (
+                      <Link
+                        key={item.id}
+                        href={item.link}
+                        className="flex flex-col items-center text-center hover:scale-105 rounded-full justify-center cursor-pointer transition-transform active:text-purple-600 hover:shadow-purple-600 hover:shadow-2xl duration-300"
+                        onClick={() => setIsOpen(false)} // Close popup on click
+                      >
+                        <img
+                          src={item.img}
+                          alt={item.title}
+                          className="w-25 h-25 rounded-full object-cover border-2 border-purple-200"
+                        />
+                        <p className="mt-2 font-medium">{item.title}</p>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
       {/* Featured Topics */}
 
       <div className="max-w-7xl mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -906,7 +894,7 @@ const Page = () => {
                 UK MEDIA ARE SUPPRESSING MENTIONS OF ISRAEL’S ‘GENOCIDE’ IN GAZA
               </h2>
             </Link>
-            <p className="text-xs text-gray-600 mt-1">
+            <p className="text-xs text-gray-600 mt-1 font-black">
               DES FREEDMAN — 18 December 2023
             </p>
             <p className="mt-2 text-gray-800 text-xs">
@@ -934,7 +922,7 @@ const Page = () => {
                 Ravage Europe
               </h2>
             </Link>
-            <p className="text-xs text-gray-600 mt-1">By Author Name</p>
+            <p className="text-xs text-gray-600 mt-1 font-black">By Cyclopedia</p>
             <p className="mt-2 text-gray-800 text-xs">
               Fire-related deaths were reported in Turkey, Spain, Montenegro,
               and Albania.
@@ -957,7 +945,7 @@ const Page = () => {
                 Americans Say Government Should Address Slavery Effects{" "}
               </h2>
             </Link>
-            <p className="text-xs text-gray-600 mt-1">By Author Name</p>
+            <p className="text-xs text-gray-600 mt-1 font-black">By Cylopedia</p>
             <p className="mt-2 text-gray-800 text-xs">
               Americans are more likely to think that the history of slavery has
               at least some effect on Black people today than to think it has
@@ -984,7 +972,7 @@ const Page = () => {
                 Why Does It Seem Israel Is Always at War With Its Neighbors?
               </h2>
             </Link>
-            <p className="text-xs text-gray-600 mt-1">By Author Name</p>
+            <p className="text-xs text-gray-600 mt-1 font-black">By cyclopedia</p>
             <p className="mt-2 text-gray-800 text-xs">
               The 7th century Muslim Conquest of Jerusalem, followed by the
               Crusades (11th-13th centuries), continued the upheaval in the
@@ -999,7 +987,7 @@ const Page = () => {
       </div>
 
       {/* Timeline of Hidden Events */}
-      <section className="px-6 py-16 bg-black text-white max-w-6xl mx-auto mt-20">
+      <section className="px-6 py-16 bg-black text-white max-w-6xl mx-auto -mt-10">
         <div className="relative border-l border-purple-700 ml-4">
           {[
             {
