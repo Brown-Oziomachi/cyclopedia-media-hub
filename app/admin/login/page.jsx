@@ -2,50 +2,25 @@
 import { useState, useEffect } from "react";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/auth";
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-} from "firebase/auth";
 
 export default function AdminPage() {
+  const [liveVideos, setLiveVideos] = useState([]);
+  const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [platform, setPlatform] = useState("youtube");
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState(null);
 
-  const auth = getAuth();
-  const provider = new GoogleAuthProvider();
-
-  // Monitor auth state
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return unsubscribe;
-  }, [auth]);
-
-  // Fetch existing livestream
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const ref = doc(db, "settings", "liveStream");
-        const snap = await getDoc(ref);
-        if (snap.exists()) {
-          setUrl(snap.data().originalUrl || snap.data().url);
-          setPlatform(snap.data().platform);
-        }
-      } catch (err) {
-        console.error("Error fetching livestream data:", err);
-      }
-    };
+    async function fetchData() {
+      const ref = doc(db, "settings", "liveStream");
+      const snap = await getDoc(ref);
+      if (snap.exists()) setLiveVideos(snap.data().liveVideos || []);
+    }
     fetchData();
   }, []);
 
   const convertToEmbed = (url, platform) => {
     if (!url) return "";
-
     if (platform === "youtube") {
       let videoId = "";
       if (url.includes("watch?v=")) videoId = url.split("v=")[1]?.split("&")[0];
@@ -57,74 +32,59 @@ export default function AdminPage() {
         ? `https://www.youtube.com/embed/${videoId}?autoplay=1`
         : url;
     }
-
-    if (platform === "twitch") {
-      const channel = url.split("twitch.tv/")[1]?.split("?")[0];
-      if (!channel) return url;
-      const parent = window.location.hostname;
-      return `https://player.twitch.tv/?channel=${channel}&parent=${parent}`;
-    }
-
-    if (platform === "facebook") {
-      return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(
-        url
-      )}&show_text=false&autoplay=true`;
-    }
-
-    if (platform === "vimeo") {
-      const id = url.split("/").pop()?.split("?")[0];
-      return id ? `https://player.vimeo.com/video/${id}?autoplay=1` : url;
-    }
-
-    return url;
+    return url; // Extend for Twitch, Facebook, Vimeo
   };
 
-  const handleSave = async () => {
-    if (!user) return alert("❌ Please log in first.");
-    if (!url) return alert("❌ Please enter a valid livestream link.");
-
+  const handleAddVideo = async () => {
+    if (!title || !url) return alert("Enter title and URL");
     setLoading(true);
     try {
-      const embedUrl = convertToEmbed(url, platform);
+      const newVideo = {
+        id: Date.now().toString(),
+        title,
+        platform,
+        originalUrl: url,
+        url: convertToEmbed(url, platform),
+      };
+      const updatedVideos = [...liveVideos, newVideo];
       const ref = doc(db, "settings", "liveStream");
-      await setDoc(ref, { url: embedUrl, originalUrl: url, platform });
-      alert("✅ Livestream updated!");
+      await setDoc(ref, { liveVideos: updatedVideos });
+      setLiveVideos(updatedVideos);
+      setTitle("");
+      setUrl("");
+      alert("✅ Livestream added!");
     } catch (err) {
-      console.error("Failed to update livestream:", err);
-      alert("❌ Failed to update livestream. Check console.");
+      console.error(err);
+      alert("❌ Failed to add livestream");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleLogin = async () => {
+  const handleRemoveVideo = async (id) => {
+    const updatedVideos = liveVideos.filter((video) => video.id !== id);
     try {
-      await signInWithPopup(auth, provider);
+      const ref = doc(db, "settings", "liveStream");
+      await setDoc(ref, { liveVideos: updatedVideos });
+      setLiveVideos(updatedVideos);
+      alert("🗑️ Livestream removed!");
     } catch (err) {
-      console.error("Login failed:", err);
-      alert("❌ Login failed. Check console.");
+      console.error(err);
+      alert("❌ Failed to remove livestream");
     }
   };
 
-  if (!user) {
-    return (
-      <div className="max-w-lg mx-auto p-5 text-center">
-        <h1 className="text-2xl font-bold mt-20 mb-4">Admin Login Required</h1>
-        <button
-          onClick={handleLogin}
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg"
-        >
-          Sign in with Google
-        </button>
-      </div>
-    );
-  }
-
   return (
     <div className="max-w-lg mx-auto p-5">
-      <img src="hid.png" alt="" className="w-full" />
-      <h1 className="text-2xl font-bold mb-4 mt-20">Update Livestream</h1>
+      <h1 className="text-2xl font-bold mb-4 mt-20">Manage Livestreams</h1>
 
+      <input
+        type="text"
+        placeholder="Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        className="w-full p-2 border rounded mb-3"
+      />
       <select
         value={platform}
         onChange={(e) => setPlatform(e.target.value)}
@@ -135,24 +95,42 @@ export default function AdminPage() {
         <option value="facebook">Facebook</option>
         <option value="vimeo">Vimeo</option>
       </select>
-
       <input
         type="text"
-        className="w-full p-2 border rounded mb-3"
+        placeholder="Livestream URL"
         value={url}
         onChange={(e) => setUrl(e.target.value)}
-        placeholder="Paste livestream link"
+        className="w-full p-2 border rounded mb-3"
       />
-
       <button
-        onClick={handleSave}
+        onClick={handleAddVideo}
         disabled={loading}
-        className={`px-4 py-2 rounded text-white ${
-          loading ? "bg-gray-500 cursor-not-allowed" : "bg-blue-600"
+        className={`w-full py-2 rounded text-white ${
+          loading ? "bg-gray-500" : "bg-blue-600"
         }`}
       >
-        {loading ? "Saving..." : "Save"}
+        {loading ? "Adding..." : "Add Livestream"}
       </button>
+
+      <div className="mt-6">
+        <h2 className="font-bold mb-2">Current Livestreams</h2>
+        {liveVideos.map((video) => (
+          <div
+            key={video.id}
+            className="p-2 border-b flex justify-between items-center"
+          >
+            <p>
+              {video.title} ({video.platform})
+            </p>
+            <button
+              onClick={() => handleRemoveVideo(video.id)}
+              className="px-3 py-1 text-sm bg-red-600 text-white rounded"
+            >
+              Remove
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

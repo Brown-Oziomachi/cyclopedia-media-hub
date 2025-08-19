@@ -89,12 +89,12 @@ const ProfileDropdownNavbar = () => {
 
    
   return (
-    <main className="fixed top-10 left-0 w-full bg-black text-white z-50">
-      <header className="fixed  -top-5 left-0 w-full  z-50 transition-transform duration-300">
-        <div className="flex items-center text-center w-full text-2xl justify-center mt-5 h-10 bg-black gap-5 relative top-0">
+    <main className="fixed top-10 left-0 w-full bg-black text-white z-50 ">
+        <header className="fixed -top-8 left-0 w-full z-50 transition-transform duration-300 -mt-1">
+        <div className="items-center text-center w-full text-2xl justify-center mt-5 h-7 bg-black gap-5 relative top-0">
           <Link href="/">
             <p
-              className="text-[35px]   z-40 bg-black text-center font-bold text-white  "
+              className="text-[35px] z-40 bg-black text-center font-bold text-white mt-1"
               onClick={() => setShowNav(false)}
             >
               CYCLOPEDIA
@@ -106,27 +106,13 @@ const ProfileDropdownNavbar = () => {
               alt="Logo"
               width={30}
               height={30}
-              className="rounded-full border-3 border-purple-500 bg-black "
+              className="rounded-full border-3 bg-black -mt-19 ml-auto"
               onClick={() => setShowNav(false)}
             />
           </Link>
         </div>
-        <div
-          className={`bg- text-white text-center py-1 font-bold h-10 ${
-            showHeader ? "-translate-y-5" : "-translate-y-4"
-          }`}
-        ></div>
-
-        <nav
-          className={` text-white flex flex-items-center md:z-50 justify-between py-1 ${
-            showHeader ? "translate-y-1" : "-translate-y-25"
-          } transition-transform duration-300 `}
-        >
-          {/* Main navbar */}
-        </nav>
-
-        {/* Sticky search input */}
       </header>
+
       <form
         onSubmit={handleSearch}
         className="hidden lg:absolute items-center mx-auto -mt-1 justify-center "
@@ -384,7 +370,7 @@ const ProfileDropdownNavbar = () => {
 
           <button
             onClick={() => setShowNav((v) => !v)}
-            className="text-3xl  z-[70] -mt-10  bg-black"
+            className="text-3xl  z-[70] -mt-14  bg-black"
             aria-label="Toggle navigation menu"
           >
             {showNav ? (

@@ -102,7 +102,7 @@ export default function BlogsPage() {
 
       {/* Load More Button */}
       {lastDoc && (
-        <div className="col-span-full text-center mt-6">
+        <div className="col-span-full text-center mt-6 mb-5">
           <button
             onClick={fetchMoreBlogs}
             className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-md transition"

@@ -230,6 +230,31 @@ export default function BlogDetails() {
       
 
       <NewsletterForm />
+      <div className="flex flex-row items-center gap-6 border-t border-gray-300 pt-6 mt-10">
+  {/* Author Image */}
+  <div className="flex-shrink-0">
+    <img
+      src="/brown.jpg" // replace with your image path
+      alt="Author"
+      className="rounded-full h-20 w-20"
+    />
+  </div>
+
+  {/* Author Info */}
+  <div className="text-left">
+    <h2 className="text-xl font-bold mb-2">ABOUT THE AUTHOR</h2>
+    <p className="text-gray-700 max-w-xl">
+      Brown Oziomachi is the director of Cyclopedia, and a software developer.
+    </p>
+    <Link
+      href="/global" // link to author's articles
+      className="mt-3 inline-block text-orange-600 font-semibold hover:underline"
+    >
+      VIEW MORE ARTICLES
+    </Link>
+  </div>
+</div>
+
       <hr />
       {/* Related Blogs */}
       <div className="mt-10">
