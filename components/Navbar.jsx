@@ -90,7 +90,7 @@ const ProfileDropdownNavbar = () => {
    
   return (
     <main className="fixed top-10 left-0 w-full bg-black text-white z-50 ">
-        <header className="fixed -top-8 left-0 w-full z-50 transition-transform duration-300 -mt-1">
+      <header className="fixed -top-8 left-0 w-full z-50 transition-transform duration-300 -mt-1">
         <div className="items-center text-center w-full text-2xl justify-center mt-5 h-7 bg-black gap-5 relative top-0">
           <Link href="/">
             <p
@@ -399,7 +399,7 @@ const ProfileDropdownNavbar = () => {
           {/* Small screen search */}
           <form
             onSubmit={handleSearch}
-            className="flex lg:hidden items-center ml-auto mr-6 z-40 "
+            className="flex items-center m"
             role="search"
             aria-label="Site Search"
           >
@@ -407,19 +407,19 @@ const ProfileDropdownNavbar = () => {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="What's on your mind?"
-              className="px-1 py-2 rounded-l-md shadow-2xl z-50 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 w-64"
+              placeholder="Search the latest..."
+              className="px-3 py-3 pr-20 rounded-md shadow-2xl bg-white text-black focus:outline-none  w-full"
               aria-label="Search input"
             />
+
+            {/* Search Button inside */}
             <button
               type="submit"
-              // onClick={() => setShowNav(false)}
-              className="bg-gradient-to-r z-40 from-purple-500 to-cyan-400 hover:bg-purple-600 px-4 py-3 rounded-r-md text-white font-semibold transition"
+              className="absolute right-4 top-11 -translate-y-1/2 bg-black px-3 py-3 rounded-md text-white font-semibold transition"
             >
               Search
             </button>
           </form>
-
           <ul className="space-y-3 font-bold mt-5 text-gray-400">
             <li>
               <Link href="/global" onClick={() => setShowNav(false)}>

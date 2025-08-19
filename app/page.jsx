@@ -164,7 +164,7 @@ const Page = () => {
       {showSplash ? (
         <LogoSplash onFinish={handleFinish} />
       ) : (
-        <div className="py-18 lg:-mt-60 text-white relative overflow-hidden  bg-black to-black">
+        <div className="py-18 lg:-mt-50 text-white relative overflow-hidden  bg-black to-black">
           {/* Hero Section */}
           {/* <div className=" z-0 ">
             <img
@@ -174,7 +174,7 @@ const Page = () => {
             />
           </div> */}
 
-          <main className="z-50 bg-black flex flex-col justify-center items-center  px-4 lg:px-0 max-lg:mt-0 opacity-100 lg:mt-20">
+          <main className="z-50 bg-black flex flex-col justify-center items-center  px-4 lg:px-0 max-lg:-mt-10 mb-10 opacity-100 lg:mt-20">
             <div className="space-y-2 ">
               {/* Cyclopedia Creation Title */}
               <img
@@ -199,7 +199,7 @@ const Page = () => {
             </div>
             <form
               onSubmit={handleSearch}
-              className=" items-center mx-auto -mt-1 justify-center max-lg:hidden"
+              className="flex items-center max-lg:hidden"
               role="search"
               aria-label="Site Search"
             >
@@ -207,22 +207,24 @@ const Page = () => {
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search...."
-                className="px-1 py-3 rounded-l-md shadow-2xl ml-4 z-50 shadow-purple-500 text-white focus:outline-none  focus:ring-2 max-lg:focus:ring-purple-400 w-64"
+                placeholder="Search the latest..."
+                className="px-3 py-3 pr-20 rounded-md shadow-2xl bg-white text-black focus:outline-none  w-full"
                 aria-label="Search input"
               />
-              <button
+
+              {/* Search Button inside */}
+              {/* <button
                 type="submit"
-                className="bg-gradient-to-r from-purple-500  to-cyan-400 hover:bg-purple-600 px-2 py-2 rounded-r-md text-white font-semibold transition"
+                className="absolute right- top-1/2 -translate-y-1/2 bg-black px-3 py-3 rounded-md text-white font-semibold transition"
               >
                 Search
-              </button>
+              </button> */}
             </form>
           </main>
         </div>
       )}
 
-      <div className="relative w-full  max-lg:w-1/2 max-md:w-full mx-auto lg:hidden -mt-16 mb-0 bg-black">
+      <div className="relative w-full  max-lg:w-1/2 max-md:w-full mx-auto lg:hidden -mt-25 mb-0 bg-black p-5">
         <form
           onSubmit={handleSearch}
           className="flex items-center"
@@ -233,15 +235,15 @@ const Page = () => {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search..."
-            className="px-3 py-3 pr-20 rounded-md shadow-2xl text-white focus:outline-none  w-full"
+            placeholder="Search the latest..."
+            className="px-3 py-3 pr-20 rounded-md shadow-2xl bg-white text-black focus:outline-none  w-full"
             aria-label="Search input"
           />
 
           {/* Search Button inside */}
           <button
             type="submit"
-            className="absolute right-1 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-500 to-cyan-400 hover:bg-purple-600 px-3 py-1 rounded-md text-white font-semibold transition"
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black px-3 py-3 rounded-md text-white font-semibold transition"
           >
             Search
           </button>
