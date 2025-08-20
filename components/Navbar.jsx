@@ -418,7 +418,7 @@ const [lastScrollMobile, setLastScrollMobile] = useState(0);
       {/* Mobile Navigation Drawer */}
       {showNav && (
         <nav
-          className="fixed inset-0  bg-black bg-opacity-95 flex flex-col text-black p-5 z-[50] mt-16 overflow-y-auto"
+          className="fixed inset-0  bg-black bg-opacity-95 flex flex-col text-black p-5 z-[50] mt-12 overflow-y-auto"
           aria-label="Mobile navigation"
         >
           {/* Small screen search */}

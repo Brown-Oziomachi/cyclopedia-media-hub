@@ -289,7 +289,7 @@ const Page = () => {
       <h1 className="text-center mb-10 font-serif text-2xl bg-white">
         Eplore more news{" "}
       </h1>
-      <section className="px- py-5 md:py-10 -opacity-50  text-black active:text-purple-600 max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
+      <section className="px- py-5 md:py-10 -opacity-50 bg-black text-black active:text-purple-600 max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
         <div className="lg:w-2/3 flex flex-col gap-8">
           {/* Card 1 */}
           <div className="relative">
