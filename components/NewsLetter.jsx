@@ -49,8 +49,8 @@ export default function NewsletterForm() {
     <div className="max-w-6xl mx-auto p-6 mt-20">
       <div className="flex flex-col lg:flex-row gap-10 items-start">
         {/* LEFT SIDE: Text */}
-        <div className="lg:w-1/2">
-          <h1 className="text-2xl font-bold text-center">“Stay Informed. Stay Ahead.”</h1>
+        <div className="lg:w-1/2 ">
+          <h1 className="text-4xl mx-auto font-bold p-3 w-1/2 border-l-5 border-purple-600 border-t-5 space-x-5"><span className="text-purple-600">“Join Our Newsletter </span> <br/> Orginal reporting from Cyclopedia </h1>
           <h1 className="mt-10">
             “Cyclopedia brings you carefully researched, unbiased insights into{" "}
             <Link href="/politics" className="font-black">
@@ -58,12 +58,6 @@ export default function NewsletterForm() {
             </Link>{" "}
             technology, culture, and hidden truths — delivered straight to your
             inbox. <br />
-            <br /> We go beyond the noise and headlines to uncover the stories
-            that matter, giving you clear analysis, deeper context, and fresh
-            perspectives you won’t find anywhere else. <br />
-            <br /> Subscribe today and join a community that values truth,
-            knowledge, and awareness in a world overflowing with
-            misinformation.”
           </h1>
         </div>
 
@@ -76,7 +70,7 @@ export default function NewsletterForm() {
             Subscribe to our Newsletter
           </h2>
 
-          <input
+          {/* <input
             type="text"
             name="firstName"
             placeholder="First Name"
@@ -94,7 +88,7 @@ export default function NewsletterForm() {
             onChange={handleChange}
             required
             className="w-full p-2 border rounded-lg"
-          />
+          /> */}
 
           <input
             type="email"
@@ -109,7 +103,7 @@ export default function NewsletterForm() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-cyan-600 hover:bg-cyan-700 text-white p-2 rounded-lg transition"
+            className="w-full bg-purple-600 hover:bg-cyan-700 text-white p-2 rounded-lg transition"
           >
             {loading ? "Subscribing..." : "Subscribe"}
           </button>
