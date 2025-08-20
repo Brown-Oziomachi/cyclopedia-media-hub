@@ -137,8 +137,8 @@ const [lastScrollMobile, setLastScrollMobile] = useState(0);
               <Image
                 src="/hid.png"
                 alt="Logo"
-                width={50}
-                height={50}
+                width={30}
+                height={30}
                 className="rounded-full border-2 border-purple-500 hover:scale-105 transition-transform duration-300 cursor-pointer"
               />
             </Link>
@@ -147,7 +147,7 @@ const [lastScrollMobile, setLastScrollMobile] = useState(0);
                 className="text-white font-bold text-3xl cursor-pointer hover:text-purple-400 transition"
                 onClick={() => setShowNav(!showNav)}
               >
-                CYCLOPEDIA
+               THE CYCLOPEDIA
               </h1>
             </Link>
           </div>
