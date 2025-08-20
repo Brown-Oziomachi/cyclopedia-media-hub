@@ -20,6 +20,32 @@ const [showHeader, setShowHeader] = useState(true);
   const [lastScroll, setLastScroll] = useState(0);
 const [showMobileToggle, setShowMobileToggle] = useState(true);
 const [lastScrollMobile, setLastScrollMobile] = useState(0);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+ const [openDropdown, setOpenDropdown] = useState(null);
+const isDropdownOpen = showNav || openDropdown !== null;
+
+  const toggleDropdown = (regionName) => {
+    setOpenDropdown(openDropdown === regionName ? null : regionName);
+  };
+
+useEffect(() => {
+  const handleScroll = () => {
+    const currentScroll = window.scrollY;
+
+    if (!isDropdownOpen) { // Only hide/show if dropdown is not open
+      if (currentScroll < lastScroll) {
+        setShowHeader(true); // scrolling up → show header
+      } else {
+        setShowHeader(false); // scrolling down → hide header
+      }
+    }
+
+    setLastScroll(currentScroll);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, [lastScroll, isDropdownOpen]);
 
 
   useEffect(() => {
@@ -115,12 +141,19 @@ const [lastScrollMobile, setLastScrollMobile] = useState(0);
     { text: "Contact us", url: "/contact" },
   ];
 
-  const regions = [
-    { name: "Africa", emoji: "🌍", url: "/africa" },
-    { name: "Asia", emoji: "🌏", url: "/asia" },
-    { name: "America", emoji: "🌎", url: "/america" },
-    { name: "Europe", emoji: "🌍", url: "/europe" },
-  ];
+  const countriesByRegion = {
+  Africa: ["Nigeria", "Kenya", "South Africa", "Egypt", "Ghana", "Mali", "Niger", "Somalia"],
+  Asia: ["Israel", "Iraq", "India", "Iran"],
+  America: ["USA", "Canada", "Brazil", "Mexico"],
+  Europe: ["UK", "Germany", "France", "Italy"],
+};
+
+const regions = [
+  { name: "Africa", url: "/africa" },
+  { name: "Asia",  url: "/asia" },
+  { name: "America", url: "/america" },
+  { name: "Europe",  url: "/europe" },
+];
 
    
   return (
@@ -129,6 +162,8 @@ const [lastScrollMobile, setLastScrollMobile] = useState(0);
         className={`fixed top-0 left-0 w-full bg-black transition-transform duration-300 ${
           showHeader ? "translate-y-0" : "-translate-y-20"
         } shadow-lg z-50`}
+          onClick={(e) => e.stopPropagation()} // Prevents nav toggle scroll effect
+
       >
         <div className="flex items-center justify-between px-4 py-2">
           {/* Logo & Title */}
@@ -145,7 +180,7 @@ const [lastScrollMobile, setLastScrollMobile] = useState(0);
             <Link href="/">
               <h1
                 className="text-white font-bold text-2xl cursor-pointer hover:text-purple-400 transition"
-                onClick={() => setShowNav(!showNav)}
+                onClick={() => setShowNav(false)}
               >
                THE CYCLOPEDIA
               </h1>
@@ -208,7 +243,7 @@ const [lastScrollMobile, setLastScrollMobile] = useState(0);
         </div>
         {/* Desktop Navigation & Categories */}
         <section className="hidden lg:flex items-center justify-between bg-black text-gray-300 px-2 py-1">
-          <nav className="flex space-x-4 max-w-full overflow-x-auto no-scrollbar">
+          <nav className="flex space-x-4 max-w-full overflow-x-auto no-scrollbar mt-5">
             {navItems.map((item) => (
               <Link
                 key={item.text}
@@ -220,7 +255,7 @@ const [lastScrollMobile, setLastScrollMobile] = useState(0);
             ))}
           </nav>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 mt-5">
             <Link
               href="/politics"
               className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
@@ -489,7 +524,7 @@ const [lastScrollMobile, setLastScrollMobile] = useState(0);
               </Link>
             </li>
           </ul>
-
+  
           <hr className="my-4 border-gray-600" />
 
           <Link
@@ -503,17 +538,56 @@ const [lastScrollMobile, setLastScrollMobile] = useState(0);
           <hr className="my-4 border-gray-600" />
 
           {/* Regions Links for mobile */}
-          <div className="grid space-y-3 text-gray-400 text-sm">
-            {regions.map((region) => (
-              <Link
-                key={region.name}
-                href={region.url}
-                onClick={() => setShowNav(false)}
+         {/* Regions Links for mobile */}
+<ul className="grid items-center text-white gap-6">
+  {regions.map((region) => (
+    <li key={region.name} className="relative">
+      <button
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent nav from closing
+          toggleDropdown(region.name);
+        }}
+        className="flex items-center gap-1 hover:text-gray-300 font-semibold"
+      >
+        {region.emoji} {region.name}{" "}
+        <ChevronDown
+          className={`w-4 h-4 transition-transform ${
+            openDropdown === region.name ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+
+      {/* Animated Dropdown */}
+      <div
+        className={`overflow-hidden transition-all duration-300 ${
+          openDropdown === region.name ? "max-h-96 mt-2" : "max-h-0"
+        } text-white rounded shadow-lg`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <ul>
+          {countriesByRegion[region.name].map((country) => (
+            <li key={country}>
+              <button
+                onClick={() => {
+                  const searchQuery = `${region.name} ${country}`;
+                  setQuery(searchQuery); 
+                  router.push(`/search?q=${encodeURIComponent(searchQuery.toLowerCase())}`);
+                  setShowNav(false); 
+                  setOpenDropdown(null); 
+                }}
+                className="w-full text-left px-4 py-2 hover:bg-gray-200 text-white"
               >
-                {region.name}
-              </Link>
-            ))}
-          </div>
+                {country}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </li>
+  ))}
+</ul>
+
+
           <hr className="my-4 border-gray-600" />
 
           <nav className="flex flex-col gap-6 mt-8 text-gray-300">
@@ -528,7 +602,7 @@ const [lastScrollMobile, setLastScrollMobile] = useState(0);
               </Link>
             ))}
           </nav>
-
+  
           <div className="mt-10 w-full gap-5 flex flex-col mx-auto items-center">
             {session ? (
               <button
@@ -561,6 +635,7 @@ const [lastScrollMobile, setLastScrollMobile] = useState(0);
           </div>
         </nav>
       )}
+      
     </main>
   );
 };

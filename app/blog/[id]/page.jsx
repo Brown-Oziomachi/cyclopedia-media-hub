@@ -128,15 +128,15 @@ export default function BlogDetails() {
     >
       {/* Blog Header */}
       {/* Blog Header */}
-      <div className="bg-black">
-        <div className="w-full mt-1">
+      <div className="bg-black ">
+        <div className="w-full mt-1 ">
           {/* Title & Subtitle above the image */}
           <div className="mb-4  p-1">
-            <h1 className="text-3xl md:text-4xl  font-bold text-white mt-10 p-2 lg:mt-25">
+            <h1 className="text-3xl md:text-4xl lg:w-1/2 font-bold text-white mt-10 p-2 lg:mt-25 lg:mx-auto">
               {blog.title}
             </h1>
             {blog.subtitle && (
-              <h2 className="text-md md:text-lg mt-1 font-semibold text-white border-2 py-2 px-2  border-white">
+              <h2 className="text-md md:text-lg mt-1 lg:mx-auto lg:w-1/2 text-center font-semibold text-white border-2 py-2 px-2  border-white">
                 {blog.subtitle}
               </h2>
             )}
@@ -161,14 +161,27 @@ export default function BlogDetails() {
         <div>
 
           <div className="flex gap-6 mt-4 items-center justify-center">
-          <div>
-              <Link href="/live">
-            <div className="flex text-white gap-2 items-center justify-center ">
-            <p className="text-white">live</p>
-            <Play className="text-red-600 h-4 w-4" />
-          </div>
-              </Link>
-          </div>
+         <div className="flex justify-center">
+  <Link href="/live">
+    <div className="flex items-center gap-2  hover:scale-105 transition-transform cursor-pointer">
+      
+      {/* Animated Live Dot */}
+      <span className="relative flex h-3 w-3">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+        <span className="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
+      </span>
+
+      {/* Live Text */}
+      <p className="text-white font-semibold uppercase tracking-wide animate-pulse">
+        Live
+      </p>
+
+      {/* Play Icon */}
+      <Play className="text-white h-5 w-5" />
+    </div>
+  </Link>
+</div>
+
 
             <div>
           <button

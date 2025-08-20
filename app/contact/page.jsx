@@ -60,23 +60,24 @@ const ContactPage = () => {
           <section className="container mx-auto px-6 py-10 lg:flex gap-16">
 
             {/* Left Panel */}
-            <div className="flex-1 max-w-xl mx-auto mt-20 space-y-6">
-              <h1 className="text-4xl font-extrabold text-center">
-                Connect with Cyclopedia
-              </h1>
-              <img
-                src="/hid.png"
-                alt="Cyclopedia System"
-                className="w-full shadow-lg "
-              />
-              <h2 className="text-center text-lg bg-gradient-to-r from-purple-500 to-cyan-400 uppercase py-2">
-                Build a System of Knowledge & Clarity
-              </h2>
-              <p className="text-gray-300">
-                The Cyclopedia project is a global knowledge movement built to
-                challenge the conventional. Whether you're a researcher, creator,
-                or thinker — we want to collaborate.
-              </p>
+           <div className="flex-1 max-w-xl mx-auto mt-20 space-y-6">
+  <h1 className="text-4xl font-extrabold text-center">
+    Welcome to Cyclopedia
+  </h1>
+  <img
+    src="/hid.png" // Update with your Cyclopedia logo
+    alt="Cyclopedia System"
+    className="w-full shadow-lg"
+  />
+  <h2 className="text-center text-lg bg-gradient-to-r from-purple-500 to-cyan-400 uppercase py-2">
+    Explore Knowledge, Discover Truths
+  </h2>
+  <p className="text-gray-300">
+    Cyclopedia is your go-to platform for curated insights and information. 
+    Whether you’re a researcher, creator, or curious thinker — join us in building 
+    a global system of knowledge and clarity.
+  </p>
+
               <p className="text-gray-400">
                 📞 Call us at{" "}
                 <a href="tel:+2348142995114" className="underline text-green-500">
