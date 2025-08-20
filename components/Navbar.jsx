@@ -144,7 +144,7 @@ const [lastScrollMobile, setLastScrollMobile] = useState(0);
             </Link>
             <Link href="/">
               <h1
-                className="text-white font-bold text-3xl cursor-pointer hover:text-purple-400 transition"
+                className="text-white font-bold text-2xl cursor-pointer hover:text-purple-400 transition"
                 onClick={() => setShowNav(!showNav)}
               >
                THE CYCLOPEDIA
@@ -418,6 +418,8 @@ const [lastScrollMobile, setLastScrollMobile] = useState(0);
       {/* Mobile Navigation Drawer */}
       {showNav && (
         <nav
+                  onClick={() => setShowNav(!showNav)}
+
           className="fixed inset-0  bg-black bg-opacity-95 flex flex-col text-black p-5 z-[50] mt-12 overflow-y-auto"
           aria-label="Mobile navigation"
         >

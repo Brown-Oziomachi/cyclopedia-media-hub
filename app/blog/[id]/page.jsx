@@ -131,12 +131,12 @@ export default function BlogDetails() {
       <div className="bg-black">
         <div className="w-full mt-1">
           {/* Title & Subtitle above the image */}
-          <div className="mb-4 ">
-            <h1 className="text-3xl md:text-4xl font-bold text-white mt-10 p-2">
+          <div className="mb-4  p-1">
+            <h1 className="text-3xl md:text-4xl  font-bold text-white mt-10 p-2 lg:mt-25">
               {blog.title}
             </h1>
             {blog.subtitle && (
-              <h2 className="text-md md:text-lg mt-1 font-semibold text-white border-2 py-2 px-2 border-white">
+              <h2 className="text-md md:text-lg mt-1 font-semibold text-white border-2 py-2 px-2  border-white">
                 {blog.subtitle}
               </h2>
             )}
@@ -240,7 +240,7 @@ export default function BlogDetails() {
 
       {/* Newsletter Card */}
       <Link href="/newsletter">
-        <div className="cursor-pointer bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
+        <div className="cursor-pointer bg-gradient-to-r from-purple-500 to-purple-800 text-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
           <h3 className="text-xl font-bold mb-2">Stay Updated!</h3>
           <p className="mb-4">
             Subscribe to our newsletter and never miss an update.
