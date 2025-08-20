@@ -25,6 +25,7 @@ const Page = () => {
   const [clickedIndex, setClickedIndex] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
  const [posts, setPosts] = useState([]);
+  const [showNav, setShowNav] = useState(false);
 
  useEffect(() => {
     const q = firestoreQuery(

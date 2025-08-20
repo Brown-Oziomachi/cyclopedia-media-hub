@@ -16,7 +16,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter, useParams } from "next/navigation";
-import NewsletterForm from "@/components/ContactForm";
+import NewsletterForm from "@/components/NewsLetter";
 
 // Blog content renderer
 const BlogDisplay = ({ body }) => {
@@ -170,7 +170,7 @@ export default function BlogDetails() {
             {blog.title}
           </h1>
           {subtitle && (
-            <h2 className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold mt-1 font-playfair drop-shadow-md border py-2 px-3 shadow-2xl mask-b-from-60% ">
+            <h2 className="text-sm  md:text-lg lg:text-xl font-bold mt- font-playfair drop-shadow-md border py-2 px-3 shadow-2xl mask-b-from-60% ">
               {subtitle}
             </h2>
           )}
@@ -210,7 +210,7 @@ export default function BlogDetails() {
       </div>
 
       {/* Blog content */}
-      <div className="blog-content prose max-w-none px-2 sm:px-4 space-y-5 gap-5 font-serif text-sm max-md:mt-110">
+      <div className="blog-content prose max-w-none px-2 sm:px-4 space-y-5 gap-5 font-serif text-sm max-md:mt-100">
         <hr />
         <BlogDisplay body={blog.body} />
       </div>
@@ -226,10 +226,9 @@ export default function BlogDetails() {
           {/* {liked ? "Liked" : "Likes"} ({likes}) */}
         </button>
       </div>
-
-      
-
-      <NewsletterForm />
+<hr className=" font-black border-2"/>
+<NewsletterForm /> 
+<hr className=" font-black border-2"/>  
       <div className="flex flex-row items-center gap-6 border-t border-gray-300 pt-6 mt-10">
   {/* Author Image */}
   <div className="flex-shrink-0">
@@ -258,7 +257,7 @@ export default function BlogDetails() {
       <hr />
       {/* Related Blogs */}
       <div className="mt-10">
-        <h2 className="text-xl font-bold mb-4">Related</h2>
+        <h2 className="text-xl font-bold mb-4 p-5">Related</h2>
         <div className="grid sm:grid-cols-2 gap-6">
           {/* Blog 1 */}
           {blogs.length >= 1 && (
@@ -614,7 +613,7 @@ export default function BlogDetails() {
       <div className="mx-auto">
         <form
           onSubmit={handleSearch}
-          className="flex lg:hidden items-center  mr-6 mx-auto"
+          className="flex lg:hidden items-center  mr-8 mx-auto"
           role="search"
           aria-label="Site Search"
         >
@@ -623,13 +622,13 @@ export default function BlogDetails() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search anything in cyclopedia"
-            className="px-5 py-2 rounded-l-md shadow-2xl text-black focus:outline-none focus:ring-2 focus:ring-purple-400 w-64"
+            className="px-4 py-2 rounded-l-md shadow-2xl text-black focus:outline-none focus:ring-2 focus:ring-black w-60"
             aria-label="Search input"
           />
           <button
             type="submit"
             // onClick={() => setShowNav(false)}
-            className="bg-gradient-to-r from-purple-500 to-cyan-400  px-6 py-2 rounded-r-md text-white font-semibold transition"
+            className="bg-black  px-6 py-2 rounded-r-md text-white font-semibold transition"
           >
             Search
           </button>

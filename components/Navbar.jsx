@@ -16,7 +16,29 @@ const ProfileDropdownNavbar = () => {
   const [query, setQuery] = useState("");
   const router = useRouter();
   const searchParams = useSearchParams();
+const [showHeader, setShowHeader] = useState(true);
+  const [lastScroll, setLastScroll] = useState(0);
+const [showMobileToggle, setShowMobileToggle] = useState(true);
+const [lastScrollMobile, setLastScrollMobile] = useState(0);
 
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScroll = window.scrollY;
+      setShowHeader(currentScroll < lastScroll);
+      setLastScroll(currentScroll);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScroll]);
+
+  useEffect(() => {
+    const scrollTo = searchParams.get("scrollTo");
+    if (scrollTo) {
+      const el = document.getElementById(scrollTo);
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 200);
+    }
+  }, [searchParams]);
 
     const handleSearch = (e) => {
       e.preventDefault();
@@ -42,8 +64,6 @@ const ProfileDropdownNavbar = () => {
     }
   }, [searchParams]);
 
-   const [showHeader, setShowHeader] = useState(true);
-   const [lastScroll, setLastScroll] = useState(0);
 
    useEffect(() => {
      const handleScroll = () => {
@@ -62,7 +82,22 @@ const ProfileDropdownNavbar = () => {
      return () => window.removeEventListener("scroll", handleScroll);
    }, [lastScroll]);
 
-  
+  useEffect(() => {
+  const handleScroll = () => {
+    const currentScroll = window.scrollY;
+    if (currentScroll > lastScrollMobile) {
+      // Scrolling down → hide toggle
+      setShowMobileToggle(false);
+    } else {
+      // Scrolling up → show toggle
+      setShowMobileToggle(true);
+    }
+    setLastScrollMobile(currentScroll);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, [lastScrollMobile]);
   // const handleSearch = (e) => {
   //   e.preventDefault();
   //   if (query.trim()) {
@@ -90,90 +125,90 @@ const ProfileDropdownNavbar = () => {
    
   return (
     <main className="fixed top-10 left-0 w-full bg-black text-white z-50 ">
-      <header className="fixed -top-8 left-0 w-full z-50 transition-transform duration-300 -mt-1">
-        <div className="items-center text-center w-full text-2xl justify-center mt-5 h-7 bg-black gap-5 relative top-0">
-          <Link href="/">
-            <p
-              className="text-[35px] z-40 bg-black text-center font-bold text-white mt-1 "
-              onClick={() => setShowNav(false)}
-            >
-              CYCLOPEDIA
-            </p>
-          </Link>
-          <Link href="/">
-            <Image
-              src="/hid.png"
-              alt="Logo"
-              width={50}
-              height={50}
-              className="rounded-full border-3 -mt-21 ml-78  max-lg:ml-auto opacity-100 brightness-100"
-              onClick={() => setShowNav(false)}
-            />
-          </Link>
-        </div>
-      </header>
-
-      <form
-        onSubmit={handleSearch}
-        className="hidden lg:absolute items-center mx-auto -mt-1 justify-center "
-        role="search"
-        aria-label="Site Search"
+      <header
+        className={`fixed top-0 left-0 w-full bg-black transition-transform duration-300 ${
+          showHeader ? "translate-y-0" : "-translate-y-20"
+        } shadow-lg z-50`}
       >
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search...."
-          className="px-1 py-1 rounded-l-md shadow-2xl ml-40 z-50 shadow-purple-500 text-white focus:outline-none focus:ring-2 max-lg:focus:ring-purple-400 w-64"
-          aria-label="Search input"
-        />
-        <button
-          type="submit"
-          className="bg-gradient-to-r from-purple-500 lg:hidden to-cyan-400 hover:bg-purple-600 px-2 py-2 rounded-r-md text-white font-semibold transition"
-        >
-          Search
-        </button>
-      </form>
+        <div className="flex items-center justify-between px-4 py-2">
+          {/* Logo & Title */}
+          <div className="flex items-center gap-4">
+            <Link href="/">
+              <Image
+                src="/hid.png"
+                alt="Logo"
+                width={50}
+                height={50}
+                className="rounded-full border-2 border-purple-500 hover:scale-105 transition-transform duration-300 cursor-pointer"
+              />
+            </Link>
+            <Link href="/">
+              <h1
+                className="text-white font-bold text-3xl cursor-pointer hover:text-purple-400 transition"
+                onClick={() => setShowNav(!showNav)}
+              >
+                CYCLOPEDIA
+              </h1>
+            </Link>
+          </div>
 
-      <section className=" lg:z-50 flex items-center justify-between px-5 py-3 bg-black">
-        {/* Logo */}
-
-        {/* Title */}
-
-        {/* Top bar with Regions dropdown (hidden on mobile) */}
-        <div className="relative max-md:hidden px-4 py-1 text-black max-lg:hidden">
-          <button
-            onClick={() => setShowRegionsDropdown((v) => !v)}
-            className="inline-flex z-50 items-center gap-2 px-4 py-2 bg-white rounded-md shadow hover:bg-gray-100 font-medium text-sm"
-            aria-haspopup="true"
-            aria-expanded={showRegionsDropdown}
+          {/* Desktop Search Bar */}
+          <form
+            onSubmit={handleSearch}
+            className="hidden lg:flex relative items-center mx-auto justify-center"
+            role="search"
+            aria-label="Site Search"
           >
-            Regions <ChevronDown className="h-4 w-4 z-50 " />
-          </button>
-
-          {showRegionsDropdown && (
-            <div
-              className="absolute bg-white shadow-lg rounded-md mt-2 w-56 max-h-60 overflow-y-auto ring-1 ring-black ring-opacity-5 z-50"
-              role="menu"
-              aria-orientation="vertical"
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search...."
+              className="px-3 py-2 rounded-l-md shadow-2xl shadow-purple-500 bg-white text-black focus:outline-none focus:ring-2 focus:ring-purple-400 w-72"
+              aria-label="Search input"
+            />
+            <button
+              type="submit"
+              className="bg-black hover:from-purple-600 hover:to-cyan-500 px-4 py-2 rounded-r-md text-white font-semibold transition z-50 cursor-pointer"
             >
-              {regions.map((region) => (
-                <Link
-                  key={region.name}
-                  href={region.url}
-                  className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                  onClick={() => setShowRegionsDropdown(false)}
-                >
-                  {region.emoji} {region.name}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
+              Search
+            </button>
+          </form>
 
-        <section className="hidden z-50 w-full -mt-7 lg:bg-black lg:flex text-gray-300 select-none  px-2 py-1 lg:ml-">
+          {/* Regions Dropdown (desktop only) */}
+          <div className="relative hidden lg:block px-4 py-1 text-black">
+            <button
+              onClick={() => setShowRegionsDropdown((v) => !v)}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-md shadow hover:bg-gray-100 font-medium text-sm"
+              aria-haspopup="true"
+              aria-expanded={showRegionsDropdown}
+            >
+              Regions <ChevronDown className="h-4 w-4" />
+            </button>
+
+            {showRegionsDropdown && (
+              <div
+                className="absolute bg-white shadow-lg rounded-md mt-2 w-56 max-h-60 overflow-y-auto ring-1 ring-black ring-opacity-5 z-50"
+                role="menu"
+                aria-orientation="vertical"
+              >
+                {regions.map((region) => (
+                  <Link
+                    key={region.name}
+                    href={region.url}
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    onClick={() => setShowRegionsDropdown(false)}
+                  >
+                    {region.emoji} {region.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+        {/* Desktop Navigation & Categories */}
+        <section className="hidden lg:flex items-center justify-between bg-black text-gray-300 px-2 py-1">
           <nav className="flex space-x-4 max-w-full overflow-x-auto no-scrollbar">
-            {/* Nav Items */}
             {navItems.map((item) => (
               <Link
                 key={item.text}
@@ -183,15 +218,14 @@ const ProfileDropdownNavbar = () => {
                 {item.text}
               </Link>
             ))}
-
-            {/* Categories */}
           </nav>
+
           <div className="flex flex-wrap gap-2">
             <Link
               href="/politics"
               className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
             >
-              politics
+              Politics
             </Link>
             <Link
               href="/religion"
@@ -207,13 +241,13 @@ const ProfileDropdownNavbar = () => {
             </Link>
             <Link
               href="/science"
-              className="px-3 py-2  hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
             >
               Science
             </Link>
             <Link
               href="/media"
-              className="px-3 py-2  hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
             >
               Media
             </Link>
@@ -233,30 +267,31 @@ const ProfileDropdownNavbar = () => {
               href="/art"
               className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
             >
-              Art&Culture
+              Art & Culture
             </Link>
             <Link
               href="/technology"
-              className="px-3 py-2 hover:bg-purple-600  rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
             >
               Technology
             </Link>
             <Link
               href="/sports"
-              className="px-3 py-2 hover:bg-purple-600  rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
             >
-              Sports news
+              Sports News
             </Link>
             <Link
               href="/live"
-              className="px-3 py-2 hover:bg-purple-600  rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
             >
               Live Now
             </Link>
           </div>
         </section>
+      </header>
 
-        {/* Profile / Auth Buttons
+      {/* Profile / Auth Buttons
         <div className="hidden lg:flex items-center gap-4">
           {session ? (
             <>
@@ -350,56 +385,46 @@ const ProfileDropdownNavbar = () => {
           )}
         </div> */}
 
-        {/* Mobile menu & profile */}
-        <div className="flex lg:hidden items-center gap-10 ">
-          {session && (
-            <button
-              onClick={toggleDrawer(true)}
-              className="bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-cyan-400"
-              aria-label="Open profile drawer"
-            >
-              <img
-                src={session.user.image || "/default-avatar.png"}
-                alt={session.user.name}
-                width={36}
-                height={36}
-                className="rounded-full border border-gray-500 object-cover"
-              />
-            </button>
-          )}
-
+      {/* Mobile menu & profile */}
+      <div
+        className={`lg:hidden fixed top-4 right-4 flex items-center gap-4 z-50 transition-transform duration-300 ${
+          showMobileToggle ? "translate-y-0" : "-translate-y-20"
+        }`}
+      >
+        {" "}
+        {session && (
           <button
-            onClick={() => setShowNav((v) => !v)}
-            className="text-3xl  z-[70] -mt-14  bg-black"
-            aria-label="Toggle navigation menu"
+            onClick={toggleDrawer(true)}
+            className="rounded-full focus:ring-2 focus:ring-cyan-400"
           >
-            {showNav ? (
-              <ChevronUp
-                className={`text-white "${
-                  showHeader ? "translate-y-0" : "-translate-y-10"
-                }`}
-              />
-            ) : (
-              <ChevronDown
-                className={`text-white" ${
-                  showHeader ? "translate-y-0" : "-translate-y-0"
-                }`}
-              />
-            )}
+            <img
+              src={session.user.image || "/default-avatar.png"}
+              alt={session.user.name}
+              width={36}
+              height={36}
+              className="rounded-full border border-gray-500 object-cover"
+            />
           </button>
-        </div>
-      </section>
+        )}
+        <button
+          onClick={() => setShowNav(!showNav)}
+          className="text-white text-3xl"
+          aria-label="Toggle navigation"
+        >
+          {showNav ? <ChevronUp /> : <ChevronDown />}
+        </button>
+      </div>
 
       {/* Mobile Navigation Drawer */}
       {showNav && (
         <nav
-          className="fixed inset-0  bg-black bg-opacity-95 flex flex-col text-black p-5 z-[50] mt-9 overflow-y-auto"
+          className="fixed inset-0  bg-black bg-opacity-95 flex flex-col text-black p-5 z-[50] mt-16 overflow-y-auto"
           aria-label="Mobile navigation"
         >
           {/* Small screen search */}
           <form
             onSubmit={handleSearch}
-            className="flex items-center m"
+            className="relative flex items-center w-full max-w-lg mx-auto sticky top-0 z-40"
             role="search"
             aria-label="Site Search"
           >
@@ -408,14 +433,14 @@ const ProfileDropdownNavbar = () => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search the latest..."
-              className="px-3 py-3 pr-20 rounded-md shadow-2xl bg-white text-black focus:outline-none  w-full"
+              className="px-3 py-3 pr-20 rounded-md shadow-2xl bg-white text-black focus:outline-none w-full"
               aria-label="Search input"
             />
 
             {/* Search Button inside */}
             <button
               type="submit"
-              className="absolute right-4 top-11 -translate-y-1/2 bg-black px-3 py-3 rounded-md text-white font-semibold transition"
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black px-3 py-2 rounded-md text-white font-semibold transition"
             >
               Search
             </button>

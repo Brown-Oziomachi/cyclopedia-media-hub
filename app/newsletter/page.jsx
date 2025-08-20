@@ -1,12 +1,10 @@
-import NewsletterForm from '@/components/ContactForm'
-import React from 'react'
+import NewsletterForm from "@/components/NewsLetter";
 
-const page = () => {
+export default function HomePage() {
   return (
     <div>
+      <h1>Welcome to Cyclopedia</h1>
       <NewsletterForm />
     </div>
-  )
+  );
 }
-
-export default page
