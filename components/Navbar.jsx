@@ -164,27 +164,28 @@ const regions = [
         } shadow-lg z-50`}
         onClick={(e) => e.stopPropagation()} // Prevents nav toggle scroll effect
       >
-        <div className="flex items-center justify-between px-4 py-2">
-          {/* Logo & Title */}
-          <div className="flex items-center gap-4">
-            <Link href="/">
-              <Image
-                src="/hid.png"
-                alt="Logo"
-                width={30}
-                height={30}
-                className="rounded-full border-2 border-purple-500 hover:scale-105 transition-transform duration-300 cursor-pointer"
-              />
-            </Link>
-            <Link href="/">
-              <h1
-                className="text-white font-bold text-2xl cursor-pointer hover:text-purple-400 transition"
-                onClick={() => setShowNav(false)}
-              >
-                THE CYCLOPEDIA
-              </h1>
-            </Link>
-          </div>
+      <div className="flex items-center justify-between px-4 py-2">
+  {/* Logo & Title */}
+  <div className="flex items-center gap-4">
+    <Link href="/">
+      <div className="w-10 h-10 relative rounded-full overflow-hidden border-2 border-purple-500 cursor-pointer hover:scale-105 transition-transform duration-300">
+        <img
+          src="/icon/android-launchericon-512-512.png"
+          alt="Logo"
+          fill
+          className="object-cover rounded-full"
+        />
+      </div>
+    </Link>
+    <Link href="/">
+      <h1
+        className="text-white font-bold text-2xl cursor-pointer hover:text-purple-400 transition"
+        onClick={() => setShowNav(false)}
+      >
+        THE CYCLOPEDIA
+      </h1>
+    </Link>
+  </div>
 
           {/* Desktop Search Bar */}
           <form
