@@ -1,15 +1,22 @@
-// app/layout.js
+import "./globals.css";
 import ClientRootLayout from "./ClientRootLayout";
 
-export const metadata = {
-  title: "THE CYCLOPEDIA",
-  icons: {
-    icon: "/hid.png",
-    shortcut: "/hid.png",
-    apple: "/hid.png",
-  },
-};
-
 export default function RootLayout({ children }) {
-  return <ClientRootLayout>{children}</ClientRootLayout>;
+  return (
+    <html lang="en">
+      <head>
+        {/* PWA Manifest & Theme */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#ff0000" />
+        <link
+          rel="apple-touch-icon"
+          href="/icons/android-launchericon-512-512.png"
+        />
+        <title>THE CYCLOPEDIA</title>
+      </head>
+      <body className="antialiased">
+        <ClientRootLayout>{children}</ClientRootLayout>
+      </body>
+    </html>
+  );
 }

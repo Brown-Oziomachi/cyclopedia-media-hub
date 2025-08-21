@@ -3,20 +3,18 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import {
-  ChevronRight,
-} from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import LogoSplash from "@/components/LogoSplash";
 import { useRouter } from "next/navigation";
 import { db1 } from "@/lib/firebaseConfig";
 import {
   collection,
-  query as firestoreQuery, // ✅ rename Firestore's query
+  query as firestoreQuery,
   orderBy,
   limit,
+  where,
   onSnapshot,
 } from "firebase/firestore";
-
 
 const Page = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -24,28 +22,29 @@ const Page = () => {
   const [query, setQuery] = useState("");
   const [clickedIndex, setClickedIndex] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
- const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [showNav, setShowNav] = useState(false);
 
- useEffect(() => {
+  // ✅ Fetch only Politics posts
+  useEffect(() => {
     const q = firestoreQuery(
       collection(db1, "blogs"),
+      where("category", "==", "politics"), // only politics
       orderBy("createdAt", "desc"),
-      limit(20) // always fetch only latest 3
+      limit(20)
     );
 
-   const unsubscribe = onSnapshot(q, (snapshot) => {
-     const latestPosts = snapshot.docs.map((doc) => ({
-       id: doc.id,
-       ...doc.data(),
-     }));
-     setPosts(latestPosts);
-   });
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const latestPosts = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setPosts(latestPosts);
+    });
 
-   return () => unsubscribe();
- }, []);
+    return () => unsubscribe();
+  }, []);
 
-  
   useEffect(() => {
     const seen = sessionStorage.getItem("hasSeenSplash");
     if (seen) {
@@ -58,34 +57,26 @@ const Page = () => {
     setShowSplash(false);
   };
 
- const [showHeader, setShowHeader] = useState(true);
- const [lastScroll, setLastScroll] = useState(0);
+  const [showHeader, setShowHeader] = useState(true);
+  const [lastScroll, setLastScroll] = useState(0);
 
- useEffect(() => {
-   const handleScroll = () => {
-     const currentScroll = window.scrollY;
-     if (currentScroll < lastScroll) {
-       // Scrolling up
-       setShowHeader(true);
-     } else {
-       // Scrolling down
-       setShowHeader(false);
-     }
-     setLastScroll(currentScroll);
-   };
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScroll = window.scrollY;
+      if (currentScroll < lastScroll) {
+        setShowHeader(true);
+      } else {
+        setShowHeader(false);
+      }
+      setLastScroll(currentScroll);
+    };
 
-   window.addEventListener("scroll", handleScroll);
-   return () => window.removeEventListener("scroll", handleScroll);
- }, [lastScroll]);
-
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScroll]);
 
   const categories = [
-    {
-      emoji: "🌍",
-      title: "History",
-      link: "/history",
-      imgSrc: "/history.png", 
-    },
+    { emoji: "🌍", title: "History", link: "/history", imgSrc: "/history.png" },
     {
       emoji: "🧨",
       title: "Politics",
@@ -110,37 +101,27 @@ const Page = () => {
       link: "/media",
       imgSrc: "/media.png",
     },
-    {
-      emoji: "👁",
-      title: "Global News",
-      link: "/global",
-      imgSrc: "/joins.png",
-    },
+    { emoji: "👁", title: "Global News", link: "/global", imgSrc: "/joins.png" },
   ];
 
   const items = [
     { id: 1, title: "Education", img: "/educo.png", link: "/education" },
     { id: 2, title: "Philosophy", img: "/philo.png", link: "/philosophy" },
     { id: 3, title: "Health", img: "/hea.png", link: "/health" },
-    {
-      id: 4,
-      title: "wildlife",
-      img: "/wildlife.png",
-      link: "/wildlife",
-    },
+    { id: 4, title: "Wildlife", img: "/wildlife.png", link: "/wildlife" },
   ];
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (!query.trim()) return;
-    setShowNav(false); 
-
+    setShowNav(false);
     router.push(`/search?q=${encodeURIComponent(query.trim().toLowerCase())}`);
   };
 
   const handleClick = (i) => {
     setClickedIndex(i);
   };
+
   return (
     <>
       {showSplash ? (
@@ -326,7 +307,9 @@ const Page = () => {
                   US Turning Oil-Rich Nigeria into Proxy for its Africa Wars
                 </h2>
               </Link>
-              <p className="text-xs text-gray-800 mt-1 font-black">by Cyclopedia</p>
+              <p className="text-xs text-gray-800 mt-1 font-black">
+                by Cyclopedia
+              </p>
               <p className="mt-2 text-gray-900 text-sm">
                 T.J. Coles reports on what AFRICOM is doing under the cover of
                 counterterrorism.
@@ -923,7 +906,9 @@ const Page = () => {
                 Ravage Europe
               </h2>
             </Link>
-            <p className="text-xs text-gray-600 mt-1 font-black">By Cyclopedia</p>
+            <p className="text-xs text-gray-600 mt-1 font-black">
+              By Cyclopedia
+            </p>
             <p className="mt-2 text-gray-800 text-xs">
               Fire-related deaths were reported in Turkey, Spain, Montenegro,
               and Albania.
@@ -946,7 +931,9 @@ const Page = () => {
                 Americans Say Government Should Address Slavery Effects{" "}
               </h2>
             </Link>
-            <p className="text-xs text-gray-600 mt-1 font-black">By Cylopedia</p>
+            <p className="text-xs text-gray-600 mt-1 font-black">
+              By Cylopedia
+            </p>
             <p className="mt-2 text-gray-800 text-xs">
               Americans are more likely to think that the history of slavery has
               at least some effect on Black people today than to think it has
@@ -973,7 +960,9 @@ const Page = () => {
                 Why Does It Seem Israel Is Always at War With Its Neighbors?
               </h2>
             </Link>
-            <p className="text-xs text-gray-600 mt-1 font-black">By cyclopedia</p>
+            <p className="text-xs text-gray-600 mt-1 font-black">
+              By cyclopedia
+            </p>
             <p className="mt-2 text-gray-800 text-xs">
               The 7th century Muslim Conquest of Jerusalem, followed by the
               Crusades (11th-13th centuries), continued the upheaval in the
