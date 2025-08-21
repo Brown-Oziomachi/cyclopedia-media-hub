@@ -1,24 +1,41 @@
-import ClientRootLayout from "@/components/ClientRootLayout";
+
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import AuthProvider from "@/components/AuthProvider";
+import { Analytics } from "@vercel/analytics/next";
+import Footer from "@/components/Footer";
+import { Suspense } from "react";
 
 export const metadata = {
-  title: "THE CYCLOPEDIA",
+  title: "Cyclopedia",
   icons: {
-    icon: "/icon/android-launchericon-512-512.png",
-    shortcut: "/icon/android-launchericon-512-512.png",
-    apple: "/icon/android-launchericon-512-512.png",
+    icon: "/hid.png",
+    shortcut: "/hid.png",
+    apple: "/hid.png",
   },
 };
+
+function Loader() {
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-white">
+      <div className="w-12 h-12 border-4 border-gray-300 border-t-black rounded-full animate-spin"></div>
+    </div>
+  );
+}
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#ff0000" />
-      </head>
+      <head></head>
       <body className="antialiased">
-        <ClientRootLayout>{children}</ClientRootLayout>
+        <Suspense fallback={<div>Loading page...</div>}>
+          <AuthProvider>
+            <Navbar />
+            {children}
+            <Footer />
+            <Analytics />
+          </AuthProvider>
+        </Suspense>
       </body>
     </html>
   );

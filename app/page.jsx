@@ -141,7 +141,7 @@ const Page = () => {
             <div className="space-y-2 ">
               {/* Cyclopedia Creation Title */}
               <img
-                src="/hid.png"
+                src="/joins.png"
                 alt="image"
                 className="z-0 w-fit lg:w-200 lg:h-200 h-fit opacity- lg:-mt-35 "
               />

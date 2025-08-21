@@ -1,21 +1,27 @@
-import withPWAInit from "next-pwa";
-import runtimeCaching from "next-pwa/cache.js";
 
-const withPWA = withPWAInit({
-  dest: "public",
-  register: true,
-  skipWaiting: true,
-  runtimeCaching: [...runtimeCaching],
-});
-
+// next.config.mjs
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "blob.vercel-storage.com" },
-      { protocol: "https", hostname: "jqijjwkgjavuqxjtwver.supabase.co" },
-      { protocol: "https", hostname: "raw.githubusercontent.com" },
+      {
+        protocol: "https",
+        hostname: "cwoel4rgy59p0nml.public.blob.vercel-storage.com", // Vercel Blob
+      },
+      {
+        protocol: "https",
+        hostname: "blob.vercel-storage.com", // Optional Vercel
+      },
+      {
+        protocol: "https",
+        hostname: "jqijjwkgjavuqxjtwver.supabase.co", // Supabase
+      },
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com", // GitHub raw file hosting
+      },
     ],
   },
 };
 
-export default withPWA(nextConfig);
+export default nextConfig;
