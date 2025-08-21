@@ -1,5 +1,5 @@
+import ClientRootLayout from "@/components/ClientRootLayout";
 import "./globals.css";
-import ClientRootLayout from "./ClientRootLayout";
 
 // ✅ Metadata for Next.js App Router
 export const metadata = {
