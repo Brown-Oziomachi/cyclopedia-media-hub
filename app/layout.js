@@ -1,13 +1,12 @@
-
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import AuthProvider from "@/components/AuthProvider";
 import { Analytics } from "@vercel/analytics/next";
-import Footer from "@/components/Footer";
 import { Suspense } from "react";
 
 export const metadata = {
-  title: "Cyclopedia",
+  title: "THE CYCLOPEDIA",
   icons: {
     icon: "/hid.png",
     shortcut: "/hid.png",
@@ -24,11 +23,18 @@ function Loader() {
 }
 
 export default function RootLayout({ children }) {
+  // ✅ Register service worker
+
   return (
     <html lang="en">
-      <head></head>
+      <head>
+        {/* PWA Manifest & Theme */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#ff0000" />
+<link rel="apple-touch-icon" href="/icons/android-launchericon-512-512.png" />
+      </head>
       <body className="antialiased">
-        <Suspense fallback={<div>Loading page...</div>}>
+        <Suspense fallback={<Loader />}>
           <AuthProvider>
             <Navbar />
             {children}

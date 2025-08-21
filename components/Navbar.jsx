@@ -453,15 +453,14 @@ const regions = [
       {/* Mobile Navigation Drawer */}
       {showNav && (
         <nav
-                  onClick={() => setShowNav(!showNav)}
 
-          className="fixed inset-0  bg-black bg-opacity-95 flex flex-col text-black p-5 z-[50] mt-12 overflow-y-auto"
+          className="fixed inset-0  bg-black bg-opacity-95 flex flex-col text-black p-5 z-[50] mt-11 overflow-y-auto"
           aria-label="Mobile navigation"
         >
           {/* Small screen search */}
           <form
             onSubmit={handleSearch}
-            className="relative flex items-center w-full max-w-lg mx-auto sticky top-0 z-40"
+            className="relative flex items-center w-full max-w-lg mx-auto top-0 z-40"
             role="search"
             aria-label="Site Search"
           >
