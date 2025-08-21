@@ -157,82 +157,77 @@ export default function BlogDetails() {
           </div>
         </div>
 
-
         <div>
-
           <div className="flex gap-6 mt-4 items-center justify-center">
-         <div className="flex justify-center">
-  <Link href="/live">
-    <div className="flex items-center gap-2  hover:scale-105 transition-transform cursor-pointer">
-      
-      {/* Animated Live Dot */}
-      <span className="relative flex h-3 w-3">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-        <span className="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
-      </span>
+            <div className="flex justify-center">
+              <Link href="/live">
+                <div className="flex items-center gap-2  hover:scale-105 transition-transform cursor-pointer">
+                  {/* Animated Live Dot */}
+                  <span className="relative flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
+                  </span>
 
-      {/* Live Text */}
-      <p className="text-white font-semibold uppercase tracking-wide animate-pulse">
-        Live
-      </p>
+                  {/* Live Text */}
+                  <p className="text-white font-semibold uppercase tracking-wide animate-pulse">
+                    Live
+                  </p>
 
-      {/* Play Icon */}
-      <Play className="text-white h-5 w-5" />
-    </div>
-  </Link>
-</div>
+                  {/* Play Icon */}
+                  <Play className="text-white h-5 w-5" />
+                </div>
+              </Link>
+            </div>
 
+            <div className="relative" ref={menuRef}>
+              <button
+                onClick={handleShareClick}
+                className="flex items-center gap-2 font-semibold text-white bg-black border  py-1 px-2 hover:bg-gray-800 transition"
+              >
+                <Share className="h-4 w-4" />
+                Share
+              </button>
+
+              {showShareMenu && (
+                <div className="absolute top-full left-0 mt-2 w-40 bg-white border p-4 flex flex-col gap-3 text-sm z-50">
+                  <a
+                    href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:underline"
+                  >
+                    Share on Twitter
+                  </a>
+                  <a
+                    href={`https://www.linkedin.com/shareArticle?mini=true&url=${window.location.href}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-700 hover:underline"
+                  >
+                    Share on LinkedIn
+                  </a>
+                  <a
+                    href={`mailto:?subject=Check this out&body=${window.location.href}`}
+                    className="text-gray-800 hover:underline"
+                  >
+                    Share via Email
+                  </a>
+                </div>
+              )}
+            </div>
 
             <div>
-          <button
-            onClick={handleCopyLink}
-            className="flex text-white gap-2 items-center justify-center border-amber-50 border py-1 px-2"
-          >
-            Copy
-            <LinkIcon className="h-4 w-4" />
-          </button>
-        </div>
-
-          <div className="relative" ref={menuRef}>
-            <button
-              onClick={handleShareClick}
-              className="flex items-center gap-2 font-semibold text-white bg-black border  py-1 px-2 hover:bg-gray-800 transition"
-            >
-              <Share className="h-4 w-4" />
-              Share
-            </button>
-
-            {showShareMenu && (
-              <div className="absolute top-full left-0 mt-2 w-60 bg-white border p-4 flex flex-col gap-3 text-sm z-50">
-                <a
-                  href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 hover:underline"
-                >
-                  Share on Twitter
-                </a>
-                <a
-                  href={`https://www.linkedin.com/shareArticle?mini=true&url=${window.location.href}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-700 hover:underline"
-                >
-                  Share on LinkedIn
-                </a>
-                <a
-                  href={`mailto:?subject=Check this out&body=${window.location.href}`}
-                  className="text-gray-800 hover:underline"
-                >
-                  Share via Email
-                </a>
-              </div>
-            )}
+              <button
+                onClick={handleCopyLink}
+                className="flex text-white gap-2 items-center justify-center border-amber-50 border py-1 px-2"
+              >
+                Copy
+                <LinkIcon className="h-4 w-4" />
+              </button>
+            </div>
           </div>
-      
         </div>
       </div>
-</div>
       {/* Blog Content */}
       <div className="blog-content prose max-w-none px-2 sm:px-4 space-y-5 font-serif">
         <hr />
