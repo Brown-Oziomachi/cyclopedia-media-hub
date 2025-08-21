@@ -1,4 +1,3 @@
-// Import Firebase scripts
 importScripts(
   "https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"
 );
@@ -6,7 +5,6 @@ importScripts(
   "https://www.gstatic.com/firebasejs/9.23.0/firebase-messaging-compat.js"
 );
 
-// Initialize Firebase with your real config
 firebase.initializeApp({
   apiKey: "AIzaSyC87iDeJ_NQYURA3J5Dv0OGb2uULVcoC20",
   authDomain: "cyclopedia-db.firebaseapp.com",
@@ -17,34 +15,34 @@ firebase.initializeApp({
   measurementId: "G-51M2DTMTFK",
 });
 
-// Initialize Firebase Messaging
 const messaging = firebase.messaging();
 
-// Handle background messages
 messaging.onBackgroundMessage((payload) => {
-  console.log(
-    "[firebase-messaging-sw.js] Received background message ",
-    payload
+  const { title, body } = payload.notification;
+  self.registration.showNotification(title, {
+    body,
+    icon: "/icon/android-launchericon-512-512.png",
+  });
+});
+
+// Optional cache for offline
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches
+      .open("cyclopedia-cache")
+      .then((cache) =>
+        cache.addAll([
+          "/",
+          "/manifest.json",
+          "/icon/android-launchericon-192-192.png",
+          "/icon/android-launchericon-512-512.png",
+        ])
+      )
   );
-
-  // Fallbacks in case notification payload is missing fields
-  const notificationTitle =
-    payload?.notification?.title || "Cyclopedia Notification";
-  const notificationOptions = {
-    body: payload?.notification?.body || "",
-    icon:
-      payload?.notification?.icon || "/icon/android-launchericon-512-512.png",
-  };
-
-  self.registration.showNotification(notificationTitle, notificationOptions);
 });
 
-// Optional: Catch global errors in the service worker
-self.addEventListener("error", (event) => {
-  console.error("SW error:", event);
-});
-
-// Ensure the SW claims clients immediately
-self.addEventListener("activate", (event) => {
-  event.waitUntil(self.clients.claim());
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((res) => res || fetch(event.request))
+  );
 });
