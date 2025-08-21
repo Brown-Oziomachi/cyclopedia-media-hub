@@ -28,7 +28,7 @@ export default function ClientRootLayout({ children }) {
           onMessage(messaging, (payload) => {
             new Notification(payload.notification.title, {
               body: payload.notification.body,
-              icon: "/icons/android-launchericon-512-512.png",
+              icon: "/icon/android-launchericon-512-512.png",
             });
           });
         }

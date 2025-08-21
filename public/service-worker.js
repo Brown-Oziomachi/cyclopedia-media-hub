@@ -5,8 +5,8 @@ self.addEventListener("install", (event) => {
       return cache.addAll([
         "/", // homepage
         "/manifest.json",
-        "/android-launchericon-192-192.png",
-        "/android-launchericon-512-512.png",
+        "/icon/android-launchericon-192-192.png",
+        "/icon/android-launchericon-512-512.png",
       ]);
     })
   );

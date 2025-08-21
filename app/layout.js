@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
         <meta name="theme-color" content="#ff0000" />
         <link
           rel="apple-touch-icon"
-          href="/icons/android-launchericon-512-512.png"
+          href="/icon/android-launchericon-512-512.png"
         />
         <title>THE CYCLOPEDIA</title>
       </head>

@@ -162,8 +162,7 @@ const regions = [
         className={`fixed top-0 left-0 w-full bg-black transition-transform duration-300 ${
           showHeader ? "translate-y-0" : "-translate-y-20"
         } shadow-lg z-50`}
-          onClick={(e) => e.stopPropagation()} // Prevents nav toggle scroll effect
-
+        onClick={(e) => e.stopPropagation()} // Prevents nav toggle scroll effect
       >
         <div className="flex items-center justify-between px-4 py-2">
           {/* Logo & Title */}
@@ -182,7 +181,7 @@ const regions = [
                 className="text-white font-bold text-2xl cursor-pointer hover:text-purple-400 transition"
                 onClick={() => setShowNav(false)}
               >
-               THE CYCLOPEDIA
+                THE CYCLOPEDIA
               </h1>
             </Link>
           </div>
@@ -453,7 +452,6 @@ const regions = [
       {/* Mobile Navigation Drawer */}
       {showNav && (
         <nav
-
           className="fixed inset-0  bg-black bg-opacity-95 flex flex-col text-black p-5 z-[50] mt-11 overflow-y-auto"
           aria-label="Mobile navigation"
         >
@@ -483,47 +481,47 @@ const regions = [
           </form>
           <ul className="space-y-3 font-bold mt-5 text-gray-400">
             <li>
-              <Link href="/global" onClick={() => setShowNav(false)}>
-                Latest news
+              <Link href="/global">
+                <span onClick={() => setShowNav(false)}>Latest news</span>
               </Link>
             </li>
             <li>
-              <Link href="/politics" onClick={() => setShowNav(false)}>
-                Politics
+              <Link href="/politics">
+                <span onClick={() => setShowNav(false)}>Politics</span>
               </Link>
             </li>
             <li>
-              <Link href="/religion" onClick={() => setShowNav(false)}>
-                Religion
+              <Link href="/religion">
+                <span onClick={() => setShowNav(false)}>Religion</span>
               </Link>
             </li>
             <li>
-              <Link href="/history" onClick={() => setShowNav(false)}>
-                History
+              <Link href="/history">
+                <span onClick={() => setShowNav(false)}>History</span>
               </Link>
             </li>
             <li>
-              <Link href="/science" onClick={() => setShowNav(false)}>
-                Science
+              <Link href="/science">
+                <span onClick={() => setShowNav(false)}>Science</span>
               </Link>
             </li>
             <li>
-              <Link href="/media" onClick={() => setShowNav(false)}>
-                Media
+              <Link href="/media">
+                <span onClick={() => setShowNav(false)}>Media</span>
               </Link>
             </li>
             <li>
-              <Link href="/sports" onClick={() => setShowNav(false)}>
-                Sports news
+              <Link href="/sports">
+                <span onClick={() => setShowNav(false)}>Sports news</span>
               </Link>
             </li>
             <li>
-              <Link href="/live" onClick={() => setShowNav(false)}>
-                Live Now
+              <Link href="/live">
+                <span onClick={() => setShowNav(false)}>Live Now</span>
               </Link>
             </li>
           </ul>
-  
+
           <hr className="my-4 border-gray-600" />
 
           <Link
@@ -537,55 +535,58 @@ const regions = [
           <hr className="my-4 border-gray-600" />
 
           {/* Regions Links for mobile */}
-         {/* Regions Links for mobile */}
-<ul className="grid items-center text-white gap-6">
-  {regions.map((region) => (
-    <li key={region.name} className="relative">
-      <button
-        onClick={(e) => {
-          e.stopPropagation(); // Prevent nav from closing
-          toggleDropdown(region.name);
-        }}
-        className="flex items-center gap-1 hover:text-gray-300 font-semibold"
-      >
-        {region.emoji} {region.name}{" "}
-        <ChevronDown
-          className={`w-4 h-4 transition-transform ${
-            openDropdown === region.name ? "rotate-180" : ""
-          }`}
-        />
-      </button>
+          {/* Regions Links for mobile */}
+          <ul className="grid items-center text-white gap-6">
+            {regions.map((region) => (
+              <li key={region.name} className="relative">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent nav from closing
+                    toggleDropdown(region.name);
+                  }}
+                  className="flex items-center gap-1 hover:text-gray-300 font-semibold"
+                >
+                  {region.emoji} {region.name}{" "}
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${
+                      openDropdown === region.name ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
 
-      {/* Animated Dropdown */}
-      <div
-        className={`overflow-hidden transition-all duration-300 ${
-          openDropdown === region.name ? "max-h-96 mt-2" : "max-h-0"
-        } text-white rounded shadow-lg`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <ul>
-          {countriesByRegion[region.name].map((country) => (
-            <li key={country}>
-              <button
-                onClick={() => {
-                  const searchQuery = `${region.name} ${country}`;
-                  setQuery(searchQuery); 
-                  router.push(`/search?q=${encodeURIComponent(searchQuery.toLowerCase())}`);
-                  setShowNav(false); 
-                  setOpenDropdown(null); 
-                }}
-                className="w-full text-left px-4 py-2 hover:bg-gray-200 text-white"
-              >
-                {country}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </li>
-  ))}
-</ul>
-
+                {/* Animated Dropdown */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${
+                    openDropdown === region.name ? "max-h-96 mt-2" : "max-h-0"
+                  } text-white rounded shadow-lg`}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <ul>
+                    {countriesByRegion[region.name].map((country) => (
+                      <li key={country}>
+                        <button
+                          onClick={() => {
+                            const searchQuery = `${region.name} ${country}`;
+                            setQuery(searchQuery);
+                            router.push(
+                              `/search?q=${encodeURIComponent(
+                                searchQuery.toLowerCase()
+                              )}`
+                            );
+                            setShowNav(false);
+                            setOpenDropdown(null);
+                          }}
+                          className="w-full text-left px-4 py-2 hover:bg-gray-200 text-white"
+                        >
+                          {country}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))}
+          </ul>
 
           <hr className="my-4 border-gray-600" />
 
@@ -601,7 +602,7 @@ const regions = [
               </Link>
             ))}
           </nav>
-  
+
           <div className="mt-10 w-full gap-5 flex flex-col mx-auto items-center">
             {session ? (
               <button
@@ -634,7 +635,6 @@ const regions = [
           </div>
         </nav>
       )}
-      
     </main>
   );
 };
