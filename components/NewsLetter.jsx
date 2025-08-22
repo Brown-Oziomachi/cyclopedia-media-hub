@@ -64,9 +64,9 @@ export default function NewsletterForm() {
         {/* RIGHT SIDE: Form */}
         <form
           onSubmit={handleSubmit}
-          className="lg:w-1/2 max-w-md mx-auto p-6 bg-white shadow rounded-2xl space-y-4"
+          className="lg:w-1/2 max-w-md mx-auto p-6 shadow-2xl rounded-2xl space-y-4 border-2"
         >
-          <h2 className="text-xl font-semibold text-center mt-4 lg:mt-0">
+          <h2 className="text-xl font-semibold text-center mt-4 lg:mt-0 ">
             Subscribe to our Newsletter
           </h2>
 
@@ -103,7 +103,7 @@ export default function NewsletterForm() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-purple-600 hover:bg-cyan-700 text-white p-2 rounded-lg transition"
+            className="w-full bg-purple-600 hover:bg-cyan-700  p-2 rounded-lg transition"
           >
             {loading ? "Subscribing..." : "Subscribe"}
           </button>
