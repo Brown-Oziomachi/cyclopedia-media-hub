@@ -49,12 +49,12 @@ const PoliticsPage = () => {
   }, []);
 
   return (
-    <main className="w-full bg-white">
+    <main className="w-ful">
       <div className="max-w-7xl mx-auto px-4 py-10">
-        <h1 className="text-3xl lg:text-5xl font-bold text-center max-lg:mt-40 lg:mt-50 text-black mb-2">
+        <h1 className="text-3xl lg:text-5xl font-bold text-center max-lg:mt-40 lg:mt-50 mb-2">
           Innovation, Tech, and the Future
         </h1>
-        <p className="text-sm lg:text-base text-center text-gray-700 mx-auto mb-10">
+        <p className="text-sm lg:text-base text-center mx-auto mb-10">
           Explore breakthroughs in AI, robotics, space exploration, and digital
           innovations. <br className="max-md:hidden" />
           Discover how technology is shaping our world and transforming everyday
@@ -65,7 +65,7 @@ const PoliticsPage = () => {
         {loading ? (
           <p className="text-center py-10">Loading latest posts...</p>
         ) : posts.length === 0 ? (
-          <p className="text-gray-500 text-center">
+          <p className=" text-center">
             No technology posts found.
           </p>
         ) : (
@@ -85,7 +85,7 @@ const PoliticsPage = () => {
                 )}
                 <div className="p-4">
                   <h2 className="text-sm font-semibold mb-2">{post.title}</h2>
-                  <p className="text-gray-600 text-sm line-clamp-3">
+                  <p className=" text-sm line-clamp-3">
                     {post.subtitle}
                   </p>
                   {/* <div className="mt-2 text-xs text-blue-600 font-medium">

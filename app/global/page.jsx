@@ -74,7 +74,7 @@ export default function BlogsPage() {
 
       {posts.map((post) => (
         <Link key={post.id} href={`/blog/${post.id}`} className="block">
-          <div className="flex flex-col bg-white overflow-hidden shadow-md cursor-pointer">
+          <div className="flex flex-col overflow-hidden shadow-md cursor-pointer">
             {post.imageUrl && (
               <div className="relative w-full h-60 sm:h-56">
                 <img
@@ -86,11 +86,11 @@ export default function BlogsPage() {
             )}
             <div className="p-4">
               {/* Title */}
-              <h2 className="text-sm font-bold text-black hover:underline uppercase">
+              <h2 className="text-sm font-bold hover:underline uppercase">
                 {post.title}
               </h2>
               {post.subtitle && (
-                <p className="text-sm text-gray-600 line-clamp-3">
+                <p className="text-sm  line-clamp-3">
                   {post.subtitle}
                 </p>
 
@@ -105,7 +105,7 @@ export default function BlogsPage() {
         <div className="col-span-full text-center mt-6 mb-5">
           <button
             onClick={fetchMoreBlogs}
-            className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-md transition"
+            className="bg-purple-600 hover:bg-purple-700  px-6 py-3 rounded-md transition"
             disabled={loading}
           >
             {loading ? "Loading News..." : "View More"}

@@ -45,9 +45,9 @@ const Page = () => {
  
 
   return (
-    <main className="w-full bg-white">
+    <main className="w-full">
       {/* === HEADER === */}
-      <h1 className="text-3xl lg:text-5xl font-bold text-center text-black mb-2 mt-30 lg:mt-50 font-serif">
+      <h1 className="text-3xl lg:text-5xl font-bold text-center mb-2 mt-30 lg:mt-50 font-serif">
         Uncovering the Hidden Past
       </h1>
       <p className="text-sm lg:text-base text-center text-gray-700 mx-auto">
@@ -58,9 +58,7 @@ const Page = () => {
       </p>
 
       <div className="max-w-7xl mx-auto px-4 mt-32">
-        <h2 className="text-2xl font-bold mb-6 text-black">
-          Latest History Articles
-        </h2>
+        <h2 className="text-2xl font-bold mb-6">Latest History Articles</h2>
         {loading ? (
           <p className="text-gray-500">Loading latest Posts </p>
         ) : posts.length === 0 ? (
@@ -71,7 +69,7 @@ const Page = () => {
               <div
                 key={post.id}
                 href={`/blog/${post.id}`}
-                className="bg-white border rounded-lg shadow hover:shadow-lg p-4"
+                className=" border rounded-lg shadow hover:shadow-lg p-4"
               >
                 {post.imageUrl && (
                   <img
@@ -80,11 +78,9 @@ const Page = () => {
                     className="w-full h-40 object-cover rounded mb-3"
                   />
                 )}
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {post.title}
-                </h3>
+                <h3 className="text-lg font-semibold  mb-2">{post.title}</h3>
                 {post.subtitle && (
-                  <p className="text-gray-600 text-sm mb-3">{post.subtitle}</p>
+                  <p className=" text-sm mb-3">{post.subtitle}</p>
                 )}
                 <Link
                   href={`/blogs/${post.id}`}
@@ -101,7 +97,7 @@ const Page = () => {
       {/* === FEATURED STATIC CARDS === */}
       <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {/* CARD 1 */}
-        <div className="relative">
+        <div className=" rounded-xl shadow-lg overflow-hidden">
           <div className="relative w-full h-[220px]">
             <Image
               src="/slavery.png"
@@ -110,32 +106,36 @@ const Page = () => {
               className="object-cover"
             />
           </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
+          <div className="p-4">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/QUnWDFG1eBq2x4ejSLcs">
-              <h2 className="text-sm font-bold text-black hover:underline">
+              <h2 className="text-sm font-bold hover:underline">
                 Americans Say Government Should Address Slavery Effects
               </h2>
             </Link>
-            <p className="text-xs text-gray-800 mt-1">by Cyclopedia</p>
-            <p className="mt-2 text-gray-900 text-xs">
+            <p className="text-xs mt-1">
+              by Cyclopedia
+            </p>
+            <p className="mt-2 text-xs ">
               Americans Perceive History of Slavery Affecting Black People Today
             </p>
           </div>
         </div>
 
         {/* CARD 2 */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
+        <div className=" rounded-xl shadow-lg overflow-hidden">
+          <div className="relative w-full h-[220px]">
             <Image src="/his.png" alt="News 2" fill className="object-cover" />
           </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
+          <div className="p-4">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/ggrMyhU1qWNwmX8sfubI">
-              <h2 className="text-sm font-bold text-black hover:underline">
+              <h2 className="text-sm font-bold hover:underline">
                 History of Missional Church
               </h2>
             </Link>
-            <p className="text-xs text-gray-800 mt-1">by Cyclopedia</p>
-            <p className="mt-2 text-gray-900 text-xs">
+            <p className="text-xs mt-1">
+              by Cyclopedia
+            </p>
+            <p className="mt-2 text-xs ">
               We need a new overstory when it comes to the way we understand
               evangelism and discipleship...
             </p>
@@ -143,18 +143,20 @@ const Page = () => {
         </div>
 
         {/* CARD 3 */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
+        <div className=" rounded-xl shadow-lg overflow-hidden">
+          <div className="relative w-full h-[220px]">
             <Image src="/mart.png" alt="News 3" fill className="object-cover" />
           </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
+          <div className="p-4">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/ttRDjI40RVXDo1Em5GUr">
-              <h2 className="text-sm font-bold text-black hover:underline">
+              <h2 className="text-sm font-bold  hover:underline">
                 80 Years of Living and Writing in the Shadow of the Bomb
               </h2>
             </Link>
-            <p className="text-xs text-gray-800 mt-1">By: Martin Halpern</p>
-            <p className="mt-2 text-gray-900 text-xs">
+            <p className="text-xs mt-1">
+              By Martin Halpern
+            </p>
+            <p className="mt-2 text-xs ">
               My acute focus on the danger of nuclear war may stem in part from
               the accident of my birthday on August 9, 1945.
             </p>
@@ -162,8 +164,8 @@ const Page = () => {
         </div>
 
         {/* CARD 4 */}
-        <div className="relative">
-          <div className="relative w-full h-[220px] mt-20">
+        <div className=" rounded-xl shadow-lg overflow-hidden">
+          <div className="relative w-full h-[220px]">
             <Image
               src="/plague.png"
               alt="News 4"
@@ -171,14 +173,16 @@ const Page = () => {
               className="object-cover"
             />
           </div>
-          <div className="absolute z-10 -bottom-20 left-4 right-4 bg-white p-4">
+          <div className="p-4">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/jeixznhQcoRJKNT9X6eE">
-              <h2 className="text-sm font-bold text-black hover:underline">
+              <h2 className="text-sm font-bold hover:underline">
                 AIDS and the Hidden Catholic Church
               </h2>
             </Link>
-            <p className="text-xs text-gray-800 mt-1">By Cyclopedia</p>
-            <p className="mt-2 text-gray-900 text-xs">
+            <p className="text-xs  mt-1">
+              By Cyclopedia
+            </p>
+            <p className="mt-2 text-xs ">
               Catholic leaders responded to the AIDS epidemic in complex ways
             </p>
           </div>

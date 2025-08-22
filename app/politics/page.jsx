@@ -49,9 +49,9 @@ const PoliticsPage = () => {
   }, []);
 
   return (
-    <main className="w-full bg-white">
+    <main className="w-full b">
       <div className="max-w-7xl mx-auto px-4 py-10">
-        <h1 className="text-3xl lg:text-5xl font-bold text-center max-lg:mt-40 lg:mt-50 text-black mb-2">
+        <h1 className="text-3xl lg:text-5xl font-bold text-center max-lg:mt-40 lg:mt-50  mb-2">
           Power, Policy, and People
         </h1>
         <p className="text-sm lg:text-base text-center text-gray-700 mx-auto mb-10">
@@ -98,7 +98,7 @@ const PoliticsPage = () => {
         {/* Static Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {/* Card 1 */}
-          <div className="relative border rounded-lg overflow-hidden shadow hover:shadow-lg transition">
+          <div className="relative  rounded-lg overflow-hidden shadow hover:shadow-lg transition">
             <div className="relative w-full h-48">
               <Image
                 src="/erik.png"
@@ -107,17 +107,17 @@ const PoliticsPage = () => {
                 className="object-cover"
               />
             </div>
-            <div className="p-4 bg-white">
+            <div className="p-4 ">
               <Link href="https://cyclopedia-media-hub.vercel.app/blog/Tc0W4qUPzj7ytY7UB5fs">
-                <h2 className="text-sm font-bold text-black hover:underline">
+                <h2 className="text-sm font-bold  hover:underline">
                   Erik Prince Calls for U.S. to Colonize Africa and Latin
                   America
                 </h2>
               </Link>
-              <p className="text-xs text-gray-800 mt-1">
+              <p className="text-xs text-gray-700 mt-1">
                 Jon Schwarz February 10 2024
               </p>
-              <p className="mt-2 text-gray-900 text-xs">
+              <p className="mt-2 text-gray-600 text-xs">
                 If so many of these countries around the world are incapable of
                 governing themselves...
               </p>
@@ -125,7 +125,7 @@ const PoliticsPage = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="relative border rounded-lg overflow-hidden shadow hover:shadow-lg transition">
+          <div className="relative rounded-lg overflow-hidden shadow hover:shadow-lg transition">
             <div className="relative w-full h-48">
               <Image
                 src="/mdi.png"
@@ -134,15 +134,15 @@ const PoliticsPage = () => {
                 className="object-cover"
               />
             </div>
-            <div className="p-4 bg-white">
+            <div className="p-4 ">
               <Link href="https://cyclopedia-media-hub.vercel.app/blog/18is4vszdgKCKhPdcDZo">
-                <h2 className="text-sm font-bold text-black hover:underline">
+                <h2 className="text-sm font-bold hover:underline">
                   US Opinion Is Shifting on Palestine; Can Political Leaders
                   Shift With It?
                 </h2>
               </Link>
-              <p className="text-xs text-gray-800 mt-1">By Cyclopedia</p>
-              <p className="mt-2 text-gray-900 text-xs">
+              <p className="text-xs text-gray-600 mt-1">By Cyclopedia</p>
+              <p className="mt-2 text-gray-700 text-xs">
                 Growing support for Palestine means that more U.S. voters will
                 base their decisions...
               </p>
@@ -150,7 +150,7 @@ const PoliticsPage = () => {
           </div>
 
           {/* Card 3 */}
-          <div className="relative border rounded-lg overflow-hidden shadow hover:shadow-lg transition">
+          <div className="relative rounded-lg overflow-hidden shadow hover:shadow-lg transition">
             <div className="relative w-full h-48">
               <Image
                 src="/emp.png"
@@ -159,16 +159,16 @@ const PoliticsPage = () => {
                 className="object-cover"
               />
             </div>
-            <div className="p-4 bg-white">
+            <div className="p-4 ">
               <Link href="https://cyclopedia-media-hub.vercel.app/blog/IaxcmJfiF1fEizKHpD3E">
-                <h2 className="text-sm font-bold text-black hover:underline">
+                <h2 className="text-sm font-bold  hover:underline">
                   How Britain allowed Pinochet to escape justice for atrocities
                 </h2>
               </Link>
-              <p className="text-xs text-gray-800 mt-1">
+              <p className="text-xs text-gray-600 mt-1">
                 JOHN McEVOY 4 March 2025
               </p>
-              <p className="mt-2 text-gray-900 text-xs">
+              <p className="mt-2 text-gray-600 text-xs">
                 25 years ago, the UK government allowed Chile’s former dictator
                 to evade extradition...
               </p>
@@ -176,7 +176,7 @@ const PoliticsPage = () => {
           </div>
 
           {/* Card 4 */}
-          <div className="relative border rounded-lg overflow-hidden shadow hover:shadow-lg transition">
+          <div className="relative  rounded-lg overflow-hidden shadow hover:shadow-lg transition">
             <div className="relative w-full h-48">
               <Image
                 src="/oil.png"
@@ -185,16 +185,16 @@ const PoliticsPage = () => {
                 className="object-cover"
               />
             </div>
-            <div className="p-4 bg-white">
+            <div className="p-4 ">
               <Link href="https://cyclopedia-media-hub.vercel.app/blog/5njbEcuqy6lFrrYdMS2p">
-                <h2 className="text-sm font-bold text-black hover:underline">
+                <h2 className="text-sm font-bold  hover:underline">
                   US Turning Oil-Rich Nigeria into Proxy for its Africa Wars
                 </h2>
               </Link>
-              <p className="text-xs text-gray-800 mt-1">
+              <p className="text-xs text-gray-700 mt-1">
                 By T.J. Coles The Grayzone
               </p>
-              <p className="mt-2 text-gray-900 text-xs">
+              <p className="mt-2 text-gray-600 text-xs">
                 AFRICOM is doing under the cover of counterterrorism...
               </p>
             </div>

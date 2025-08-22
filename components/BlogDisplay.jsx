@@ -21,10 +21,18 @@ export default function BlogDisplay({ title, subtitle, body, imageUrl }) {
   const formattedBody = formatBody(body);
 
   return (
-    <article className="p-6 bg-gray-900 text-white">
+    <article className="p-6 transition-colors duration-300">
       {/* Title */}
-      {title && <h1 className="text-3xl font-bold mb-4">{title}</h1>}
-      {subtitle && <h2 className="text-lg text-gray-300 mb-6">{subtitle}</h2>}
+      {title && (
+        <h1 className="text-3xl font-bold mb-4 ">
+          {title}
+        </h1>
+      )}
+      {subtitle && (
+        <h2 className="text-lg mb-6 ">
+          {subtitle}
+        </h2>
+      )}
 
       {/* Image */}
       {imageUrl && (
@@ -36,9 +44,14 @@ export default function BlogDisplay({ title, subtitle, body, imageUrl }) {
       )}
 
       {/* Body */}
-      <div className="tiptap max-w-3xl mx-auto px-6">
-        <div dangerouslySetInnerHTML={{ __html: formattedBody }} />
-      </div>
+      <div
+        className="tiptap prose max-w-3xl mx-auto px-6 
+        prose-headings:text-gray-900 dark:prose-headings:text-gray-100
+        prose-p:text-gray-800 dark:prose-p:text-gray-200
+        prose-strong:text-gray-900 dark:prose-strong:text-gray-100
+        prose-a:text-blue-600 dark:prose-a:text-blue-400"
+        dangerouslySetInnerHTML={{ __html: formattedBody }}
+      />
     </article>
   );
 }

@@ -1,6 +1,7 @@
-export default {
-  darkMode: 'class', // ✅ enable dark mode using a class
-  content: ["./src/**/*.{js,jsx,ts,tsx}"], // Adjust paths based on your project
+// tailwind.config.js
+module.exports = {
+  darkMode: "class", // enable dark mode toggle using a class
+  content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"], // adjust paths
   theme: {
     extend: {
       fontFamily: {
@@ -12,12 +13,11 @@ export default {
     },
   },
   plugins: [require("@tailwindcss/typography")],
-
   safelist: [
     "prose",
     "prose-lg",
     "space-y-4",
     "whitespace-pre-line",
-    "whitespace-pre-wrap", // ✅ added so it won't be purged
+    "whitespace-pre-wrap",
   ],
 };

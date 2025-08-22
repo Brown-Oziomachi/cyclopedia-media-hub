@@ -74,9 +74,9 @@ export default function LiveStreamSwitcher() {
           <button
             key={video.id}
             onClick={() => setCurrentVideo(video)}
-            className={`p-3 rounded text-left flex justify-between py-0 items-center text-white ${
+            className={`p-3 rounded flex justify-between py-0 items-center text-center  ${
               currentVideo.id === video.id
-                ? "bg-black"
+                ? ""
                 : "bg-purple-900 hover:bg-gray-800"
             }`}
           >
@@ -84,8 +84,8 @@ export default function LiveStreamSwitcher() {
               {video.title} {/* 🔹 Removed platform name from here */}
             </span>
             {index === 0 && (
-              <div className="flex items-center gap-1 bg-red-500 text-white text-xs px-2 py-1 rounded">
-                <span className="w-2 h-2 bg-white rounded-full animate-ping"></span>
+              <div className="flex items-center gap-1 bg-red-500  text-xs px-2 py-1 rounded">
+                <span className="w-2 h-2  rounded-full animate-ping"></span>
                 CPD
               </div>
             )}

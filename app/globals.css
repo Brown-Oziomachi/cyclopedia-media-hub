@@ -1,37 +1,49 @@
 @import "tailwindcss";
 
-
-/* spacing for blog content */
+/* ===== TipTap content spacing ===== */
 .tiptap p {
   margin-bottom: 1rem;
+  line-height: 1.6;
+  /* Better readability */
 }
 
 .tiptap p:last-child {
   margin-bottom: 0;
 }
 
+/* ===== Global typography ===== */
+p {
+  margin: 1em 0;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* ===== Theme Variables ===== */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-body {
-  color: #000;
-  background-color: white;
+.dark {
+  --background: #000000;
+  --foreground: #ffffff;
 }
 
-.ql-container {
-  background: white;
-  color: black;
-}
-
-
+/* ===== Star Rating (example) ===== */
 .star-rating::after {
   content: "★ ★ ★ ★ ★";
-  color: yellow;
+  color: gold;
 }
 
-@keyframes draw-border {
+/* ===== Animated Border ===== */
+@keyframes traceBorder {
   to {
     stroke-dashoffset: 0;
   }
@@ -43,32 +55,4 @@ body {
   border-image-slice: 1;
   border-image-source: conic-gradient(from 0deg, blue 0%, transparent 0%);
   animation: traceBorder 50s linear forwards;
-}
-
-@keyframes draw-border {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-/* globals.css or wherever your global Tailwind imports are */
-.tiptap p {
-  margin-bottom: 1rem;
-  /* adjust size */
-  line-height: 1.6;
-}
-
-/* remove bottom margin on last child */
-.tiptap p:last-child {
-  margin-bottom: 0;
-}
-
-p {
-  margin: 1em 0;
-}
-
-body {
-  transition: background-color 0.3s ease, color 0.3s ease;
-  min-height: 100vh;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
 }

@@ -48,12 +48,12 @@ const PoliticsPage = () => {
   }, []);
 
   return (
-    <main className="w-full bg-white">
+    <main className="w-full">
       <div className="max-w-7xl mx-auto px-4 py-10">
-        <h1 className="text-3xl lg:text-5xl font-bold text-center max-lg:mt-40 lg:mt-50 text-black mb-2">
+        <h1 className="text-3xl lg:text-5xl font-bold text-center max-lg:mt-40 lg:mt-50 mb-2">
           Creativity, Heritage, and Expression
         </h1>
-        <p className="text-sm lg:text-base text-center text-gray-700 mx-auto mb-10">
+        <p className="text-sm lg:text-base text-center mx-auto mb-10">
           Explore the vibrant world of art, music, literature, and cultural
           traditions. <br className="max-md:hidden" />
           Discover how creativity shapes societies and celebrates human
@@ -64,14 +64,14 @@ const PoliticsPage = () => {
         {loading ? (
           <p className="text-center py-10">Loading latest posts...</p>
         ) : posts.length === 0 ? (
-          <p className="text-gray-500 text-center">No art & culture posts found.</p>
+          <p className=" text-center">No art & culture posts found.</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {posts.map((post) => (
               <Link
                 key={post.id}
                 href={`/blog/${post.id}`}
-                className="border rounded-lg shadow hover:shadow-lg transition overflow-hidden"
+                className=" rounded-lg shadow hover:shadow-lg transition overflow-hidden"
               >
                 {post.imageUrl && (
                   <img
@@ -82,7 +82,7 @@ const PoliticsPage = () => {
                 )}
                 <div className="p-4">
                   <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-                  <p className="text-gray-600 text-sm line-clamp-3">
+                  <p className=" text-sm line-clamp-3">
                     {post.subtitle}
                   </p>
                   {/* <div className="mt-2 text-xs text-blue-600 font-medium">

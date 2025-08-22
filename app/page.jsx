@@ -127,7 +127,7 @@ const Page = () => {
       {showSplash ? (
         <LogoSplash onFinish={handleFinish} />
       ) : (
-        <div className="py-18 lg:mt-30 opacity- text-white relative overflow-hidden -mt-2 bg-black to-black">
+        <div className="py-18 lg:mt-30  relative overflow-hidden -mt-2 bg-black">
           {/* <div className=" z-0 ">
             <img
               src="hid.png"
@@ -137,8 +137,8 @@ const Page = () => {
           </div> */}
           {/* Hero Section */}
 
-          <main className="z-0 bg-black flex opacity flex-col justify-center items-center  px-4 lg:px-0 max-lg:-mt-10 mb-10 opacity-100 lg:mt-0">
-            <div className="space-y-2 ">
+          <main className="z-0  flex opacity flex-col justify-center items-center  px-4 lg:px-0 max-lg:-mt-10 mb-10 opacity-100 lg:mt-0">
+            <div className="space-y-2 bg-black">
               {/* Cyclopedia Creation Title */}
               <img
                 src="/joins.png"
@@ -146,7 +146,7 @@ const Page = () => {
                 className="z-0 w-fit lg:w-200 lg:h-200 h-fit opacity- lg:-mt-35 "
               />
 
-              <p className="text-sm lg:text-2xl text-gray-300 max-w-3xl mx-auto lg:-mt-30 text-center">
+              <p className="text-sm lg:text-2xl  max-w-3xl mx-auto lg:-mt-30 text-center text-white">
                 Uncovering the Unseen, Revealing the Real.
               </p>
 
@@ -154,7 +154,7 @@ const Page = () => {
             </div>
             <div className="flex  gap-4  group text-sm z-0  lg:mb-20 ">
               <Link href="/about">
-                <button className="z-50 border-purple-400 max-lg:hidden  shadow-black shadow-2xl cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black text-white px-6 py-3 rounded-lg font-semibold transition-all group-hover:bg-white group-hover:text-black ">
+                <button className="z-50 border-purple-400 max-lg:hidden text-white  shadow-black shadow-2xl cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black  px-6 py-3 rounded-lg font-semibold transition-all group-hover:bg-white group-hover:text-black ">
                   Learn More
                   <ChevronRight className="text-purple-300" />
                 </button>
@@ -171,7 +171,7 @@ const Page = () => {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search the latest..."
-                className="px-3 py-3 pr-20 rounded-md shadow-2xl bg-white text-black focus:outline-none  w-full"
+                className="px-3 py-3 pr-20 rounded-md shadow-2xl text-white  focus:outline-none  w-full"
                 aria-label="Search input"
               />
 
@@ -187,7 +187,7 @@ const Page = () => {
         </div>
       )}
 
-      <div className="relative w-full  max-lg:w-1/2 max-md:w-full mx-auto lg:hidden max-lg:-mt-30 max-md:-mt-25 mb-0 bg-black p-5">
+      <div className="relative w-full  max-lg:w-1/2 max-md:w-full mx-auto lg:hidden max-lg:-mt-30 max-md:-mt-25 mb-0 p-5">
         <form
           onSubmit={handleSearch}
           className="flex items-center"
@@ -213,7 +213,7 @@ const Page = () => {
         </form>
       </div>
 
-      <div className="bg-gray-950 p-6 text-white max-w-3xl lg:hidden">
+      <div className=" max-w-3xl lg:hidden mt-10  ">
         {/* Title */}
         <a
           href="https://cyclopedia-media-hub.vercel.app/blog/9dhLYxSLB0fLLRPFBX1Z"
@@ -234,8 +234,8 @@ const Page = () => {
       <div id="read-more ">{/* Your "Explore more" content goes here */}</div>
 
       <hr className="border-2" />
-      <div className="max-w-5xl mx-auto py-10 px- bg-white">
-        <h2 className="text-2xl font-bold mb-6 text-black p-4">Latest News</h2>
+      <div className="max-w-5xl mx-auto py-10 px- ">
+        <h2 className="text-2xl font-bold mb-6 p-4">Latest News</h2>
         {posts.length === 0 ? (
           <p className="text-gray-500">No posts found.</p>
         ) : (
@@ -244,7 +244,7 @@ const Page = () => {
               <Link
                 key={post.id}
                 href={`/blog/${post.id}`} // <-- Correct route
-                className="bg-white  shadow-md overflow-hidden hover:shadow-lg transition"
+                className=" shadow-md overflow-hidden hover:shadow-lg transition"
               >
                 {post.imageUrl && (
                   <img
@@ -267,50 +267,52 @@ const Page = () => {
         )}
       </div>
 
-      <h1 className="text-center mb-10 font-serif text-2xl bg-white">
+      <h1 className="text-center mb-10 font-serif text-2xl ">
         Eplore more news{" "}
       </h1>
-      <section className="px- py-5 md:py-10 -opacity-50 bg-black text-black active:text-purple-600 max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
+      <section className="px- py-5 md:py-10 -opacity-50 active:text-purple-600 max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
         <div className="lg:w-2/3 flex flex-col gap-8">
           {/* Card 1 */}
-          <div className="relative">
+          <div className=" rounded-xl shadow-lg overflow-hidden">
             <img
               src="fun.png"
               alt="News Image"
-              className="w-full -mt-5 max-lg:-mt-10"
+              className="w-full h-64 object-cover"
             />
-            <div className="absolute bottom-1 left-4 right-4 bg-white max-lg:h-40  bg-opacity-90 p-4">
+            <div className="p-4">
               <Link href="https://cyclopedia-media-hub.vercel.app/blog/bmFfkpRJx9MceeUlcz5J">
-                <h2 className="text-sm font-bold hover:underline">
+                <h2 className="text-lg font-bold hover:underline">
                   The Strategic Fallout of the Israel-Iran War
                 </h2>
               </Link>
-              <p className="text-xs text-gray-800 mt-1">June 27, 2025 </p>
-              <p className="mt-2 text-gray-900 text-sm">
+              <p className="text-xs  mt-1">
+                June 27, 2025
+              </p>
+              <p className="mt-2 text-sm">
                 Amid all the military calculations and geopolitical theater,
-                Ramzy Baroud says one truth stands out. When it mattered most,
+                Ramzy Baroud says one truth stands out: when it mattered most,
                 the Iranian people stood united.
               </p>
             </div>
           </div>
 
           {/* Card 2 */}
-          <div className="relative">
+          <div className=" rounded-xl shadow-lg overflow-hidden">
             <img
               src="oil.png"
               alt="News Image"
-              className="w-full h-60 -mt-5 max-lg:-mt-10"
+              className="w-full h-64 object-cover"
             />
-            <div className="absolute bottom-0 left-4 right-4 bg-white max-lg:h-30 bg-opacity-90 p-4">
+            <div className="p-4">
               <Link href="https://cyclopedia-media-hub.vercel.app/blog/5njbEcuqy6lFrrYdMS2p">
-                <h2 className="text-sm font-bold hover:underline">
+                <h2 className="text-lg font-bold  hover:underline">
                   US Turning Oil-Rich Nigeria into Proxy for its Africa Wars
                 </h2>
               </Link>
-              <p className="text-xs text-gray-800 mt-1 font-black">
-                by Cyclopedia
+              <p className="text-xs  mt-1">
+                By Cyclopedia
               </p>
-              <p className="mt-2 text-gray-900 text-sm">
+              <p className="mt-2  text-sm">
                 T.J. Coles reports on what AFRICOM is doing under the cover of
                 counterterrorism.
               </p>
@@ -319,7 +321,7 @@ const Page = () => {
         </div>
 
         {/* Right Column — Bold List of Headlines */}
-        <aside className="lg:w-1/3 bg-gray-50 p-4 rounded-lg shadow-md">
+        <aside className="lg:w-1/3  p-4 rounded-lg shadow-md">
           <h3 className="text-xl font-bold mb-4">Top Stories:</h3>
           <ul className="space-y-3">
             <li>
@@ -407,75 +409,71 @@ const Page = () => {
           </ul>
         </aside>
       </section>
-      <hr className="border-2" />
-      <section className="px- py-10 md:py-20 bg-white text-black text-center max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 items-stretch">
-        {/* First Card */}
 
-        <div className="relative w-full lg:w-1/2 ">
+      <hr className="border-2" />
+      <section className="px-4 py-10 md:py-20 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
+        {/* First Card */}
+        <div className=" rounded-xl shadow-lg overflow-hidden">
           <img
             src="inter.png"
             alt="News Image"
-            className="w-full max-md:h-50"
+            className="w-full h-64 object-cover"
           />
-          <div className="absolute z-10 bottom-4 max-md:-bottom-5 left-4 right-4 bg-white bg-opacity-90 p-4 ">
+          <div className="p-4">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/EBmJtaV9bZ6rmy8blKmw">
-              <h2 className="text-sm font-bold text-black hover:underline">
+              <h2 className="text-lg font-bold  hover:underline">
                 International Medical Workers Decry Israel's 'Deliberate
                 Assault' on Their Gaza Colleagues
               </h2>
             </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              Brett Wilkins Aug 13, 2025{" "}
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              Many Palestinian health workers 'suffer from hunger, dizziness and
+            <p className="text-xs mt-1">Brett Wilkins — Aug 13, 2025</p>
+            <p className="mt-2  text-sm">
+              Many Palestinian health workers suffer from hunger, dizziness and
               fainting episodes while performing operations and triaging
-              patients,' reads an open letter signed by the healthcare
-              professionals.
-            </p>
-          </div>
-        </div>
-
-        <div className="relative w-full lg:w-1/2">
-          <img
-            src="erik.png"
-            alt="News Image"
-            className="w-full h-auto object-cover "
-          />
-          <div className="absolute z-10 bottom-4 left-4 right-4 bg-white bg-opacity-90 p-4">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/Tc0W4qUPzj7ytY7UB5fs">
-              <h2 className="text-sm font-bold text-black hover:underline">
-                Erik Prince Calls for U.S. to Colonize Africa and Latin America
-              </h2>
-            </Link>
-            <p className="text-xs text-gray-800 mt-1">
-              Jon Schwarz February 10 2024,
-            </p>
-            <p className="mt-2 text-gray-900 text-xs">
-              If so many of these countries around the world are incapable of
-              governing themselves, it’s time for us to just put the imperial
-              hat back on, to say, we’re going to govern those countries
+              patients, reads an open letter signed by healthcare professionals.
             </p>
           </div>
         </div>
 
         {/* Second Card */}
-        <div className="relative w-full lg:w-1/2">
+        <div className=" rounded-xl shadow-lg overflow-hidden">
+          <img
+            src="erik.png"
+            alt="News Image"
+            className="w-full h-64 object-cover"
+          />
+          <div className="p-4">
+            <Link href="https://cyclopedia-media-hub.vercel.app/blog/Tc0W4qUPzj7ytY7UB5fs">
+              <h2 className="text-lg font-bold hover:underline">
+                Erik Prince Calls for U.S. to Colonize Africa and Latin America
+              </h2>
+            </Link>
+            <p className="text-xs mt-1">Jon Schwarz — February 10, 2024</p>
+            <p className="mt-2  text-sm">
+              If so many of these countries around the world are incapable of
+              governing themselves, it’s time for us to just put the imperial
+              hat back on, to say, we’re going to govern those countries.
+            </p>
+          </div>
+        </div>
+
+        {/* Third Card */}
+        <div className=" rounded-xl shadow-lg overflow-hidden lg:col-span-2">
           <img
             src="/Ame.png"
             alt="News 4"
-            className="w-full h-auto object-cover "
+            className="w-full h-64 object-cover"
           />
-          <div className="absolute z-10 bottom-4 left-4 right-4 bg-white bg-opacity-90 p-4 ">
+          <div className="p-4">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/dTksJYvlMiYC3QJ2BVa3">
-              <h2 className="text-sm font-bold text-black hover:underline">
+              <h2 className="text-lg font-bold hover:underline">
                 Americans Leaving Religion
               </h2>
             </Link>
-            <p className="text-xs text-gray-800 mt-1">
+            <p className="text-xs mt-1">
               By Ryan T. Cragun & Jesse M. Smith — Published on May 7, 2025
             </p>
-            <p className="mt-2 text-gray-900 text-xs">
+            <p className="mt-2  text-sm">
               An excerpt from “Goodbye Religion: The Causes and Consequences of
               Secularization”
             </p>
@@ -483,11 +481,11 @@ const Page = () => {
         </div>
       </section>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto items-start justify-center z-50 p- bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto items-start justify-center z-50  rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
         {/* Card 1 */}
         <Link
           href="https://cyclopedia-media-hub.vercel.app/blog/nVmpG0se1lyhis8uRH9y"
-          className="block bg-white text-black h-full hover:shadow-lg transition "
+          className="block  h-full hover:shadow-lg transition "
         >
           <img
             src="/leba.png"
@@ -498,7 +496,7 @@ const Page = () => {
             The Exploitative System that Traps Nigerian Women as Slaves in
             Lebanon
           </h3>
-          <p className="text-sm text-gray-400 line-clamp-3 p-4">
+          <p className="text-sm line-clamp-3 p-4">
             Nigerian migrants arrive in Lagos from Libya. Nigeria has, in the
             last two years, evacuated thousands of its citizens from Libya and
             Lebanon after they suffered several forms of abuses, including
@@ -509,7 +507,7 @@ const Page = () => {
         {/* Card 2 */}
         <Link
           href="https://cyclopedia-media-hub.vercel.app/blog/91mdgClamjnMtE6v0yQf"
-          className="block bg-white text-black  h-full hover:shadow-lg transition rounded"
+          className="block   h-full hover:shadow-lg transition rounded"
         >
           <img
             src="/teen.png"
@@ -520,7 +518,7 @@ const Page = () => {
             Teens are increasingly turning to AI companions, and it could be
             harming them
           </h3>
-          <p className="text-sm text-gray-400  line-clamp-3 p-4">
+          <p className="text-sm  line-clamp-3 p-4">
             Teenagers are increasingly turning to AI companions for friendship,
             support, and even romance. But these apps could be changing how
             young people connect to others, both online and off.
@@ -530,7 +528,7 @@ const Page = () => {
         {/* Card 3 */}
         <Link
           href="https://cyclopedia-media-hub.vercel.app/blog/QSmmSGdGenuMSwIRTWpJ"
-          className="block bg-white text-black  h-full hover:shadow-lg transition rounded"
+          className="block  h-full hover:shadow-lg transition rounded"
         >
           <img
             src="/hiden.png"
@@ -540,7 +538,7 @@ const Page = () => {
           <h3 className="text-lg font-semibold max-md:-mb-8 mt-4 p-4">
             Britain’s Hidden Helicopter War in Niger
           </h3>
-          <p className="text-sm text-gray-400 p-4 line-clamp-3">
+          <p className="text-sm  p-4 line-clamp-3">
             As Niger expels US troops, Declassified reveals British helicopters
             operated a taxi service for French forces in the uranium-rich
             African state.
@@ -550,7 +548,7 @@ const Page = () => {
         {/* Card 4 */}
         <Link
           href="https://cyclopedia-media-hub.vercel.app/blog/eLBxs8nuMz9j0OrJ3Pm3"
-          className="block bg-white text-black  h-full hover:shadow-lg transition rounded"
+          className="block  h-full hover:shadow-lg transition rounded"
         >
           <img
             src="/mini.png"
@@ -560,7 +558,7 @@ const Page = () => {
           <h3 className="text-lg font-semibold mt-4 p-4 max-md:-mb-8">
             Breaking America’s Bonds With Israel
           </h3>
-          <p className="text-sm text-gray-400 mt-2 line-clamp-3 p-4 ">
+          <p className="text-sm  mt-2 line-clamp-3 p-4 ">
             Taking a cue from the Declaration of Independence, M. Reza Behnam
             submits facts “to a candid world” that impel the dissolution of a
             destructive liaison.
@@ -569,14 +567,14 @@ const Page = () => {
       </div>
 
       <section className="px- text-center grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto  mt-10 ">
-        <div className="mt-5 text-black bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div className="mt-5  overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <img src="british.png" alt="" />
           <Link href="https://cyclopedia-media-hub.vercel.app/blog/DxewHf37R7X7ZBzQRLE5">
-            <h2 className="text-xl font-bold text-left hover:underline text-black p-4 max-md:-mb-8">
+            <h2 className="text-xl font-bold text-left hover:underline  p-4 max-md:-mb-8">
               Britain’s secret state and the need for whistle-blowing
             </h2>
           </Link>
-          <p className="text-sm text-gray-500 text-left mt p-4">
+          <p className="text-sm  text-left mt p-4">
             In November 2003, I was charged with a breach of the Official
             Secrets Act in the UK. My ‘crime’ had been to reveal an email from
             the US National Security Agency (NSA) to Britain's intelligence
@@ -585,28 +583,28 @@ const Page = () => {
           </p>
         </div>
 
-        <div className="bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div className=" overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <img src="uk.png" alt="" />
           <Link href="https://cyclopedia-media-hub.vercel.app/blog/HYhefDd7rXfAAzKBJCyb">
-            <h2 className="text-xl font-bold text-left hover:underline text-black p-4 max-md:-mb-8">
+            <h2 className="text-xl font-bold text-left hover:underlinep-4 max-md:-mb-8">
               UK government secretly paid foreign YouTube stars for ‘propaganda’{" "}
             </h2>
           </Link>
-          <p className="text-sm text-gray-500 text-left mt-5 p-2">
+          <p className="text-sm text-left mt-5 p-2">
             The past five months have been clarifying. What was supposed to be
             hidden has been thrust into the light. What was supposed to be
             obscured has come sharply into focus.
           </p>
         </div>
 
-        <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ">
+        <div className=" rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ">
           <img src="som.png" alt="" className="mt-10" />
           <Link href="https://cyclopedia-media-hub.vercel.app/blog/OjdVfovsON2pJsJU9yJr">
-            <h2 className="text-xl font-bold text-black text-left hover:underline p-4 max-md:-mb-8">
+            <h2 className="text-xl font-bold text-left hover:underline p-4 max-md:-mb-8">
               How the Western media helped build the case for genocide in Gaza
             </h2>
           </Link>
-          <p className="text-sm text-gray-500 text-left mt-5 p-4">
+          <p className="text-sm text-left mt-5 p-4">
             The past five months have been clarifying. What was supposed to be
             hidden has been thrust into the light. What was supposed to be
             obscured has come sharply into focus.
@@ -620,7 +618,7 @@ const Page = () => {
           {/* Feature Card */}
           <div className="w-full lg:w-1/2">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/DkwQs35ZgaKbfYnH0fOg">
-              <div className="bg-white text-black h-full">
+              <div className="h-full">
                 <img
                   src="/slave.png"
                   alt="News Image"
@@ -629,7 +627,7 @@ const Page = () => {
                 <h3 className="text-lg font-semibold mt-4 p-4 max-md:-mb-8">
                   The “Slave Bible” is Not What You Think
                 </h3>
-                <p className="text-sm text-gray-400 mt-2 line-clamp-3 p-4">
+                <p className="text-sm mt-2 line-clamp-3 p-4">
                   The Museum of the Bible presented misleading information to
                   attract people of color to the museum.
                 </p>
@@ -641,7 +639,7 @@ const Page = () => {
           <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[600px] overflow-y-auto pr-2">
             {/* Card 1 */}
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/up07d67GdXw6WP116uxQ">
-              <div className="bg-white text-black ">
+              <div className="">
                 <img
                   src="/border.png"
                   alt="News Image"
@@ -650,7 +648,7 @@ const Page = () => {
                 <h3 className="text-sm font-semibold mt-2 p-4 max-md:-mb-8">
                   American Border Religion{" "}
                 </h3>
-                <p className="text-sm text-gray-400 line-clamp-3 mt-1 p-4">
+                <p className="text-sm  line-clamp-3 mt-1 p-4">
                   An excerpt from "Heaven Has a Wall: Religion, Borders, and the
                   Global United States"{" "}
                 </p>
@@ -659,7 +657,7 @@ const Page = () => {
 
             {/* Card 2 */}
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/nJeaLwjnuQnYii18kKvL">
-              <div className="bg-white text-black ">
+              <div className=" ">
                 <img
                   src="/arr.png"
                   alt="News image"
@@ -669,7 +667,7 @@ const Page = () => {
                   Hundreds Arrested In London for Opposing Ban on Nonviolent
                   Group Palestine Action{" "}
                 </h3>
-                <p className="text-sm text-gray-400 line-clamp-3 mt-1 p-4">
+                <p className="text-sm  line-clamp-3 mt-1 p-4">
                   Let us be under no illusion," said one organizer. "The
                   government is criminalizing the people of Britain for standing
                   up against the biggest genocide of the 21st century, as it's
@@ -680,7 +678,7 @@ const Page = () => {
 
             {/* Card 3 */}
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/6cC1bNTyfe7MwciAmvtg">
-              <div className="bg-white text-black">
+              <div className="">
                 <img
                   src="/white.png"
                   alt="News Image"
@@ -689,7 +687,7 @@ const Page = () => {
                 <h3 className="text-sm font-semibold mt-2 p-4 max-md:-mb-8">
                   From Good Christian Boys to White Nationalists{" "}
                 </h3>
-                <p className="text-sm text-gray-400 line-clamp-3 mt-1 p-4">
+                <p className="text-sm line-clamp-3 mt-1 p-4">
                   An excerpt from “Disciples of White Jesus: The Radicalization
                   of American Boyhood”{" "}
                 </p>
@@ -698,7 +696,7 @@ const Page = () => {
 
             {/* Card 4 */}
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/UAekeH5vur8lBd9DHKCr">
-              <div className="bg-white text-black ">
+              <div className=" ">
                 <img
                   src="/trump.png"
                   alt="Trump"
@@ -707,7 +705,7 @@ const Page = () => {
                 <h3 className="text-sm font-semibold mt-2 p-4 max-md:-mb-8">
                   Authoritarian Christianity Targets Christians
                 </h3>
-                <p className="text-sm text-gray-400 line-clamp-3 mt-1 p-4">
+                <p className="text-sm line-clamp-3 mt-1 p-4">
                   Trump’s Christian nationalism may hurt Christians.
                 </p>
               </div>
@@ -715,7 +713,7 @@ const Page = () => {
 
             {/* Card 5 */}
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/4LiDW10fO3UQx56I4mqB">
-              <div className="bg-white text-black ">
+              <div className="">
                 <img
                   src="sha.png"
                   alt="Sharia"
@@ -732,7 +730,7 @@ const Page = () => {
 
             {/* Card 6 */}
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/eRNFoxbcDwyL000C9dFi">
-              <div className="bg-white text-black ">
+              <div className=" ">
                 <img
                   src="nig.png"
                   alt="Nigeria"
@@ -751,7 +749,7 @@ const Page = () => {
         <div className="text-center mt-8"></div>
       </div>
 
-      <div className="bg-white lg:flex items-center justify-center gap-8">
+      <div className=" lg:mx-auto items-center justify-center gap-8">
         <img
           src="untold.png"
           alt="Elevate Your Digital Presence"
@@ -764,7 +762,7 @@ const Page = () => {
         </Link>
       </div>
 
-      <section className="px-6 py-5 md:py-20 max-w-5xl mx-auto bg-white text-black z-0">
+      <section className="px-6 py-5 md:py-20 max-w-5xl mx-auto  z-0">
         <div className="grid grid-cols-3 sm:grid-cols-5 gap-6 justify-center hover:shadow-2xl hover:shadow-purple-700">
           {categories.map((item, i) => (
             <Link
@@ -821,9 +819,9 @@ const Page = () => {
 
             {/* Overlay */}
             {isOpen && (
-              <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+              <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50">
                 {/* Popup */}
-                <div className="bg-white p-6 rounded-2xl max-w-lg w-full relative shadow-lg">
+                <div className=" p-6 rounded-2xl max-w-lg w-full relative shadow-lg">
                   {/* Close button */}
                   <button
                     onClick={() => setIsOpen(false)}
@@ -837,7 +835,7 @@ const Page = () => {
                   </h2>
 
                   {/* Items */}
-                  <div className="grid grid-cols-2 gap-4 ">
+                  <div className="grid grid-cols-2 gap-4 text-white">
                     {items.map((item) => (
                       <Link
                         key={item.id}
@@ -864,7 +862,7 @@ const Page = () => {
 
       <div className="max-w-7xl mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {/* === NEWS CARD 2 === */}
-        <div className="bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div className=" overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <div className="relative w-full h-[220px]">
             <img
               src="/ed.png"
@@ -874,14 +872,14 @@ const Page = () => {
           </div>
           <div className="p-4">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/yr4GRaz6USfU5E9s2INA">
-              <h2 className="text-sm font-bold text-black hover:underline">
+              <h2 className="text-sm font-bold  hover:underline">
                 UK MEDIA ARE SUPPRESSING MENTIONS OF ISRAEL’S ‘GENOCIDE’ IN GAZA
               </h2>
             </Link>
-            <p className="text-xs text-gray-600 mt-1 font-black">
+            <p className="text-xs  mt-1 font-black">
               DES FREEDMAN — 18 December 2023
             </p>
-            <p className="mt-2 text-gray-800 text-xs">
+            <p className="mt-2 text-xs">
               Analysis of British media reporting shows they are barely covering
               allegations by UN officials and others that Israel is promoting
               genocide against Palestinians. This is in complete contrast to
@@ -891,7 +889,7 @@ const Page = () => {
         </div>
 
         {/* === NEWS CARD 3 === */}
-        <div className="bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div className=" overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <div className="relative w-full h-[220px]">
             <img
               src="/fire.png"
@@ -901,15 +899,15 @@ const Page = () => {
           </div>
           <div className="p-4">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/TdKgQZy1WYBEHVhZ86HZ">
-              <h2 className="text-sm font-bold text-black hover:underline">
+              <h2 className="text-sm font-bold hover:underline">
                 'We Are Being Cooked Alive': Wildfires Driven by Climate Crisis
                 Ravage Europe
               </h2>
             </Link>
-            <p className="text-xs text-gray-600 mt-1 font-black">
+            <p className="text-xs mt-1 font-black">
               By Cyclopedia
             </p>
-            <p className="mt-2 text-gray-800 text-xs">
+            <p className="mt-2 text-xs">
               Fire-related deaths were reported in Turkey, Spain, Montenegro,
               and Albania.
             </p>
@@ -917,7 +915,7 @@ const Page = () => {
         </div>
 
         {/* === NEWS CARD 4 === */}
-        <div className="bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div className=" overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <div className="relative w-full h-[220px]">
             <img
               src="/amer.png"
@@ -927,14 +925,14 @@ const Page = () => {
           </div>
           <div className="p-4">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/QUnWDFG1eBq2x4ejSLcs">
-              <h2 className="text-sm font-bold text-black hover:underline">
+              <h2 className="text-sm font-bold hover:underline">
                 Americans Say Government Should Address Slavery Effects{" "}
               </h2>
             </Link>
-            <p className="text-xs text-gray-600 mt-1 font-black">
+            <p className="text-xs mt-1 ">
               By Cylopedia
             </p>
-            <p className="mt-2 text-gray-800 text-xs">
+            <p className="mt-2 text-xs">
               Americans are more likely to think that the history of slavery has
               at least some effect on Black people today than to think it has
               little to no effect. Forty percent of Americans say Black people
@@ -946,7 +944,7 @@ const Page = () => {
         </div>
 
         {/* === NEWS CARD 5 === */}
-        <div className="bg-white overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div className=" overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <div className="relative w-full h-[220px]">
             <img
               src="/wa.png"
@@ -956,14 +954,14 @@ const Page = () => {
           </div>
           <div className="p-4">
             <Link href="https://cyclopedia-media-hub.vercel.app/blog/sample5">
-              <h2 className="text-sm font-bold text-black hover:underline">
+              <h2 className="text-sm font-bold hover:underline">
                 Why Does It Seem Israel Is Always at War With Its Neighbors?
               </h2>
             </Link>
-            <p className="text-xs text-gray-600 mt-1 font-black">
+            <p className="text-xs mt-1 font-black">
               By cyclopedia
             </p>
-            <p className="mt-2 text-gray-800 text-xs">
+            <p className="mt-2 text-xs">
               The 7th century Muslim Conquest of Jerusalem, followed by the
               Crusades (11th-13th centuries), continued the upheaval in the
               Levant, even though the percentage of Jews living there was
@@ -977,7 +975,7 @@ const Page = () => {
       </div>
 
       {/* Timeline of Hidden Events */}
-      <section className="px-6 py-16 bg-black text-white max-w-6xl mx-auto -mt-10">
+      <section className="px-6 py-16 max-w-6xl mx-auto -mt-10">
         <div className="relative border-l border-purple-700 ml-4">
           {[
             {
@@ -1050,7 +1048,7 @@ const Page = () => {
       </section>
 
       {/* Coming Soon Teaser */}
-      <section className="px-6 py-16 bg-black text-white max-w-6xl mx-auto %">
+      <section className="px-6 py-16  max-w-6xl mx-auto %">
         <div className="grid gap-12 lg:grid-cols-3">
           {[
             {
@@ -1073,10 +1071,10 @@ const Page = () => {
           ].map(({ title, desc, link }, i) => (
             <article
               key={i}
-              className="flex flex-col justify-between bg-black p-6 rounded-lg shadow-xl shadow-purple-700 transition-shadow duration-300"
+              className="flex flex-col justify-between p-6 rounded-lg shadow-xl shadow-purple-700 transition-shadow duration-300"
             >
               <h2 className="text-xl font-bold mb-3">{title}</h2>
-              <p className="text-gray-300 flex-grow">{desc}</p>
+              <p className="flex-grow">{desc}</p>
               <a
                 href={link}
                 className="mt-5 inline-block text-purple-400 hover:text-purple-600 underline font-semibold transition-colors"

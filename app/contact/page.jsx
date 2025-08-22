@@ -56,7 +56,7 @@ const ContactPage = () => {
 
   return (
     
-        <main className="bg-black text-white min-h-screen border-t border-b border-green-700">
+        <main className=" min-h-screen border-t border-b border-green-700">
           <section className="container mx-auto px-6 py-10 lg:flex gap-16">
 
             {/* Left Panel */}
@@ -72,13 +72,13 @@ const ContactPage = () => {
   <h2 className="text-center text-lg bg-gradient-to-r from-purple-500 to-cyan-400 uppercase py-2">
     Explore Knowledge, Discover Truths
   </h2>
-  <p className="text-gray-300">
+  <p className="">
     Cyclopedia is your go-to platform for curated insights and information. 
     Whether you’re a researcher, creator, or curious thinker — join us in building 
     a global system of knowledge and clarity.
   </p>
 
-              <p className="text-gray-400">
+              <p className="">
                 📞 Call us at{" "}
                 <a href="tel:+2348142995114" className="underline text-green-500">
                   +234 8142 995114
@@ -96,7 +96,7 @@ const ContactPage = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="flex-1 bg-gray-950 border border-purple-700 rounded-lg p-6 mt-20 shadow-lg">
+            <div className="flex-1  border border-purple-700 rounded-lg p-6 mt-20 shadow-lg">
               <Formik
                 initialValues={{
                   name: "",
@@ -110,7 +110,7 @@ const ContactPage = () => {
               >
                 {() => (
                   <Form>
-                    <h2 className="text-2xl text-center font-bold mb-4 border-b border-purple-600 pb-2">
+                    <h2 className="text-2xl text-center font-bold mb-4 border-b border pb-2">
                       Message Us
                     </h2>
 
@@ -124,7 +124,7 @@ const ContactPage = () => {
                               ? "+234..."
                               : `${field.charAt(0).toUpperCase() + field.slice(1)}...`
                           }
-                          className="w-full p-3 rounded bg-black text-white border border-gray-700 focus:ring-2 focus:ring-green-600"
+                          className="w-full p-3 rounded border"
                         />
                         <ErrorMessage name={field} component="p" className="text-red-500 text-sm mt-1" />
                       </div>
@@ -136,7 +136,7 @@ const ContactPage = () => {
                         as="textarea"
                         rows={5}
                         placeholder="Share your thoughts..."
-                        className="w-full p-3 rounded bg-black text-white border border-gray-700 focus:ring-2 focus:ring-green-600"
+                        className="w-full p-3 rounded border focus:ring-2 focus:ring-green-600"
                       />
                       <ErrorMessage name="message" component="p" className="text-red-500 text-sm mt-1" />
                     </div>
@@ -144,7 +144,7 @@ const ContactPage = () => {
                     <button
                       type="submit"
                       disabled={processing}
-                      className="w-full py-3 bg-gradient-to-r from-purple-500 to-cyan-400 hover:bg-green-600 rounded text-white font-bold transition"
+                      className="w-full py-3 bg-gradient-to-r from-purple-500 to-cyan-400 hover:bg-green-600 rounded font-bold transition"
                     >
                       {processing ? (
                         <LoaderCircle className="animate-spin mx-auto" size={20} />
@@ -158,13 +158,13 @@ const ContactPage = () => {
 
               {/* Confirmation Modal */}
               {modalVisibility && (
-                <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
-                  <div className="bg-white rounded-lg p-10 text-center">
-                    <h1 className="text-xl font-bold text-black">Message Sent</h1>
+                <div className="fixed inset-0 bg-opacity-80 flex items-center justify-center z-50">
+                  <div className=" rounded-lg p-10 text-center">
+                    <h1 className="text-xl font-bold ">Message Sent</h1>
                     <ThumbsUp className="text-4xl text-green-700 mx-auto mt-4" />
                     <button
                       onClick={() => setModalVisibility(false)}
-                      className="mt-6 bg-black text-white px-6 py-2 rounded hover:bg-gray-800"
+                      className="mt-6  px-6 py-2 rounded hover:bg-gray-800"
                     >
                       Close
                     </button>
@@ -178,7 +178,7 @@ const ContactPage = () => {
             <h1 className="text-center mb-0">© 2025 Cyclopedia. Truth. Light. Clarity.</h1>
             <br />
             <Link href="/">
-              <p className="underline text-gray-300 hover:text-white text-center mt-0">
+              <p className="underline hover:text-white text-center mt-0">
                 www.cyclopedia.movement
               </p>
             </Link>

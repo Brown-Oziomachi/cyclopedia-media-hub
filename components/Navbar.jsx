@@ -7,6 +7,7 @@ import { ChevronDown, LogIn, ChevronRight,  ChevronUp } from "lucide-react";
 import { Drawer, Box } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
 import SearchInput from "@/components/SearchInput"; // Assuming you have this component
+import ThemeToggle from "./ThemeToggle";
 
 const ProfileDropdownNavbar = () => {
   const [showNav, setShowNav] = useState(false);
@@ -170,7 +171,7 @@ const regions = [
     <Link href="/">
       <div className="w-10 h-10 relative rounded-full overflow-hidden border-2 border-purple-500 cursor-pointer hover:scale-105 transition-transform duration-300">
         <img
-          src="/icon/android-launchericon-512-512.png"
+          src="/hid.png"
           alt="Logo"
           fill
           className="object-cover rounded-full"
@@ -185,6 +186,7 @@ const regions = [
         THE CYCLOPEDIA
       </h1>
     </Link>
+      <ThemeToggle />
   </div>
 
           {/* Desktop Search Bar */}
@@ -443,7 +445,7 @@ const regions = [
         )}
         <button
           onClick={() => setShowNav(!showNav)}
-          className="text-white text-3xl"
+          className="t text-3xl"
           aria-label="Toggle navigation"
         >
           {showNav ? <ChevronUp /> : <ChevronDown />}

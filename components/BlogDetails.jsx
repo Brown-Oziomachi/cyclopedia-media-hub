@@ -26,9 +26,6 @@ const BlogDetails = () => {
 
   // ... rest of your BlogDetails code as you wrote it ...
 
-    return (
-    // ... your JSX as in your original BlogDetails component ...
-  );
 };
 
 export default BlogDetails;

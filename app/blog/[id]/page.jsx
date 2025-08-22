@@ -19,14 +19,14 @@ import { useRouter, useParams } from "next/navigation";
 // Blog content renderer
 const BlogDisplay = ({ body }) => {
   const isHTML = /<\/?[a-z][\s\S]*>/i.test(body || "");
+  const html = isHTML ? body : body?.replace(/\n/g, "<br />") || "";
+
   return (
     <div
-      className={`prose max-w-none text-gray-900 ${
+      className={` ${
         !isHTML ? "whitespace-pre-line space-y-4" : ""
       }`}
-      dangerouslySetInnerHTML={{
-        __html: isHTML ? body : body?.replace(/\n/g, "<br />"),
-      }}
+      dangerouslySetInnerHTML={{ __html: html }}
     />
   );
 };
@@ -42,10 +42,9 @@ export default function BlogDetails() {
   const [showShareMenu, setShowShareMenu] = useState(false);
   const [blogs, setBlogs] = useState([]);
   const [query, setQuery] = useState("");
-   const menuRef = useRef(null);
-   const handleShareClick = () => setShowShareMenu(!showShareMenu);
+  const menuRef = useRef(null);
+  const handleShareClick = () => setShowShareMenu(!showShareMenu);
 
-  
   // Fetch blog
   useEffect(() => {
     if (!id) return;
@@ -68,20 +67,18 @@ export default function BlogDetails() {
     if (storedLiked) setLiked(true);
   }, [id]);
 
-
-   // Close menu when clicking outside
-   useEffect(() => {
-     function handleClickOutside(event) {
-       if (menuRef.current && !menuRef.current.contains(event.target)) {
-         setShowShareMenu(false);
-       }
-     }
-     document.addEventListener("mousedown", handleClickOutside);
-     return () => {
-       document.removeEventListener("mousedown", handleClickOutside);
-     };
-   }, []);
-
+  // Close menu when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setShowShareMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // Fetch related blogs
   useEffect(() => {
@@ -96,7 +93,6 @@ export default function BlogDetails() {
     }
     fetchBlogs();
   }, [id]);
-
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -124,19 +120,18 @@ export default function BlogDetails() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.1 }}
-      className="min-h-screen px-0 md:px-10 lg:px-20 py-5 mx-auto text-gray-900 font-sans space-y-10"
+      className="min-h-screen px-0 md:px-10 lg:px-20 py-5 mx-auto font-sans space-y-10"
     >
       {/* Blog Header */}
-      {/* Blog Header */}
-      <div className="bg-black ">
-        <div className="w-full mt-1 ">
+      <div>
+        <div className="w-full mt-1">
           {/* Title & Subtitle above the image */}
-          <div className="mb-4  p-1">
-            <h1 className="text-3xl md:text-4xl lg:w-1/2 font-bold text-white mt-10 p-2 lg:mt-25 lg:mx-auto">
+          <div className="mb-4 p-1">
+            <h1 className="text-3xl md:text-4xl lg:w-1/2 font-bold mt-10 p-2 lg:mt-25 lg:mx-auto">
               {blog.title}
             </h1>
             {blog.subtitle && (
-              <h2 className="text-md md:text-lg mt-1 lg:mx-auto lg:w-1/2 text-center font-semibold text-white border-2 py-2 px-2  border-white">
+              <h2 className="text-md md:text-lg mt-1 lg:mx-auto lg:w-1/2 text-center font-semibold border-2 py-2 px-2">
                 {blog.subtitle}
               </h2>
             )}
@@ -153,7 +148,7 @@ export default function BlogDetails() {
                 className="rounded-lg"
               />
             )}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-transparent rounded-lg"></div>
+            <div className="absolute inset-0 rounded-lg"></div>
           </div>
         </div>
 
@@ -161,7 +156,7 @@ export default function BlogDetails() {
           <div className="flex gap-6 mt-4 items-center justify-center">
             <div className="flex justify-center">
               <Link href="/live">
-                <div className="flex items-center gap-2  hover:scale-105 transition-transform cursor-pointer">
+                <div className="flex items-center gap-2 hover:scale-105 transition-transform cursor-pointer">
                   {/* Animated Live Dot */}
                   <span className="relative flex h-3 w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -169,12 +164,12 @@ export default function BlogDetails() {
                   </span>
 
                   {/* Live Text */}
-                  <p className="text-white font-semibold uppercase tracking-wide animate-pulse">
+                  <p className="font-semibold uppercase tracking-wide animate-pulse">
                     Live
                   </p>
 
                   {/* Play Icon */}
-                  <Play className="text-white h-5 w-5" />
+                  <Play className="h-5 w-5" />
                 </div>
               </Link>
             </div>
@@ -182,14 +177,14 @@ export default function BlogDetails() {
             <div className="relative" ref={menuRef}>
               <button
                 onClick={handleShareClick}
-                className="flex items-center gap-2 font-semibold text-white bg-black border  py-1 px-2 hover:bg-gray-800 transition"
+                className="flex items-center gap-2 font-semibold border border-gray-300 dark:border-gray-700 py-1 px-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
               >
                 <Share className="h-4 w-4" />
                 Share
               </button>
 
               {showShareMenu && (
-                <div className="absolute top-full left-0 mt-2 w-40 bg-white border p-4 flex flex-col gap-3 text-sm z-50">
+                <div className="absolute top-full left-0 mt-2 w-40 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-4 flex flex-col gap-3 text-sm z-50">
                   <a
                     href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
                     target="_blank"
@@ -208,7 +203,7 @@ export default function BlogDetails() {
                   </a>
                   <a
                     href={`mailto:?subject=Check this out&body=${window.location.href}`}
-                    className="text-gray-800 hover:underline"
+                    className="hover:underline"
                   >
                     Share via Email
                   </a>
@@ -219,7 +214,7 @@ export default function BlogDetails() {
             <div>
               <button
                 onClick={handleCopyLink}
-                className="flex text-white gap-2 items-center justify-center border-amber-50 border py-1 px-2"
+                className="flex gap-2 items-center justify-center border border-gray-300 dark:border-gray-700 py-1 px-2 hover:bg-gray-100 dark:hover:bg-gray-800"
               >
                 Copy
                 <LinkIcon className="h-4 w-4" />
@@ -228,27 +223,19 @@ export default function BlogDetails() {
           </div>
         </div>
       </div>
+
       {/* Blog Content */}
-      <div className="blog-content prose max-w-none px-2 sm:px-4 space-y-5 font-serif">
-        <hr />
+      <div className=" max-w-none px-2 sm:px-4 space-y-5 ">
+        <hr className="border-gray-200 dark:border-gray-700" />
         <BlogDisplay body={blog.body} />
       </div>
 
-      {/* Like Button */}
-      <div className="flex gap-3 sm:gap-5">
-        {/* <button
-          onClick={handleLikeClick}
-          className={`flex items-center justify-center text-sm py-2 px-4 rounded-md ${
-            liked ? "text-green-600" : "text-gray-400"
-          }`}
-        >
-          {liked ? `Liked (${likes})` : `Likes (${likes})`}
-        </button> */}
-      </div>
+      {/* Like Button (left as-is) */}
+      <div className="flex gap-3 sm:gap-5">{/* ... */}</div>
 
       {/* Newsletter Card */}
       <Link href="/newsletter">
-        <div className="cursor-pointer bg-gradient-to-r from-purple-500 to-purple-800 text-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
+        <div className="cursor-pointer bg-gradient-to-r from-purple-500 to-purple-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
           <h3 className="text-xl font-bold mb-2">Stay Updated!</h3>
           <p className="mb-4">
             Subscribe to our newsletter and never miss an update.
@@ -265,7 +252,7 @@ export default function BlogDetails() {
         <div className="grid sm:grid-cols-2 gap-6">
           {blogs.map((b) => (
             <Link key={b.id} href={`/blog/${b.id}`} className="block">
-              <div className="flex flex-col bg-white rounded-md overflow-hidden shadow-md cursor-pointer">
+              <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
                 {b.imageUrl && (
                   <div className="relative w-full h-48 sm:h-56">
                     <img
@@ -276,7 +263,7 @@ export default function BlogDetails() {
                   </div>
                 )}
                 <div className="p-4">
-                  <h2 className="text-base font-bold text-black hover:underline uppercase">
+                  <h2 className="text-base font-bold hover:underline uppercase ">
                     {b.title}
                   </h2>
                   <div className="flex gap-2 items-center mt-2 flex-wrap">
@@ -287,7 +274,7 @@ export default function BlogDetails() {
                       <Link
                         key={tag}
                         href={`/search?q=${tag.toLowerCase()}`}
-                        className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50"
+                        className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50 dark:hover:bg-orange-900/20"
                       >
                         {tag}
                       </Link>

@@ -1,10 +1,10 @@
-
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import AuthProvider from "@/components/AuthProvider";
 import { Analytics } from "@vercel/analytics/next";
 import Footer from "@/components/Footer";
 import { Suspense } from "react";
+import { ThemeProvider } from "next-themes";
 
 export const metadata = {
   title: "Cyclopedia",
@@ -25,17 +25,23 @@ function Loader() {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <head></head>
+    <html lang="en" suppressHydrationWarning>
+      <head />
       <body className="antialiased">
-        <Suspense fallback={<div>Loading page...</div>}>
-          <AuthProvider>
-            <Navbar />
-            {children}
-            <Footer />
-            <Analytics />
-          </AuthProvider>
-        </Suspense>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+        >
+          <Suspense fallback={<Loader />}>
+            <AuthProvider>
+              <Navbar />
+              {children}
+              <Footer />
+              <Analytics />
+            </AuthProvider>
+          </Suspense>
+        </ThemeProvider>
       </body>
     </html>
   );
