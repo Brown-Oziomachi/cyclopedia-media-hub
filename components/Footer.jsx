@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto px-4 flex flex-col lg:flex-row justify-between items-start lg:items-start gap-8">
         {/* Left: Site links */}
         <div>
-          <h2 className="text-white font-bold text-lg mb-4"> TheCyclopedia</h2>
+          <h2 className="text-white font-bold text-lg mb-4"> The Cyclopedia</h2>
           <ul className="space-y-2 font-mono">
             <li>
               <a href="/politics" className="hover:text-purple-400 transition">

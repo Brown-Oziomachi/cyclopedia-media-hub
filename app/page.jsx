@@ -108,7 +108,7 @@ const Page = () => {
     { id: 1, title: "Education", img: "/educo.png", link: "/education" },
     { id: 2, title: "Philosophy", img: "/philo.png", link: "/philosophy" },
     { id: 3, title: "Health", img: "/hea.png", link: "/health" },
-    { id: 4, title: "Wildlife", img: "/wildlife.png", link: "/wildlife" },
+    { id: 4, title: "Technology", img: "/wildlife.png", link: "/technology" },
   ];
 
   const handleSearch = (e) => {
@@ -586,11 +586,11 @@ const Page = () => {
         <div className=" overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
           <img src="uk.png" alt="" />
           <Link href="https://cyclopedia-media-hub.vercel.app/blog/HYhefDd7rXfAAzKBJCyb">
-            <h2 className="text-xl font-bold text-left hover:underlinep-4 max-md:-mb-8">
+            <h2 className="text-xl font-bold text-left hover:underline p-4 max-md:-mb-8">
               UK government secretly paid foreign YouTube stars for ‘propaganda’{" "}
             </h2>
           </Link>
-          <p className="text-sm text-left mt-5 p-2">
+          <p className="text-sm text-left mt-10 p-4">
             The past five months have been clarifying. What was supposed to be
             hidden has been thrust into the light. What was supposed to be
             obscured has come sharply into focus.

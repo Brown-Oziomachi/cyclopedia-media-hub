@@ -22,18 +22,26 @@ export async function POST(req) {
     });
 
     // ✅ 2. Send confirmation email to subscriber
-    await resend.emails.send({
-      from: "Cyclopedia <onboarding@resend.dev>",
-      to: email,
-      subject: "Welcome to Cyclopedia 🚀",
-      html: `
-        <h2>Hello ${firstName || "Friend"},</h2>
-        <p>Thanks for subscribing to <b>Cyclopedia</b>! 🎉</p>
-        <p>You’ll now get the latest blogs, news, and updates right in your inbox.</p>
-        <br/>
-        <p>– The Cyclopedia Team</p>
+await resend.emails.send({
+  from: "Cyclopedia <onboarding@resend.dev>",
+  to: email,
+  subject: "Welcome to Cyclopedia 🚀",
+  html: `
+    <h2>Hello ${firstName || "Friend"},</h2>
+    <p>Welcome to <b>The Cyclopedia</b>! 👁️‍🗨️</p>
+    <p>We’re thrilled to have you on board. As a subscriber, you’ll get the latest blogs, insightful articles, and trending news delivered straight to your inbox.</p>
+    <p>Explore, discover, and stay informed with content curated just for you. Don’t forget to visit our website to catch the newest updates and hidden insights!</p>
+    <p style="text-align:center; margin:30px 0;">
+      <a href="https://cyclopedia-media-hub.vercel.app"
+         style="display:inline-block; padding:12px 25px; background-color:#4F46E5; color:#ffffff; text-decoration:none; border-radius:6px; font-weight:bold;">
+        Explore Cyclopedia
+      </a>
+    </p>
+    <br/>
+    <p>Warm regards,<br/>
+    The Cyclopedia Team</p>
       `,
-    });
+});
 
     // ✅ 3. Notify admin (you)
     await resend.emails.send({
@@ -50,6 +58,9 @@ export async function POST(req) {
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error subscribing:", error);
-    return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Something went wrong" },
+      { status: 500 }
+    );
   }
 }
