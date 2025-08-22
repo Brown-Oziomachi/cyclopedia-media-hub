@@ -15,6 +15,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter, useParams } from "next/navigation";
+import SideNewsTicker from "@/components/SideNewsTicker";
 
 // Blog content renderer
 const BlogDisplay = ({ body }) => {
@@ -113,6 +114,24 @@ export default function BlogDetails() {
     }
   };
 
+   const sampleNews = [
+     {
+       title: "Elections 2025: What You Should Know",
+       link: "/news/elections",
+       category: "Politics",
+     },
+     {
+       title: "Tech Giants Battle Over AI Dominance",
+       link: "/news/ai-war",
+       category: "Technology",
+     },
+     {
+       title: "Global Markets Face Turbulence",
+       link: "/news/markets",
+       category: "Business",
+     },
+  ];
+  
   if (!blog) return <div className="text-center py-20">Loading news...</div>;
 
   return (
@@ -223,6 +242,7 @@ export default function BlogDetails() {
           </div>
         </div>
       </div>
+      <SideNewsTicker news={sampleNews} />
 
       {/* Blog Content */}
       <div className=" max-w-none px-2 sm:px-4 space-y-5 ">

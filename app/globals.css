@@ -56,3 +56,19 @@ body {
   border-image-source: conic-gradient(from 0deg, blue 0%, transparent 0%);
   animation: traceBorder 50s linear forwards;
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: inline-flex;
+  min-width: 200%;
+  animation: marquee 200s linear infinite;
+}
