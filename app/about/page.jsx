@@ -23,7 +23,7 @@ const About = () => {
             <h1 className="text-5xl font-extrabold mt-30 lg:mt-50 mb-8 tracking-tigh mask-b-from-70%">
               About{" "}
               <span className="bg-gradient-to-r from-purple-500 to-cyan-400 text-transparent bg-clip-text font-serif mask-t-from-black to-70%">
-                Cyclopedia
+               The Cyclopedia
               </span>
             </h1>
             <img
@@ -86,7 +86,7 @@ const About = () => {
           <section className="px-4 md:px-20 py-10 text-center">
             <h2 className="text-2xl font-bold mb-4 text-purple-600">Our Journey</h2>
             <p className="max-w-3xl mx-auto text-sm ">
-              Cyclopedia was founded out of a need for honest inquiry and open
+             The Cyclopedia was founded out of a need for honest inquiry and open
               minds. We began as a small community sharing unconventional
               insights and evolved into a platform for collective awareness. Our
               journey continues — and you’re part of it.
@@ -95,7 +95,7 @@ const About = () => {
           <div>
       {/* Footer */}
       <footer className="py-10 text-center text-sm  border-t border">
-        &copy; 2025 Cyclopedia. All rights reserved.
+        &copy; 2025 The Cyclopedia. All rights reserved.
        </footer>
        </div>
         </main>

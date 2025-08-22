@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto px-4 flex flex-col lg:flex-row justify-between items-start lg:items-start gap-8">
         {/* Left: Site links */}
         <div>
-          <h2 className="text-white font-bold text-lg mb-4">Cyclopedia</h2>
+          <h2 className="text-white font-bold text-lg mb-4"> TheCyclopedia</h2>
           <ul className="space-y-2 font-mono">
             <li>
               <a href="/politics" className="hover:text-purple-400 transition">
@@ -115,7 +115,7 @@ const Footer = () => {
       {/* Bottom copyright */}
       <div className="mt-10 text-center">
         <img src="/hid.png" alt="logo" className="h-20 w-20 mx-auto mb-3" />
-        <p>&copy; 2025 Cyclopedia. All rights reserved.</p>
+        <p>&copy; 2025 The Cyclopedia. All rights reserved.</p>
       </div>
     </footer>
   );

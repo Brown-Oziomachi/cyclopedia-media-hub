@@ -62,7 +62,7 @@ const ContactPage = () => {
             {/* Left Panel */}
            <div className="flex-1 max-w-xl mx-auto mt-20 space-y-6">
   <h1 className="text-4xl font-extrabold text-center">
-    Welcome to Cyclopedia
+    Welcome to The Cyclopedia
   </h1>
   <img
     src="/hid.png" // Update with your Cyclopedia logo
@@ -73,7 +73,7 @@ const ContactPage = () => {
     Explore Knowledge, Discover Truths
   </h2>
   <p className="">
-    Cyclopedia is your go-to platform for curated insights and information. 
+    The Cyclopedia is your go-to platform for curated insights and information. 
     Whether you’re a researcher, creator, or curious thinker — join us in building 
     a global system of knowledge and clarity.
   </p>
@@ -86,7 +86,7 @@ const ContactPage = () => {
                 <br />
                 ✉️ Email:{" "}
                 <a href="mailto:cyclopedia.web@gmail.com" className="underline text-green-500">
-                  cyclopedia.web@gmail.com
+                  thecyclopedia.news@gmail.com
                 </a>
               </p>
               <p className="text-gray-300">
@@ -175,11 +175,11 @@ const ContactPage = () => {
           </section>
 
           {/* Footer */}
-            <h1 className="text-center mb-0">© 2025 Cyclopedia. Truth. Light. Clarity.</h1>
+            <h1 className="text-center mb-0">© 2025 The Cyclopedia. Truth. Light. Clarity.</h1>
             <br />
             <Link href="/">
               <p className="underline hover:text-white text-center mt-0">
-                www.cyclopedia.movement
+                www.cyclopedia.com
               </p>
             </Link>
         </main>

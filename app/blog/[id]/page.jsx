@@ -170,6 +170,7 @@ export default function BlogDetails() {
             <div className="absolute inset-0 rounded-lg"></div>
           </div>
         </div>
+        <SideNewsTicker news={sampleNews} />
 
         <div>
           <div className="flex gap-6 mt-4 items-center justify-center">
@@ -242,7 +243,6 @@ export default function BlogDetails() {
           </div>
         </div>
       </div>
-      <SideNewsTicker news={sampleNews} />
 
       {/* Blog Content */}
       <div className=" max-w-none px-2 sm:px-4 space-y-5 ">
