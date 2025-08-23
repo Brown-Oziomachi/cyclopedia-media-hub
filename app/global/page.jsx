@@ -10,6 +10,7 @@ import {
   limit,
   startAfter,
   onSnapshot,
+  getDocs,
 } from "firebase/firestore";
 
 export default function BlogsPage() {
@@ -17,7 +18,7 @@ export default function BlogsPage() {
   const [lastDoc, setLastDoc] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // ✅ Fetch first batch
+  // ✅ Fetch first batch with real-time updates
   useEffect(() => {
     const q = query(
       collection(db1, "blogs"),
@@ -39,8 +40,8 @@ export default function BlogsPage() {
     return () => unsubscribe(); // cleanup listener
   }, []);
 
-  // ✅ Fetch next batch
-  const fetchMoreBlogs = () => {
+  // ✅ Fetch next batch (no real-time listener → just once)
+  const fetchMoreBlogs = async () => {
     if (!lastDoc) return;
 
     setLoading(true);
@@ -51,22 +52,25 @@ export default function BlogsPage() {
       limit(6)
     );
 
-    onSnapshot(q, (snapshot) => {
-      if (!snapshot.empty) {
-        const docs = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setBlogs((prev) => [...prev, ...docs]);
-        setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
-      }
-      setLoading(false);
-    });
+    const snapshot = await getDocs(q);
+
+    if (!snapshot.empty) {
+      const docs = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setPosts((prev) => [...prev, ...docs]); // ✅ FIXED
+      setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
+    }
+
+    setLoading(false);
   };
 
   return (
-    <div className="max-w-7xl mx-auto  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-30 lg:mt-40">
-      <h1 className="text-center font-bold text-4xl col-span-full">Latest News</h1>
+    <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-30 lg:mt-40">
+      <h1 className="text-center font-bold text-4xl col-span-full">
+        Latest News
+      </h1>
       <hr className="col-span-full" />
       <h2 className="text-xs text-center mb-10 col-span-full">
         Explore the global News
@@ -90,10 +94,7 @@ export default function BlogsPage() {
                 {post.title}
               </h2>
               {post.subtitle && (
-                <p className="text-sm  line-clamp-3">
-                  {post.subtitle}
-                </p>
-
+                <p className="text-sm line-clamp-3">{post.subtitle}</p>
               )}
             </div>
           </div>
@@ -105,7 +106,7 @@ export default function BlogsPage() {
         <div className="col-span-full text-center mt-6 mb-5">
           <button
             onClick={fetchMoreBlogs}
-            className="bg-purple-600 hover:bg-purple-700  px-6 py-3 rounded-md transition"
+            className="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-md transition"
             disabled={loading}
           >
             {loading ? "Loading News..." : "View More"}
