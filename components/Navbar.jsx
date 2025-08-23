@@ -8,6 +8,8 @@ import { Drawer, Box } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
 import SearchInput from "@/components/SearchInput"; // Assuming you have this component
 import ThemeToggle from "./ThemeToggle";
+import StatusModal from "@/components/StatusModal";
+
 
 const ProfileDropdownNavbar = () => {
   const [showNav, setShowNav] = useState(false);
@@ -24,6 +26,13 @@ const [lastScrollMobile, setLastScrollMobile] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
  const [openDropdown, setOpenDropdown] = useState(null);
 const isDropdownOpen = showNav || openDropdown !== null;
+
+
+ const statusItems = [
+    { type: "image", url: "/demo-status1.jpg" },
+    { type: "video", url: "/demo-status2.mp4" },
+    { type: "audio", url: "/demo-status3.mp3" },
+  ];
 
   const toggleDropdown = (regionName) => {
     setOpenDropdown(openDropdown === regionName ? null : regionName);
@@ -168,17 +177,19 @@ const regions = [
       <div className="flex items-center justify-between px-4 py-2">
   {/* Logo & Title */}
   <div className="flex items-center gap-4">
+      <StatusModal
+        trigger={
+          <Image
+            src="/hid.png"
+            alt="Cyclopedia Logo"
+            width={30}
+            height={30}
+            className="rounded-full border-2 border-purple-500"
+          />
+        }
+      />
     <Link href="/">
-      <div className="w-10 h-10 relative rounded-full overflow-hidden border-2 border-purple-500 cursor-pointer hover:scale-105 transition-transform duration-300">
-        <img
-          src="/hid.png"
-          alt="Logo"
-          fill
-          className="object-cover rounded-full"
-        />
-      </div>
-    </Link>
-    <Link href="/">
+    
       <h1
         className="text-white font-bold text-2xl cursor-pointer hover:text-purple-400 transition"
         onClick={() => setShowNav(false)}
@@ -186,6 +197,8 @@ const regions = [
         THE CYCLOPEDIA
       </h1>
     </Link>
+          <StatusModal statusItems={statusItems} />
+
       <ThemeToggle />
   </div>
 

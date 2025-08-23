@@ -31,7 +31,7 @@ const Page = () => {
       collection(db1, "blogs"),
       where("category", "==", "politics"), // only politics
       orderBy("createdAt", "desc"),
-      limit(20)
+      limit(30)
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
