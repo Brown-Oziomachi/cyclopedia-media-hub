@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/auth";
+import LiveClock from "@/components/LiveClock";
 
 export default function LiveStreamSwitcher() {
   const [liveVideos, setLiveVideos] = useState([]);
@@ -49,6 +50,7 @@ export default function LiveStreamSwitcher() {
     <div className="max-w-4xl mx-auto p-5">
       {/* Main Video */}
       <h1 className="text-center mb-5 lg:mt-40 mt-20 uppercase underline">Streaming Real Stories as They Happen</h1>
+      <LiveClock/>
       <div className="w-full aspect-video overflow-hidden mb-6 relative mt-10 lg:mt-10 bg-black">
         <iframe
           src={getEmbedUrl(currentVideo)}

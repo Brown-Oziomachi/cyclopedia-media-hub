@@ -9,6 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import SearchInput from "@/components/SearchInput"; // Assuming you have this component
 import ThemeToggle from "./ThemeToggle";
 import StatusModal from "@/components/StatusModal";
+import LiveClock from "@/components/LiveClock";
 
 
 const ProfileDropdownNavbar = () => {
@@ -224,7 +225,7 @@ const regions = [
               <Search />
             </button>
           </form>
-
+          <LiveClock />
           {/* Regions Dropdown (desktop only) */}
           <div className="relative hidden lg:block px-4 py-1 text-black">
             <button

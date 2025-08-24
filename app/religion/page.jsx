@@ -132,7 +132,7 @@ const Page = () => {
                 src="/rel.png"
                 alt="News 1"
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105"
               />
             </div>
             <div className="p-4">
@@ -142,7 +142,7 @@ const Page = () => {
                   Supremacy
                 </h2>
               </Link>
-              <p className="text-xs  mt-1">
+              <p className="text-xs  mt-1 hover:scale-105">
                 by Bradley Onishi — October 1, 2024
               </p>
               <p className="mt-2 text-sm ">
@@ -159,7 +159,7 @@ const Page = () => {
                 src="/shari.png"
                 alt="News 2"
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105"
               />
             </div>
             <div className="p-4">
@@ -184,7 +184,7 @@ const Page = () => {
                 src="/strug.png"
                 alt="News 3"
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105"
               />
             </div>
             <div className="p-4">
@@ -210,7 +210,7 @@ const Page = () => {
                 src="/bible.png"
                 alt="News 4"
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105"
               />
             </div>
             <div className="p-4">
@@ -236,7 +236,7 @@ const Page = () => {
                 src="/mod.png"
                 alt="News 4"
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105"
               />
             </div>
             <div className="p-4">
@@ -260,7 +260,7 @@ const Page = () => {
                 src="/muslim.jpg"
                 alt="News 4"
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105"
               />
             </div>
             <div className="p-4">
@@ -287,7 +287,7 @@ const Page = () => {
                 src="/image.png"
                 alt="News 4"
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105"
               />
             </div>
             <div className="p-4">
@@ -312,7 +312,7 @@ const Page = () => {
                 src="/Ame.png"
                 alt="News 4"
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105"
               />
             </div>
             <div className="p-4">
@@ -338,7 +338,7 @@ const Page = () => {
                 src="/miss.png"
                 alt="News 4"
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105"
               />
             </div>
             <div className="p-4">
@@ -362,7 +362,7 @@ const Page = () => {
                 src="/arab.png"
                 alt="News 4"
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105"
               />
             </div>
             <div className="p-4">
@@ -385,7 +385,7 @@ const Page = () => {
                 src="/BLM.png"
                 alt="News 4"
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105"
               />
             </div>
             <div className="p-4">
@@ -410,7 +410,7 @@ const Page = () => {
                 src="/cath.png"
                 alt="News 4"
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105"
               />
             </div>
             <div className="p-4">

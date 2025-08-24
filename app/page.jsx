@@ -162,7 +162,7 @@ const Page = () => {
             </div>
             <form
               onSubmit={handleSearch}
-              className="flex items-center max-lg:hidden "
+              className="flex items-center max-lg:hidden lg:hidden"
               role="search"
               aria-label="Site Search"
             >
