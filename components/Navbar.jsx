@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
-import { ChevronDown, LogIn, ChevronRight,  ChevronUp } from "lucide-react";
+import { ChevronDown, LogIn, ChevronRight,  ChevronUp,Search } from "lucide-react";
 import { Drawer, Box } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
 import SearchInput from "@/components/SearchInput"; // Assuming you have this component
@@ -182,8 +182,8 @@ const regions = [
           <Image
             src="/hid.png"
             alt="Cyclopedia Logo"
-            width={50}
-            height={50}
+            width={40}
+            height={40}
             className="rounded-full border-2 border-purple-500"
           />
         }
@@ -214,14 +214,14 @@ const regions = [
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search...."
-              className="px-3 py-2 rounded-l-md shadow-2xl shadow-purple-500 bg-white text-black focus:outline-none focus:ring-2 focus:ring-purple-400 w-72"
+              className="px-3 py-2 rounded-l-md shadow-2xl shadow-purple-500 bg-white text-black w-72"
               aria-label="Search input"
             />
             <button
               type="submit"
-              className="bg-black hover:from-purple-600 hover:to-cyan-500 px-4 py-2 rounded-r-md text-white font-semibold transition z-50 cursor-pointer"
+              className="bg-black hover:from-purple-600 hover:to-cyan-500 px-4 py-2 rounded-r-md text-white border-1-white border font-semibold transition z-50 cursor-pointer"
             >
-              Search
+              <Search />
             </button>
           </form>
 
@@ -468,7 +468,7 @@ const regions = [
       {/* Mobile Navigation Drawer */}
       {showNav && (
         <nav
-          className="fixed inset-0  bg-black bg-opacity-95 flex flex-col text-black p-5 z-[50] mt-11 overflow-y-auto"
+          className="fixed inset-0  bg-black bg-opacity-95 flex flex-col text-black p-5 z-[50] mt-13 overflow-y-auto"
           aria-label="Mobile navigation"
         >
           {/* Small screen search */}
@@ -492,7 +492,7 @@ const regions = [
               type="submit"
               className="absolute right-2 top-1/2 -translate-y-1/2 bg-black px-3 py-2 rounded-md text-white font-semibold transition"
             >
-              Search
+              <Search />
             </button>
           </form>
           <ul className="space-y-3 font-bold mt-5 text-gray-400">

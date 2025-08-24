@@ -255,16 +255,23 @@ export default function BlogDetails() {
 
       {/* Newsletter Card */}
       <Link href="/newsletter">
-        <div className="cursor-pointer bg-gradient-to-r from-purple-500 to-purple-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
-          <h3 className="text-xl font-bold mb-2">Stay Updated!</h3>
-          <p className="mb-4">
-            Subscribe to our newsletter and never miss an update.
-          </p>
-          <button className="bg-white text-blue-600 font-semibold px-4 py-2 rounded-full hover:bg-gray-100 transition">
-            Subscribe Now
-          </button>
-        </div>
-      </Link>
+      <div className="cursor-pointer bg-gradient-to-r from-purple-500 to-purple-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
+        <h3 className="text-xl font-bold mb-2 text-white">Stay Updated!</h3>
+        <p className="mb-4 text-gray-200">
+          Subscribe to our newsletter and never miss an update.
+        </p>
+
+        {/* Animated Button */}
+        <motion.button
+          className="bg-white text-purple-700 font-semibold px-6 py-2 rounded-full shadow-md"
+          whileHover={{ scale: 1.1 }}
+          animate={{ y: [0, -3, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+        >
+          Subscribe Now
+        </motion.button>
+      </div>
+    </Link>
 
       {/* Related Blogs */}
       <div>

@@ -29,7 +29,7 @@ const About = () => {
             <img
               src="hid.png"
               alt="Cyclopedia image"
-              className="shadow-2xl rounded-b-4xl mask-b-from-5%"
+              className="shadow-2xl  bg-black"
             />
             <p className=" mb-2 -mt-10 text-xs">
               Uncovering the Unseen, Revealing the Real.

@@ -54,7 +54,7 @@ const PoliticsPage = () => {
         <h1 className="text-3xl lg:text-5xl font-bold text-center max-lg:mt-40 lg:mt-50  mb-2">
           Power, Policy, and People
         </h1>
-        <p className="text-sm lg:text-base text-center text-gray-700 mx-auto mb-10">
+        <p className="text-sm lg:text-base text-center text-gray-300 mx-auto mb-10">
           Navigate the world of governance, elections, secret deals, and
           political <br className="max-md:hidden" />
           maneuvers that influence global direction. See what lies behind the
@@ -83,7 +83,7 @@ const PoliticsPage = () => {
                 )}
                 <div className="p-4">
                   <h2 className="text-sm font-semibold mb-2">{post.title}</h2>
-                  <p className="text-gray-600 text-sm line-clamp-3">
+                  <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-3">
                     {post.subtitle}
                   </p>
                  <p className="text-xs mt-2">

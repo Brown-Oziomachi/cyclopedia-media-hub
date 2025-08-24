@@ -50,7 +50,7 @@ export default function SearchResults() {
                 {post.title}
               </h2>
             </Link>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-400">
               {post.subtitle || "No description available."}
             </p>
           </div>
