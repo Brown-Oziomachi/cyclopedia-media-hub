@@ -63,6 +63,9 @@ const Page = () => {
                   <h3 className="font-bold text-lg hover:underline">{post.title}</h3>
                 </Link>
                 <p className="text-sm ">{post.subtitle || "No description available."}</p>
+                 <p className="text-xs mt-2">
+                  {post.createdAt?.toDate().toDateString()}
+                </p>
               </div>
             ))}
           </div>

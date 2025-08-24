@@ -155,6 +155,9 @@ const Page = () => {
               <p className="mt-2 text-xs flex-grow">
                 {card.desc}
               </p>
+               <p className="text-xs mt-2">
+                  {post.createdAt?.toDate().toDateString()}
+                </p>
             </div>
           </div>
         ))}

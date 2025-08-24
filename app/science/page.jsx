@@ -79,6 +79,9 @@ const Page = () => {
                     <p className="text-xs text-gray-600 border mt-1">
                       {post.tags?.join(", ")}
                     </p>
+                     <p className="text-xs mt-2">
+                  {post.createdAt?.toDate().toDateString()}
+                </p>
                   </div>
                 </div>
               </Link>

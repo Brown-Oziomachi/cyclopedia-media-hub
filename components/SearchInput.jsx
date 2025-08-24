@@ -60,7 +60,7 @@ export default function SearchPage() {
             <li key={post.id}>
               <Link
                 href={`/blog/${post.id}`}
-                className="text-blue-500 hover:underline"
+                className="text-white hover:underline"
               >
                 {post.title}
               </Link>

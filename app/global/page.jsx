@@ -96,6 +96,11 @@ export default function BlogsPage() {
               {post.subtitle && (
                 <p className="text-sm line-clamp-3">{post.subtitle}</p>
               )}
+              <h3>
+                 <p className="text-xs mt-2">
+                  {post.createdAt?.toDate().toDateString()}
+                </p>
+              </h3>
             </div>
           </div>
         </Link>

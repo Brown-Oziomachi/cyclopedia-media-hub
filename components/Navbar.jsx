@@ -182,8 +182,8 @@ const regions = [
           <Image
             src="/hid.png"
             alt="Cyclopedia Logo"
-            width={30}
-            height={30}
+            width={50}
+            height={50}
             className="rounded-full border-2 border-purple-500"
           />
         }

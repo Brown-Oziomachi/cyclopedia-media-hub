@@ -58,6 +58,9 @@ export default function HealthPostsPage() {
                     {post.subtitle}
                   </p>
                 )}
+                   <p className="text-xs mt-2">
+                  {post.createdAt?.toDate().toDateString()}
+                </p>
               </div>
             </div>
           </Link>

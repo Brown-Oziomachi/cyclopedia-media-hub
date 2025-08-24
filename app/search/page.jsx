@@ -46,7 +46,7 @@ export default function SearchResults() {
         results.map((post) => (
           <div key={post.id} className="mb-6">
             <Link href={`/blog/${post.id}`}>
-              <h2 className="text-lg text-blue-800 hover:underline">
+              <h2 className="text-lg text-blue-400 hover:underline">
                 {post.title}
               </h2>
             </Link>
@@ -61,7 +61,7 @@ export default function SearchResults() {
           <span className="font-semibold text-xl"></span> Content not
           available:{" "}
           <span className=" ">
-              We are currently expanding our coverage on <span className="font-bold text-xl">{term}</span>. Please check back
+              We are currently expanding our coverage on <span className="font-bold text-xl text-purple-600">{term}</span>. Please check back
             soon for updates.
           </span>
           . <br />

@@ -86,9 +86,9 @@ const SportsPage = () => {
                   <p className=" text-sm line-clamp-3">
                     {post.subtitle}
                   </p>
-                  {/* <div className="mt-2 text-xs text-blue-600 font-medium">
-                    {post.tags?.join(", ")}
-                  </div> */}
+                  <p className="text-xs mt-2">
+                  {post.createdAt?.toDate().toDateString()}
+                </p>
                 </div>
               </Link>
             ))}
