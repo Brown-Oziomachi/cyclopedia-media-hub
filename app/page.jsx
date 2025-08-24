@@ -819,7 +819,7 @@ const Page = () => {
 
             {/* Overlay */}
             {isOpen && (
-              <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50">
+              <div className="fixed inset-0 bg-black/70 backdrop-blur-sm  flex items-center justify-center z-50">
                 {/* Popup */}
                 <div className=" p-6 rounded-2xl max-w-lg w-full relative shadow-lg">
                   {/* Close button */}
@@ -830,7 +830,7 @@ const Page = () => {
                     ✖
                   </button>
 
-                  <h2 className="text-xl font-bold mb-4 text-center">
+                  <h2 className="text-xl font-bold mb-4 text-center text-white">
                     More Categories
                   </h2>
 

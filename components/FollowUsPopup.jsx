@@ -29,7 +29,7 @@ export default function FollowUsPopup() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+            className="fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-sm  bg-opacity-50 z-50"
           >
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}

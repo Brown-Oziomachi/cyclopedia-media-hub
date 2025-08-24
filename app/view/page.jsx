@@ -20,7 +20,7 @@ export default function ViewMoreSearchPopup() {
       {/* View More Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className=" transition-colors duration-200 focus:ring-2 focus:ring-purple-400 text-white mt-20 mx-auto px-6 py-2 rounded-full shadow-md flex items-center gap-2 mb-10"
+        className=" transition-colors duration-200 focus:ring-2 focus:ring-purple-400  mt-20 mx-auto px-6 py-2 rounded-full shadow-md flex items-center gap-2 mb-10"
       >
         <Search size={18} />
         View More
