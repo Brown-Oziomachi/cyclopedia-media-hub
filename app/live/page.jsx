@@ -48,7 +48,8 @@ export default function LiveStreamSwitcher() {
   return (
     <div className="max-w-4xl mx-auto p-5">
       {/* Main Video */}
-      <div className="w-full aspect-video overflow-hidden mb-6 relative mt-20 lg:mt-40 bg-black">
+      <h1 className="text-center mb-5 lg:mt-40 mt-20 uppercase underline">Streaming Real Stories as They Happen</h1>
+      <div className="w-full aspect-video overflow-hidden mb-6 relative mt-10 lg:mt-10 bg-black">
         <iframe
           src={getEmbedUrl(currentVideo)}
           title="Live Broadcast"
@@ -65,10 +66,6 @@ export default function LiveStreamSwitcher() {
         </div>
       </div>
 
-      {/* Other Livestreams */}
-      <h2 className="text-xl font-bold mb-2 text-center">
-        Livestreams Section
-      </h2>
       <div className="flex flex-col gap-2">
         {liveVideos.map((video, index) => (
           <button

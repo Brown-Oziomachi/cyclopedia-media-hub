@@ -16,6 +16,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter, useParams } from "next/navigation";
 import SideNewsTicker from "@/components/SideNewsTicker";
+import FollowUsPopup from "@/components/FollowUsPopup";
+
 
 // Blog content renderer
 const BlogDisplay = ({ body }) => {
@@ -171,9 +173,10 @@ export default function BlogDetails() {
           </div>
         </div>
         <SideNewsTicker news={sampleNews} />
-
+        
         <div>
-          <div className="flex gap-6 mt-4 items-center justify-center">
+          <div className="flex gap-6 mt-4 items-center justify-center size-10 mx-auto">
+        <FollowUsPopup />
             <div className="flex justify-center">
               <Link href="/live">
                 <div className="flex items-center gap-2 hover:scale-105 transition-transform cursor-pointer">
@@ -184,12 +187,12 @@ export default function BlogDetails() {
                   </span>
 
                   {/* Live Text */}
-                  <p className="font-semibold uppercase tracking-wide animate-pulse">
+                  <p className="font-semibold text-sm uppercase tracking-wide animate-pulse">
                     Live
                   </p>
 
                   {/* Play Icon */}
-                  <Play className="h-5 w-5" />
+                  <Play className="h-4 w-4" />
                 </div>
               </Link>
             </div>
@@ -274,44 +277,36 @@ export default function BlogDetails() {
     </Link>
 
       {/* Related Blogs */}
-      <div>
-        <h2 className="text-xl font-bold mb-4 mt-10">Related</h2>
-        <div className="grid sm:grid-cols-2 gap-6">
-          {blogs.map((b) => (
-            <Link key={b.id} href={`/blog/${b.id}`} className="block">
-              <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
-                {b.imageUrl && (
-                  <div className="relative w-full h-48 sm:h-56">
-                    <img
-                      src={b.imageUrl}
-                      alt={b.title}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                )}
-                <div className="p-4">
-                  <h2 className="text-base font-bold hover:underline uppercase ">
-                    {b.title}
-                  </h2>
-                  <div className="flex gap-2 items-center mt-2 flex-wrap">
-                    <span className="text-orange-600 text-sm uppercase">
-                      TAGGED:
-                    </span>
-                    {b.tags?.map((tag) => (
-                      <Link
-                        key={tag}
-                        href={`/search?q=${tag.toLowerCase()}`}
-                        className="border py-0 px-3 border-orange-600 text-orange-600 text-sm hover:bg-orange-50 dark:hover:bg-orange-900/20"
-                      >
-                        {tag}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
+    <div>
+  <h2 className="text-xl font-bold mb-4 mt-10">Related</h2>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {blogs.map((b) => (
+      <Link key={b.id} href={`/blog/${b.id}`} className="block">
+        <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
+          {b.imageUrl && (
+            <div className="relative w-full h-48 sm:h-56">
+              <img
+                src={b.imageUrl}
+                alt={b.title}
+                className="object-cover w-full h-full"
+              />
+            </div>
+          )}
+          <div className="p-4">
+            <h2 className="text-base font-bold hover:underline uppercase">
+              {b.title}
+            </h2>
+            <h3 className="text-sm">{b.subtitle}</h3>
+           <p className="text-xs mt-2">
+                  {b.createdAt?.toDate().toDateString()}
+                </p>
+          </div>
         </div>
+      </Link>
+    ))}
+  </div>
+
+
       </div>
     </motion.div>
   );
