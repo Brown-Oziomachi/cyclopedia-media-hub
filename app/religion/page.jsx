@@ -61,7 +61,6 @@ const Page = () => {
       </p>
 
       {/* ✅ Dynamic Firestore Religion Posts */}
-      <p className="text-center text-2xl font-bold mb-6">Latest News</p>
 
       {loading ? (
         // Skeleton Loader
