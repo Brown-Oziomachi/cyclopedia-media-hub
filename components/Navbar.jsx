@@ -175,33 +175,38 @@ const regions = [
         } shadow-lg z-50`}
         onClick={(e) => e.stopPropagation()} // Prevents nav toggle scroll effect
       >
-      <div className="flex items-center justify-between px-4 py-2">
-  {/* Logo & Title */}
-  <div className="flex items-center gap-4">
-      <StatusModal
-        trigger={
-          <Image
-            src="/hid.png"
-            alt="Cyclopedia Logo"
-            width={40}
-            height={40}
-            className="rounded-full border-2 border-purple-500"
-          />
-        }
-      />
-    <Link href="/">
-    
-      <h1
-        className="text-white font-bold text-2xl cursor-pointer hover:text-purple-400 transition"
-        onClick={() => setShowNav(false)}
-      >
-        THE CYCLOPEDIA
-      </h1>
-    </Link>
-          <StatusModal statusItems={statusItems} />
+        <div className="flex items-center justify-between px-4 py-2">
+          {/* Logo & Title */}
+          <div className="flex items-center gap-4">
+            <StatusModal
+              trigger={
+                <Image
+                  src="/hid.png"
+                  alt="Cyclopedia Logo"
+                  width={30}
+                  height={30}
+                  className="rounded-full border-2 border-purple-500 "
+                />
+              }
+            />
+            <Link href="/">
+              <h1
+                className=" font-bold text-xl lg:text-3xl cursor-pointer transition rounded-sm "
+                onClick={() => setShowNav(false)}
+              >
+                THE CYCL
+                <Link href="/about">
+                  <span className="bg-white rounded-full w-0 h-0 mask-b-from-70% hover:invisible">
+                    👁️
+                  </span>
+                </Link>
+                PEDIA
+              </h1>
+            </Link>
+            <StatusModal statusItems={statusItems} />
 
-      <ThemeToggle />
-  </div>
+            <ThemeToggle />
+          </div>
 
           {/* Desktop Search Bar */}
           <form
@@ -469,7 +474,7 @@ const regions = [
       {/* Mobile Navigation Drawer */}
       {showNav && (
         <nav
-          className="fixed inset-0  bg-black bg-opacity-95 flex flex-col text-black p-5 z-[50] mt-13 overflow-y-auto"
+          className="fixed inset-0  bg-black bg-opacity-95 flex flex-col text-black p-5 z-[50] mt-11 overflow-y-auto"
           aria-label="Mobile navigation"
         >
           {/* Small screen search */}

@@ -5,7 +5,6 @@ export default function Clock() {
   const [time, setTime] = useState("");
 
   useEffect(() => {
-    // Function to update time
     const updateClock = () => {
       const now = new Date();
       const hours = String(now.getHours()).padStart(2, "0");
@@ -14,8 +13,8 @@ export default function Clock() {
       setTime(`${hours}:${minutes}:${seconds}`); // ✅ fixed
     };
 
-    updateClock(); // call immediately on mount
-    const timer = setInterval(updateClock, 1000); // update every second
+    updateClock(); 
+    const timer = setInterval(updateClock, 1000);
 
     return () => clearInterval(timer); // cleanup
   }, []);
