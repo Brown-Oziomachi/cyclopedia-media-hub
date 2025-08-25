@@ -8,6 +8,9 @@ import { db1 } from "@/lib/firebaseConfig";
 import { useRouter } from "next/navigation";
 import { LoaderCircle } from "lucide-react";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
+import { redirect } from "next/navigation";
+
+redirect("/");
 
 const formatTimestamp = (timestamp) => {
   if (!timestamp) return "Unknown Date";
@@ -39,6 +42,9 @@ const formatTimestamp = (timestamp) => {
 
   return "Unknown Date";
 };
+
+
+
 
 const BlogPage = () => {
   const router = useRouter();
