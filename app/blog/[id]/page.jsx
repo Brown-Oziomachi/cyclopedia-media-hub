@@ -258,7 +258,7 @@ export default function BlogDetails() {
 
       {/* Newsletter Card */}
       <Link href="/newsletter">
-      <div className="cursor-pointer bg-gradient-to-r from-purple-500 to-purple-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
+      <div className="cursor-pointer bg-gradient-to-r from-purple-500 to-purple-800 lg:w-1/3 mx-auto rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
         <h3 className="text-xl font-bold mb-2 text-white">Stay Updated!</h3>
         <p className="mb-4 text-gray-200">
           Subscribe to our newsletter and never miss an update.
