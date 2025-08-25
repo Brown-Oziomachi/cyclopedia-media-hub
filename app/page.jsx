@@ -1040,8 +1040,8 @@ const Page = () => {
         >
           What We Fight For
         </motion.h2>
-        <p className="text-lg max-w-2xl mx-auto% ">
-          We are not conspiracy theorists. We are truth seekers. We are the ones
+        <p className="text-lg text-center items-center justify-center">
+          We are not conspiracy theorists. We are truth seekers. We are the ones <br />
           who question what they tell us, challenge the narrative, and expose
           what lies behind the curtain.
         </p>
