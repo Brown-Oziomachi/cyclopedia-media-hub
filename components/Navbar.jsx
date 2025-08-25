@@ -191,7 +191,7 @@ const regions = [
             />
             <Link href="/">
               <h1
-                className=" font-bold text-xl lg:text-3xl cursor-pointer transition rounded-sm "
+                className=" font-bold text-2xl lg:text-3xl cursor-pointer transition rounded-sm "
                 onClick={() => setShowNav(false)}
               >
                 THE CYCL
