@@ -92,7 +92,7 @@ export default function BlogDetails() {
         .map((doc) => ({ id: doc.id, ...doc.data() }))
         .filter((b) => b.id !== id)
         .sort((a, b) => (b.date || 0) - (a.date || 0));
-      setBlogs(allBlogs.slice(0, 4));
+      setBlogs(allBlogs.slice(70, 80));
     }
     fetchBlogs();
   }, [id]);
@@ -173,10 +173,10 @@ export default function BlogDetails() {
           </div>
         </div>
         <SideNewsTicker news={sampleNews} />
-        
+
         <div>
           <div className="flex gap-6 mt-4 items-center justify-center size-10 mx-auto">
-        <FollowUsPopup />
+            <FollowUsPopup />
             <div className="flex justify-center">
               <Link href="/live">
                 <div className="flex items-center gap-2 hover:scale-105 transition-transform cursor-pointer">
@@ -258,55 +258,116 @@ export default function BlogDetails() {
 
       {/* Newsletter Card */}
       <Link href="/newsletter">
-      <div className="cursor-pointer bg-gradient-to-r from-purple-500 to-purple-800 lg:w-1/3 mx-auto rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
-        <h3 className="text-xl font-bold mb-2 text-white">Stay Updated!</h3>
-        <p className="mb-4 text-gray-200">
-          Subscribe to our newsletter and never miss an update.
-        </p>
+        <div className="cursor-pointer bg-gradient-to-r from-purple-500 to-purple-800 lg:w-1/3 mx-auto rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
+          <h3 className="text-xl font-bold mb-2 text-white">Stay Updated!</h3>
+          <p className="mb-4 text-gray-200">
+            Subscribe to our newsletter and never miss an update.
+          </p>
 
-        {/* Animated Button */}
-        <motion.button
-          className="bg-white text-purple-700 font-semibold px-6 py-2 rounded-full shadow-md"
-          whileHover={{ scale: 1.1 }}
-          animate={{ y: [0, -3, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-        >
-          Subscribe Now
-        </motion.button>
-      </div>
-    </Link>
-
-      {/* Related Blogs */}
-    <div>
-  <h2 className="text-xl font-bold mb-4 mt-10">Related</h2>
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {blogs.map((b) => (
-      <Link key={b.id} href={`/blog/${b.id}`} className="block">
-        <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
-          {b.imageUrl && (
-            <div className="relative w-full h-48 sm:h-56">
-              <img
-                src={b.imageUrl}
-                alt={b.title}
-                className="object-cover w-full h-full"
-              />
-            </div>
-          )}
-          <div className="p-4">
-            <h2 className="text-base font-bold hover:underline uppercase">
-              {b.title}
-            </h2>
-            <h3 className="text-sm">{b.subtitle}</h3>
-           <p className="text-xs mt-2">
-                  {b.createdAt?.toDate().toDateString()}
-                </p>
-          </div>
+          {/* Animated Button */}
+          <motion.button
+            className="bg-white text-purple-700 font-semibold px-6 py-2 rounded-full shadow-md"
+            whileHover={{ scale: 1.1 }}
+            animate={{ y: [0, -3, 0] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+          >
+            Subscribe Now
+          </motion.button>
         </div>
       </Link>
-    ))}
-  </div>
 
+      {/* Related Blogs */}
+      <div>
+        <h2 className="text-xl font-bold mb-4 mt-10 p-5">Related</h2>
 
+        {/* First row - grid cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {blogs.slice(0, 3).map((b) => (
+            <Link key={b.id} href={`/blog/${b.id}`} className="block">
+              <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
+                {b.imageUrl && (
+                  <div className="relative w-full h-48 sm:h-56">
+                    <img
+                      src={b.imageUrl}
+                      alt={b.title}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                )}
+                <div className="p-4">
+                  <h2 className="text-base font-bold hover:underline uppercase">
+                    {b.title}
+                  </h2>
+                  <h3 className="text-sm">{b.subtitle}</h3>
+                  <p className="text-xs mt-2">
+                    {b.createdAt?.toDate().toDateString()}
+                  </p>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {/* Middle row - scrollable small cards */}
+        <div className="overflow-x-auto mt-6">
+          <div className="flex space-x-4">
+            {blogs.slice(3, 6).map((b) => (
+              <Link
+                key={b.id}
+                href={`/blog/${b.id}`}
+                className="flex-shrink-0 w-64"
+              >
+                <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
+                  {b.imageUrl && (
+                    <div className="relative w-full h-32">
+                      <img
+                        src={b.imageUrl}
+                        alt={b.title}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+                  )}
+                  <div className="p-3">
+                    <h2 className="text-sm font-bold hover:underline uppercase truncate">
+                      {b.title}
+                    </h2>
+                    <p className="text-xs mt-1">
+                      {b.createdAt?.toDate().toDateString()}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Last row - 3 more cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+          {blogs.slice(6, 9).map((b) => (
+            <Link key={b.id} href={`/blog/${b.id}`} className="block">
+              <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
+                {b.imageUrl && (
+                  <div className="relative w-full h-40 sm:h-48">
+                    <img
+                      src={b.imageUrl}
+                      alt={b.title}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                )}
+                <div className="p-4">
+                  <h2 className="text-base font-bold hover:underline uppercase">
+                    {b.title}
+                  </h2>
+                  <h3 className="text-sm">{b.subtitle}</h3>
+                  <p className="text-xs mt-2">
+                    {b.createdAt?.toDate().toDateString()}
+                  </p>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </motion.div>
   );
