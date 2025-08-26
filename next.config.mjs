@@ -1,4 +1,3 @@
-
 // next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -6,11 +5,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "cwoel4rgy59p0nml.public.blob.vercel-storage.com", // Vercel Blob
+        hostname: "cwoel4rgy59p0nml.public.blob.vercel-storage.com", // your Vercel Blob
       },
       {
         protocol: "https",
-        hostname: "blob.vercel-storage.com", // Optional Vercel
+        hostname: "blob.vercel-storage.com", // optional Vercel
       },
       {
         protocol: "https",
@@ -18,8 +17,9 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "raw.githubusercontent.com", // GitHub raw file hosting
+        hostname: "raw.githubusercontent.com", // GitHub
       },
+      
     ],
   },
 };
