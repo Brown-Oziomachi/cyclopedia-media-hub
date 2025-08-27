@@ -51,14 +51,13 @@ const NigeriaPage = () => {
   return (
     <main className="w-full b">
       <div className="max-w-7xl mx-auto px-4 py-10">
-        <h1 className="text-3xl lg:text-5xl font-bold text-center max-lg:mt-40 lg:mt-50  mb-2">
-          Power, Policy, and People
+        <h1 className="text-3xl lg:text-5xl font-bold text-center max-lg:mt-40 lg:mt-50 mb-2">
+          Nigeria Post
         </h1>
         <p className="text-sm lg:text-base text-center text-gray-300 mx-auto mb-10">
-          Navigate the world of governance, elections, secret deals, and
-          political <br className="max-md:hidden" />
-          maneuvers that influence global direction. See what lies behind the
-          decisions made in your name.
+          Explore stories on governance, elections, policies, and deals shaping
+          Nigeria’s future. <br className="max-md:hidden" />
+          Uncover the truths behind decisions that affect the people every day.
         </p>
 
         {/* Fetched Politics Posts */}
