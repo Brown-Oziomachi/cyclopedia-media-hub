@@ -62,7 +62,7 @@ export default function SearchResults() {
           available:{" "}
           <span className=" ">
               We are currently expanding our coverage on <span className="font-bold text-xl text-purple-600">{term}</span>. Please check back
-            soon for updates.
+            soon for updates. Or check your <span className="text-purple-600 animate-pulse">network connection,</span> thank you......
           </span>
           . <br />
         </p>

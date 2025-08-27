@@ -19,7 +19,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "raw.githubusercontent.com", // GitHub
       },
-      
+      {
+        protocol: "https",
+        hostname: "*.public.blob.uploadthing.com", // UploadThing URLs
+      },
     ],
   },
 };

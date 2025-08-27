@@ -65,7 +65,9 @@ const PoliticsPage = () => {
         {loading ? (
           <p className="text-center py-10">Loading latest posts...</p>
         ) : posts.length === 0 ? (
-          <p className="text-gray-500 text-center">No politics posts found.</p>
+          <p className="text-gray-500 text-center">
+            No politics posts found. Please check your network connection
+          </p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {posts.map((post) => (
@@ -86,9 +88,9 @@ const PoliticsPage = () => {
                   <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-3">
                     {post.subtitle}
                   </p>
-                 <p className="text-xs mt-2">
-                  {post.createdAt?.toDate().toDateString()}
-                </p>
+                  <p className="text-xs mt-2">
+                    {post.createdAt?.toDate().toDateString()}
+                  </p>
                 </div>
               </Link>
             ))}

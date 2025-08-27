@@ -223,11 +223,11 @@ const Page = () => {
         </a>
 
         {/* Date + Description */}
-        <p className="text-xs text-gray-400">
+        <p className="text-xs">
           Cyclopedia — As{" "}
-          <span className="font-bold text-white">journalists</span> are laid off
-          and newspapers cut back or shut down, whole sectors of our civic life
-          disappear from public view and go dark. Much of local and state
+          <span className="font-bold text-blue-700">journalists</span> are laid
+          off and newspapers cut back or shut down, whole sectors of our civic
+          life disappear from public view and go dark. Much of local and state
           governments, whole federal departments...
         </p>
       </div>
@@ -235,9 +235,13 @@ const Page = () => {
 
       <hr className="border-2" />
       <div className="max-w-5xl mx-auto py-10 px- ">
-        <h2 className="text-2xl font-bold mb-6 p-4">Latest News</h2>
+        <h2 className="text-2xl font-bold mb-6 p-4 underline font-stretch-ultra-condensed">
+          Latest News
+        </h2>
         {posts.length === 0 ? (
-          <p className="text-gray-500">No posts found.</p>
+          <p className="text-gray-500 p-5 animate-pulse">
+            Please check your network connection.
+          </p>
         ) : (
           <div className="grid md:grid-cols-3 gap-6">
             {posts.map((post) => (
@@ -285,9 +289,7 @@ const Page = () => {
                   The Strategic Fallout of the Israel-Iran War
                 </h2>
               </Link>
-              <p className="text-xs  mt-1">
-                June 27, 2025
-              </p>
+              <p className="text-xs  mt-1">June 27, 2025</p>
               <p className="mt-2 text-sm">
                 Amid all the military calculations and geopolitical theater,
                 Ramzy Baroud says one truth stands out: when it mattered most,
@@ -309,9 +311,7 @@ const Page = () => {
                   US Turning Oil-Rich Nigeria into Proxy for its Africa Wars
                 </h2>
               </Link>
-              <p className="text-xs  mt-1">
-                By Cyclopedia
-              </p>
+              <p className="text-xs  mt-1">By Cyclopedia</p>
               <p className="mt-2  text-sm">
                 T.J. Coles reports on what AFRICOM is doing under the cover of
                 counterterrorism.
@@ -410,7 +410,7 @@ const Page = () => {
         </aside>
       </section>
 
-      <hr className="border-2" />
+      <hr className="border" />
       <section className="px-4 py-10 md:py-20 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
         {/* First Card */}
         <div className=" rounded-xl shadow-lg overflow-hidden">
@@ -904,9 +904,7 @@ const Page = () => {
                 Ravage Europe
               </h2>
             </Link>
-            <p className="text-xs mt-1 font-black">
-              By Cyclopedia
-            </p>
+            <p className="text-xs mt-1 font-black">By Cyclopedia</p>
             <p className="mt-2 text-xs">
               Fire-related deaths were reported in Turkey, Spain, Montenegro,
               and Albania.
@@ -929,9 +927,7 @@ const Page = () => {
                 Americans Say Government Should Address Slavery Effects{" "}
               </h2>
             </Link>
-            <p className="text-xs mt-1 ">
-              By Cylopedia
-            </p>
+            <p className="text-xs mt-1 ">By Cylopedia</p>
             <p className="mt-2 text-xs">
               Americans are more likely to think that the history of slavery has
               at least some effect on Black people today than to think it has
@@ -958,9 +954,7 @@ const Page = () => {
                 Why Does It Seem Israel Is Always at War With Its Neighbors?
               </h2>
             </Link>
-            <p className="text-xs mt-1 font-black">
-              By cyclopedia
-            </p>
+            <p className="text-xs mt-1 font-black">By cyclopedia</p>
             <p className="mt-2 text-xs">
               The 7th century Muslim Conquest of Jerusalem, followed by the
               Crusades (11th-13th centuries), continued the upheaval in the
@@ -1041,7 +1035,8 @@ const Page = () => {
           What We Fight For
         </motion.h2>
         <p className="text-lg text-center items-center justify-center">
-          We are not conspiracy theorists. We are truth seekers. We are the ones <br />
+          We are not conspiracy theorists. We are truth seekers. We are the ones{" "}
+          <br />
           who question what they tell us, challenge the narrative, and expose
           what lies behind the curtain.
         </p>

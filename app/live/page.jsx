@@ -25,7 +25,11 @@ export default function LiveStreamSwitcher() {
 
   if (loading) return <div className="text-center mt-28">Loading...</div>;
   if (!currentVideo)
-    return <div className="text-center mt-20">No livestream available.</div>;
+    return (
+      <div className="text-center mt-20">
+        No livestream available. Please check your network connection
+      </div>
+    );
 
   // Function to clean embed links (removes branding)
   const getEmbedUrl = (video) => {

@@ -68,7 +68,7 @@ const Page = () => {
         {loading ? (
           <p>Loading latest Posts...</p>
         ) : posts.length === 0 ? (
-          <p>No posts found</p>
+          <p>Please check your network connection</p>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {posts.map((post) => (
@@ -94,9 +94,7 @@ const Page = () => {
                     {post.title}
                   </h3>
                   {post.subtitle && (
-                    <p className="text-sm mt-1">
-                      {post.subtitle}
-                    </p>
+                    <p className="text-sm mt-1">{post.subtitle}</p>
                   )}
                   <p className="text-xs mt-2">
                     {post.createdAt?.toDate().toDateString()}

@@ -108,6 +108,14 @@ const Footer = () => {
                 Philosophy
               </a>
             </li>
+            <li>
+              <a
+                href="/nigeria"
+                className="hover:text-purple-400 transition"
+              >
+                Nigeria
+              </a>
+            </li>
           </ul>
         </div>
       </div>

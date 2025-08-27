@@ -185,7 +185,7 @@ const regions = [
                   alt="Cyclopedia Logo"
                   width={30}
                   height={30}
-                  className="rounded-full border-2 border-purple-500 "
+                  className="rounded-full brightness-125 "
                 />
               }
             />
@@ -196,7 +196,7 @@ const regions = [
               >
                 THE CYCL
                 <Link href="/about">
-                  <span className="bg-white rounded-full w-0 h-0 mask-b-from-70% hover:invisible">
+                  <span className="bg-white rounded-full w-0 h-0 mask-b-from-20% hover:invisible">
                     👁️
                   </span>
                 </Link>
@@ -269,7 +269,7 @@ const regions = [
               <Link
                 key={item.text}
                 href={item.url}
-                className="px-4 py-2 hover:bg-gray-700 whitespace-nowrap text-sm font-semibold transition"
+                className="px-4 py-2 hover:bg-purple-700 whitespace-nowrap text-sm font-semibold transition"
               >
                 {item.text}
               </Link>

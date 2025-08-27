@@ -65,7 +65,7 @@ const SportsPage = () => {
         {loading ? (
           <p className="text-center py-10">Loading latest posts...</p>
         ) : posts.length === 0 ? (
-          <p className=" text-center">No sports posts found.</p>
+          <p className=" text-center text-gray-500 animate-pulse">Please check your network connection....</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {posts.map((post) => (
@@ -83,12 +83,10 @@ const SportsPage = () => {
                 )}
                 <div className="p-4">
                   <h2 className="text-sm font-semibold mb-2">{post.title}</h2>
-                  <p className=" text-sm line-clamp-3">
-                    {post.subtitle}
-                  </p>
+                  <p className=" text-sm line-clamp-3">{post.subtitle}</p>
                   <p className="text-xs mt-2">
-                  {post.createdAt?.toDate().toDateString()}
-                </p>
+                    {post.createdAt?.toDate().toDateString()}
+                  </p>
                 </div>
               </Link>
             ))}
@@ -96,7 +94,6 @@ const SportsPage = () => {
         )}
 
         {/* Static Cards */}
-        
 
         <div className="mx-auto text-center mt-10">
           <ViewMoreSearchPopup />

@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import ViewMoreSearchPopup from "../view/page";
+import { motion } from "framer-motion";
+
 
 // ✅ Firebase
 import {
@@ -61,6 +63,7 @@ const Page = () => {
       </p>
 
       {/* ✅ Dynamic Firestore Religion Posts */}
+      <p className="p-5">Latest Updates:</p>
 
       {loading ? (
         // Skeleton Loader
@@ -113,14 +116,20 @@ const Page = () => {
         </div>
       ) : (
         // Empty State
-        <p className="text-center">
-          No blog posts available yet.
-        </p>
+        <motion.p
+          className=" text-gray-500 text-center "
+          whileHover={{ scale: 1.1 }}
+          animate={{ y: [0, -3, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+        >
+          Please check your network connection for latest
+          updates...
+        </motion.p>
       )}
 
       {/* ✅ Static Cards (kept intact) */}
-      <div className="max-w-7xl mx-auto px-4 py-10">
-        <h1 className="text-center text-2xl font-bold mb-8 dark:text-white">
+      <div className="max-w-7xl mx-auto px-4 py-0">
+        <h1 className="text-center text-2xl font-bold mb-8  dark:text-white">
           Explore more News
         </h1>
 
