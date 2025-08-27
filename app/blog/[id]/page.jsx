@@ -248,7 +248,7 @@ export default function BlogDetails() {
       </div>
 
       {/* Blog Content */}
-      <div className=" max-w-none px-2 sm:px-4 space-y-5 ">
+      <div className=" max-w-none px-2 sm:px-4 space-y-5 blog-content">
         <hr className="border-gray-200 dark:border-gray-700" />
         <BlogDisplay body={blog.body} />
       </div>

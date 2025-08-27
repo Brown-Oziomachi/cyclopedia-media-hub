@@ -72,3 +72,11 @@ body {
   min-width: 200%;
   animation: marquee 200s linear infinite;
 }
+
+.blog-content p:first-of-type::first-letter {
+  font-size: 3rem;
+  font-weight: bold;
+  float: left;
+  line-height: 1;
+  margin-right: 6px;
+}

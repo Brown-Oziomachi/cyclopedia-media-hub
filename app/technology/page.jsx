@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {
   collection,
@@ -22,24 +21,38 @@ const PoliticsPage = () => {
     const fetchTechnologyPosts = async () => {
       try {
         const postsRef = collection(db1, "blogs");
-        const q = query(
+
+        // Main query: category + createdAt
+        let q = query(
           postsRef,
           where("category", "==", "technology"),
           orderBy("createdAt", "desc"),
-          limit(20)
+          limit(5)
         );
-        
 
-        const querySnapshot = await getDocs(q);
+        let querySnapshot;
+
+        try {
+          querySnapshot = await getDocs(q);
+        } catch (err) {
+          console.warn(
+            "Composite index for (category + createdAt) missing. Falling back to latest posts only."
+          );
+
+          // Fallback query (no category filter)
+          q = query(postsRef, orderBy("createdAt", "desc"), limit(5));
+          querySnapshot = await getDocs(q);
+        }
+
         const data = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
 
-        console.log("Fetched technology posts:", data);
+        console.log("Fetched posts:", data);
         setPosts(data);
       } catch (error) {
-        console.error("Error fetching technology posts:", error);
+        console.error("Error fetching posts:", error);
       } finally {
         setLoading(false);
       }
@@ -61,18 +74,20 @@ const PoliticsPage = () => {
           life.
         </p>
 
-        {/* Fetched Politics Posts */}
+        {/* Posts */}
         {loading ? (
           <p className="text-center py-10">Loading latest posts...</p>
         ) : posts.length === 0 ? (
-          <p className=" text-center text-gray-500 animate-pulse">Please check your network connection.... </p>
+          <p className="text-center text-gray-500 animate-pulse">
+            No posts found. Please check your network or Firestore data.
+          </p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {posts.map((post) => (
               <Link
                 key={post.id}
                 href={`/blog/${post.id}`}
-                className=" rounded-lg shadow-xl  transition overflow-hidden"
+                className="rounded-lg shadow-xl transition overflow-hidden"
               >
                 {post.imageUrl && (
                   <img
@@ -83,9 +98,11 @@ const PoliticsPage = () => {
                 )}
                 <div className="p-4">
                   <h2 className="text-sm font-semibold mb-2">{post.title}</h2>
-                  <p className=" text-sm line-clamp-3">{post.subtitle}</p>
+                  <p className="text-sm line-clamp-3">{post.subtitle}</p>
                   <p className="text-xs mt-2">
-                    {post.createdAt?.toDate().toDateString()}
+                    {post.createdAt?.toDate
+                      ? post.createdAt.toDate().toDateString()
+                      : ""}
                   </p>
                 </div>
               </Link>

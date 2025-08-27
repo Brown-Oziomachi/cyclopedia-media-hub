@@ -45,7 +45,7 @@ export default function BlogDisplay({ title, subtitle, body, imageUrl }) {
 
       {/* Body */}
       <div
-        className="tiptap prose max-w-3xl mx-auto px-6 
+        className="tiptap prose max-w-3xl mx-auto px-6 blog-content
         prose-headings:text-gray-900 dark:prose-headings:text-gray-100
         prose-p:text-gray-800 dark:prose-p:text-gray-200
         prose-strong:text-gray-900 dark:prose-strong:text-gray-100
