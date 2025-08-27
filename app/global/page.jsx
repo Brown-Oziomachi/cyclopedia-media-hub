@@ -76,36 +76,69 @@ export default function BlogsPage() {
         Explore the global News
       </h2>
 
-      {posts.map((post) => (
-        <Link key={post.id} href={`/blog/${post.id}`} className="block">
-          <div className="flex flex-col overflow-hidden shadow-md cursor-pointer">
-            {post.imageUrl && (
-              <div className="relative w-full h-60 sm:h-56">
-                <img
-                  src={post.imageUrl}
-                  alt={post.title}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-            )}
-            <div className="p-4">
-              {/* Title */}
-              <h2 className="text-sm font-bold hover:underline uppercase">
-                {post.title}
-              </h2>
-              {post.subtitle && (
-                <p className="text-sm line-clamp-3">{post.subtitle}</p>
-              )}
-              <h3>
-                 <p className="text-xs mt-2">
-                  {post.createdAt?.toDate().toDateString()}
-                </p>
-              </h3>
-            </div>
+        {/* Middle row - scrollable small cards */}
+        <div className="overflow-x-auto mb-2 lg:mt-2">
+          <div className="max-md:flex space-x-2">
+            {posts.slice(3, 6).map((b) => (
+              <Link
+                key={b.id}
+                href={`/blog/${b.id}`}
+                className="flex-shrink-0 w-56"
+              >
+                <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
+                  {b.imageUrl && (
+                    <div className="relative w-full h-24">
+                      <img
+                        src={b.imageUrl}
+                        alt={b.title}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+                  )}
+                  <div className="p-2">
+                    <h2 className="text-sm font-bold hover:underline uppercase truncate">
+                      {b.title}
+                    </h2>
+                    <h3 className="text-xs">{b.subtitle}</h3>
+                    <p className="text-xs mt-1">
+                      {b.createdAt?.toDate().toDateString()}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
-        </Link>
-      ))}
+        </div>
 
+        {posts.map((post) => (
+          <Link key={post.id} href={`/blog/${post.id}`} className="block">
+            <div className="flex flex-col overflow-hidden shadow-md cursor-pointer mt-3 max-md:-mt-10">
+              {post.imageUrl && (
+                <div className="relative w-full h-48 sm:h-40">
+                  <img
+                    src={post.imageUrl}
+                    alt={post.title}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+              )}
+              <div className="p-3">
+                {/* Title */}
+                <h2 className="text-sm font-bold hover:underline uppercase">
+                  {post.title}
+                </h2>
+                {post.subtitle && (
+                  <p className="text-sm line-clamp-3">{post.subtitle}</p>
+                )}
+                <h3>
+                  <p className="text-xs mt-2">
+                    {post.createdAt?.toDate().toDateString()}
+                  </p>
+                </h3>
+              </div>
+            </div>
+          </Link>
+        ))}
       {/* Load More Button */}
       {lastDoc && (
         <div className="col-span-full text-center mt-6 mb-5">

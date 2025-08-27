@@ -97,6 +97,40 @@ const PoliticsPage = () => {
           </div>
         )}
 
+        {/* Middle row - scrollable small cards */}
+        <div className="overflow-x-auto mb-40 lg:mt-5 scrollbar-hide">
+          <div className="flex space-x-4">
+            {posts.slice(3, 8).map((b) => (
+              <Link
+                key={b.id}
+                href={`/blog/${b.id}`}
+                className="flex-shrink-0 w-64"
+              >
+                <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
+                  {b.imageUrl && (
+                    <div className="relative w-full h-32">
+                      <img
+                        src={b.imageUrl}
+                        alt={b.title}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+                  )}
+                  <div className="p-3">
+                    <h2 className="text-sm font-bold hover:underline uppercase truncate">
+                      {b.title}
+                    </h2>
+                    <h3 className="text-xs">{b.subtitle}</h3>
+                    <p className="text-xs mt-1">
+                      {b.createdAt?.toDate().toDateString()}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
         {/* Static Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {/* Card 1 */}

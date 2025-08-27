@@ -331,6 +331,7 @@ export default function BlogDetails() {
                     <h2 className="text-sm font-bold hover:underline uppercase truncate">
                       {b.title}
                     </h2>
+                    <h3 className="text-xs">{b.subtitle}</h3>
                     <p className="text-xs mt-1">
                       {b.createdAt?.toDate().toDateString()}
                     </p>
