@@ -49,7 +49,7 @@ export default function SearchPage() {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">
+      <h2 className="text-2xl font-extrabold mb-4">
         Search Results for: "{queryTerm}"
       </h2>
       {results.length === 0 ? (
@@ -63,6 +63,7 @@ export default function SearchPage() {
                 className="text-white hover:underline"
               >
                 {post.title}
+              {<p className="text-xs mt-2">{post.createdAt?.toDate().toDateString()}</p>}
               </Link>
             </li>
           ))}

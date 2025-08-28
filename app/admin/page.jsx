@@ -6,7 +6,7 @@ import AdminLiveStream from "@/components/Live";
 
 function Loader() {
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white">
+    <div className="flex justify-center items-center min-h-screen ">
       <div className="w-12 h-12 border-4 border-gray-300 border-t-black rounded-full animate-spin"></div>
     </div>
   );
@@ -14,7 +14,7 @@ function Loader() {
 
 export default function AdminPage() {
   const [user, setUser] = useState(null);
-  const allowedEmail = "browncemmanuel@gmail.com"; // ✅ replace with your admin email
+  const allowedEmail = "browncemmanuel@gmail.com"; 
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {

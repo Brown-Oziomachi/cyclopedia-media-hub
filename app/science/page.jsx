@@ -60,7 +60,7 @@ const Page = () => {
 
       {/* 🔹 Dynamic Firestore Posts */}
       {posts.length > 0 && (
-        <div className="max-w-7xl mx-auto px-4 py-10">
+        <div className="max-w-7xl mx-auto py-10">
           <h2 className="text-2xl font-bold mb-4">Latest latest Posts</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
             {posts.map((post) => (
@@ -92,7 +92,7 @@ const Page = () => {
 
       {/* 🔹 Static Science Cards */}
 
-      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="max-w-7xl mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {/* === Static NEWS CARD 1 === */}
         <div className="relative rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
           <div className="relative w-full h-[220px]">

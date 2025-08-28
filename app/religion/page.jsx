@@ -67,7 +67,7 @@ const Page = () => {
 
       {loading ? (
         // Skeleton Loader
-        <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="max-w-7xl mx-auto  py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {[...Array(8)].map((_, i) => (
             <div
               key={i}
@@ -84,7 +84,7 @@ const Page = () => {
         </div>
       ) : posts.length > 0 ? (
         // Blog Cards
-        <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="max-w-7xl mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {posts.map((post) => (
             <div
               key={post.id}
@@ -128,7 +128,7 @@ const Page = () => {
       )}
 
       {/* ✅ Static Cards (kept intact) */}
-      <div className="max-w-7xl mx-auto px-4 py-0">
+      <div className="max-w-7xl mx-auto py-0">
         <h1 className="text-center text-2xl font-bold mb-8  dark:text-white">
           Explore more News
         </h1>

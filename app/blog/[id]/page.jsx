@@ -17,6 +17,7 @@ import { motion } from "framer-motion";
 import { useRouter, useParams } from "next/navigation";
 import SideNewsTicker from "@/components/SideNewsTicker";
 import FollowUsPopup from "@/components/FollowUsPopup";
+import AdminProfile from "@/components/AdminProfile";
 
 
 // Blog content renderer
@@ -157,7 +158,6 @@ export default function BlogDetails() {
               </h2>
             )}
           </div>
-
           {/* Image */}
           <div className="relative w-full h-64 sm:h-80 md:h-[30rem] rounded-lg overflow-hidden">
             {blog.imageUrl && (
@@ -275,7 +275,7 @@ export default function BlogDetails() {
           </motion.button>
         </div>
       </Link>
-
+      <AdminProfile />
       {/* Related Blogs */}
       <div>
         <h2 className="text-xl font-bold mb-4 mt-10 p-5">Related</h2>

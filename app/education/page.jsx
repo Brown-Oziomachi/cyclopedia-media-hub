@@ -52,7 +52,7 @@ export default function EducationTicker() {
   
 
   return (
-    <section className="max-w-4xl mx-auto py-10 px-4">
+    <section className="max-w-4xl mx-auto py-10">
       
       <h1 className="text-4xl font-serif font-bold mb-12 mt-40 text-center">
         Student Education in <span className="text-purple-600">Cyclopedia</span>

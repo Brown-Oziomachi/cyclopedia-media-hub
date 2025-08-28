@@ -50,7 +50,7 @@ const SportsPage = () => {
 
   return (
     <main className="w-full">
-      <div className="max-w-7xl mx-auto px-4 py-10">
+      <div className="max-w-7xl mx-auto py-10">
         <h1 className="text-3xl lg:text-5xl font-bold text-center max-lg:mt-40 lg:mt-50 mb-2">
           Speed, Strength, and Strategy
         </h1>

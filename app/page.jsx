@@ -212,7 +212,6 @@ const Page = () => {
           </button>
         </form>
       </div>
-
       <div className=" max-w-3xl lg:hidden mt-10  ">
         {/* Title */}
         <a
@@ -234,7 +233,7 @@ const Page = () => {
       <div id="read-more ">{/* Your "Explore more" content goes here */}</div>
 
       <hr className="border-2" />
-      <div className="max-w-5xl mx-auto py-10 px- ">
+      <div className="max-w-5xl mx-auto py-10">
         <h2 className="text-2xl font-bold mb-6 p-4 underline font-stretch-ultra-condensed">
           Latest News
         </h2>
@@ -258,7 +257,7 @@ const Page = () => {
                   />
                 )}
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold font-serif">
+                  <h3 className="text-lg font-semibold font-serif hover:underline">
                     {post.title}
                   </h3>
                   <p className="text-sm text-gray-600 line-clamp-2">

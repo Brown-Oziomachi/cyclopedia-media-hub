@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -122,7 +123,9 @@ const Footer = () => {
 
       {/* Bottom copyright */}
       <div className="mt-10 text-center">
-        <img src="/hid.png" alt="logo" className="h-20 w-20 mx-auto mb-3" />
+        <Link href="/">
+          <img src="/hid.png" alt="logo" className="h-20 w-20 mx-auto mb-3" />
+        </Link>
         <p>&copy; 2025 The Cyclopedia. All rights reserved.</p>
       </div>
     </footer>

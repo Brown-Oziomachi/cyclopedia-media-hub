@@ -34,7 +34,7 @@ export default function HealthPostsPage() {
   if (loading) return <p className="p-6">Loading...</p>;
 
   return (
-    <section className="max-w-6xl mx-auto px-6 py-12 ">
+    <section className="max-w-6xl mx-auto py-12 ">
       <h1 className="text-3xl font-bold mb-8 mt-20">Health Articles</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

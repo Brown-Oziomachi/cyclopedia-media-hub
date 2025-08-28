@@ -63,7 +63,7 @@ const Page = () => {
       </p>
 
       {/* === FIRESTORE LATEST BLOGS === */}
-      <div className="max-w-7xl mx-auto px-4 mt-32">
+      <div className="max-w-7xl mx-auto mt-32">
         <h2 className="text-2xl font-bold mb-6">Latest History Articles</h2>
         {loading ? (
           <p>Loading latest Posts...</p>
@@ -107,7 +107,7 @@ const Page = () => {
       </div>
 
       {/* === FEATURED STATIC CARDS === */}
-      <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="max-w-7xl mx-auto  py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {/* CARD 1 */}
         <div className="rounded-xl shadow-lg overflow-hidden">
           <div className="relative w-full h-[220px]">
