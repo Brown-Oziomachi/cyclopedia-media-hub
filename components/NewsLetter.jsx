@@ -50,7 +50,7 @@ export default function NewsletterForm() {
       <div className="flex flex-col lg:flex-row gap-10 items-start">
         {/* LEFT SIDE: Text */}
         <div className="lg:w-1/2 ">
-          <h1 className="text-4xl mx-auto font-bold p-3 w-1/2 border-l-5 border-purple-600 border-t-5 space-x-5"><span className="text-purple-600">“Join Our Newsletter </span> <br/> Orginal reporting from The Cyclopedia </h1>
+          <h1 className="text-4xl mx-auto font-bold p-3 w-1/2 border-l-5 border-purple-600 border-t-5 space-x-5"><span className="text-purple-600">“Join Our Newsletter </span> <br/> Original reporting from The Cyclopedia </h1>
           <h1 className="mt-10 text-center ">
             “The Cyclopedia brings you carefully researched, unbiased insights into{" "}
             <Link href="/politics" className="font-black">

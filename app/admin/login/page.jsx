@@ -76,7 +76,7 @@ export default function AdminPage() {
 
   return (
     <div className="max-w-lg mx-auto p-5">
-      <h1 className="text-2xl font-bold mb-4 mt-20">Manage Livestreams</h1>
+      <h1 className="text-2xl font-bold mb-4 mt-20 lg:py-20">Manage Livestreams</h1>
 
       <input
         type="text"

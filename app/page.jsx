@@ -108,7 +108,7 @@ const Page = () => {
     { id: 1, title: "Education", img: "/educo.png", link: "/education" },
     { id: 2, title: "Philosophy", img: "/philo.png", link: "/philosophy" },
     { id: 3, title: "Health", img: "/hea.png", link: "/health" },
-    { id: 4, title: "Technology", img: "/wildlife.png", link: "/technology" },
+    { id: 4, title: "Technology", img: "/tech.png", link: "/technology" },
   ];
 
   const handleSearch = (e) => {
@@ -187,7 +187,7 @@ const Page = () => {
         </div>
       )}
 
-      <div className="relative w-full  max-lg:w-1/2 max-md:w-full mx-auto lg:hidden max-lg:-mt-30 max-md:-mt-25 mb-0 p-5">
+      <div className="relative w-full max-md:hidden  max-lg:w-1/2 max-md:w-full mx-auto lg:hidden max-lg:-mt-30 max-md:-mt-25 mb-0 p-5">
         <form
           onSubmit={handleSearch}
           className="flex items-center"
@@ -212,7 +212,7 @@ const Page = () => {
           </button>
         </form>
       </div>
-      <div className=" max-w-3xl lg:hidden mt-10  ">
+      <div className=" max-w-3xl lg:hidden mt-10 p-3 ">
         {/* Title */}
         <a
           href="https://cyclopedia-media-hub.vercel.app/blog/9dhLYxSLB0fLLRPFBX1Z"
