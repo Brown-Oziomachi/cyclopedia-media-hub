@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
-import { ChevronDown, LogIn, ChevronRight,  ChevronUp,Search } from "lucide-react";
+import { LogIn, ChevronRight, Menu, Search, X, ChevronDown, Twitter, Instagram, Youtube } from "lucide-react";
 import { Drawer, Box } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
 import SearchInput from "@/components/SearchInput"; // Assuming you have this component
@@ -26,8 +26,9 @@ const [showMobileToggle, setShowMobileToggle] = useState(true);
 const [lastScrollMobile, setLastScrollMobile] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
  const [openDropdown, setOpenDropdown] = useState(null);
-const isDropdownOpen = showNav || openDropdown !== null;
-
+  const isDropdownOpen = showNav || openDropdown !== null;
+  const statusRef = useRef(null)
+  const showRegionsDropdownRef = useRef(null)
 
  const statusItems = [
     { type: "image", url: "/demo-status1.jpg" },
@@ -38,6 +39,23 @@ const isDropdownOpen = showNav || openDropdown !== null;
   const toggleDropdown = (regionName) => {
     setOpenDropdown(openDropdown === regionName ? null : regionName);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        showRegionsDropdownRef.current &&
+        showRegionsDropdownRef.current.contains(event.target)
+      ) {
+        setShowRegionsDropdown(false);
+      }
+    }
+    if (showRegionsDropdown) {
+      document.addEventListener("mousedown", handleClickOutside)
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [showRegionsDropdown])
 
 useEffect(() => {
   const handleScroll = () => {
@@ -173,11 +191,10 @@ const regions = [
         className={`fixed top-0 left-0 w-full bg-black transition-transform duration-300 ${
           showHeader ? "translate-y-0" : "-translate-y-20"
         } shadow-lg z-50`}
-        onClick={(e) => e.stopPropagation()} // Prevents nav toggle scroll effect
+        onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-4 py-2">
-          {/* Logo & Title */}
-          <div className="flex items-center gap-4">
+          <div ref={statusRef} className="flex items-center gap-4">
             <StatusModal
               trigger={
                 <Image
@@ -244,6 +261,7 @@ const regions = [
 
             {showRegionsDropdown && (
               <div
+                ref={showRegionsDropdownRef}
                 className="absolute bg-white shadow-lg rounded-md mt-2 w-56 max-h-60 overflow-y-auto ring-1 ring-black ring-opacity-5 z-50"
                 role="menu"
                 aria-orientation="vertical"
@@ -467,7 +485,7 @@ const regions = [
           className="t text-3xl"
           aria-label="Toggle navigation"
         >
-          {showNav ? <ChevronUp /> : <ChevronDown />}
+          {showNav ? <X /> : <Menu />}
         </button>
       </div>
 
@@ -556,8 +574,6 @@ const regions = [
 
           <hr className="my-4 border-gray-600" />
 
-          {/* Regions Links for mobile */}
-          {/* Regions Links for mobile */}
           <ul className="grid items-center text-white gap-6">
             {regions.map((region) => (
               <li key={region.name} className="relative">
@@ -638,20 +654,42 @@ const regions = [
               </button>
             ) : (
               <>
-                {/* <Link
-                  href="/contact"
-                  onClick={() => setShowNav(false)}
-                  className="py-3 w-3/4 rounded-lg bg-gradient-to-r from-purple-500 to-cyan-500 hover:bg-cyan-500 text-white font-medium text-center"
-                >
-                  Join Us
-                </Link> */}
-                {/* <Link
-                  href="/auth/signin"
-                  onClick={() => setShowNav(false)}
-                  className="py-3 w-3/4 rounded-lg bg-gradient-to-r from-purple-500 to-cyan-500 hover:bg-cyan-500 text-white font-medium text-center"
-                >
-                  Sign In
-                </Link> */}
+                <h1 className="py-3 text-white text-xl text-center font-bold">
+                  __THE CYCLOPEDIA
+                </h1>
+                <p className=" text-white font-medium text-center">
+                  The Cyclopedia was founded out of a need for honest inquiry
+                  and open minds. We began as a small community sharing
+                  unconventional insights and evolved into a platform for
+                  collective awareness. Our journey continues — and you’re part
+                  of it.
+                </p>
+
+                <div className="flex space-x-5 mb-10">
+                  <a
+                    href="https://x.com/cyclopedia_news?t=yU4JjJPlLO7Zp9GVoEaF5A&s=09"
+                    target="_self"
+                    className="text-white hover:scale-110 transition-transform"
+                  >
+                    <Twitter size={32} />
+                  </a>
+
+                  <a
+                    href="https://www.instagram.com/cyclopedia_news?igsh=MThvdDEwa3c3aGpsMQ=="
+                    target="_self"
+                    className="text-pink-500 hover:scale-110 transition-transform"
+                  >
+                    <Instagram size={32} />
+                  </a>
+
+                  <a
+                    href="https://www.youtube.com/@cyclopedia-media"
+                    target="_self"
+                    className="text-red-600 hover:scale-110 transition-transform"
+                  >
+                    <Youtube size={32} />
+                  </a>
+                </div>
               </>
             )}
           </div>

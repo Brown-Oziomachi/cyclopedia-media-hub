@@ -2,12 +2,17 @@ import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
+
+ 
+
   return (
     <footer className="py-10 text-gray-500 text-sm bg-black border-t border-gray-800">
       <div className="max-w-6xl mx-auto px-4 flex flex-col lg:flex-row justify-between items-start lg:items-start gap-8">
         {/* Left: Site links */}
         <div>
           <h2 className="text-white font-bold text-lg mb-4"> The Cyclopedia</h2>
+         
+
           <ul className="space-y-2 font-mono">
             <li>
               <a href="/politics" className="hover:text-purple-400 transition">
@@ -110,10 +115,7 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a
-                href="/nigeria"
-                className="hover:text-purple-400 transition"
-              >
+              <a href="/nigeria" className="hover:text-purple-400 transition">
                 Nigeria
               </a>
             </li>
@@ -126,7 +128,9 @@ const Footer = () => {
         <Link href="/">
           <img src="/hid.png" alt="logo" className="h-20 w-20 mx-auto mb-3" />
         </Link>
-        <p>&copy; 2025 The Cyclopedia. All rights reserved.</p>
+        <p>
+          &copy; {new Date().getFullYear()} The Cyclopedia. All rights reserved.
+        </p>
       </div>
     </footer>
   );

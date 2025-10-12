@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import { ThemeProvider } from "next-themes";
 
 export const metadata = {
-  title: "Cyclopedia",
+  title: "The Cyclopedia | News & media company",
   icons: {
     icon: "/hid.png",
     shortcut: "/hid.png",

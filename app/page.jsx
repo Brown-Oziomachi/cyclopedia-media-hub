@@ -16,6 +16,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 
+
 const Page = () => {
   const [showSplash, setShowSplash] = useState(true);
   const router = useRouter();

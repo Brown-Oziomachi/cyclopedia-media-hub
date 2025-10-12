@@ -1,11 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 
 export default function StatusModal({ trigger }) {
   const [isOpen, setIsOpen] = useState(false);
+  const statusRef = useRef(null);
 
-  // Example statuses with YouTube URLs + Image
+
   const statuses = [
     { type: "video", src: "https://www.youtube.com/embed/lhCH0Z5SSsw", text: "Latest Breaking News" },
     { type: "video", src: "https://www.youtube.com/embed/WptREEgMqI0", text: "Israel and Gaza war" },
@@ -13,6 +14,19 @@ export default function StatusModal({ trigger }) {
     { type: "image", src: "/hid.png", text: "Welcome to The Cyclopedia" },
   ];
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (statusRef.current && statusRef.current.contains(event.target)) {
+        setIsOpen(false)
+      }
+    }
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside)
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [isOpen])
   return (
     <>
       {/* ✅ Trigger (Logo or Button passed from parent) */}
@@ -22,7 +36,9 @@ export default function StatusModal({ trigger }) {
 
       {/* ✅ Modal */}
       {isOpen && (
-        <div className="fixed inset-0 bg-black/100 flex items-center justify-center z-[70]">
+        <div
+          ref={statusRef}
+          className="fixed inset-0 bg-black/100 flex items-center justify-center z-[70]">
           <div className="relative rounded-2xl shadow-lg max-w-4xl w-full p-4 mt-80">
             {/* Close */}
             <button
