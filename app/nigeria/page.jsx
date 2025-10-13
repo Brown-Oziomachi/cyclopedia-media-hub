@@ -50,14 +50,14 @@ const NigeriaPage = () => {
 
   return (
     <main className="w-full b">
-      <div className="max-w-7xl mx-auto px- py-10">
+      <div className="max-w-7xl mx-auto px- lg:py-40 py-20">
         
-        <p className="text-sm lg:text-base text-center text-gray-300 mx-auto mb-10">
+        <p className="text-lg p-5 capitalize lg:text-base text-center text-gray-300 mx-auto mb-10">
           Explore stories on governance, elections, policies, and deals shaping
           Nigeria’s future. <br className="max-md:hidden" />
           Uncover the truths behind decisions that affect the people every day.
         </p>
-
+      <hr className="mb-10"/>
         {/* Fetched Politics Posts */}
         {loading ? (
           <p className="text-center py-10">Loading latest posts...</p>

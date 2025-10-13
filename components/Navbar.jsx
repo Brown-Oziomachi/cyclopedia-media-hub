@@ -10,6 +10,7 @@ import SearchInput from "@/components/SearchInput"; // Assuming you have this co
 import ThemeToggle from "./ThemeToggle";
 import StatusModal from "@/components/StatusModal";
 import LiveClock from "@/components/LiveClock";
+import ViewMoreSearchPopup from "./ViewIcon";
 
 
 const ProfileDropdownNavbar = () => {
@@ -223,6 +224,7 @@ const regions = [
             <StatusModal statusItems={statusItems} />
 
             <ThemeToggle />
+            <ViewMoreSearchPopup />
           </div>
 
           {/* Desktop Search Bar */}
