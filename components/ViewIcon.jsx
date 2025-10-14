@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search, X } from "lucide-react";
 
@@ -8,12 +8,28 @@ export default function ViewMoreSearchPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
+  const isOpenRef = useRef(null)
 
   const handleSearch = () => {
     if (!searchQuery.trim()) return;
     setIsOpen(false);
     router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isOpenRef.current && !isOpenRef.current.contains(event.target)) {
+        setIsOpen(false);
+     }
+    }
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside)
+    }
+    return () => {
+      document.removeEventListener("mouseDown", handleClickOutside)
+    }
+ }, [isOpen])
+  
 
   return (
     <div>
@@ -25,9 +41,10 @@ export default function ViewMoreSearchPopup() {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center h-screen bg-black bg-opacity-90">
-          {/* Modal Box */}
-          <div className="bg-white rounded-2xl shadow-2xl w-96 p-6 relative">
+        <div
+          ref={isOpenRef}
+          className="fixed inset-0 z-50 flex items-center justify-center h-screen bg-black/80 bg-opacity-90">
+          <div className=" rounded-2xl shadow-2xl w-96 p-6 relative">
             <button
               onClick={() => setIsOpen(false)}
               className="absolute top-1 right-2 text-gray-600 hover:text-gray-800 transition-colors"
@@ -35,15 +52,15 @@ export default function ViewMoreSearchPopup() {
               <X size={22} />
             </button>
 
-            <div className="flex items-center border border-gray-300 rounded-full overflow-hidden shadow-sm focus-within:ring-2 focus-within:ring-purple-500">
+            <div className="flex  items-center border border-gray-300 rounded-full overflow-hidden shadow-sm focus-within:ring-2 focus-within:ring-purple-500">
               <input
                 type="text"
                 placeholder="Type to search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                className="w-full px-4 py-2 text-gray-800 focus:outline-none bg-gray-50"
-              />
+                className="w-full px-5 py-1 text-gray-200 focus:outline-none"
+                          />
               <button
                 onClick={handleSearch}
                 className="bg-purple-600 hover:bg-purple-700 px-4 py-2 text-white transition-colors"

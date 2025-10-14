@@ -249,6 +249,7 @@ const regions = [
               <Search />
             </button>
           </form>
+
           <LiveClock />
           {/* Regions Dropdown (desktop only) */}
           <div className="relative hidden lg:block px-4 py-1 text-black">
@@ -362,6 +363,12 @@ const regions = [
               className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
             >
               Live Now
+            </Link>
+              <Link
+              href="/africacont"
+              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+            >
+              Africa
             </Link>
           </div>
         </section>
@@ -513,7 +520,6 @@ const regions = [
               aria-label="Search input"
             />
 
-            {/* Search Button inside */}
             <button
               type="submit"
               className="absolute right-2 top-1/2 -translate-y-1/2 bg-black px-3 py-2 rounded-md text-white font-semibold transition"
@@ -523,43 +529,48 @@ const regions = [
           </form>
           <ul className="space-y-3 font-bold mt-5 text-gray-400">
             <li>
-              <Link href="/global">
-                <span onClick={() => setShowNav(false)}>Latest news</span>
+              <Link href="/global" onClick={() => setShowNav(false)}>
+                Latest news
               </Link>
             </li>
             <li>
-              <Link href="/politics">
-                <span onClick={() => setShowNav(false)}>Politics</span>
+              <Link href="/politics" onClick={() => setShowNav(false)}>
+                Politics
               </Link>
             </li>
             <li>
-              <Link href="/religion">
-                <span onClick={() => setShowNav(false)}>Religion</span>
+              <Link href="/religion" onClick={() => setShowNav(false)}>
+                Religion
               </Link>
             </li>
             <li>
-              <Link href="/history">
-                <span onClick={() => setShowNav(false)}>History</span>
+              <Link href="/history" onClick={() => setShowNav(false)}>
+                History
               </Link>
             </li>
             <li>
-              <Link href="/science">
-                <span onClick={() => setShowNav(false)}>Science</span>
+              <Link href="/science" onClick={() => setShowNav(false)}>
+                Science
               </Link>
             </li>
             <li>
-              <Link href="/media">
-                <span onClick={() => setShowNav(false)}>Media</span>
+              <Link href="/media" onClick={() => setShowNav(false)}>
+                Media
               </Link>
             </li>
             <li>
-              <Link href="/sports">
-                <span onClick={() => setShowNav(false)}>Sports news</span>
+              <Link href="/sports" onClick={() => setShowNav(false)}>
+                Sports news
               </Link>
             </li>
             <li>
-              <Link href="/live">
-                <span onClick={() => setShowNav(false)}>Live Now</span>
+              <Link href="/live" onClick={() => setShowNav(false)}>
+                Live Now
+              </Link>
+            </li>
+             <li>
+              <Link href="/africacont" onClick={() => setShowNav(false)}>
+                Africa
               </Link>
             </li>
           </ul>

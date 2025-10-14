@@ -1,17 +1,14 @@
 @import "tailwindcss";
 
-/* ===== TipTap content spacing ===== */
 .tiptap p {
   margin-bottom: 1rem;
   line-height: 1.6;
-  /* Better readability */
 }
 
 .tiptap p:last-child {
   margin-bottom: 0;
 }
 
-/* ===== Global typography ===== */
 p {
   margin: 1em 0;
 }
@@ -25,7 +22,6 @@ body {
   color: var(--foreground);
 }
 
-/* ===== Theme Variables ===== */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -36,13 +32,11 @@ body {
   --foreground: #ffffff;
 }
 
-/* ===== Star Rating (example) ===== */
 .star-rating::after {
   content: "★ ★ ★ ★ ★";
   color: gold;
 }
 
-/* ===== Animated Border ===== */
 @keyframes traceBorder {
   to {
     stroke-dashoffset: 0;

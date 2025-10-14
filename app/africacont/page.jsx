@@ -24,7 +24,7 @@ const PoliticsPage = () => {
         const postsRef = collection(db1, "blogs");
         const q = query(
           postsRef,
-          where("category", "==", "politics"),
+          where("category", "==", "africa"),
           orderBy("createdAt", "desc"),
           limit(50)
         );
@@ -75,13 +75,11 @@ const PoliticsPage = () => {
     <main className="w-full">
       <div className="max-w-7xl mx-auto px-4 py-10">
         {/* Header Section */}
-        <div className="text-center mb-12 max-lg:mt-32 lg:mt-20">
-          <h1 className="text-3xl lg:text-4xl font-bold mb-3">Politics</h1>
-          <p className="text-sm lg:text-base text-center text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Navigate the world of governance, elections, and political maneuvers
-            that shape our world. Deep dives into the decisions made in your
-            name.
-          </p>
+        <div className="text-center mb-12 max-lg:mt-32 lg:mt-30">
+          <h1 className="text-3xl lg:text-4xl font-bold mb-3 ">Africa</h1>
+          {/* <p className="text-sm lg:text-base text-center text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          Africa
+          </p> */}
         </div>
         {/* Featured Story (First Post) */}
         {posts[0] && (
@@ -99,7 +97,7 @@ const PoliticsPage = () => {
                 )}
                 <div className="p-8 flex flex-col justify-center">
                   <span className="text-xs font-semibold text-purple-600 uppercase mb-2 tracking-wider">
-                    Featured Story
+                    Latest News
                   </span>
                   <h2 className="text-2xl lg:text-3xl font-bold mb-4 hover:text-purple-600 transition-colors">
                     {posts[0].title}
@@ -152,7 +150,7 @@ const PoliticsPage = () => {
         {posts.length > 4 && (
           <div className="mb-12">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold">Latest Politics News</h2>
+              <h2 className="text-2xl font-bold">Latest Africa News</h2>
               <div className="hidden md:block">
                 <ViewMoreSearchPopup />
               </div>
@@ -195,7 +193,7 @@ const PoliticsPage = () => {
         {/* More Politics Stories (if there are more than 12 posts) */}
         {posts.length > 12 && (
           <div className="mb-12">
-            <h2 className="text-2xl font-bold mb-6">More Politics Stories</h2>
+            <h2 className="text-2xl font-bold mb-6">More Africa Stories</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {posts.slice(12).map((post) => (
                 <Link key={post.id} href={`/blog/${post.id}`}>
@@ -225,120 +223,9 @@ const PoliticsPage = () => {
               ))}
             </div>
           </div>
-        )}
-
-        {/* Editor's Picks Section */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Editor's Picks</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Card 1 */}
-            <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ">
-              <div className="relative w-full h-48">
-                <Image
-                  src="/erik.png"
-                  alt="News 1"
-                  fill
-                  className="object-cover"
-                />
+              )}
               </div>
-              <div className="p-4">
-                <Link href="https://cyclopedia-media-hub.vercel.app/blog/Tc0W4qUPzj7ytY7UB5fs">
-                  <h2 className="text-sm font-bold hover:text-purple-600 transition-colors mb-2">
-                    Erik Prince Calls for U.S. to Colonize Africa and Latin
-                    America
-                  </h2>
-                </Link>
-                <p className="text-xs text-gray-500 mb-2">
-                  Jon Schwarz • February 10 2024
-                </p>
-                <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">
-                  If so many of these countries around the world are incapable
-                  of governing themselves...
-                </p>
-              </div>
-            </div>
-
-            {/* Card 2 */}
-            <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ">
-              <div className="relative w-full h-48">
-                <Image
-                  src="/mdi.png"
-                  alt="News 2"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <Link href="https://cyclopedia-media-hub.vercel.app/blog/18is4vszdgKCKhPdcDZo">
-                  <h2 className="text-sm font-bold  transition-colors mb-2">
-                    US Opinion Is Shifting on Palestine; Can Political Leaders
-                    Shift With It?
-                  </h2>
-                </Link>
-                <p className="text-xs text-gray-500 mb-2">By Cyclopedia</p>
-                <p className="text-xs line-clamp-2">
-                  Growing support for Palestine means that more U.S. voters will
-                  base their decisions...
-                </p>
-              </div>
-            </div>
-
-            {/* Card 3 */}
-            <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ">
-              <div className="relative w-full h-48">
-                <Image
-                  src="/emp.png"
-                  alt="News 3"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <Link href="https://cyclopedia-media-hub.vercel.app/blog/IaxcmJfiF1fEizKHpD3E">
-                  <h2 className="text-sm font-bold hover:text-purple-600 transition-colors mb-2">
-                    How Britain allowed Pinochet to escape justice for
-                    atrocities
-                  </h2>
-                </Link>
-                <p className="text-xs text-gray-500 mb-2">
-                  JOHN McEVOY • 4 March 2025
-                </p>
-                <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">
-                  25 years ago, the UK government allowed Chile's former
-                  dictator to evade extradition...
-                </p>
-              </div>
-            </div>
-
-            {/* Card 4 */}
-            <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ">
-              <div className="relative w-full h-48">
-                <Image
-                  src="/oil.png"
-                  alt="News 4"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <Link href="https://cyclopedia-media-hub.vercel.app/blog/5njbEcuqy6lFrrYdMS2p">
-                  <h2 className="text-sm font-bold hover:text-purple-600 transition-colors mb-2">
-                    US Turning Oil-Rich Nigeria into Proxy for its Africa Wars
-                  </h2>
-                </Link>
-                <p className="text-xs text-gray-500 mb-2">
-                  By T.J. Coles • The Grayzone
-                </p>
-                <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">
-                  AFRICOM is doing under the cover of counterterrorism...
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-  );
-};
-
+              </main>
+  )
+}
 export default PoliticsPage;
