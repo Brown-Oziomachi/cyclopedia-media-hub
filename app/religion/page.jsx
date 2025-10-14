@@ -84,11 +84,11 @@ const Page = () => {
         </div>
       ) : posts.length > 0 ? (
         // Blog Cards
-        <div className="max-w-7xl mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className=" max-w-7xl mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {posts.map((post) => (
             <div
               key={post.id}
-              className="group rounded-xl overflow-hidden shadow-md  hover:shadow-2xl hover:border-purple-600 transition"
+              className="group rounded-xl overflow-hidden shadow-md hover:shadow-2xl hover:border-purple-600 transition"
             >
               <div className="relative w-full h-[220px]">
                 <Image
@@ -97,8 +97,11 @@ const Page = () => {
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
+                <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                  Religion
+                </div>
               </div>
-              <div className="p-4 ">
+              <div className="p-4">
                 <Link href={`/blog/${post.id}`}>
                   <h2 className="text-sm font-bold line-clamp-2 hover:underline">
                     {post.title}
@@ -122,8 +125,7 @@ const Page = () => {
           animate={{ y: [0, -3, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
         >
-          Please check your network connection for latest
-          updates...
+          Please check your network connection for latest updates...
         </motion.p>
       )}
 
@@ -133,7 +135,7 @@ const Page = () => {
           Explore more News
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {/* === NEWS CARD 1 === */}
           <div className=" rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
             <div className="relative w-full h-56">
@@ -159,10 +161,13 @@ const Page = () => {
                 Evangelical discourse.
               </p>
             </div>
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              Religion
+            </div>
           </div>
 
           {/* === NEWS CARD 2 === */}
-          <div className="rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
+          <div className="relative rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
             <div className="relative w-full h-56">
               <Image
                 src="/shari.png"
@@ -184,10 +189,13 @@ const Page = () => {
                 campaign issue in 2003.
               </p>
             </div>
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              Religion
+            </div>
           </div>
 
           {/* === NEWS CARD 3 === */}
-          <div className=" rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
+          <div className="relative rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
             <div className="relative w-full h-56">
               <Image
                 src="/strug.png"
@@ -210,10 +218,13 @@ const Page = () => {
                 and religious authority simultaneously.
               </p>
             </div>
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              Religion
+            </div>
           </div>
 
           {/* === NEWS CARD 4 === */}
-          <div className=" rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
+          <div className="relative rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
             <div className="relative w-full h-56">
               <Image
                 src="/bible.png"
@@ -236,10 +247,13 @@ const Page = () => {
                 to remake religion for the modern age.
               </p>
             </div>
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              Religion
+            </div>
           </div>
 
           {/* === CARD 1 === */}
-          <div className=" rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
+          <div className="relative rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
             <div className="relative w-full h-[220px]">
               <Image
                 src="/mod.png"
@@ -260,10 +274,13 @@ const Page = () => {
                 Christianity in America.
               </p>
             </div>
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              Religion
+            </div>
           </div>
 
           {/* === CARD 2 === */}
-          <div className=" rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
+          <div className="relative rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
             <div className="relative w-full h-[220px]">
               <Image
                 src="/muslim.jpg"
@@ -287,10 +304,13 @@ const Page = () => {
                 religious reasons.
               </p>
             </div>
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              Religion
+            </div>
           </div>
 
           {/* === CARD 3 === */}
-          <div className="rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
+          <div className="relative rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
             <div className="relative w-full h-[220px]">
               <Image
                 src="/image.png"
@@ -312,10 +332,13 @@ const Page = () => {
                 are trying to bring Her out into the light.
               </p>
             </div>
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              Religion
+            </div>
           </div>
 
           {/* === CARD 4 === */}
-          <div className=" rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
+          <div className="relative rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
             <div className="relative w-full h-[220px]">
               <Image
                 src="/Ame.png"
@@ -338,10 +361,13 @@ const Page = () => {
                 of Secularization”
               </p>
             </div>
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              Religion
+            </div>
           </div>
 
           {/* === CARD 5 === */}
-          <div className=" rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
+          <div className="relative rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
             <div className="relative w-full h-[220px]">
               <Image
                 src="/miss.png"
@@ -362,10 +388,13 @@ const Page = () => {
                 The doctors and religious organizers who risk everything.
               </p>
             </div>
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              Religion
+            </div>
           </div>
 
           {/* === CARD 6 === */}
-          <div className="rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
+          <div className="rewlative rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
             <div className="relative w-full h-[220px]">
               <Image
                 src="/arab.png"
@@ -385,10 +414,13 @@ const Page = () => {
                 Daily round-up of religion in the news.
               </p>
             </div>
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              Religion
+            </div>
           </div>
 
           {/* === CARD 7 === */}
-          <div className=" rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
+          <div className="relative rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
             <div className="relative w-full h-[220px]">
               <Image
                 src="/BLM.png"
@@ -410,10 +442,13 @@ const Page = () => {
                 A conversation about religion in Black protest movements.
               </p>
             </div>
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              Religion
+            </div>
           </div>
 
           {/* === CARD 8 === */}
-          <div className=" rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
+          <div className="relative rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition">
             <div className="relative w-full h-[220px]">
               <Image
                 src="/cath.png"
@@ -434,6 +469,9 @@ const Page = () => {
               <p className="mt-2  text-xs">
                 Catholic leaders responded to the AIDS epidemic in complex ways.
               </p>
+            </div>
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              Religion
             </div>
           </div>
 

@@ -64,9 +64,11 @@ const PoliticsPage = () => {
         {loading ? (
           <p className="text-center py-10">Loading latest posts...</p>
         ) : posts.length === 0 ? (
-          <p className=" text-center text-gray-500 animate-pulse">Please check your network connection....</p>
+          <p className=" text-center text-gray-500 animate-pulse">
+            Please check your network connection....
+          </p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {posts.map((post) => (
               <Link
                 key={post.id}
@@ -86,6 +88,9 @@ const PoliticsPage = () => {
                   {/* <div className="mt-2 text-xs text-blue-600 font-medium">
                     {post.tags?.join(", ")}
                   </div> */}
+                </div>
+                <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                  Art & Culture
                 </div>
               </Link>
             ))}

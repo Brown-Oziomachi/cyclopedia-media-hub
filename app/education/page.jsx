@@ -53,12 +53,10 @@ export default function EducationTicker() {
 
   return (
     <section className="max-w-4xl mx-auto py-10">
-      
       <h1 className="text-4xl font-serif font-bold mb-12 mt-40 text-center">
         Student Education in <span className="text-purple-600">Cyclopedia</span>
       </h1>
       {/* Marquee list */}
-     
 
       <style jsx>{`
         @keyframes marquee {
@@ -79,20 +77,25 @@ export default function EducationTicker() {
       {loading ? (
         <p className="text-center py-10">Loading latest posts...</p>
       ) : posts.length === 0 ? (
-        <p className="text-gray-500 text-center">Please check your network connection.</p>
+        <p className="text-gray-500 text-center">
+          Please check your network connection.
+        </p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {posts.map((post) => (
             <Link
               key={post.id}
               href={`/blog/${post.id}`}
-              className=" shadow-xl transition overflow-hidden"
+              className="relative shadow-xl transition overflow-hidden"
             >
+              <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                Education
+              </div>
               {post.imageUrl && (
                 <img
                   src={post.imageUrl}
                   alt={post.title}
-                  className="w-full h-48 object-cover"
+                  className=" w-full h-48 object-cover"
                 />
               )}
               <div className="p-4">

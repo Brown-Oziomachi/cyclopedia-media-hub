@@ -68,7 +68,7 @@ const Page = () => {
       ) : posts.length === 0 ? (
         <p className=" text-center">No media posts found.</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-16 px-4">
+        <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-16 px-4">
           {posts.map((post) => (
             <Link
               key={post.id}
@@ -85,6 +85,9 @@ const Page = () => {
               <div className="p-4">
                 <h2 className="text-base font-semibold mb-2 ">{post.title}</h2>
                 <p className=" text-sm line-clamp-3">{post.subtitle}</p>
+              </div>
+              <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                Media
               </div>
             </Link>
           ))}
@@ -125,7 +128,7 @@ const Page = () => {
         ].map((card, idx) => (
           <div
             key={idx}
-            className="rounded-2xl shadow-lg hover:shadow-2xl transition overflow-hidden flex flex-col"
+            className=" relative rounded-2xl shadow-lg hover:shadow-2xl transition overflow-hidden flex flex-col"
           >
             <div className="relative w-full h-48">
               <Image
@@ -143,6 +146,9 @@ const Page = () => {
               </Link>
               <p className="text-xs mt-1">{card.author}</p>
               <p className="mt-2 text-xs flex-grow">{card.desc}</p>
+            </div>
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              Religion
             </div>
           </div>
         ))}

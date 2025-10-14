@@ -37,13 +37,16 @@ export default function HealthPostsPage() {
     <section className="max-w-6xl mx-auto py-12 ">
       <h1 className="text-3xl font-bold mb-8 mt-20">Health Articles</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6">
         {posts.map((post, index) => (
           <Link key={post.id} href={`/blog/${post.id}`}>
             <div
-              className={`rounded overflow-hidden shadow hover:shadow-lg transition cursor-pointer
-                ${index % 5 === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
+              className={`relative rounded overflow-hidden shadow hover:shadow-lg transition cursor-pointer
+          ${index % 5 === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
             >
+              <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                Health
+              </div>
               {post.imageUrl && (
                 <img
                   src={post.imageUrl}
@@ -58,7 +61,7 @@ export default function HealthPostsPage() {
                     {post.subtitle}
                   </p>
                 )}
-                   <p className="text-xs mt-2">
+                <p className="text-xs mt-2">
                   {post.createdAt?.toDate().toDateString()}
                 </p>
               </div>

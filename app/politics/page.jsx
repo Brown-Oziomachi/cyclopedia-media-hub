@@ -87,9 +87,9 @@ const PoliticsPage = () => {
         {posts[0] && (
           <div className="mb-12">
             <Link href={`/blog/${posts[0].id}`}>
-              <div className="grid lg:grid-cols-2 gap-6 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 ">
+              <div className="relative grid lg:grid-cols-2 gap-6 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 ">
                 {posts[0].imageUrl && (
-                  <div className="relative h-64 lg:h-96">
+                  <div className=" h-64 lg:h-96">
                     <img
                       src={posts[0].imageUrl}
                       alt={posts[0].title}
@@ -101,6 +101,9 @@ const PoliticsPage = () => {
                   <span className="text-xs font-semibold text-purple-600 uppercase mb-2 tracking-wider">
                     Featured Story
                   </span>
+                  <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                    Politics
+                  </div>
                   <h2 className="text-2xl lg:text-3xl font-bold mb-4 hover:text-purple-600 transition-colors">
                     {posts[0].title}
                   </h2>
@@ -121,7 +124,7 @@ const PoliticsPage = () => {
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             {posts.slice(1, 4).map((post) => (
               <Link key={post.id} href={`/blog/${post.id}`}>
-                <div className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full">
+                <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full">
                   {post.imageUrl && (
                     <div className="relative h-48">
                       <img
@@ -141,6 +144,9 @@ const PoliticsPage = () => {
                     <p className="text-xs text-gray-500">
                       {post.createdAt?.toDate().toDateString()}
                     </p>
+                  </div>
+                  <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                    Politics
                   </div>
                 </div>
               </Link>
@@ -162,9 +168,9 @@ const PoliticsPage = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {posts.slice(4, 12).map((post) => (
                 <Link key={post.id} href={`/blog/${post.id}`}>
-                  <div className="rounded-lg overflow-hidden shadow hover:shadow-lg transition-all duration-300  h-full">
+                  <div className="relative rounded-lg overflow-hidden shadow hover:shadow-lg transition-all duration-300  h-full">
                     {post.imageUrl && (
-                      <div className="relative h-40">
+                      <div className=" h-40">
                         <img
                           src={post.imageUrl}
                           alt={post.title}
@@ -179,6 +185,9 @@ const PoliticsPage = () => {
                       <p className="text-xs text-gray-500">
                         {post.createdAt?.toDate().toDateString()}
                       </p>
+                    </div>
+                    <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                      Politics
                     </div>
                   </div>
                 </Link>
@@ -199,9 +208,9 @@ const PoliticsPage = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {posts.slice(12).map((post) => (
                 <Link key={post.id} href={`/blog/${post.id}`}>
-                  <div className="rounded-lg overflow-hidden shadow hover:shadow-lg transition-all duration-300 ">
+                  <div className="relative rounded-lg overflow-hidden shadow hover:shadow-lg transition-all duration-300 ">
                     {post.imageUrl && (
-                      <div className="relative h-48">
+                      <div className=" h-48">
                         <img
                           src={post.imageUrl}
                           alt={post.title}
@@ -219,6 +228,9 @@ const PoliticsPage = () => {
                       <p className="text-xs text-gray-500">
                         {post.createdAt?.toDate().toDateString()}
                       </p>
+                    </div>
+                    <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                      Politics
                     </div>
                   </div>
                 </Link>
@@ -256,6 +268,9 @@ const PoliticsPage = () => {
                   of governing themselves...
                 </p>
               </div>
+              <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                Politics
+              </div>
             </div>
 
             {/* Card 2 */}
@@ -280,6 +295,9 @@ const PoliticsPage = () => {
                   Growing support for Palestine means that more U.S. voters will
                   base their decisions...
                 </p>
+              </div>
+              <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                Politics
               </div>
             </div>
 
@@ -308,6 +326,9 @@ const PoliticsPage = () => {
                   dictator to evade extradition...
                 </p>
               </div>
+              <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                Politics
+              </div>
             </div>
 
             {/* Card 4 */}
@@ -332,6 +353,9 @@ const PoliticsPage = () => {
                 <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">
                   AFRICOM is doing under the cover of counterterrorism...
                 </p>
+              </div>
+              <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                Politics
               </div>
             </div>
           </div>

@@ -18,6 +18,20 @@ export default function BlogsPage() {
   const [lastDoc, setLastDoc] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // Category colors mapping
+  const categoryColors = {
+    politics: "bg-red-600",
+    religion: "bg-red-600",
+    history: "bg-red-600",
+    education: "bg-red-600",
+    health: "bg-red-600",
+    sports: "bg-red-600",
+    technology: "bg-red-600",
+    entertainment: "bg-red-600",
+    business: "bg-red-600",
+    other: "bg-red-500",
+  };
+
   // ✅ Fetch first batch with real-time updates
   useEffect(() => {
     const q = query(
@@ -37,10 +51,10 @@ export default function BlogsPage() {
       }
     });
 
-    return () => unsubscribe(); // cleanup listener
+    return () => unsubscribe();
   }, []);
 
-  // ✅ Fetch next batch (no real-time listener → just once)
+  // ✅ Fetch next batch
   const fetchMoreBlogs = async () => {
     if (!lastDoc) return;
 
@@ -59,11 +73,17 @@ export default function BlogsPage() {
         id: doc.id,
         ...doc.data(),
       }));
-      setPosts((prev) => [...prev, ...docs]); // ✅ FIXED
+      setPosts((prev) => [...prev, ...docs]);
       setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
     }
 
     setLoading(false);
+  };
+
+  // Helper function to get category color
+  const getCategoryColor = (category) => {
+    const cat = category?.toLowerCase() || "other";
+    return categoryColors[cat] || categoryColors.other;
   };
 
   return (
@@ -76,69 +96,90 @@ export default function BlogsPage() {
         Explore the global News
       </h2>
 
-        {/* Middle row - scrollable small cards */}
-        <div className="overflow-x-auto mb-2 lg:mt-2">
-          <div className="max-md:flex space-x-2">
-            {posts.slice(3, 6).map((b) => (
-              <Link
-                key={b.id}
-                href={`/blog/${b.id}`}
-                className="flex-shrink-0 w-56"
-              >
-                <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
-                  {b.imageUrl && (
-                    <div className="relative w-full h-24">
-                      <img
-                        src={b.imageUrl}
-                        alt={b.title}
-                        className="object-cover w-full h-full"
-                      />
+      {/* Middle row - scrollable small cards */}
+      <div className="overflow-x-auto mb-2 lg:mt-2">
+        <div className="max-md:flex space-x-2">
+          {posts.slice(3, 6).map((b) => (
+            <Link
+              key={b.id}
+              href={`/blog/${b.id}`}
+              className="flex-shrink-0 w-56 relative"
+            >
+              <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
+                {b.imageUrl && (
+                  <div className="relative w-full h-24">
+                    <img
+                      src={b.imageUrl}
+                      alt={b.title}
+                      className="object-cover w-full h-full"
+                    />
+                    {/* Category badge */}
+                    <div
+                      className={`absolute top-2 left-2 ${getCategoryColor(
+                        b.category
+                      )} text-white text-xs font-semibold px-2 py-1 rounded-md z-10`}
+                    >
+                      {b.category || "Other"}
                     </div>
-                  )}
-                  <div className="p-2">
-                    <h2 className="text-sm font-bold hover:underline uppercase truncate">
-                      {b.title}
-                    </h2>
-                    <h3 className="text-xs">{b.subtitle}</h3>
-                    <p className="text-xs mt-1">
-                      {b.createdAt?.toDate().toDateString()}
-                    </p>
                   </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {posts.map((post) => (
-          <Link key={post.id} href={`/blog/${post.id}`} className="block">
-            <div className="flex flex-col overflow-hidden shadow-md cursor-pointer mt-3 max-md:-mt-10">
-              {post.imageUrl && (
-                <div className="relative w-full h-48 sm:h-40">
-                  <img
-                    src={post.imageUrl}
-                    alt={post.title}
-                    className="object-cover w-full h-full"
-                  />
-                </div>
-              )}
-              <div className="p-3">
-                {/* Title */}
-                <h2 className="text-sm font-bold hover:underline uppercase">
-                  {post.title}
-                </h2>
-                {post.subtitle && (
-                  <p className="text-sm line-clamp-3">{post.subtitle}</p>
                 )}
-                <h3>
-                  <p className="text-xs mt-2">
-                    {post.createdAt?.toDate().toDateString()}
+                <div className="p-2">
+                  <h2 className="text-sm font-bold hover:underline uppercase truncate">
+                    {b.title}
+                  </h2>
+                  <h3 className="text-xs">{b.subtitle}</h3>
+                  <p className="text-xs mt-1">
+                    {b.createdAt?.toDate().toDateString()}
                   </p>
-                </h3>
+                </div>
               </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Main grid posts */}
+      {posts.map((post) => (
+        <Link
+          key={post.id}
+          href={`/blog/${post.id}`}
+          className="block relative"
+        >
+          <div className="flex flex-col overflow-hidden shadow-md cursor-pointer mt-3 max-md:-mt-10">
+            {post.imageUrl && (
+              <div className="relative w-full h-48 sm:h-40">
+                <img
+                  src={post.imageUrl}
+                  alt={post.title}
+                  className="object-cover w-full h-full"
+                />
+                {/* Category badge */}
+                <div
+                  className={`absolute top-2 left-2 ${getCategoryColor(
+                    post.category
+                  )} text-white text-xs font-semibold px-3 py-1 rounded-md z-10`}
+                >
+                  {post.category || "Other"}
+                </div>
+              </div>
+            )}
+            <div className="p-3">
+              <h2 className="text-sm font-bold hover:underline uppercase">
+                {post.title}
+              </h2>
+              {post.subtitle && (
+                <p className="text-sm line-clamp-3">{post.subtitle}</p>
+              )}
+              <h3>
+                <p className="text-xs mt-2">
+                  {post.createdAt?.toDate().toDateString()}
+                </p>
+              </h3>
             </div>
-          </Link>
-        ))}
+          </div>
+        </Link>
+      ))}
+
       {/* Load More Button */}
       {lastDoc && (
         <div className="col-span-full text-center mt-6 mb-5">

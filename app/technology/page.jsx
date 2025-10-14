@@ -82,12 +82,12 @@ const PoliticsPage = () => {
             No posts found. Please check your network or Firestore data.
           </p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {posts.map((post) => (
               <Link
                 key={post.id}
                 href={`/blog/${post.id}`}
-                className="rounded-lg shadow-xl transition overflow-hidden"
+                className="relative rounded-lg shadow-xl transition overflow-hidden"
               >
                 {post.imageUrl && (
                   <img
@@ -104,6 +104,9 @@ const PoliticsPage = () => {
                       ? post.createdAt.toDate().toDateString()
                       : ""}
                   </p>
+                </div>
+                <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                  Technology
                 </div>
               </Link>
             ))}

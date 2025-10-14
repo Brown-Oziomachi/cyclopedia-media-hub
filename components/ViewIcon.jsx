@@ -54,7 +54,7 @@ export default function ViewMoreSearchPopup() {
               <X size={22} />
             </button>
             <h1 className="my-2 text-center font-bold">THE CYCLOPEDIA | NEWS COMPANY</h1>
-            <h5 className="text-center uppercase">
+            <h5 className="text-center uppercase mb-5">
               Stay informed! Use our search to explore thousands of articles
               from The Cyclopedia News archives. Find breaking news, in-depth
               analysis, and stories that matter to you.

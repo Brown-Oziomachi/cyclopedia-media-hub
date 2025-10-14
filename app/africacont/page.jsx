@@ -83,18 +83,21 @@ const PoliticsPage = () => {
         </div>
         {/* Featured Story (First Post) */}
         {posts[0] && (
-          <div className="mb-12">
+          <div className="relative mb-12">
             <Link href={`/blog/${posts[0].id}`}>
-              <div className="grid lg:grid-cols-2 gap-6 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 ">
+              <div className="relative grid lg:grid-cols-2 gap-6 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 ">
                 {posts[0].imageUrl && (
                   <div className="relative h-64 lg:h-96">
                     <img
                       src={posts[0].imageUrl}
                       alt={posts[0].title}
-                      className="w-full h-full object-cover"
+                      className=" w-full h-full object-cover"
                     />
                   </div>
                 )}
+                <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                  Africa News
+                </div>
                 <div className="p-8 flex flex-col justify-center">
                   <span className="text-xs font-semibold text-purple-600 uppercase mb-2 tracking-wider">
                     Latest News
@@ -116,7 +119,7 @@ const PoliticsPage = () => {
 
         {/* Secondary Stories (Posts 1-3) */}
         {posts.length > 1 && (
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
+          <div className="relative grid md:grid-cols-3 gap-6 mb-12">
             {posts.slice(1, 4).map((post) => (
               <Link key={post.id} href={`/blog/${post.id}`}>
                 <div className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full">
@@ -129,6 +132,9 @@ const PoliticsPage = () => {
                       />
                     </div>
                   )}
+                  <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                    Africa News
+                  </div>
                   <div className="p-5">
                     <h3 className="text-lg font-bold mb-2 line-clamp-2 hover:text-purple-600 transition-colors">
                       {post.title}
@@ -223,9 +229,9 @@ const PoliticsPage = () => {
               ))}
             </div>
           </div>
-              )}
-              </div>
-              </main>
-  )
+        )}
+      </div>
+    </main>
+  );
 }
 export default PoliticsPage;

@@ -70,15 +70,15 @@ const Page = () => {
         ) : posts.length === 0 ? (
           <p>Please check your network connection</p>
         ) : (
-          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <div className="relative grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {posts.map((post) => (
               <Link
                 key={post.id}
                 href={`/blog/${post.id}`}
-                className="group block rounded-lg shadow hover:shadow-lg transition overflow-hidden"
+                className="relative group block rounded-lg shadow hover:shadow-lg transition overflow-hidden"
               >
                 {/* Image */}
-                <div className="w-full h-60 relative">
+                <div className="w-full h-60">
                   {post.imageUrl && (
                     <img
                       src={post.imageUrl}
@@ -87,7 +87,9 @@ const Page = () => {
                     />
                   )}
                 </div>
-
+                <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                  History
+                </div>
                 {/* Text BELOW the image */}
                 <div className="p-4">
                   <h3 className="text-lg font-semibold leading-snug">
@@ -109,7 +111,7 @@ const Page = () => {
       {/* === FEATURED STATIC CARDS === */}
       <div className="max-w-7xl mx-auto  py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {/* CARD 1 */}
-        <div className="rounded-xl shadow-lg overflow-hidden">
+        <div className="relative rounded-xl shadow-lg overflow-hidden">
           <div className="relative w-full h-[220px]">
             <Image
               src="/slavery.png"
@@ -118,7 +120,7 @@ const Page = () => {
               className="object-cover"
             />
           </div>
-          <div className="p-4">
+          <div className=" p-4">
             <Link href="/blog/QUnWDFG1eBq2x4ejSLcs">
               <h2 className="text-sm font-bold hover:underline">
                 Americans Say Government Should Address Slavery Effects
@@ -126,10 +128,13 @@ const Page = () => {
             </Link>
             <p className="text-xs mt-1">by Cyclopedia</p>
           </div>
+          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+            History
+          </div>
         </div>
 
         {/* CARD 2 */}
-        <div className="rounded-xl shadow-lg overflow-hidden">
+        <div className="relative rounded-xl shadow-lg overflow-hidden">
           <div className="relative w-full h-[220px]">
             <Image src="/his.png" alt="News 2" fill className="object-cover" />
           </div>
@@ -141,10 +146,13 @@ const Page = () => {
             </Link>
             <p className="text-xs mt-1">by Cyclopedia</p>
           </div>
+          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+            History
+          </div>
         </div>
 
         {/* CARD 3 */}
-        <div className="rounded-xl shadow-lg overflow-hidden">
+        <div className="relative rounded-xl shadow-lg overflow-hidden">
           <div className="relative w-full h-[220px]">
             <Image src="/mart.png" alt="News 3" fill className="object-cover" />
           </div>
@@ -156,10 +164,13 @@ const Page = () => {
             </Link>
             <p className="text-xs mt-1">By Martin Halpern</p>
           </div>
+          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+            History
+          </div>
         </div>
 
         {/* CARD 4 */}
-        <div className="rounded-xl shadow-lg overflow-hidden">
+        <div className="relative rounded-xl shadow-lg overflow-hidden">
           <div className="relative w-full h-[220px]">
             <Image
               src="/plague.png"
@@ -175,6 +186,9 @@ const Page = () => {
               </h2>
             </Link>
             <p className="text-xs mt-1">By Cyclopedia</p>
+          </div>
+          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+            History
           </div>
         </div>
       </div>

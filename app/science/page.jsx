@@ -62,10 +62,10 @@ const Page = () => {
       {posts.length > 0 && (
         <div className="max-w-7xl mx-auto py-10">
           <h2 className="text-2xl font-bold mb-4">Latest latest Posts</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+          <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
             {posts.map((post) => (
               <Link key={post.id} href={`/blog/${post.id}`}>
-                <div className="relative rounded-lg  shadow-xl transition overflow-hidden">
+                <div className=" rounded-lg  shadow-xl transition overflow-hidden">
                   {post.imageUrl && (
                     <img
                       src={post.imageUrl}
@@ -74,14 +74,17 @@ const Page = () => {
                     />
                   )}
                   <div className="p-4">
+                    <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                      Science
+                    </div>
                     <h2 className="text-lg font-semibold ">{post.title}</h2>
                     <h3 className="text-xs mt-2">{post.subtitle}</h3>
                     <p className="text-xs text-gray-600 border mt-1">
                       {post.tags?.join(", ")}
                     </p>
-                     <p className="text-xs mt-2">
-                  {post.createdAt?.toDate().toDateString()}
-                </p>
+                    <p className="text-xs mt-2">
+                      {post.createdAt?.toDate().toDateString()}
+                    </p>
                   </div>
                 </div>
               </Link>
@@ -109,13 +112,14 @@ const Page = () => {
                 Review: Religion, Science, and Empire
               </h2>
             </Link>
-            <p className="text-xs mt-1">
-              By Anand Venkatkrishnan
-            </p>
+            <p className="text-xs mt-1">By Anand Venkatkrishnan</p>
             <p className="mt-2 text-xs ">
               Anand Venkatkrishnan reviews Religion, Science, and Empire by
               Peter Gottschalk.
             </p>
+          </div>
+          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+            Science
           </div>
         </div>
 
@@ -135,13 +139,14 @@ const Page = () => {
                 Science or Academic Atheism?
               </h2>
             </Link>
-            <p className="text-xs mt-1">
-              Published on August 8, 2011
-            </p>
+            <p className="text-xs mt-1">Published on August 8, 2011</p>
             <p className="mt-2 text-xs ">
               What happens when we give scientists the authority to speak about
               God?
             </p>
+          </div>
+          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+            Science
           </div>
         </div>
 
@@ -161,13 +166,14 @@ const Page = () => {
                 Healed and Whole Forever: On Psychedelic Science & Spirituality
               </h2>
             </Link>
-            <p className="text-xs  mt-1">
-              Published on January 25, 2016
-            </p>
+            <p className="text-xs  mt-1">Published on January 25, 2016</p>
             <p className="mt-2 text-xs ">
               Patricia Kubala explores the connection between drugs, healing,
               and spirituality.
             </p>
+          </div>
+          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+            Science
           </div>
         </div>
 
@@ -187,13 +193,14 @@ const Page = () => {
                 Christian Science as Jewish Tradition
               </h2>
             </Link>
-            <p className="text-xs mt-1">
-              By Noah Berlatsky (June 11, 2024)
-            </p>
+            <p className="text-xs mt-1">By Noah Berlatsky (June 11, 2024)</p>
             <p className="mt-2 text-xs">
               Why did so many American Jewish women find Christian Science
               appealing?
             </p>
+          </div>
+          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+            Science
           </div>
         </div>
       </div>
