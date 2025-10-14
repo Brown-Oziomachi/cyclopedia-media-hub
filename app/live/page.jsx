@@ -23,7 +23,7 @@ export default function LiveStreamSwitcher() {
     fetchLiveVideos();
   }, []);
 
-  if (loading) return <div className="text-center mt-28">Loading...</div>;
+  if (loading) return <div className="text-center mt-38">Loading...</div>;
   if (!currentVideo)
     return (
       <div className="text-center mt-20">
@@ -84,7 +84,7 @@ export default function LiveStreamSwitcher() {
             }`}
           >
             <span>
-              {video.title} {/* 🔹 Removed platform name from here */}
+              {video.title} 
             </span>
             {index === 0 && (
               <div className="flex items-center gap-1 bg-red-500  text-xs px-2 py-1 rounded">

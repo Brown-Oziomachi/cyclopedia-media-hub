@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Facebook,UserX, Twitter,Youtube, Instagram, X, X as CloseIcon } from "lucide-react"; // using X for both twitter and close button
+import { Facebook,UserX, Twitter,Youtube, Instagram, X, X as CloseIcon, SquareParking } from "lucide-react"; // using X for both twitter and close button
 
 export default function FollowUsPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,18 +9,17 @@ export default function FollowUsPopup() {
   return (
     <div>
       {/* Follow Us Button */}
-  <button
-  onClick={() => setIsOpen(true)}
-  className="font-bold lg:px-5 lg:py-2 size-10 rounded-full shadow-lg hover:shadow-xl transition flex flex-col items-center justify-center"
->
-  <div className="flex items-center justify-center">
-
-  <p className="text-[10px] md:text-xs rotate-180 [writing-mode:vertical-rl] tracking-wider">
-    Follow us
-  </p>
-  <UserX className="w-5 h-5 mt-2" />
-  </div>
-</button>
+      <button
+        onClick={() => setIsOpen(true)}
+        className="font-bold lg:px-5 lg:py-2 size-10 rounded-full shadow-lg hover:shadow-xl transition flex flex-col items-center justify-center"
+      >
+        <div className="flex items-center justify-center">
+          <p className="text-[10px] md:text-xs rotate-180 [writing-mode:vertical-rl] tracking-wider">
+            Follow us
+          </p>
+          <UserX className="w-5 h-5 mt-2" />
+        </div>
+      </button>
 
       {/* Popup */}
       <AnimatePresence>
@@ -49,7 +48,7 @@ export default function FollowUsPopup() {
               <h2 className="text-sm font-bold text-black mb-4">Follow Us</h2>
 
               <div className="flex gap-6 justify-center">
-      {/* <a
+                {/* <a
         href="https://facebook.com"
         target="_self"
         className="text-blue-600 hover:scale-110 transition-transform"
@@ -57,30 +56,37 @@ export default function FollowUsPopup() {
         <Facebook size={32} />
       </a> */}
 
-      <a
-        href="https://x.com/cyclopedia_news?t=yU4JjJPlLO7Zp9GVoEaF5A&s=09"
-        target="_self"
-        className="text-black hover:scale-110 transition-transform"
-      >
-        <Twitter size={32} />
-      </a>
+                <a
+                  href="https://x.com/cyclopedia_news?t=yU4JjJPlLO7Zp9GVoEaF5A&s=09"
+                  target="_self"
+                  className="text-black hover:scale-110 transition-transform"
+                >
+                  <Twitter size={32} />
+                </a>
 
-      <a
-        href="https://www.instagram.com/cyclopedia_news?igsh=MThvdDEwa3c3aGpsMQ=="
-        target="_self"
-        className="text-pink-500 hover:scale-110 transition-transform"
-      >
-        <Instagram size={32} />
-      </a>
+                <a
+                  href="https://www.instagram.com/cyclopedia_news?igsh=MThvdDEwa3c3aGpsMQ=="
+                  target="_self"
+                  className="text-pink-500 hover:scale-110 transition-transform"
+                >
+                  <Instagram size={32} />
+                </a>
 
-      <a
-        href="https://www.youtube.com/@cyclopedia-media"
-        target="_self"
-        className="text-red-600 hover:scale-110 transition-transform"
-      >
-        <Youtube size={32} />
-      </a>
-    </div>
+                <a
+                  href="https://www.youtube.com/@cyclopedia-media"
+                  target="_self"
+                  className="text-red-600 hover:scale-110 transition-transform"
+                >
+                  <Youtube size={32} />
+                </a>
+                <a
+                  href="https://thecyclopedia.substack.com/subscribe"
+                  target="_self"
+                  className="text-red-600 hover:scale-110 transition-transform"
+                >
+                  <SquareParking size={32} />
+                </a>
+              </div>
             </motion.div>
           </motion.div>
         )}

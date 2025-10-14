@@ -101,7 +101,7 @@ useEffect(() => {
       if (!query.trim()) return;
 
       setShowNav(false); // Close nav here
-
+      setQuery("");
       // Navigate to search page with query param
       router.push(
         `/search?q=${encodeURIComponent(query.trim().toLowerCase())}`
@@ -264,7 +264,6 @@ const regions = [
 
             {showRegionsDropdown && (
               <div
-                ref={showRegionsDropdownRef}
                 className="absolute bg-white shadow-lg rounded-md mt-2 w-56 max-h-60 overflow-y-auto ring-1 ring-black ring-opacity-5 z-50"
                 role="menu"
                 aria-orientation="vertical"
@@ -364,7 +363,7 @@ const regions = [
             >
               Live Now
             </Link>
-              <Link
+            <Link
               href="/africacont"
               className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
             >
@@ -568,7 +567,12 @@ const regions = [
                 Live Now
               </Link>
             </li>
-             <li>
+            <li>
+              <Link href="/nigeria" onClick={() => setShowNav(false)}>
+                Nigeria
+              </Link>
+            </li>
+            <li>
               <Link href="/africacont" onClick={() => setShowNav(false)}>
                 Africa
               </Link>
@@ -584,8 +588,14 @@ const regions = [
           >
             Newsletter
           </Link>
-
-          <hr className="my-4 border-gray-600" />
+          <Link
+            href="https://thecyclopedia.substack.com/subscribe"
+            onClick={() => setShowNav(false)}
+            className="text-gray-400 text-sm mb-4"
+          >
+            Substack | Subscription
+          </Link>
+          <hr className="my-2 border-gray-600" />
 
           <ul className="grid items-center text-white gap-6">
             {regions.map((region) => (

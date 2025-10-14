@@ -11,7 +11,6 @@ const Footer = () => {
         {/* Left: Site links */}
         <div>
           <h2 className="text-white font-bold text-lg mb-4"> The Cyclopedia</h2>
-         
 
           <ul className="space-y-2 font-mono">
             <li>
@@ -119,11 +118,24 @@ const Footer = () => {
                 Nigeria
               </a>
             </li>
+            <li>
+              <a href="/africacont" className="hover:text-purple-400 transition">
+                Africa
+              </a>
+            </li>
           </ul>
+        </div>
+        <div>
+          <h3 className="text-white font-bold text-lg mb-4">Subscriptions</h3>
+          <a href="/newsletter" className="hover:text-purple-400 transition">
+            Newslettter
+          </a>
+          <Link href="https://thecyclopedia.substack.com/subscribe">
+            <p className="mx-auto">Substack</p>
+          </Link>
         </div>
       </div>
 
-      {/* Bottom copyright */}
       <div className="mt-10 text-center">
         <Link href="/">
           <img src="/hid.png" alt="logo" className="h-20 w-20 mx-auto mb-3" />

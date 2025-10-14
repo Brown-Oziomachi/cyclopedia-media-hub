@@ -52,7 +52,7 @@ const PoliticsPage = () => {
       <main className="w-full min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-purple-500 border-t-transparent mb-4"></div>
-          <p className="text-gray-600">Loading politics news...</p>
+          <p className="text-gray-600">Loading africa news...</p>
         </div>
       </main>
     );
@@ -62,7 +62,7 @@ const PoliticsPage = () => {
     return (
       <main className="w-full min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-500 text-lg">No politics posts found.</p>
+          <p className="text-gray-500 text-lg">No africa posts found.</p>
           <p className="text-gray-400 mt-2">
             Please check your network connection
           </p>

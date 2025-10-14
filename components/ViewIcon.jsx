@@ -14,6 +14,7 @@ export default function ViewMoreSearchPopup() {
     if (!searchQuery.trim()) return;
     setIsOpen(false);
     router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+    setSearchQuery("")
   };
 
   useEffect(() => {
@@ -43,7 +44,8 @@ export default function ViewMoreSearchPopup() {
       {isOpen && (
         <div
           ref={isOpenRef}
-          className="fixed inset-0 z-50 flex items-center justify-center h-screen bg-black/80 bg-opacity-90">
+          className="fixed inset-0 z-50 flex items-center justify-center h-screen bg-black/90 bg-opacity-90"
+        >
           <div className=" rounded-2xl shadow-2xl w-96 p-6 relative">
             <button
               onClick={() => setIsOpen(false)}
@@ -51,8 +53,14 @@ export default function ViewMoreSearchPopup() {
             >
               <X size={22} />
             </button>
+            <h1 className="my-2 text-center font-bold">THE CYCLOPEDIA | NEWS COMPANY</h1>
+            <h5 className="text-center uppercase">
+              Stay informed! Use our search to explore thousands of articles
+              from The Cyclopedia News archives. Find breaking news, in-depth
+              analysis, and stories that matter to you.
+            </h5>
 
-            <div className="flex  items-center border border-gray-300 rounded-full overflow-hidden shadow-sm focus-within:ring-2 focus-within:ring-purple-500">
+            <div className="flex  items-center border-2 border-gray-300 overflow-hidden shadow-sm focus-within:ring-2 ">
               <input
                 type="text"
                 placeholder="Type to search..."
@@ -60,10 +68,10 @@ export default function ViewMoreSearchPopup() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 className="w-full px-5 py-1 text-gray-200 focus:outline-none"
-                          />
+              />
               <button
                 onClick={handleSearch}
-                className="bg-purple-600 hover:bg-purple-700 px-4 py-2 text-white transition-colors"
+                className="bg-black hover:bg-purple-700 px-4 py-2 text-white transition-colors"
               >
                 <Search size={18} />
               </button>
