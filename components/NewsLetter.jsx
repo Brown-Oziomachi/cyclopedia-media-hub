@@ -32,7 +32,9 @@ export default function NewsletterForm() {
       const data = await res.json();
 
       if (res.ok) {
-        setMessage("🎉 Thanks for subscribing! Please check your email.");
+        setMessage(
+          "🎉 Subscription Successful. You’re now part of The Cyclopedia Newsroom — delivering truth, insight, and independence every day. Expect timely updates and breaking news delivered straight to your inbox."
+        );
         setFormData({ firstName: "", email: "" });
       } else {
         setMessage(`❌ Error: ${data.error}`);

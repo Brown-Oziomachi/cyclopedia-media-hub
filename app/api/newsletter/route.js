@@ -21,20 +21,19 @@ export async function POST(req) {
       createdAt: new Date(),
     });
 
-    // ✅ 2. Send confirmation email to subscriber
 await resend.emails.send({
   from: "Cyclopedia <onboarding@resend.dev>",
   to: email,
-  subject: "Welcome to Cyclopedia 🚀",
+  subject: "Welcome to The Cyclopedia 🚀",
   html: `
     <h2>Hello ${firstName || "Friend"},</h2>
-    <p>Welcome to <b>The Cyclopedia</b>! 👁️‍🗨️</p>
-    <p>We’re thrilled to have you on board. As a subscriber, you’ll get the latest blogs, insightful articles, and trending news delivered straight to your inbox.</p>
+    <p>Welcome to <b>The Cyclopedia</b>! 👁️</p>
+    <p>We’re thrilled to have you on board. As a subscriber, you’ll get the latest newss, insightful articles, and trending news delivered straight to your inbox.</p>
     <p>Explore, discover, and stay informed with content curated just for you. Don’t forget to visit our website to catch the newest updates and hidden insights!</p>
     <p style="text-align:center; margin:30px 0;">
-      <a href="https://cyclopedia-media-hub.vercel.app"
+      <a href="https://cyclopedia-media-hub.vercel.app/global"
          style="display:inline-block; padding:12px 25px; background-color:#4F46E5; color:#ffffff; text-decoration:none; border-radius:6px; font-weight:bold;">
-        Explore Cyclopedia
+        Explore The Latest News
       </a>
     </p>
     <br/>
@@ -43,11 +42,10 @@ await resend.emails.send({
       `,
 });
 
-    // ✅ 3. Notify admin (you)
     await resend.emails.send({
       from: "Cyclopedia <onboarding@resend.dev>",
-      to: "youremail@example.com", // 🔹 replace with your admin email
-      subject: "New Subscriber to Cyclopedia 📩",
+      to: "browncemmanuel@gmail.com", 
+      subject: "Hello Admin, New Subscriber to The Cyclopedia",
       html: `
         <h3>New Subscriber Alert 🚨</h3>
         <p><b>Name:</b> ${firstName || ""} ${lastName || ""}</p>

@@ -211,7 +211,7 @@ export default function NewsDetails() {
           </div>
 
           <div className="mb-10 text-center">
-            <h1 className="text-3xl md:text-4xl lg:mt-10 font-extrabold mt-13 mb-8  lg:w-3/4 mx-auto leading-snug">
+            <h1 className="text-3xl md:text-4xl uppercase lg:mt-10 font-extrabold mt-13 mb-8  lg:w-3/4 mx-auto leading-snug">
               {blog.title}
             </h1>
 
