@@ -66,16 +66,16 @@ export default function NewsDetails() {
 
   // Category colors mapping
   const categoryColors = {
-    politics: "bg-blue-600",
-    religion: "bg-purple-600",
-    history: "bg-amber-600",
-    education: "bg-green-600",
+    politics: "bg-red-600",
+    religion: "bg-red-600",
+    history: "bg-red-600",
+    education: "bg-red-600",
     health: "bg-red-600",
-    sports: "bg-orange-600",
-    technology: "bg-cyan-600",
-    entertainment: "bg-pink-600",
-    business: "bg-gray-700",
-    other: "bg-gray-500",
+    sports: "bg-red-600",
+    technology: "bg-red-600",
+    entertainment: "bg-red-600",
+    business: "bg-red-700",
+    other: "bg-red-500",
   };
 
   // Helper function to get category color
