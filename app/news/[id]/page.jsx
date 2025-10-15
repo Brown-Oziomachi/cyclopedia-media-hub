@@ -233,23 +233,26 @@ export default function NewsDetails() {
               </p>
             )}
 
-            {/* Featured Image */}
-            {blog.imageUrl && (
-              <div className="relative w-full max-w-4xl mx-auto mb-6">
-                <img
-                  src={blog.imageUrl}
-                  alt={blog.title}
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            )}
+           {blog.imageUrl && (
+  <div className="relative w-full max-w-4xl mx-auto mb-6">
+    <img
+      src={blog.imageUrl}
+      alt={blog.title}
+      className="w-full h-auto object-cover"
+    />
+    <div className="absolute top-3 left-3 bg-red-600 text-white text-sm md:text-base font-semibold px-3 py-1 rounded-md">
+      The Cyclopedia
+    </div>
+  </div>
+)}
 
-            {/* Subtitle under the image */}
-            {blog.subtitle && (
-              <h2 className="text-lg md:text-xl italic font-medium max-w-3xl mx-auto border-l-4 border-purple-600 pl-4">
-                {blog.subtitle}
-              </h2>
-            )}
+{/* Subtitle under the image */}
+{blog.subtitle && (
+  <h2 className="text-lg md:text-xl italic font-medium max-w-3xl mx-auto border-l-4 border-purple-600 pl-4">
+    {blog.subtitle}
+  </h2>
+)}
+
           </div>
 
           {/* Image */}
