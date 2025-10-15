@@ -574,7 +574,7 @@ const Page = () => {
             Lebanon after they suffered several forms of abuses, including
             enslavement. (Sam Olukoya/IPS)
           </p>
-          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+          <div className="absolute top-4 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
             Nigeria
           </div>
         </Link>
@@ -602,7 +602,7 @@ const Page = () => {
               friendship, support, and even romance. But these apps could be
               changing how young people connect to others, both online and off.
             </p>
-            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+            <div className="absolute top-4 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
               Technology
             </div>
           </Link>
@@ -631,7 +631,7 @@ const Page = () => {
               uranium-rich African state.
             </p>
           </Link>
-          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+          <div className="absolute top-4 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
             Niger
           </div>
         </div>
@@ -659,7 +659,7 @@ const Page = () => {
               destructive liaison.
             </p>
           </Link>
-          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+          <div className="absolute top-4 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
             America
           </div>
         </div>
@@ -729,7 +729,7 @@ const Page = () => {
             hidden has been thrust into the light. What was supposed to be
             obscured has come sharply into focus.
           </p>
-          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+          <div className="absolute top-12 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
             Media
           </div>
         </div>
@@ -760,7 +760,7 @@ const Page = () => {
                   attract people of color to the museum.
                 </p>
               </div>
-              <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              <div className="absolute top-4 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
                 Religion
               </div>
             </Link>
@@ -948,104 +948,6 @@ const Page = () => {
           </div>
         </Link>
       </div>
-
-      <section className="px-6 py-5 md:py-20 max-w-5xl mx-auto  z-0">
-        <div className="grid grid-cols-3 sm:grid-cols-5 gap-6 justify-center hover:shadow-2xl hover:shadow-purple-700">
-          {categories.map((item, i) => (
-            <Link
-              key={i}
-              href={item.link}
-              passHref
-              legacyBehavior
-              onClick={() => handleClick(i)}
-              className={`
-              px-4 py-2
-              border border-gray-300
-              rounded
-              transition duration-300
-              ${
-                clickedIndex === i
-                  ? "bg-blue-700 text-white"
-                  : "bg-white text-black "
-              }
-              hover:bg-blue-500 hover:text-white
-            `}
-            >
-              <a aria-label={item.title} className="group ">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.15, duration: 0.5 }}
-                  viewport={{ once: true }}
-                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full bg-gray-100 shadow-md flex items-center justify-center cursor-pointer transition-transform group-hover:scale-120 hover:shadow-purple-600 hover:shadow-2xl duration-300"
-                >
-                  {item.imgSrc ? (
-                    <img
-                      src={item.imgSrc}
-                      alt={item.title}
-                      className="w-25 h-25 object-cover sm:w-20 sm:h-20 rounded-full"
-                    />
-                  ) : (
-                    <span className="text-4xl">{item.emoji}</span>
-                  )}
-                </motion.div>
-                <p className="text-center mt-3 text-sm font-medium  text-gray-700 group-hover:text-purple-700 transition-colors">
-                  {item.title}
-                </p>
-              </a>
-            </Link>
-          ))}
-          <div className="p-6 mt-5 lg:ml-auto max-md:justify-center mx-auto">
-            {/* More Button */}
-            <button
-              onClick={() => setIsOpen(true)}
-              className="px-4 py-2 bg-purple-600 text-white rounded-lg  hover:bg-purple-300   "
-            >
-              More
-            </button>
-
-            {/* Overlay */}
-            {isOpen && (
-              <div className="fixed inset-0 bg-black/70 backdrop-blur-sm  flex items-center justify-center z-50">
-                {/* Popup */}
-                <div className=" p-6 rounded-2xl max-w-lg w-full relative shadow-lg">
-                  {/* Close button */}
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
-                  >
-                    ✖
-                  </button>
-
-                  <h2 className="text-xl font-bold mb-4 text-center text-white">
-                    More Categories
-                  </h2>
-
-                  {/* Items */}
-                  <div className="grid grid-cols-2 gap-4 text-white">
-                    {items.map((item) => (
-                      <Link
-                        key={item.id}
-                        href={item.link}
-                        className="flex flex-col items-center text-center hover:scale-105 rounded-full justify-center cursor-pointer transition-transform active:text-purple-600 hover:shadow-purple-600 hover:shadow-2xl duration-300"
-                        onClick={() => setIsOpen(false)} // Close popup on click
-                      >
-                        <img
-                          src={item.img}
-                          alt={item.title}
-                          className="w-25 h-25 rounded-full object-cover border-2 border-purple-200"
-                        />
-                        <p className="mt-2 font-medium">{item.title}</p>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-      {/* Featured Topics */}
 
       <div className="max-w-7xl mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {/* === NEWS CARD 2 === */}
