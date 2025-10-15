@@ -197,30 +197,62 @@ export default function NewsDetails() {
       {/* News Header */}
       <div>
         <div className="w-full mt-1">
-          {/* Title & Subtitle above the image */}
-          <div className="mb-4 p-1">
-            <h1 className="text-3xl md:text-4xl lg:w-1/2 font-bold mt-10 p-2 lg:mt-25 lg:mx-auto">
+          <div className="w-full bg-gradient-to-r from-blue-900 via-gray-800 to-black text-white my-2 text-center py-3 px-4 shadow-md">
+            <p className="text-sm md:text-base font-medium tracking-wide">
+               Stay informed —{" "}
+              <a
+                href="https://thecyclopedia.substack.com/subscribe"
+                className="underline underline-offset-4 hover:text-yellow-400 transition-colors duration-300"
+              >
+                support independent journalism
+              </a>{" "}
+              and help us continue delivering reliable news and in-depth
+              analysis.
+            </p>
+          </div>
+
+          <div className="mb-10 text-center">
+            <h1 className="text-3xl md:text-4xl lg:mt-40 font-extrabold mt-13 mb-3  lg:w-3/4 mx-auto leading-snug">
               {blog.title}
             </h1>
+
+            {blog.createdAt && (
+              <p className="text-sm font-serif font-black mb-6 ">
+                Published on:{" "}
+                <span className=" font-medium">
+                  {blog.createdAt.toDate().toLocaleString("en-US", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: true,
+                  })}
+                </span>
+              </p>
+            )}
+
+            {/* Featured Image */}
+            {blog.imageUrl && (
+              <div className="relative w-full max-w-4xl mx-auto mb-6">
+                <img
+                  src={blog.imageUrl}
+                  alt={blog.title}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            )}
+
+            {/* Subtitle under the image */}
             {blog.subtitle && (
-              <h2 className="text-md md:text-lg mt-1 lg:mx-auto lg:w-1/2 text-center font-semibold border-2 py-2 px-2">
+              <h2 className="text-lg md:text-xl italic font-medium max-w-3xl mx-auto border-l-4 border-purple-600 pl-4">
                 {blog.subtitle}
               </h2>
             )}
           </div>
+
           {/* Image */}
-          <div className="relative w-full h-64 sm:h-80 md:h-[30rem] rounded-lg overflow-hidden">
-            {blog.imageUrl && (
-              <Image
-                src={blog.imageUrl}
-                alt={blog.title}
-                fill
-                style={{ objectFit: "cover" }}
-                className="rounded-lg"
-              />
-            )}
-            <div className="absolute inset-0 rounded-lg"></div>
-          </div>
         </div>
         <SideNewsTicker news={sampleNews} />
 
@@ -307,15 +339,14 @@ export default function NewsDetails() {
 
       {/* Like Button */}
       <div className="flex gap-3 sm:gap-5">{/* ... */}</div>
-
       <div className="relative mx-auto text-center mt-20 mb-20 max-w-4xl">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-700/10 via-indigo-700/10 to-purple-700/10 backdrop-blur-lg rounded-2xl border border-purple-500/30 shadow-2xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-700 via-indigo-700/5 to-purple-700 backdrop-blur-lg border-purple-500/30 shadow-2xl"></div>
 
-        <div className="relative py-16 px-8 text-white">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
+        <div className="relative py-16 px-8 font-black">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
             Truth in Your Inbox
           </h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
+          <p className="text-lg max-w-2xl mx-auto mb-8">
             Get concise, evidence-based journalism that cuts through the noise.
             Subscribe and uncover what really matters — every week.
           </p>

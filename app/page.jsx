@@ -250,13 +250,13 @@ const Page = () => {
       </div>
 
       <div className="relative mx-auto text-center mt-20 mb-20 max-w-4xl">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-700/10 via-indigo-700/10 to-purple-700/10 backdrop-blur-lg rounded-2xl border border-purple-500/30 shadow-2xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-700 via-indigo-700/5 to-purple-700 backdrop-blur-lg border-purple-500/30 shadow-2xl"></div>
 
-        <div className="relative py-16 px-8 text-white">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
+        <div className="relative py-16 px-8 font-bold">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
             Truth in Your Inbox
           </h2>
-          <p className="text-lg text-gray-300 text-center mx-auto mb-8">
+          <p className="text-lg max-w-2xl mx-auto mb-8">
             Get concise, evidence-based journalism that cuts through the noise.
             Subscribe and uncover what really matters — every week.
           </p>
