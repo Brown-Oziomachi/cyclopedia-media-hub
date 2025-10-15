@@ -72,54 +72,88 @@ const Page = () => {
         from perspectives often left out of mainstream narratives.
       </p>
 
-      <div className="max-w-7xl mx-auto mt-32">
-        <h2 className="text-2xl font-bold mb-6">Latest History Articles</h2>
-        {loading ? (
-          <p>Loading latest Posts...</p>
-        ) : posts.length === 0 ? (
-          <p>Please check your network connection</p>
-        ) : (
-          <div className="relative grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {posts[0] && (
-              <Link
-                href={`/news/${createFullSlug(posts[0].title, posts[0].id)}`}
-                className="relative block rounded-xl shadow-xl hover:shadow-2xl transition overflow-hidden mb-10"
-              >
-                <div className="grid md:grid-cols-2 gap-6">
-                  {/* Large Image */}
-                  <div className="relative h-80 md:h-96">
-                    {posts[0].imageUrl && (
-                      <img
-                        src={posts[0].imageUrl}
-                        alt={posts[0].title}
-                        className="w-full h-full object-cover"
-                      />
-                    )}
-                    <div className="absolute top-4 left-4 bg-red-500 text-white text-sm font-semibold px-4 py-2 rounded-md z-10">
-                      History
-                    </div>
-                  </div>
+      {posts[0] && (
+        <div className="mb-12">
+          <Link href={`/news/${createFullSlug(posts[0].title, posts[0].id)}`}>
+            <div className="relative grid lg:grid-cols-2 gap-6 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 ">
+              {posts[0].imageUrl && (
+                <div className=" h-64 lg:h-96">
+                  <img
+                    src={posts[0].imageUrl}
+                    alt={posts[0].title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+              <div className="p-8 flex flex-col justify-center">
+                <span className="text-xs font-semibold text-purple-600 uppercase mb-2 tracking-wider">
+                  Latest News
+                </span>
+                <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                  History
+                </div>
+                <h2 className="text-2xl uppercase lg:text-3xl font-bold mb-4 hover:text-purple-600 transition-colors">
+                  {posts[0].title}
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 text-base">
+                  {posts[0].subtitle}
+                </p>
+                <p className="text-sm text-gray-500">
+                  {posts[0].createdAt?.toDate().toDateString()}
+                </p>
+              </div>
+            </div>
+          </Link>
+        </div>
+      )}
 
-                  {/* Content */}
-                  <div className="p-6 flex flex-col justify-center">
-                    <h3 className="text-3xl font-bold leading-tight mb-4 hover:text-purple-600 transition">
-                      {posts[0].title}
+      {posts.length > 1 && (
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          {posts.slice(1, 5).map((post) => (
+            <Link
+              key={post.id}
+              href={`/news/${createFullSlug(post.title, post.id)}`}
+            >
+              <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full">
+                {/* Image and Title Side by Side */}
+                <div className="flex gap-3 p-4">
+                  {/* Image on the left */}
+                  {post.imageUrl && (
+                    <div className="relative w-24 h-24 flex-shrink-0">
+                      <img
+                        src={post.imageUrl}
+                        alt={post.title}
+                        className="w-full h-full object-cover rounded"
+                      />
+                    </div>
+                  )}
+
+                  {/* Title on the right */}
+                  <div className="flex-1">
+                    <h3 className="text-base font-bold line-clamp-3 hover:text-purple-600 transition-colors">
+                      {post.title}
                     </h3>
-                    {posts[0].subtitle && (
-                      <p className="text-lg text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
-                        {posts[0].subtitle}
-                      </p>
-                    )}
-                    <p className="text-sm text-gray-500">
-                      {posts[0].createdAt?.toDate().toDateString()}
-                    </p>
                   </div>
                 </div>
-              </Link>
-            )}
-          </div>
-        )}
-      </div>
+
+                {/* Description below */}
+                <div className="px-4 pb-4">
+                  <p className="text-sm text-gray-600 uppercase dark:text-gray-400 line-clamp-2 mb-2">
+                    {post.subtitle}
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    {post.createdAt?.toDate().toDateString()}
+                  </p>
+                </div>
+
+                <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                  History
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
 
       <div className="max-w-7xl mx-auto py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {/* CARD 1 */}
