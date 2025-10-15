@@ -249,6 +249,26 @@ const Page = () => {
         )}
       </div>
 
+      <div className="relative mx-auto text-center mt-20 mb-20 max-w-4xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-700/10 via-indigo-700/10 to-purple-700/10 backdrop-blur-lg rounded-2xl border border-purple-500/30 shadow-2xl"></div>
+
+        <div className="relative py-16 px-8 text-white">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
+            Truth in Your Inbox
+          </h2>
+          <p className="text-lg text-gray-300 text-center mx-auto mb-8">
+            Get concise, evidence-based journalism that cuts through the noise.
+            Subscribe and uncover what really matters — every week.
+          </p>
+          <a
+            href="/newsletter"
+            className="inline-block bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold px-8 py-3 rounded-full hover:scale-105 hover:shadow-lg transition-all duration-300"
+          >
+            Subscribe Now
+          </a>
+        </div>
+      </div>
+
       <h1 className="text-center mb-10 font-serif text-2xl">
         Explore more news
       </h1>

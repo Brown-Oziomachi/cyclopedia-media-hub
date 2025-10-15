@@ -80,37 +80,43 @@ const Page = () => {
           <p>Please check your network connection</p>
         ) : (
           <div className="relative grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {posts.map((post) => (
+            {posts[0] && (
               <Link
-                key={post.id}
-                href={`/news/${createFullSlug(post.title, post.id)}`}
-                className="relative group block rounded-lg shadow hover:shadow-lg transition overflow-hidden"
+                href={`/news/${createFullSlug(posts[0].title, posts[0].id)}`}
+                className="relative block rounded-xl shadow-xl hover:shadow-2xl transition overflow-hidden mb-10"
               >
-                <div className="w-full h-60">
-                  {post.imageUrl && (
-                    <img
-                      src={post.imageUrl}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition"
-                    />
-                  )}
-                </div>
-                <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
-                  History
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold leading-snug">
-                    {post.title}
-                  </h3>
-                  {post.subtitle && (
-                    <p className="text-sm mt-1">{post.subtitle}</p>
-                  )}
-                  <p className="text-xs mt-2">
-                    {post.createdAt?.toDate().toDateString()}
-                  </p>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Large Image */}
+                  <div className="relative h-80 md:h-96">
+                    {posts[0].imageUrl && (
+                      <img
+                        src={posts[0].imageUrl}
+                        alt={posts[0].title}
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                    <div className="absolute top-4 left-4 bg-red-500 text-white text-sm font-semibold px-4 py-2 rounded-md z-10">
+                      History
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6 flex flex-col justify-center">
+                    <h3 className="text-3xl font-bold leading-tight mb-4 hover:text-purple-600 transition">
+                      {posts[0].title}
+                    </h3>
+                    {posts[0].subtitle && (
+                      <p className="text-lg text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+                        {posts[0].subtitle}
+                      </p>
+                    )}
+                    <p className="text-sm text-gray-500">
+                      {posts[0].createdAt?.toDate().toDateString()}
+                    </p>
+                  </div>
                 </div>
               </Link>
-            ))}
+            )}
           </div>
         )}
       </div>

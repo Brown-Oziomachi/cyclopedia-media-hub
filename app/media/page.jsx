@@ -73,14 +73,48 @@ const Page = () => {
         telling you?
       </p>
 
-      {/* === FIRESTORE POSTS === */}
+      {posts[0] && (
+        <div className="mb-12">
+          <Link href={`/news/${createFullSlug(posts[0].title, posts[0].id)}`}>
+            <div className="relative grid lg:grid-cols-2 gap-6 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 ">
+              {posts[0].imageUrl && (
+                <div className=" h-64 lg:h-96">
+                  <img
+                    src={posts[0].imageUrl}
+                    alt={posts[0].title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+              <div className="p-8 flex flex-col justify-center">
+                <span className="text-xs font-semibold text-purple-600 uppercase mb-2 tracking-wider">
+                  Latest News
+                </span>
+                <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                  Politics
+                </div>
+                <h2 className="text-2xl uppercase lg:text-3xl font-bold mb-4 hover:text-purple-600 transition-colors">
+                  {posts[0].title}
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 text-base">
+                  {posts[0].subtitle}
+                </p>
+                <p className="text-sm text-gray-500">
+                  {posts[0].createdAt?.toDate().toDateString()}
+                </p>
+              </div>
+            </div>
+          </Link>
+        </div>
+      )}
+      
       {loading ? (
         <p className="text-center py-10 ">Loading latest posts...</p>
       ) : posts.length === 0 ? (
         <p className=" text-center">No media posts found.</p>
       ) : (
         <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-16 px-4">
-          {posts.map((post) => (
+          {posts.slice(1, 5).map((post) => (
             <Link
               key={post.id}
               href={`/news/${createFullSlug(post.title, post.id)}`}
@@ -105,7 +139,6 @@ const Page = () => {
         </div>
       )}
 
-      {/* === STATIC FEATURED CARDS === */}
       <div className="max-w-7xl mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {[
           {

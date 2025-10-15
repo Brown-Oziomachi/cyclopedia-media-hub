@@ -35,7 +35,6 @@ const PoliticsPage = () => {
           ...doc.data(),
         }));
 
-        console.log("Fetched Politics posts:", data);
         setPosts(data);
       } catch (error) {
         console.error("Error fetching politics posts:", error);
@@ -134,29 +133,43 @@ const PoliticsPage = () => {
         {posts.length > 1 && (
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             {posts.slice(1, 4).map((post) => (
-              <Link key={post.id} href={`/news/${createFullSlug(post.title, post.id)}`}>
+              <Link
+                key={post.id}
+                href={`/news/${createFullSlug(post.title, post.id)}`}
+              >
                 <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full">
-                  {post.imageUrl && (
-                    <div className="relative h-48">
-                      <img
-                        src={post.imageUrl}
-                        alt={post.title}
-                        className="w-full h-full object-cover"
-                      />
+                  {/* Image and Title Side by Side */}
+                  <div className="flex gap-3 p-4">
+                    {/* Image on the left */}
+                    {post.imageUrl && (
+                      <div className="relative w-24 h-24 flex-shrink-0">
+                        <img
+                          src={post.imageUrl}
+                          alt={post.title}
+                          className="w-full h-full object-cover rounded"
+                        />
+                      </div>
+                    )}
+
+                    {/* Title on the right */}
+                    <div className="flex-1">
+                      <h3 className="text-base font-bold line-clamp-3 hover:text-purple-600 transition-colors">
+                        {post.title}
+                      </h3>
                     </div>
-                  )}
-                  <div className="p-5">
-                    <h3 className="text-lg font-bold mb-2 line-clamp-2 hover:text-purple-600 transition-colors">
-                      {post.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 uppercase dark:text-gray-400 line-clamp-2 mb-3">
+                  </div>
+
+                  {/* Description below */}
+                  <div className="px-4 pb-4">
+                    <p className="text-sm text-gray-600 uppercase dark:text-gray-400 line-clamp-2 mb-2">
                       {post.subtitle}
                     </p>
                     <p className="text-xs text-gray-500">
                       {post.createdAt?.toDate().toDateString()}
                     </p>
                   </div>
-                  <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+
+                  <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
                     Politics
                   </div>
                 </div>
@@ -165,7 +178,22 @@ const PoliticsPage = () => {
           </div>
         )}
 
-        {/* Latest Politics News Section */}
+        <div className="mx-auto text-center mt-16 mb-16 bg-gradient-to-r from-purple-700 to-indigo-700 text-white py-14 px-6 rounded-2xl shadow-xl max-w-3xl">
+          <h2 className="text-3xl font-extrabold mb-3">
+            Stay Ahead of the Hidden Truths
+          </h2>
+          <p className="text-base md:text-lg text-gray-200 mb-6">
+            Join thousands of readers who get our investigative reports and
+            evidence-based insights straight to their inbox every week.
+          </p>
+          <a
+            href="/newsletter"
+            className="inline-block bg-white text-purple-700 hover:bg-purple-700 hover:text-white  font-semibold px-6 py-3 rounded-md transition-all duration-300"
+          >
+            Subscribe to Our Newsletter
+          </a>
+        </div>
+
         {posts.length > 4 && (
           <div className="mb-12">
             <div className="flex items-center justify-between mb-6">
@@ -178,7 +206,10 @@ const PoliticsPage = () => {
             {/* Latest News Grid */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {posts.slice(4, 12).map((post) => (
-                <Link key={post.id} href={`/news/${createFullSlug(post.title, post.id)}`}>
+                <Link
+                  key={post.id}
+                  href={`/news/${createFullSlug(post.title, post.id)}`}
+                >
                   <div className="relative rounded-lg overflow-hidden shadow hover:shadow-lg transition-all duration-300  h-full">
                     {post.imageUrl && (
                       <div className=" h-40">
@@ -218,7 +249,10 @@ const PoliticsPage = () => {
             <h2 className="text-2xl font-bold mb-6">More Politics Stories</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {posts.slice(12).map((post) => (
-                <Link key={post.id} href={`/news/${createFullSlug(post.title, post.id)}`}>
+                <Link
+                  key={post.id}
+                  href={`/news/${createFullSlug(post.title, post.id)}`}
+                >
                   <div className="relative rounded-lg overflow-hidden shadow hover:shadow-lg transition-all duration-300 ">
                     {post.imageUrl && (
                       <div className=" h-48">
@@ -265,7 +299,12 @@ const PoliticsPage = () => {
                 />
               </div>
               <div className="p-4">
-                <Link href={`/news/${createFullSlug("Erik Prince Calls for U.S. to Colonize Africa and Latin America", "Tc0W4qUPzj7ytY7UB5fs")}`}>
+                <Link
+                  href={`/news/${createFullSlug(
+                    "Erik Prince Calls for U.S. to Colonize Africa and Latin America",
+                    "Tc0W4qUPzj7ytY7UB5fs"
+                  )}`}
+                >
                   <h2 className="text-sm font-bold uppercase hover:text-purple-600 transition-colors mb-2">
                     Erik Prince Calls for U.S. to Colonize Africa and Latin
                     America
@@ -295,7 +334,12 @@ const PoliticsPage = () => {
                 />
               </div>
               <div className="p-4">
-                <Link href={`/news/${createFullSlug("US Opinion Is Shifting on Palestine; Can Political Leaders Shift With It?", "18is4vszdgKCKhPdcDZo")}`}>
+                <Link
+                  href={`/news/${createFullSlug(
+                    "US Opinion Is Shifting on Palestine; Can Political Leaders Shift With It?",
+                    "18is4vszdgKCKhPdcDZo"
+                  )}`}
+                >
                   <h2 className="text-sm font-bold uppercase transition-colors mb-2">
                     US Opinion Is Shifting on Palestine; Can Political Leaders
                     Shift With It?
@@ -323,7 +367,12 @@ const PoliticsPage = () => {
                 />
               </div>
               <div className="p-4">
-                <Link href={`/news/${createFullSlug("How Britain allowed Pinochet to escape justice for atrocities", "IaxcmJfiF1fEizKHpD3E")}`}>
+                <Link
+                  href={`/news/${createFullSlug(
+                    "How Britain allowed Pinochet to escape justice for atrocities",
+                    "IaxcmJfiF1fEizKHpD3E"
+                  )}`}
+                >
                   <h2 className="text-sm font-bold uppercase hover:text-purple-600 transition-colors mb-2">
                     How Britain allowed Pinochet to escape justice for
                     atrocities
@@ -353,7 +402,12 @@ const PoliticsPage = () => {
                 />
               </div>
               <div className="p-4">
-                <Link href={`/news/${createFullSlug("US Turning Oil-Rich Nigeria into Proxy for its Africa Wars", "5njbEcuqy6lFrrYdMS2p")}`}>
+                <Link
+                  href={`/news/${createFullSlug(
+                    "US Turning Oil-Rich Nigeria into Proxy for its Africa Wars",
+                    "5njbEcuqy6lFrrYdMS2p"
+                  )}`}
+                >
                   <h2 className="text-sm font-bold uppercase hover:text-purple-600 transition-colors mb-2">
                     US Turning Oil-Rich Nigeria into Proxy for its Africa Wars
                   </h2>

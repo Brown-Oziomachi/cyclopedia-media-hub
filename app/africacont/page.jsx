@@ -85,14 +85,9 @@ const PoliticsPage = () => {
   return (
     <main className="w-full">
       <div className="max-w-7xl mx-auto px-4 py-10">
-        {/* Header Section */}
         <div className="text-center mb-12 max-lg:mt-32 lg:mt-30">
           <h1 className="text-3xl lg:text-4xl font-bold mb-3 ">Africa</h1>
-          {/* <p className="text-sm lg:text-base text-center text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-          Africa
-          </p> */}
         </div>
-        {/* Featured Story (First Post) */}
         {posts[0] && (
           <div className="relative mb-12">
             <Link href={`/news/${createFullSlug(posts[0].title, posts[0].id)}`}>
@@ -128,7 +123,6 @@ const PoliticsPage = () => {
           </div>
         )}
 
-        {/* Secondary Stories (Posts 1-3) */}
         {posts.length > 1 && (
           <div className="relative grid md:grid-cols-3 gap-6 mb-12">
             {posts.slice(1, 4).map((post) => (
@@ -169,7 +163,22 @@ const PoliticsPage = () => {
           </div>
         )}
 
-        {/* Latest Politics News Section */}
+        <div className="mx-auto text-center mt-16 mb-16 bg-gradient-to-r from-purple-700 to-indigo-700 text-white py-14 px-6 rounded-2xl shadow-xl max-w-3xl">
+          <h2 className="text-3xl font-extrabold mb-3">
+            Stay Ahead of the Hidden Truths
+          </h2>
+          <p className="text-base md:text-lg text-gray-200 mb-6">
+            Join thousands of readers who get our investigative reports and
+            evidence-based insights straight to their inbox every week.
+          </p>
+          <a
+            href="/newsletter"
+            className="inline-block bg-white text-purple-700 font-semibold px-6 py-3 rounded-md hover:bg-gray-100 transition-all duration-300"
+          >
+            Subscribe to Our Newsletter
+          </a>
+        </div>
+
         {posts.length > 4 && (
           <div className="mb-12">
             <div className="flex items-center justify-between mb-6">

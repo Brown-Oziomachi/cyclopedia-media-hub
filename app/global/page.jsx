@@ -108,7 +108,7 @@ export default function BlogsPage() {
 
       <div className="overflow-x-auto mb-2 lg:mt-2">
         <div className="max-md:flex space-x-2">
-          {posts.slice(3, 6).map((b) => (
+          {posts.slice(0, 3).map((b) => (
             <Link
               key={b.id}
               href={`/news/${createFullSlug(b.title, b.id)}`}
@@ -146,7 +146,71 @@ export default function BlogsPage() {
         </div>
       </div>
 
-      {posts.map((post) => (
+      {posts.length > 1 && (
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          {posts.slice(4, 11).map((post) => (
+            <Link
+              key={post.id}
+              href={`/news/${createFullSlug(post.title, post.id)}`}
+            >
+              <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full">
+                {/* Image and Title Side by Side */}
+                <div className="flex gap-3 p-4">
+                  {/* Image on the left */}
+                  {post.imageUrl && (
+                    <div className="relative w-24 h-24 flex-shrink-0">
+                      <img
+                        src={post.imageUrl}
+                        alt={post.title}
+                        className="w-full h-full object-cover rounded"
+                      />
+                    </div>
+                  )}
+
+                  {/* Title on the right */}
+                  <div className="flex-1">
+                    <h3 className="text-base font-bold line-clamp-3 hover:text-purple-600 transition-colors">
+                      {post.title}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Description below */}
+                <div className="px-4 pb-4">
+                  <p className="text-sm text-gray-600 uppercase dark:text-gray-400 line-clamp-2 mb-2">
+                    {post.subtitle}
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    {post.createdAt?.toDate().toDateString()}
+                  </p>
+                </div>
+
+                <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                  Politics
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
+
+      <div className="mx-auto text-center  mb-16 bg-gradient-to-r from-purple-700 to-indigo-700 text-white py-14 px-6 rounded-2xl shadow-xl max-w-3xl">
+        <h2 className="text-3xl font-extrabold mb-3">
+          Stay Ahead of the Hidden Truths
+        </h2>
+        <p className="text-base md:text-lg text-gray-200 mb-6">
+          Join thousands of readers who get our investigative reports and
+          evidence-based insights straight to their inbox every week.
+        </p>
+        <a
+          href="/newsletter"
+          className="inline-block bg-white text-purple-700 font-semibold px-6 py-3 rounded-md hover:bg-gray-100 transition-all duration-300"
+        >
+          Subscribe to Our Newsletter
+        </a>
+      </div>
+
+      {posts.slice(10, 25).map((post) => (
         <Link
           key={post.id}
           href={`/news/${createFullSlug(post.title, post.id)}`}

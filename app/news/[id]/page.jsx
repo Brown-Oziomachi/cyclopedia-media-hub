@@ -308,26 +308,26 @@ export default function NewsDetails() {
       {/* Like Button */}
       <div className="flex gap-3 sm:gap-5">{/* ... */}</div>
 
-      {/* Newsletter Card */}
-      <Link href="/newsletter">
-        <div className="cursor-pointer bg-gradient-to-r from-purple-500 to-purple-800 lg:w-1/3 mx-auto rounded-2xl p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
-          <h3 className="text-xl font-bold mb-2 text-white">Stay Updated!</h3>
-          <p className="mb-4 text-gray-200">
-            Subscribe to our newsletter and never miss an update.
-          </p>
+      <div className="relative mx-auto text-center mt-20 mb-20 max-w-4xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-700/10 via-indigo-700/10 to-purple-700/10 backdrop-blur-lg rounded-2xl border border-purple-500/30 shadow-2xl"></div>
 
-          {/* Animated Button */}
-          <motion.button
-            className="bg-white text-purple-700 font-semibold px-6 py-2 rounded-full shadow-md"
-            whileHover={{ scale: 1.1 }}
-            animate={{ y: [0, -3, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
+        <div className="relative py-16 px-8 text-white">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
+            Truth in Your Inbox
+          </h2>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
+            Get concise, evidence-based journalism that cuts through the noise.
+            Subscribe and uncover what really matters — every week.
+          </p>
+          <a
+            href="/newsletter"
+            className="inline-block bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold px-8 py-3 rounded-full hover:scale-105 hover:shadow-lg transition-all duration-300"
           >
             Subscribe Now
-          </motion.button>
+          </a>
         </div>
-      </Link>
-      <AdminProfile />
+      </div>
+
       {/* Related News */}
       <div>
         <h2 className="text-xl font-bold mb-4 mt-10 p-5">Related News</h2>

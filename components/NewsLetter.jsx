@@ -70,17 +70,17 @@ export default function NewsletterForm() {
             Subscribe to our Newsletter
           </h2>
 
-          {/* <input
+          <input
             type="text"
             name="firstName"
-            placeholder="First Name"
+            placeholder="Full Name"
             value={formData.firstName}
             onChange={handleChange}
             required
             className="w-full p-2 border rounded-lg"
           />
 
-          <input
+          {/* <input
             type="text"
             name="lastName"
             placeholder="Last Name"
