@@ -197,7 +197,7 @@ export default function NewsDetails() {
       {/* News Header */}
       <div>
         <div className="w-full mt-1">
-          <div className="w-full bg-gradient-to-r from-blue-900 via-gray-800 to-black text-white my-2 text-center py-3 px-4 shadow-md">
+          <div className="w-full bg-gradient-to-r from-blue-900 via-gray-800 to-black text-white my-2 lg:my-25 text-center py-3 px-4 shadow-md">
             <p className="text-sm md:text-base font-medium tracking-wide">
                Stay informed —{" "}
               <a
@@ -212,7 +212,7 @@ export default function NewsDetails() {
           </div>
 
           <div className="mb-10 text-center">
-            <h1 className="text-3xl md:text-4xl lg:mt-40 font-extrabold mt-13 mb-3  lg:w-3/4 mx-auto leading-snug">
+            <h1 className="text-3xl md:text-4xl lg:mt-10 font-extrabold mt-13 mb-3  lg:w-3/4 mx-auto leading-snug">
               {blog.title}
             </h1>
 
