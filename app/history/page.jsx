@@ -49,9 +49,19 @@ const Page = () => {
     fetchHistoryPosts();
   }, []);
 
+  const createSlug = (title) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  };
+
+  const createFullSlug = (title, id) => {
+    return `${createSlug(title)}--${id}`;
+  };
+
   return (
     <main className="w-full">
-      {/* === HEADER === */}
       <h1 className="text-3xl lg:text-5xl font-bold text-center mb-2 mt-30 lg:mt-50 font-serif">
         Uncovering the Hidden Past
       </h1>
@@ -62,7 +72,6 @@ const Page = () => {
         from perspectives often left out of mainstream narratives.
       </p>
 
-      {/* === FIRESTORE LATEST BLOGS === */}
       <div className="max-w-7xl mx-auto mt-32">
         <h2 className="text-2xl font-bold mb-6">Latest History Articles</h2>
         {loading ? (
@@ -74,10 +83,9 @@ const Page = () => {
             {posts.map((post) => (
               <Link
                 key={post.id}
-                href={`/blog/${post.id}`}
+                href={`/news/${createFullSlug(post.title, post.id)}`}
                 className="relative group block rounded-lg shadow hover:shadow-lg transition overflow-hidden"
               >
-                {/* Image */}
                 <div className="w-full h-60">
                   {post.imageUrl && (
                     <img
@@ -90,7 +98,6 @@ const Page = () => {
                 <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
                   History
                 </div>
-                {/* Text BELOW the image */}
                 <div className="p-4">
                   <h3 className="text-lg font-semibold leading-snug">
                     {post.title}
@@ -108,8 +115,7 @@ const Page = () => {
         )}
       </div>
 
-      {/* === FEATURED STATIC CARDS === */}
-      <div className="max-w-7xl mx-auto  py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="max-w-7xl mx-auto py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {/* CARD 1 */}
         <div className="relative rounded-xl shadow-lg overflow-hidden">
           <div className="relative w-full h-[220px]">
@@ -120,8 +126,13 @@ const Page = () => {
               className="object-cover"
             />
           </div>
-          <div className=" p-4">
-            <Link href="/blog/QUnWDFG1eBq2x4ejSLcs">
+          <div className="p-4">
+            <Link
+              href={`/news/${createFullSlug(
+                "Americans Say Government Should Address Slavery Effects",
+                "QUnWDFG1eBq2x4ejSLcs"
+              )}`}
+            >
               <h2 className="text-sm font-bold hover:underline">
                 Americans Say Government Should Address Slavery Effects
               </h2>
@@ -133,13 +144,17 @@ const Page = () => {
           </div>
         </div>
 
-        {/* CARD 2 */}
         <div className="relative rounded-xl shadow-lg overflow-hidden">
           <div className="relative w-full h-[220px]">
             <Image src="/his.png" alt="News 2" fill className="object-cover" />
           </div>
           <div className="p-4">
-            <Link href="/blog/ggrMyhU1qWNwmX8sfubI">
+            <Link
+              href={`/news/${createFullSlug(
+                "History of Missional Church",
+                "ggrMyhU1qWNwmX8sfubI"
+              )}`}
+            >
               <h2 className="text-sm font-bold hover:underline">
                 History of Missional Church
               </h2>
@@ -157,7 +172,12 @@ const Page = () => {
             <Image src="/mart.png" alt="News 3" fill className="object-cover" />
           </div>
           <div className="p-4">
-            <Link href="/blog/ttRDjI40RVXDo1Em5GUr">
+            <Link
+              href={`/news/${createFullSlug(
+                "80 Years of Living and Writing in the Shadow of the Bomb",
+                "ttRDjI40RVXDo1Em5GUr"
+              )}`}
+            >
               <h2 className="text-sm font-bold hover:underline">
                 80 Years of Living and Writing in the Shadow of the Bomb
               </h2>
@@ -180,7 +200,12 @@ const Page = () => {
             />
           </div>
           <div className="p-4">
-            <Link href="/blog/jeixznhQcoRJKNT9X6eE">
+            <Link
+              href={`/news/${createFullSlug(
+                "AIDS and the Hidden Catholic Church",
+                "jeixznhQcoRJKNT9X6eE"
+              )}`}
+            >
               <h2 className="text-sm font-bold hover:underline">
                 AIDS and the Hidden Catholic Church
               </h2>
@@ -193,7 +218,6 @@ const Page = () => {
         </div>
       </div>
 
-      {/* === VIEW MORE BUTTON === */}
       <div className="mx-auto text-center mt-16">
         <ViewMoreSearchPopup />
       </div>

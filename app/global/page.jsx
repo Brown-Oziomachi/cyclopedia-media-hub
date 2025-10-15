@@ -80,12 +80,22 @@ export default function BlogsPage() {
     setLoading(false);
   };
 
-  // Helper function to get category color
   const getCategoryColor = (category) => {
     const cat = category?.toLowerCase() || "other";
     return categoryColors[cat] || categoryColors.other;
   };
 
+    const createSlug = (title) => {
+      return title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    };
+
+    const createFullSlug = (title, id) => {
+      return `${createSlug(title)}--${id}`;
+  };
+  
   return (
     <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-30 lg:mt-40">
       <h1 className="text-center font-bold text-4xl col-span-full">
@@ -96,13 +106,12 @@ export default function BlogsPage() {
         Explore the global News
       </h2>
 
-      {/* Middle row - scrollable small cards */}
       <div className="overflow-x-auto mb-2 lg:mt-2">
         <div className="max-md:flex space-x-2">
           {posts.slice(3, 6).map((b) => (
             <Link
               key={b.id}
-              href={`/blog/${b.id}`}
+              href={`/news/${createFullSlug(b.title, b.id)}`}
               className="flex-shrink-0 w-56 relative"
             >
               <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
@@ -113,7 +122,6 @@ export default function BlogsPage() {
                       alt={b.title}
                       className="object-cover w-full h-full"
                     />
-                    {/* Category badge */}
                     <div
                       className={`absolute top-2 left-2 ${getCategoryColor(
                         b.category
@@ -138,11 +146,10 @@ export default function BlogsPage() {
         </div>
       </div>
 
-      {/* Main grid posts */}
       {posts.map((post) => (
         <Link
           key={post.id}
-          href={`/blog/${post.id}`}
+          href={`/news/${createFullSlug(post.title, post.id)}`}
           className="block relative"
         >
           <div className="flex flex-col overflow-hidden shadow-md cursor-pointer mt-3 max-md:-mt-10">
@@ -153,7 +160,6 @@ export default function BlogsPage() {
                   alt={post.title}
                   className="object-cover w-full h-full"
                 />
-                {/* Category badge */}
                 <div
                   className={`absolute top-2 left-2 ${getCategoryColor(
                     post.category
@@ -180,7 +186,6 @@ export default function BlogsPage() {
         </Link>
       ))}
 
-      {/* Load More Button */}
       {lastDoc && (
         <div className="col-span-full text-center mt-6 mb-5">
           <button

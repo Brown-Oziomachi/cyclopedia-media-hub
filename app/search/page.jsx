@@ -11,11 +11,23 @@ export default function SearchResults() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Helper functions
+  const createSlug = (title) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  };
+
+  const createFullSlug = (title, id) => {
+    return `${createSlug(title)}--${id}`;
+  };
+
   useEffect(() => {
     if (!term) return;
 
     const fetchResults = async () => {
-        setLoading(true);
+      setLoading(true);
       const q = collection(db1, "blogs");
       const snapshot = await getDocs(q);
 
@@ -42,7 +54,6 @@ export default function SearchResults() {
     fetchResults();
   }, [term]);
 
-
   return (
     <div className="max-w-3xl mx-auto py-2 max-lg:mt-20 mt-25 p-5 lg:mt-30">
       <h1 className="text-lg mb-3 text-center">
@@ -60,14 +71,21 @@ export default function SearchResults() {
         </p>
       ) : results.length > 0 ? (
         results.map((post) => (
-          <div key={post.id} className="mb-6">
-            <Link href={`/blog/${post.id}`}>
-              <div className="relative rounded-lg shadow-xl transition overflow-hidden">           
-                <h2 className="text-lg text-blue-400 hover:underline">
+          <div key={post.id} className="mb-3">
+            <Link href={`/news/${createFullSlug(post.title, post.id)}`}>
+              <div className="relative rounded-lg transition overflow-hidden">
+                {/* {post.imageUrl && (
+                  <img
+                    src={post.imageUrl}
+                    alt={post.title}
+                    className="w-full h-40 object-cover"
+                  />
+                )} */}
+                <h2 className="text-lg text-blue-400 hover:underline p-1">
                   {post.title}
                 </h2>
               </div>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-gray-400 mt-2">
                 {post.subtitle || "No description available."}
               </p>
               <p className="text-xs mt-2">

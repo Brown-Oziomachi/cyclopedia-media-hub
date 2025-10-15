@@ -181,35 +181,84 @@ const BlogPage = () => {
 
   return (
     <>
-        <main className="min-h-screen bg-black text-white px-2 py-20">
-          <div className="max-w-7xl mx-auto ">
-            <ScrollProgressBar />
+      <main className="min-h-screen bg-black text-white px-2 py-20">
+        <div className="max-w-7xl mx-auto ">
+          <ScrollProgressBar />
 
-            <header className="text-center mb-12 bg-amber-950 text-white rounded-bl-full">
-              <div className="lg:flex items-center justify-center gap-20 bg-amber-950 rounded-br-full ">
-                <div className="max-lg:relative">
-                  <h1 className="text-6xl font-bold tracking-tight max-lg:inset-0 max-lg:top-8 lg:py-10 lg:hidden text-gray-400 mb-5">
-                    <div id="ups-go"></div>
-                    <div
-                      onClick={() => {
-                        const el = document.getElementById("ups-go");
-                        if (el) el.scrollIntoView({ behavior: "smooth" });
-                      }}
-                    >
-                      {/* small Screen */}
-                    </div>
-                    {showContentType === "" ? " " : ""}
-                  </h1>
-                </div>
-                <div className="z-0 max-md:mt-2 lg:-mt-30 w-90 fixed ">
-                  <input
-                    type="text"
-                    placeholder={`Search ${showContentType} by genre... Cyclopedia`}
-                    className="px-2 py-2 rounded-full text-white focus:ring-purple-800 border w-full max-w-md mx-auto mb-10 bg-amber-950 border-gray-700 focus:outline-none focus:ring-2"
-                    onChange={(e) => {
-                      const searchTerm = e.target.value.toLowerCase();
+          <header className="text-center mb-12 bg-amber-950 text-white rounded-bl-full">
+            <div className="lg:flex items-center justify-center gap-20 bg-amber-950 rounded-br-full ">
+              <div className="max-lg:relative">
+                <h1 className="text-6xl font-bold tracking-tight max-lg:inset-0 max-lg:top-8 lg:py-10 lg:hidden text-gray-400 mb-5">
+                  <div id="ups-go"></div>
+                  <div
+                    onClick={() => {
+                      const el = document.getElementById("ups-go");
+                      if (el) el.scrollIntoView({ behavior: "smooth" });
+                    }}
+                  >
+                    {/* small Screen */}
+                  </div>
+                  {showContentType === "" ? " " : ""}
+                </h1>
+              </div>
+              <div className="z-0 max-md:mt-2 lg:-mt-30 w-90 fixed ">
+                <input
+                  type="text"
+                  placeholder={`Search ${showContentType} by genre... Cyclopedia`}
+                  className="px-2 py-2 rounded-full text-white focus:ring-purple-800 border w-full max-w-md mx-auto mb-10 bg-amber-950 border-gray-700 focus:outline-none focus:ring-2"
+                  onChange={(e) => {
+                    const searchTerm = e.target.value.toLowerCase();
+                    let basePosts = [];
+
+                    if (showContentType === "blog") {
+                      basePosts = blogPosts.filter((post) => !post.isVideo);
+                    } else if (showContentType === "video") {
+                      basePosts = blogPosts.filter(
+                        (post) => post.isVideo && !post.isReel
+                      );
+                    } else if (showContentType === "reel") {
+                      basePosts = blogPosts.filter((post) => post.isReel);
+                    }
+
+                    if (searchTerm) {
+                      const filtered = basePosts.filter(
+                        (post) =>
+                          post.genre &&
+                          post.genre.toLowerCase().includes(searchTerm)
+                      );
+                      setFilteredPosts(filtered);
+                      setSelectedCategory(null);
+                    } else {
+                      setFilteredPosts(basePosts);
+                      setSelectedCategory(null);
+                    }
+                  }}
+                />
+              </div>
+
+              <div
+                className="flex overflow-x-auto whitespace-nowrap gap-1 py-20 px-4"
+                style={{ scrollbarWidth: "none" }}
+              >
+                {genres.map((genre) => (
+                  <button
+                    key={genre}
+                    className={`flex-shrink-0 px-4 py-2 rounded-full font-medium transition cursor-pointer ${
+                      selectedCategory === genre
+                        ? "bg-green-500 text-black"
+                        : "bg-gray-400/5 border-x border-x-green-600 text-white hover:bg-gray-400/10"
+                    }`}
+                    onClick={() => filterByCategory(genre)}
+                  >
+                    {genre}
+                  </button>
+                ))}
+                {selectedCategory && (
+                  <button
+                    className="flex-shrink-0 px-4 py-2 rounded-md font-medium bg-red-600 text-white hover:bg-red-700"
+                    onClick={() => {
+                      setSelectedCategory(null);
                       let basePosts = [];
-
                       if (showContentType === "blog") {
                         basePosts = blogPosts.filter((post) => !post.isVideo);
                       } else if (showContentType === "video") {
@@ -219,93 +268,46 @@ const BlogPage = () => {
                       } else if (showContentType === "reel") {
                         basePosts = blogPosts.filter((post) => post.isReel);
                       }
-
-                      if (searchTerm) {
-                        const filtered = basePosts.filter(
-                          (post) =>
-                            post.genre &&
-                            post.genre.toLowerCase().includes(searchTerm)
-                        );
-                        setFilteredPosts(filtered);
-                        setSelectedCategory(null);
-                      } else {
-                        setFilteredPosts(basePosts);
-                        setSelectedCategory(null);
-                      }
+                      setFilteredPosts(basePosts);
                     }}
-                  />
-                </div>
-
-                <div
-                  className="flex overflow-x-auto whitespace-nowrap gap-1 py-20 px-4"
-                  style={{ scrollbarWidth: "none" }}
-                >
-                  {genres.map((genre) => (
-                    <button
-                      key={genre}
-                      className={`flex-shrink-0 px-4 py-2 rounded-full font-medium transition cursor-pointer ${
-                        selectedCategory === genre
-                          ? "bg-green-500 text-black"
-                          : "bg-gray-400/5 border-x border-x-green-600 text-white hover:bg-gray-400/10"
-                      }`}
-                      onClick={() => filterByCategory(genre)}
-                    >
-                      {genre}
-                    </button>
-                  ))}
-                  {selectedCategory && (
-                    <button
-                      className="flex-shrink-0 px-4 py-2 rounded-md font-medium bg-red-600 text-white hover:bg-red-700"
-                      onClick={() => {
-                        setSelectedCategory(null);
-                        let basePosts = [];
-                        if (showContentType === "blog") {
-                          basePosts = blogPosts.filter((post) => !post.isVideo);
-                        } else if (showContentType === "video") {
-                          basePosts = blogPosts.filter(
-                            (post) => post.isVideo && !post.isReel
-                          );
-                        } else if (showContentType === "reel") {
-                          basePosts = blogPosts.filter((post) => post.isReel);
-                        }
-                        setFilteredPosts(basePosts);
-                      }}
-                    >
-                      Clear Genre Filter
-                    </button>
-                  )}
-                </div>
-
-                {/* big Screen */}
-                <p className="text-sm py-1 text-gray-400 font-mono">
-                  <h1 className="text-6xl font-bold tracking-tight space-x-5 lg:border-x-green-600 max-lg:inset-0 max-lg:top-8 lg:py-10 max-lg:hidden">
-                    {showContentType === "" ? " " : ""}
-                  </h1>
-                </p>
+                  >
+                    Clear Genre Filter
+                  </button>
+                )}
               </div>
-              <p>
-                {" "}
-                Explore unique insights, research, trends, stories, histories,
-                news, politics and expert opinions.
-              </p>
-              <div></div>
-              {/* Only show community section on blog, not video or reel */}
-              {showContentType === "blog" && <div></div>}
-              <div>
-                <h1
-                  className="font-bold font-serif cursor-pointer text-green-600"
-                  onClick={() => {
-                    const el = document.getElementById("services-section");
-                    if (el) el.scrollIntoView({ behavior: "smooth" });
-                  }}
-                >
-                  Have something to Share? ⬇
+
+              {/* big Screen */}
+              <p className="text-sm py-1 text-gray-400 font-mono">
+                <h1 className="text-6xl font-bold tracking-tight space-x-5 lg:border-x-green-600 max-lg:inset-0 max-lg:top-8 lg:py-10 max-lg:hidden">
+                  {showContentType === "" ? " " : ""}
                 </h1>
-              </div>
-            </header>
+              </p>
+            </div>
+            <p>
+              {" "}
+              Explore unique insights, research, trends, stories, histories,
+              news, politics and expert opinions.
+            </p>
+            <div></div>
+            {/* Only show community section on blog, not video or reel */}
+            {showContentType === "blog" && <div></div>}
+            <div>
+              <h1
+                className="font-bold font-serif cursor-pointer text-green-600"
+                onClick={() => {
+                  const el = document.getElementById("services-section");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Have something to Share? ⬇
+              </h1>
+            </div>
+          </header>
 
-            {/* Posts */}
-            {!loading && filteredPosts.length > 0 && showContentType !== "gallery" && (
+          {/* Posts */}
+          {!loading &&
+            filteredPosts.length > 0 &&
+            showContentType !== "gallery" && (
               <section className="lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
                 {filteredPosts.map((post) => (
                   <article
@@ -320,7 +322,11 @@ const BlogPage = () => {
                     </h1>
 
                     {showContentType === "blog" ? (
-                      <Link href={`/blog/${post.id}`} className="block">
+                      <Link
+                        href={`/news/${createFullSlug(post.title, post.id)}`}
+                        className="block"
+                      >
+                        {" "}
                         <div className="z-50 p-5 bg-gray-950 backdrop-blur-md rounded-b-xl shadow-2xl shadow-black hover:bg-gray-400/5 h-50 items-center justify-center">
                           <h3 className="w-30 h-25 rounded-t-xl object-right ml-auto">
                             {post.imageUrl && (
@@ -388,37 +394,37 @@ const BlogPage = () => {
               </section>
             )}
 
-            {loading && (
-              <div className="flex justify-center items-center h-[30vh]">
-                <div className="w-14 h-14 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
-              </div>
-            )}
+          {loading && (
+            <div className="flex justify-center items-center h-[30vh]">
+              <div className="w-14 h-14 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          )}
 
-            {!loading && filteredPosts.length === 0 && (
-              <p className="text-center text-gray-400 mt-10">No posts found.</p>
-            )}
-          </div>
+          {!loading && filteredPosts.length === 0 && (
+            <p className="text-center text-gray-400 mt-10">No posts found.</p>
+          )}
+        </div>
 
-          <div id="services-section"></div>
-          <div className="mt-10 ">
-            <h1 className="font-bold font-serif text-green-600">
-              Have something to Share?
-            </h1>
-            <h2 className="font-mono ">
-              We value your thoughts and ideas! feel free to share your
-              opinions, Suggestions, or topics you'd love to see on our blog.
-              <h3>📩Reach out to us directly on WhatsApp:</h3>
-            </h2>
-            <a
-              href="https://wa.me/+2348142995114?text=Hello,%20my%20name%20is%20[Your%20Name].%20I'd%20like%20to%20share%20some%20information%20with%20Wiz-Blog."
-              target="_self"
-              rel="noopener noreferrer"
-              className="font-bold text-green-600 cursor-pointer hover:underline"
-            >
-              Click here to chat
-            </a>
-          </div>
-        </main>
+        <div id="services-section"></div>
+        <div className="mt-10 ">
+          <h1 className="font-bold font-serif text-green-600">
+            Have something to Share?
+          </h1>
+          <h2 className="font-mono ">
+            We value your thoughts and ideas! feel free to share your opinions,
+            Suggestions, or topics you'd love to see on our blog.
+            <h3>📩Reach out to us directly on WhatsApp:</h3>
+          </h2>
+          <a
+            href="https://wa.me/+2348142995114?text=Hello,%20my%20name%20is%20[Your%20Name].%20I'd%20like%20to%20share%20some%20information%20with%20Wiz-Blog."
+            target="_self"
+            rel="noopener noreferrer"
+            className="font-bold text-green-600 cursor-pointer hover:underline"
+          >
+            Click here to chat
+          </a>
+        </div>
+      </main>
     </>
   );
 };

@@ -45,6 +45,17 @@ const Page = () => {
     fetchMediaPosts();
   }, []);
 
+  const createSlug = (title) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  };
+
+  const createFullSlug = (title, id) => {
+    return `${createSlug(title)}--${id}`;
+  };
+
   if (loading) {
     return <p className="text-center py-10">Loading latest news...</p>;
   }
@@ -72,8 +83,8 @@ const Page = () => {
           {posts.map((post) => (
             <Link
               key={post.id}
-              href={`/blog/${post.id}`}
-              className="rounded-2xl shadow-lg hover:shadow-2xl transition overflow-hidden "
+              href={`/news/${createFullSlug(post.title, post.id)}`}
+              className="relative rounded-2xl shadow-lg hover:shadow-2xl transition overflow-hidden"
             >
               {post.imageUrl && (
                 <img
@@ -83,8 +94,8 @@ const Page = () => {
                 />
               )}
               <div className="p-4">
-                <h2 className="text-base font-semibold mb-2 ">{post.title}</h2>
-                <p className=" text-sm line-clamp-3">{post.subtitle}</p>
+                <h2 className="text-base font-semibold mb-2">{post.title}</h2>
+                <p className="text-sm line-clamp-3">{post.subtitle}</p>
               </div>
               <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
                 Media
@@ -100,28 +111,40 @@ const Page = () => {
           {
             img: "/plun.png",
             title: "The Forgotten Plunder of Iraq",
-            link: "https://cyclopedia-media-hub.vercel.app/blog/I19iaUfjERIHIPAce3ps",
+            link: `/news/${createFullSlug(
+              "The Forgotten Plunder of Iraq",
+              "IaxcmJfiF1fEizKHpD3E"
+            )}`,
             author: "By Cyclopedia",
             desc: "Few talk or think about Iraq these days and the media ignores this important but demolished nation.",
           },
           {
             img: "/uks.png",
             title: "UK media covering up British spy flights for Israel",
-            link: "https://cyclopedia-media-hub.vercel.app/blog/NDX3C3o7duRdz7844LU6",
+            link: `/news/${createFullSlug(
+              "UK media covering up British spy flights for Israel",
+              "NDX3C3o7duRdz7844LU6"
+            )}`,
             author: "Published with The National",
             desc: "Britain’s obedient defence correspondents are refusing to report a story of clear public interest.",
           },
           {
             img: "/medi.png",
             title: "How Western Media Built the Case for Genocide in Gaza",
-            link: "https://cyclopedia-media-hub.vercel.app/blog/OjdVfovsON2pJsJU9yJr",
+            link: `/news/${createFullSlug(
+              "How Western Media Built the Case for Genocide in Gaza",
+              "OjdVfovsON2pJsJU9yJr"
+            )}`,
             author: "By Cyclopedia",
             desc: "From obscuring the West’s role in starving Gaza to sensationalised accounts, journalists became propagandists.",
           },
           {
             img: "/ed.png",
             title: "UK Media Suppressing Mentions of Israel’s Genocide",
-            link: "https://cyclopedia-media-hub.vercel.app/blog/yr4GRaz6USfU5E9s2INA",
+            link: `/news/${createFullSlug(
+              "UK Media Suppressing Mentions of Israel’s Genocide",
+              "yr4GRaz6USfU5E9s2INA"
+            )}`,
             author: "By Des Freedman",
             desc: "Analysis shows British media downplayed UN allegations against Israel compared to Russia in Ukraine.",
           },

@@ -17,6 +17,18 @@ const Page = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Helper functions
+  const createSlug = (title) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  };
+
+  const createFullSlug = (title, id) => {
+    return `${createSlug(title)}--${id}`;
+  };
+
   useEffect(() => {
     const fetchSciencePosts = async () => {
       try {
@@ -33,7 +45,7 @@ const Page = () => {
           id: doc.id,
           ...doc.data(),
         }));
-  console.log("Fetched Science posts:", data);
+        console.log("Fetched Science posts:", data);
         setPosts(data);
       } catch (error) {
         console.error("Error fetching science posts:", error);
@@ -45,11 +57,10 @@ const Page = () => {
     fetchSciencePosts();
   }, []);
 
-
   return (
-    <main className="w-full ">
+    <main className="w-full">
       <h1 className="text-3xl lg:text-5xl font-bold text-center mt-30 lg:mt-50 mb-2">
-        Tomorrow’s World, Today
+        Tomorrow's World, Today
       </h1>
       <p className="text-sm lg:text-base text-center mx-auto">
         Discover breakthroughs shaping our future — AI, space travel,{" "}
@@ -61,11 +72,14 @@ const Page = () => {
       {/* 🔹 Dynamic Firestore Posts */}
       {posts.length > 0 && (
         <div className="max-w-7xl mx-auto py-10">
-          <h2 className="text-2xl font-bold mb-4">Latest latest Posts</h2>
+          <h2 className="text-2xl font-bold mb-4">Latest Posts</h2>
           <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
             {posts.map((post) => (
-              <Link key={post.id} href={`/blog/${post.id}`}>
-                <div className=" rounded-lg  shadow-xl transition overflow-hidden">
+              <Link
+                key={post.id}
+                href={`/news/${createFullSlug(post.title, post.id)}`}
+              >
+                <div className="relative rounded-lg shadow-xl transition overflow-hidden">
                   {post.imageUrl && (
                     <img
                       src={post.imageUrl}
@@ -73,11 +87,11 @@ const Page = () => {
                       className="w-full h-40 object-cover"
                     />
                   )}
+                  <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                    Science
+                  </div>
                   <div className="p-4">
-                    <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
-                      Science
-                    </div>
-                    <h2 className="text-lg font-semibold ">{post.title}</h2>
+                    <h2 className="text-lg font-semibold">{post.title}</h2>
                     <h3 className="text-xs mt-2">{post.subtitle}</h3>
                     <p className="text-xs text-gray-600 border mt-1">
                       {post.tags?.join(", ")}
@@ -94,7 +108,6 @@ const Page = () => {
       )}
 
       {/* 🔹 Static Science Cards */}
-
       <div className="max-w-7xl mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {/* === Static NEWS CARD 1 === */}
         <div className="relative rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
@@ -107,13 +120,18 @@ const Page = () => {
             />
           </div>
           <div className="p-4 rounded-b-xl">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/5ucZczUCM0xYIsUEbamY">
-              <h2 className="text-sm font-bold  hover:underline">
+            <Link
+              href={`/news/${createFullSlug(
+                "Review: Religion, Science, and Empire",
+                "5ucZczUCM0xYIsUEbamY"
+              )}`}
+            >
+              <h2 className="text-sm font-bold hover:underline">
                 Review: Religion, Science, and Empire
               </h2>
             </Link>
             <p className="text-xs mt-1">By Anand Venkatkrishnan</p>
-            <p className="mt-2 text-xs ">
+            <p className="mt-2 text-xs">
               Anand Venkatkrishnan reviews Religion, Science, and Empire by
               Peter Gottschalk.
             </p>
@@ -124,7 +142,7 @@ const Page = () => {
         </div>
 
         {/* === Static NEWS CARD 2 === */}
-        <div className="relative rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 ">
+        <div className="relative rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
           <div className="relative w-full h-[220px]">
             <Image
               src="/sciat.png"
@@ -134,13 +152,18 @@ const Page = () => {
             />
           </div>
           <div className="p-4 rounded-b-xl">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/IDins9X9XoPgmhW9FTBi">
+            <Link
+              href={`/news/${createFullSlug(
+                "Science or Academic Atheism?",
+                "IDins9X9XoPgmhW9FTBi"
+              )}`}
+            >
               <h2 className="text-sm font-bold hover:underline">
                 Science or Academic Atheism?
               </h2>
             </Link>
             <p className="text-xs mt-1">Published on August 8, 2011</p>
-            <p className="mt-2 text-xs ">
+            <p className="mt-2 text-xs">
               What happens when we give scientists the authority to speak about
               God?
             </p>
@@ -151,7 +174,7 @@ const Page = () => {
         </div>
 
         {/* === Static NEWS CARD 3 === */}
-        <div className="relative rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 ">
+        <div className="relative rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
           <div className="relative w-full h-[220px]">
             <Image
               src="/heal.png"
@@ -161,13 +184,18 @@ const Page = () => {
             />
           </div>
           <div className="p-4 rounded-b-xl">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/BlKwDu4niv82rMzxTDVF">
-              <h2 className="text-sm font-bold  hover:underline">
+            <Link
+              href={`/news/${createFullSlug(
+                "Healed and Whole Forever: On Psychedelic Science & Spirituality",
+                "BlKwDu4niv82rMzxTDVF"
+              )}`}
+            >
+              <h2 className="text-sm font-bold hover:underline">
                 Healed and Whole Forever: On Psychedelic Science & Spirituality
               </h2>
             </Link>
-            <p className="text-xs  mt-1">Published on January 25, 2016</p>
-            <p className="mt-2 text-xs ">
+            <p className="text-xs mt-1">Published on January 25, 2016</p>
+            <p className="mt-2 text-xs">
               Patricia Kubala explores the connection between drugs, healing,
               and spirituality.
             </p>
@@ -178,7 +206,7 @@ const Page = () => {
         </div>
 
         {/* === Static NEWS CARD 4 === */}
-        <div className="relative rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 ">
+        <div className="relative rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300">
           <div className="relative w-full h-[220px]">
             <Image
               src="/jews.png"
@@ -188,7 +216,12 @@ const Page = () => {
             />
           </div>
           <div className="p-4 rounded-b-xl">
-            <Link href="https://cyclopedia-media-hub.vercel.app/blog/tx8eWd93N7HyChUseSob">
+            <Link
+              href={`/news/${createFullSlug(
+                "Christian Science as Jewish Tradition",
+                "tx8eWd93N7HyChUseSob"
+              )}`}
+            >
               <h2 className="text-sm font-bold hover:underline">
                 Christian Science as Jewish Tradition
               </h2>

@@ -47,6 +47,17 @@ const NigeriaPage = () => {
     fetchNigeriaPosts();
   }, []);
 
+    const createSlug = (title) => {
+      return title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    };
+
+    const createFullSlug = (title, id) => {
+      return `${createSlug(title)}--${id}`;
+    };
+
   return (
     <main className="w-full b">
       <div className="max-w-7xl mx-auto px- lg:py-40 py-20">
@@ -68,7 +79,7 @@ const NigeriaPage = () => {
             {posts.map((post) => (
               <Link
                 key={post.id}
-                href={`/blog/${post.id}`}
+                href={`/news/${createFullSlug(post.title, post.id)}`}
                 className="relative rounded-lg shadow-xl  transition overflow-hidden"
               >
                 {post.imageUrl && (

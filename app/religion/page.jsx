@@ -49,6 +49,17 @@ const Page = () => {
 
    fetchReligionPosts();
  }, []);
+  
+    const createSlug = (title) => {
+      return title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    };
+
+    const createFullSlug = (title, id) => {
+      return `${createSlug(title)}--${id}`;
+    };
 
   return (
     <main className="w-full ">
@@ -102,7 +113,7 @@ const Page = () => {
                 </div>
               </div>
               <div className="p-4">
-                <Link href={`/blog/${post.id}`}>
+                <Link href={`/news/${createFullSlug(post.title, post.id)}`}>
                   <h2 className="text-sm font-bold line-clamp-2 hover:underline">
                     {post.title}
                   </h2>
@@ -147,7 +158,7 @@ const Page = () => {
               />
             </div>
             <div className="p-4">
-              <Link href="https://cyclopedia-media-hub.vercel.app/blog/enupjwyWCCP7OS0h77TQ">
+              <Link href={`/news/${createFullSlug("From Missionaries to Settler-Colonialists for Christian Supremacy", "enupjwyWCCP7OS0h77TQ")}`}>
                 <h2 className="text-base font-bold  hover:underline">
                   From Missionaries to Settler-Colonialists for Christian
                   Supremacy
@@ -177,7 +188,7 @@ const Page = () => {
               />
             </div>
             <div className="p-4">
-              <Link href="https://cyclopedia-media-hub.vercel.app/blog/yQ5FJS6IFfe7zpQ8gzk7">
+              <Link href={`/news/${createFullSlug("Three Key Moments for Shari’a in Nigeria", "yQ5FJS6IFfe7zpQ8gzk7")}`}>
                 <h2 className="text-base font-bold hover:underline">
                   Three Key Moments for Shari’a in Nigeria
                 </h2>
@@ -205,7 +216,7 @@ const Page = () => {
               />
             </div>
             <div className="p-4">
-              <Link href="https://cyclopedia-media-hub.vercel.app/blog/sVYggqD0kTZjrZsC7GIb">
+              <Link href={`/news/${createFullSlug("Violent Dissent, Intra-Muslim Struggles, and Political Crisis in Northern Nigeria", "sVYggqD0kTZjrZsC7GIb")}`}>
                 <h2 className="text-base font-bold  hover:underline">
                   Violent Dissent, Intra-Muslim Struggles, and Political Crisis
                   in Northern Nigeria
@@ -234,7 +245,7 @@ const Page = () => {
               />
             </div>
             <div className="p-4">
-              <Link href="https://cyclopedia-media-hub.vercel.app/blog/VfaKVglfMBiX8qNlgaQd">
+              <Link href={`/news/${createFullSlug("Christianity Without God", "VfaKVglfMBiX8qNlgaQd")}`}>
                 <h2 className="text-base font-bold hover:underline">
                   Christianity Without God
                 </h2>
@@ -263,7 +274,7 @@ const Page = () => {
               />
             </div>
             <div className="p-4">
-              <Link href="https://cyclopedia-media-hub.vercel.app/blog/NhDvvZoRYdUU6hrpMABv">
+              <Link href={`/news/${createFullSlug("Modified Christianity", "NhDvvZoRYdUU6hrpMABv")}`}>
                 <h2 className="text-sm font-bold hover:underline">
                   Modified Christianity
                 </h2>
@@ -290,7 +301,7 @@ const Page = () => {
               />
             </div>
             <div className="p-4">
-              <Link href="https://cyclopedia-media-hub.vercel.app/blog/u4GeCPrM7sddaF5dEKsD">
+              <Link href={`/news/${createFullSlug("Islamophobia and Americans’ Problems with Face Masks", "u4GeCPrM7sddaF5dEKsD")}`}>
                 <h2 className="text-sm font-bold hover:underline">
                   Islamophobia and Americans’ Problems with Face Masks
                 </h2>
@@ -320,7 +331,7 @@ const Page = () => {
               />
             </div>
             <div className="p-4">
-              <Link href="https://cyclopedia-media-hub.vercel.app/blog/75ZM0N5NXt3cMFHkbUKS">
+              <Link href={`/news/${createFullSlug("How They Met Their Mother", "75ZM0N5NXt3cMFHkbUKS")}`}>
                 <h2 className="text-sm font-bold hover:underline">
                   How They Met Their Mother
                 </h2>
@@ -348,7 +359,7 @@ const Page = () => {
               />
             </div>
             <div className="p-4">
-              <Link href="https://cyclopedia-media-hub.vercel.app/blog/dTksJYvlMiYC3QJ2BVa3">
+              <Link href={`/news/${createFullSlug("Americans Leaving Religion", "dTksJYvlMiYC3QJ2BVa3")}`}>
                 <h2 className="text-sm font-bold hover:underline">
                   Americans Leaving Religion
                 </h2>
@@ -377,7 +388,7 @@ const Page = () => {
               />
             </div>
             <div className="p-4">
-              <Link href="https://cyclopedia-media-hub.vercel.app/blog/wuagVdBpN45n8CuQa65d">
+              <Link href={`/news/${createFullSlug("More than Missionary — A Life in the Struggle for Reproductive Freedom", "wuagVdBpN45n8CuQa65d")}`}>
                 <h2 className="text-sm font-bold  hover:underline">
                   More than Missionary — A Life in the Struggle for Reproductive
                   Freedom
@@ -404,7 +415,7 @@ const Page = () => {
               />
             </div>
             <div className="p-4">
-              <Link href="https://cyclopedia-media-hub.vercel.app/blog/FM2i8368RY3xpHvH9D6K">
+              <Link href={`/news/${createFullSlug("Blasphemy in Saudi Arabia, Religious Freedom", "FM2i8368RY3xpHvH9D6K")}`}>
                 <h2 className="text-sm font-bold hover:underline">
                   Blasphemy in Saudi Arabia, Religious Freedom
                 </h2>
@@ -430,7 +441,7 @@ const Page = () => {
               />
             </div>
             <div className="p-4">
-              <Link href="https://cyclopedia-media-hub.vercel.app/blog/0oE5AkuF09zxe4F8u3gb">
+              <Link href={`/news/${createFullSlug("Tragedy, Spirituality, and Black Justice", "0oE5AkuF09zxe4F8u3gb")}`}>
                 <h2 className="text-sm font-bold hover:underline">
                   Tragedy, Spirituality, and Black Justice
                 </h2>
@@ -458,7 +469,7 @@ const Page = () => {
               />
             </div>
             <div className="p-4">
-              <Link href="https://cyclopedia-media-hub.vercel.app/blog/jeixznhQcoRJKNT9X6eE">
+              <Link href={`/news/${createFullSlug("AIDS and the Hidden Catholic Church", "jeixznhQcoRJKNT9X6eE")}`}>
                 <h2 className="text-sm font-bold hover:underline">
                   AIDS and the Hidden Catholic Church
                 </h2>

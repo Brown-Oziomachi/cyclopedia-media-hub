@@ -49,7 +49,16 @@ export default function EducationTicker() {
   }, []);
 
   // Static cards you already had
-  
+    const createSlug = (title) => {
+      return title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    };
+
+    const createFullSlug = (title, id) => {
+      return `${createSlug(title)}--${id}`;
+    };
 
   return (
     <section className="max-w-4xl mx-auto py-10">
@@ -73,7 +82,6 @@ export default function EducationTicker() {
         }
       `}</style>
 
-      {/* 🔹 Dynamic posts fetched by CATEGORY */}
       {loading ? (
         <p className="text-center py-10">Loading latest posts...</p>
       ) : posts.length === 0 ? (
@@ -85,7 +93,7 @@ export default function EducationTicker() {
           {posts.map((post) => (
             <Link
               key={post.id}
-              href={`/blog/${post.id}`}
+              href={`/news/${createFullSlug(post.title, post.id)}`}
               className="relative shadow-xl transition overflow-hidden"
             >
               <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">

@@ -18,6 +18,18 @@ const SportsPage = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Helper functions
+  const createSlug = (title) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  };
+
+  const createFullSlug = (title, id) => {
+    return `${createSlug(title)}--${id}`;
+  };
+
   useEffect(() => {
     const fetchPoliticsPosts = async () => {
       try {
@@ -28,7 +40,6 @@ const SportsPage = () => {
           orderBy("createdAt", "desc"),
           limit(20)
         );
-        
 
         const querySnapshot = await getDocs(q);
         const data = querySnapshot.docs.map((doc) => ({
@@ -73,7 +84,7 @@ const SportsPage = () => {
             {posts.map((post) => (
               <Link
                 key={post.id}
-                href={`/blog/${post.id}`}
+                href={`/news/${createFullSlug(post.title, post.id)}`}
                 className="relative rounded-lg shadow-xl  transition overflow-hidden"
               >
                 {post.imageUrl && (

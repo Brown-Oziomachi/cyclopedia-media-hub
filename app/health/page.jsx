@@ -31,6 +31,17 @@ export default function HealthPostsPage() {
     fetchPosts();
   }, []);
 
+    const createSlug = (title) => {
+      return title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    };
+
+    const createFullSlug = (title, id) => {
+      return `${createSlug(title)}--${id}`;
+    };
+
   if (loading) return <p className="p-6">Loading...</p>;
 
   return (
@@ -39,7 +50,7 @@ export default function HealthPostsPage() {
 
       <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6">
         {posts.map((post, index) => (
-          <Link key={post.id} href={`/blog/${post.id}`}>
+          <Link key={post.id} href={`/news/${createFullSlug(post.title, post.id)}`}>
             <div
               className={`relative rounded overflow-hidden shadow hover:shadow-lg transition cursor-pointer
           ${index % 5 === 0 ? "md:col-span-2 md:row-span-2" : ""}`}

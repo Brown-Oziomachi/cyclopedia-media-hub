@@ -38,7 +38,18 @@ const Page = () => {
     };
 
     fetchphilosophysPosts();
-  }, []);
+ }, []);
+  
+    const createSlug = (title) => {
+      return title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    };
+
+    const createFullSlug = (title, id) => {
+      return `${createSlug(title)}--${id}`;
+    };
 
   return (
     <main className="w-full">
@@ -58,7 +69,7 @@ const Page = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {posts.map((post) => (
               <div key={post.id} className=" rounded-lg shadow-2xl p-4">
-                <Link href={`/blog/${post.id}`}>
+                <Link href={`/news/${createFullSlug(post.title, post.id)}`}>
                   <h3 className="font-bold text-lg hover:underline">
                     {post.title}
                   </h3>

@@ -19,6 +19,24 @@ import SideNewsTicker from "@/components/SideNewsTicker";
 import FollowUsPopup from "@/components/FollowUsPopup";
 import AdminProfile from "@/components/AdminProfile";
 
+// Helper function to create slug from title
+const createSlug = (title) => {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+};
+
+// Helper function to extract ID from slug (format: title-slug--docId)
+const extractIdFromSlug = (slug) => {
+  const parts = slug.split("--");
+  return parts.length > 1 ? parts[parts.length - 1] : slug;
+};
+
+// Helper function to create full slug with ID
+const createFullSlug = (title, id) => {
+  return `${createSlug(title)}--${id}`;
+};
 
 // Blog content renderer
 const BlogDisplay = ({ body }) => {
@@ -27,16 +45,14 @@ const BlogDisplay = ({ body }) => {
 
   return (
     <div
-      className={` ${
-        !isHTML ? "whitespace-pre-line space-y-4" : ""
-      }`}
+      className={` ${!isHTML ? "whitespace-pre-line space-y-4" : ""}`}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
 };
 
-export default function BlogDetails() {
-  const { id } = useParams();
+export default function NewsDetails() {
+  const { id: slugParam } = useParams();
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -45,31 +61,56 @@ export default function BlogDetails() {
   const [liked, setLiked] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
   const [blogs, setBlogs] = useState([]);
-  const [query, setQuery] = useState("");
   const menuRef = useRef(null);
   const handleShareClick = () => setShowShareMenu(!showShareMenu);
 
-  // Fetch blog
+  // Category colors mapping
+  const categoryColors = {
+    politics: "bg-blue-600",
+    religion: "bg-purple-600",
+    history: "bg-amber-600",
+    education: "bg-green-600",
+    health: "bg-red-600",
+    sports: "bg-orange-600",
+    technology: "bg-cyan-600",
+    entertainment: "bg-pink-600",
+    business: "bg-gray-700",
+    other: "bg-gray-500",
+  };
+
+  // Helper function to get category color
+  const getCategoryColor = (category) => {
+    const cat = category?.toLowerCase() || "other";
+    return categoryColors[cat] || categoryColors.other;
+  };
+
+  // Fetch blog - extract ID from slug
   useEffect(() => {
-    if (!id) return;
+    if (!slugParam) return;
     async function fetchBlog() {
-      const blogRef = doc(db1, "blogs", id);
-      const blogDoc = await getDoc(blogRef);
-      if (blogDoc.exists()) {
-        const data = blogDoc.data();
-        setBlog({ id, ...data });
-        setLikes(data.likes || 0);
+      try {
+        const docId = extractIdFromSlug(slugParam);
+        const blogRef = doc(db1, "blogs", docId);
+        const blogDoc = await getDoc(blogRef);
+        
+        if (blogDoc.exists()) {
+          const data = blogDoc.data();
+          setBlog({ id: docId, ...data });
+          setLikes(data.likes || 0);
+        }
+      } catch (error) {
+        console.error("Error fetching news:", error);
       }
     }
     fetchBlog();
-  }, [id]);
+  }, [slugParam]);
 
   // Check if liked
   useEffect(() => {
-    if (!id) return;
-    const storedLiked = localStorage.getItem(`liked-${id}`);
+    if (!blog) return;
+    const storedLiked = localStorage.getItem(`liked-${blog.id}`);
     if (storedLiked) setLiked(true);
-  }, [id]);
+  }, [blog]);
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -86,17 +127,17 @@ export default function BlogDetails() {
 
   // Fetch related blogs
   useEffect(() => {
-    if (!id) return;
+    if (!blog) return;
     async function fetchBlogs() {
       const snapshot = await getDocs(collection(db1, "blogs"));
       const allBlogs = snapshot.docs
         .map((doc) => ({ id: doc.id, ...doc.data() }))
-        .filter((b) => b.id !== id)
-        .sort((a, b) => (b.date || 0) - (a.date || 0));
-      setBlogs(allBlogs.slice(70, 80));
+        .filter((b) => b.id !== blog.id)
+        .sort((a, b) => (b.createdAt?.toDate() || 0) - (a.createdAt?.toDate() || 0));
+      setBlogs(allBlogs.slice(0, 9));
     }
     fetchBlogs();
-  }, [id]);
+  }, [blog]);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -104,37 +145,37 @@ export default function BlogDetails() {
   };
 
   const handleLikeClick = async () => {
-    if (!id) return;
+    if (!blog) return;
     const newLikes = liked ? likes - 1 : likes + 1;
     setLiked(!liked);
     setLikes(newLikes);
-    localStorage.setItem(`liked-${id}`, (!liked).toString());
+    localStorage.setItem(`liked-${blog.id}`, (!liked).toString());
     try {
-      const blogRef = doc(db1, "blogs", id);
+      const blogRef = doc(db1, "blogs", blog.id);
       await updateDoc(blogRef, { likes: newLikes });
     } catch (error) {
       console.error("Error updating likes:", error);
     }
   };
 
-   const sampleNews = [
-     {
-       title: "Elections 2025: What You Should Know",
-       link: "/news/elections",
-       category: "Politics",
-     },
-     {
-       title: "Tech Giants Battle Over AI Dominance",
-       link: "/news/ai-war",
-       category: "Technology",
-     },
-     {
-       title: "Global Markets Face Turbulence",
-       link: "/news/markets",
-       category: "Business",
-     },
+  const sampleNews = [
+    {
+      title: "Elections 2025: What You Should Know",
+      link: "/news/elections",
+      category: "Politics",
+    },
+    {
+      title: "Tech Giants Battle Over AI Dominance",
+      link: "/news/ai-war",
+      category: "Technology",
+    },
+    {
+      title: "Global Markets Face Turbulence",
+      link: "/news/markets",
+      category: "Business",
+    },
   ];
-  
+
   if (!blog) return <div className="text-center py-20">Loading news...</div>;
 
   return (
@@ -144,7 +185,7 @@ export default function BlogDetails() {
       transition={{ duration: 0.1 }}
       className="min-h-screen px-0 md:px-10 lg:px-20 py-5 mx-auto font-sans space-y-10"
     >
-      {/* Blog Header */}
+      {/* News Header */}
       <div>
         <div className="w-full mt-1">
           {/* Title & Subtitle above the image */}
@@ -247,13 +288,15 @@ export default function BlogDetails() {
         </div>
       </div>
 
-      {/* Blog Content */}
-      <div className=" max-w-none px-2 sm:px-4 space-y-5 blog-content">
-        <hr className="border-gray-200 dark:border-gray-700" />
-        <BlogDisplay body={blog.body} />
+      {/* News Content */}
+      <div className="max-w-none px-2 sm:px-4 space-y-5 blog-content">
+        <>
+          <hr className="border-gray-200 dark:border-gray-700" />
+          <BlogDisplay body={blog.body} />
+        </>
       </div>
 
-      {/* Like Button (left as-is) */}
+      {/* Like Button */}
       <div className="flex gap-3 sm:gap-5">{/* ... */}</div>
 
       {/* Newsletter Card */}
@@ -276,14 +319,14 @@ export default function BlogDetails() {
         </div>
       </Link>
       <AdminProfile />
-      {/* Related Blogs */}
+      {/* Related News */}
       <div>
-        <h2 className="text-xl font-bold mb-4 mt-10 p-5">Related</h2>
+        <h2 className="text-xl font-bold mb-4 mt-10 p-5">Related News</h2>
 
         {/* First row - grid cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs.slice(0, 3).map((b) => (
-            <Link key={b.id} href={`/blog/${b.id}`} className="block">
+            <Link key={b.id} href={`/news/${createFullSlug(b.title, b.id)}`} className="block">
               <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
                 {b.imageUrl && (
                   <div className="relative w-full h-48 sm:h-56">
@@ -292,6 +335,14 @@ export default function BlogDetails() {
                       alt={b.title}
                       className="object-cover w-full h-full"
                     />
+                    {/* Category badge */}
+                    <div
+                      className={`absolute top-2 left-2 ${getCategoryColor(
+                        b.category
+                      )} text-white text-xs font-semibold px-3 py-1 rounded-md z-10`}
+                    >
+                      {b.category || "Other"}
+                    </div>
                   </div>
                 )}
                 <div className="p-4">
@@ -314,7 +365,7 @@ export default function BlogDetails() {
             {blogs.slice(3, 6).map((b) => (
               <Link
                 key={b.id}
-                href={`/blog/${b.id}`}
+                href={`/news/${createFullSlug(b.title, b.id)}`}
                 className="flex-shrink-0 w-64"
               >
                 <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
@@ -325,6 +376,14 @@ export default function BlogDetails() {
                         alt={b.title}
                         className="object-cover w-full h-full"
                       />
+                      {/* Category badge */}
+                      <div
+                        className={`absolute top-2 left-2 ${getCategoryColor(
+                          b.category
+                        )} text-white text-xs font-semibold px-2 py-1 rounded-md z-10`}
+                      >
+                        {b.category || "Other"}
+                      </div>
                     </div>
                   )}
                   <div className="p-3">
@@ -345,7 +404,7 @@ export default function BlogDetails() {
         {/* Last row - 3 more cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {blogs.slice(6, 9).map((b) => (
-            <Link key={b.id} href={`/blog/${b.id}`} className="block">
+            <Link key={b.id} href={`/news/${createFullSlug(b.title, b.id)}`} className="block">
               <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
                 {b.imageUrl && (
                   <div className="relative w-full h-40 sm:h-48">
@@ -354,6 +413,14 @@ export default function BlogDetails() {
                       alt={b.title}
                       className="object-cover w-full h-full"
                     />
+                    {/* Category badge */}
+                    <div
+                      className={`absolute top-2 left-2 ${getCategoryColor(
+                        b.category
+                      )} text-white text-xs font-semibold px-3 py-1 rounded-md z-10`}
+                    >
+                      {b.category || "Other"}
+                    </div>
                   </div>
                 )}
                 <div className="p-4">

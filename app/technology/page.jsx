@@ -17,6 +17,18 @@ const PoliticsPage = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Helper functions
+  const createSlug = (title) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  };
+
+  const createFullSlug = (title, id) => {
+    return `${createSlug(title)}--${id}`;
+  };
+
   useEffect(() => {
     const fetchTechnologyPosts = async () => {
       try {
@@ -62,7 +74,7 @@ const PoliticsPage = () => {
   }, []);
 
   return (
-    <main className="w-ful">
+    <main className="w-full">
       <div className="max-w-7xl mx-auto py-10">
         <h1 className="text-3xl lg:text-5xl font-bold text-center max-lg:mt-40 lg:mt-50 mb-2">
           Innovation, Tech, and the Future
@@ -86,7 +98,7 @@ const PoliticsPage = () => {
             {posts.map((post) => (
               <Link
                 key={post.id}
-                href={`/blog/${post.id}`}
+                href={`/news/${createFullSlug(post.title, post.id)}`}
                 className="relative rounded-lg shadow-xl transition overflow-hidden"
               >
                 {post.imageUrl && (

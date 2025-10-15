@@ -99,7 +99,7 @@ export default function ContactPage() {
         </div>
 
         {/* ✅ Contact Form */}
-        <div className="flex-1 border border rounded-2xl p-8 mt-16 shadow-xl ">
+        <div className="flex-1 border rounded-2xl p-8 mt-16 shadow-xl ">
           <Formik
             initialValues={{
               name: "",

@@ -47,6 +47,17 @@ const PoliticsPage = () => {
     fetchArtPosts();
   }, []);
 
+    const createSlug = (title) => {
+      return title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    };
+
+    const createFullSlug = (title, id) => {
+      return `${createSlug(title)}--${id}`;
+    };
+
   return (
     <main className="w-full">
       <div className="max-w-7xl mx-auto py-10">
@@ -72,7 +83,7 @@ const PoliticsPage = () => {
             {posts.map((post) => (
               <Link
                 key={post.id}
-                href={`/blog/${post.id}`}
+                href={`/news/${createFullSlug(post.title, post.id)}`}
                 className=" rounded-lg shadow hover:shadow-lg transition overflow-hidden"
               >
                 {post.imageUrl && (
@@ -85,9 +96,6 @@ const PoliticsPage = () => {
                 <div className="p-4">
                   <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
                   <p className=" text-sm line-clamp-3">{post.subtitle}</p>
-                  {/* <div className="mt-2 text-xs text-blue-600 font-medium">
-                    {post.tags?.join(", ")}
-                  </div> */}
                 </div>
                 <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
                   Art & Culture

@@ -53,7 +53,9 @@ export default function ViewMoreSearchPopup() {
             >
               <X size={22} />
             </button>
-            <h1 className="my-2 text-center font-bold">THE CYCLOPEDIA | NEWS COMPANY</h1>
+            <h1 className="my-2 text-center font-bold">
+              THE CYCLOPEDIA | NEWS COMPANY
+            </h1>
             <h5 className="text-center uppercase mb-5">
               Stay informed! Use our search to explore thousands of articles
               from The Cyclopedia News archives. Find breaking news, in-depth
@@ -75,6 +77,17 @@ export default function ViewMoreSearchPopup() {
               >
                 <Search size={18} />
               </button>
+            </div>
+            <div className="flex gap-3 mt-10 items-center justify-around">
+              <a className="bg-red-600 font-black px-5 py-2 rouded-lg" href="/newsletter">
+                Join Us
+              </a>
+              <a
+                className="bg-blue-600 font-black px-5 py-2 rouded-lg"
+                href="https://thecyclopedia.substack.com/subscribe"
+              >
+                Support Us
+              </a>
             </div>
           </div>
         </div>

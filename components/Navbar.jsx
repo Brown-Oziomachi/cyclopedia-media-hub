@@ -713,6 +713,20 @@ const regions = [
                     <Youtube size={32} />
                   </a>
                 </div>
+                <div className="flex gap-10 items-center justify-around mb-20">
+                  <a
+                    className="bg-red-600 text-white font-black px-5 py-2 rouded-lg"
+                    href="/newsletter"
+                  >
+                    Join Us
+                  </a>
+                  <a
+                    className="bg-blue-600 text-white font-black px-5 py-2 rouded-lg"
+                    href="https://thecyclopedia.substack.com/subscribe"
+                  >
+                    Support Us
+                  </a>
+                </div>
               </>
             )}
           </div>

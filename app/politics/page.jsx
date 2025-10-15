@@ -47,6 +47,17 @@ const PoliticsPage = () => {
     fetchPoliticsPosts();
   }, []);
 
+    const createSlug = (title) => {
+      return title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    };
+
+    const createFullSlug = (title, id) => {
+      return `${createSlug(title)}--${id}`;
+    };
+
   if (loading) {
     return (
       <main className="w-full min-h-screen flex items-center justify-center">
@@ -86,7 +97,7 @@ const PoliticsPage = () => {
         {/* Featured Story (First Post) */}
         {posts[0] && (
           <div className="mb-12">
-            <Link href={`/blog/${posts[0].id}`}>
+            <Link href={`/news/${createFullSlug(posts[0].title, posts[0].id)}`}>
               <div className="relative grid lg:grid-cols-2 gap-6 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 ">
                 {posts[0].imageUrl && (
                   <div className=" h-64 lg:h-96">
@@ -99,12 +110,12 @@ const PoliticsPage = () => {
                 )}
                 <div className="p-8 flex flex-col justify-center">
                   <span className="text-xs font-semibold text-purple-600 uppercase mb-2 tracking-wider">
-                    Featured Story
+                    Latest News
                   </span>
                   <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
                     Politics
                   </div>
-                  <h2 className="text-2xl lg:text-3xl font-bold mb-4 hover:text-purple-600 transition-colors">
+                  <h2 className="text-2xl uppercase lg:text-3xl font-bold mb-4 hover:text-purple-600 transition-colors">
                     {posts[0].title}
                   </h2>
                   <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 text-base">
@@ -123,7 +134,7 @@ const PoliticsPage = () => {
         {posts.length > 1 && (
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             {posts.slice(1, 4).map((post) => (
-              <Link key={post.id} href={`/blog/${post.id}`}>
+              <Link key={post.id} href={`/news/${createFullSlug(post.title, post.id)}`}>
                 <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full">
                   {post.imageUrl && (
                     <div className="relative h-48">
@@ -138,7 +149,7 @@ const PoliticsPage = () => {
                     <h3 className="text-lg font-bold mb-2 line-clamp-2 hover:text-purple-600 transition-colors">
                       {post.title}
                     </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-3">
+                    <p className="text-sm text-gray-600 uppercase dark:text-gray-400 line-clamp-2 mb-3">
                       {post.subtitle}
                     </p>
                     <p className="text-xs text-gray-500">
@@ -167,7 +178,7 @@ const PoliticsPage = () => {
             {/* Latest News Grid */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {posts.slice(4, 12).map((post) => (
-                <Link key={post.id} href={`/blog/${post.id}`}>
+                <Link key={post.id} href={`/news/${createFullSlug(post.title, post.id)}`}>
                   <div className="relative rounded-lg overflow-hidden shadow hover:shadow-lg transition-all duration-300  h-full">
                     {post.imageUrl && (
                       <div className=" h-40">
@@ -179,7 +190,7 @@ const PoliticsPage = () => {
                       </div>
                     )}
                     <div className="p-4">
-                      <h3 className="text-sm font-semibold mb-2 line-clamp-3 hover:text-purple-600 transition-colors">
+                      <h3 className="text-sm font-semibold uppercase mb-2 line-clamp-3 hover:text-purple-600 transition-colors">
                         {post.title}
                       </h3>
                       <p className="text-xs text-gray-500">
@@ -207,7 +218,7 @@ const PoliticsPage = () => {
             <h2 className="text-2xl font-bold mb-6">More Politics Stories</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {posts.slice(12).map((post) => (
-                <Link key={post.id} href={`/blog/${post.id}`}>
+                <Link key={post.id} href={`/news/${createFullSlug(post.title, post.id)}`}>
                   <div className="relative rounded-lg overflow-hidden shadow hover:shadow-lg transition-all duration-300 ">
                     {post.imageUrl && (
                       <div className=" h-48">
@@ -254,8 +265,8 @@ const PoliticsPage = () => {
                 />
               </div>
               <div className="p-4">
-                <Link href="https://cyclopedia-media-hub.vercel.app/blog/Tc0W4qUPzj7ytY7UB5fs">
-                  <h2 className="text-sm font-bold hover:text-purple-600 transition-colors mb-2">
+                <Link href={`/news/${createFullSlug("Erik Prince Calls for U.S. to Colonize Africa and Latin America", "Tc0W4qUPzj7ytY7UB5fs")}`}>
+                  <h2 className="text-sm font-bold uppercase hover:text-purple-600 transition-colors mb-2">
                     Erik Prince Calls for U.S. to Colonize Africa and Latin
                     America
                   </h2>
@@ -284,8 +295,8 @@ const PoliticsPage = () => {
                 />
               </div>
               <div className="p-4">
-                <Link href="https://cyclopedia-media-hub.vercel.app/blog/18is4vszdgKCKhPdcDZo">
-                  <h2 className="text-sm font-bold  transition-colors mb-2">
+                <Link href={`/news/${createFullSlug("US Opinion Is Shifting on Palestine; Can Political Leaders Shift With It?", "18is4vszdgKCKhPdcDZo")}`}>
+                  <h2 className="text-sm font-bold uppercase transition-colors mb-2">
                     US Opinion Is Shifting on Palestine; Can Political Leaders
                     Shift With It?
                   </h2>
@@ -312,8 +323,8 @@ const PoliticsPage = () => {
                 />
               </div>
               <div className="p-4">
-                <Link href="https://cyclopedia-media-hub.vercel.app/blog/IaxcmJfiF1fEizKHpD3E">
-                  <h2 className="text-sm font-bold hover:text-purple-600 transition-colors mb-2">
+                <Link href={`/news/${createFullSlug("How Britain allowed Pinochet to escape justice for atrocities", "IaxcmJfiF1fEizKHpD3E")}`}>
+                  <h2 className="text-sm font-bold uppercase hover:text-purple-600 transition-colors mb-2">
                     How Britain allowed Pinochet to escape justice for
                     atrocities
                   </h2>
@@ -342,8 +353,8 @@ const PoliticsPage = () => {
                 />
               </div>
               <div className="p-4">
-                <Link href="https://cyclopedia-media-hub.vercel.app/blog/5njbEcuqy6lFrrYdMS2p">
-                  <h2 className="text-sm font-bold hover:text-purple-600 transition-colors mb-2">
+                <Link href={`/news/${createFullSlug("US Turning Oil-Rich Nigeria into Proxy for its Africa Wars", "5njbEcuqy6lFrrYdMS2p")}`}>
+                  <h2 className="text-sm font-bold uppercase hover:text-purple-600 transition-colors mb-2">
                     US Turning Oil-Rich Nigeria into Proxy for its Africa Wars
                   </h2>
                 </Link>
