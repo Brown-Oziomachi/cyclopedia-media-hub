@@ -84,7 +84,6 @@ export default function NewsDetails() {
     return categoryColors[cat] || categoryColors.other;
   };
 
-  // Fetch blog - extract ID from slug
   useEffect(() => {
     if (!slugParam) return;
     async function fetchBlog() {
@@ -92,7 +91,7 @@ export default function NewsDetails() {
         const docId = extractIdFromSlug(slugParam);
         const blogRef = doc(db1, "blogs", docId);
         const blogDoc = await getDoc(blogRef);
-        
+
         if (blogDoc.exists()) {
           const data = blogDoc.data();
           setBlog({ id: docId, ...data });
@@ -104,6 +103,14 @@ export default function NewsDetails() {
     }
     fetchBlog();
   }, [slugParam]);
+
+  useEffect(() => {
+    if (blog && slugParam && !slugParam.includes("--")) {
+      const fullSlug = createFullSlug(blog.title, blog.id);
+      router.replace(`/news/${fullSlug}`);
+    }
+  }, [blog, slugParam]);
+
 
   // Check if liked
   useEffect(() => {
@@ -133,7 +140,9 @@ export default function NewsDetails() {
       const allBlogs = snapshot.docs
         .map((doc) => ({ id: doc.id, ...doc.data() }))
         .filter((b) => b.id !== blog.id)
-        .sort((a, b) => (b.createdAt?.toDate() || 0) - (a.createdAt?.toDate() || 0));
+        .sort(
+          (a, b) => (b.createdAt?.toDate() || 0) - (a.createdAt?.toDate() || 0)
+        );
       setBlogs(allBlogs.slice(0, 9));
     }
     fetchBlogs();
@@ -326,7 +335,11 @@ export default function NewsDetails() {
         {/* First row - grid cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs.slice(0, 3).map((b) => (
-            <Link key={b.id} href={`/news/${createFullSlug(b.title, b.id)}`} className="block">
+            <Link
+              key={b.id}
+              href={`/news/${createFullSlug(b.title, b.id)}`}
+              className="block"
+            >
               <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
                 {b.imageUrl && (
                   <div className="relative w-full h-48 sm:h-56">
@@ -404,7 +417,11 @@ export default function NewsDetails() {
         {/* Last row - 3 more cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {blogs.slice(6, 9).map((b) => (
-            <Link key={b.id} href={`/news/${createFullSlug(b.title, b.id)}`} className="block">
+            <Link
+              key={b.id}
+              href={`/news/${createFullSlug(b.title, b.id)}`}
+              className="block"
+            >
               <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
                 {b.imageUrl && (
                   <div className="relative w-full h-40 sm:h-48">
