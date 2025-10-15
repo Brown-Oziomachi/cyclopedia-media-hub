@@ -48,7 +48,7 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen  border-t border-b border-purple-200">
-      <section className="container mx-auto px-6 py-16 lg:flex gap-16">
+      <section className="container mx-auto px-6 py-16 lg:mt-20 lg:flex gap-16">
         {/* ✅ Left Panel */}
         <div className="flex-1 max-w-xl mx-auto mt-10 space-y-6 text-center lg:text-left">
           <h1 className="text-4xl font-extrabold ">
@@ -99,7 +99,7 @@ export default function ContactPage() {
         </div>
 
         {/* ✅ Contact Form */}
-        <div className="flex-1 border rounded-2xl p-8 mt-16 shadow-xl ">
+        <div className="flex-1  rounded-2xl p-8 mt-16 shadow-xl ">
           <Formik
             initialValues={{
               name: "",

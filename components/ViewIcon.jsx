@@ -8,89 +8,118 @@ export default function ViewMoreSearchPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
-  const isOpenRef = useRef(null)
+  const isOpenRef = useRef(null);
 
   const handleSearch = () => {
     if (!searchQuery.trim()) return;
     setIsOpen(false);
     router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
-    setSearchQuery("")
+    setSearchQuery("");
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isOpenRef.current && !isOpenRef.current.contains(event.target)) {
         setIsOpen(false);
-     }
-    }
+      }
+    };
     if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside)
+      document.addEventListener("mousedown", handleClickOutside);
     }
     return () => {
-      document.removeEventListener("mouseDown", handleClickOutside)
-    }
- }, [isOpen])
-  
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
 
   return (
     <div>
+      {/* Trigger Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="transition-colors mt-1 duration-200 lg:hidden focus:ring-2 focus:ring-purple-400 mx-auto gap-2 rounded-full shadow-md flex items-center justify-center p-2  text-white "
+        className="px-4 py-2 text-white font-semibold rounded-lg shadow-lg transition-all duration-200 flex items-center justify-center gap-2"
       >
-        <Search size={20} />
+        <Search size={25} />
       </button>
 
       {isOpen && (
-        <div
-          ref={isOpenRef}
-          className="fixed inset-0 z-50 flex items-center justify-center h-screen bg-black/90 bg-opacity-90"
-        >
-          <div className=" rounded-2xl shadow-2xl w-96 p-6 relative">
-            <button
-              onClick={() => setIsOpen(false)}
-              className="absolute top-1 right-2 text-gray-600 hover:text-gray-800 transition-colors"
+        <div className="fixed inset-0 flex z-[999] mt-80 lg:mt-100 items-center justify-center bg-black animate-fadeIn">
+            <div
+              ref={isOpenRef}
+              className="relative w-11/12 max-w-lg p-8 rounded-xl shadow-2xl bg-black border border-gray-900 text-gray-100 animate-slideUp"
             >
-              <X size={22} />
-            </button>
-            <h1 className="my-2 text-center font-bold">
-              THE CYCLOPEDIA | NEWS COMPANY
-            </h1>
-            <h5 className="text-center uppercase mb-5">
-              Stay informed! Use our search to explore thousands of articles
-              from The Cyclopedia News archives. Find breaking news, in-depth
-              analysis, and stories that matter to you.
-            </h5>
-
-            <div className="flex  items-center border-2 border-gray-300 overflow-hidden shadow-sm focus-within:ring-2 ">
-              <input
-                type="text"
-                placeholder="Type to search..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                className="w-full px-5 py-1 text-gray-200 focus:outline-none"
-              />
+              {/* Close Button */}
               <button
-                onClick={handleSearch}
-                className="bg-black hover:bg-purple-700 px-4 py-2 text-white transition-colors"
+                onClick={() => setIsOpen(false)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors duration-200 p-1"
               >
-                <Search size={18} />
+                <X size={24} />
               </button>
-            </div>
-            <div className="flex gap-3 mt-10 items-center justify-around">
-              <a className="bg-red-600 font-black px-5 py-2 rouded-lg" href="/newsletter">
-                Join Us
-              </a>
-              <a
-                className="bg-blue-600 font-black px-5 py-2 rouded-lg"
-                href="https://thecyclopedia.substack.com/subscribe"
-              >
-                Support Us
-              </a>
+
+              {/* Header */}
+              <div className="mb-8">
+                <h1 className="text-2xl font-bold tracking-tight mb-2">
+                  Search in <span className="text-purple-500">Cyclopedia</span>
+                </h1>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  Discover thousands of news and exclusive reports from our
+                  archives.
+                </p>
+              </div>
+
+              {/* Search Box */}
+              <div className="mb-6">
+                <div className="flex items-center bg-gray-900 border border-gray-700 hover:border-gray-600 rounded-lg overflow-hidden transition-all duration-200 focus-within:border-purple-500 focus-within:ring-1 focus-within:ring-purple-500/50">
+                  <Search size={18} className="ml-4 text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Search news..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                    className="w-full px-4 py-3 bg-transparent text-gray-100 placeholder-gray-600 focus:outline-none"
+                    autoFocus
+                  />
+                </div>
+                <button
+                  onClick={handleSearch}
+                  className="w-full mt-3 px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors duration-200"
+                >
+                  Search
+                </button>
+              </div>
+
+              {/* Divider */}
+              <div className="my-6 border-t border-gray-800"></div>
+
+              {/* Quick Actions */}
+              <div className="mb-6">
+                <p className="text-xs text-gray-500 uppercase tracking-wide mb-3">
+                  Quick Links
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  <a
+                    href="/newsletter"
+                    className="px-4 py-2.5 rounded-lg bg-gray-900 hover:bg-gray-800 border border-gray-700 hover:border-gray-600 text-center font-medium text-sm transition-all duration-200"
+                  >
+                    Newsletter
+                  </a>
+                  <a
+                    href="https://thecyclopedia.substack.com/subscribe"
+                    className="px-4 py-2.5 rounded-lg bg-purple-900/20 hover:bg-purple-900/40 border border-purple-700/50 hover:border-purple-600 text-center font-medium text-sm text-purple-300 hover:text-purple-200 transition-all duration-200"
+                  >
+                    Support Us
+                  </a>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="text-center border-t border-gray-800 pt-4">
+                <p className="text-xs text-gray-500">
+                  © The Cyclopedia News — Truth. Insight. Independence.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
       )}
     </div>
   );

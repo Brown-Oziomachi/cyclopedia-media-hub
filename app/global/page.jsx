@@ -97,104 +97,103 @@ export default function BlogsPage() {
   };
   
   return (
-    <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-30 lg:mt-40">
-      <h1 className="text-center font-bold text-4xl col-span-full">
-        Latest News
-      </h1>
-      <hr className="col-span-full" />
-      <h2 className="text-xs text-center mb-10 col-span-full">
-        Explore the global News
-      </h2>
+    <div className="max-w-7xl mx-auto px-4 mt-28 lg:mt-36 space-y-12">
+      {/* Header */}
+      <div className="text-center">
+        <h1 className="text-4xl font-extrabold">Latest News</h1>
+        <p className=" text-sm mt-1">
+          Explore the global headlines and in-depth insights
+        </p>
+        <hr className="mt-3" />
+      </div>
 
-      <div className="overflow-x-auto mb-2 lg:mt-2">
-        <div className="max-md:flex space-x-2">
+      {/* Top Featured Section */}
+      <div className="overflow-x-auto lg:overflow-visible">
+        <div className="flex lg:grid lg:grid-cols-3 gap-5">
           {posts.slice(0, 3).map((b) => (
             <Link
               key={b.id}
               href={`/news/${createFullSlug(b.title, b.id)}`}
-              className="flex-shrink-0 w-56 relative"
+              className="flex-shrink-0 lg:flex-shrink rounded-xl shadow hover:shadow-lg transition-transform hover:-translate-y-1 duration-300"
             >
-              <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
+              <div className="relative w-full h-40">
                 {b.imageUrl && (
-                  <div className="relative w-full h-24">
-                    <img
-                      src={b.imageUrl}
-                      alt={b.title}
-                      className="object-cover w-full h-full"
-                    />
-                    <div
-                      className={`absolute top-2 left-2 ${getCategoryColor(
-                        b.category
-                      )} text-white text-xs font-semibold px-2 py-1 rounded-md z-10`}
-                    >
-                      {b.category || "Other"}
-                    </div>
-                  </div>
+                  <img
+                    src={b.imageUrl}
+                    alt={b.title}
+                    className="object-cover w-full h-full rounded-t-xl"
+                  />
                 )}
-                <div className="p-2">
-                  <h2 className="text-sm font-bold hover:underline uppercase truncate">
-                    {b.title}
-                  </h2>
-                  <h3 className="text-xs">{b.subtitle}</h3>
-                  <p className="text-xs mt-1">
-                    {b.createdAt?.toDate().toDateString()}
-                  </p>
+                <div
+                  className={`absolute top-3 left-3 ${getCategoryColor(
+                    b.category
+                  )}  text-xs font-semibold px-3 py-1 rounded-md`}
+                >
+                  {b.category || "Other"}
                 </div>
+              </div>
+              <div className="p-4">
+                <h2 className="font-bold text-base  line-clamp-2">{b.title}</h2>
+                <p className="text-xs text-gray-500 mt-1">
+                  {b.createdAt?.toDate().toLocaleString()}
+                </p>
               </div>
             </Link>
           ))}
         </div>
       </div>
 
-      {posts.length > 1 && (
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {posts.slice(4, 11).map((post) => (
+      {/* Middle Grid Section */}
+      {posts.length > 4 && (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts.slice(4, 10).map((post) => (
             <Link
               key={post.id}
               href={`/news/${createFullSlug(post.title, post.id)}`}
+              className="relative rounded-xl shadow hover:shadow-xl overflow-hidden transition-all duration-300  flex flex-col"
             >
-              <div className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full">
-                {/* Image and Title Side by Side */}
-                <div className="flex gap-3 p-4">
-                  {/* Image on the left */}
-                  {post.imageUrl && (
-                    <div className="relative w-24 h-24 flex-shrink-0">
-                      <img
-                        src={post.imageUrl}
-                        alt={post.title}
-                        className="w-full h-full object-cover rounded"
-                      />
-                    </div>
-                  )}
-
-                  {/* Title on the right */}
-                  <div className="flex-1">
-                    <h3 className="text-base font-bold line-clamp-3 hover:text-purple-600 transition-colors">
-                      {post.title}
-                    </h3>
+              <div className="relative flex items-start gap-4 p-4">
+                {/* Image */}
+                {post.imageUrl && (
+                  <div className="w-1/3">
+                    <img
+                      src={post.imageUrl}
+                      alt={post.title}
+                      className="w-full h-24 object-cover rounded-md"
+                    />
                   </div>
-                </div>
-
-                {/* Description below */}
-                <div className="px-4 pb-4">
-                  <p className="text-sm text-gray-600 uppercase dark:text-gray-400 line-clamp-2 mb-2">
-                    {post.subtitle}
+                )}
+                {/* Title and subtitle */}
+                <div className="w-2/3 flex flex-col">
+                  <h3 className="font-semibold text-base md:text-lg line-clamp-2">
+                    {post.title}
+                  </h3>
+                  {post.subtitle && (
+                    <p className="text-sm  mt-1 line-clamp-2">
+                      {post.subtitle}
+                    </p>
+                  )}
+                  <p className="text-xs  mt-2">
+                    {post.createdAt?.toDate().toLocaleString()}
                   </p>
-                  <p className="text-xs text-gray-500">
-                    {post.createdAt?.toDate().toDateString()}
-                  </p>
                 </div>
+              </div>
 
-                <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
-                  Politics
-                </div>
+              {/* Category badge on top-left of the card */}
+              <div
+                className={`absolute top-3 left-3 ${getCategoryColor(
+                  post.category
+                )}  text-xs font-semibold px-3 py-1 rounded-md`}
+              >
+                {post.category || "Other"}
               </div>
             </Link>
           ))}
         </div>
       )}
 
-      <div className="mx-auto text-center  mb-16 bg-gradient-to-r from-purple-700 to-indigo-700 text-white py-14 px-6 rounded-2xl shadow-xl max-w-3xl">
+      {/* Newsletter Section */}
+      <div className="mx-auto text-center mt-16 mb-16 bg-gradient-to-r from-purple-700 to-indigo-700 text-white py-14 px-6 rounded-2xl shadow-xl max-w-3xl">
         <h2 className="text-3xl font-extrabold mb-3">
           Stay Ahead of the Hidden Truths
         </h2>
@@ -204,57 +203,57 @@ export default function BlogsPage() {
         </p>
         <a
           href="/newsletter"
-          className="inline-block bg-white text-purple-700 font-semibold px-6 py-3 rounded-md hover:bg-gray-100 transition-all duration-300"
+          className="inline-block bg-white text-purple-700 hover:bg-purple-700 hover:text-white  font-semibold px-6 py-3 rounded-md transition-all duration-300"
         >
           Subscribe to Our Newsletter
         </a>
       </div>
 
-      {posts.slice(10, 25).map((post) => (
-        <Link
-          key={post.id}
-          href={`/news/${createFullSlug(post.title, post.id)}`}
-          className="block relative"
-        >
-          <div className="flex flex-col overflow-hidden shadow-md cursor-pointer mt-3 max-md:-mt-10">
-            {post.imageUrl && (
-              <div className="relative w-full h-48 sm:h-40">
+      {/* More News Section */}
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {posts.slice(10, 500).map((post) => (
+          <Link
+            key={post.id}
+            href={`/news/${createFullSlug(post.title, post.id)}`}
+            className="rounded-lg overflow-hidden shadow hover:shadow-xl transition-transform hover:-translate-y-1"
+          >
+            <div className="relative h-40">
+              {post.imageUrl && (
                 <img
                   src={post.imageUrl}
                   alt={post.title}
-                  className="object-cover w-full h-full"
+                  className="w-full h-full object-cover"
                 />
-                <div
-                  className={`absolute top-2 left-2 ${getCategoryColor(
-                    post.category
-                  )} text-white text-xs font-semibold px-3 py-1 rounded-md z-10`}
-                >
-                  {post.category || "Other"}
-                </div>
+              )}
+              <div
+                className={`absolute top-3 left-3 ${getCategoryColor(
+                  post.category
+                )} text-xs font-semibold px-3 py-1 rounded-md`}
+              >
+                {post.category || "Other"}
               </div>
-            )}
+            </div>
             <div className="p-3">
-              <h2 className="text-sm font-bold hover:underline uppercase">
+              <h2 className="font-semibold text-sm uppercase line-clamp-2">
                 {post.title}
               </h2>
               {post.subtitle && (
-                <p className="text-sm line-clamp-3">{post.subtitle}</p>
+                <p className="text-xs line-clamp-2 mt-1">{post.subtitle}</p>
               )}
-              <h3>
-                <p className="text-xs mt-2">
-                  {post.createdAt?.toDate().toDateString()}
-                </p>
-              </h3>
+              <p className="text-xs text-gray-400 mt-2">
+                {post.createdAt?.toDate().toLocaleString()}
+              </p>
             </div>
-          </div>
-        </Link>
-      ))}
+          </Link>
+        ))}
+      </div>
 
+      {/* Load More */}
       {lastDoc && (
-        <div className="col-span-full text-center mt-6 mb-5">
+        <div className="">
           <button
             onClick={fetchMoreBlogs}
-            className="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-md transition"
+            className=" px-6 py-3 transition items-center mb-5 justify-center mt-6 bg-purple-700 rounded-lg mx-auto text-white hover:bg-purple-800 disabled:opacity-50 disabled:cursor-not-allowed flex"
             disabled={loading}
           >
             {loading ? "Loading News..." : "View More"}

@@ -228,27 +228,7 @@ const regions = [
           </div>
 
           {/* Desktop Search Bar */}
-          <form
-            onSubmit={handleSearch}
-            className="hidden lg:flex relative items-center mx-auto justify-center"
-            role="search"
-            aria-label="Site Search"
-          >
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search...."
-              className="px-3 py-2 rounded-l-md shadow-2xl shadow-purple-500 bg-white text-black w-72"
-              aria-label="Search input"
-            />
-            <button
-              type="submit"
-              className="bg-black hover:from-purple-600 hover:to-cyan-500 px-4 py-2 rounded-r-md text-white border-1-white border font-semibold transition z-50 cursor-pointer"
-            >
-              <Search />
-            </button>
-          </form>
+         
 
           <LiveClock />
           {/* Regions Dropdown (desktop only) */}

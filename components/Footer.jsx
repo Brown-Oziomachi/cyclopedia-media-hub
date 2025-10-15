@@ -119,20 +119,45 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a href="/africacont" className="hover:text-purple-400 transition">
+              <a
+                href="/africacont"
+                className="hover:text-purple-400 transition"
+              >
                 Africa
               </a>
             </li>
           </ul>
         </div>
         <div>
-          <h3 className="text-white font-bold text-lg mb-4">Subscriptions</h3>
-          <a href="/newsletter" className="hover:text-purple-400 transition">
-            Newslettter
-          </a>
-          <Link href="https://thecyclopedia.substack.com/subscribe">
-            <p className="mx-auto">Substack</p>
-          </Link>
+          <h3 className="text-white font-bold text-lg mb-4">Quick Links</h3>
+          <ul className="space-y-2 font-mono">
+            <li>
+              <a href="/about" className="hover:text-purple-400 transition">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="/contact" className="hover:text-purple-400 transition">
+                Contact Us
+              </a>
+            </li>
+            <li>
+              <a
+                href="/newsletter"
+                className="hover:text-purple-400 transition"
+              >
+                Newsletter
+              </a>
+            </li>
+            <li>
+              <Link
+                href="https://thecyclopedia.substack.com/subscribe"
+                className="hover:text-purple-400 transition"
+              >
+                Support
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
 
