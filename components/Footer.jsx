@@ -157,6 +157,14 @@ const Footer = () => {
                 Support
               </Link>
             </li>
+            <li>
+              <a
+                href="/feedback"
+                className="hover:text-purple-400 transition"
+              >
+                FeedBack
+              </a>
+            </li>
           </ul>
         </div>
       </div>
