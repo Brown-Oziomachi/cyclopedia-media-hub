@@ -10,7 +10,7 @@ import {
   collection,
   getDocs,
 } from "firebase/firestore";
-import { Share, LinkIcon, Play } from "lucide-react";
+import { Share, LinkIcon, Play, Twitter, Instagram, Youtube, SquareParking } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -232,6 +232,47 @@ export default function NewsDetails() {
               </p>
             )}
 
+            <div className="flex gap-6 justify-center mb-5">
+              {/* <a
+        href="https://facebook.com"
+        target="_self"
+        className="text-blue-600 hover:scale-110 transition-transform"
+      >
+        <Facebook size={32} />
+      </a> */}
+
+              <a
+                href="https://x.com/cyclopedia_news?t=yU4JjJPlLO7Zp9GVoEaF5A&s=09"
+                target="_self"
+                className="text-black hover:scale-110 transition-transform"
+              >
+                <Twitter size={32} />
+              </a>
+
+              <a
+                href="https://www.instagram.com/cyclopedia_news?igsh=MThvdDEwa3c3aGpsMQ=="
+                target="_self"
+                className="text-pink-500 hover:scale-110 transition-transform"
+              >
+                <Instagram size={32} />
+              </a>
+
+              <a
+                href="https://www.youtube.com/@cyclopedia-media"
+                target="_self"
+                className="text-red-600 hover:scale-110 transition-transform"
+              >
+                <Youtube size={32} />
+              </a>
+              <a
+                href="https://substack.com/@thecyclopedia?utm_campaign=profile&utm_medium=profile-page"
+                target="_self"
+                className="text-red-600 hover:scale-110 transition-transform"
+              >
+                <SquareParking size={32} />
+              </a>
+            </div>
+
             {blog.imageUrl && (
               <div className="relative w-full max-w-4xl mx-auto mb-6">
                 <img
@@ -245,15 +286,12 @@ export default function NewsDetails() {
               </div>
             )}
 
-            {/* Subtitle under the image */}
             {blog.subtitle && (
               <h2 className="text-lg md:text-xl italic font-medium max-w-3xl mx-auto border-l-4 border-purple-600 pl-4">
                 {blog.subtitle}
               </h2>
             )}
           </div>
-
-          {/* Image */}
         </div>
         <SideNewsTicker news={sampleNews} />
 

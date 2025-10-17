@@ -14,45 +14,60 @@ const Footer = () => {
             </h2>
             <ul className="space-y-2 font-mono">
               <li>
-                <a
+                <Link
                   href="/politics"
                   className="hover:text-purple-400 transition"
                 >
                   Politics
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/religion"
                   className="hover:text-purple-400 transition"
                 >
                   Religion
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/history" className="hover:text-purple-400 transition">
+                <Link
+                  href="/history"
+                  className="hover:text-purple-400 transition"
+                >
                   History
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/science" className="hover:text-purple-400 transition">
+                <Link
+                  href="/science"
+                  className="hover:text-purple-400 transition"
+                >
                   Science
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/media" className="hover:text-purple-400 transition">
+                <Link
+                  href="/media"
+                  className="hover:text-purple-400 transition"
+                >
                   Media
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/sports" className="hover:text-purple-400 transition">
+                <Link
+                  href="/sports"
+                  className="hover:text-purple-400 transition"
+                >
                   Sports News
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/global" className="hover:text-purple-400 transition">
+                <Link
+                  href="/global"
+                  className="hover:text-purple-400 transition"
+                >
                   Latest News
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -62,24 +77,33 @@ const Footer = () => {
             <h2 className="text-white font-bold text-lg mb-4">Continental</h2>
             <ul className="space-y-2 font-mono">
               <li>
-                <a href="/africa" className="hover:text-purple-400 transition">
+                <Link
+                  href="/africa"
+                  className="hover:text-purple-400 transition"
+                >
                   Africa
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/asia" className="hover:text-purple-400 transition">
+                <Link href="/asia" className="hover:text-purple-400 transition">
                   Asia
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/europe" className="hover:text-purple-400 transition">
+                <Link
+                  href="/europe"
+                  className="hover:text-purple-400 transition"
+                >
                   Europe
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/america" className="hover:text-purple-400 transition">
+                <Link
+                  href="/america"
+                  className="hover:text-purple-400 transition"
+                >
                   America
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -89,148 +113,166 @@ const Footer = () => {
             <h2 className="text-white font-bold text-lg mb-4">Explore</h2>
             <ul className="space-y-2 font-mono">
               <li>
-                <a
+                <Link
                   href="/technology"
                   className="hover:text-purple-400 transition"
                 >
                   Technology
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/education"
                   className="hover:text-purple-400 transition"
                 >
                   Education
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/art" className="hover:text-purple-400 transition">
+                <Link href="/art" className="hover:text-purple-400 transition">
                   Art & Culture
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/health" className="hover:text-purple-400 transition">
+                <Link
+                  href="/health"
+                  className="hover:text-purple-400 transition"
+                >
                   Health
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/philosophy"
                   className="hover:text-purple-400 transition"
                 >
                   Philosophy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/nigeria" className="hover:text-purple-400 transition">
+                <Link
+                  href="/nigeria"
+                  className="hover:text-purple-400 transition"
+                >
                   Nigeria
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/africacont"
                   className="hover:text-purple-400 transition"
                 >
                   Africa
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Hidden on mobile, shown on lg */}
           <div className="hidden lg:block">
             <h3 className="text-white font-bold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2 font-mono">
               <li>
-                <a href="/about" className="hover:text-purple-400 transition">
+                <Link
+                  href="/about"
+                  className="hover:text-purple-400 transition"
+                >
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/contact" className="hover:text-purple-400 transition">
+                <Link
+                  href="/contact"
+                  className="hover:text-purple-400 transition"
+                >
                   Contact Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/newsletter"
                   className="hover:text-purple-400 transition"
                 >
                   Newsletter
-                </a>
+                </Link>
               </li>
               <li>
                 <Link
                   href="https://thecyclopedia.substack.com/subscribe"
                   className="hover:text-purple-400 transition"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Support
                 </Link>
               </li>
               <li>
-                <a
-                  href="/feedback"
+                <Link
+                  href="/pp-feedbacks"
                   className="hover:text-purple-400 transition"
                 >
-                  FeedBack
-                </a>
+                  Feedback
+                </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Mobile: Show Explore & Quick Links in 2 columns below */}
         <div className="grid grid-cols-2 gap-8 mb-10 lg:hidden">
           <div>
             <h2 className="text-white font-bold text-lg mb-4">Explore</h2>
             <ul className="space-y-2 font-mono">
               <li>
-                <a
+                <Link
                   href="/technology"
                   className="hover:text-purple-400 transition"
                 >
                   Technology
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/education"
                   className="hover:text-purple-400 transition"
                 >
                   Education
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/art" className="hover:text-purple-400 transition">
+                <Link href="/art" className="hover:text-purple-400 transition">
                   Art & Culture
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/health" className="hover:text-purple-400 transition">
+                <Link
+                  href="/health"
+                  className="hover:text-purple-400 transition"
+                >
                   Health
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/philosophy"
                   className="hover:text-purple-400 transition"
                 >
                   Philosophy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/nigeria" className="hover:text-purple-400 transition">
+                <Link
+                  href="/nigeria"
+                  className="hover:text-purple-400 transition"
+                >
                   Nigeria
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/africacont"
                   className="hover:text-purple-400 transition"
                 >
                   Africa
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -239,44 +281,51 @@ const Footer = () => {
             <h3 className="text-white font-bold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2 font-mono">
               <li>
-                <a href="/about" className="hover:text-purple-400 transition">
+                <Link
+                  href="/about"
+                  className="hover:text-purple-400 transition"
+                >
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/contact" className="hover:text-purple-400 transition">
+                <Link
+                  href="/contact"
+                  className="hover:text-purple-400 transition"
+                >
                   Contact Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/newsletter"
                   className="hover:text-purple-400 transition"
                 >
                   Newsletter
-                </a>
+                </Link>
               </li>
               <li>
                 <Link
                   href="https://thecyclopedia.substack.com/subscribe"
                   className="hover:text-purple-400 transition"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Support
                 </Link>
               </li>
               <li>
-                <a
-                  href="/feedback"
+                <Link
+                  href="/pp-feedbacks"
                   className="hover:text-purple-400 transition"
                 >
-                  FeedBack
-                </a>
+                  Feedback
+                </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom: Logo and Copyright */}
         <div className="mt-10 text-center border-t border-gray-800 pt-6">
           <Link href="/">
             <img src="/hid.png" alt="logo" className="h-16 w-16 mx-auto mb-3" />
