@@ -13,7 +13,7 @@ export async function POST(req) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
-    // ✅ 1. Save subscriber in Firestore
+    //  1. Save subscriber in Firestore
     await addDoc(collection(db1, "subscribers"), {
       firstName: firstName || "",
       lastName: lastName || "",

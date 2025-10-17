@@ -42,7 +42,7 @@ export default function ViewMoreSearchPopup() {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 flex z-[999] mt-80 lg:mt-100 items-center justify-center bg-black animate-fadeIn">
+        <div className="fixed inset-0 flex h-screen z-[999] mt-10 lg:mt-30 items-center justify-center bg-black animate-fadeIn">
             <div
               ref={isOpenRef}
               className="relative w-11/12 max-w-lg p-8 rounded-xl shadow-2xl bg-black border border-gray-900 text-gray-100 animate-slideUp"

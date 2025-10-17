@@ -37,10 +37,10 @@ export default function NewsletterForm() {
         );
         setFormData({ firstName: "", email: "" });
       } else {
-        setMessage(`❌ Error: ${data.error}`);
+        setMessage(` Error: ${data.error}`);
       }
     } catch (err) {
-      setMessage("❌ Something went wrong.");
+      setMessage(" Something went wrong.");
     }
 
     setLoading(false);
