@@ -191,10 +191,10 @@ export default function TestimonialPage() {
                       <h3 className="font-bold text-sm truncate">
                         {feedback.name}
                       </h3>
-                      <div className="flex items-center gap-1 text-xs">
+                      {/* <div className="flex items-center gap-1 text-xs">
                         <Mail size={12} />
                         <span className="truncate">{feedback.email}</span>
-                      </div>
+                      </div> */}
                       <div
                         className={`px-3 py-1 rounded-full text-xs font-semibold border ${getFeedbackTypeColor(
                           feedback.feedbackType
@@ -227,12 +227,7 @@ export default function TestimonialPage() {
                     <Calendar size={14} />
                     {formatDate(feedback.createdAt)}
                   </div>
-                  <a
-                    href={`mailto:${feedback.email}`}
-                    className="text-purple-400 hover:text-purple-300 text-xs font-medium transition-colors"
-                  >
-                    Contact
-                  </a>
+                 
                 </div>
                 <p className="text-xs text-center -mt-5 text-purple-500">
                   We will reply you via your email
