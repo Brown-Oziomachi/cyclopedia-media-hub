@@ -96,7 +96,7 @@ export default function EducationTicker() {
               href={`/news/${createFullSlug(post.title, post.id)}`}
               className="relative shadow-xl transition overflow-hidden"
             >
-              <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              <div className="absolute top-0 left-0 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
                 Education
               </div>
               {post.imageUrl && (

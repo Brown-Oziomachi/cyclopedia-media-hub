@@ -55,7 +55,7 @@ export default function HealthPostsPage() {
               className={`relative rounded overflow-hidden shadow hover:shadow-lg transition cursor-pointer
           ${index % 5 === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
             >
-              <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              <div className="absolute top-0 left-0 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
                 Health
               </div>
               {post.imageUrl && (

@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import Footer from "@/components/Footer";
 import { Suspense } from "react";
 import { ThemeProvider } from "next-themes";
+import CookieBanner from "@/components/Cookies";
 
 export const metadata = {
   title: "The Cyclopedia | News & media company",
@@ -26,7 +27,23 @@ function Loader() {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        {/* Google Analytics */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-TT01H9803V"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TT01H9803V');
+    `,
+          }}
+        />
+      </head>
       <body className="antialiased">
         <ThemeProvider
           attribute="class"
@@ -36,6 +53,7 @@ export default function RootLayout({ children }) {
           <Suspense fallback={<Loader />}>
             <AuthProvider>
               <Navbar />
+              <CookieBanner />
               {children}
               <Footer />
               <Analytics />

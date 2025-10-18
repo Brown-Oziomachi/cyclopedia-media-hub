@@ -97,7 +97,7 @@ const PoliticsPage = () => {
                   <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
                   <p className=" text-sm line-clamp-3">{post.subtitle}</p>
                 </div>
-                <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                <div className="absolute top-0 left-0 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
                   Art & Culture
                 </div>
               </Link>

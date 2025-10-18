@@ -334,6 +334,23 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} The Cyclopedia. All rights
             reserved.
           </p>
+
+          {/* Legal Links */}
+          <div className="flex flex-wrap justify-center gap-6 mt-6">
+            <Link
+              href="/privacy-policy"
+              className="text-gray-600 hover:text-white transition"
+            >
+              Privacy Policy
+            </Link>
+            <span className="text-gray-500">|</span>
+            <Link
+              href="/terms-of-services"
+              className="text-gray-500 hover:text-white transition"
+            >
+              Terms of Service
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

@@ -64,9 +64,11 @@ const Page = () => {
         {loading ? (
           <p className="text-gray-600">Loading latest posts</p>
         ) : posts.length === 0 ? (
-          <p className="text-gray-600 text-center">Please check your network connection</p>
+          <p className="text-gray-600 text-center">
+            Please check your network connection
+          </p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {posts.map((post) => (
               <div key={post.id} className=" rounded-lg shadow-2xl p-4">
                 <Link href={`/news/${createFullSlug(post.title, post.id)}`}>
@@ -80,6 +82,9 @@ const Page = () => {
                 <p className="text-xs mt-2">
                   {post.createdAt?.toDate().toDateString()}
                 </p>
+                <div className="absolute top-0 left-0 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                  Philosophy
+                </div>
               </div>
             ))}
           </div>

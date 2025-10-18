@@ -52,7 +52,7 @@ const SideNewsTicker = () => {
         {posts.map((item) => (
           <Link
             key={item.id}
-            href={`/blog/${item.id}`} // ✅ clickable blog detail page
+            href={`/news/${item.id}`} // ✅ clickable blog detail page
             className="px-6 py-1 font-medium hover:underline flex-shrink-0"
           >
             {item.title}
@@ -66,7 +66,7 @@ const SideNewsTicker = () => {
         {posts.map((item) => (
           <Link
             key={`dup-${item.id}`}
-            href={`/blog/${item.id}`} // ✅ same clickable link
+            href={`/news/${item.id}`} // ✅ same clickable link
             className="px-6 py-1 font-medium hover:underline flex-shrink-0"
           >
             {item.title}

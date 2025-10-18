@@ -13,6 +13,7 @@ import {
   Zap,
 } from "lucide-react";
 import { db1 } from "@/lib/firebaseConfig";
+import { TextField } from "@mui/material";
 
 export default function FeedbackForm() {
   const [feedbackType, setFeedbackType] = useState("");
@@ -103,7 +104,6 @@ export default function FeedbackForm() {
   return (
     <div className="min-h-screen  py-12 px-4 md:px-8">
       <div className="max-w-3xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center mb-4 p-3 mt-5 lg:mt-30 bg-purple-500/10 rounded-full border border-purple-500/20">
             <MessageSquare className="text-purple-400" size={24} />
@@ -120,10 +120,8 @@ export default function FeedbackForm() {
           </p>
         </div>
 
-        {/* Form Container */}
         <div className=" rounded-3xl p-8 md:p-12 backdrop-blur-xl shadow-2xl">
           <form onSubmit={handleSubmit} className="space-y-8">
-            {/* Feedback Type Selection */}
             <div>
               <label className="block text-lg font-semibold mb-6 text-center">
                 What type of feedback?
@@ -174,52 +172,55 @@ export default function FeedbackForm() {
               </div>
             </div>
 
-            {/* Email Input */}
             <div>
               <label className="block text-lg font-semibold mb-3">
                 Email Address
               </label>
               <input
                 type="email"
-                placeholder="your@email.com"
+                placeholder="thecyclopedia@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-5 py-4 shadow-2xl rounded-xl focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                className="w-full px-5 py-4 border-neutral-50 shadow-2xl rounded-xl focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                 required
               />
             </div>
 
-            {/* Title Input */}
             <div>
               <label className="block text-lg font-semibold mb-3 ">
                 Feedback Title
               </label>
               <input
                 type="text"
+                fullWidth
+                multiline
+                minRows={2}
+                outlined
                 placeholder="Give your feedback a brief title..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-5 py-4 shadow-2xl rounded-xl focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                className="w-full px-5 py-4 border-neutral-50 shadow-2xl rounded-xl focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                 required
               />
             </div>
 
-            {/* Message Textarea */}
             <div>
               <label className="block text-lg font-semibold mb-3 ">
                 Your Message
               </label>
-              <textarea
-                rows={6}
+              <TextField
+                outlined
+                fullWidth
+                multiline
+                minRows={8}
                 placeholder="Share your thoughts, suggestions, or report issues in detail..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full px-5 py-4 border rounded-xl  focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200 resize-none"
+                className=" px-5 py-4 border rounded-xl  focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200 "
                 required
               />
             </div>
 
-            {/* Submit Button */}
             <button
               disabled={submitting}
               type="submit"
@@ -241,7 +242,6 @@ export default function FeedbackForm() {
         </div>
       </div>
 
-      {/* Success Modal */}
 
       {popup && submitData && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-lg flex items-center justify-center z-50 p-4">

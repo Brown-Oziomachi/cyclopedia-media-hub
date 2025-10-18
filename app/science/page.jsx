@@ -93,9 +93,6 @@ const Page = () => {
                   <div className="p-4">
                     <h2 className="text-lg font-semibold">{post.title}</h2>
                     <h3 className="text-xs mt-2">{post.subtitle}</h3>
-                    <p className="text-xs text-gray-600 border mt-1">
-                      {post.tags?.join(", ")}
-                    </p>
                     <p className="text-xs mt-2">
                       {post.createdAt?.toDate().toDateString()}
                     </p>
@@ -232,7 +229,7 @@ const Page = () => {
               appealing?
             </p>
           </div>
-          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+          <div className="absolute top-0 left-0 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
             Science
           </div>
         </div>

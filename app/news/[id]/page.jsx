@@ -18,6 +18,7 @@ import { useRouter, useParams } from "next/navigation";
 import SideNewsTicker from "@/components/SideNewsTicker";
 import FollowUsPopup from "@/components/FollowUsPopup";
 import AdminProfile from "@/components/AdminProfile";
+import Icons from "@/components/Icon";
 
 // Helper function to create slug from title
 const createSlug = (title) => {
@@ -232,46 +233,7 @@ export default function NewsDetails() {
               </p>
             )}
 
-            <div className="flex gap-6 justify-center mb-5">
-              {/* <a
-        href="https://facebook.com"
-        target="_self"
-        className="text-blue-600 hover:scale-110 transition-transform"
-      >
-        <Facebook size={32} />
-      </a> */}
-
-              <a
-                href="https://x.com/cyclopedia_news?t=yU4JjJPlLO7Zp9GVoEaF5A&s=09"
-                target="_self"
-                className="text-black hover:scale-110 transition-transform"
-              >
-                <Twitter size={32} />
-              </a>
-
-              <a
-                href="https://www.instagram.com/cyclopedia_news?igsh=MThvdDEwa3c3aGpsMQ=="
-                target="_self"
-                className="text-pink-500 hover:scale-110 transition-transform"
-              >
-                <Instagram size={32} />
-              </a>
-
-              <a
-                href="https://www.youtube.com/@cyclopedia-media"
-                target="_self"
-                className="text-red-600 hover:scale-110 transition-transform"
-              >
-                <Youtube size={32} />
-              </a>
-              <a
-                href="https://substack.com/@thecyclopedia?utm_campaign=profile&utm_medium=profile-page"
-                target="_self"
-                className="text-red-600 hover:scale-110 transition-transform"
-              >
-                <SquareParking size={32} />
-              </a>
-            </div>
+              <Icons />
 
             {blog.imageUrl && (
               <div className="relative w-full max-w-4xl mx-auto mb-6">
@@ -280,7 +242,7 @@ export default function NewsDetails() {
                   alt={blog.title}
                   className="w-full h-auto object-cover"
                 />
-                <div className="absolute top-3 left-3 bg-red-600 text-white text-sm md:text-base font-semibold px-3 py-1 rounded-md">
+                <div className="absolute top-0 left-0 bg-red-600 text-white text-sm md:text-base font-semibold px-3 py-1 rounded-md">
                   The Cyclopedia
                 </div>
               </div>
@@ -405,7 +367,7 @@ export default function NewsDetails() {
                       className="object-cover w-full h-full"
                     />
                     <div
-                      className={`absolute top-2 left-2 ${getCategoryColor(
+                      className={`absolute top-0 left-0 ${getCategoryColor(
                         b.category
                       )} text-white text-xs font-semibold px-3 py-1 rounded-md z-10`}
                     >
@@ -444,7 +406,7 @@ export default function NewsDetails() {
                         className="object-cover w-full h-full"
                       />
                       <div
-                        className={`absolute top-2 left-2 ${getCategoryColor(
+                        className={`absolute top-0 left-0 ${getCategoryColor(
                           b.category
                         )} text-white text-xs font-semibold px-2 py-1 rounded-md z-10`}
                       >
@@ -483,7 +445,7 @@ export default function NewsDetails() {
                       className="object-cover w-full h-full"
                     />
                     <div
-                      className={`absolute top-2 left-2 ${getCategoryColor(
+                      className={`absolute top-0 left-0 ${getCategoryColor(
                         b.category
                       )} text-white text-xs font-semibold px-3 py-1 rounded-md z-10`}
                     >

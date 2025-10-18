@@ -108,15 +108,15 @@ export default function BlogsPage() {
       </div>
 
       {/* Top Featured Section */}
-      <div className="overflow-x-auto lg:overflow-visible">
-        <div className="flex lg:grid lg:grid-cols-3 gap-5">
+      <div className="overflow-x-auto overflow-y-visible lg:overflow-visible">
+        <div className="flex lg:grid lg:grid-cols-3 gap-5  lg:w-full">
           {posts.slice(0, 3).map((b) => (
             <Link
               key={b.id}
               href={`/news/${createFullSlug(b.title, b.id)}`}
-              className="flex-shrink-0 lg:flex-shrink rounded-xl shadow hover:shadow-lg transition-transform hover:-translate-y-1 duration-300"
+              className=""
             >
-              <div className="relative w-full h-40">
+              <div className="relative w-72 lg:w-full h-40">
                 {b.imageUrl && (
                   <img
                     src={b.imageUrl}
@@ -125,15 +125,17 @@ export default function BlogsPage() {
                   />
                 )}
                 <div
-                  className={`absolute top-3 left-3 ${getCategoryColor(
+                  className={`absolute top-0 left-0 ${getCategoryColor(
                     b.category
-                  )}  text-xs font-semibold px-3 py-1 rounded-md`}
+                  )} text-xs font-semibold px-3 py-1 rounded-md`}
                 >
                   {b.category || "Other"}
                 </div>
               </div>
-              <div className="p-4">
-                <h2 className="font-bold text-base  line-clamp-2">{b.title}</h2>
+              <div className="p-3">
+                <h3 className="font-semibold text-base md:text-lg line-clamp-2">
+                  {b.title}
+                </h3>
                 <p className="text-xs text-gray-500 mt-1">
                   {b.createdAt?.toDate().toLocaleString()}
                 </p>
@@ -226,7 +228,7 @@ export default function BlogsPage() {
                 />
               )}
               <div
-                className={`absolute top-3 left-3 ${getCategoryColor(
+                className={`absolute top-0 left-0 ${getCategoryColor(
                   post.category
                 )} text-xs font-semibold px-3 py-1 rounded-md`}
               >

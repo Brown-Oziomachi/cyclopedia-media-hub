@@ -24,7 +24,6 @@ const BlogDetails = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
-  // ... rest of your BlogDetails code as you wrote it ...
 
 };
 

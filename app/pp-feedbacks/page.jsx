@@ -179,7 +179,7 @@ export default function TestimonialPage() {
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-3 flex-1">
-                    {/* Avatar */}
+                    {feedback.avater} 
                     <div
                       className={`w-12 h-12 rounded-full bg-gradient-to-br ${getAvatarColor(
                         feedback.name

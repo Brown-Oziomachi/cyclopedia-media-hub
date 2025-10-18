@@ -240,7 +240,7 @@ const Page = () => {
                     {post.subtitle || post.content?.slice(0, 100) + "..."}
                   </p>
                 </div>
-                <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                <div className="absolute top-0 left-0 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
                   Politics
                 </div>
               </Link>

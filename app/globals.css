@@ -74,3 +74,8 @@ body {
   line-height: 1;
   margin-right: 6px;
 }
+
+/* globals.css */
+.reverse-theme {
+  @apply bg-gray-900 text-white dark:bg-white dark:text-gray-900;
+}

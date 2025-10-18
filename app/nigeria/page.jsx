@@ -84,7 +84,7 @@ const NigeriaPage = () => {
                   <span className="text-xs font-semibold text-purple-600 uppercase mb-2 tracking-wider">
                     Latest News
                   </span>
-                  <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                  <div className="absolute top-0 left-0 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
                     NG News
                   </div>
                   <h2 className="text-2xl uppercase lg:text-3xl font-bold mb-4 hover:text-purple-600 transition-colors">
@@ -198,7 +198,7 @@ const NigeriaPage = () => {
                     {post.createdAt?.toDate().toDateString()}
                   </p>
                 </div>
-                <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                <div className="absolute top-0 left-0 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
                   NG News
                 </div>
               </Link>
