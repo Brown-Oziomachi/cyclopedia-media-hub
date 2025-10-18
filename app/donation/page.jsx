@@ -1,6 +1,6 @@
 "use client";
 
-import DonationForm from "@/components/DonationForm";
+import DonationForm from "@/components/Affiliate";
 
 
 export default function DonatePage() {

@@ -233,7 +233,7 @@ export default function NewsDetails() {
               </p>
             )}
 
-              <Icons />
+            <Icons />
 
             {blog.imageUrl && (
               <div className="relative w-full max-w-4xl mx-auto mb-6">
@@ -326,7 +326,6 @@ export default function NewsDetails() {
           <BlogDisplay body={blog.body} />
         </>
       </div>
-
       <div className="flex gap-3 sm:gap-5">{/* ... */}</div>
       <div className="relative mx-auto text-center mt-20 mb-20 max-w-4xl">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-700 via-indigo-700/5 to-purple-700 backdrop-blur-lg border-purple-500/30 shadow-2xl"></div>

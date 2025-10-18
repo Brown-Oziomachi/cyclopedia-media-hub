@@ -1,24 +1,27 @@
 "use client";
 import { useEffect, useState } from "react";
-import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import { db1 } from "@/lib/firebaseConfig";
-import { Star, MessageCircle, User, Mail, Calendar } from "lucide-react";
+import {
+  MessageCircle,
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 export default function TestimonialPage() {
   const [feedbacks, setFeedbacks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
       try {
         setLoading(true);
         const feedbackCollection = collection(db1, "feedback");
-        const q = query(
-          feedbackCollection,
-          orderBy("createdAt", "desc"),
-          limit(20)
-        );
+        const q = query(feedbackCollection, orderBy("createdAt", "desc"));
         const snapshot = await getDocs(q);
 
         const feedbackData = snapshot.docs.map((doc) => {
@@ -85,32 +88,38 @@ export default function TestimonialPage() {
     });
   };
 
+  // Pagination
+  const totalPages = Math.ceil(feedbacks.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentFeedbacks = feedbacks.slice(startIndex, endIndex);
+
+  const handlePrevious = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 1));
+  };
+
+  const handleNext = () => {
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  };
+
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black py-12 px-4">
+      <div className="min-h-screen py-12 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold text-white mb-4">
-              Community{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
-                Feedback
-              </span>
-            </h1>
+            <h1 className="text-5xl font-bold mb-4">Community Feedback</h1>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (
-              <div
-                key={i}
-                className="bg-gray-800/30 border border-gray-700/50 rounded-2xl p-6 animate-pulse"
-              >
+              <div key={i} className="border rounded-2xl p-6 animate-pulse">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-14 h-14 rounded-full bg-gray-700"></div>
+                  <div className="w-14 h-14 rounded-full bg-gray-200"></div>
                   <div className="flex-1">
-                    <div className="h-4 bg-gray-700 rounded w-24 mb-2"></div>
-                    <div className="h-3 bg-gray-700 rounded w-32"></div>
+                    <div className="h-4 bg-gray-200 rounded w-24 mb-2"></div>
+                    <div className="h-3 bg-gray-200 rounded w-32"></div>
                   </div>
                 </div>
-                <div className="h-20 bg-gray-700 rounded"></div>
+                <div className="h-20 bg-gray-200 rounded"></div>
               </div>
             ))}
           </div>
@@ -124,18 +133,15 @@ export default function TestimonialPage() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center mb-4 p-3 lg:mt-30 mt-10 rounded-full shadow border-purple-500/20">
-            <MessageCircle className="text-purple-400" size={24} />
+          <div className="inline-flex items-center justify-center mb-4 p-3 lg:mt-30 mt-10 rounded-full border">
+            <MessageCircle size={24} />
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-4">
-            Community{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
-              Feedback
-            </span>
+            Community Feedback
           </h1>
           <p className="text-xl mx-auto text-center">
-            See what our readers and community members are saying about
-            <span className="text-purple-600 font-black"> The Cyclopedia</span>
+            See what our readers and community members are saying about The
+            Cyclopedia
           </p>
           <div className="mt-6 flex items-center justify-center gap-2">
             <div className="flex -space-x-2">
@@ -151,14 +157,14 @@ export default function TestimonialPage() {
                 </div>
               ))}
             </div>
-            <span className=" ml-4">
+            <span className="ml-4">
               {feedbacks.length} testimonials from our community
             </span>
           </div>
         </div>
 
         {error && (
-          <div className="bg-red-500/10 border border-red-500/30 rounded-2xl p-6 mb-12 text-center text-red-400">
+          <div className="border border-red-500/30 rounded-2xl p-6 mb-12 text-center">
             {error}
           </div>
         )}
@@ -166,87 +172,117 @@ export default function TestimonialPage() {
         {feedbacks.length === 0 ? (
           <div className="text-center py-20">
             <MessageCircle size={48} className="mx-auto mb-4" />
-            <p className=" text-lg">
+            <p className="text-lg">
               No testimonials yet. Be the first to share your feedback!
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {feedbacks.map((feedback) => (
-              <div
-                key={feedback.id}
-                className="shadow-2xl rounded-2xl p-6 hover:border-purple-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/10"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3 flex-1">
-                    {feedback.avater} 
-                    <div
-                      className={`w-12 h-12 rounded-full bg-gradient-to-br ${getAvatarColor(
-                        feedback.name
-                      )} flex items-center justify-center font-bold flex-shrink-0`}
-                    >
-                      {feedback.initials}
-                    </div>
-                    <div className="min-w-0">
-                      <h3 className="font-bold text-sm truncate">
-                        {feedback.name}
-                      </h3>
-                      {/* <div className="flex items-center gap-1 text-xs">
-                        <Mail size={12} />
-                        <span className="truncate">{feedback.email}</span>
-                      </div> */}
+          <>
+            {/* Feedback Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {currentFeedbacks.map((feedback) => (
+                <div
+                  key={feedback.id}
+                  className="border rounded-2xl p-6 hover:border-purple-500/30 transition-all duration-300"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center gap-3 flex-1">
                       <div
-                        className={`px-3 py-1 rounded-full text-xs font-semibold border ${getFeedbackTypeColor(
-                          feedback.feedbackType
-                        )} whitespace-nowrap ml-2`}
+                        className={`w-12 h-12 rounded-full bg-gradient-to-br ${getAvatarColor(
+                          feedback.name
+                        )} flex items-center justify-center font-bold flex-shrink-0`}
                       >
-                        {feedback.feedbackType === "bug" && "🐛"}
-                        {feedback.feedbackType === "feature" && "💡"}
-                        {feedback.feedbackType === "improvement" && "⚡"}
-                        {feedback.feedbackType === "praise" && "⭐"}
-                        {feedback.feedbackType === "other" && "💬"}{" "}
-                        {feedback.feedbackType}
+                        {feedback.initials}
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="font-bold text-sm truncate">
+                          {feedback.name}
+                        </h3>
+                        <div
+                          className={`px-3 py-1 rounded-full text-xs font-semibold border ${getFeedbackTypeColor(
+                            feedback.feedbackType
+                          )} whitespace-nowrap mt-1`}
+                        >
+                          {feedback.feedbackType === "bug" && "🐛"}
+                          {feedback.feedbackType === "feature" && "💡"}
+                          {feedback.feedbackType === "improvement" && "⚡"}
+                          {feedback.feedbackType === "praise" && "⭐"}
+                          {feedback.feedbackType === "other" && "💬"}{" "}
+                          {feedback.feedbackType}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Title */}
-                <h4 className="text-lg font-semibold mb-3 line-clamp-2">
-                  {feedback.title}
-                </h4>
+                  <h4 className="font-semibold mb-3 line-clamp-2">
+                    {feedback.title}
+                  </h4>
 
-                {/* Message */}
-                <p className=" text-sm leading-relaxed mb-4 line-clamp-4">
-                  {feedback.message}
-                </p>
+                  <p className="text-sm leading-relaxed mb-4 line-clamp-4">
+                    {feedback.message}
+                  </p>
 
-                {/* Footer with Date */}
-                <div className="flex items-center justify-between pt-4 shadow-2xl">
-                  <div className="flex items-center gap-2 text-gray-500 text-xs">
+                  <div className="flex items-center gap-2 pt-4 border-t text-xs">
                     <Calendar size={14} />
                     {formatDate(feedback.createdAt)}
                   </div>
-                 
                 </div>
-                <p className="text-xs text-center -mt-5 text-purple-500">
-                  We will reply you via your email
-                </p>
+              ))}
+            </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-4 mb-12">
+                <button
+                  onClick={handlePrevious}
+                  disabled={currentPage === 1}
+                  className="flex items-center gap-2 px-4 py-2 border rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 dark:hover:bg-gray-900 transition"
+                >
+                  <ChevronLeft size={20} />
+                  Previous
+                </button>
+
+                <div className="flex items-center gap-2">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (page) => (
+                      <button
+                        key={page}
+                        onClick={() => setCurrentPage(page)}
+                        className={`w-10 h-10 rounded-lg border transition ${
+                          currentPage === page
+                            ? "bg-blue-600 text-white border-blue-600"
+                            : "hover:bg-gray-100 dark:hover:bg-gray-900"
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    )
+                  )}
+                </div>
+
+                <button
+                  onClick={handleNext}
+                  disabled={currentPage === totalPages}
+                  className="flex items-center gap-2 px-4 py-2 border rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 dark:hover:bg-gray-900 transition"
+                >
+                  Next
+                  <ChevronRight size={20} />
+                </button>
               </div>
-            ))}
-          </div>
+            )}
+          </>
         )}
 
         {/* CTA Section */}
-        <div className="mt-20 bg-gradient-to-r from-purple-900/20 to-blue-900/20 shadow-2xl rounded-2xl p-8 md:p-12 text-center">
+        <div className="border rounded-2xl p-8 md:p-12 text-center">
           <h2 className="text-3xl font-bold mb-4">Share Your Feedback</h2>
-          <p className=" mb-6 max-w-xl mx-auto">
+          <p className="mb-6 max-w-xl mx-auto">
             Join our community and help us improve The Cyclopedia with your
             valuable insights
           </p>
           <a
             href="/feedback"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition"
           >
             <MessageCircle size={20} />
             Leave Your Feedback
