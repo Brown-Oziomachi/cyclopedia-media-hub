@@ -23,6 +23,7 @@ export default function TestimonialPage() {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  const [feedbackCountMap, setFeedbackCountMap] = useState({});
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
@@ -32,10 +33,22 @@ export default function TestimonialPage() {
         const q = query(feedbackCollection, orderBy("createdAt", "desc"));
         const snapshot = await getDocs(q);
 
+        // Count feedbacks per email
+        const countMap = {};
+        snapshot.docs.forEach((doc) => {
+          const email = doc.data().email;
+          countMap[email] = (countMap[email] || 0) + 1;
+        });
+        setFeedbackCountMap(countMap);
+
+        // Group by email to get one feedback per user
+        const uniqueFeedbacks = {};
+
         const feedbackData = await Promise.all(
           snapshot.docs.map(async (feedbackDoc) => {
             const data = feedbackDoc.data();
             const userId = data.userId;
+            const email = data.email;
             let userProfile = null;
 
             if (userId) {
@@ -48,10 +61,7 @@ export default function TestimonialPage() {
             }
 
             const name =
-              userProfile?.name ||
-              data.name ||
-              data.email?.split("@")[0] ||
-              "User";
+              userProfile?.name || data.name || email?.split("@")[0] || "User";
             const initials = name
               .split(" ")
               .map((n) => n[0])
@@ -59,17 +69,24 @@ export default function TestimonialPage() {
               .toUpperCase()
               .slice(0, 2);
 
-           return {
-  id: feedbackDoc.id, 
-  ...data,
-  name: name.charAt(0).toUpperCase() + name.slice(1),
-  initials,
-  profileImage: userProfile?.profileImage || null,
-};
+            const feedbackItem = {
+              id: feedbackDoc.id,
+              ...data,
+              name: name.charAt(0).toUpperCase() + name.slice(1),
+              initials,
+              profileImage: userProfile?.profileImage || null,
+            };
+
+            // Keep only the latest feedback per email
+            if (!uniqueFeedbacks[email]) {
+              uniqueFeedbacks[email] = feedbackItem;
+            }
+
+            return feedbackItem;
           })
         );
 
-        setFeedbacks(feedbackData);
+        setFeedbacks(Object.values(uniqueFeedbacks));
         setError(null);
       } catch (err) {
         console.error("Error fetching feedbacks:", err);
@@ -159,7 +176,7 @@ export default function TestimonialPage() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center mb-4 p-3 lg:mt-30 mt-10 rounded-full border">
+          <div className="inline-flex items-center justify-center mb-4 p-3 lg:mt-30 mt-10 rounded-full shadow-lg bg-gradient-to-br from-purple-600 to-purple-700 text-white">
             <MessageCircle size={24} />
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-4">
@@ -214,12 +231,11 @@ export default function TestimonialPage() {
           </div>
         ) : (
           <>
-            {/* Feedback Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {currentFeedbacks.map((feedback) => (
                 <div
                   key={feedback.id}
-                  className="border rounded-2xl p-6 hover:border-purple-500/30 transition-all duration-300"
+                  className="shadow-2xl rounded-2xl p-6 hover:border-purple-500/30 transition-all duration-300"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3 flex-1">
@@ -236,13 +252,23 @@ export default function TestimonialPage() {
                           )} flex items-center justify-center font-bold flex-shrink-0`}
                         >
                           {feedback.initials}
+                          {feedbackCountMap[feedback.email] > 1 && (
+                            <div className="flex items-center gap-1 px-2 py-1 border rounded-full text-xs font-medium mt-2 w-fit">
+                              <MessageCircle size={12} />
+                              {feedbackCountMap[feedback.email]} feedback
+                            </div>
+                          )}
                         </div>
                       )}
+
                       <div className="min-w-0">
                         <Link href={`/profile/view?id=${feedback.userId}`}>
                           {feedback.name}
-                        <h1 className="text-sm text-blue-600">View Profile</h1>
+                          <h1 className="text-sm text-blue-600">
+                            View Profile
+                          </h1>
                         </Link>
+
                         <div
                           className={`px-3 py-1 rounded-full text-xs font-semibold border ${getFeedbackTypeColor(
                             feedback.feedbackType
@@ -266,11 +292,20 @@ export default function TestimonialPage() {
                   <p className="text-sm leading-relaxed mb-4 line-clamp-4">
                     {feedback.message}
                   </p>
-
-                  <div className="flex items-center gap-2 pt-4 border-t text-xs">
-                    <Calendar size={14} />
-                    {formatDate(feedback.createdAt)}
+                  
+                  <div className="flex items-center gap-2 pt-4 text-xs justify-around">
+                    {feedbackCountMap[feedback.email] > 1 && (
+                      <div className="flex items-center gap-1 px-2 py-1 border rounded-full text-xs font-medium mt-2 w-fit">
+                        <MessageCircle size={12} className="text-blue-400"/>
+                        {feedbackCountMap[feedback.email]} feedback
+                      </div>
+                    )}
+                    <div className="flex items-center gap-1 px-2 py-1 border rounded-full text-xs font-medium mt-2 w-fit">
+                      <Calendar size={14} className="text-blue-400"/>
+                      {formatDate(feedback.createdAt)}
+                    </div>
                   </div>
+                  <hr className="mt-5"/>
                 </div>
               ))}
             </div>

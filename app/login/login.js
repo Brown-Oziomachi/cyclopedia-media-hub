@@ -1,8 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { auth } from "@/lib/firebaseConfig";
+import { useAuth } from "@/components/AuthProvider";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -10,6 +11,28 @@ export default function Login() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const { user, loading: authLoading } = useAuth();
+
+    // Redirect if user is already logged in
+    useEffect(() => {
+        if (user && !authLoading) {
+            router.push("/feedback"); 
+        }
+    }, [user, authLoading, router]);
+
+    // Show loading while checking auth status
+    if (authLoading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <p className="text-center">Loading...</p>
+            </div>
+        );
+    }
+
+    // If user is logged in, don't show login form
+    if (user) {
+        return null;
+    }
 
     const getErrorMessage = (errorCode) => {
         switch (errorCode) {

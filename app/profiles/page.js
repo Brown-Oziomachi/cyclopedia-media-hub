@@ -1,14 +1,18 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { useAuth } from "@/components/AuthProvider";
-import { useRouter } from "next/navigation";
-import { doc, updateDoc, collection, query, where, getDocs, getDoc } from "firebase/firestore";
+import { useRouter, useSearchParams } from "next/navigation";
+import { doc, updateDoc, collection, query, where, getDocs, getDoc, deleteDoc } from "firebase/firestore";
 import { db1 } from "@/lib/firebaseConfig";
-import { LogOut, Edit2, Save, X, Upload, Settings, Bell, HelpCircle } from "lucide-react";
+import { LogOut, Edit2, Save, X, Upload, Settings, Bell, HelpCircle, Trash2 } from "lucide-react";
 
 export default function UserProfile() {
     const { user, logout } = useAuth();
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const viewingUserId = searchParams.get("id");
+    const isOwnProfile = !viewingUserId || viewingUserId === user?.uid;
+
     const [activeTab, setActiveTab] = useState("feedback");
     const [isEditing, setIsEditing] = useState(false);
     const [editName, setEditName] = useState("");
@@ -22,41 +26,56 @@ export default function UserProfile() {
     const [feedbackStats, setFeedbackStats] = useState({ total: 0, types: {} });
     const [notifications, setNotifications] = useState(true);
     const [newsletter, setNewsletter] = useState(true);
+    const [viewingUser, setViewingUser] = useState(null);
+    const [loadingProfile, setLoadingProfile] = useState(true);
+    const [editingFeedbackId, setEditingFeedbackId] = useState(null);
+    const [editingFeedback, setEditingFeedback] = useState({ title: "", message: "" });
+    const [savingFeedback, setSavingFeedback] = useState(false);
     const fileInputRef = useRef(null);
 
     useEffect(() => {
-        if (user) {
+        if (!user && isOwnProfile) {
+            router.push("/login");
+        }
+    }, [user, isOwnProfile, router]);
+
+    useEffect(() => {
+        if (isOwnProfile && user) {
             setEditName(user?.name || "");
             setEditEmail(user?.email || "");
             setEditBio(user?.bio || "");
             setEditBusinessLink(user?.businessLink || "");
             setNotifications(user?.notificationsEnabled !== false);
             setNewsletter(user?.newsletterSubscribed !== false);
-            fetchUserFeedback();
+            fetchUserFeedback(user?.email);
+            setLoadingProfile(false);
+        } else if (viewingUserId && viewingUserId !== user?.uid) {
+            fetchPublicProfile(viewingUserId);
         }
-    }, [user]);
+    }, [user, viewingUserId, isOwnProfile]);
 
-    useEffect(() => {
-        if (isEditing && user?.uid) {
-            const fetchLatestUserData = async () => {
-                try {
-                    const userDoc = await getDoc(doc(db1, "users", user.uid));
-                    const userData = userDoc.data();
-                    setEditBio(userData?.bio || "");
-                    setEditBusinessLink(userData?.businessLink || "");
-                } catch (error) {
-                    console.error("Error fetching user data:", error);
-                }
-            };
-            fetchLatestUserData();
+    const fetchPublicProfile = async (userId) => {
+        try {
+            const userDoc = await getDoc(doc(db1, "users", userId));
+            if (userDoc.exists()) {
+                setViewingUser({ id: userId, ...userDoc.data() });
+                fetchUserFeedback(userDoc.data().email);
+            } else {
+                router.push("/404");
+            }
+        } catch (error) {
+            console.error("Error fetching public profile:", error);
+            router.push("/");
+        } finally {
+            setLoadingProfile(false);
         }
-    }, [isEditing, user?.uid]);
+    };
 
-    const fetchUserFeedback = async () => {
+    const fetchUserFeedback = async (email) => {
         try {
             const feedbackQuery = query(
                 collection(db1, "feedback"),
-                where("email", "==", user?.email)
+                where("email", "==", email)
             );
             const querySnapshot = await getDocs(feedbackQuery);
             const feedbackList = querySnapshot.docs.map((doc) => ({
@@ -103,11 +122,7 @@ export default function UserProfile() {
                 updateData.profileImage = profileImage;
             }
 
-            console.log("Saving:", updateData);
-
             await updateDoc(doc(db1, "users", user?.uid), updateData);
-
-            console.log("Saved successfully!");
             setIsEditing(false);
             alert("Profile updated successfully!");
         } catch (error) {
@@ -118,22 +133,81 @@ export default function UserProfile() {
         }
     };
 
+    const handleEditFeedback = (feedback) => {
+        setEditingFeedbackId(feedback.id);
+        setEditingFeedback({ title: feedback.title, message: feedback.message });
+    };
+
+    const handleSaveFeedback = async () => {
+        setSavingFeedback(true);
+        try {
+            await updateDoc(doc(db1, "feedback", editingFeedbackId), {
+                title: editingFeedback.title,
+                message: editingFeedback.message,
+                updatedAt: new Date().toISOString(),
+            });
+
+            setUserFeedback(userFeedback.map(f =>
+                f.id === editingFeedbackId
+                    ? { ...f, ...editingFeedback, updatedAt: new Date().toISOString() }
+                    : f
+            ));
+
+            setEditingFeedbackId(null);
+            setEditingFeedback({ title: "", message: "" });
+            alert("Feedback updated successfully!");
+        } catch (error) {
+            console.error("Error updating feedback:", error);
+            alert("Failed to update feedback: " + error.message);
+        } finally {
+            setSavingFeedback(false);
+        }
+    };
+
+    const handleDeleteFeedback = async (feedbackId) => {
+        if (!confirm("Are you sure you want to delete this feedback?")) return;
+
+        try {
+            await deleteDoc(doc(db1, "feedback", feedbackId));
+            setUserFeedback(userFeedback.filter(f => f.id !== feedbackId));
+
+            const stats = { total: feedbackStats.total - 1, types: {} };
+            userFeedback.forEach((item) => {
+                if (item.id !== feedbackId) {
+                    stats.types[item.feedbackType] = (stats.types[item.feedbackType] || 0) + 1;
+                }
+            });
+            setFeedbackStats(stats);
+
+            alert("Feedback deleted successfully!");
+        } catch (error) {
+            console.error("Error deleting feedback:", error);
+            alert("Failed to delete feedback: " + error.message);
+        }
+    };
+
     const handleLogout = async () => {
         await logout();
         router.push("/login");
     };
 
-    if (!user) {
-        return <div className="text-center py-10">Loading...</div>;
+    if (loadingProfile) {
+        return <div className="text-center py-20 min-h-screen flex items-center justify-center">Loading...</div>;
     }
 
-    const userInitial = user?.email?.charAt(0).toUpperCase() || "U";
-    const displayImage = profileImage || user?.profileImage;
-    const joinedDate = new Date(user?.createdAt).toLocaleDateString();
-    const memberDays = Math.floor((new Date() - new Date(user?.createdAt)) / (1000 * 60 * 60 * 24));
+    const profileData = isOwnProfile ? user : viewingUser;
+    const userInitial = profileData?.email?.charAt(0).toUpperCase() || "U";
+    const displayImage = isOwnProfile ? (profileImage || user?.profileImage) : viewingUser?.profileImage;
+    const joinedDate = profileData?.createdAt
+        ? new Date(profileData.createdAt).toLocaleDateString()
+        : "Date not available";
+    const memberDays = profileData?.createdAt
+        ? Math.floor((new Date() - new Date(profileData.createdAt)) / (1000 * 60 * 60 * 24))
+        : 0;
+    
 
     return (
-        <div className="min-h-screen py-6 sm:py-8 px-4 sm:px-6 ">
+        <div className="min-h-screen py-6 sm:py-8 px-4 sm:px-6">
             <div className="max-w-4xl mx-auto">
                 {/* Profile Header */}
                 <div className="rounded-2xl p-6 sm:p-8 mb-8 shadow-lg border mt-20 lg:mt-40">
@@ -152,7 +226,7 @@ export default function UserProfile() {
                                         {userInitial}
                                     </div>
                                 )}
-                                {isEditing && (
+                                {isOwnProfile && isEditing && (
                                     <button
                                         onClick={() => fileInputRef.current?.click()}
                                         className="absolute bottom-0 right-0 bg-purple-600 hover:bg-purple-700 text-white p-2 rounded-full shadow-lg"
@@ -171,25 +245,24 @@ export default function UserProfile() {
 
                             {!isEditing ? (
                                 <div className="text-center sm:text-left flex-1 min-w-0">
-                                    <h1 className="text-2xl sm:text-3xl font-bold truncate">{user?.name || "User"}</h1>
-                                    <p className="text-gray-600 break-all">{user?.email}</p>
-                                    {user?.bio && (
-                                        <p className="text-gray-700 mt-2 text-sm">{user.bio}</p>
+                                    <h1 className="text-2xl sm:text-3xl font-bold truncate">{profileData?.name || "User"}</h1>
+                                    <p className="break-all">{profileData?.email}</p>
+                                    {profileData?.bio && (
+                                        <p className="mt-2 text-sm">{profileData.bio}</p>
                                     )}
-                                    {user?.businessLink && (
+                                    {profileData?.businessLink && (
                                         <a
-                                            href={user.businessLink}
+                                            href={profileData.businessLink}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-purple-600 hover:underline text-sm block mt-2"
+                                            className="hover:underline text-sm block mt-2 text-blue-500 underline"
                                         >
-                                            {user.businessLink}
+                                            {profileData.businessLink}
                                         </a>
                                     )}
-                                    <div className="flex flex-col sm:flex-row gap-4 mt-3 text-sm text-gray-500">
+                                    <div className="flex flex-col sm:flex-row gap-4 mt-3 text-sm">
                                         <span>Joined {joinedDate}</span>
                                         <span className="hidden sm:inline">•</span>
-                                        <span>Member for {memberDays} days</span>
                                     </div>
                                 </div>
                             ) : (
@@ -222,7 +295,7 @@ export default function UserProfile() {
                                             rows={3}
                                             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-purple-500"
                                         />
-                                        <p className="text-xs text-gray-500 mt-1">{editBio.length}/200</p>
+                                        <p className="text-xs mt-1">{editBio.length}/200</p>
                                     </div>
                                     <div>
                                         <label className="block text-sm font-semibold mb-1">Business Link</label>
@@ -231,7 +304,7 @@ export default function UserProfile() {
                                             value={editBusinessLink}
                                             onChange={(e) => setEditBusinessLink(e.target.value)}
                                             placeholder="https://yourwebsite.com"
-                                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-purple-500"
+                                            className="w-full px-4 py-2 border rounded-lg text-blue-600 focus:outline-none focus:border-purple-500"
                                         />
                                     </div>
                                 </div>
@@ -239,44 +312,46 @@ export default function UserProfile() {
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="flex flex-wrap gap-2 sm:flex-col justify-center sm:justify-start w-full sm:w-auto">
-                            {!isEditing ? (
-                                <button
-                                    onClick={() => setIsEditing(true)}
-                                    className="flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition flex-1 sm:flex-none"
-                                >
-                                    <Edit2 size={18} />
-                                    <span className="hidden sm:inline">Edit Profile</span>
-                                    <span className="sm:hidden">Edit</span>
-                                </button>
-                            ) : (
-                                <>
+                        {isOwnProfile && (
+                            <div className="flex flex-wrap gap-2 sm:flex-col justify-center sm:justify-start w-full sm:w-auto">
+                                {!isEditing ? (
                                     <button
-                                        onClick={handleSaveProfile}
-                                        disabled={saving}
-                                        className="flex items-center justify-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition disabled:opacity-50 flex-1"
+                                        onClick={() => setIsEditing(true)}
+                                        className="flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition flex-1 sm:flex-none"
                                     >
-                                        <Save size={18} />
-                                        {saving ? "Saving..." : "Save"}
+                                        <Edit2 size={18} />
+                                        <span className="hidden sm:inline">Edit Profile</span>
+                                        <span className="sm:hidden">Edit</span>
                                     </button>
-                                    <button
-                                        onClick={() => setIsEditing(false)}
-                                        className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition flex-1"
-                                    >
-                                        <X size={18} />
-                                        Cancel
-                                    </button>
-                                </>
-                            )}
+                                ) : (
+                                    <>
+                                        <button
+                                            onClick={handleSaveProfile}
+                                            disabled={saving}
+                                            className="flex items-center justify-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition disabled:opacity-50 flex-1"
+                                        >
+                                            <Save size={18} />
+                                            {saving ? "Saving..." : "Save"}
+                                        </button>
+                                        <button
+                                            onClick={() => setIsEditing(false)}
+                                            className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition flex-1"
+                                        >
+                                            <X size={18} />
+                                            Cancel
+                                        </button>
+                                    </>
+                                )}
 
-                            <button
-                                onClick={handleLogout}
-                                className="flex items-center justify-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition flex-1"
-                            >
-                                <LogOut size={18} />
-                                <span className="hidden sm:inline">Logout</span>
-                            </button>
-                        </div>
+                                <button
+                                    onClick={handleLogout}
+                                    className="flex items-center justify-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition flex-1"
+                                >
+                                    <LogOut size={18} />
+                                    <span className="hidden sm:inline">Logout</span>
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -301,32 +376,36 @@ export default function UserProfile() {
                     <button
                         onClick={() => setActiveTab("feedback")}
                         className={`px-4 py-3 font-semibold whitespace-nowrap transition ${activeTab === "feedback"
-                                ? "border-b-2 border-purple-600 text-purple-600"
-                                : "text-gray-600 hover:text-gray-900"
+                            ? "border-b-2 border-purple-600 text-purple-600"
+                            : "text-gray-600 hover:text-gray-900"
                             }`}
                     >
-                        Your Feedback
+                        Feedback
                     </button>
-                    <button
-                        onClick={() => setActiveTab("preferences")}
-                        className={`px-4 py-3 font-semibold whitespace-nowrap transition flex items-center gap-2 ${activeTab === "preferences"
-                                ? "border-b-2 border-purple-600 text-purple-600"
-                                : "text-gray-600 hover:text-gray-900"
-                            }`}
-                    >
-                        <Settings size={18} />
-                        Preferences
-                    </button>
-                    <button
-                        onClick={() => setActiveTab("help")}
-                        className={`px-4 py-3 font-semibold whitespace-nowrap transition flex items-center gap-2 ${activeTab === "help"
-                                ? "border-b-2 border-purple-600 text-purple-600"
-                                : "text-gray-600 hover:text-gray-900"
-                            }`}
-                    >
-                        <HelpCircle size={18} />
-                        Help
-                    </button>
+                    {isOwnProfile && (
+                        <>
+                            <button
+                                onClick={() => setActiveTab("preferences")}
+                                className={`px-4 py-3 font-semibold whitespace-nowrap transition flex items-center gap-2 ${activeTab === "preferences"
+                                    ? "border-b-2 border-purple-600 text-purple-600"
+                                    : "text-gray-600 hover:text-gray-900"
+                                    }`}
+                            >
+                                <Settings size={18} />
+                                Preferences
+                            </button>
+                            <button
+                                onClick={() => setActiveTab("help")}
+                                className={`px-4 py-3 font-semibold whitespace-nowrap transition flex items-center gap-2 ${activeTab === "help"
+                                    ? "border-b-2 border-purple-600 text-purple-600"
+                                    : "text-gray-600 hover:text-gray-900"
+                                    }`}
+                            >
+                                <HelpCircle size={18} />
+                                Help
+                            </button>
+                        </>
+                    )}
                 </div>
 
                 {/* Tab Content */}
@@ -338,80 +417,141 @@ export default function UserProfile() {
                                 <div className="text-center py-8">Loading feedback...</div>
                             ) : userFeedback.length === 0 ? (
                                 <div className="rounded-lg p-6 sm:p-8 text-center border-2 border-dashed border-gray-300">
-                                    <p className="text-gray-600 mb-4">You haven't submitted any feedback yet.</p>
-                                    <a
-                                        href="/feedback"
-                                        className="inline-block px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition"
-                                    >
-                                        Submit Feedback
-                                    </a>
+                                    <p className="text-gray-600 mb-4">No feedback submitted yet.</p>
+                                    {isOwnProfile && (
+                                        <a
+                                            href="/feedback"
+                                            className="inline-block px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition"
+                                        >
+                                            Submit Feedback
+                                        </a>
+                                    )}
                                 </div>
                             ) : (
                                 userFeedback.map((item) => (
-                                    <div
-                                        key={item.id}
-                                        className="rounded-lg p-4 sm:p-6 border border-gray-200 shadow-sm hover:shadow-md transition"
-                                    >
-                                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-2">
-                                            <h3 className="text-lg font-semibold break-words flex-1">{item.title}</h3>
-                                            <span className="px-3 py-1 bg-purple-500/20 text-purple-700 rounded-full text-sm capitalize font-medium whitespace-nowrap flex-shrink-0">
-                                                {item.feedbackType}
-                                            </span>
-                                        </div>
-                                        <p className="text-gray-600 mb-3 ">{item.message}</p>
-                                        <p className="text-sm text-gray-500">
-                                            {new Date(item.createdAt).toLocaleDateString()} at{" "}
-                                            {new Date(item.createdAt).toLocaleTimeString()}
-                                        </p>
+                                    <div key={item.id} className="rounded-lg p-4 sm:p-6 border shadow-sm hover:shadow-md transition">
+                                        {editingFeedbackId === item.id ? (
+                                            // Edit Mode
+                                            <div className="space-y-4">
+                                                <div>
+                                                    <label className="block text-sm font-semibold mb-2 text-black">Title</label>
+                                                    <input
+                                                        type="text"
+                                                        value={editingFeedback.title}
+                                                        onChange={(e) => setEditingFeedback({ ...editingFeedback, title: e.target.value })}
+                                                        className="w-full px-4 py-2 text-black border rounded-lg focus:outline-none focus:border-purple-500"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-sm font-semibold mb-2 text-black">Message</label>
+                                                    <textarea
+                                                        value={editingFeedback.message}
+                                                        onChange={(e) => setEditingFeedback({ ...editingFeedback, message: e.target.value })}
+                                                        rows={4}
+                                                        className="w-full text-black px-4 py-2 border rounded-lg focus:outline-none focus:border-purple-500 resize-none"
+                                                    />
+                                                </div>
+                                                <div className="flex gap-2">
+                                                    <button
+                                                        onClick={handleSaveFeedback}
+                                                        disabled={savingFeedback}
+                                                        className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition disabled:opacity-50 flex-1"
+                                                    >
+                                                        <Save size={16} />
+                                                        {savingFeedback ? "Saving..." : "Save"}
+                                                    </button>
+                                                    <button
+                                                        onClick={() => setEditingFeedbackId(null)}
+                                                        className="flex items-center gap-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition flex-1"
+                                                    >
+                                                        <X size={16} />
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            // View Mode
+                                            <>
+                                                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-2">
+                                                    <h3 className="text-lg font-semibold break-words flex-1 text-black">{item.title}</h3>
+                                                    <span className="px-3 py-1 bg-purple-500/20 text-purple-700 rounded-full text-sm capitalize font-medium whitespace-nowrap flex-shrink-0">
+                                                        {item.feedbackType}
+                                                    </span>
+                                                </div>
+                                                <p className="text-gray-600 mb-3">{item.message}</p>
+                                                <p className="text-sm text-gray-500 mb-3">
+                                                    {new Date(item.createdAt).toLocaleDateString()} at{" "}
+                                                    {new Date(item.createdAt).toLocaleTimeString()}
+                                                </p>
+                                                {isOwnProfile && (
+                                                    <div className="flex gap-2 pt-3 border-t">
+                                                        <button
+                                                            onClick={() => handleEditFeedback(item)}
+                                                            className="flex items-center gap-2 px-4 py-2 text-black border border-purple-500 rounded-lg hover:border-purple-700 transition text-sm flex-1"
+                                                        >
+                                                            <Edit2 size={16} />
+                                                            Edit
+                                                        </button>
+                                                        <button
+                                                            onClick={() => handleDeleteFeedback(item.id)}
+                                                            className="flex items-center text-black gap-2 px-4 py-2 border border-red-500 rounded-lg hover:border-red-700 transition text-sm flex-1"
+                                                        >
+                                                            <Trash2 size={16} />
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                )}
+                                            </>
+                                        )}
                                     </div>
                                 ))
                             )}
                         </div>
                     )}
 
-                    {/* Preferences Tab */}
-                    {activeTab === "preferences" && (
+                    {/* Preferences Tab - Only for own profile */}
+                    {activeTab === "preferences" && isOwnProfile && (
                         <div className="space-y-6">
-                            <div className="flex items-center justify-between p-4 border rounded-lg">
+                            <div className="flex items-center justify-between p-4 border rounded-lg text-black">
                                 <div className="flex items-center gap-3">
-                                    <Bell size={20} className="text-purple-600" />
+                                    <Bell size={20} />
                                     <div>
-                                        <p className="font-semibold text-black">Notifications</p>
+                                        <p className="font-semibold">Notifications</p>
                                         <p className="text-sm text-gray-600">Receive updates about your feedback</p>
                                     </div>
                                 </div>
                                 <button
                                     onClick={() => setNotifications(!notifications)}
                                     className={`px-4 py-2 rounded-lg font-medium transition ${notifications
-                                            ? "bg-purple-600  hover:bg-purple-700"
-                                            : "bg-gray-300 text-gray-700 hover:bg-gray-400"
+                                        ? "bg-purple-600 text-white hover:bg-purple-700"
+                                        : "bg-gray-300 text-gray-700 hover:bg-gray-400"
                                         }`}
                                 >
                                     {notifications ? "On" : "Off"}
                                 </button>
                             </div>
 
-                            <div className="flex items-center justify-between p-4 border rounded-lg">
+                            <div className="flex items-center justify-between p-4 border rounded-lg text-black">
                                 <div className="flex items-center gap-3">
-                                    <Bell size={20} className="text-blue-600" />
+                                    <Bell size={20} />
                                     <div>
-                                        <p className="font-semibold text-black">Newsletter</p>
+                                        <p className="font-semibold">Newsletter</p>
                                         <p className="text-sm text-gray-600">Subscribe to our weekly newsletter</p>
                                     </div>
                                 </div>
                                 <button
                                     onClick={() => setNewsletter(!newsletter)}
                                     className={`px-4 py-2 rounded-lg font-medium transition ${newsletter
-                                            ? "bg-blue-600  hover:bg-blue-700"
-                                            : "bg-gray-300 text-gray-700 hover:bg-gray-400"
+                                        ? "bg-blue-600 text-white hover:bg-blue-700"
+                                        : "bg-gray-300 text-gray-700 hover:bg-gray-400"
                                         }`}
                                 >
                                     {newsletter ? "On" : "Off"}
                                 </button>
                             </div>
 
-                            <div className="border-t pt-6">
-                                <h3 className="text-lg font-semibold mb-3 text-black">Account Info</h3>
+                            <div className="border-t pt-6 text-black">
+                                <h3 className="text-lg font-semibold mb-3">Account Info</h3>
                                 <div className="space-y-2 text-sm text-gray-600">
                                     <p>Account ID: {user?.uid}</p>
                                     <p>Member since: {joinedDate}</p>
@@ -421,8 +561,8 @@ export default function UserProfile() {
                         </div>
                     )}
 
-                    {/* Help Tab */}
-                    {activeTab === "help" && (
+                    {/* Help Tab - Only for own profile */}
+                    {activeTab === "help" && isOwnProfile && (
                         <div className="space-y-6">
                             <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
                                 <h3 className="font-semibold text-purple-900 mb-2">Help & Support</h3>
