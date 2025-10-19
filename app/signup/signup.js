@@ -119,11 +119,10 @@ export default function Signup() {
                 password
             );
 
-            // Save user data to Firestore
             await setDoc(doc(db1, "users", userCredential.user.uid), {
                 name: name.trim(),
                 email: email.toLowerCase(),
-                createdAt: new Date(),
+                createdAt: serverTimestamp(),
                 bio: "",
                 businessLink: "",
                 profileImage: null,

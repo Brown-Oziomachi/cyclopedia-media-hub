@@ -22,7 +22,7 @@ export default function TestimonialPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
   const [feedbackCountMap, setFeedbackCountMap] = useState({});
 
   useEffect(() => {

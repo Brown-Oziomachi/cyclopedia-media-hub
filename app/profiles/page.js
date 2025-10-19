@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { doc, updateDoc, collection, query, where, getDocs, getDoc, deleteDoc } from "firebase/firestore";
 import { db1 } from "@/lib/firebaseConfig";
 import { LogOut, Edit2, Save, X, Upload, Settings, Bell, HelpCircle, Trash2 } from "lucide-react";
+import { formatFirestoreDate } from "@/lib/dateUtils";
 
 export default function UserProfile() {
     const { user, logout } = useAuth();
@@ -198,13 +199,20 @@ export default function UserProfile() {
     const profileData = isOwnProfile ? user : viewingUser;
     const userInitial = profileData?.email?.charAt(0).toUpperCase() || "U";
     const displayImage = isOwnProfile ? (profileImage || user?.profileImage) : viewingUser?.profileImage;
-    const joinedDate = profileData?.createdAt
-        ? new Date(profileData.createdAt).toLocaleDateString()
-        : "Date not available";
+    const joinedDate = formatFirestoreDate(profileData?.createdAt);
     const memberDays = profileData?.createdAt
-        ? Math.floor((new Date() - new Date(profileData.createdAt)) / (1000 * 60 * 60 * 24))
+        ? (() => {
+            let date;
+            if (profileData.createdAt?.toDate) {
+                date = profileData.createdAt.toDate();
+            } else if (profileData.createdAt?.seconds) {
+                date = new Date(profileData.createdAt.seconds * 1000);
+            } else {
+                date = new Date(profileData.createdAt);
+            }
+            return isNaN(date.getTime()) ? 0 : Math.floor((new Date() - date) / (1000 * 60 * 60 * 24));
+        })()
         : 0;
-    
 
     return (
         <div className="min-h-screen py-6 sm:py-8 px-4 sm:px-6">
@@ -263,6 +271,7 @@ export default function UserProfile() {
                                     <div className="flex flex-col sm:flex-row gap-4 mt-3 text-sm">
                                         <span>Joined {joinedDate}</span>
                                         <span className="hidden sm:inline">•</span>
+                                        <span>{memberDays} days member</span>
                                     </div>
                                 </div>
                             ) : (
@@ -304,7 +313,7 @@ export default function UserProfile() {
                                             value={editBusinessLink}
                                             onChange={(e) => setEditBusinessLink(e.target.value)}
                                             placeholder="https://yourwebsite.com"
-                                            className="w-full px-4 py-2 border rounded-lg text-blue-600 focus:outline-none focus:border-purple-500"
+                                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-purple-500"
                                         />
                                     </div>
                                 </div>
@@ -480,8 +489,7 @@ export default function UserProfile() {
                                                 </div>
                                                 <p className="text-gray-600 mb-3">{item.message}</p>
                                                 <p className="text-sm text-gray-500 mb-3">
-                                                    {new Date(item.createdAt).toLocaleDateString()} at{" "}
-                                                    {new Date(item.createdAt).toLocaleTimeString()}
+                                                    {formatFirestoreDate(item.createdAt, "datetime")}
                                                 </p>
                                                 {isOwnProfile && (
                                                     <div className="flex gap-2 pt-3 border-t">
@@ -555,6 +563,7 @@ export default function UserProfile() {
                                 <div className="space-y-2 text-sm text-gray-600">
                                     <p>Account ID: {user?.uid}</p>
                                     <p>Member since: {joinedDate}</p>
+                                    <p>Member for: {memberDays} days</p>
                                     <p>Total feedback submitted: {feedbackStats.total}</p>
                                 </div>
                             </div>
