@@ -38,7 +38,7 @@ export default function UserProfileButton({ setShowNavOpen }) {
           {userInitial}
         </div>
       )}
-      <span className="text-sm mt-10 font-semibold hidden sm:inline text-white">
+      <span className="text-sm mt-10 font-semibold text-gray-200">
         {user?.name || "User"}
       </span>
     </button>

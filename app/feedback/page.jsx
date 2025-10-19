@@ -48,14 +48,14 @@ export default function FeedbackForm() {
     e.preventDefault();
     setSubmitting(true);
 
- const data = {
-  feedbackType,
-  email,
-  title,
-  message,
-  userId: user?.uid, 
-  createdAt: new Date().toISOString(),
-};
+    const data = {
+      feedbackType,
+      email,
+      title,
+      message,
+      userId: user?.uid,
+      createdAt: new Date().toISOString(),
+    };
     try {
       const feedbackId = `feedback_${Date.now()}`;
       await setDoc(doc(db1, "feedback", feedbackId), data);
@@ -169,7 +169,10 @@ export default function FeedbackForm() {
                         className="sr-only"
                         required
                       />
-                      <IconComponent size={24} className={isSelected ? "mb-2" : ""} />
+                      <IconComponent
+                        size={24}
+                        className={isSelected ? "mb-2" : ""}
+                      />
                       <p className="font-semibold text-center text-sm">
                         {option.label}
                       </p>
@@ -189,7 +192,7 @@ export default function FeedbackForm() {
                 placeholder="thecyclopedia@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-5 py-4 border-neutral-50 shadow-2xl rounded-xl focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                className="w-full px-5 py-4 border border-purple-950 shadow-2xl rounded-xl focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                 required
               />
             </div>
@@ -203,7 +206,7 @@ export default function FeedbackForm() {
                 placeholder="Give your feedback a brief title..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-5 py-4 border-neutral-50 shadow-2xl rounded-xl focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                className="w-full px-5 py-4 border shadow-2xl rounded-xl focus:outline-none border-purple-950 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                 required
               />
             </div>
@@ -219,8 +222,9 @@ export default function FeedbackForm() {
                 placeholder="Share your thoughts, suggestions, or report issues in detail..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="px-5 py-4 border rounded-xl focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                 required
+                variant="outlined"
+                className="px-5 py-4 border border-purple-950 rounded-xl bg-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
               />
             </div>
 
