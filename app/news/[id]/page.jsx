@@ -212,12 +212,12 @@ export default function NewsDetails() {
           </div>
 
           <div className="mb-10 text-center">
-            <h1 className="text-3xl md:text-4xl uppercase lg:mt-10 font-extrabold mt-13 mb-8  lg:w-3/4 mx-auto leading-snug">
+            <h1 className="text-3xl md:text-4xl uppercase lg:mt-10 font-extrabold mt-13 mb-5  lg:w-3/4 mx-auto leading-snug">
               {blog.title}
             </h1>
 
             {blog.createdAt && (
-              <p className="text-sm font-serif font-black mb-6 ">
+              <p className="text-sm font-serif font-black mb-0 ">
                 Published on:{" "}
                 <span className=" font-medium">
                   {blog.createdAt.toDate().toLocaleString("en-US", {
@@ -234,7 +234,7 @@ export default function NewsDetails() {
             )}
 
             <Icons />
-
+              <Link href="/pp-feedbacks" className="mb-5 text-blue-600 hover:underline ">FeedBack</Link>
             {blog.imageUrl && (
               <div className="relative w-full max-w-4xl mx-auto mb-6">
                 <img
@@ -343,6 +343,12 @@ export default function NewsDetails() {
             className="inline-block bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold px-8 py-3 rounded-full hover:scale-105 hover:shadow-lg transition-all duration-300"
           >
             Subscribe Now
+          </a>
+            <a
+            href="/pp-feedbacks"
+            className="inline-block ml-5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold px-8 py-3 rounded-full hover:scale-105 hover:shadow-lg transition-all duration-300"
+          >
+            Feedback
           </a>
         </div>
       </div>

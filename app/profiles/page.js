@@ -133,10 +133,10 @@ export default function UserProfile() {
     const memberDays = Math.floor((new Date() - new Date(user?.createdAt)) / (1000 * 60 * 60 * 24));
 
     return (
-        <div className="min-h-screen py-6 sm:py-8 px-4 sm:px-6 bg-gray-50">
+        <div className="min-h-screen py-6 sm:py-8 px-4 sm:px-6 ">
             <div className="max-w-4xl mx-auto">
                 {/* Profile Header */}
-                <div className="rounded-2xl p-6 sm:p-8 mb-8 shadow-lg border mt-20 lg:mt-40 border-gray-200 bg-white">
+                <div className="rounded-2xl p-6 sm:p-8 mb-8 shadow-lg border mt-20 lg:mt-40">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 sm:gap-8">
                         {/* Profile Image and Info */}
                         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 flex-1 min-w-0">
@@ -358,7 +358,7 @@ export default function UserProfile() {
                                                 {item.feedbackType}
                                             </span>
                                         </div>
-                                        <p className="text-gray-600 mb-3 line-clamp-2">{item.message}</p>
+                                        <p className="text-gray-600 mb-3 ">{item.message}</p>
                                         <p className="text-sm text-gray-500">
                                             {new Date(item.createdAt).toLocaleDateString()} at{" "}
                                             {new Date(item.createdAt).toLocaleTimeString()}
@@ -376,14 +376,14 @@ export default function UserProfile() {
                                 <div className="flex items-center gap-3">
                                     <Bell size={20} className="text-purple-600" />
                                     <div>
-                                        <p className="font-semibold">Notifications</p>
+                                        <p className="font-semibold text-black">Notifications</p>
                                         <p className="text-sm text-gray-600">Receive updates about your feedback</p>
                                     </div>
                                 </div>
                                 <button
                                     onClick={() => setNotifications(!notifications)}
                                     className={`px-4 py-2 rounded-lg font-medium transition ${notifications
-                                            ? "bg-purple-600 text-white hover:bg-purple-700"
+                                            ? "bg-purple-600  hover:bg-purple-700"
                                             : "bg-gray-300 text-gray-700 hover:bg-gray-400"
                                         }`}
                                 >
@@ -395,14 +395,14 @@ export default function UserProfile() {
                                 <div className="flex items-center gap-3">
                                     <Bell size={20} className="text-blue-600" />
                                     <div>
-                                        <p className="font-semibold">Newsletter</p>
+                                        <p className="font-semibold text-black">Newsletter</p>
                                         <p className="text-sm text-gray-600">Subscribe to our weekly newsletter</p>
                                     </div>
                                 </div>
                                 <button
                                     onClick={() => setNewsletter(!newsletter)}
                                     className={`px-4 py-2 rounded-lg font-medium transition ${newsletter
-                                            ? "bg-blue-600 text-white hover:bg-blue-700"
+                                            ? "bg-blue-600  hover:bg-blue-700"
                                             : "bg-gray-300 text-gray-700 hover:bg-gray-400"
                                         }`}
                                 >
@@ -411,7 +411,7 @@ export default function UserProfile() {
                             </div>
 
                             <div className="border-t pt-6">
-                                <h3 className="text-lg font-semibold mb-3">Account Info</h3>
+                                <h3 className="text-lg font-semibold mb-3 text-black">Account Info</h3>
                                 <div className="space-y-2 text-sm text-gray-600">
                                     <p>Account ID: {user?.uid}</p>
                                     <p>Member since: {joinedDate}</p>

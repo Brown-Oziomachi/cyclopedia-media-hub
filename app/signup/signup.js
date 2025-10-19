@@ -60,7 +60,7 @@ export default function SignUp() {
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            placeholder="Brown Oziomachi"
+                            placeholder="The Cyclopedia"
                             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
                             required
                         />

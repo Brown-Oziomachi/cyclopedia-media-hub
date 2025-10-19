@@ -150,10 +150,10 @@ export default function UserProfile() {
     const memberDays = Math.floor((new Date() - new Date(profileData?.createdAt)) / (1000 * 60 * 60 * 24));
 
     return (
-        <div className="min-h-screen py-6 sm:py-8 px-4 sm:px-6 bg-gray-50">
+        <div className="min-h-screen py-6 sm:py-8 px-4 sm:px-6 ">
             <div className="max-w-4xl mx-auto">
                 {/* Profile Header */}
-                <div className="rounded-2xl p-6 sm:p-8 mb-8 shadow-lg border mt-20 lg:mt-40 border-gray-200 bg-white">
+                <div className="rounded-2xl p-6 sm:p-8 mb-8 shadow-lg border mt-20 lg:mt-40">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 sm:gap-8">
                         {/* Profile Image and Info */}
                         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 flex-1 min-w-0">
@@ -375,15 +375,15 @@ export default function UserProfile() {
                                 userFeedback.map((item) => (
                                     <div
                                         key={item.id}
-                                        className="rounded-lg p-4 sm:p-6 border border-gray-200 shadow-sm hover:shadow-md transition"
+                                        className="rounded-lg p-4 sm:p-6 border shadow-sm hover:shadow-md transition"
                                     >
                                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-2">
-                                            <h3 className="text-lg font-semibold break-words flex-1">{item.title}</h3>
+                                            <h3 className="text-lg font-semibold break-words text-black flex-1">{item.title}</h3>
                                             <span className="px-3 py-1 bg-purple-500/20 text-purple-700 rounded-full text-sm capitalize font-medium whitespace-nowrap flex-shrink-0">
                                                 {item.feedbackType}
                                             </span>
                                         </div>
-                                        <p className="text-gray-600 mb-3 line-clamp-2">{item.message}</p>
+                                        <p className="text-gray-600 mb-3 ">{item.message}</p>
                                         <p className="text-sm text-gray-500">
                                             {new Date(item.createdAt).toLocaleDateString()} at{" "}
                                             {new Date(item.createdAt).toLocaleTimeString()}
