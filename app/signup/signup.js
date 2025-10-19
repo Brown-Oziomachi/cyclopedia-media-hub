@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { setDoc, doc, serverTimestamp } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { auth, db1 } from "@/lib/firebaseConfig";
 import { useAuth } from "@/components/AuthProvider";
@@ -119,10 +119,11 @@ export default function Signup() {
                 password
             );
 
+            // Save user data to Firestore
             await setDoc(doc(db1, "users", userCredential.user.uid), {
                 name: name.trim(),
                 email: email.toLowerCase(),
-                createdAt: serverTimestamp(),
+                createdAt: new Date(),
                 bio: "",
                 businessLink: "",
                 profileImage: null,
@@ -309,7 +310,7 @@ export default function Signup() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full py-3 bg-purple-700 hover:bg-purple-800 text-white font-semibold rounded-lg disabled:opacity-50 transition"
+                        className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg disabled:opacity-50 transition"
                     >
                         {loading ? "Creating Account..." : "Sign Up"}
                     </button>
