@@ -200,19 +200,7 @@ export default function UserProfile() {
     const userInitial = profileData?.email?.charAt(0).toUpperCase() || "U";
     const displayImage = isOwnProfile ? (profileImage || user?.profileImage) : viewingUser?.profileImage;
     const joinedDate = formatFirestoreDate(profileData?.createdAt);
-    const memberDays = profileData?.createdAt
-        ? (() => {
-            let date;
-            if (profileData.createdAt?.toDate) {
-                date = profileData.createdAt.toDate();
-            } else if (profileData.createdAt?.seconds) {
-                date = new Date(profileData.createdAt.seconds * 1000);
-            } else {
-                date = new Date(profileData.createdAt);
-            }
-            return isNaN(date.getTime()) ? 0 : Math.floor((new Date() - date) / (1000 * 60 * 60 * 24));
-        })()
-        : 0;
+    const memberDays = getDaysSince(profileData?.createdAt);
 
     return (
         <div className="min-h-screen py-6 sm:py-8 px-4 sm:px-6">
@@ -232,7 +220,7 @@ export default function UserProfile() {
                                     />
                                 ) : (
                                     <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white text-3xl sm:text-4xl font-bold">
-                                            {userInitial}
+                                        {userInitial}
                                     </div>
                                 )}
                                 {isOwnProfile && isEditing && (
@@ -269,8 +257,9 @@ export default function UserProfile() {
                                             {profileData.businessLink}
                                         </a>
                                     )}
-                                    Joined {formatFirestoreDate(user.createdAt)} • {getDaysSince(user.createdAt)} days ago
-                                   
+                                    <p>
+                                        Joined {joinedDate} • {memberDays} days ago
+                                    </p>
                                 </div>
                             ) : (
                                 <div className="w-full sm:flex-1 space-y-4">

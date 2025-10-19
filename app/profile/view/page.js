@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { doc, updateDoc, collection, query, where, getDocs, getDoc, deleteDoc } from "firebase/firestore";
 import { db1 } from "@/lib/firebaseConfig";
 import { LogOut, Edit2, Save, X, Upload, Settings, Bell, HelpCircle, Trash2 } from "lucide-react";
-import { formatFirestoreDate, getDaysSince } from "@/utils/dateUtils";
+import { formatFirestoreDate, getDaysSince, sortByDate } from "@/utils/dateUtils";
 
 export default function UserProfile() {
     const { user, logout } = useAuth();
@@ -199,12 +199,8 @@ export default function UserProfile() {
     const profileData = isOwnProfile ? user : viewingUser;
     const userInitial = profileData?.email?.charAt(0).toUpperCase() || "U";
     const displayImage = isOwnProfile ? (profileImage || user?.profileImage) : viewingUser?.profileImage;
-    const joinedDate = profileData?.createdAt
-        ? new Date(profileData.createdAt).toLocaleDateString()
-        : "Date not available";
-    const memberDays = profileData?.createdAt
-        ? Math.floor((new Date() - new Date(profileData.createdAt)) / (1000 * 60 * 60 * 24))
-        : 0;
+    const joinedDate = formatFirestoreDate(profileData?.createdAt);
+    const memberDays = getDaysSince(profileData?.createdAt);
 
     return (
         <div className="min-h-screen py-6 sm:py-8 px-4 sm:px-6">
@@ -262,9 +258,8 @@ export default function UserProfile() {
                                         </a>
                                     )}
                                     <p>
-                                        Joined {formatFirestoreDate(user.createdAt)} • {getDaysSince(user.createdAt)} days ago
+                                        Joined {joinedDate} • {memberDays} days ago
                                     </p>
-
                                 </div>
                             ) : (
                                 <div className="w-full sm:flex-1 space-y-4">
@@ -481,8 +476,7 @@ export default function UserProfile() {
                                                 </div>
                                                 <p className="text-gray-600 mb-3">{item.message}</p>
                                                 <p className="text-sm text-gray-500 mb-3">
-                                                    {new Date(item.createdAt).toLocaleDateString()} at{" "}
-                                                    {new Date(item.createdAt).toLocaleTimeString()}
+                                                    {formatFirestoreDate(item.createdAt, "datetime")}
                                                 </p>
                                                 {isOwnProfile && (
                                                     <div className="flex gap-2 pt-3 border-t">
@@ -556,6 +550,7 @@ export default function UserProfile() {
                                 <div className="space-y-2 text-sm text-gray-600">
                                     <p>Account ID: {user?.uid}</p>
                                     <p>Member since: {joinedDate}</p>
+                                    <p>Member for: {memberDays} days</p>
                                     <p>Total feedback submitted: {feedbackStats.total}</p>
                                 </div>
                             </div>
