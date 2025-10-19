@@ -11,6 +11,8 @@ import ThemeToggle from "./ThemeToggle";
 import StatusModal from "@/components/StatusModal";
 import LiveClock from "@/components/LiveClock";
 import ViewMoreSearchPopup from "./ViewIcon";
+import UserProfileDropdown from "./UserProfile";
+import UserProfileButton from "./UserProfile";
 
 
 const ProfileDropdownNavbar = () => {
@@ -226,12 +228,10 @@ const regions = [
             <ThemeToggle />
             <ViewMoreSearchPopup />
           </div>
-
-          {/* Desktop Search Bar */}
-         
-
           <LiveClock />
-          {/* Regions Dropdown (desktop only) */}
+          <div className="ml-auto -mt-5 max-lg:hidden">
+            <UserProfileButton setShowNavOpen={setShowNav} />{" "}
+          </div>
           <div className="relative hidden lg:block px-4 py-1 text-black">
             <button
               onClick={() => setShowRegionsDropdown((v) => !v)}
@@ -353,100 +353,6 @@ const regions = [
         </section>
       </header>
 
-      {/* Profile / Auth Buttons
-        <div className="hidden lg:flex items-center gap-4">
-          {session ? (
-            <>
-              <button
-                onClick={toggleDrawer(true)}
-                className="flex items-center gap-2 focus:outline-none"
-                aria-haspopup="true"
-                aria-expanded={drawerOpen}
-                aria-label="Open profile menu"
-              >
-                <img
-                  src={session.user.image || "/default-avatar.png"}
-                  alt={session.user.name}
-                  width={36}
-                  height={36}
-                  className="rounded-full border border-gray-600 shadow hover:shadow-lg transition duration-300 object-cover"
-                />
-                <span className="text-sm font-semibold text-gray-200">
-                  {session.user.name}
-                </span>
-                <ChevronDown className="text-xl text-cyan-400" />
-              </button>
-
-              <Drawer
-                anchor="right"
-                open={drawerOpen}
-                onClose={toggleDrawer(false)}
-                PaperProps={{
-                  sx: {
-                    bgcolor: "black",
-                    width: 350,
-                    p: 3,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    color: "white",
-                  },
-                }}
-              >
-                <div>
-                  <h1 className="text-green-600 text-center text-2xl font-serif font-bold">
-                    Hello!!
-                  </h1>
-                  <p className="font-semibold text-base text-white text-center">
-                    {session.user.name}
-                  </p>
-                  <p className="text-gray-400 text-xs text-center mb-4">
-                    {session.user.email}
-                  </p>
-
-                  <hr className="my-4 border-gray-600" />
-
-                  <nav className="flex flex-col space-y-2 text-gray-300 text-sm">
-                    <Link
-                      href="/blog?genre=news"
-                      className="hover:text-cyan-400"
-                    >
-                      News
-                    </Link>
-                    <Link href="/news" className="hover:text-cyan-400">
-                      Notifications
-                    </Link>
-                    <h1
-                      className="font-bold font-serif cursor-pointer text-green-700 text-center mt-5"
-                      onClick={() => {
-                        const el = document.getElementById("services-section");
-                        if (el) el.scrollIntoView({ behavior: "smooth" });
-                      }}
-                    >
-                      Have something to Share? ⬇
-                      <img src="/share.jpg" alt="Share" className="mt-5" />
-                    </h1>
-                  </nav>
-                </div>
-
-                <button
-                  onClick={signOut}
-                  className="mt- w-full py-2 rounded bg-gradient-to-r from-purple-500 to-cyan-500 text-white text-sm font-semibold hover:opacity-90"
-                >
-                  Sign Out
-                </button>
-              </Drawer>
-            </>
-          ) : (
-            <Link
-              href="/auth/signin"
-              className="text-sm py-2 px-4 bg-gradient-to-r from-purple-500 to-cyan-500 text-white rounded-lg hover:bg-cyan-500 transition"
-            >
-              Sign In <LogIn className="inline-block ml-2" size={16} />
-            </Link>
-          )}
-        </div> */}
-
       {/* Mobile menu & profile */}
       <div
         className={`lg:hidden fixed top-4 right-4 flex items-center gap-4 z-50 transition-transform duration-300 ${
@@ -506,6 +412,7 @@ const regions = [
               <Search />
             </button>
           </form>
+          <UserProfileButton setShowNavOpen={setShowNav} />{" "}
           <ul className="space-y-3 font-bold mt-5 text-gray-400">
             <li>
               <Link href="/global" onClick={() => setShowNav(false)}>
@@ -558,9 +465,7 @@ const regions = [
               </Link>
             </li>
           </ul>
-
           <hr className="my-4 border-gray-600" />
-
           <Link
             href="/newsletter"
             onClick={() => setShowNav(false)}
@@ -576,7 +481,6 @@ const regions = [
             Substack | Subscription
           </Link>
           <hr className="my-2 border-gray-600" />
-
           <ul className="grid items-center text-white gap-6">
             {regions.map((region) => (
               <li key={region.name} className="relative">
@@ -628,9 +532,7 @@ const regions = [
               </li>
             ))}
           </ul>
-
           <hr className="my-4 border-gray-600" />
-
           <nav className="flex flex-col gap-6 mt-8 text-gray-300">
             {navItems.map((item, index) => (
               <Link
@@ -643,7 +545,6 @@ const regions = [
               </Link>
             ))}
           </nav>
-
           <div className="mt-10 w-full gap-5 flex flex-col mx-auto items-center">
             {session ? (
               <button

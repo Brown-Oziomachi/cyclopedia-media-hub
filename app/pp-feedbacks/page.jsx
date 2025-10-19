@@ -1,6 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-import { collection, query, orderBy, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  orderBy,
+  getDocs,
+  doc,
+  getDoc,
+} from "firebase/firestore";
 import { db1 } from "@/lib/firebaseConfig";
 import {
   MessageCircle,
@@ -8,6 +15,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function TestimonialPage() {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -24,24 +32,42 @@ export default function TestimonialPage() {
         const q = query(feedbackCollection, orderBy("createdAt", "desc"));
         const snapshot = await getDocs(q);
 
-        const feedbackData = snapshot.docs.map((doc) => {
-          const data = doc.data();
-          const email = data.email || "";
-          const name = email.split("@")[0] || "User";
-          const initials = name
-            .split(".")
-            .map((n) => n[0])
-            .join("")
-            .toUpperCase()
-            .slice(0, 2);
+        const feedbackData = await Promise.all(
+          snapshot.docs.map(async (feedbackDoc) => {
+            const data = feedbackDoc.data();
+            const userId = data.userId;
+            let userProfile = null;
 
-          return {
-            id: doc.id,
-            ...data,
-            name: name.charAt(0).toUpperCase() + name.slice(1),
-            initials,
-          };
-        });
+            if (userId) {
+              try {
+                const userDoc = await getDoc(doc(db1, "users", userId));
+                userProfile = userDoc.data();
+              } catch (err) {
+                console.error("Error fetching user profile:", err);
+              }
+            }
+
+            const name =
+              userProfile?.name ||
+              data.name ||
+              data.email?.split("@")[0] ||
+              "User";
+            const initials = name
+              .split(" ")
+              .map((n) => n[0])
+              .join("")
+              .toUpperCase()
+              .slice(0, 2);
+
+           return {
+  id: feedbackDoc.id, 
+  ...data,
+  name: name.charAt(0).toUpperCase() + name.slice(1),
+  initials,
+  profileImage: userProfile?.profileImage || null,
+};
+          })
+        );
 
         setFeedbacks(feedbackData);
         setError(null);
@@ -146,14 +172,24 @@ export default function TestimonialPage() {
           <div className="mt-6 flex items-center justify-center gap-2">
             <div className="flex -space-x-2">
               {feedbacks.slice(0, 3).map((feedback) => (
-                <div
-                  key={feedback.id}
-                  className={`w-10 h-10 rounded-full bg-gradient-to-br ${getAvatarColor(
-                    feedback.name
-                  )} flex items-center justify-center font-bold text-sm shadow`}
-                  title={feedback.name}
-                >
-                  {feedback.initials}
+                <div key={feedback.id} className="relative">
+                  {feedback.profileImage ? (
+                    <img
+                      src={feedback.profileImage}
+                      alt={feedback.name}
+                      className="w-10 h-10 rounded-full object-cover shadow border-2 border-white"
+                      title={feedback.name}
+                    />
+                  ) : (
+                    <div
+                      className={`w-10 h-10 rounded-full bg-gradient-to-br ${getAvatarColor(
+                        feedback.name
+                      )} flex items-center justify-center font-bold text-sm shadow border-2 border-white`}
+                      title={feedback.name}
+                    >
+                      {feedback.initials}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -187,17 +223,26 @@ export default function TestimonialPage() {
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3 flex-1">
-                      <div
-                        className={`w-12 h-12 rounded-full bg-gradient-to-br ${getAvatarColor(
-                          feedback.name
-                        )} flex items-center justify-center font-bold flex-shrink-0`}
-                      >
-                        {feedback.initials}
-                      </div>
+                      {feedback.profileImage ? (
+                        <img
+                          src={feedback.profileImage}
+                          alt={feedback.name}
+                          className="w-12 h-12 rounded-full object-cover flex-shrink-0"
+                        />
+                      ) : (
+                        <div
+                          className={`w-12 h-12 rounded-full bg-gradient-to-br ${getAvatarColor(
+                            feedback.name
+                          )} flex items-center justify-center font-bold flex-shrink-0`}
+                        >
+                          {feedback.initials}
+                        </div>
+                      )}
                       <div className="min-w-0">
-                        <h3 className="font-bold text-sm truncate">
+                        <Link href={`/profile/view?id=${feedback.userId}`}>
                           {feedback.name}
-                        </h3>
+                        <h1 className="text-sm text-blue-600">View Profile</h1>
+                        </Link>
                         <div
                           className={`px-3 py-1 rounded-full text-xs font-semibold border ${getFeedbackTypeColor(
                             feedback.feedbackType

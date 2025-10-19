@@ -1,11 +1,11 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import AuthProvider from "@/components/AuthProvider";
 import { Analytics } from "@vercel/analytics/next";
 import Footer from "@/components/Footer";
 import { Suspense } from "react";
 import { ThemeProvider } from "next-themes";
 import CookieBanner from "@/components/Cookies";
+import AuthProvider from "@/components/AuthProvider";
 
 export const metadata = {
   title: "The Cyclopedia | News & media company",
