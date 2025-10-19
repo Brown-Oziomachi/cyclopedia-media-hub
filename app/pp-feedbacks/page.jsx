@@ -253,7 +253,7 @@ export default function TestimonialPage() {
                         >
                           {feedback.initials}
                           {feedbackCountMap[feedback.email] > 1 && (
-                            <div className="flex items-center gap-1 px-2 py-1 border rounded-full text-xs font-medium mt-2 w-fit">
+                            <div className="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium mt-2 w-fit">
                               <MessageCircle size={12} />
                               {feedbackCountMap[feedback.email]} feedback
                             </div>
@@ -295,12 +295,12 @@ export default function TestimonialPage() {
                   
                   <div className="flex items-center gap-2 pt-4 text-xs justify-around">
                     {feedbackCountMap[feedback.email] > 1 && (
-                      <div className="flex items-center gap-1 px-2 py-1 border rounded-full text-xs font-medium mt-2 w-fit">
+                      <div className="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium mt-2 w-fit">
                         <MessageCircle size={12} className="text-blue-400"/>
                         {feedbackCountMap[feedback.email]} feedback
                       </div>
                     )}
-                    <div className="flex items-center gap-1 px-2 py-1 border rounded-full text-xs font-medium mt-2 w-fit">
+                    <div className="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium mt-2 w-fit">
                       <Calendar size={14} className="text-blue-400"/>
                       {formatDate(feedback.createdAt)}
                     </div>

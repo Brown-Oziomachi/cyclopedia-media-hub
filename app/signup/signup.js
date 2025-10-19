@@ -19,7 +19,7 @@ export default function Signup() {
     // Redirect if user is already logged in
     useEffect(() => {
         if (user && !authLoading) {
-            router.push("/");
+            router.push("/pp-feedbacks");
         }
     }, [user, authLoading, router]);
 
