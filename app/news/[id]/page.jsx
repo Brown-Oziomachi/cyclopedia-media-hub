@@ -234,7 +234,6 @@ export default function NewsDetails() {
             )}
 
             <Icons />
-              <Link href="/pp-feedbacks" className="mb-5 text-blue-600 hover:underline ">FeedBack</Link>
             {blog.imageUrl && (
               <div className="relative w-full max-w-4xl mx-auto mb-6">
                 <img
@@ -242,9 +241,17 @@ export default function NewsDetails() {
                   alt={blog.title}
                   className="w-full h-auto object-cover"
                 />
-                <div className="absolute top-0 left-0 bg-red-600 text-white text-sm md:text-base font-semibold px-3 py-1 rounded-md">
-                  The Cyclopedia
-                </div>
+               
+                <Link href="/global">
+                  <div className="absolute top-0 left-0 bg-red-600 text-white text-sm md:text-base font-semibold px-3 py-1 rounded-md">
+                    The Cyclopedia
+                  </div>
+                </Link>
+                <Link href="/pp-feedbacks">
+                  <div className="absolute top-0 right-0 bg-blue-600 text-white text-sm md:text-base font-semibold px-3 py-1 rounded-md">
+                    Rate ⭐⭐⭐⭐
+                  </div>
+                </Link>
               </div>
             )}
 
@@ -344,7 +351,7 @@ export default function NewsDetails() {
           >
             Subscribe Now
           </a>
-            <a
+          <a
             href="/pp-feedbacks"
             className="inline-block ml-5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold px-8 py-3 rounded-full hover:scale-105 hover:shadow-lg transition-all duration-300"
           >
