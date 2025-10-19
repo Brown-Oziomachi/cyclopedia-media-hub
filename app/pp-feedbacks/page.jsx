@@ -183,7 +183,7 @@ export default function TestimonialPage() {
             Community Feedback
           </h1>
           <p className="text-xl mx-auto text-center">
-            See what our readers and community members are saying about The
+            See what our readers and community subscribers are saying about The
             Cyclopedia
           </p>
           <div className="mt-6 flex items-center justify-center gap-2">
@@ -292,27 +292,27 @@ export default function TestimonialPage() {
                   <p className="text-sm leading-relaxed mb-4 line-clamp-4">
                     {feedback.message}
                   </p>
-                  
+
                   <div className="flex items-center gap-2 pt-4 text-xs justify-around">
                     {feedbackCountMap[feedback.email] > 1 && (
                       <div className="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium mt-2 w-fit">
-                        <MessageCircle size={12} className="text-blue-400"/>
+                        <MessageCircle size={12} className="text-blue-400" />
                         {feedbackCountMap[feedback.email]} feedback
                       </div>
                     )}
                     <div className="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium mt-2 w-fit">
-                      <Calendar size={14} className="text-blue-400"/>
+                      <Calendar size={14} className="text-blue-400" />
                       {formatDate(feedback.createdAt)}
                     </div>
                   </div>
-                  <hr className="mt-5"/>
+                  <hr className="mt-5" />
                 </div>
               ))}
             </div>
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-4 mb-12">
+              <div className="flex items-center justify-center gap-4 mb-5">
                 <button
                   onClick={handlePrevious}
                   disabled={currentPage === 1}
@@ -350,9 +350,19 @@ export default function TestimonialPage() {
                 </button>
               </div>
             )}
+            <div className="flex justify-center mb-10">
+              <Link
+                href="/all-members"
+                className="group relative inline-block text-lg font-semibold tracking-wide"
+              >
+                <span className="bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-500 bg-clip-text text-transparent group-hover:from-indigo-500 group-hover:to-purple-600 transition-all duration-300">
+                  All Subscribers
+                </span>
+                <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-500 group-hover:w-full transition-all duration-300 rounded-full"></span>
+              </Link>
+            </div>
           </>
         )}
-
         {/* CTA Section */}
         <div className="border rounded-2xl p-8 md:p-12 text-center">
           <h2 className="text-3xl font-bold mb-4">Share Your Feedback</h2>

@@ -223,6 +223,7 @@ export default function UserProfile() {
                         {/* Profile Image and Info */}
                         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 flex-1 min-w-0">
                             <div className="relative flex-shrink-0">
+                                <h1 className="bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-500 bg-clip-text text-transparent group-hover:from-indigo-500 group-hover:to-purple-600 transition-all duration-300 text-center">Subscriber</h1>
                                 {displayImage ? (
                                     <img
                                         src={displayImage}
@@ -231,7 +232,7 @@ export default function UserProfile() {
                                     />
                                 ) : (
                                     <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white text-3xl sm:text-4xl font-bold">
-                                        {userInitial}
+                                            {userInitial}
                                     </div>
                                 )}
                                 {isOwnProfile && isEditing && (

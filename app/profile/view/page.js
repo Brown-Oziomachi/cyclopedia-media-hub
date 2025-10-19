@@ -214,6 +214,7 @@ export default function UserProfile() {
                         {/* Profile Image and Info */}
                         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 flex-1 min-w-0">
                             <div className="relative flex-shrink-0">
+                                <h1 className="bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-500 bg-clip-text text-transparent group-hover:from-indigo-500 group-hover:to-purple-600 transition-all duration-300 text-center">Subscriber</h1>
                                 {displayImage ? (
                                     <img
                                         src={displayImage}
