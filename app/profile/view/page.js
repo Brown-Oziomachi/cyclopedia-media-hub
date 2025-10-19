@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { doc, updateDoc, collection, query, where, getDocs, getDoc, deleteDoc } from "firebase/firestore";
 import { db1 } from "@/lib/firebaseConfig";
 import { LogOut, Edit2, Save, X, Upload, Settings, Bell, HelpCircle, Trash2 } from "lucide-react";
+import { formatFirestoreDate, getDaysSince } from "@/utils/dateUtils";
 
 export default function UserProfile() {
     const { user, logout } = useAuth();
@@ -260,10 +261,10 @@ export default function UserProfile() {
                                             {profileData.businessLink}
                                         </a>
                                     )}
-                                    <div className="flex flex-col sm:flex-row gap-4 mt-3 text-sm">
-                                        <span>Joined {joinedDate}</span>
-                                        <span className="hidden sm:inline">•</span>
-                                    </div>
+                                    <p>
+                                        Joined {formatFirestoreDate(user.createdAt)} • {getDaysSince(user.createdAt)} days ago
+                                    </p>
+
                                 </div>
                             ) : (
                                 <div className="w-full sm:flex-1 space-y-4">
