@@ -194,7 +194,7 @@ export default function TestimonialPage() {
                     <img
                       src={feedback.profileImage}
                       alt={feedback.name}
-                      className="w-10 h-10 rounded-full object-cover shadow border-2 border-white"
+                      className="w-10 h-10 text-xl rounded-full object-cover shadow border-2 border-white"
                       title={feedback.name}
                     />
                   ) : (
@@ -243,7 +243,7 @@ export default function TestimonialPage() {
                         <img
                           src={feedback.profileImage}
                           alt={feedback.name}
-                          className="w-12 h-12 rounded-full object-cover flex-shrink-0"
+                          className="w-12 h-12 rounded-full object-cover flex-shrink-0 hover:scale-200 transition-transform"
                         />
                       ) : (
                         <div
@@ -261,10 +261,10 @@ export default function TestimonialPage() {
                         </div>
                       )}
 
-                      <div className="min-w-0">
+                      <div className="min-w-0 font-semibold">
                         <Link href={`/profile/view?id=${feedback.userId}`}>
                           {feedback.name}
-                          <h1 className="text-sm text-blue-600">
+                          <h1 className="text-sm text-blue-600 underline">
                             View Profile
                           </h1>
                         </Link>
@@ -285,7 +285,7 @@ export default function TestimonialPage() {
                     </div>
                   </div>
 
-                  <h4 className="font-semibold mb-3 line-clamp-2">
+                  <h4 className="font-semibold mb-3 line-clamp-2 text-sm">
                     {feedback.title}
                   </h4>
 
