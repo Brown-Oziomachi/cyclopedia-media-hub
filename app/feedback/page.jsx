@@ -110,13 +110,14 @@ export default function FeedbackForm() {
     },
   ];
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin w-8 h-8 border-4 border-purple-500/30 border-t-purple-500 rounded-full"></div>
-      </div>
-    );
-  }
+if (loading) {
+  return (
+    <div className="fixed inset-0 min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 to-black z-50">
+      <div className="animate-spin w-12 h-12 border-4 border-purple-500/30 border-t-purple-500 rounded-full mb-4"></div>
+      <p className="text-white font-medium">Loading...</p>
+    </div>
+  );
+}
 
   if (!user) {
     return null;

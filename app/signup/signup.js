@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { auth, db1 } from "@/lib/firebaseConfig";
 import { useAuth } from "@/components/AuthProvider";
 
@@ -11,15 +11,19 @@ export default function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [dateOfBirth, setDateOfBirth] = useState("");
+    const [ageConfirmed, setAgeConfirmed] = useState(false);
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const redirectTo = searchParams.get("redirect"); // e.g., "sex-education"
     const { user, loading: authLoading } = useAuth();
 
     // Redirect if user is already logged in
     useEffect(() => {
         if (user && !authLoading) {
-            router.push("/pp-feedbacks");
+            router.push("/feedback");
         }
     }, [user, authLoading, router]);
 
@@ -64,6 +68,18 @@ export default function Signup() {
         return errors;
     };
 
+    const calculateAge = (birthDate) => {
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        
+        return age;
+    };
+
     const validateForm = () => {
         const newErrors = {};
 
@@ -98,6 +114,24 @@ export default function Signup() {
             newErrors.confirmPassword = "Passwords do not match";
         }
 
+        // Date of birth validation (only if redirecting to age-restricted content)
+        if (redirectTo === "sex-education") {
+            if (!dateOfBirth) {
+                newErrors.dateOfBirth = "Date of birth is required";
+            } else {
+                const birthDate = new Date(dateOfBirth);
+                const age = calculateAge(birthDate);
+                
+                if (age < 18) {
+                    newErrors.dateOfBirth = "You must be at least 18 years old to access this content";
+                }
+            }
+
+            if (!ageConfirmed) {
+                newErrors.ageConfirmed = "You must confirm you are 18 years or older";
+            }
+        }
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -120,19 +154,40 @@ export default function Signup() {
             );
 
             // Save user data to Firestore
-            await setDoc(doc(db1, "users", userCredential.user.uid), {
+            const userData = {
                 name: name.trim(),
                 email: email.toLowerCase(),
                 createdAt: new Date(),
                 bio: "",
                 businessLink: "",
                 profileImage: null,
+                skills: "",
+                interests: "",
+                quote: "",
+                socialLinks: {
+                    twitter: "",
+                    linkedin: "",
+                    instagram: ""
+                },
                 notificationsEnabled: true,
                 newsletterSubscribed: true,
-            });
+            };
+
+            // Add age-related fields if redirecting to sex education
+            if (redirectTo === "sex-education") {
+                userData.dateOfBirth = dateOfBirth;
+                userData.ageVerified = true;
+            }
+
+            await setDoc(doc(db1, "users", userCredential.user.uid), userData);
 
             alert("Account created successfully!");
-            router.push("/login");
+            
+           if (redirectTo === "sex-education") {
+  router.push("/age-verification?redirect=sex-education");
+} else {
+  router.push("/pp-feedbacks");
+}
         } catch (err) {
             if (err.code === "auth/email-already-in-use") {
                 setErrors({ email: "This email is already in use" });
@@ -148,11 +203,18 @@ export default function Signup() {
 
     const passwordErrors = validatePassword(password);
     const isPasswordStrong = password && passwordErrors.length === 0;
+    const isAgeRestrictedContent = redirectTo === "sex-education";
 
     return (
         <div className="min-h-screen flex items-center justify-center px-4 py-8">
             <div className="w-full max-w-md border rounded-lg p-8 mt-10 lg:mt-30">
                 <h2 className="text-3xl font-bold mb-6 text-center">Sign Up</h2>
+
+                {isAgeRestrictedContent && (
+                    <div className="mb-4 p-3 border border-blue-500 bg-blue-50 rounded text-blue-700 text-sm">
+                        This content is for educational purposes and restricted to users 18+
+                    </div>
+                )}
 
                 {errors.general && (
                     <div className="mb-4 p-3 border border-red-500 rounded text-red-600 text-sm">
@@ -305,6 +367,47 @@ export default function Signup() {
                             </p>
                         )}
                     </div>
+
+                    {/* Date of Birth Field - Only for age-restricted content */}
+                    {isAgeRestrictedContent && (
+                        <div>
+                            <label className="block font-semibold mb-2">Date of Birth</label>
+                            <input
+                                type="date"
+                                value={dateOfBirth}
+                                onChange={(e) => setDateOfBirth(e.target.value)}
+                                className={`w-full px-4 py-2 border rounded-lg focus:outline-none transition ${errors.dateOfBirth
+                                    ? "border-red-500 focus:border-red-500"
+                                    : "border-gray-300 focus:border-blue-500"
+                                    }`}
+                            />
+                            {errors.dateOfBirth && (
+                                <p className="text-red-600 text-sm mt-1">
+                                    {errors.dateOfBirth}
+                                </p>
+                            )}
+                        </div>
+                    )}
+
+                    {/* Age Confirmation Checkbox - Only for age-restricted content */}
+                    {isAgeRestrictedContent && (
+                        <div>
+                            <label className="flex items-center gap-2 cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    checked={ageConfirmed}
+                                    onChange={(e) => setAgeConfirmed(e.target.checked)}
+                                    className="w-4 h-4"
+                                />
+                                <span className="text-sm">I confirm I am 18 years or older</span>
+                            </label>
+                            {errors.ageConfirmed && (
+                                <p className="text-red-600 text-sm mt-1">
+                                    {errors.ageConfirmed}
+                                </p>
+                            )}
+                        </div>
+                    )}
 
                     {/* Submit Button */}
                     <button

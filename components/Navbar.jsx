@@ -283,6 +283,12 @@ const regions = [
             >
               Politics
             </Link>
+              <Link
+              href="/sex-education"
+              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+            >
+              Sex education
+            </Link>
             <Link
               href="/religion"
               className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
@@ -323,7 +329,7 @@ const regions = [
               href="/art"
               className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
             >
-              Art & Culture
+              Art + Culture
             </Link>
             <Link
               href="/technology"
@@ -422,6 +428,11 @@ const regions = [
             <li>
               <Link href="/politics" onClick={() => setShowNav(false)}>
                 Politics
+              </Link>
+            </li>
+              <li>
+              <Link href="/sex-education" onClick={() => setShowNav(false)}>
+                Sex Education
               </Link>
             </li>
             <li>
