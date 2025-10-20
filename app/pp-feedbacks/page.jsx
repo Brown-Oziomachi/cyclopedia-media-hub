@@ -150,7 +150,7 @@ export default function TestimonialPage() {
       <div className="min-h-screen py-12 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold mb-4">Community Feedback</h1>
+            <h1 className="text-5xl font-bold mb-4">Subscribers Feedback</h1>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (
@@ -180,7 +180,7 @@ export default function TestimonialPage() {
             <MessageCircle size={24} />
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-4">
-            Community Feedback
+            Subscribers Feedback
           </h1>
           <p className="text-xl mx-auto text-center">
             See what our readers and community subscribers are saying about The
@@ -188,7 +188,7 @@ export default function TestimonialPage() {
           </p>
           <div className="mt-6 flex items-center justify-center gap-2">
             <div className="flex -space-x-2">
-              {feedbacks.slice(0, 3).map((feedback) => (
+              {feedbacks.slice(0, 7).map((feedback) => (
                 <div key={feedback.id} className="relative">
                   {feedback.profileImage ? (
                     <img
@@ -211,7 +211,7 @@ export default function TestimonialPage() {
               ))}
             </div>
             <span className="ml-4">
-              {feedbacks.length} testimonials from our community
+              {feedbacks.length} testimonials from our subscribers
             </span>
           </div>
         </div>

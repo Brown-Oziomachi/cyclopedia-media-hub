@@ -310,7 +310,7 @@ export default function Signup() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg disabled:opacity-50 transition"
+                        className="w-full py-3 bg-purple-600 hover:bg-purple-950 text-white font-semibold rounded-lg disabled:opacity-50 transition"
                     >
                         {loading ? "Creating Account..." : "Sign Up"}
                     </button>

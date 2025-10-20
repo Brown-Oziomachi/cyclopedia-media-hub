@@ -4,8 +4,8 @@ import { useAuth } from "@/components/AuthProvider";
 import { useRouter, useSearchParams } from "next/navigation";
 import { doc, updateDoc, collection, query, where, getDocs, getDoc, deleteDoc } from "firebase/firestore";
 import { db1 } from "@/lib/firebaseConfig";
-import { LogOut, Edit2, Save, X, Upload, Settings, Bell, HelpCircle, Trash2 } from "lucide-react";
-import { formatFirestoreDate, getDaysSince, sortByDate } from "@/utils/dateUtils";
+import { LogOut, Edit2, Save, X, Upload, Settings, Bell, HelpCircle, Trash2, Twitter, Linkedin, Instagram, Globe } from "lucide-react";
+import { formatFirestoreDate, getDaysSince } from "@/utils/dateUtils";
 
 export default function UserProfile() {
     const { user, logout } = useAuth();
@@ -20,6 +20,12 @@ export default function UserProfile() {
     const [editEmail, setEditEmail] = useState("");
     const [editBio, setEditBio] = useState("");
     const [editBusinessLink, setEditBusinessLink] = useState("");
+    const [editSkills, setEditSkills] = useState("");
+    const [editInterests, setEditInterests] = useState("");
+    const [editQuote, setEditQuote] = useState("");
+    const [editTwitter, setEditTwitter] = useState("");
+    const [editLinkedin, setEditLinkedin] = useState("");
+    const [editInstagram, setEditInstagram] = useState("");
     const [profileImage, setProfileImage] = useState(null);
     const [saving, setSaving] = useState(false);
     const [userFeedback, setUserFeedback] = useState([]);
@@ -46,6 +52,12 @@ export default function UserProfile() {
             setEditEmail(user?.email || "");
             setEditBio(user?.bio || "");
             setEditBusinessLink(user?.businessLink || "");
+            setEditSkills(user?.skills || "");
+            setEditInterests(user?.interests || "");
+            setEditQuote(user?.quote || "");
+            setEditTwitter(user?.socialLinks?.twitter || "");
+            setEditLinkedin(user?.socialLinks?.linkedin || "");
+            setEditInstagram(user?.socialLinks?.instagram || "");
             setNotifications(user?.notificationsEnabled !== false);
             setNewsletter(user?.newsletterSubscribed !== false);
             fetchUserFeedback(user?.email);
@@ -116,6 +128,14 @@ export default function UserProfile() {
                 email: editEmail,
                 bio: editBio,
                 businessLink: editBusinessLink,
+                skills: editSkills,
+                interests: editInterests,
+                quote: editQuote,
+                socialLinks: {
+                    twitter: editTwitter,
+                    linkedin: editLinkedin,
+                    instagram: editInstagram
+                },
                 notificationsEnabled: notifications,
                 newsletterSubscribed: newsletter,
             };
@@ -210,8 +230,7 @@ export default function UserProfile() {
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 sm:gap-8">
                         {/* Profile Image and Info */}
                         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 flex-1 min-w-0">
-                            <div className="relative flex-shrink-0">
-                                <h1 className="bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-500 bg-clip-text text-transparent group-hover:from-indigo-500 group-hover:to-purple-600 transition-all duration-300 text-center">Subscriber</h1>
+                            <div className="relative flex-shrink-0 flex flex-col items-center">
                                 {displayImage ? (
                                     <img
                                         src={displayImage}
@@ -223,6 +242,7 @@ export default function UserProfile() {
                                         {userInitial}
                                     </div>
                                 )}
+                                <h1 className="mt-3 bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-500 bg-clip-text text-transparent text-center font-semibold">Subscriber</h1>
                                 {isOwnProfile && isEditing && (
                                     <button
                                         onClick={() => fileInputRef.current?.click()}
@@ -241,28 +261,86 @@ export default function UserProfile() {
                             </div>
 
                             {!isEditing ? (
-                                <div className="text-center sm:text-left flex-1 min-w-0">
-                                    <h1 className="text-2xl sm:text-3xl font-bold truncate">{profileData?.name || "User"}</h1>
-                                    <p className="break-all">{profileData?.email}</p>
-                                    {profileData?.bio && (
-                                        <p className="mt-2 text-sm">{profileData.bio}</p>
+                                <div className="text-center sm:text-left flex-1 min-w-0 space-y-3">
+                                    <div>
+                                        <h1 className="text-2xl sm:text-3xl font-bold truncate">{profileData?.name || "User"}</h1>
+                                        <p className="break-all text-gray-600">{profileData?.email}</p>
+                                    </div>
+
+                                    {profileData?.quote && (
+                                        <p className="text-sm italic text-purple-600 border-l-4 border-purple-600 pl-3">
+                                            "{profileData.quote}"
+                                        </p>
                                     )}
+
+                                    {profileData?.bio && (
+                                        <p className="text-sm text-gray-700">{profileData.bio}</p>
+                                    )}
+
+                                    {profileData?.skills && (
+                                        <div>
+                                            <p className="text-xs font-semibold text-gray-600 mb-2">Skills</p>
+                                            <div className="gap-2">
+                                                {profileData.skills.split(",").map((skill, idx) => (
+                                                    <span key={idx} className="inline-block bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-medium">
+                                                        {skill.trim()}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {profileData?.interests && (
+                                        <div>
+                                            <p className="text-xs font-semibold text-gray-600 mb-2">Interests</p>
+                                            <div className=" gap-2">
+                                                {profileData.interests.split(",").map((interest, idx) => (
+                                                    <span key={idx} className="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">
+                                                        {interest.trim()}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
                                     {profileData?.businessLink && (
                                         <a
                                             href={profileData.businessLink}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="hover:underline text-sm block mt-2 text-blue-500 underline"
+                                            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium text-sm"
                                         >
-                                            {profileData.businessLink}
+                                            <Globe size={16} />
+                                            Website
                                         </a>
                                     )}
-                                    <p>
+
+                                    {(profileData?.socialLinks?.twitter || profileData?.socialLinks?.linkedin || profileData?.socialLinks?.instagram) && (
+                                        <div className="flex gap-4 pt-2">
+                                            {profileData.socialLinks?.twitter && (
+                                                <a href={`https://twitter.com/${profileData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-600 transition" title="Twitter">
+                                                    <Twitter size={20} />
+                                                </a>
+                                            )}
+                                            {profileData.socialLinks?.linkedin && (
+                                                <a href={profileData.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 transition" title="LinkedIn">
+                                                    <Linkedin size={20} />
+                                                </a>
+                                            )}
+                                            {profileData.socialLinks?.instagram && (
+                                                <a href={`https://instagram.com/${profileData.socialLinks.instagram}`} target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800 transition" title="Instagram">
+                                                    <Instagram size={20} />
+                                                </a>
+                                            )}
+                                        </div>
+                                    )}
+
+                                    <p className="text-xs text-gray-500 pt-2">
                                         Joined {joinedDate} • {memberDays} days ago
                                     </p>
                                 </div>
                             ) : (
-                                <div className="w-full sm:flex-1 space-y-4">
+                                <div className="w-full sm:flex-1 space-y-4 max-h-96 overflow-y-auto">
                                     <div>
                                         <label className="block text-sm font-semibold mb-1">Name</label>
                                         <input
@@ -288,18 +366,80 @@ export default function UserProfile() {
                                             onChange={(e) => setEditBio(e.target.value)}
                                             placeholder="Tell us about yourself..."
                                             maxLength={200}
-                                            rows={3}
+                                            rows={2}
                                             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-purple-500"
                                         />
                                         <p className="text-xs mt-1">{editBio.length}/200</p>
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-semibold mb-1">Business Link</label>
+                                        <label className="block text-sm font-semibold mb-1">Quote</label>
+                                        <textarea
+                                            value={editQuote}
+                                            onChange={(e) => setEditQuote(e.target.value)}
+                                            placeholder="Add an inspiring quote..."
+                                            maxLength={150}
+                                            rows={2}
+                                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-purple-500"
+                                        />
+                                        <p className="text-xs mt-1">{editQuote.length}/150</p>
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-semibold mb-1">Skills (comma separated)</label>
+                                        <input
+                                            type="text"
+                                            value={editSkills}
+                                            onChange={(e) => setEditSkills(e.target.value)}
+                                            placeholder="e.g., Writing, Data Analysis, Design"
+                                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-purple-500"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-semibold mb-1">Interests (comma separated)</label>
+                                        <input
+                                            type="text"
+                                            value={editInterests}
+                                            onChange={(e) => setEditInterests(e.target.value)}
+                                            placeholder="e.g., African News, Technology, Business"
+                                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-purple-500"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-semibold mb-1">Website</label>
                                         <input
                                             type="url"
                                             value={editBusinessLink}
                                             onChange={(e) => setEditBusinessLink(e.target.value)}
                                             placeholder="https://yourwebsite.com"
+                                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-purple-500"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-semibold mb-1">Twitter Handle</label>
+                                        <input
+                                            type="text"
+                                            value={editTwitter}
+                                            onChange={(e) => setEditTwitter(e.target.value)}
+                                            placeholder="yourhandle (without @)"
+                                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-purple-500"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-semibold mb-1">LinkedIn URL</label>
+                                        <input
+                                            type="url"
+                                            value={editLinkedin}
+                                            onChange={(e) => setEditLinkedin(e.target.value)}
+                                            placeholder="https://linkedin.com/in/yourprofile"
+                                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-purple-500"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-semibold mb-1">Instagram Handle</label>
+                                        <input
+                                            type="text"
+                                            value={editInstagram}
+                                            onChange={(e) => setEditInstagram(e.target.value)}
+                                            placeholder="yourhandle (without @)"
                                             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-purple-500"
                                         />
                                     </div>
@@ -427,7 +567,6 @@ export default function UserProfile() {
                                 userFeedback.map((item) => (
                                     <div key={item.id} className="rounded-lg p-4 sm:p-6 border shadow-sm hover:shadow-md transition">
                                         {editingFeedbackId === item.id ? (
-                                            // Edit Mode
                                             <div className="space-y-4">
                                                 <div>
                                                     <label className="block text-sm font-semibold mb-2 text-black">Title</label>
@@ -466,7 +605,6 @@ export default function UserProfile() {
                                                 </div>
                                             </div>
                                         ) : (
-                                            // View Mode
                                             <>
                                                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-2">
                                                     <h3 className="text-lg font-semibold break-words flex-1 text-black">{item.title}</h3>
@@ -504,7 +642,7 @@ export default function UserProfile() {
                         </div>
                     )}
 
-                    {/* Preferences Tab - Only for own profile */}
+                    {/* Preferences Tab */}
                     {activeTab === "preferences" && isOwnProfile && (
                         <div className="space-y-6">
                             <div className="flex items-center justify-between p-4 border rounded-lg text-black">
@@ -557,7 +695,7 @@ export default function UserProfile() {
                         </div>
                     )}
 
-                    {/* Help Tab - Only for own profile */}
+                    {/* Help Tab */}
                     {activeTab === "help" && isOwnProfile && (
                         <div className="space-y-6">
                             <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
