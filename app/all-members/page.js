@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 import { formatFirestoreDate } from "@/utils/dateUtils";
+import { Undo2 } from "lucide-react";
 
 export default function MembersPage() {
     const [members, setMembers] = useState([]);
@@ -117,11 +118,19 @@ export default function MembersPage() {
         return sorted;
     };
 
+    const handleBack = () => {
+        if (window.history.length > 1) {
+            router.back(); // Go back to previous scroll position
+        } else {
+            router.push("/pp-feedbacks"); // Fallback if no history
+        }
+    };
+
     if (loading) {
         return (
             <div className="min-h-screen py-12 px-4">
                 <div className="max-w-7xl mx-auto">
-                    <h1 className="text-5xl font-bold mb-8 text-center">Cyclopedia Subscribers</h1>
+                    <h1 className="text-5xl font-bold mb-8 text-center">The Cyclopedia Subscribers</h1>
                     <div className="border rounded-2xl overflow-hidden animate-pulse bg-gray-50 dark:bg-gray-900">
                         <div className="h-12 bg-gray-200 dark:bg-gray-800" />
                         {[...Array(8)].map((_, i) => (
@@ -133,32 +142,31 @@ export default function MembersPage() {
         );
     }
 
-    // 🔒 Not logged in view
     if (!user) {
         return (
-           <div 
-            className="min-h-screen flex flex-col items-center justify-center text-center px-4 relative"
-            style={{
-                backgroundImage: 'url("/thecyclo.jpg")',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundAttachment: 'fixed'
-            }}
-        >
-            <div className="absolute inset-0 bg-black/60" />
-            <div className="relative z-10">
-                <div className="mb-4 text-white drop-shadow-lg text-6xl">👥</div>
-                <h1 className="text-4xl font-bold mb-2 text-white drop-shadow-lg">Subscribers Area Locked</h1>
-                <p className="text-gray-100 mb-6 max-w-md drop-shadow-md">
-                    You must be signed in to view all Cyclopedia subscribers.
-                </p>
-               <button
-    onClick={() => router.push("/login")}
-    className="px-6 py-3 bg-purple-700 z-[999] cursor-pointer hover:bg-purple-800 text-white rounded-xl transition font-semibold"
->
-    Sign In to Continue
-</button>
-            </div>
+            <div
+                className="min-h-screen flex flex-col items-center justify-center text-center px-4 relative"
+                style={{
+                    backgroundImage: 'url("/thecyclo.jpg")',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundAttachment: 'fixed'
+                }}
+            >
+                <div className="absolute inset-0 bg-black/60" />
+                <div className="relative z-10">
+                    <div className="mb-4 text-white drop-shadow-lg text-6xl">👥</div>
+                    <h1 className="text-4xl font-bold mb-2 text-white drop-shadow-lg">Subscribers Area Locked</h1>
+                    <p className="text-gray-100 mb-6 max-w-md drop-shadow-md">
+                        You must be signed in to view all Cyclopedia subscribers.
+                    </p>
+                    <button
+                        onClick={() => router.push("/login")}
+                        className="px-6 py-3 bg-purple-700 z-[999] cursor-pointer hover:bg-purple-800 text-white rounded-xl transition font-semibold"
+                    >
+                        Sign In to Continue
+                    </button>
+                </div>
             </div>
         );
     }
@@ -167,6 +175,13 @@ export default function MembersPage() {
         <div className="min-h-screen py-16 px-4 md:px-8 ">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
+                <button
+                    onClick={handleBack}
+                    className="inline-flex items-center gap-2 px-4 py-2 font-semibold rounded-xl hover:text-purple-700 dark:hover:text-purple-400 transition-colors duration-300"
+                >
+                    <Undo2 className="w-5 h-5" />
+                    <span>Feedback</span>
+                </button>
                 <div className="mb-12 lg:mt-30">
                     <div className="inline-flex items-center justify-center mb-4 p-3 rounded-full shadow-lg bg-gradient-to-br from-purple-600 to-purple-700 text-white">
                         <Users size={24} />
@@ -205,8 +220,8 @@ export default function MembersPage() {
                                     <button
                                         onClick={() => setSortBy("recent")}
                                         className={`px-4 py-2 rounded-lg text-sm font-medium transition ${sortBy === "recent"
-                                                ? "bg-purple-600 text-white"
-                                                : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+                                            ? "bg-purple-600 text-white"
+                                            : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
                                             }`}
                                     >
                                         Recent
@@ -214,8 +229,8 @@ export default function MembersPage() {
                                     <button
                                         onClick={() => setSortBy("name")}
                                         className={`px-4 py-2 rounded-lg text-sm font-medium transition ${sortBy === "name"
-                                                ? "bg-purple-600 text-white"
-                                                : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+                                            ? "bg-purple-600 text-white"
+                                            : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
                                             }`}
                                     >
                                         Name
@@ -223,8 +238,8 @@ export default function MembersPage() {
                                     <button
                                         onClick={() => setSortBy("subscribers")}
                                         className={`px-4 py-2 rounded-lg text-sm font-medium transition ${sortBy === "subscribers"
-                                                ? "bg-purple-600 text-white"
-                                                : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+                                            ? "bg-purple-600 text-white"
+                                            : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
                                             }`}
                                     >
                                         Feedback

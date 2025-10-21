@@ -4,8 +4,9 @@ import { useAuth } from "@/components/AuthProvider";
 import { useRouter, useSearchParams } from "next/navigation";
 import { doc, updateDoc, collection, query, where, getDocs, getDoc, deleteDoc } from "firebase/firestore";
 import { db1 } from "@/lib/firebaseConfig";
-import { LogOut, Edit2, Save, X, Upload, Settings, Bell, HelpCircle, Trash2, Twitter, Linkedin, Instagram, Globe } from "lucide-react";
+import { LogOut, Edit2, Save, X, Upload, Settings, Bell, HelpCircle, Trash2, Twitter, Linkedin, Instagram, Globe, Undo2 } from "lucide-react";
 import { formatFirestoreDate, getDaysSince } from "@/utils/dateUtils";
+import Link from "next/link";
 
 export default function UserProfile() {
     const { user, logout } = useAuth();
@@ -222,12 +223,28 @@ export default function UserProfile() {
     const joinedDate = formatFirestoreDate(profileData?.createdAt);
     const memberDays = getDaysSince(profileData?.createdAt);
 
+     const handleBack = () => {
+    if (window.history.length > 1) {
+      router.back();
+    } else {
+      router.push("/pp-feedbacks"); 
+    }
+    };
+    
     return (
         <div className="min-h-screen py-6 sm:py-8 px-4 sm:px-6">
             <div className="max-w-4xl mx-auto">
                 {/* Profile Header */}
                 <div className="rounded-2xl p-6 sm:p-8 mb-8 shadow-lg border mt-20 lg:mt-40">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 sm:gap-8">
+                        <button
+                            onClick={handleBack}
+                            className="inline-flex items-center gap-2 px-4 py-2 font-semibold rounded-xl hover:text-purple-700 dark:hover:text-purple-400 transition-colors duration-300"
+                        >
+                            <Undo2 className="w-5 h-5" />
+                            <span>Feedback</span>
+                        </button>
+
                         {/* Profile Image and Info */}
                         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 flex-1 min-w-0">
                             <div className="relative flex-shrink-0 flex flex-col items-center">

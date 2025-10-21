@@ -6,6 +6,7 @@ import { doc, updateDoc, collection, query, where, getDocs, getDoc, deleteDoc } 
 import { db1 } from "@/lib/firebaseConfig";
 import { LogOut, Edit2, Save, X, Upload, Settings, Bell, HelpCircle, Trash2, Twitter, Linkedin, Instagram, Globe } from "lucide-react";
 import { formatFirestoreDate, getDaysSince } from "@/utils/dateUtils";
+import Link from "next/link";
 
 export default function UserProfile() {
     const { user, logout } = useAuth();
@@ -228,6 +229,13 @@ export default function UserProfile() {
                 {/* Profile Header */}
                 <div className="rounded-2xl p-6 sm:p-8 mb-8 shadow-lg border mt-20 lg:mt-40">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 sm:gap-8">
+                       <Link
+  href="/pp-feedbacks"
+  className=" px-10 py-2 bg-purple-700 text-white font-semibold rounded-xl hover:bg-purple-800 transition duration-300"
+>
+  Subscribers Feedback
+</Link>
+
                         {/* Profile Image and Info */}
                         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 flex-1 min-w-0">
                             <div className="relative flex-shrink-0 flex flex-col items-center">

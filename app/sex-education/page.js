@@ -192,7 +192,7 @@ const SexEducationPage = () => {
                     </p>
                   </div>
 
-                  <div className="absolute top-4 left-4 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                  <div className="absolute top-4 left-4 bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
                     Sex Education
                   </div>
                 </div>
@@ -251,7 +251,7 @@ const SexEducationPage = () => {
                         {post.createdAt?.toDate().toDateString()}
                       </p>
                     </div>
-                    <div className="absolute top-0 left-0 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                    <div className="absolute top-0 left-0 bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
                       Sex Ed
                     </div>
                   </div>
@@ -296,7 +296,7 @@ const SexEducationPage = () => {
                         {post.createdAt?.toDate().toDateString()}
                       </p>
                     </div>
-                    <div className="absolute top-0 left-0 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                    <div className="absolute top-0 left-0 bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
                       Sex Ed
                     </div>
                   </div>

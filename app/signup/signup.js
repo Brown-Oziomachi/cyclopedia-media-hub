@@ -23,7 +23,7 @@ export default function Signup() {
     // Redirect if user is already logged in
     useEffect(() => {
         if (user && !authLoading) {
-            router.push("/feedback");
+            router.push("/pp-feedbacks");
         }
     }, [user, authLoading, router]);
 
@@ -72,11 +72,11 @@ export default function Signup() {
         const today = new Date();
         let age = today.getFullYear() - birthDate.getFullYear();
         const monthDiff = today.getMonth() - birthDate.getMonth();
-        
+
         if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
             age--;
         }
-        
+
         return age;
     };
 
@@ -121,7 +121,7 @@ export default function Signup() {
             } else {
                 const birthDate = new Date(dateOfBirth);
                 const age = calculateAge(birthDate);
-                
+
                 if (age < 18) {
                     newErrors.dateOfBirth = "You must be at least 18 years old to access this content";
                 }
@@ -182,12 +182,13 @@ export default function Signup() {
             await setDoc(doc(db1, "users", userCredential.user.uid), userData);
 
             alert("Account created successfully!");
-            
-           if (redirectTo === "sex-education") {
-  router.push("/age-verification?redirect=sex-education");
-} else {
-  router.push("/pp-feedbacks");
-}
+
+            // Redirect based on where they came from
+            if (redirectTo === "sex-education") {
+                router.push("/sex-education");
+            } else {
+                router.push("/login"); // Regular users go to login, then to feedback
+            }
         } catch (err) {
             if (err.code === "auth/email-already-in-use") {
                 setErrors({ email: "This email is already in use" });

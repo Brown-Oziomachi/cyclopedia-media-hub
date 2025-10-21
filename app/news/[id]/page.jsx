@@ -10,14 +10,14 @@ import {
   collection,
   getDocs,
 } from "firebase/firestore";
-import { Share, LinkIcon, Play, Twitter, Instagram, Youtube, SquareParking } from "lucide-react";
+import { Share, LinkIcon, Play } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter, useParams } from "next/navigation";
+import { useAuth } from "@/components/AuthProvider";
+import { checkAgeVerification } from "@/hooks/useAgeVerification";
 import SideNewsTicker from "@/components/SideNewsTicker";
 import FollowUsPopup from "@/components/FollowUsPopup";
-import AdminProfile from "@/components/AdminProfile";
 import Icons from "@/components/Icon";
 
 // Helper function to create slug from title
@@ -55,6 +55,7 @@ const BlogDisplay = ({ body }) => {
 export default function NewsDetails() {
   const { id: slugParam } = useParams();
   const { data: session } = useSession();
+  const { user, loading: authLoading } = useAuth();
   const router = useRouter();
 
   const [blog, setBlog] = useState(null);
@@ -62,8 +63,8 @@ export default function NewsDetails() {
   const [liked, setLiked] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
   const [blogs, setBlogs] = useState([]);
+  const [isVerifying, setIsVerifying] = useState(true);
   const menuRef = useRef(null);
-  const handleShareClick = () => setShowShareMenu(!showShareMenu);
 
   // Category colors mapping
   const categoryColors = {
@@ -76,6 +77,7 @@ export default function NewsDetails() {
     technology: "bg-red-600",
     entertainment: "bg-red-600",
     business: "bg-red-700",
+    "sex-education": "bg-red-600",
     other: "bg-red-500",
   };
 
@@ -85,9 +87,11 @@ export default function NewsDetails() {
     return categoryColors[cat] || categoryColors.other;
   };
 
+  // Fetch blog and check age verification
   useEffect(() => {
     if (!slugParam) return;
-    async function fetchBlog() {
+
+    async function verifyAndFetchBlog() {
       try {
         const docId = extractIdFromSlug(slugParam);
         const blogRef = doc(db1, "blogs", docId);
@@ -95,16 +99,36 @@ export default function NewsDetails() {
 
         if (blogDoc.exists()) {
           const data = blogDoc.data();
+
+          if (data.category === "sex-education") {
+            if (authLoading) return;
+
+            if (!user) {
+              router.push("/signup?redirect=sex-education");
+              return;
+            }
+
+            const verified = await checkAgeVerification(user.uid);
+            if (!verified) {
+              router.push("/age-verification?redirect=sex-education");
+              return;
+            }
+          }
+
           setBlog({ id: docId, ...data });
           setLikes(data.likes || 0);
         }
       } catch (error) {
         console.error("Error fetching news:", error);
+      } finally {
+        setIsVerifying(false);
       }
     }
-    fetchBlog();
-  }, [slugParam]);
 
+    verifyAndFetchBlog();
+  }, [slugParam, user, authLoading, router]);
+
+  // Update URL if needed
   useEffect(() => {
     if (blog && slugParam && !slugParam.includes("--")) {
       const fullSlug = createFullSlug(blog.title, blog.id);
@@ -148,6 +172,8 @@ export default function NewsDetails() {
     fetchBlogs();
   }, [blog]);
 
+  const handleShareClick = () => setShowShareMenu(!showShareMenu);
+
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
     alert("Link copied to clipboard!");
@@ -185,6 +211,17 @@ export default function NewsDetails() {
     },
   ];
 
+  if (isVerifying || authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-purple-500 border-t-transparent mb-4"></div>
+          <p>Loading news...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!blog) return <div className="text-center py-20">Loading news...</div>;
 
   return (
@@ -194,10 +231,16 @@ export default function NewsDetails() {
       transition={{ duration: 0.1 }}
       className="min-h-screen px-0 md:px-10 lg:px-20 py-5 mx-auto font-sans space-y-10"
     >
+      {blog.category === "sex-education" && (
+        <div className="w-full bg-blue-600 text-white text-center py-2 px-4 text-sm">
+          ⚠️ This content is restricted to adults 18 years and older
+        </div>
+      )}
+
       {/* News Header */}
       <div>
-        <div className="w-full mt-1">
-          <div className="w-full bg-gradient-to-r from-blue-900 via-gray-800 to-black text-white my-2 lg:my-25 text-center py-3 px-4 shadow-md">
+        <div className="w-full overflow-hidden">
+          <div className="w-full bg-gradient-to-r from-blue-900 via-gray-800 to-black overflow-hidden text-white -my-1 lg:my-25 text-center py-2 px-4 shadow-md">
             <p className="text-sm md:text-base font-medium tracking-wide">
               Stay informed —{" "}
               <a
@@ -241,14 +284,14 @@ export default function NewsDetails() {
                   alt={blog.title}
                   className="w-full h-auto object-cover"
                 />
-               
+
                 <Link href="/global">
-                  <div className="absolute top-0 left-0 bg-red-600 text-white text-sm md:text-base font-semibold px-3 py-1 rounded-md">
+                  <div className="absolute top-0 left-0 bg-red-600 text-white text-sm md:text-base font-semibold px-3 py-1 rounded-r">
                     The Cyclopedia
                   </div>
                 </Link>
                 <Link href="/pp-feedbacks">
-                  <div className="absolute top-0 right-0 bg-blue-600 text-white text-sm md:text-base font-semibold px-3 py-1 rounded-md">
+                  <div className="absolute top-0 right-0 bg-blue-600 text-white text-sm md:text-base font-semibold px-3 py-1 rounded-l">
                     Rate ⭐⭐⭐⭐
                   </div>
                 </Link>
@@ -333,7 +376,7 @@ export default function NewsDetails() {
           <BlogDisplay body={blog.body} />
         </>
       </div>
-      <div className="flex gap-3 sm:gap-5">{/* ... */}</div>
+
       <div className="relative mx-auto text-center mt-20 mb-20 max-w-4xl">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-700 via-indigo-700/5 to-purple-700 backdrop-blur-lg border-purple-500/30 shadow-2xl"></div>
 
