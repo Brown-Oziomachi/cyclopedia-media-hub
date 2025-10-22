@@ -60,18 +60,26 @@ const PoliticsPage = () => {
 
   return (
     <main className="w-full">
-      <div className="max-w-7xl mx-auto py-10">
-        <h1 className="text-3xl lg:text-5xl font-bold text-center max-lg:mt-40 lg:mt-50 mb-2">
-          Creativity, Heritage, and Expression
-        </h1>
-        <p className="text-sm lg:text-base text-center mx-auto mb-10">
-          Explore the vibrant world of art, music, literature, and cultural
-          traditions. <br className="max-md:hidden" />
-          Discover how creativity shapes societies and celebrates human
-          expression across generations.
-        </p>
+      <section className="relative w-full h-[500px] flex items-center justify-center text-center bg-gradient-to-br from-purple-700 via-rose-700 to-fuchsia-800 overflow-hidden">
+  <div className="absolute inset-0 bg-black/30"></div>
+  <div className="absolute w-[400px] h-[400px] bg-rose-900/40 blur-3xl rounded-full top-10 left-20"></div>
+  <div className="absolute w-[300px] h-[300px] bg-purple-800/40 blur-3xl rounded-full bottom-10 right-20"></div>
 
-        {/* Fetched Politics Posts */}
+  <div className="relative z-10 px-4">
+    <p className="inline-block text-rose-600 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
+      Art & Culture
+    </p>
+    <h1 className="text-white font-extrabold text-5xl md:text-6xl lg:text-7xl uppercase mb-4 drop-shadow-lg">
+      Creativity, Heritage, and Expression
+    </h1>
+    <p className="text-gray-100 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed">
+      Explore the vibrant world of art, music, literature, and cultural traditions.{" "}
+      Discover how creativity shapes societies and celebrates human expression across generations.
+    </p>
+  </div>
+</section>
+
+      <div className="max-w-7xl mx-auto py-10">
         {loading ? (
           <p className="text-center py-10">Loading latest posts...</p>
         ) : posts.length === 0 ? (

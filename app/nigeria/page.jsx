@@ -60,13 +60,29 @@ const NigeriaPage = () => {
 
   return (
     <main className="w-full b">
-      <div className="max-w-7xl mx-auto px- lg:py-40 py-20">
-        <p className="text-lg p-5 capitalize lg:text-base text-center text-gray-300 mx-auto mb-10">
-          Explore stories on governance, elections, policies, and deals shaping
-          Nigeria’s future. <br className="max-md:hidden" />
-          Uncover the truths behind decisions that affect the people every day.
-        </p>
+      <section className="relative w-full h-[500px] flex items-center justify-center text-center bg-gradient-to-br from-green-700 via-emerald-800 to-black overflow-hidden">
+        {/* Background Overlays */}
+        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="absolute w-[400px] h-[400px] bg-green-900/40 blur-3xl rounded-full top-10 left-20"></div>
+        <div className="absolute w-[300px] h-[300px] bg-emerald-700/40 blur-3xl rounded-full bottom-10 right-20"></div>
 
+        {/* Text Content */}
+        <div className="relative z-10 px-4">
+          <p className="inline-block text-green-600 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
+            Nigeria
+          </p>
+          <h1 className="text-white font-extrabold text-5xl md:text-6xl lg:text-7xl uppercase mb-4 drop-shadow-lg">
+            The Heart of a Nation
+          </h1>
+          <p className="text-gray-100 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed">
+            Explore stories on governance, elections, policies, and deals
+            shaping Nigeria’s future. Uncover the truths behind decisions that
+            affect the people every day.
+          </p>
+        </div>
+      </section>
+      
+      <div className="max-w-7xl mx-auto px- lg:py-40 py-20">
         {posts[0] && (
           <div className="mb-12">
             <Link href={`/news/${createFullSlug(posts[0].title, posts[0].id)}`}>

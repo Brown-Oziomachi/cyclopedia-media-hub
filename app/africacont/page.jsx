@@ -84,9 +84,30 @@ const PoliticsPage = () => {
 
   return (
     <main className="w-full">
+      <section className="relative w-full h-[500px] flex items-center justify-center text-center bg-gradient-to-br from-yellow-700 via-amber-800 to-black overflow-hidden">
+        {/* Background Overlays */}
+        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="absolute w-[400px] h-[400px] bg-amber-900/40 blur-3xl rounded-full top-10 left-20"></div>
+        <div className="absolute w-[300px] h-[300px] bg-yellow-800/40 blur-3xl rounded-full bottom-10 right-20"></div>
+
+        {/* Text Content */}
+        <div className="relative z-10 px-4">
+          <p className="inline-block text-amber-600 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
+            Africa
+          </p>
+          <h1 className="text-white font-extrabold text-5xl md:text-6xl lg:text-7xl uppercase mb-4 drop-shadow-lg">
+            The Pulse of a Continent
+          </h1>
+          <p className="text-gray-100 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed">
+            Journey through the heart of Africa — its cultures, innovations,
+            leaders, and untold stories. Celebrate a continent rich in history,
+            diversity, and unstoppable potential.
+          </p>
+        </div>
+      </section>
+
       <div className="max-w-7xl mx-auto px-4 py-10">
-        <div className="text-center mb-12 max-lg:mt-32 lg:mt-30">
-          <h1 className="text-3xl lg:text-4xl font-bold mb-3 ">Africa</h1>
+        <div className="text-center mb-12 ">
         </div>
         {posts[0] && (
           <div className="relative mb-12">

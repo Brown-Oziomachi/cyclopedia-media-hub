@@ -59,15 +59,28 @@ const Page = () => {
 
   return (
     <main className="w-full">
-      <h1 className="text-3xl lg:text-5xl font-bold text-center mt-30 lg:mt-50 mb-2">
-        Tomorrow's World, Today
-      </h1>
-      <p className="text-sm lg:text-base text-center mx-auto">
-        Discover breakthroughs shaping our future — AI, space travel,{" "}
-        <br className="max-md:hidden" />
-        biotechnology, and more. Dive into the wonders and ethical questions of
-        the modern age.
-      </p>
+      <section className="relative w-full h-[500px] flex items-center justify-center text-center bg-gradient-to-br from-blue-600 via-cyan-700 to-indigo-800 overflow-hidden">
+        {/* Background Overlays */}
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute w-[400px] h-[400px] bg-black/40 blur-3xl rounded-full top-10 left-20"></div>
+        <div className="absolute w-[300px] h-[300px] bg-black/30 blur-3xl rounded-full bottom-10 right-20"></div>
+
+        {/* Text Content */}
+        <div className="relative z-10 px-4">
+          <p className="inline-block text-cyan-700 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
+            Science
+          </p>
+          <h1 className="text-white font-extrabold text-5xl md:text-6xl lg:text-7xl uppercase mb-4 drop-shadow-lg">
+            Tomorrow’s World, Today
+          </h1>
+          <p className="text-gray-100 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed">
+            Discover breakthroughs shaping our future — AI, space travel,
+            biotechnology, and more. Dive into the wonders, challenges, and
+            ethical frontiers of the modern age, where science meets
+            imagination.
+          </p>
+        </div>
+      </section>
 
       {/* 🔹 Dynamic Firestore Posts */}
       {posts.length > 0 && (

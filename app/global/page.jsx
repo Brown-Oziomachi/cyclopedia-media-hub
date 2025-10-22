@@ -54,7 +54,6 @@ export default function BlogsPage() {
     return () => unsubscribe();
   }, []);
 
-  // ✅ Fetch next batch
   const fetchMoreBlogs = async () => {
     if (!lastDoc) return;
 
@@ -97,17 +96,39 @@ export default function BlogsPage() {
   };
   
   return (
-    <div className="max-w-7xl mx-auto px-4 mt-28 lg:mt-36 space-y-12">
-      {/* Header */}
-      <div className="text-center">
-        <h1 className="text-4xl font-extrabold">Latest News</h1>
-        <p className=" text-sm mt-1">
-          Explore the global headlines and in-depth insights
-        </p>
-        <hr className="mt-3" />
-      </div>
+    <div className="max-w-7xl mx-auto mt-10 lg:mt-36 space-y-12">
+      <section
+        className="relative w-full h-[500px] flex items-center justify-center text-center bg-cover bg-center overflow-hidden"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80')",
+        }}
+      >
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/60"></div>
 
-      {/* Top Featured Section */}
+        {/* Gradient Blurs - representing different sections */}
+        <div className="absolute w-[400px] h-[400px] bg-purple-600/30 blur-3xl rounded-full top-10 left-10"></div>
+        <div className="absolute w-[350px] h-[350px] bg-blue-500/30 blur-3xl rounded-full bottom-20 right-20"></div>
+        <div className="absolute w-[250px] h-[250px] bg-emerald-400/30 blur-3xl rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+
+        {/* Text Content */}
+        <div className="relative z-10 px-4">
+          <p className="inline-block bg-white/80 text-transparent bg-clip-text font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase bg-gradient-to-r from-yellow-400 via-red-500 to-blue-500">
+            Global Spotlight
+          </p>
+          <h1 className="text-white font-extrabold text-5xl md:text-6xl lg:text-7xl uppercase mb-4 drop-shadow-lg">
+            Latest News
+          </h1>
+          <p className="text-gray-100 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed">
+            A fusion of stories from every corner — politics, culture, sports,
+            health, and innovation. <br className="max-md:hidden" />
+            Dive into the pulse of the world and uncover the narratives shaping
+            our collective reality.
+          </p>
+        </div>
+      </section>
+
       <div className="overflow-x-auto overflow-y-visible lg:overflow-visible">
         <div className="flex lg:grid lg:grid-cols-3 gap-5  lg:w-full">
           {posts.slice(0, 3).map((b) => (

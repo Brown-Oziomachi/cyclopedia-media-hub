@@ -61,17 +61,35 @@ const SportsPage = () => {
 
   return (
     <main className="w-full">
-      <div className="max-w-7xl mx-auto py-10">
-        <h1 className="text-3xl lg:text-5xl font-bold text-center max-lg:mt-40 lg:mt-50 mb-2">
-          Speed, Strength, and Strategy
-        </h1>
-        <p className="text-sm lg:text-base text-center mx-auto mb-10">
-          Explore the world of sports, thrilling matches, record-breaking
-          performances, <br className="max-md:hidden" />
-          and the athletes who push the limits to achieve greatness on every
-          field.
-        </p>
+      <section
+        className="relative w-full h-[500px] lg:mt-35 flex items-center justify-center text-center bg-cover bg-center overflow-hidden"
+        style={{
+          backgroundImage:
+            "url(/sport.jpg)",
+        }}
+      >
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="absolute w-[400px] h-[400px] bg-yellow-500/20 blur-3xl rounded-full top-10 left-20"></div>
+        <div className="absolute w-[300px] h-[300px] bg-red-600/20 blur-3xl rounded-full bottom-10 right-20"></div>
 
+        {/* Text Content */}
+        <div className="relative z-10 px-4">
+          <p className="inline-block text-yellow-400 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
+            Sports
+          </p>
+          <h1 className="text-white font-extrabold text-5xl md:text-6xl lg:text-7xl uppercase mb-4 drop-shadow-lg">
+            Speed, Strength, and Strategy
+          </h1>
+          <p className="text-gray-100 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed">
+            Explore the world of sports — thrilling matches, record-breaking
+            performances, and the athletes who push the limits to achieve
+            greatness on every field.
+          </p>
+        </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto py-10">
         {posts[0] && (
           <div className="mb-12">
             <Link href={`/news/${createFullSlug(posts[0].title, posts[0].id)}`}>

@@ -107,19 +107,30 @@ const SexEducationPage = () => {
 
   return (
     <main className="w-full">
-      <div className="max-w-7xl mx-auto px-4 py-10">
-        {/* Header Section */}
-        <div className="text-center mb-12 max-lg:mt-32 lg:mt-40">
-          <h1 className="text-3xl lg:text-4xl font-bold mb-3 ">Comprehensive Sex Education</h1>
-          <p className="text-sm lg:text-base text-center text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Evidence-based, medically accurate information about sexual health, relationships, consent, and wellbeing. 
-            Educational resources designed for adult learners seeking to deepen their understanding of human sexuality.
+      {/* Hero Section */}
+      <div className="relative w-full h-[500px] bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 flex items-center justify-center overflow-hidden lg:mt-30">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-20 left-1/4 w-96 h-96 bg-black rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-black rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="relative z-10 text-center px-4 max-w-5xl">
+          <div className="inline-block bg-red-600 text-white text-xs font-bold px-4 py-2 rounded mb-6 uppercase tracking-wider">
+            Sex Education
+          </div>
+          <h1 className="text-4xl lg:text-7xl font-black text-white mb-6 uppercase tracking-tight leading-tight">
+            Comprehensive Sex Education
+          </h1>
+          <p className="text-lg lg:text-xl text-white/90 max-w-3xl mx-auto font-medium">
+            Evidence-based, medically accurate information about sexual health, relationships, consent, and wellbeing
           </p>
-          <p className="text-xs text-gray-500 mt-4 italic">
-            ⚠️ This content is restricted to adults 18 years and older
+          <p className="text-sm text-white/80 mt-6 font-semibold">
+            ⚠️ Content restricted to adults 18 years and older
           </p>
         </div>
+      </div>
 
+      <div className="max-w-7xl mx-auto px-4 py-10">
         {/* Featured Article (First Post) */}
         {posts[0] && (
           <div className="mb-12">

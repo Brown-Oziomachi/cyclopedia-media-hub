@@ -62,15 +62,27 @@ const Page = () => {
 
   return (
     <main className="w-full">
-      <h1 className="text-3xl lg:text-5xl font-bold text-center mb-2 mt-30 lg:mt-50 font-serif">
-        Uncovering the Hidden Past
-      </h1>
-      <p className="text-sm lg:text-base text-center mx-auto">
-        Delve into the depths of forgotten events, suppressed truths, and{" "}
-        <br className="max-md:hidden" />
-        powerful legacies that continue to shape our present. Explore history
-        from perspectives often left out of mainstream narratives.
-      </p>
+      <section className="relative w-full h-[500px] flex items-center justify-center text-center bg-gradient-to-br from-yellow-800 via-amber-900 to-yellow-950 overflow-hidden">
+        {/* Background Overlays */}
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute w-[400px] h-[400px] bg-black/40 blur-3xl rounded-full top-10 left-20"></div>
+        <div className="absolute w-[300px] h-[300px] bg-black/30 blur-3xl rounded-full bottom-10 right-20"></div>
+
+        {/* Text Content */}
+        <div className="relative z-10 px-4">
+          <p className="inline-block text-yellow-900 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
+            History
+          </p>
+          <h1 className="text-white font-extrabold text-5xl md:text-6xl lg:text-7xl uppercase mb-4 drop-shadow-lg font-serif">
+            Uncovering the Hidden Past
+          </h1>
+          <p className="text-gray-100 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed">
+            Delve into the depths of forgotten events, suppressed truths, and
+            powerful legacies that continue to shape our present. Explore
+            history from perspectives often left out of mainstream narratives.
+          </p>
+        </div>
+      </section>
 
       {posts[0] && (
         <div className="mb-12">

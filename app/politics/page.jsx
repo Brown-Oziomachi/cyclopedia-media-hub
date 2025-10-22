@@ -46,16 +46,16 @@ const PoliticsPage = () => {
     fetchPoliticsPosts();
   }, []);
 
-    const createSlug = (title) => {
-      return title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "");
-    };
+  const createSlug = (title) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  };
 
-    const createFullSlug = (title, id) => {
-      return `${createSlug(title)}--${id}`;
-    };
+  const createFullSlug = (title, id) => {
+    return `${createSlug(title)}--${id}`;
+  };
 
   if (loading) {
     return (
@@ -83,16 +83,29 @@ const PoliticsPage = () => {
 
   return (
     <main className="w-full">
-      <div className="max-w-7xl mx-auto px-4 py-10">
-        {/* Header Section */}
-        <div className="text-center mb-12 max-lg:mt-32 lg:mt-20">
-          <h1 className="text-3xl lg:text-4xl font-bold mb-3">Politics</h1>
-          <p className="text-sm lg:text-base text-center text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+      {/* Hero Section */}
+      <div className="relative w-full h-[500px] bg-gradient-to-br from-red-600 via-red-700 to-red-800 flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-20 left-1/4 w-96 h-96 bg-black rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-black rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="relative z-10 text-center px-4 max-w-5xl">
+          <div className="inline-block bg-white text-red-700 text-xs font-bold px-4 py-2 rounded mb-6 uppercase tracking-wider">
+            Politics
+          </div>
+          <h1 className="text-5xl lg:text-7xl font-black text-white mb-6 uppercase tracking-tight leading-tight">
+            Politics
+          </h1>
+          <p className="text-lg lg:text-xl text-white/90 max-w-3xl mx-auto font-medium">
             Navigate the world of governance, elections, and political maneuvers
             that shape our world. Deep dives into the decisions made in your
             name.
           </p>
         </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 py-10">
         {/* Featured Story (First Post) */}
         {posts[0] && (
           <div className="mb-12">

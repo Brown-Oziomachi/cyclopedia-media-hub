@@ -53,12 +53,27 @@ const Page = () => {
 
   return (
     <main className="w-full">
-      <h1 className="text-3xl lg:text-5xl font-bold text-center mt-30 lg:mt-50 mb-2">
-        The Battle for Truth
-      </h1>
-      <p className="text-sm lg:text-base text-center text-gray-700 mx-auto">
-        Exploring philosophical debates, critical thinking, and truth-seeking.
-      </p>
+      <section className="relative w-full h-[500px] flex items-center justify-center text-center bg-gradient-to-br from-teal-700 via-emerald-800 to-green-900 overflow-hidden">
+        {/* Background Overlays */}
+        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="absolute w-[400px] h-[400px] bg-green-900/40 blur-3xl rounded-full top-10 left-20"></div>
+        <div className="absolute w-[300px] h-[300px] bg-teal-700/40 blur-3xl rounded-full bottom-10 right-20"></div>
+
+        {/* Text Content */}
+        <div className="relative z-10 px-4">
+          <p className="inline-block text-emerald-600 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
+            Health
+          </p>
+          <h1 className="text-white font-extrabold text-5xl md:text-6xl lg:text-7xl uppercase mb-4 drop-shadow-lg">
+            The Battle for Truth
+          </h1>
+          <p className="text-gray-100 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed">
+            Exploring philosophical debates, critical thinking, and
+            truth-seeking in the realm of health — where science, ethics, and
+            the human spirit meet.
+          </p>
+        </div>
+      </section>
 
       <div className="max-w-7xl mx-auto py-12">
         {loading ? (

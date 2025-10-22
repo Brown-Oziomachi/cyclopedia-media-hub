@@ -62,10 +62,27 @@ export default function EducationTicker() {
 
   return (
     <section className="max-w-4xl mx-auto py-10">
-      <h1 className="text-4xl font-serif font-bold mb-12 mt-40 text-center">
-        Student Education in <span className="text-purple-600">Cyclopedia</span>
-      </h1>
-      {/* Marquee list */}
+      <section className="relative w-full h-[500px] flex items-center justify-center text-center bg-gradient-to-br from-sky-700 via-blue-800 to-cyan-900 overflow-hidden">
+        {/* Background Overlays */}
+        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="absolute w-[400px] h-[400px] bg-blue-900/40 blur-3xl rounded-full top-10 left-20"></div>
+        <div className="absolute w-[300px] h-[300px] bg-cyan-800/40 blur-3xl rounded-full bottom-10 right-20"></div>
+
+        {/* Text Content */}
+        <div className="relative z-10 px-4">
+          <p className="inline-block text-sky-600 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
+            Education
+          </p>
+          <h1 className="text-white font-extrabold text-5xl md:text-6xl lg:text-7xl uppercase mb-4 drop-shadow-lg">
+            Unlocking Minds, Shaping Futures
+          </h1>
+          <p className="text-gray-100 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed">
+            Explore the evolution of learning — from classrooms to digital
+            spaces. Discover how innovation, policy, and passion are redefining
+            education for generations to come.
+          </p>
+        </div>
+      </section>
 
       <style jsx>{`
         @keyframes marquee {

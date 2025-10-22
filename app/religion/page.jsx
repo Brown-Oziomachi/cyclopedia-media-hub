@@ -63,19 +63,27 @@ const Page = () => {
 
   return (
     <main className="w-full ">
-      <h1 className="text-3xl lg:text-5xl font-bold text-center mt-30 lg:mt-50 mb-2">
-        Faith, Belief, and Beyond
-      </h1>
-      <p className="text-sm text-center   lg:text-base ">
-        Explore ancient scriptures, divine mysteries, and the role of religion{" "}
-        <br className="max-md:hidden" />
-        in shaping societies and ideologies. A closer look at beliefs that unite
-        — and divide — billions.
-      </p>
+      <section className="relative w-full h-[500px] flex items-center justify-center text-center bg-gradient-to-br from-red-600 via-red-700 to-red-800 overflow-hidden">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute w-[400px] h-[400px] bg-black/40 blur-3xl rounded-full top-10 left-20"></div>
+        <div className="absolute w-[300px] h-[300px] bg-black/30 blur-3xl rounded-full bottom-10 right-20"></div>
 
-      {/* ✅ Dynamic Firestore Religion Posts */}
+        {/* Text Content */}
+        <div className="relative z-10 px-4">
+          <p className="inline-block text-red-700 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
+            Religion
+          </p>
+          <h1 className="text-white font-extrabold text-5xl md:text-6xl lg:text-7xl uppercase mb-4 drop-shadow-lg">
+            Faith, Belief & Beyond
+          </h1>
+          <p className="text-gray-100 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed">
+            Explore ancient scriptures, divine mysteries, and the role of
+            religion in shaping societies and ideologies. A closer look at
+            beliefs that unite — and divide — billions.
+          </p>
+        </div>
+      </section>
       <p className="p-5">Latest Updates:</p>
-
       {posts[0] && (
         <div className="mb-12">
           <Link href={`/news/${createFullSlug(posts[0].title, posts[0].id)}`}>
@@ -536,9 +544,9 @@ const Page = () => {
             <p className="mt-2  text-xs">
               Daily round-up of religion in the news.
             </p>
-          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
-            Religion
-          </div>
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+              Religion
+            </div>
           </div>
         </div>
 

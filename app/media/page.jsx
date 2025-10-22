@@ -62,16 +62,27 @@ const Page = () => {
 
   return (
     <main className="w-full  transition-colors duration-300">
-      {/* === PAGE HEADER === */}
-      <h1 className="text-3xl lg:text-5xl font-bold text-center mt-20 lg:mt-40 mb-4">
-        The Battle for Truth
-      </h1>
-      <p className="text-sm lg:text-base text-center  mx-auto">
-        Unmask the forces behind curated narratives, censorship, propaganda,{" "}
-        <br className="max-md:hidden" />
-        and digital manipulation. Who controls the story — and what aren’t they
-        telling you?
-      </p>
+      <section className="relative w-full h-[500px] flex items-center justify-center text-center bg-gradient-to-br from-red-800 via-gray-900 to-black overflow-hidden">
+        {/* Background Overlays */}
+        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="absolute w-[400px] h-[400px] bg-red-900/40 blur-3xl rounded-full top-10 left-20"></div>
+        <div className="absolute w-[300px] h-[300px] bg-gray-800/40 blur-3xl rounded-full bottom-10 right-20"></div>
+
+        {/* Text Content */}
+        <div className="relative z-10 px-4">
+          <p className="inline-block text-red-600 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
+            Media
+          </p>
+          <h1 className="text-white font-extrabold text-5xl md:text-6xl lg:text-7xl uppercase mb-4 drop-shadow-lg">
+            The Battle for Truth
+          </h1>
+          <p className="text-gray-100 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed">
+            Unmask the forces behind curated narratives, censorship, propaganda,
+            and digital manipulation. Discover who truly controls the story —
+            and what they don’t want you to know.
+          </p>
+        </div>
+      </section>
 
       {posts[0] && (
         <div className="mb-12">
@@ -107,7 +118,7 @@ const Page = () => {
           </Link>
         </div>
       )}
-      
+
       {loading ? (
         <p className="text-center py-10 ">Loading latest posts...</p>
       ) : posts.length === 0 ? (

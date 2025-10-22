@@ -46,11 +46,37 @@ export default function HealthPostsPage() {
 
   return (
     <section className="max-w-6xl mx-auto py-12 ">
-      <h1 className="text-3xl font-bold mb-8 mt-20">Health Articles</h1>
+      <section
+        className="relative w-full h-[500px] flex items-center justify-center text-center bg-cover bg-center overflow-hidden"
+        style={{
+          backgroundImage: "url(/health.jpeg)",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="absolute w-[400px] h-[400px] bg-emerald-500/30 blur-3xl rounded-full top-10 left-20"></div>
+        <div className="absolute w-[300px] h-[300px] bg-teal-600/30 blur-3xl rounded-full bottom-10 right-20"></div>
+
+        <div className="relative z-10 px-4">
+          <p className="inline-block text-emerald-600 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
+            Health
+          </p>
+          <h1 className="text-white font-extrabold text-5xl md:text-6xl lg:text-7xl uppercase mb-4 drop-shadow-lg">
+            Wellness, Medicine, and the Human Spirit
+          </h1>
+          <p className="text-gray-100 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed">
+            Explore the world of health — from groundbreaking medical research
+            and holistic wellness to mental resilience and human care. Discover
+            what it truly means to heal and thrive.
+          </p>
+        </div>
+      </section>
 
       <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6">
         {posts.map((post, index) => (
-          <Link key={post.id} href={`/news/${createFullSlug(post.title, post.id)}`}>
+          <Link
+            key={post.id}
+            href={`/news/${createFullSlug(post.title, post.id)}`}
+          >
             <div
               className={`relative rounded overflow-hidden shadow hover:shadow-lg transition cursor-pointer
           ${index % 5 === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
