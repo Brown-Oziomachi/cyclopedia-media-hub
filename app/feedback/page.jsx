@@ -130,7 +130,7 @@ if (loading) {
           <div className="inline-flex items-center justify-center mb-4 p-3 mt-5 lg:mt-30 bg-purple-500/10 rounded-full border border-purple-500/20">
             <MessageSquare className="text-purple-400" size={24} />
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-center">
             We'd Love to Hear from{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
               You
