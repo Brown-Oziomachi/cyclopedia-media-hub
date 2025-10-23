@@ -59,7 +59,7 @@ export default function CookieBanner() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-40">
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className=" mx-auto px-4 py-8 overflow-y-auto max-h-[80vh]">
         <div className="flex flex-col gap-6">
           {/* Title */}
           <div>
@@ -106,16 +106,16 @@ export default function CookieBanner() {
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-end gap-3 pt-4">
+          <div className="flex justify-end gap-3 pt-1">
             <button
               onClick={() => setShowCookieSettings(!showCookieSettings)}
-              className="px-4 py-2 text-gray-700 hover:text-gray-900 transition"
+              className="px-2 py-1 text-gray-700 hover:text-gray-900 transition"
             >
               Manage my cookies
             </button>
             <button
               onClick={handleDecline}
-              className="px-6 py-2 border-2 border-gray-400 text-gray-700 rounded hover:border-gray-600 transition"
+              className="px-2 py-1 border-2 border-gray-400 text-gray-700 rounded hover:border-gray-600 transition"
             >
               Decline
             </button>
