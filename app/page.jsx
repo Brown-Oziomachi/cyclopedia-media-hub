@@ -15,7 +15,7 @@ import {
   where,
   onSnapshot,
 } from "firebase/firestore";
-
+import AboutSection from "@/components/AboutSection"
 const Page = () => {
   const [showSplash, setShowSplash] = useState(true);
   const router = useRouter();
@@ -147,18 +147,15 @@ const Page = () => {
                 alt="image"
                 className="z-0 w-fit lg:w-200 lg:h-200 h-fit opacity- lg:-mt-35"
               />
-
-              <p className="text-sm lg:text-2xl max-w-3xl mx-auto lg:-mt-30 text-center text-white">
-                Uncovering the Unseen, Revealing the Real.
-              </p>
+            <AboutSection/>
             </div>
-            <div className="flex gap-4 group text-sm z-0 lg:mb-20">
               <Link href="/about">
-                <button className="z-50 border-purple-400 max-lg:hidden text-white shadow-black shadow-2xl cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black px-6 py-3 rounded-lg font-semibold transition-all group-hover:bg-white group-hover:text-black">
-                  Learn More
+                <button className="z-50 border-purple-400 text-white shadow-black shadow-2xl cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black px-6 py-3 rounded-lg font-semibold transition-all group-hover:bg-white group-hover:text-black">
+                  About Us
                   <ChevronRight className="text-purple-300" />
                 </button>
               </Link>
+            <div className="flex gap-4 group text-sm z-0 lg:mb-20">
             </div>
           </main>
         </div>

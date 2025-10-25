@@ -6,7 +6,7 @@ import Link from "next/link";
 import Footer from "@/components/Footer";
 import ViewMoreSearchPopup from "../view/page";
 import { motion } from "framer-motion";
-
+import AboutSection from "@/components/AboutSection"
 
 // ✅ Firebase
 import {
@@ -621,6 +621,7 @@ const Page = () => {
       {/* === VIEW MORE BUTTON === */}
       <div className="mx-auto text-center">
         <ViewMoreSearchPopup />
+        <AboutSection />
       </div>
     </main>
   );

@@ -521,14 +521,15 @@ useEffect(() => {
           </div>
         </div>
             <div className="mb-10">
-                <a
-              href="https://reffpa.com/L?tag=d_4882646m_97c_3780558&site=4882646&ad=97"
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="block w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 rounded-lg text-center transition-all transform hover:scale-105"
-            >
-              1Xbet
-            </a>
+                   <a
+  href="https://reffpa.com/L?tag=d_4882646m_97c_3780558&site=4882646&ad=97"
+  target="_blank"
+  rel="noopener noreferrer sponsored"
+  className="block w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 rounded-lg text-center transition-all transform hover:scale-105 relative"
+>
+  <span className="inline-block animate-spin mr-2">⚽</span>
+  1Xbet →
+</a>
             </div>
       </div>
 

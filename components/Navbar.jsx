@@ -196,44 +196,47 @@ const regions = [
         } shadow-lg z-50`}
         onClick={(e) => e.stopPropagation()}
       >
+
         <div className="flex items-center justify-between px-4 py-2">
-          <div ref={statusRef} className="flex items-center gap-4">
-            <Link href="/">
-              <Image
-                src="/hid.png"
-                alt="Cyclopedia Logo"
-                width={30}
-                height={30}
-                className="rounded-full brightness-125 "
-              />
-            </Link>
-            <Link href="/">
-              <h1
-                className=" font-bold text-xl lg:text-3xl cursor-pointer transition rounded-sm "
-                onClick={() => setShowNav(false)}
-              >
-                THE CYCL
-                <Link href="/about">
-                  <span className="bg-white rounded-full w-0 h-0 mask-b-from-20% hover:invisible">
-                    👁️
-                  </span>
-                </Link>
-                PEDIA
-              </h1>
-            </Link>
-            <span />
-            <ThemeToggle />
-            <ViewMoreSearchPopup />
-          </div>
-          <LiveClock />
-          <div className="ml-10 hover:bg-red-600 border border-black hover:text-white px-20 py-2 max-lg:hidden">
-            <Link href="/newsletter" className="text-gray-400  mb-4 hover:text-white">
-              Newsletter
-            </Link>
-            </div>
-          <div className="ml-auto -mt-5 max-lg:hidden">
-            <UserProfileButton setShowNavOpen={setShowNav} />{" "}
-          </div>
+
+      <div className="flex">
+         <div ref={statusRef} className="flex items-center gap-4">
+  <Link href="/">
+    <Image
+      src="/hid.png"
+      alt="Cyclopedia Logo"
+      width={30}
+      height={30}
+      className="rounded-full brightness-125"
+    />
+  </Link>
+
+  <h1 className="font-bold text-xl lg:text-3xl cursor-pointer transition rounded-sm">
+    <Link href="/" onClick={() => setShowNav(false)}>
+      THE CYCL
+    </Link>
+    <Link href="/about" className="inline-block hover:scale-110 transition-transform">
+      <span className="bg-white rounded-full px-1">👁️</span>
+    </Link>
+    <Link href="/" onClick={() => setShowNav(false)}>
+      PEDIA
+    </Link>
+  </h1>
+
+  <ThemeToggle />
+  <ViewMoreSearchPopup />
+</div>
+
+<LiveClock />
+
+<div className="ml-10 hover:bg-red-600 border border-black dark:border-white hover:text-white px-20 py-2 max-lg:hidden rounded transition-colors">
+  <Link href="/newsletter" className="block hover:text-white">
+    Newsletter
+  </Link>
+</div>
+<UserProfileButton setShowNavOpen={setShowNav} className=""/>
+      </div>
+
 
           <div className="relative hidden lg:block px-4 py-1 text-black">
             <button
