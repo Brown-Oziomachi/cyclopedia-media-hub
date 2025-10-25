@@ -212,7 +212,7 @@ const NigeriaPage = () => {
                     Latest News
                   </span>
                   <div className="absolute top-0 left-0 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
-                    NG News
+                    sports News
                   </div>
                   <h2 className="text-2xl uppercase lg:text-3xl font-bold mb-4 hover:text-purple-600 transition-colors">
                     {posts[0].title}
