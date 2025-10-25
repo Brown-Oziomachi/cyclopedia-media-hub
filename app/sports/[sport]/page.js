@@ -100,7 +100,7 @@ const SportsPage = () => {
             setLoadingVideos(true);
             try {
                 const YOUTUBE_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
-                
+
                 // Check if API key is valid
                 if (!YOUTUBE_API_KEY || YOUTUBE_API_KEY === 'AIzaSyDummy') {
                     console.error('⚠️ YouTube API key not configured properly');
@@ -248,10 +248,10 @@ const SportsPage = () => {
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowFullScreen
                         />
-                        
+
                         {/* Video Info Overlay */}
                         <div className="absolute bottom-8 left-8 z-20 max-w-xl pointer-events-auto bg-black/70 backdrop-blur-sm p-4 rounded-lg">
-                          
+                           
                             <div className="flex items-center gap-4 flex-wrap">
                                 <span className="text-gray-400 text-xs">
                                     {spaceVideos[currentVideoIndex].channelTitle}
@@ -351,8 +351,8 @@ const SportsPage = () => {
                                     key={sport.id}
                                     onClick={() => handleSportSelect(sport.id)}
                                     className={`w-full text-left p-4 rounded-xl transition-all flex items-center justify-between group ${isActive
-                                            ? `bg-gradient-to-r ${sport.color} text-white shadow-lg scale-105`
-                                            : "bg-gray-800 hover:bg-gray-700"
+                                        ? `bg-gradient-to-r ${sport.color} text-white shadow-lg scale-105`
+                                        : "bg-gray-800 hover:bg-gray-700"
                                         }`}
                                 >
                                     <div className="flex items-center gap-3">

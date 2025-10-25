@@ -85,7 +85,7 @@ const SexEducationPage = () => {
     return (
       <main className="w-full min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-purple-500 border-t-transparent mb-4"></div>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-red-500 border-t-transparent mb-4"></div>
           <p className="text-gray-600">Loading comprehensive sex education resources...</p>
         </div>
       </main>

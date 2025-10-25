@@ -23,7 +23,7 @@ export default function LiveStreamSwitcher() {
     fetchLiveVideos();
   }, []);
 
-  if (loading) return <div className="text-center mt-38">Loading...</div>;
+  if (loading) return <div className="text-center lg:py-100 py-50">Loading Livestream vidoes...</div>;
   if (!currentVideo)
     return (
       <div className="text-center mt-20">

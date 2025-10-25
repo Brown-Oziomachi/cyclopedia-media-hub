@@ -52,7 +52,7 @@ const SideNewsTicker = () => {
         {posts.map((item) => (
           <Link
             key={item.id}
-            href={`/news/${item.id}`} // ✅ clickable blog detail page
+            href={`/news/${item.id}`} 
             className="px-6 py-1 font-medium hover:underline flex-shrink-0"
           >
             {item.title}
@@ -62,11 +62,10 @@ const SideNewsTicker = () => {
           </Link>
         ))}
 
-        {/* Duplicate for seamless loop */}
         {posts.map((item) => (
           <Link
             key={`dup-${item.id}`}
-            href={`/news/${item.id}`} // ✅ same clickable link
+            href={`/news/${item.id}`} 
             className="px-6 py-1 font-medium hover:underline flex-shrink-0"
           >
             {item.title}

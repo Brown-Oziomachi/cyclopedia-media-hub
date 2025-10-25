@@ -29,7 +29,7 @@ export default function Login() {
         return (
             <div className="min-h-screen flex items-center justify-center ">
                 <div className="text-center">
-                    <CircularProgress size={60} sx={{ color: '#7c3aed' }} />
+                    <CircularProgress size={60} sx={{ color: 'red' }} />
                     <p className="mt-4 text-lg">Loading...</p>
                 </div>
             </div>
@@ -73,10 +73,9 @@ export default function Login() {
     return (
         <div className="min-h-screen flex items-center justify-center px-4 py-12 ">
             <div className="w-full max-w-md mt-30">
-                <div className=" rounded-3xl shadow-2xl border border-purple-100 dark:border-purple-900 overflow-hidden">
+                <div className=" rounded-3xl shadow-2xl border border-red-600 overflow-hidden">
 
-                    {/* Logo Section */}
-                    <div className="relative h-48 bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600 flex items-center justify-center">
+                    <div className="relative h-48 bg-red-600 flex items-center justify-center">
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.2),transparent)]"></div>
                         <div className="relative z-10 text-center">
                             <div className="w-24 h-24 mx-auto mb-4 rounded-full mt-4 flex items-center justify-center shadow-2xl">
@@ -167,7 +166,7 @@ export default function Login() {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full py-3.5 bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:from-purple-700 hover:via-indigo-700 hover:to-blue-700 text-white font-semibold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group"
+                                className="w-full py-3.5 bg-red-600 hover:from-purple-700 hover:via-indigo-700 hover:to-blue-700 text-white font-semibold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group"
                             >
                                 {loading ? (
                                     <>
@@ -197,7 +196,7 @@ export default function Login() {
                         <div className="text-center">
                             <p className="text-gray-600 dark:text-gray-400">
                                 Don't have an account?{" "}
-                                <a href="/signup" className="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-semibold hover:underline">
+                                <a href="/signup" className="text-red-600 hover:underline">
                                     Create Account
                                 </a>
                             </p>
@@ -207,11 +206,11 @@ export default function Login() {
 
                 <p className="text-center mt-8 text-sm text-gray-600 dark:text-gray-400">
                     By continuing, you agree to our{" "}
-                    <a href="/terms-of-services" className="text-purple-600 dark:text-purple-400 hover:underline">
+                    <a href="/terms-of-services" className="text-red-600 hover:underline">
                         Terms of Service
                     </a>{" "}
                     and{" "}
-                    <a href="/privacy-policy" className="text-purple-600 dark:text-purple-400 hover:underline">
+                    <a href="/privacy-policy" className="text-red-600  hover:underline">
                         Privacy Policy
                     </a>
                 </p>

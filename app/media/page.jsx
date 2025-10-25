@@ -57,7 +57,7 @@ const Page = () => {
   };
 
   if (loading) {
-    return <p className="text-center py-10">Loading latest news...</p>;
+    return <p className="h-screen text-center py-50">Loading latest news...</p>;
   }
 
   return (

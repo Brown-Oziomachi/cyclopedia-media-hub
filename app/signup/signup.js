@@ -213,7 +213,7 @@ export default function Signup() {
 
                 {isAgeRestrictedContent && (
                     <div className="mb-4 p-3 border border-blue-500 bg-blue-50 rounded text-blue-700 text-sm">
-                        This content is for educational purposes and restricted to users 18+
+                        This content is for educational purposes and <span className="text-red-600">restricted</span> to users 18+
                     </div>
                 )}
 
@@ -414,7 +414,7 @@ export default function Signup() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full py-3 bg-purple-600 hover:bg-purple-950 text-white font-semibold rounded-lg disabled:opacity-50 transition"
+                        className="w-full py-3 bg-red-600 hover:bg-purple-950 text-white font-semibold rounded-lg disabled:opacity-50 transition"
                     >
                         {loading ? "Creating Account..." : "Sign Up"}
                     </button>
@@ -422,7 +422,7 @@ export default function Signup() {
 
                 <p className="text-center mt-4">
                     Already have an account?{" "}
-                    <a href="/login" className="text-blue-600 hover:underline">
+                    <a href="/login" className="text-red-600 hover:underline">
                         Login
                     </a>
                 </p>

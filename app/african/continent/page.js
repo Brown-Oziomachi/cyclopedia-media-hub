@@ -12,7 +12,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { db1 } from "@/lib/firebaseConfig";
-import ViewMoreSearchPopup from "../view/page";
+import ViewMoreSearchPopup from "@/app/view/page";
 
 const PoliticsPage = () => {
   const [posts, setPosts] = useState([]);

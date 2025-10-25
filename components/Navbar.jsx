@@ -198,17 +198,15 @@ const regions = [
       >
         <div className="flex items-center justify-between px-4 py-2">
           <div ref={statusRef} className="flex items-center gap-4">
-            <StatusModal
-              trigger={
-                <Image
-                  src="/hid.png"
-                  alt="Cyclopedia Logo"
-                  width={30}
-                  height={30}
-                  className="rounded-full brightness-125 "
-                />
-              }
-            />
+            <Link href="/">
+              <Image
+                src="/hid.png"
+                alt="Cyclopedia Logo"
+                width={30}
+                height={30}
+                className="rounded-full brightness-125 "
+              />
+            </Link>
             <Link href="/">
               <h1
                 className=" font-bold text-xl lg:text-3xl cursor-pointer transition rounded-sm "
@@ -223,15 +221,20 @@ const regions = [
                 PEDIA
               </h1>
             </Link>
-            <StatusModal statusItems={statusItems} />
-
+            <span />
             <ThemeToggle />
             <ViewMoreSearchPopup />
           </div>
           <LiveClock />
+          <div className="ml-10 hover:bg-red-600 border border-black hover:text-white px-20 py-2 max-lg:hidden">
+            <Link href="/newsletter" className="text-gray-400  mb-4 hover:text-white">
+              Newsletter
+            </Link>
+            </div>
           <div className="ml-auto -mt-5 max-lg:hidden">
             <UserProfileButton setShowNavOpen={setShowNav} />{" "}
           </div>
+
           <div className="relative hidden lg:block px-4 py-1 text-black">
             <button
               onClick={() => setShowRegionsDropdown((v) => !v)}
@@ -258,7 +261,7 @@ const regions = [
                     {region.emoji} {region.name}
                   </Link>
                 ))}
-              </div>
+              </div> 
             )}
           </div>
         </div>
@@ -279,79 +282,79 @@ const regions = [
           <div className="flex flex-wrap gap-2 mt-5">
             <Link
               href="/politics"
-              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2 hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
             >
               Politics
             </Link>
-              <Link
+            <Link
               href="/sex-education"
-              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
             >
               Sex education
             </Link>
             <Link
               href="/religion"
-              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
             >
               Religion
             </Link>
             <Link
               href="/history"
-              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
             >
               History
             </Link>
             <Link
               href="/science"
-              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
             >
               Science
             </Link>
             <Link
               href="/media"
-              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
             >
               Media
             </Link>
             <Link
               href="/education"
-              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
             >
               Education
             </Link>
             <Link
               href="/health"
-              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
             >
               Health
             </Link>
             <Link
               href="/art"
-              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
             >
               Art + Culture
             </Link>
             <Link
               href="/technology"
-              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
             >
               Technology
             </Link>
             <Link
               href="/sports"
-              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
             >
               Sports News
             </Link>
             <Link
               href="/live"
-              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
             >
               Live Now
             </Link>
             <Link
-              href="/africacont"
-              className="px-3 py-2 hover:bg-purple-600 rounded cursor-pointer text-sm font-medium"
+              href="/african/continent"
+              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
             >
               Africa
             </Link>
@@ -430,7 +433,7 @@ const regions = [
                 Politics
               </Link>
             </li>
-              <li>
+            <li>
               <Link href="/sex-education" onClick={() => setShowNav(false)}>
                 Sex Education
               </Link>
@@ -471,7 +474,7 @@ const regions = [
               </Link>
             </li>
             <li>
-              <Link href="/africacont" onClick={() => setShowNav(false)}>
+              <Link href="/african/continent" onClick={() => setShowNav(false)}>
                 Africa
               </Link>
             </li>

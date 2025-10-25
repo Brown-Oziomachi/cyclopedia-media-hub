@@ -63,6 +63,7 @@ const Page = () => {
 
   return (
     <main className="w-full ">
+      
       <section className="relative w-full h-[500px] flex items-center justify-center text-center bg-gradient-to-br from-red-600 via-red-700 to-red-800 overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="absolute w-[400px] h-[400px] bg-black/40 blur-3xl rounded-full top-10 left-20"></div>

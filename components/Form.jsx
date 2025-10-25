@@ -6,9 +6,8 @@ import React, { useEffect, useState } from 'react'
 import { collection, addDoc } from 'firebase/firestore';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import { Loader,ThumbsUp } from 'lucide-react';
-import { db2 } from '@/lib/firebaseConfig';
+import { db1 } from '@/lib/firebaseConfig';
 
-// Validation schema
 const valSchema = Yup.object({
   name: Yup.string().required('Name is required'),
   number: Yup.string().required('Number is required'),
@@ -17,28 +16,27 @@ const valSchema = Yup.object({
   message: Yup.string().required('Message is required'),
 });
 
+
 const ContactPage = ({ session }) => {
-    const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true); 
+  const [processing, setProcessing] = useState(false);
+  const [modalVisibility, setModalVisibility] = useState(false);
    
      useEffect(() => {
       const timer = setTimeout(() => {
         setLoading(false);
-      }, 3000); // adjust the timeout as needed
+      }, 3000);
   
       return () => clearTimeout(timer);
     }, []);
 
-  const [processing, setProcessing] = useState(false);
-  const [modalVisibility, setModalVisibility] = useState(false);
-  
   console.log(session);
   
   const handleSubmit = async (values, { resetForm }) => {
     try {
       setProcessing(true);
       
-      // create an object to be sent to the db
-      const webwizformDoc = {
+      const cylopediaformDoc = {
         name: values.name,
         number: values.number,
         email: values.email,
@@ -47,8 +45,8 @@ const ContactPage = ({ session }) => {
         timestamp: new Date().toLocaleDateString(),
       };
       
-      const webwizformRef = await addDoc(collection(db2, "contactForm"), webwizformDoc);
-      console.log(webwizformRef.id);
+      const cyclopediaformRef = await addDoc(collection(db1, "contactForm"), cyclopediaformDoc);
+      console.log(cyclopediaformRef.id);
       
       resetForm();
       setModalVisibility(true);
@@ -64,7 +62,6 @@ const ContactPage = ({ session }) => {
     <>
      {loading ? (
             <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-700 via-gray-900 to-gray-900">
-             
               <h1 className="text-4xl lg:text-6xl font-extrabold tracking-wide leading-tight text-white relative"></h1>
               <Loader   size="50" speed="0.5" color="blue" />
               <img
@@ -75,14 +72,12 @@ const ContactPage = ({ session }) => {
             </div>
           ) : (
     <div className="bg-gradient-to-r from-gray-700 via-gray-900 to-gray-900 min-h-screen flex flex-col items-center justify-center text-gray-100">
-      {/* Header */}
       <div className="text-center py-5">
         <img src="logo.png" alt="logo" className='w-70 h-60 mx-auto'/>
         <h1 className="text-6xl font-serif text-white max-md:text-4xl">Get In Touch</h1>
         <p className="text-2xl font-serif text-gray-400 max-md:text-xl mt-4"> We'd love to hear from you! </p>
       </div>
 
-      {/* Contact Form */}
       <Formik
         initialValues={{ name: '', number: '', email: '', address: '', message: '' }}
         validationSchema={valSchema}
