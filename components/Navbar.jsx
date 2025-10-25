@@ -234,7 +234,6 @@ const regions = [
     Newsletter
   </Link>
 </div>
-<UserProfileButton setShowNavOpen={setShowNav} className=""/>
       </div>
 
 
@@ -281,6 +280,7 @@ const regions = [
               </Link>
             ))}
           </nav>
+<UserProfileButton setShowNavOpen={setShowNav} className=""/>
 
           <div className="flex flex-wrap gap-2 mt-5">
             <Link
