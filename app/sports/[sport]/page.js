@@ -96,75 +96,89 @@ const SportsPage = () => {
   const createFullSlug = (title, id) => {
     return `${createSlug(title)}--${id}`;
   };
+// Replace the fetchSportsVideos useEffect in your sports page with this:
 
-  // Fetch latest sports videos from YouTube API
-  useEffect(() => {
-    const fetchSportsVideos = async () => {
-      setLoadingVideos(true);
-      try {
-        const YOUTUBE_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
+useEffect(() => {
+  const fetchSportsVideos = async () => {
+    setLoadingVideos(true);
+    try {
+      // ✅ MULTIPLE API KEYS SETUP
+      const API_KEYS = [
+        process.env.NEXT_PUBLIC_YOUTUBE_API_KEY_1,
+        process.env.NEXT_PUBLIC_YOUTUBE_API_KEY_2,
+        process.env.NEXT_PUBLIC_YOUTUBE_API_KEY_3,
+      ].filter(Boolean); // Remove undefined keys
 
-        // Check if API key is valid
-        if (!YOUTUBE_API_KEY || YOUTUBE_API_KEY === "AIzaSyDummy") {
-          console.error("⚠️ YouTube API key not configured properly");
-          setSpaceVideos([]);
-          setLoadingVideos(false);
-          return;
-        }
-
-        const searchQuery =
-          currentSport.searchQuery || "sports highlights 2025";
-        console.log("🔍 Searching YouTube for:", searchQuery);
-
-        const response = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${encodeURIComponent(
-            searchQuery
-          )}&type=video&order=date&videoDuration=medium&key=${YOUTUBE_API_KEY}`
-        );
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          console.error("❌ YouTube API Error:", errorData);
-          setSpaceVideos([]);
-          setLoadingVideos(false);
-          return;
-        }
-
-        const data = await response.json();
-        console.log("✅ YouTube API Response:", data);
-
-        if (data.items && data.items.length > 0) {
-          const videos = data.items.map((item) => ({
-            id: item.id.videoId,
-            title: item.snippet.title,
-            description: item.snippet.description,
-            date: item.snippet.publishedAt,
-            thumbnail:
-              item.snippet.thumbnails.high?.url ||
-              item.snippet.thumbnails.medium?.url,
-            // YouTube embed URL - will play with sound when clicked
-            embedUrl: `https://www.youtube.com/embed/${item.id.videoId}?autoplay=1&rel=0&controls=1&showinfo=0&modestbranding=1`,
-            watchUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`,
-            channelTitle: item.snippet.channelTitle,
-          }));
-          console.log("✅ Processed", videos.length, "videos");
-          setSpaceVideos(videos);
-        } else {
-          console.log("⚠️ No videos found");
-          setSpaceVideos([]);
-        }
-      } catch (error) {
-        console.error("❌ Error fetching videos:", error);
+      // Check if we have at least one key
+      if (API_KEYS.length === 0) {
+        console.error("⚠️ No YouTube API keys configured");
         setSpaceVideos([]);
-      } finally {
         setLoadingVideos(false);
+        return;
       }
-    };
 
-    fetchSportsVideos();
-    setCurrentVideoIndex(0);
-  }, [sportParam]);
+      // Randomly select an API key
+      const currentKeyIndex = Math.floor(Math.random() * API_KEYS.length);
+      const YOUTUBE_API_KEY = API_KEYS[currentKeyIndex];
 
+      console.log(`🔑 Using API Key #${currentKeyIndex + 1} of ${API_KEYS.length}`);
+
+      const searchQuery = currentSport.searchQuery || "sports highlights 2025";
+      console.log("🔍 Searching YouTube for:", searchQuery);
+
+      const response = await fetch(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${encodeURIComponent(
+          searchQuery
+        )}&type=video&order=date&videoDuration=medium&key=${YOUTUBE_API_KEY}`
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("❌ YouTube API Error:", errorData);
+        
+        // If quota exceeded, log which key failed
+        if (errorData.error?.errors?.[0]?.reason === "quotaExceeded") {
+          console.error(`⚠️ Quota exceeded for API Key #${currentKeyIndex + 1}`);
+        }
+        
+        setSpaceVideos([]);
+        setLoadingVideos(false);
+        return;
+      }
+
+      const data = await response.json();
+      console.log("✅ YouTube API Response:", data);
+
+      if (data.items && data.items.length > 0) {
+        const videos = data.items.map((item) => ({
+          id: item.id.videoId,
+          title: item.snippet.title,
+          description: item.snippet.description,
+          date: item.snippet.publishedAt,
+          thumbnail:
+            item.snippet.thumbnails.high?.url ||
+            item.snippet.thumbnails.medium?.url,
+          embedUrl: `https://www.youtube.com/embed/${item.id.videoId}?autoplay=1&rel=0&controls=1&showinfo=0&modestbranding=1`,
+          watchUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+          channelTitle: item.snippet.channelTitle,
+        }));
+        console.log(`✅ Processed ${videos.length} videos using Key #${currentKeyIndex + 1}`);
+        setSpaceVideos(videos);
+      } else {
+        console.log("⚠️ No videos found");
+        setSpaceVideos([]);
+      }
+    } catch (error) {
+      console.error("❌ Error fetching videos:", error);
+      setSpaceVideos([]);
+    } finally {
+      setLoadingVideos(false);
+    }
+  };
+
+  fetchSportsVideos();
+  setCurrentVideoIndex(0);
+}, [sportParam]);
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowVideo(true);
@@ -502,6 +516,16 @@ const SportsPage = () => {
             </p>
           </div>
         </div>
+            <div className="mb-10">
+                <a
+              href="https://reffpa.com/L?tag=d_4882646m_97c_3780558&site=4882646&ad=97"
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="block w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 rounded-lg text-center transition-all transform hover:scale-105"
+            >
+              1Xbet
+            </a>
+            </div>
       </div>
 
       {/* Overlay */}

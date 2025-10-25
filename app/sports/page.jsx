@@ -97,80 +97,89 @@ const SportsPage = () => {
     return `${createSlug(title)}--${id}`;
   };
 
-  // Fetch latest sports videos from YouTube API
-  useEffect(() => {
-    const fetchSportsVideos = async () => {
-      setLoadingVideos(true);
-      try {
-        const YOUTUBE_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
+// Replace the fetchSportsVideos useEffect in your sports page with this:
 
-        // Check if API key is valid
-        if (!YOUTUBE_API_KEY || YOUTUBE_API_KEY === "AIzaSyDummy") {
-          console.error("⚠️ YouTube API key not configured properly");
-          setSpaceVideos([]);
-          setLoadingVideos(false);
-          return;
-        }
+useEffect(() => {
+  const fetchSportsVideos = async () => {
+    setLoadingVideos(true);
+    try {
+      // ✅ MULTIPLE API KEYS SETUP
+      const API_KEYS = [
+        process.env.NEXT_PUBLIC_YOUTUBE_API_KEY_1,
+        process.env.NEXT_PUBLIC_YOUTUBE_API_KEY_2,
+        process.env.NEXT_PUBLIC_YOUTUBE_API_KEY_3,
+      ].filter(Boolean); // Remove undefined keys
 
-        const searchQuery =
-          currentSport.searchQuery || "sports highlights 2025";
-        console.log("🔍 Searching YouTube for:", searchQuery);
-
-        const response = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${encodeURIComponent(
-            searchQuery
-          )}&type=video&order=date&videoDuration=medium&key=${YOUTUBE_API_KEY}`
-        );
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          console.error("❌ YouTube API Error:", errorData);
-          setSpaceVideos([]);
-          setLoadingVideos(false);
-          return;
-        }
-
-        const data = await response.json();
-        console.log("✅ YouTube API Response:", data);
-
-        if (data.items && data.items.length > 0) {
-          const videos = data.items.map((item) => ({
-            id: item.id.videoId,
-            title: item.snippet.title,
-            description: item.snippet.description,
-            date: item.snippet.publishedAt,
-            thumbnail:
-              item.snippet.thumbnails.high?.url ||
-              item.snippet.thumbnails.medium?.url,
-            // YouTube embed URL - will play with sound when clicked
-            embedUrl: `https://www.youtube.com/embed/${item.id.videoId}?autoplay=1&rel=0&controls=1&showinfo=0&modestbranding=1`,
-            watchUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`,
-            channelTitle: item.snippet.channelTitle,
-          }));
-          console.log("✅ Processed", videos.length, "videos");
-          setSpaceVideos(videos);
-        } else {
-          console.log("⚠️ No videos found");
-          setSpaceVideos([]);
-        }
-      } catch (error) {
-        console.error("❌ Error fetching videos:", error);
+      // Check if we have at least one key
+      if (API_KEYS.length === 0) {
+        console.error("⚠️ No YouTube API keys configured");
         setSpaceVideos([]);
-      } finally {
         setLoadingVideos(false);
+        return;
       }
-    };
 
-    fetchSportsVideos();
-    setCurrentVideoIndex(0);
-  }, [sportParam]);
+      // Randomly select an API key
+      const currentKeyIndex = Math.floor(Math.random() * API_KEYS.length);
+      const YOUTUBE_API_KEY = API_KEYS[currentKeyIndex];
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowVideo(true);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [sportParam]);
+      console.log(`🔑 Using API Key #${currentKeyIndex + 1} of ${API_KEYS.length}`);
+
+      const searchQuery = currentSport.searchQuery || "sports highlights 2025";
+      console.log("🔍 Searching YouTube for:", searchQuery);
+
+      const response = await fetch(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${encodeURIComponent(
+          searchQuery
+        )}&type=video&order=date&videoDuration=medium&key=${YOUTUBE_API_KEY}`
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("❌ YouTube API Error:", errorData);
+        
+        // If quota exceeded, log which key failed
+        if (errorData.error?.errors?.[0]?.reason === "quotaExceeded") {
+          console.error(`⚠️ Quota exceeded for API Key #${currentKeyIndex + 1}`);
+        }
+        
+        setSpaceVideos([]);
+        setLoadingVideos(false);
+        return;
+      }
+
+      const data = await response.json();
+      console.log("✅ YouTube API Response:", data);
+
+      if (data.items && data.items.length > 0) {
+        const videos = data.items.map((item) => ({
+          id: item.id.videoId,
+          title: item.snippet.title,
+          description: item.snippet.description,
+          date: item.snippet.publishedAt,
+          thumbnail:
+            item.snippet.thumbnails.high?.url ||
+            item.snippet.thumbnails.medium?.url,
+          embedUrl: `https://www.youtube.com/embed/${item.id.videoId}?autoplay=1&rel=0&controls=1&showinfo=0&modestbranding=1`,
+          watchUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+          channelTitle: item.snippet.channelTitle,
+        }));
+        console.log(`✅ Processed ${videos.length} videos using Key #${currentKeyIndex + 1}`);
+        setSpaceVideos(videos);
+      } else {
+        console.log("⚠️ No videos found");
+        setSpaceVideos([]);
+      }
+    } catch (error) {
+      console.error("❌ Error fetching videos:", error);
+      setSpaceVideos([]);
+    } finally {
+      setLoadingVideos(false);
+    }
+  };
+
+  fetchSportsVideos();
+  setCurrentVideoIndex(0);
+}, [sportParam]);
 
   useEffect(() => {
     const fetchSportsPosts = async () => {
@@ -523,9 +532,7 @@ const SportsPage = () => {
             <span className="text-5xl">{currentSport.icon}</span>
             <div>
               <h2 className="text-3xl font-bold">{currentSport.name}</h2>
-              <p className="text-gray-500 text-sm">
-                {filteredPosts.length} articles available
-              </p>
+             
             </div>
           </div>
         </div>
@@ -715,31 +722,7 @@ const SportsPage = () => {
           </div>
         )}
 
-        {/* Loading State */}
-        {loading ? (
-          <div className="text-center py-20">
-            <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-red-500 border-t-transparent"></div>
-            <p className="mt-6 text-gray-600 dark:text-gray-400 text-lg">
-              Loading {currentSport.name.toLowerCase()} news...
-            </p>
-          </div>
-        ) : filteredPosts.length === 0 ? (
-          <div className="text-center py-20 bg-gray-100 dark:bg-gray-800 rounded-2xl">
-            <div className="text-6xl mb-4">{currentSport.icon}</div>
-            <p className="text-xl text-gray-500 dark:text-gray-400 mb-2">
-              No posts found for {currentSport.name}
-            </p>
-            <p className="text-sm text-gray-400 mb-6">
-              Check back soon for updates!
-            </p>
-            <button
-              onClick={() => router.push("/sports")}
-              className="px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition"
-            >
-              View All Sports
-            </button>
-          </div>
-        ) : (
+       
           <>
               <div className="text-center mt-10">
                 <button
@@ -750,7 +733,6 @@ const SportsPage = () => {
                 </button>
               </div>
           </>
-        )}
       </div>
     </main>
   );

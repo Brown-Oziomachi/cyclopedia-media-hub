@@ -94,7 +94,7 @@ export default function NewsDetails() {
     const interval = setInterval(() => {
       setShowFloatingAd((prev) => !prev);
       setIsAdMinimized(false);
-    }, 30000);
+    }, 100000);
 
     return () => clearInterval(interval);
   }, []);

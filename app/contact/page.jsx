@@ -112,7 +112,7 @@ export default function ContactPage() {
             <div className="bg-gradient-to-br from-purple-600 to-indigo-600 rounded-2xl p-8 text-white shadow-xl">
               <div className="flex items-center gap-4 mb-6">
                 <img
-                  src="/api/placeholder/64/64"
+                  src="/hid.png"
                   alt="The Cyclopedia"
                   className="w-16 h-16 rounded-xl bg-white/10 backdrop-blur"
                 />
