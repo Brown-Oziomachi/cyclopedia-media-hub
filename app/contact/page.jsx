@@ -5,7 +5,7 @@ import Link from "next/link";
 import * as Yup from "yup";
 import { collection, addDoc } from "firebase/firestore";
 import { Field, Form, Formik, ErrorMessage } from "formik";
-import { db2 } from "@/lib/firebaseConfig";
+import { db1 } from "@/lib/firebaseConfig";
 import { LoaderCircle, ThumbsUp } from "lucide-react";
 import ChatDropdown from "@/components/Chat";
 
@@ -35,7 +35,7 @@ export default function ContactPage() {
         timestamp: new Date().toLocaleDateString(),
       };
 
-      await addDoc(collection(db2, "cyclopedia Contacts"), docData);
+      await addDoc(collection(db1, "cyclopedia Contacts"), docData);
       resetForm();
       setModalVisibility(true);
     } catch (error) {
