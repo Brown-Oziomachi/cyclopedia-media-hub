@@ -273,6 +273,10 @@ useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const latestNews = () => {
+    router.push("/all-sports")
+  }
+
   return (
     <main className="w-full relative">
       {/* Hero Section with Video */}
@@ -582,10 +586,10 @@ useEffect(() => {
                 No videos available
               </p>
               <p className="text-gray-400 text-sm">
-                Check your YouTube API key configuration
+                Check your network connection
               </p>
               <p className="text-gray-500 text-xs mt-2">
-                Open browser console (F12) for details
+                find the late news on <a href="/all-sports" className="text-red-600 underline">Sports</a>
               </p>
             </div>
           ) : (
@@ -594,7 +598,7 @@ useEffect(() => {
                 <button
                   key={video.id}
                   onClick={() => handleVideoSelect(index)}
-                  className={`group relative rounded-xl overflow-hidden bg-gray-900 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 text-left ${
+                  className={`group relative rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 text-left ${
                     currentVideoIndex === index ? "ring-4 ring-yellow-400" : ""
                   }`}
                 >

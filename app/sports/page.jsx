@@ -538,7 +538,7 @@ useEffect(() => {
         </div>
 
         {/* Latest Videos Section */}
-        <div className="mb-16 bg-gradient-to-br from-indigo-900/20 to-purple-900/20 rounded-2xl p-8 border border-indigo-500/30">
+        <div className="mb-16  rounded-2xl p-8 shadow-2xl">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               <Rocket className="text-indigo-400" size={32} />
@@ -567,10 +567,10 @@ useEffect(() => {
                 No videos available
               </p>
               <p className="text-gray-400 text-sm">
-                Check your YouTube API key configuration
+                Check your network connection
               </p>
-              <p className="text-gray-500 text-xs mt-2">
-                Open browser console (F12) for details
+               <p className="text-gray-500 text-xs mt-2">
+                find the late news on <a href="/all-sports" className="text-red-600 underline">Sports</a>
               </p>
             </div>
           ) : (
@@ -579,7 +579,7 @@ useEffect(() => {
                 <button
                   key={video.id}
                   onClick={() => handleVideoSelect(index)}
-                  className={`group relative rounded-xl overflow-hidden bg-gray-900 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 text-left ${
+                  className={`group relative rounded-xl overflow-hidden  hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 text-left ${
                     currentVideoIndex === index ? "ring-4 ring-yellow-400" : ""
                   }`}
                 >

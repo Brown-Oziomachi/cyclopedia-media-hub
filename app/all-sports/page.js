@@ -71,7 +71,7 @@ const NigeriaPage = () => {
   };
 
   return (
-    <main className="w-full b">
+    <main className="w-full b lg:mt-30 mt-15">
       <section
         className="relative w-full h-[500px] flex items-center justify-center text-center bg-cover bg-center overflow-hidden"
         style={{
@@ -79,7 +79,7 @@ const NigeriaPage = () => {
         }}
       >
         {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="absolute inset-0 bg-black/50 "></div>
 
         {/* Colored Light Effects */}
         <div className="absolute w-[400px] h-[400px] bg-green-600/30 blur-3xl rounded-full top-10 left-20"></div>
