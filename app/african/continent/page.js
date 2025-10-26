@@ -91,7 +91,7 @@ const PoliticsPage = () => {
         <div className="absolute w-[300px] h-[300px] bg-yellow-800/40 blur-3xl rounded-full bottom-10 right-20"></div>
 
         {/* Text Content */}
-        <div className="relative z-10 px-4">
+        <div className="relative z-10 px-4 lg:mt-35">
           <p className="inline-block text-amber-600 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
             Africa
           </p>

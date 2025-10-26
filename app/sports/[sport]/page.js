@@ -280,7 +280,7 @@ useEffect(() => {
   return (
     <main className="w-full relative">
       {/* Hero Section with Video */}
-      <section className="relative w-full h-[500px] lg:mt-30 mt-10 flex items-center justify-center text-center overflow-hidden">
+      <section className="relative w-full h-[500px] lg:mt-50 mt-20 flex items-center justify-center text-center overflow-hidden">
         <div
           className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
             showVideo && spaceVideos.length > 0 ? "opacity-0" : "opacity-100"
@@ -520,16 +520,16 @@ useEffect(() => {
             </p>
           </div>
         </div>
-            <div className="mb-10">
-                   <a
-  href="https://reffpa.com/L?tag=d_4882646m_97c_3780558&site=4882646&ad=97"
-  target="_blank"
-  rel="noopener noreferrer sponsored"
-  className="block w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 rounded-lg text-center transition-all transform hover:scale-105 relative"
->
-  <span className="inline-block animate-spin mr-2">⚽</span>
-  1Xbet →
-</a>
+        <div className="mb-5 w-1/2 mx-auto">
+          <a
+            href="https://reffpa.com/L?tag=d_4882646m_97c_3780558&site=4882646&ad=97"
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="block w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 rounded-lg text-center transition-all transform hover:scale-105 relative"
+          >
+            <span className="inline-block animate-spin mr-2">⚽</span>
+            1Xbet →
+          </a>
             </div>
       </div>
 

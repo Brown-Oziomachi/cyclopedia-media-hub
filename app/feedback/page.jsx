@@ -127,7 +127,7 @@ if (loading) {
     <div className="min-h-screen py-12 px-4 md:px-8">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center mb-4 p-3 mt-5 lg:mt-30 bg-purple-500/10 rounded-full border border-purple-500/20">
+          <div className="inline-flex items-center justify-center mb-4 p-3 mt-10 lg:mt-40 bg-purple-500/10 rounded-full border border-purple-500/20">
             <MessageSquare className="text-purple-400" size={24} />
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-4 text-center">

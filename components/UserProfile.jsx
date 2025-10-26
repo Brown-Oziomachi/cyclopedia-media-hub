@@ -31,16 +31,16 @@ export default function UserProfileButton({ setShowNavOpen }) {
         <img
           src={displayImage}
           alt={user?.name}
-          className="w-10 h-10 rounded-full object-cover border-2 border-purple-500 lg:ml-auto"
+          className="w-10 h-10 rounded-full object-cover border-2 border-purple-500 lg:ml-auto "
         />
       ) : (
         <div className="w-10 h-10 mt-5 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold">
           {userInitial}
         </div>
       )}
-      {/* <span className="text-sm mt-10 font-semibold text-gray-200">
+      <span className="text-sm mt-10 font-semibold text-gray-200">
         {user?.name || "User"}
-      </span> */}
+      </span>
     </button>
   );
 }

@@ -65,7 +65,7 @@ const PoliticsPage = () => {
   <div className="absolute w-[400px] h-[400px] bg-rose-900/40 blur-3xl rounded-full top-10 left-20"></div>
   <div className="absolute w-[300px] h-[300px] bg-purple-800/40 blur-3xl rounded-full bottom-10 right-20"></div>
 
-  <div className="relative z-10 px-4">
+  <div className="relative z-10 px-4 lg:mt-35">
     <p className="inline-block text-rose-600 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
       Art & Culture
     </p>

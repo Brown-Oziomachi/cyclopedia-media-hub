@@ -45,18 +45,18 @@ export default function HealthPostsPage() {
   if (loading) return <p className="p-6">Loading...</p>;
 
   return (
-    <section className="max-w-6xl mx-auto py-12 ">
+    <section className="max-w-full mx-auto py-12 ">
       <section
-        className="relative w-full h-[500px] flex items-center justify-center text-center bg-cover bg-center overflow-hidden"
+        className="relative w-full h-[500px] flex items-center justify-center text-center bg-cover bg-center overflow-hidden lg:mt-30"
         style={{
-          backgroundImage: "url(/health.jpeg)",
+          backgroundImage: "url(/stethoscope.png)",
         }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
         <div className="absolute w-[400px] h-[400px] bg-emerald-500/30 blur-3xl rounded-full top-10 left-20"></div>
         <div className="absolute w-[300px] h-[300px] bg-teal-600/30 blur-3xl rounded-full bottom-10 right-20"></div>
 
-        <div className="relative z-10 px-4">
+        <div className="relative z-10 px-4 lg:mt-35">
           <p className="inline-block text-emerald-600 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
             Health
           </p>
@@ -71,7 +71,7 @@ export default function HealthPostsPage() {
         </div>
       </section>
 
-      <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 lg:mt-1 p-10">
         {posts.map((post, index) => (
           <Link
             key={post.id}

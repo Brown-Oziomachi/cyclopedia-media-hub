@@ -207,8 +207,8 @@ export default function Signup() {
     const isAgeRestrictedContent = redirectTo === "sex-education";
 
     return (
-        <div className="min-h-screen flex items-center justify-center px-4 py-8">
-            <div className="w-full max-w-md border rounded-lg p-8 mt-10 lg:mt-30">
+        <div className="min-h-screen flex items-center justify-center px-4 py-10 mt-10">
+            <div className="w-full max-w-md border rounded-lg p-8 mt-10 lg:mt-35">
                 <h2 className="text-3xl font-bold mb-6 text-center">Sign Up</h2>
 
                 {isAgeRestrictedContent && (

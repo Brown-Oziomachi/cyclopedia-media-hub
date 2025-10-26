@@ -2,42 +2,43 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import { signOut, useSession } from "next-auth/react";
-import { LogIn, ChevronRight, Menu, Search, X, ChevronDown, Twitter, Instagram, Youtube } from "lucide-react";
-import { Drawer, Box } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
-import SearchInput from "@/components/SearchInput"; // Assuming you have this component
+import {
+  Menu,
+  Search,
+  X,
+  ChevronDown,
+  Twitter,
+  Instagram,
+  Youtube,
+  User,
+  LogOut,
+} from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
-import StatusModal from "@/components/StatusModal";
 import LiveClock from "@/components/LiveClock";
 import ViewMoreSearchPopup from "./ViewIcon";
-import UserProfileDropdown from "./UserProfile";
 import UserProfileButton from "./UserProfile";
-
+import { useAuth } from "@/components/AuthProvider";
+import { auth } from "@/lib/firebaseConfig";
+import { signOut } from "firebase/auth";
 
 const ProfileDropdownNavbar = () => {
   const [showNav, setShowNav] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const { data: session } = useSession();
+  const { user } = useAuth();
   const [showRegionsDropdown, setShowRegionsDropdown] = useState(false);
   const [query, setQuery] = useState("");
   const router = useRouter();
   const searchParams = useSearchParams();
-const [showHeader, setShowHeader] = useState(true);
+  const [showHeader, setShowHeader] = useState(true);
   const [lastScroll, setLastScroll] = useState(0);
-const [showMobileToggle, setShowMobileToggle] = useState(true);
-const [lastScrollMobile, setLastScrollMobile] = useState(0);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
- const [openDropdown, setOpenDropdown] = useState(null);
-  const isDropdownOpen = showNav || openDropdown !== null;
-  const statusRef = useRef(null)
-  const showRegionsDropdownRef = useRef(null)
-
- const statusItems = [
-    { type: "image", url: "/demo-status1.jpg" },
-    { type: "video", url: "/demo-status2.mp4" },
-    { type: "audio", url: "/demo-status3.mp3" },
-  ];
+  const [showMobileToggle, setShowMobileToggle] = useState(true);
+  const [lastScrollMobile, setLastScrollMobile] = useState(0);
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const isDropdownOpen = showNav || openDropdown !== null || showUserMenu;
+  const statusRef = useRef(null);
+  const showRegionsDropdownRef = useRef(null);
+  const userMenuRef = useRef(null);
 
   const toggleDropdown = (regionName) => {
     setOpenDropdown(openDropdown === regionName ? null : regionName);
@@ -45,50 +46,43 @@ const [lastScrollMobile, setLastScrollMobile] = useState(0);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setShowUserMenu(false);
+      }
       if (
         showRegionsDropdownRef.current &&
-        showRegionsDropdownRef.current.contains(event.target)
+        !showRegionsDropdownRef.current.contains(event.target)
       ) {
         setShowRegionsDropdown(false);
       }
-    }
-    if (showRegionsDropdown) {
-      document.addEventListener("mousedown", handleClickOutside)
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [showRegionsDropdown])
-
-useEffect(() => {
-  const handleScroll = () => {
-    const currentScroll = window.scrollY;
-
-    if (!isDropdownOpen) { // Only hide/show if dropdown is not open
-      if (currentScroll < lastScroll) {
-        setShowHeader(true); // scrolling up → show header
-      } else {
-        setShowHeader(false); // scrolling down → hide header
-      }
-    }
-
-    setLastScroll(currentScroll);
-  };
-
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, [lastScroll, isDropdownOpen]);
-
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
-      setShowHeader(currentScroll < lastScroll);
+      if (!isDropdownOpen) {
+        setShowHeader(currentScroll < lastScroll || currentScroll < 50);
+      }
       setLastScroll(currentScroll);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScroll]);
+  }, [lastScroll, isDropdownOpen]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScroll = window.scrollY;
+      setShowMobileToggle(
+        currentScroll < lastScrollMobile || currentScroll < 50
+      );
+      setLastScrollMobile(currentScroll);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollMobile]);
 
   useEffect(() => {
     const scrollTo = searchParams.get("scrollTo");
@@ -98,74 +92,26 @@ useEffect(() => {
     }
   }, [searchParams]);
 
-    const handleSearch = (e) => {
-      e.preventDefault();
-      if (!query.trim()) return;
-
-      setShowNav(false); // Close nav here
-      setQuery("");
-      // Navigate to search page with query param
-      router.push(
-        `/search?q=${encodeURIComponent(query.trim().toLowerCase())}`
-      );
-    };
-  
-  useEffect(() => {
-    const scrollTo = searchParams.get("scrollTo");
-    if (scrollTo) {
-      const el = document.getElementById(scrollTo);
-      if (el) {
-        setTimeout(() => {
-          el.scrollIntoView({ behavior: "smooth" });
-        }, 200);
-      }
-    }
-  }, [searchParams]);
-
-
-   useEffect(() => {
-     const handleScroll = () => {
-       const currentScroll = window.scrollY;
-       if (currentScroll < lastScroll) {
-         // Scrolling up
-         setShowHeader(true);
-       } else {
-         // Scrolling down
-         setShowHeader(false);
-       }
-       setLastScroll(currentScroll);
-     };
-
-     window.addEventListener("scroll", handleScroll);
-     return () => window.removeEventListener("scroll", handleScroll);
-   }, [lastScroll]);
-
-  useEffect(() => {
-  const handleScroll = () => {
-    const currentScroll = window.scrollY;
-    if (currentScroll > lastScrollMobile) {
-      // Scrolling down → hide toggle
-      setShowMobileToggle(false);
-    } else {
-      // Scrolling up → show toggle
-      setShowMobileToggle(true);
-    }
-    setLastScrollMobile(currentScroll);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (!query.trim()) return;
+    setShowNav(false);
+    const searchQuery = query;
+    setQuery("");
+    router.push(
+      `/search?q=${encodeURIComponent(searchQuery.trim().toLowerCase())}`
+    );
   };
 
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, [lastScrollMobile]);
-  // const handleSearch = (e) => {
-  //   e.preventDefault();
-  //   if (query.trim()) {
-  //     router.push(`/search?q=${query}`);
-  //     setShowNav(false);
-  //   }
-  // };
-
-  const toggleDrawer = (open) => () => {
-    setDrawerOpen(open);
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      setShowUserMenu(false);
+      setShowNav(false);
+      router.push("/");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
   };
 
   const navItems = [
@@ -174,362 +120,437 @@ useEffect(() => {
   ];
 
   const countriesByRegion = {
-  Africa: ["Nigeria", "Kenya", "South Africa", "Egypt", "Ghana", "Mali", "Niger", "Somalia"],
-  Asia: ["Israel", "Iraq", "India", "Iran"],
-  America: ["USA", "Canada", "Brazil", "Mexico"],
-  Europe: ["UK", "Germany", "France", "Italy"],
-};
+    Africa: [
+      "Nigeria",
+      "Kenya",
+      "South Africa",
+      "Egypt",
+      "Ghana",
+      "Mali",
+      "Niger",
+      "Somalia",
+    ],
+    Asia: ["Israel", "Iraq", "India", "Iran"],
+    America: ["USA", "Canada", "Brazil", "Mexico"],
+    Europe: ["UK", "Germany", "France", "Italy"],
+  };
 
-const regions = [
-  { name: "Africa", url: "/africa" },
-  { name: "Asia",  url: "/asia" },
-  { name: "America", url: "/america" },
-  { name: "Europe",  url: "/europe" },
-];
+  const regions = [
+    { name: "Africa", url: "/africa" },
+    { name: "Asia", url: "/asia" },
+    { name: "America", url: "/america" },
+    { name: "Europe", url: "/europe" },
+  ];
 
-   
+  const categories = [
+    { name: "Politics", url: "/politics" },
+    { name: "Sports News", url: "/sports" },
+    { name: "Sex Education", url: "/sex-education" },
+    { name: "Religion", url: "/religion" },
+    { name: "History", url: "/history" },
+    { name: "Science", url: "/science" },
+    { name: "Media", url: "/media" },
+    { name: "Education", url: "/education" },
+    { name: "Health", url: "/health" },
+    { name: "Art + Culture", url: "/art" },
+    // { name: "Technology", url: "/technology" },
+    { name: "Nigeria", url: "/nigeria" },
+    { name: "Live Now", url: "/live" },
+    { name: "Africa", url: "/african/continent" },
+  ];
+
+  const userEmail = user?.email || "";
+  const userName = user?.name || userEmail.split("@")[0];
+  const userInitial = userName.charAt(0).toUpperCase();
+  const displayImage = user?.profileImage;
+
   return (
-    <main className="fixed top-10 left-0 w-full bg-black text-white z-50 ">
+    <main className="fixed top-0 left-0 w-full z-50">
       <header
-        className={`fixed top-0 left-0 w-full bg-black transition-transform duration-300 ${
-          showHeader ? "translate-y-0" : "-translate-y-20"
-        } shadow-lg z-50`}
+        className={`w-full bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white transition-transform duration-300 ${
+          showHeader ? "translate-y-0" : "-translate-y-full"
+        } shadow-2xl border-b border-gray-800`}
         onClick={(e) => e.stopPropagation()}
       >
-
-        <div className="flex items-center justify-between px-4 py-2">
-
-      <div className="flex">
-         <div ref={statusRef} className="flex items-center gap-4">
-  <Link href="/">
-    <Image
-      src="/hid.png"
-      alt="Cyclopedia Logo"
-      width={30}
-      height={30}
-      className="rounded-full brightness-125"
-    />
-  </Link>
-
-  <h1 className="font-bold text-xl lg:text-3xl cursor-pointer transition rounded-sm">
-    <Link href="/" onClick={() => setShowNav(false)}>
-      THE CYCL
-    </Link>
-    <Link href="/about" className="inline-block hover:scale-110 transition-transform">
-      <span className="bg-white rounded-full px-1">👁️</span>
-    </Link>
-    <Link href="/" onClick={() => setShowNav(false)}>
-      PEDIA
-    </Link>
-  </h1>
-
-  <ThemeToggle />
-  <ViewMoreSearchPopup />
-</div>
-
-<LiveClock />
-
-<div className="ml-10 hover:bg-red-600 border border-black dark:border-white hover:text-white px-20 py-2 max-lg:hidden rounded transition-colors">
-  <Link href="/newsletter" className="block hover:text-white">
-    Newsletter
-  </Link>
-</div>
-      </div>
-
-
-          <div className="relative hidden lg:block px-4 py-1 text-black">
-            <button
-              onClick={() => setShowRegionsDropdown((v) => !v)}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-md shadow hover:bg-gray-100 font-medium text-sm"
-              aria-haspopup="true"
-              aria-expanded={showRegionsDropdown}
-            >
-              Regions <ChevronDown className="h-4 w-4" />
-            </button>
-
-            {showRegionsDropdown && (
-              <div
-                className="absolute bg-white shadow-lg rounded-md mt-2 w-56 max-h-60 overflow-y-auto ring-1 ring-black ring-opacity-5 z-50"
-                role="menu"
-                aria-orientation="vertical"
+        {/* Top Bar */}
+        <div className="border-b border-gray-800 bg-black/50 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+            <LiveClock />
+            <div className="hidden md:flex items-center gap-4">
+              <Link
+                href="/newsletter"
+                className="text-xs uppercase tracking-wider hover:text-cyan-400 transition-colors font-semibold"
               >
-                {regions.map((region) => (
-                  <Link
-                    key={region.name}
-                    href={region.url}
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    onClick={() => setShowRegionsDropdown(false)}
-                  >
-                    {region.emoji} {region.name}
-                  </Link>
-                ))}
-              </div> 
-            )}
+                Newsletter
+              </Link>
+              <span className="text-gray-600">|</span>
+              <a
+                href="https://thecyclopedia.substack.com/subscribe"
+                className="text-xs uppercase tracking-wider hover:text-cyan-400 transition-colors font-semibold"
+              >
+                Subscribe
+              </a>
+            </div>
           </div>
         </div>
-        {/* Desktop Navigation & Categories */}
-        <section className="hidden lg:flex items-center justify-between bg-black text-gray-300 px-2 py-1">
-          <nav className="flex space-x-4 max-w-full overflow-x-auto no-scrollbar mt-5">
-            {navItems.map((item) => (
-              <Link
-                key={item.text}
-                href={item.url}
-                className="px-4 py-2 hover:bg-purple-700 whitespace-nowrap text-sm font-semibold transition"
-              >
-                {item.text}
-              </Link>
-            ))}
-          </nav>
-<UserProfileButton setShowNavOpen={setShowNav} className=""/>
 
-          <div className="flex flex-wrap gap-2 mt-5">
-            <Link
-              href="/politics"
-              className="px-3 py-2 hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
-            >
-              Politics
-            </Link>
-            <Link
-              href="/sex-education"
-              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
-            >
-              Sex education
-            </Link>
-            <Link
-              href="/religion"
-              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
-            >
-              Religion
-            </Link>
-            <Link
-              href="/history"
-              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
-            >
-              History
-            </Link>
-            <Link
-              href="/science"
-              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
-            >
-              Science
-            </Link>
-            <Link
-              href="/media"
-              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
-            >
-              Media
-            </Link>
-            <Link
-              href="/education"
-              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
-            >
-              Education
-            </Link>
-            <Link
-              href="/health"
-              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
-            >
-              Health
-            </Link>
-            <Link
-              href="/art"
-              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
-            >
-              Art + Culture
-            </Link>
-            <Link
-              href="/technology"
-              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
-            >
-              Technology
-            </Link>
-            <Link
-              href="/sports"
-              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
-            >
-              Sports News
-            </Link>
-            <Link
-              href="/live"
-              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
-            >
-              Live Now
-            </Link>
-            <Link
-              href="/african/continent"
-              className="px-3 py-2  hover:bg-red-600 rounded cursor-pointer text-sm font-medium"
-            >
-              Africa
-            </Link>
+        {/* Main Header */}
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between gap-4">
+            {/* Logo Section */}
+            <div ref={statusRef} className="flex items-center gap-3">
+              <h1 className="font-black text-2xl lg:text-4xl cursor-pointer transition-all hover:tracking-wider duration-300">
+                <Link
+                  href="/"
+                  onClick={() => setShowNav(false)}
+                  className="hover:text-cyan-400 transition-colors"
+                >
+                  THE CYCL
+                </Link>
+                <Link
+                  href="/about"
+                  className="inline-block hover:scale-125 transition-transform mx-1"
+                >
+                  <span className="bg-gradient-to-br from-cyan-400 to-purple-500 rounded-full px-2 py-1 text-sm">
+                    👁️
+                  </span>
+                </Link>
+                <Link
+                  href="/"
+                  onClick={() => setShowNav(false)}
+                  className="hover:text-purple-400 transition-colors"
+                >
+                  PEDIA
+                </Link>
+              </h1>
+            </div>
+
+            {/* Desktop Right Section */}
+            <div className="hidden lg:flex items-center gap-4">
+              <div className="flex items-center gap-3">
+                <ThemeToggle />
+                <ViewMoreSearchPopup />
+              </div>
+
+              {/* Regions Dropdown */}
+              <div className="relative" ref={showRegionsDropdownRef}>
+                <button
+                  onClick={() => setShowRegionsDropdown((v) => !v)}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 rounded-lg shadow-lg font-semibold text-sm transition-all duration-300 hover:shadow-cyan-500/50"
+                >
+                  Regions{" "}
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform ${
+                      showRegionsDropdown ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {showRegionsDropdown && (
+                  <div className="absolute right-0 bg-gray-900 shadow-2xl rounded-lg mt-2 w-56 border border-gray-700 z-50 overflow-hidden">
+                    {regions.map((region) => (
+                      <Link
+                        key={region.name}
+                        href={region.url}
+                        className="block px-4 py-3 text-gray-200 hover:bg-gradient-to-r hover:from-purple-600 hover:to-cyan-600 transition-all duration-200 font-medium"
+                        onClick={() => setShowRegionsDropdown(false)}
+                      >
+                        {region.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* User Profile Section - Desktop */}
+              {user ? (
+                <div className="relative" ref={userMenuRef}>
+                  <button
+                    onClick={() => setShowUserMenu(!showUserMenu)}
+                    className="flex items-center gap-3 px-4 py-2 bg-red-600 hover:to-purple-700 rounded-full transition-all duration-300 shadow-lg hover:shadow-purple-500/50"
+                  >
+                    {displayImage ? (
+                      <img
+                        src={displayImage}
+                        alt={userName}
+                        className="w-9 h-9 rounded-full border-2 border-white object-cover"
+                      />
+                    ) : (
+                      <div className="w-9 h-9 rounded-full bg-red-600 flex items-center justify-center text-white font-bold border-2 border-white">
+                        {userInitial}
+                      </div>
+                    )}
+                    <span className="font-semibold text-sm max-w-[100px] truncate">
+                      {userName}
+                    </span>
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform ${
+                        showUserMenu ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {showUserMenu && (
+                    <div className="absolute right-0 mt-2 w-64 bg-gray-900 rounded-lg shadow-2xl border border-gray-700 overflow-hidden z-50">
+                      <div className="px-4 py-3 bg-gradient-to-r from-purple-600/20 to-cyan-600/20 border-b border-gray-700">
+                        <p className="font-semibold text-white">{userName}</p>
+                        <p className="text-xs text-gray-400 truncate">
+                          {userEmail}
+                        </p>
+                      </div>
+                      <Link
+                        href="/profiles"
+                        className="block px-4 py-3 hover:bg-gray-800 transition-colors text-gray-200"
+                        onClick={() => setShowUserMenu(false)}
+                      >
+                        My Profile
+                      </Link>
+                      <Link
+                        href="/settings"
+                        className="block px-4 py-3 hover:bg-gray-800 transition-colors text-gray-200"
+                        onClick={() => setShowUserMenu(false)}
+                      >
+                        Settings
+                      </Link>
+                      <button
+                        onClick={handleSignOut}
+                        className="w-full text-left px-4 py-3 hover:bg-red-600/20 transition-colors text-red-400 border-t border-gray-700 font-semibold flex items-center gap-2"
+                      >
+                        <LogOut size={16} />
+                        Sign Out
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  href="/login"
+                  className="flex items-center gap-2 px-6 py-2.5 bg-red-600 text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-purple-500/50"
+                >
+                  <User size={18} />
+                  Sign In
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Categories Bar */}
+        <section className="hidden lg:block bg-black/70 backdrop-blur-md border-t border-gray-800">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex items-center justify-between py-3">
+              <nav className="flex gap-2 overflow-x-auto no-scrollbar">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.text}
+                    href={item.url}
+                    className="px-4 py-2 hover:bg-purple-600 rounded-lg whitespace-nowrap text-sm font-semibold transition-all duration-200"
+                  >
+                    {item.text}
+                  </Link>
+                ))}
+              </nav>
+
+              <div className="flex flex-wrap gap-2">
+                {categories.slice(0, 8).map((cat) => (
+                  <Link
+                    key={cat.name}
+                    href={cat.url}
+                    className="px-3 py-1.5 text-xs font-medium hover:bg-gradient-to-r hover:from-red-600 hover:to-pink-600 rounded-md transition-all duration-200 whitespace-nowrap"
+                  >
+                    {cat.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
       </header>
 
-      {/* Mobile menu & profile */}
+      {/* Mobile Header Controls */}
       <div
-        className={`lg:hidden fixed top-4 right-4 flex items-center gap-4 z-50 transition-transform duration-300 ${
+        className={`lg:hidden fixed top-4 right-4 left-4 flex items-center justify-between z-50 transition-transform duration-300 bg-black/90 backdrop-blur-sm rounded-lg px-3 py-2 border border-gray-700 ${
           showMobileToggle ? "translate-y-0" : "-translate-y-20"
         }`}
       >
-        {" "}
-        {session && (
+        {/* Left side - Logo for mobile */}
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/hid.png"
+            alt="Cyclopedia Logo"
+            width={30}
+            height={30}
+            className="rounded-full brightness-125"
+          />
+          <h1 className="font-bold text-base sm:text-lg text-white whitespace-nowrap">
+            THE CYCL<span className="text-cyan-400">👁️</span>PEDIA
+          </h1>
+        </Link>
+
+        {/* Right side - Controls */}
+        <div className="flex items-center justify-between ">
+          <ThemeToggle />
+          <ViewMoreSearchPopup />
+
+          {user && (
+            <div className="relative">
+              <button
+                onClick={() => setShowUserMenu(!showUserMenu)}
+                className="relative w-8 h-8"
+              >
+                {displayImage ? (
+                  <img
+                    src={displayImage}
+                    alt={userName}
+                    className="w-8 h-8 rounded-full border-2 border-cyan-400 object-cover"
+                  />
+                ) : (
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-sm border-2 border-cyan-400">
+                    {userInitial}
+                  </div>
+                )}
+              </button>
+
+              {showUserMenu && (
+                <div className="absolute right-0 mt-2 w-56 bg-gray-900 rounded-lg shadow-2xl border border-gray-700 overflow-hidden">
+                  <div className="px-4 py-3 bg-gradient-to-r from-purple-600/20 to-cyan-600/20 border-b border-gray-700">
+                    <p className="font-semibold text-white text-sm">
+                      {userName}
+                    </p>
+                    <p className="text-xs text-gray-400 truncate">
+                      {userEmail}
+                    </p>
+                  </div>
+                  <Link
+                    href="/profiles"
+                    className="block px-4 py-3 hover:bg-gray-800 transition-colors text-gray-200 text-sm"
+                    onClick={() => setShowUserMenu(false)}
+                  >
+                    My Profile
+                  </Link>
+                  <Link
+                    href="/settings"
+                    className="block px-4 py-3 hover:bg-gray-800 transition-colors text-gray-200 text-sm"
+                    onClick={() => setShowUserMenu(false)}
+                  >
+                    Settings
+                  </Link>
+                  <button
+                    onClick={handleSignOut}
+                    className="w-full text-left px-4 py-3 hover:bg-red-600/20 transition-colors text-red-400 border-t border-gray-700 font-semibold text-sm flex items-center gap-2"
+                  >
+                    <LogOut size={16} />
+                    Sign Out
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
           <button
-            onClick={toggleDrawer(true)}
-            className="rounded-full focus:ring-2 focus:ring-cyan-400"
+            onClick={() => setShowNav(!showNav)}
+            className="text-white bg-gradient-to-r from-purple-600 to-cyan-600 p-1.5 rounded-lg"
+            aria-label="Toggle navigation"
           >
-            <img
-              src={session.user.image || "/default-avatar.png"}
-              alt={session.user.name}
-              width={36}
-              height={36}
-              className="rounded-full border border-gray-500 object-cover"
-            />
+            {showNav ? <X size={24} /> : <Menu size={24} />}
           </button>
-        )}
-        <button
-          onClick={() => setShowNav(!showNav)}
-          className="t text-3xl"
-          aria-label="Toggle navigation"
-        >
-          {showNav ? <X /> : <Menu />}
-        </button>
+        </div>
       </div>
 
-      {/* Mobile Navigation Drawer */}
+      {/* Mobile Navigation */}
       {showNav && (
-        <nav
-          className="fixed inset-0  bg-black bg-opacity-95 flex flex-col text-black p-5 z-[50] mt-11 overflow-y-auto"
-          aria-label="Mobile navigation"
-        >
-          {/* Small screen search */}
-          <form
-            onSubmit={handleSearch}
-            className="relative flex items-center w-full max-w-lg mx-auto top-0 z-40"
-            role="search"
-            aria-label="Site Search"
-          >
+        <nav className="fixed inset-0 bg-gradient-to-b from-gray-900 via-black to-gray-900 flex flex-col text-white p-6 z-[50] pt-20 overflow-y-auto">
+          {/* Close button and Sign In/Out at top */}
+          <div className="absolute top-6 right-6 flex items-center gap-3">
+            {user ? (
+              <button
+                onClick={handleSignOut}
+                className="text-white bg-gradient-to-r from-red-600 to-pink-600 px-4 py-2 rounded-lg shadow-lg hover:from-red-700 hover:to-pink-700 transition-all flex items-center gap-2 font-semibold text-sm"
+              >
+                <LogOut size={18} />
+                Sign Out
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                onClick={() => setShowNav(false)}
+                className="text-white bg-gradient-to-r from-purple-600 to-cyan-600 px-4 py-2 rounded-lg shadow-lg hover:from-purple-700 hover:to-cyan-700 transition-all flex items-center gap-2 font-semibold text-sm"
+              >
+                <User size={18} />
+                Sign In
+              </Link>
+            )}
+            <button
+              onClick={() => setShowNav(false)}
+              className="text-white bg-gradient-to-r from-red-600 to-pink-600 p-2 rounded-lg shadow-lg hover:from-red-700 hover:to-pink-700 transition-all"
+              aria-label="Close navigation"
+            >
+              <X size={24} />
+            </button>
+          </div>
+
+          <div className="relative flex items-center w-full mb-6 mt-8">
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              onKeyPress={(e) => e.key === "Enter" && handleSearch(e)}
               placeholder="Search the latest..."
-              className="px-3 py-3 pr-20 rounded-md shadow-2xl bg-white text-black focus:outline-none w-full"
-              aria-label="Search input"
+              className="px-4 py-3 pr-12 rounded-lg shadow-2xl bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 w-full border border-gray-700"
             />
-
             <button
-              type="submit"
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black px-3 py-2 rounded-md text-white font-semibold transition"
+              onClick={handleSearch}
+              className="absolute right-2 bg-gradient-to-r from-purple-600 to-cyan-600 px-3 py-2 rounded-md text-white font-semibold transition-all hover:shadow-lg"
             >
               <Search />
             </button>
-          </form>
-          <UserProfileButton setShowNavOpen={setShowNav} />{" "}
-          <ul className="space-y-3 font-bold mt-5 text-gray-400">
-            <li>
-              <Link href="/global" onClick={() => setShowNav(false)}>
-                Latest news
-              </Link>
-            </li>
-            <li>
-              <Link href="/politics" onClick={() => setShowNav(false)}>
-                Politics
-              </Link>
-            </li>
-            <li>
-              <Link href="/sex-education" onClick={() => setShowNav(false)}>
-                Sex Education
-              </Link>
-            </li>
-            <li>
-              <Link href="/religion" onClick={() => setShowNav(false)}>
-                Religion
-              </Link>
-            </li>
-            <li>
-              <Link href="/history" onClick={() => setShowNav(false)}>
-                History
-              </Link>
-            </li>
-            <li>
-              <Link href="/science" onClick={() => setShowNav(false)}>
-                Science
-              </Link>
-            </li>
-            <li>
-              <Link href="/media" onClick={() => setShowNav(false)}>
-                Media
-              </Link>
-            </li>
-            <li>
-              <Link href="/sports" onClick={() => setShowNav(false)}>
-                Sports news
-              </Link>
-            </li>
-            <li>
-              <Link href="/live" onClick={() => setShowNav(false)}>
-                Live Now
-              </Link>
-            </li>
-            <li>
-              <Link href="/nigeria" onClick={() => setShowNav(false)}>
-                Nigeria
-              </Link>
-            </li>
-            <li>
-              <Link href="/african/continent" onClick={() => setShowNav(false)}>
-                Africa
-              </Link>
-            </li>
+          </div>
+
+          <ul className="space-y-4 font-semibold">
+            <UserProfileButton setShowNavOpen={setShowNav} />
+            {categories.map((cat) => (
+              <li key={cat.name}>
+                <Link
+                  href={cat.url}
+                  onClick={() => setShowNav(false)}
+                  className="block hover:text-cyan-400 transition-colors"
+                >
+                  {cat.name}
+                </Link>
+              </li>
+            ))}
           </ul>
-          <hr className="my-4 border-gray-600" />
-          <Link
-            href="/newsletter"
-            onClick={() => setShowNav(false)}
-            className="text-gray-400 text-sm mb-4"
-          >
-            Newsletter
-          </Link>
-          <Link
-            href="https://thecyclopedia.substack.com/subscribe"
-            onClick={() => setShowNav(false)}
-            className="text-gray-400 text-sm mb-4"
-          >
-            Substack | Subscription
-          </Link>
-          <hr className="my-2 border-gray-600" />
-          <ul className="grid items-center text-white gap-6">
+
+          <hr className="my-6 border-gray-700" />
+
+          <ul className="space-y-4">
             {regions.map((region) => (
-              <li key={region.name} className="relative">
+              <li key={region.name}>
                 <button
                   onClick={(e) => {
-                    e.stopPropagation(); // Prevent nav from closing
+                    e.stopPropagation();
                     toggleDropdown(region.name);
                   }}
-                  className="flex items-center gap-1 hover:text-gray-300 font-semibold"
+                  className="flex items-center gap-2 hover:text-cyan-400 font-semibold transition-colors"
                 >
-                  {region.emoji} {region.name}{" "}
+                  {region.name}
                   <ChevronDown
                     className={`w-4 h-4 transition-transform ${
                       openDropdown === region.name ? "rotate-180" : ""
                     }`}
                   />
                 </button>
-
-                {/* Animated Dropdown */}
                 <div
                   className={`overflow-hidden transition-all duration-300 ${
                     openDropdown === region.name ? "max-h-96 mt-2" : "max-h-0"
-                  } text-white rounded shadow-lg`}
-                  onClick={(e) => e.stopPropagation()}
+                  }`}
                 >
-                  <ul>
+                  <ul className="pl-4 space-y-2">
                     {countriesByRegion[region.name].map((country) => (
                       <li key={country}>
                         <button
                           onClick={() => {
                             const searchQuery = `${region.name} ${country}`;
-                            setQuery(searchQuery);
                             router.push(
                               `/search?q=${encodeURIComponent(
                                 searchQuery.toLowerCase()
@@ -538,7 +559,7 @@ const regions = [
                             setShowNav(false);
                             setOpenDropdown(null);
                           }}
-                          className="w-full text-left px-4 py-2 hover:bg-gray-200 text-white"
+                          className="text-gray-400 hover:text-white transition-colors"
                         >
                           {country}
                         </button>
@@ -549,83 +570,96 @@ const regions = [
               </li>
             ))}
           </ul>
-          <hr className="my-4 border-gray-600" />
-          <nav className="flex flex-col gap-6 mt-8 text-gray-300">
-            {navItems.map((item, index) => (
+
+          <hr className="my-6 border-gray-700" />
+          <div className="md:flex items-center justify-between text-center mb-6 space-x-10 mt-5">
+            <Link
+              href="/newsletter"
+              onClick={() => setShowNav(false)}
+              className="text-xs uppercase tracking-wider hover:text-cyan-400 transition-colors font-semibold"
+            >
+              Newsletter
+            </Link>
+            <span className="text-gray-600">|</span>
+            <a
+              onClick={() => setShowNav(false)}
+              href="https://thecyclopedia.substack.com/subscribe"
+              className="text-xs uppercase tracking-wider hover:text-cyan-400 transition-colors font-semibold"
+            >
+              Subscribe
+            </a>
+          </div>
+          <hr className="my-6 border-gray-700" />
+
+          <div className="flex flex-col gap-4">
+            {navItems.map((item) => (
               <Link
-                key={index}
+                key={item.text}
                 href={item.url}
                 onClick={() => setShowNav(false)}
-                className="text-sm font-semibold hover:text-cyan-400 transition duration-200"
+                className="hover:text-cyan-400 transition-colors font-semibold"
               >
                 {item.text}
               </Link>
             ))}
-          </nav>
-          <div className="mt-10 w-full gap-5 flex flex-col mx-auto items-center">
-            {session ? (
-              <button
-                onClick={() => {
-                  signOut();
-                  setShowNav(false);
-                }}
-                className="py-3 w-3/4 rounded-lg bg-gradient-to-r from-purple-500 to-cyan-500 hover:bg-cyan-500 text-white font-medium"
+          </div>
+
+          <div className="mt-8 space-y-4">
+            <div className="flex gap-4 justify-center">
+              <a
+                href="https://x.com/cyclopedia_news"
+                className="text-cyan-400 hover:scale-110 transition-transform"
               >
-                Sign Out
-              </button>
+                <Twitter size={28} />
+              </a>
+              <a
+                href="https://www.instagram.com/cyclopedia_news"
+                className="text-pink-500 hover:scale-110 transition-transform"
+              >
+                <Instagram size={28} />
+              </a>
+              <a
+                href="https://www.youtube.com/@cyclopedia-media"
+                className="text-red-600 hover:scale-110 transition-transform"
+              >
+                <Youtube size={28} />
+              </a>
+            </div>
+
+            {user ? (
+              <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-purple-600/20 to-cyan-600/20 rounded-lg border border-gray-700">
+                {displayImage ? (
+                  <img
+                    src={displayImage}
+                    alt={userName}
+                    className="w-16 h-16 rounded-full border-2 border-cyan-400 object-cover"
+                  />
+                ) : (
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-2xl border-2 border-cyan-400">
+                    {userInitial}
+                  </div>
+                )}
+                <div>
+                  <p className="font-bold text-white">{userName}</p>
+                  <p className="text-xs text-gray-400">{userEmail}</p>
+                </div>
+              </div>
             ) : (
-              <>
-                <h1 className="py-3 text-white text-xl text-center font-bold">
-                  __THE CYCLOPEDIA
-                </h1>
-                <p className=" text-white font-medium text-center">
-                  The Cyclopedia was founded out of a need for honest inquiry
-                  and open minds. We began as a small community sharing
-                  unconventional insights and evolved into a platform for
-                  collective awareness. Our journey continues — and you’re part
-                  of it.
-                </p>
-
-                <div className="flex space-x-5 mb-10">
-                  <a
-                    href="https://x.com/cyclopedia_news?t=yU4JjJPlLO7Zp9GVoEaF5A&s=09"
-                    target="_self"
-                    className="text-white hover:scale-110 transition-transform"
-                  >
-                    <Twitter size={32} />
-                  </a>
-
-                  <a
-                    href="https://www.instagram.com/cyclopedia_news?igsh=MThvdDEwa3c3aGpsMQ=="
-                    target="_self"
-                    className="text-pink-500 hover:scale-110 transition-transform"
-                  >
-                    <Instagram size={32} />
-                  </a>
-
-                  <a
-                    href="https://www.youtube.com/@cyclopedia-media"
-                    target="_self"
-                    className="text-red-600 hover:scale-110 transition-transform"
-                  >
-                    <Youtube size={32} />
-                  </a>
-                </div>
-                <div className="flex gap-10 items-center justify-around mb-20">
-                  <a
-                    className="bg-red-600 text-white font-black px-5 py-2 rouded-lg"
-                    href="/newsletter"
-                  >
-                    Join Us
-                  </a>
-                  <a
-                    className="bg-blue-600 text-white font-black px-5 py-2 rouded-lg"
-                    href="https://thecyclopedia.substack.com/subscribe"
-                  >
-                    Support Us
-                  </a>
-                </div>
-              </>
+              <div className="flex gap-4">
+                <Link
+                  href="/newsletter"
+                  onClick={() => setShowNav(false)}
+                  className="flex-1 bg-gradient-to-r from-red-600 to-pink-600 text-white font-bold px-6 py-3 rounded-lg text-center hover:shadow-lg transition-all"
+                >
+                  Join Us
+                </Link>
+                <a
+                  href="https://thecyclopedia.substack.com/subscribe"
+                  className="flex-1 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold px-6 py-3 rounded-lg text-center hover:shadow-lg transition-all"
+                >
+                  Support
+                </a>
+              </div>
             )}
           </div>
         </nav>

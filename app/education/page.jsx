@@ -61,7 +61,7 @@ export default function EducationTicker() {
     };
 
   return (
-    <section className="max-w-4xl mx-auto py-10">
+    <section className="max-w-full mx-auto py-10">
       <section className="relative w-full h-[500px] flex items-center justify-center text-center bg-gradient-to-br from-sky-700 via-blue-800 to-cyan-900 overflow-hidden">
         {/* Background Overlays */}
         <div className="absolute inset-0 bg-black/30"></div>
@@ -69,7 +69,7 @@ export default function EducationTicker() {
         <div className="absolute w-[300px] h-[300px] bg-cyan-800/40 blur-3xl rounded-full bottom-10 right-20"></div>
 
         {/* Text Content */}
-        <div className="relative z-10 px-4">
+        <div className="relative z-10 px-4 lg:mt-35">
           <p className="inline-block text-sky-600 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
             Education
           </p>
@@ -106,7 +106,7 @@ export default function EducationTicker() {
           Please check your network connection.
         </p>
       ) : (
-        <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 lg:mt-20">
           {posts.map((post) => (
             <Link
               key={post.id}

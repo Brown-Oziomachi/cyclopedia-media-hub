@@ -35,8 +35,8 @@ export default function Icons({ news }) {
   return (
     <div className="w-full">
       {/* Social Media Links */}
-      <div className="mb-10 mx-auto">
-        <div className="flex flex-wrap gap-3 justify-center  ">
+      <div className="mb-10 mx-auto ">
+        <div className="flex flex-wrap gap-3 justify-center">
           {socialLinks.map((social) => {
             const Icon = social.icon;
             return (

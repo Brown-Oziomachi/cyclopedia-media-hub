@@ -141,14 +141,14 @@ const Footer = () => {
                   Health
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href="/philosophy"
                   className="hover:text-purple-400 transition"
                 >
                   Philosophy
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
                   href="/nigeria"
@@ -159,7 +159,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/africacont"
+                  href="/african/continent"
                   className="hover:text-purple-400 transition"
                 >
                   Africa
@@ -250,14 +250,14 @@ const Footer = () => {
                   Health
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href="/philosophy"
                   className="hover:text-purple-400 transition"
                 >
                   Philosophy
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
                   href="/nigeria"
@@ -268,7 +268,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/africacont"
+                  href="/african/continent"
                   className="hover:text-purple-400 transition"
                 >
                   Africa
