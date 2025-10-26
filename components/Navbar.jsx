@@ -21,6 +21,7 @@ import UserProfileButton from "./UserProfile";
 import { useAuth } from "@/components/AuthProvider";
 import { auth } from "@/lib/firebaseConfig";
 import { signOut } from "firebase/auth";
+import NotificationBell from "./NotificationBell";
 
 const ProfileDropdownNavbar = () => {
   const [showNav, setShowNav] = useState(false);
@@ -190,6 +191,9 @@ const ProfileDropdownNavbar = () => {
               >
                 Subscribe
               </a>
+              <span>
+            <NotificationBell />
+              </span>
             </div>
           </div>
         </div>
@@ -336,7 +340,7 @@ const ProfileDropdownNavbar = () => {
         </div>
 
         {/* Categories Bar */}
-        <section className="hidden lg:block bg-black/70 backdrop-blur-md border-t border-gray-800">
+        <section className="hidden lg:block bg-black/70 backdrop-blur-md border-t border-gray-800 z-0">
           <div className="max-w-7xl mx-auto px-4">
             <div className="flex items-center justify-between py-3">
               <nav className="flex gap-2 overflow-x-auto no-scrollbar">
@@ -461,6 +465,9 @@ const ProfileDropdownNavbar = () => {
       {showNav && (
         <nav className="fixed inset-0 bg-gradient-to-b from-gray-900 via-black to-gray-900 flex flex-col text-white p-6 z-[50] pt-20 overflow-y-auto">
           {/* Close button and Sign In/Out at top */}
+          <span className="-mt-13">
+            <NotificationBell  setShowNavOpen={setShowNav}/>
+          </span>
           <div className="absolute top-6 right-6 flex items-center gap-3">
             {user ? (
               <button
@@ -488,7 +495,6 @@ const ProfileDropdownNavbar = () => {
               <X size={24} />
             </button>
           </div>
-
           <div className="relative flex items-center w-full mb-6 mt-8">
             <input
               type="text"
