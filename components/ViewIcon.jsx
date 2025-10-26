@@ -33,7 +33,6 @@ export default function ViewMoreSearchPopup() {
 
   return (
     <div className="w-full">
-      {/* Trigger Button */}
       <button
         onClick={() => setIsOpen(true)}
         className="px-4 py-2 text-white font-semibold rounded-lg shadow-lg transition-all duration-200 flex items-center justify-center gap-2"
@@ -44,7 +43,7 @@ export default function ViewMoreSearchPopup() {
       {isOpen && (
         <div
           ref={isOpenRef}
-          className="fixed inset-0 right-0 h-screen z-[999] flex flex-col items-center justify-center bg-black animate-fadeIn px-6 py-0"
+          className="fixed inset-0 w-screen h-screen z-[999] flex flex-col items-center justify-center bg-black animate-fadeIn px-6 py-0"
         >
           {/* Close Button */}
           <button
@@ -62,7 +61,7 @@ export default function ViewMoreSearchPopup() {
           </div>
 
           {/* Search Input */}
-          <div className="relative w-full max-w-3xl">
+          <div className="relative w-full ">
             <input
               type="text"
               placeholder="Type to search..."

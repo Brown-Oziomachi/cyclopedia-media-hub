@@ -108,7 +108,7 @@ const ProfileDropdownNavbar = () => {
       await signOut(auth);
       setShowUserMenu(false);
       setShowNav(false);
-      router.push("/");
+      router.push("/sports");
     } catch (error) {
       console.error("Error signing out:", error);
     }

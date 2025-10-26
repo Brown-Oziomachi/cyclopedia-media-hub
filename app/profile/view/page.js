@@ -79,7 +79,7 @@ export default function UserProfile() {
             }
         } catch (error) {
             console.error("Error fetching public profile:", error);
-            router.push("/");
+            router.push("/sports");
         } finally {
             setLoadingProfile(false);
         }
