@@ -391,13 +391,13 @@ const ProfileDropdownNavbar = () => {
 
         {/* Right side - Controls */}
         <div className="flex items-center gap-0.5 flex-shrink-0">
-          <div className="scale-75">
+          <div className="scale">
             <ThemeToggle />
           </div>
           <div className="scale">
             <ViewMoreSearchPopup />
           </div>
-          <div className="scale-75">
+          <div className="scale">
             <NotificationBell setShowNav={setShowNav} />
           </div>
           <button
