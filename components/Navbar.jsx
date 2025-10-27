@@ -145,6 +145,7 @@ const ProfileDropdownNavbar = () => {
 
   const categories = [
     { name: "Politics", url: "/politics" },
+    { name: "Law + Justice", url: "/law-justice" },
     { name: "Sports News", url: "/sports" },
     { name: "Sex Education", url: "/sex-education" },
     { name: "Religion", url: "/religion" },
