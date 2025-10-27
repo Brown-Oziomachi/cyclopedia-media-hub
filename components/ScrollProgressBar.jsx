@@ -354,7 +354,7 @@ export default function CyclopediaConnection() {
           className="text-center mt-8 md:mt-12"
         >
           <div className="max-w-3xl mx-auto">
-            <p className="text-sm md:text-lg mb-2 md:mb-3">
+            <p className="text-sm md:text-lg text-white mb-2 md:mb-3">
               <span className="text-purple-400 font-semibold">
                 The Cyclopedia
               </span>{" "}

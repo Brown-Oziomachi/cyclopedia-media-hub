@@ -146,7 +146,7 @@ const ProfileDropdownNavbar = () => {
   const categories = [
     { name: "Politics", url: "/politics" },
     { name: "Law + Justice", url: "/law-justice" },
-    { name: "Sports News", url: "/sports" },
+    { name: "Sports + News", url: "/sports" },
     { name: "Sex + Education", url: "/sex-education" },
     { name: "Religion", url: "/religion" },
     { name: "History", url: "/history" },
@@ -154,6 +154,7 @@ const ProfileDropdownNavbar = () => {
     { name: "Media", url: "/media" },
     { name: "Education", url: "/education" },
     { name: "Health", url: "/health" },
+    { name: "Latest News", url: "/global" },
     { name: "Art + Culture", url: "/art" },
     { name: "Technology", url: "/technology" },
     { name: "Sports News", url: "/sports" },
@@ -355,7 +356,7 @@ const ProfileDropdownNavbar = () => {
               </nav>
 
               <div className="flex flex-wrap gap-2">
-                {categories.slice(0, 8).map((cat) => (
+                {categories.slice(0, 11).map((cat) => (
                   <Link
                     key={cat.name}
                     href={cat.url}

@@ -20,17 +20,17 @@ export default function BlogsPage() {
 
   // Define legal/justice categories to exclude
   const legalCategories = [
-    "criminal law",
-    "family law",
+    "criminal-law",
+    "family-law",
     "personal injury",
     "real estate law",
-    "employment law",
+    "employment-law",
     "litigation-appeals",
     "car accidents",
     "divorce",
-    "medical malpractice",
+    "medical-malpractice",
     "custody & visitation",
-    "landlord-tenant law",
+    "landlord-tenant-law",
     "estate planning",
     "justice",
     "law",
@@ -165,86 +165,95 @@ export default function BlogsPage() {
         </div>
       </section>
 
+      {/* Top 3 Posts - Image Overlay Design */}
       <div className="overflow-x-auto overflow-y-visible lg:overflow-visible">
-        <div className="flex lg:grid lg:grid-cols-3 gap-5  lg:w-full">
+        <div className="flex lg:grid lg:grid-cols-3 gap-5 lg:w-full">
           {posts.slice(0, 3).map((b) => (
             <Link
               key={b.id}
               href={`/news/${createFullSlug(b.title, b.id)}`}
-              className=""
+              className="group"
             >
-              <div className="relative w-72 lg:w-full h-40">
+              <div className="relative w-72 lg:w-full h-64 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                {/* Background Image */}
                 {b.imageUrl && (
                   <img
                     src={b.imageUrl}
                     alt={b.title}
-                    className="object-cover w-full h-full rounded-t-xl"
+                    className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
                   />
                 )}
+                
+                {/* Dark Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+                
+                {/* Category Badge */}
                 <div
-                  className={`absolute top-0 left-0 ${getCategoryColor(
+                  className={`absolute top-3 left-3 ${getCategoryColor(
                     b.category
-                  )} text-xs font-semibold px-3 py-1 rounded-md`}
+                  )} text-white text-xs font-semibold px-3 py-1 rounded-md z-10`}
                 >
                   {b.category || "Other"}
                 </div>
-              </div>
-              <div className="p-3">
-                <h3 className="font-semibold text-base md:text-lg line-clamp-2">
-                  {b.title}
-                </h3>
-                <p className="text-xs text-gray-500 mt-1">
-                  {b.createdAt?.toDate().toLocaleString()}
-                </p>
+
+                {/* Text Content on Image */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                  <h3 className="font-semibold text-base md:text-lg line-clamp-3 group-hover:text-blue-300 transition-colors">
+                    {b.title}
+                  </h3>
+                  <p className="text-xs text-gray-300 mt-2">
+                    {b.createdAt?.toDate().toLocaleString()}
+                  </p>
+                </div>
               </div>
             </Link>
           ))}
         </div>
       </div>
 
-      {/* Middle Grid Section */}
+      {/* Middle Grid Section - Image Overlay Design */}
       {posts.length > 4 && (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.slice(4, 10).map((post) => (
             <Link
               key={post.id}
               href={`/news/${createFullSlug(post.title, post.id)}`}
-              className="relative rounded-xl shadow hover:shadow-xl overflow-hidden transition-all duration-300  flex flex-col"
+              className="relative rounded-xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 h-80 group"
             >
-              <div className="relative flex items-start gap-4 p-4">
-                {/* Image */}
-                {post.imageUrl && (
-                  <div className="w-1/3">
-                    <img
-                      src={post.imageUrl}
-                      alt={post.title}
-                      className="w-full h-24 object-cover rounded-md"
-                    />
-                  </div>
-                )}
-                {/* Title and subtitle */}
-                <div className="w-2/3 flex flex-col">
-                  <h3 className="font-semibold text-base md:text-lg line-clamp-2">
-                    {post.title}
-                  </h3>
-                  {post.subtitle && (
-                    <p className="text-sm  mt-1 line-clamp-2">
-                      {post.subtitle}
-                    </p>
-                  )}
-                  <p className="text-xs  mt-2">
-                    {post.createdAt?.toDate().toLocaleString()}
-                  </p>
-                </div>
-              </div>
-
-              {/* Category badge on top-left of the card */}
+              {/* Background Image */}
+              {post.imageUrl && (
+                <img
+                  src={post.imageUrl}
+                  alt={post.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+              )}
+              
+              {/* Dark Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+              
+              {/* Category Badge */}
               <div
                 className={`absolute top-3 left-3 ${getCategoryColor(
                   post.category
-                )}  text-xs font-semibold px-3 py-1 rounded-md`}
+                )} text-white text-xs font-semibold px-3 py-1 rounded-md z-10`}
               >
                 {post.category || "Other"}
+              </div>
+
+              {/* Text Content on Image */}
+              <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                <h3 className="font-semibold text-base md:text-lg line-clamp-2 group-hover:text-blue-300 transition-colors">
+                  {post.title}
+                </h3>
+                {post.subtitle && (
+                  <p className="text-sm text-gray-200 mt-2 line-clamp-2">
+                    {post.subtitle}
+                  </p>
+                )}
+                <p className="text-xs text-gray-300 mt-2">
+                  {post.createdAt?.toDate().toLocaleString()}
+                </p>
               </div>
             </Link>
           ))}
@@ -262,44 +271,52 @@ export default function BlogsPage() {
         </p>
         <a
           href="/newsletter"
-          className="inline-block bg-white text-purple-700 hover:bg-purple-700 hover:text-white  font-semibold px-6 py-3 rounded-md transition-all duration-300"
+          className="inline-block bg-white text-purple-700 hover:bg-purple-700 hover:text-white font-semibold px-6 py-3 rounded-md transition-all duration-300"
         >
           Subscribe to Our Newsletter
         </a>
       </div>
 
-      {/* More News Section */}
+      {/* More News Section - Image Overlay Design */}
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {posts.slice(10, 500).map((post) => (
           <Link
             key={post.id}
             href={`/news/${createFullSlug(post.title, post.id)}`}
-            className="rounded-lg overflow-hidden shadow hover:shadow-xl transition-transform hover:-translate-y-1"
+            className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-64 group"
           >
-            <div className="relative h-40">
-              {post.imageUrl && (
-                <img
-                  src={post.imageUrl}
-                  alt={post.title}
-                  className="w-full h-full object-cover"
-                />
-              )}
-              <div
-                className={`absolute top-0 left-0 ${getCategoryColor(
-                  post.category
-                )} text-xs font-semibold px-3 py-1 rounded-md`}
-              >
-                {post.category || "Other"}
-              </div>
+            {/* Background Image */}
+            {post.imageUrl && (
+              <img
+                src={post.imageUrl}
+                alt={post.title}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            )}
+            
+            {/* Dark Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+            
+            {/* Category Badge */}
+            <div
+              className={`absolute top-3 left-3 ${getCategoryColor(
+                post.category
+              )} text-white text-xs font-semibold px-3 py-1 rounded-md z-10`}
+            >
+              {post.category || "Other"}
             </div>
-            <div className="p-3">
-              <h2 className="font-semibold text-sm uppercase line-clamp-2">
+
+            {/* Text Content on Image */}
+            <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+              <h2 className="font-semibold text-sm uppercase line-clamp-2 group-hover:text-blue-300 transition-colors">
                 {post.title}
               </h2>
               {post.subtitle && (
-                <p className="text-xs line-clamp-2 mt-1">{post.subtitle}</p>
+                <p className="text-xs text-gray-200 line-clamp-2 mt-1">
+                  {post.subtitle}
+                </p>
               )}
-              <p className="text-xs text-gray-400 mt-2">
+              <p className="text-xs text-gray-300 mt-2">
                 {post.createdAt?.toDate().toLocaleString()}
               </p>
             </div>
@@ -312,7 +329,7 @@ export default function BlogsPage() {
         <div className="">
           <button
             onClick={fetchMoreBlogs}
-            className=" px-6 py-3 transition items-center mb-5 justify-center mt-6 bg-purple-700 rounded-lg mx-auto text-white hover:bg-purple-800 disabled:opacity-50 disabled:cursor-not-allowed flex"
+            className="px-6 py-3 transition items-center mb-5 justify-center mt-6 bg-purple-700 rounded-lg mx-auto text-white hover:bg-purple-800 disabled:opacity-50 disabled:cursor-not-allowed flex"
             disabled={loading}
           >
             {loading ? "Loading News..." : "View More"}
