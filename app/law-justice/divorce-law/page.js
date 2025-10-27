@@ -22,7 +22,7 @@ const DivorcePage = () => {
         const postsRef = collection(db1, "blogs");
         const q = query(
           postsRef,
-          where("category", "==", "divorce"),
+          where("category", "==", "divorce-law"),
           orderBy("createdAt", "desc"),
           limit(20)
         );

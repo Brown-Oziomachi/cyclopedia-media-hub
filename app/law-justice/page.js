@@ -11,7 +11,7 @@ const LegalCategories = () => {
     { name: 'Employment Law', icon: Briefcase, color: 'from-indigo-500 to-indigo-600', link: '/law-justice/employment-law' },
     { name: 'Litigation & Appeals', icon: Gavel, color: 'from-orange-500 to-orange-600', link: '/law-justice/litigation-appeals' },
     // { name: 'Car Accidents', icon: Car, color: 'from-cyan-500 to-cyan-600', link: '/legal/car-accidents' },
-    { name: 'Divorce', icon: Heart, color: 'from-pink-500 to-pink-600', link: '/law-justice/divorce' },
+    { name: 'Divorce', icon: Heart, color: 'from-pink-500 to-pink-600', link: '/law-justice/divorce-law' },
     { name: 'Medical Malpractice', icon: UserCheck, color: 'from-teal-500 to-teal-600', link: '/law-justice/medical-malpractice' },
     // { name: 'Custody & Visitation', icon: Users, color: 'from-violet-500 to-violet-600', link: '/legal/custody-visitation' },
     { name: 'Landlord-Tenant Law', icon: Building, color: 'from-yellow-500 to-yellow-600', link: '/law-justice/landlord-tenant-law' },

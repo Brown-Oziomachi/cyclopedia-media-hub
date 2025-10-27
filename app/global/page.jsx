@@ -18,6 +18,36 @@ export default function BlogsPage() {
   const [lastDoc, setLastDoc] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // Define legal/justice categories to exclude
+  const legalCategories = [
+    "criminal law",
+    "family law",
+    "personal injury",
+    "real estate law",
+    "employment law",
+    "litigation-appeals",
+    "car accidents",
+    "divorce",
+    "medical malpractice",
+    "custody & visitation",
+    "landlord-tenant law",
+    "estate planning",
+    "justice",
+    "law",
+    "legal",
+    "family-law",
+    "landlord-tenant-law",
+  ];
+
+  // Helper function to check if post is legal/justice related
+  const isLegalPost = (category) => {
+    if (!category) return false;
+    const cat = category.toLowerCase();
+    return legalCategories.some(
+      (legal) => cat.includes(legal) || legal.includes(cat)
+    );
+  };
+
   // Category colors mapping
   const categoryColors = {
     politics: "bg-red-600",
@@ -32,21 +62,24 @@ export default function BlogsPage() {
     other: "bg-red-500",
   };
 
-  // ✅ Fetch first batch with real-time updates
+  // ✅ Fetch first batch with real-time updates (filtered)
   useEffect(() => {
     const q = query(
       collection(db1, "blogs"),
       orderBy("createdAt", "desc"),
-      limit(12)
+      limit(50) // Fetch more to account for filtering
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       if (!snapshot.empty) {
-        const docs = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setPosts(docs);
+        const docs = snapshot.docs
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          .filter((post) => !isLegalPost(post.category)); // Filter out legal posts
+
+        setPosts(docs.slice(0, 12)); // Take first 12 after filtering
         setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
       }
     });
@@ -62,16 +95,19 @@ export default function BlogsPage() {
       collection(db1, "blogs"),
       orderBy("createdAt", "desc"),
       startAfter(lastDoc),
-      limit(6)
+      limit(20) // Fetch more to account for filtering
     );
 
     const snapshot = await getDocs(q);
 
     if (!snapshot.empty) {
-      const docs = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+      const docs = snapshot.docs
+        .map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+        .filter((post) => !isLegalPost(post.category)); // Filter out legal posts
+
       setPosts((prev) => [...prev, ...docs]);
       setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
     }
@@ -84,17 +120,17 @@ export default function BlogsPage() {
     return categoryColors[cat] || categoryColors.other;
   };
 
-    const createSlug = (title) => {
-      return title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "");
-    };
-
-    const createFullSlug = (title, id) => {
-      return `${createSlug(title)}--${id}`;
+  const createSlug = (title) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
   };
-  
+
+  const createFullSlug = (title, id) => {
+    return `${createSlug(title)}--${id}`;
+  };
+
   return (
     <div className="max-w-7xl mx-auto mt-10 lg:mt-36 space-y-12">
       <section
