@@ -417,7 +417,6 @@ const ProfileDropdownNavbar = () => {
         <nav className="fixed inset-0 bg-gradient-to-b from-gray-900 via-black to-gray-900 flex flex-col text-white p-6 z-[50] pt-20 overflow-y-auto">
           {/* Close button and Sign In/Out at top */}
           <div className="absolute top-6 left-6">
-            <NotificationBell setShowNav={setShowNav} />
           </div>
           <div className="absolute top-6 right-6 flex items-center gap-3">
             {user ? (
