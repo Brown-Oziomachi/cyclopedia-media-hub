@@ -14,7 +14,7 @@ const LegalCategories = () => {
     { name: 'Divorce', icon: Heart, color: 'from-pink-500 to-pink-600', link: '/law-justice/divorce' },
     { name: 'Medical Malpractice', icon: UserCheck, color: 'from-teal-500 to-teal-600', link: '/law-justice/medical-malpractice' },
     // { name: 'Custody & Visitation', icon: Users, color: 'from-violet-500 to-violet-600', link: '/legal/custody-visitation' },
-    // { name: 'Landlord-Tenant Law', icon: Building, color: 'from-yellow-500 to-yellow-600', link: '/law-justice/landlord-tenant-law' },
+    { name: 'Landlord-Tenant Law', icon: Building, color: 'from-yellow-500 to-yellow-600', link: '/law-justice/landlord-tenant-law' },
     // { name: 'Estate Planning', icon: FileText, color: 'from-emerald-500 to-emerald-600', link: '/legal/estate-planning' },
   ];
 
@@ -63,7 +63,7 @@ const LegalCategories = () => {
 
       {/* View All Button */}
       <div className="text-center">
-        <Link href="/legal">
+        <Link href="/all-legal">
           <button className="inline-flex items-center gap-2 bg-white border-2 border-blue-600 text-blue-600 font-semibold px-8 py-3 rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-md hover:shadow-lg">
             All Legal Issues
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
