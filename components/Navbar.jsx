@@ -371,36 +371,41 @@ const ProfileDropdownNavbar = () => {
 
       {/* Mobile Header Controls */}
       <div
-        className={`lg:hidden fixed top-4 right-4 left-4 flex items-center justify-between z-50 transition-transform duration-300 bg-black/90 backdrop-blur-sm rounded-lg px-3 py-2 border border-gray-700 ${
+        className={`lg:hidden fixed top-4 right-4 left-4 flex items-center justify-between z-50 transition-transform duration-300 bg-black/90 backdrop-blur-sm rounded-lg px-2 py-2 border border-gray-700 ${
           showMobileToggle ? "translate-y-0" : "-translate-y-20"
         }`}
       >
         {/* Left side - Logo for mobile */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-1 flex-shrink-0">
           <Image
             src="/hid.png"
             alt="Cyclopedia Logo"
-            width={30}
-            height={30}
+            width={24}
+            height={24}
             className="rounded-full brightness-125"
           />
-          <h1 className="font-bold text-base sm:text-lg text-white whitespace-nowrap">
+          <h1 className="font-bold text-sm text-white whitespace-nowrap">
             THE CYCL<span className="text-cyan-400">👁️</span>PEDIA
           </h1>
         </Link>
 
         {/* Right side - Controls */}
-        <div className="flex items-center justify-between ">
-          <ThemeToggle />
-          <ViewMoreSearchPopup />
-          <NotificationBell setShowNav={setShowNav} />
-
+        <div className="flex items-center gap-0.5 flex-shrink-0">
+          <div className="scale-75">
+            <ThemeToggle />
+          </div>
+          <div className="scale">
+            <ViewMoreSearchPopup />
+          </div>
+          <div className="scale-75">
+            <NotificationBell setShowNav={setShowNav} />
+          </div>
           <button
             onClick={() => setShowNav(!showNav)}
-            className="text-white bg-gradient-to-r from-purple-600 to-cyan-600 p-1.5 rounded-lg"
+            className="text-white bg-gradient-to-r from-purple-600 to-cyan-600 p-1 rounded-lg ml-0.5"
             aria-label="Toggle navigation"
           >
-            {showNav ? <X size={24} /> : <Menu size={24} />}
+            {showNav ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
