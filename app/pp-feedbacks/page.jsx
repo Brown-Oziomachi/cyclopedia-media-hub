@@ -220,7 +220,7 @@ export default function TestimonialPage() {
     <div className="min-h-screen  py-16 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Hero Header */}
-        <div className="text-center mb-20 mt-10 lg:mt-30">
+        <div className="text-center mb-20 mt-10 lg:mt-40">
           <div className="inline-flex items-center justify-center mb-6 p-4 rounded-2xl bg-gradient-to-br from-purple-500 via-purple-600 to-indigo-600 shadow-2xl shadow-purple-500/30 transform hover:scale-105 transition-transform">
             <MessageCircle size={32} className="text-white" />
           </div>
@@ -407,7 +407,7 @@ export default function TestimonialPage() {
                       <h4 className="font-semibold mb-2 line-clamp-2">
                         {feedback.title}
                       </h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-3">
+                      <p className="text-sm text-gray-700 dark:text-gray-400 leading-relaxed line-clamp-3">
                         {feedback.message}
                       </p>
                     </div>

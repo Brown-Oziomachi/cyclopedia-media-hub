@@ -109,7 +109,7 @@ const ProfileDropdownNavbar = () => {
       await signOut(auth);
       setShowUserMenu(false);
       setShowNav(false);
-      router.push("/sports");
+      router.push("/");
     } catch (error) {
       console.error("Error signing out:", error);
     }
@@ -154,8 +154,8 @@ const ProfileDropdownNavbar = () => {
     { name: "Education", url: "/education" },
     { name: "Health", url: "/health" },
     { name: "Art + Culture", url: "/art" },
-    // { name: "Technology", url: "/technology" },
-    { name: "Nigeria", url: "/nigeria" },
+    { name: "Technology", url: "/technology" },
+    { name: "Sports News", url: "/sports" },
     { name: "Live Now", url: "/live" },
     { name: "Africa", url: "/african/continent" },
   ];
@@ -191,9 +191,6 @@ const ProfileDropdownNavbar = () => {
               >
                 Subscribe
               </a>
-              <span>
-            <NotificationBell />
-              </span>
             </div>
           </div>
         </div>
@@ -234,6 +231,7 @@ const ProfileDropdownNavbar = () => {
               <div className="flex items-center gap-3">
                 <ThemeToggle />
                 <ViewMoreSearchPopup />
+                <NotificationBell />
               </div>
 
               {/* Regions Dropdown */}
@@ -340,7 +338,7 @@ const ProfileDropdownNavbar = () => {
         </div>
 
         {/* Categories Bar */}
-        <section className="hidden lg:block bg-black/70 backdrop-blur-md border-t border-gray-800 z-0">
+        <section className="hidden lg:block bg-black/70 backdrop-blur-md border-t border-gray-800">
           <div className="max-w-7xl mx-auto px-4">
             <div className="flex items-center justify-between py-3">
               <nav className="flex gap-2 overflow-x-auto no-scrollbar">
@@ -395,61 +393,7 @@ const ProfileDropdownNavbar = () => {
         <div className="flex items-center justify-between ">
           <ThemeToggle />
           <ViewMoreSearchPopup />
-
-          {user && (
-            <div className="relative">
-              <button
-                onClick={() => setShowUserMenu(!showUserMenu)}
-                className="relative w-8 h-8"
-              >
-                {displayImage ? (
-                  <img
-                    src={displayImage}
-                    alt={userName}
-                    className="w-8 h-8 rounded-full border-2 border-cyan-400 object-cover"
-                  />
-                ) : (
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-sm border-2 border-cyan-400">
-                    {userInitial}
-                  </div>
-                )}
-              </button>
-
-              {showUserMenu && (
-                <div className="absolute right-0 mt-2 w-56 bg-gray-900 rounded-lg shadow-2xl border border-gray-700 overflow-hidden">
-                  <div className="px-4 py-3 bg-gradient-to-r from-purple-600/20 to-cyan-600/20 border-b border-gray-700">
-                    <p className="font-semibold text-white text-sm">
-                      {userName}
-                    </p>
-                    <p className="text-xs text-gray-400 truncate">
-                      {userEmail}
-                    </p>
-                  </div>
-                  <Link
-                    href="/profiles"
-                    className="block px-4 py-3 hover:bg-gray-800 transition-colors text-gray-200 text-sm"
-                    onClick={() => setShowUserMenu(false)}
-                  >
-                    My Profile
-                  </Link>
-                  <Link
-                    href="/settings"
-                    className="block px-4 py-3 hover:bg-gray-800 transition-colors text-gray-200 text-sm"
-                    onClick={() => setShowUserMenu(false)}
-                  >
-                    Settings
-                  </Link>
-                  <button
-                    onClick={handleSignOut}
-                    className="w-full text-left px-4 py-3 hover:bg-red-600/20 transition-colors text-red-400 border-t border-gray-700 font-semibold text-sm flex items-center gap-2"
-                  >
-                    <LogOut size={16} />
-                    Sign Out
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
+          <NotificationBell setShowNav={setShowNav} />
 
           <button
             onClick={() => setShowNav(!showNav)}
@@ -465,9 +409,9 @@ const ProfileDropdownNavbar = () => {
       {showNav && (
         <nav className="fixed inset-0 bg-gradient-to-b from-gray-900 via-black to-gray-900 flex flex-col text-white p-6 z-[50] pt-20 overflow-y-auto">
           {/* Close button and Sign In/Out at top */}
-          <span className="-mt-13">
-            <NotificationBell  setShowNavOpen={setShowNav}/>
-          </span>
+          <div className="absolute top-6 left-6">
+            <NotificationBell setShowNav={setShowNav} />
+          </div>
           <div className="absolute top-6 right-6 flex items-center gap-3">
             {user ? (
               <button
@@ -495,6 +439,7 @@ const ProfileDropdownNavbar = () => {
               <X size={24} />
             </button>
           </div>
+
           <div className="relative flex items-center w-full mb-6 mt-8">
             <input
               type="text"
@@ -577,24 +522,6 @@ const ProfileDropdownNavbar = () => {
             ))}
           </ul>
 
-          <hr className="my-6 border-gray-700" />
-          <div className="md:flex items-center justify-between text-center mb-6 space-x-10 mt-5">
-            <Link
-              href="/newsletter"
-              onClick={() => setShowNav(false)}
-              className="text-xs uppercase tracking-wider hover:text-cyan-400 transition-colors font-semibold"
-            >
-              Newsletter
-            </Link>
-            <span className="text-gray-600">|</span>
-            <a
-              onClick={() => setShowNav(false)}
-              href="https://thecyclopedia.substack.com/subscribe"
-              className="text-xs uppercase tracking-wider hover:text-cyan-400 transition-colors font-semibold"
-            >
-              Subscribe
-            </a>
-          </div>
           <hr className="my-6 border-gray-700" />
 
           <div className="flex flex-col gap-4">

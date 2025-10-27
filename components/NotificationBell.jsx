@@ -23,7 +23,7 @@ export default function NotificationBell({ setShowNav }) {
     const q = query(
       collection(db1, "blogs"),
       orderBy("createdAt", "desc"),
-      limit(10)
+      limit(5)
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -135,7 +135,7 @@ export default function NotificationBell({ setShowNav }) {
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute right-0 mt-3 w-96 max-w-[calc(100vw-2rem)] bg-gray-900 rounded-2xl shadow-2xl border border-gray-700 z-[100] overflow-hidden">
+        <div className="absolute -right-12 mt-3 w-96  max-w-[calc(100vw-2rem)] bg-gray-900 rounded-2xl shadow-2xl border border-gray-700 z-[100] overflow-hidden">
           {/* Header */}
           <div className="bg-gradient-to-r from-purple-600 to-cyan-600 px-6 py-4 flex items-center justify-between">
             <div>

@@ -16,6 +16,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import AboutSection from "@/components/AboutSection"
+import CyclopediaConnection from "@/components/ScrollProgressBar";
 const Page = () => {
   const [showSplash, setShowSplash] = useState(true);
   const router = useRouter();
@@ -147,43 +148,22 @@ const Page = () => {
                 alt="image"
                 className="z-0 w-fit lg:w-200 lg:h-200 h-fit opacity- lg:-mt-35"
               />
-            <AboutSection/>
             </div>
-              <Link href="/about">
-                <button className="z-50 border-purple-400 text-white shadow-black shadow-2xl cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black px-6 py-3 rounded-lg font-semibold transition-all group-hover:bg-white group-hover:text-black">
-                  About Us
-                  <ChevronRight className="text-purple-300" />
-                </button>
-              </Link>
+            <Link href="/about">
+              <button className="z-50 border-purple-400 text-white shadow-black shadow-2xl cursor-pointer hover:text-xl flex gap-2 hover:bg-white hover:text-black px-6 py-3 rounded-lg font-semibold transition-all group-hover:bg-white group-hover:text-black">
+                About Us
+                <ChevronRight className="text-purple-300" />
+              </button>
+            </Link>
             <div className="flex gap-4 group text-sm z-0 lg:mb-20">
+              <div>
+                <CyclopediaConnection />
+              </div>
             </div>
+              <AboutSection />
           </main>
         </div>
       )}
-
-      <div className="relative w-full max-md:hidden max-lg:w-1/2 max-md:w-full mx-auto lg:hidden max-lg:-mt-30 max-md:-mt-25 mb-0 p-5">
-        <form
-          onSubmit={handleSearch}
-          className="flex items-center"
-          role="search"
-          aria-label="Site Search"
-        >
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search the latest..."
-            className="px-3 py-3 pr-20 rounded-md shadow-2xl bg-white text-black focus:outline-none w-full"
-            aria-label="Search input"
-          />
-          <button
-            type="submit"
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black px-3 py-3 rounded-md text-white font-semibold transition"
-          >
-            Search
-          </button>
-        </form>
-      </div>
 
       <div className="max-w-3xl lg:hidden mt-10 p-3">
         <Link

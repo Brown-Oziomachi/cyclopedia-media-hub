@@ -47,11 +47,8 @@ export default function AboutSection() {
                 <X size={26} />
               </button>
 
-                <div>
-                    <img scr="/hid.png" alt="Cyclopedia Logo" className="w-20 h-20 mx-auto"/>
-                </div> 
               <h2 className="text-3xl font-bold mb-4 text-center">
-                The Cyclopedia & Hidden Truth Media
+                The Cyclopedia || Hidden Truth Media
               </h2>
 
               <div className="space-y-6 text-gray-400 leading-relaxed">

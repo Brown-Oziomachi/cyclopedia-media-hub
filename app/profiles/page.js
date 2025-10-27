@@ -227,7 +227,7 @@ export default function UserProfile() {
         <div className="min-h-screen py-6 sm:py-8 px-4 sm:px-6">
             <div className="max-w-4xl mx-auto">
                 {/* Profile Header */}
-                <div className="rounded-2xl p-6 sm:p-8 mb-8 shadow-lg border mt-20 lg:mt-40">
+                <div className="rounded-2xl p-6 sm:p-8 mb-8 shadow-lg border mt-20 lg:mt-50">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 sm:gap-8">
                        <Link
   href="/pp-feedbacks"

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Lightbulb, Target, Shield, Users, BookOpen, Globe, Eye, Compass, Award, Heart } from "lucide-react";
+import CyclopediaConnection from "@/components/ScrollProgressBar";
 
 const About = () => {
   const [loading, setLoading] = useState(true);
@@ -37,6 +38,8 @@ const About = () => {
           who question, research, and seek the truth behind the curtain.
         </p>
       </header>
+
+      <CyclopediaConnection />
 
       {/* Mission Statement */}
       <section className="px-6 md:px-20 py-16 bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
