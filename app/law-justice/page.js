@@ -18,15 +18,14 @@ const LegalCategories = () => {
     { name: 'Employment Law', link: '/law-justice/employment-law' },
     { name: 'Civil Right', link: '/law-justice/civil-right' },
     { name: 'Business', link: '/law-justice/business-law' },
-    { name: 'Immigration', link: '/law-justice/immigration' },
-    { name: 'Real Estate', link: '/law-justice/real-estate' },
+    { name: 'Immigration', link: '/law-justice/immigration-law' },
+    // { name: 'Real Estate', link: '/law-justice/real-estate' },
     { name: 'Education', link: '/education' },
     { name: 'Litigation & Appeals', link: '/law-justice/litigation-appeals' },
-    { name: 'Sex Offenses', link: '/law-justice/sex-offenses' },
     // { name: 'Wrongful Death', link: '/law-justice/wrongful-death' },
     // { name: 'Elder Law', link: '/law-justice/elder-law' },
     { name: 'Medical Malpractice', link: '/law-justice/medical-malpractice' },
-    // { name: 'Sexual Harassment', link: '/law-justice/sexual-harassment' },
+    { name: 'Sexual Harassment', link: '/law-justice/sexual-harassment' },
     // { name: 'Wrongful Termination', link: '/law-justice/wrongful-termination' },
   ];
 

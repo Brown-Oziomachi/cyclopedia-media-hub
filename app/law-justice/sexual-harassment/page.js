@@ -12,17 +12,17 @@ import {
 } from "firebase/firestore";
 import { db1 } from "@/lib/firebaseConfig";
 
-const SexOffencesPage = () => {
+const SexualHarassmentPage = () => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchSexOffencesPosts = async () => {
+        const fetchSexualHarassmentPosts = async () => {
             try {
                 const postsRef = collection(db1, "blogs");
                 const q = query(
                     postsRef,
-                    where("category", "==", "sex-offenses"),
+                    where("category", "==", "sexual-harassment"),
                     orderBy("createdAt", "desc"),
                     limit(20)
                 );
@@ -33,16 +33,16 @@ const SexOffencesPage = () => {
                     ...doc.data(),
                 }));
 
-                console.log("Fetched Sex Offences posts:", data);
+                console.log("Fetched Sexual Harassment posts:", data);
                 setPosts(data);
             } catch (error) {
-                console.error("Error fetching sex offences posts:", error);
+                console.error("Error fetching sexual harassment posts:", error);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchSexOffencesPosts();
+        fetchSexualHarassmentPosts();
     }, []);
 
     const createSlug = (title) => {
@@ -58,22 +58,22 @@ const SexOffencesPage = () => {
 
     return (
         <main className="w-full">
-            <section className="relative w-full h-[500px] flex items-center justify-center text-center bg-gradient-to-br from-red-800 via-rose-800 to-pink-900 overflow-hidden">
+            <section className="relative w-full h-[500px] flex items-center justify-center text-center bg-gradient-to-br from-purple-800 via-pink-700 to-rose-800 overflow-hidden">
                 {/* Background Overlays */}
-                <div className="absolute inset-0 bg-black/40"></div>
-                <div className="absolute w-[400px] h-[400px] bg-rose-700/40 blur-3xl rounded-full top-10 left-20 animate-pulse"></div>
-                <div className="absolute w-[300px] h-[300px] bg-pink-700/40 blur-3xl rounded-full bottom-10 right-20 animate-pulse delay-1000"></div>
+                <div className="absolute inset-0 bg-black/30"></div>
+                <div className="absolute w-[400px] h-[400px] bg-purple-600/40 blur-3xl rounded-full top-10 left-20 animate-pulse"></div>
+                <div className="absolute w-[300px] h-[300px] bg-pink-600/40 blur-3xl rounded-full bottom-10 right-20 animate-pulse delay-1000"></div>
 
                 {/* Text Content */}
                 <div className="relative z-10 px-4 lg:mt-30">
-                    <p className="inline-block text-red-700 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
-                        Sexual Offences Law
+                    <p className="inline-block text-purple-600 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
+                        Workplace Rights
                     </p>
                     <h1 className="text-white font-extrabold text-5xl md:text-6xl lg:text-7xl uppercase mb-4 drop-shadow-lg">
-                        Understanding the Law
+                        Sexual Harassment
                     </h1>
                     <p className="text-gray-100 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed">
-                        Legal information on sexual offences, victims' rights, legal protections, and criminal justice under Nigerian law.
+                        Comprehensive guidance on workplace sexual harassment, your rights, reporting mechanisms, and legal protection in Nigeria.
                     </p>
                 </div>
             </section>
@@ -93,13 +93,13 @@ const SexOffencesPage = () => {
                                     </div>
                                 )}
                                 <div className="p-8 flex flex-col justify-center">
-                                    <span className="text-xs font-semibold text-red-700 uppercase mb-2 tracking-wider">
+                                    <span className="text-xs font-semibold text-purple-600 uppercase mb-2 tracking-wider">
                                         Featured Article
                                     </span>
-                                    <div className="absolute top-0 left-0 bg-red-700 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
-                                        Sexual Offences
+                                    <div className="absolute top-0 left-0 bg-purple-600 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                                        Sexual Harassment
                                     </div>
-                                    <h2 className="text-2xl uppercase lg:text-3xl font-bold mb-4 hover:text-red-700 transition-colors">
+                                    <h2 className="text-2xl uppercase lg:text-3xl font-bold mb-4 hover:text-purple-600 transition-colors">
                                         {posts[0].title}
                                     </h2>
                                     <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 text-base">
@@ -133,7 +133,7 @@ const SexOffencesPage = () => {
                                             </div>
                                         )}
                                         <div className="flex-1">
-                                            <h3 className="text-base font-bold line-clamp-3 hover:text-red-700 transition-colors">
+                                            <h3 className="text-base font-bold line-clamp-3 hover:text-purple-600 transition-colors">
                                                 {post.title}
                                             </h3>
                                         </div>
@@ -146,8 +146,8 @@ const SexOffencesPage = () => {
                                             {post.createdAt?.toDate().toDateString()}
                                         </p>
                                     </div>
-                                    <div className="absolute top-4 left-4 bg-red-700 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
-                                        Sexual Offences
+                                    <div className="absolute top-4 left-4 bg-purple-600 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                                        Sexual Harassment
                                     </div>
                                 </div>
                             </Link>
@@ -155,17 +155,17 @@ const SexOffencesPage = () => {
                     </div>
                 )}
 
-                <div className="mx-auto text-center mt-16 mb-16 bg-gradient-to-r from-red-800 to-rose-800 text-white py-14 px-6 rounded-2xl shadow-xl max-w-3xl">
+                <div className="mx-auto text-center mt-16 mb-16 bg-gradient-to-r from-purple-800 to-pink-700 text-white py-14 px-6 rounded-2xl shadow-xl max-w-3xl">
                     <h2 className="text-3xl font-extrabold mb-3">
-                        Know Your Rights and Legal Protections
+                        Know Your Rights & Stay Protected
                     </h2>
                     <p className="text-base md:text-lg text-gray-200 mb-6">
-                        Stay informed about victims' rights, legal procedures, and protections under Nigerian sexual offences law.
+                        Get expert guidance on recognizing harassment, reporting procedures, legal protections, and creating safer workplaces in Nigeria.
                     </p>
 
                     <Link
                         href="/newsletter"
-                        className="inline-block bg-white text-red-800 font-semibold px-6 py-3 rounded-md hover:bg-gray-100 transition-all duration-300"
+                        className="inline-block bg-white text-purple-700 font-semibold px-6 py-3 rounded-md hover:bg-gray-100 transition-all duration-300"
                     >
                         Subscribe to Our Newsletter
                     </Link>
@@ -174,10 +174,10 @@ const SexOffencesPage = () => {
                 <hr className="mb-10" />
 
                 {loading ? (
-                    <p className="text-center py-10">Loading posts...</p>
+                    <p className="text-center py-10">Loading sexual harassment posts...</p>
                 ) : posts.length === 0 ? (
                     <p className="text-gray-500 text-center">
-                        No posts found. Check back soon for updates.
+                        No sexual harassment posts found. Check back soon for updates.
                     </p>
                 ) : (
                     <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
@@ -203,8 +203,8 @@ const SexOffencesPage = () => {
                                         {post.createdAt?.toDate().toDateString()}
                                     </p>
                                 </div>
-                                <div className="absolute top-0 left-0 bg-red-700 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
-                                    Sexual Offences
+                                <div className="absolute top-0 left-0 bg-purple-600 text-white text-xs font-semibold px-3 py-1 rounded-md z-10">
+                                    Sexual Harassment
                                 </div>
                             </Link>
                         ))}
@@ -215,4 +215,4 @@ const SexOffencesPage = () => {
     );
 };
 
-export default SexOffencesPage;
+export default SexualHarassmentPage;

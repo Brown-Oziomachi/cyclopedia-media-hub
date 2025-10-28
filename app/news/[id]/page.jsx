@@ -10,7 +10,15 @@ import {
   collection,
   getDocs,
 } from "firebase/firestore";
-import { Share, LinkIcon, Play } from "lucide-react";
+import {
+  Share,
+  LinkIcon,
+  Play,
+  Heart,
+  Bookmark,
+  Eye,
+  Clock,
+} from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useRouter, useParams } from "next/navigation";
@@ -20,7 +28,7 @@ import SideNewsTicker from "@/components/SideNewsTicker";
 import FollowUsPopup from "@/components/FollowUsPopup";
 import Icons from "@/components/Icon";
 
-// Helper function to create slug from title
+// Helper functions
 const createSlug = (title) => {
   return title
     .toLowerCase()
@@ -28,13 +36,11 @@ const createSlug = (title) => {
     .replace(/^-+|-+$/g, "");
 };
 
-// Helper function to extract ID from slug (format: title-slug--docId)
 const extractIdFromSlug = (slug) => {
   const parts = slug.split("--");
   return parts.length > 1 ? parts[parts.length - 1] : slug;
 };
 
-// Helper function to create full slug with ID
 const createFullSlug = (title, id) => {
   return `${createSlug(title)}--${id}`;
 };
@@ -46,7 +52,9 @@ const BlogDisplay = ({ body }) => {
 
   return (
     <div
-      className={` ${!isHTML ? "whitespace-pre-line space-y-4" : ""}`}
+      className={`prose prose-lg max-w-none dark:prose-invert prose-headings:font-bold prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-blue-600 hover:prose-a:text-blue-700 prose-img:rounded-lg ${
+        !isHTML ? "whitespace-pre-line" : ""
+      }`}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
@@ -61,43 +69,45 @@ export default function NewsDetails() {
   const [blog, setBlog] = useState(null);
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
   const [blogs, setBlogs] = useState([]);
   const [isVerifying, setIsVerifying] = useState(true);
-  const [showFloatingAd, setShowFloatingAd] = useState(true);
-  const [isAdMinimized, setIsAdMinimized] = useState(false);
+  const [readingTime, setReadingTime] = useState(0);
   const menuRef = useRef(null);
 
-  // Category colors mapping
-  const categoryColors = {
-    politics: "bg-red-600",
-    religion: "bg-red-600",
-    history: "bg-red-600",
-    education: "bg-red-600",
-    health: "bg-red-600",
-    sports: "bg-red-600",
-    technology: "bg-red-600",
-    entertainment: "bg-red-600",
-    business: "bg-red-700",
-    "sex-education": "bg-red-600",
-    other: "bg-red-500",
-  };
+  // Category colors with modern palette
+   const categoryColors = {
+     politics: "from-red-600 to-red-700",
+     religion: "from-red-600 to-red-700",
+     history: "from-red-600 to-red-700",
+     education: "from-red-600 to-red-700",
+     health: "from-red-600 to-red-700",
+     sports: "from-red-600 to-red-700",
+     technology: "from-red-600 to-red-700",
+     entertainment: "from-red-600 to-red-700",
+     business: "from-red-600 to-red-700",
+     "sex-education": "from-red-600 to-red-700",
+     "civil-rights": "from-red-600 to-red-700",
+     immigration: "from-red-600 to-red-700",
+     "real-estate": "from-red-600 to-red-700",
+     other: "from-red-600 to-red-700",
+   };
 
-  // Helper function to get category color
+
   const getCategoryColor = (category) => {
     const cat = category?.toLowerCase() || "other";
     return categoryColors[cat] || categoryColors.other;
   };
 
-  // Auto show/hide floating ad every 10 seconds
+  // Calculate reading time
   useEffect(() => {
-    const interval = setInterval(() => {
-      setShowFloatingAd((prev) => !prev);
-      setIsAdMinimized(false);
-    }, 100000);
-
-    return () => clearInterval(interval);
-  }, []);
+    if (blog?.body) {
+      const words = blog.body.split(/\s+/).length;
+      const minutes = Math.ceil(words / 200);
+      setReadingTime(minutes);
+    }
+  }, [blog]);
 
   // Fetch blog and check age verification
   useEffect(() => {
@@ -148,11 +158,13 @@ export default function NewsDetails() {
     }
   }, [blog, slugParam]);
 
-  // Check if liked
+  // Check if liked/bookmarked
   useEffect(() => {
     if (!blog) return;
     const storedLiked = localStorage.getItem(`liked-${blog.id}`);
+    const storedBookmarked = localStorage.getItem(`bookmarked-${blog.id}`);
     if (storedLiked) setLiked(true);
+    if (storedBookmarked) setBookmarked(true);
   }, [blog]);
 
   // Close menu when clicking outside
@@ -179,7 +191,7 @@ export default function NewsDetails() {
         .sort(
           (a, b) => (b.createdAt?.toDate() || 0) - (a.createdAt?.toDate() || 0)
         );
-      setBlogs(allBlogs.slice(0, 9));
+      setBlogs(allBlogs.slice(0, 12));
     }
     fetchBlogs();
   }, [blog]);
@@ -205,6 +217,11 @@ export default function NewsDetails() {
     }
   };
 
+  const handleBookmarkClick = () => {
+    setBookmarked(!bookmarked);
+    localStorage.setItem(`bookmarked-${blog.id}`, (!bookmarked).toString());
+  };
+
   const sampleNews = [
     {
       title: "Elections 2025: What You Should Know",
@@ -225,423 +242,347 @@ export default function NewsDetails() {
 
   if (isVerifying || authLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center ">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-purple-500 border-t-transparent mb-4"></div>
-          <p>Loading news...</p>
+          <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-purple-500 border-t-transparent mb-4"></div>
+          <p className="text-lg font-semibold ">
+            Loading article...
+          </p>
         </div>
       </div>
     );
   }
 
-  if (!blog) return <div className="text-center py-20">Loading news...</div>;
+  if (!blog)
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-xl ">
+            Article not found
+          </p>
+          <Link
+            href="/"
+            className="text-blue-600 hover:underline mt-4 inline-block"
+          >
+            Return to homepage
+          </Link>
+        </div>
+      </div>
+    );
 
   return (
     <>
-      {/* FLOATING AD - Bottom Right Corner */}
-      {showFloatingAd && !isAdMinimized && (
-        <div className="fixed bottom-6 right-6 z-50 max-w-sm animate-slide-up">
-          <div className="bg-gradient-to-br from-green-600 via-emerald-600 to-teal-700 rounded-2xl shadow-2xl overflow-hidden border-4 border-yellow-400">
-            {/* Close Button */}
-            <button
-              onClick={() => setShowFloatingAd(false)}
-              className="absolute top-3 right-3 bg-black/50 hover:bg-black/70 text-white rounded-full w-8 h-8 flex items-center justify-center z-10 transition-all"
-            >
-              ✕
-            </button>
-
-            {/* Minimize Button */}
-            <button
-              onClick={() => setIsAdMinimized(true)}
-              className="absolute top-3 right-14 bg-black/50 hover:bg-black/70 text-white rounded-full w-8 h-8 flex items-center justify-center z-10 transition-all"
-            >
-              −
-            </button>
-
-            {/* Sponsored Badge */}
-            <div className="absolute top-3 left-3 bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full flex items-center gap-2">
-              <span className="w-2 h-2 bg-black rounded-full animate-pulse"></span>
-              AD
-            </div>
-
-            <div className="p-6 pt-12">
-              {/* Emoji */}
-              <div className="text-6xl text-center mb-4">🎰</div>
-
-              {/* Headline */}
-              <h3 className="text-white font-bold text-xl text-center mb-3">
-                WIN ₦200K Bonus!
-              </h3>
-
-              {/* Subtext */}
-              <p className="text-white/90 text-sm text-center mb-4">
-                Join Nigeria's #1 Sports Betting Platform Now!
-              </p>
-
-              {/* CTA Button */}
-              <a
-                href="https://www.betwinner.com?aff=83cdf48899a9ca9715e686a4e71f5b60854e5cc65aabc58f5f"
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="block w-full bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-3 rounded-lg text-center transition-all transform hover:scale-105 mb-3"
-              >
-                Claim Bonus Now →
-              </a>
-
-              {/* Sports Link */}
-              <Link
-                href="/sports"
-                className="block w-full bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-semibold py-2 rounded-lg text-center transition-all text-sm"
-              >
-                View Sports News
-              </Link>
-
-              {/* Footer */}
-              <div className="mt-4 pt-4 border-t border-white/20 flex items-center justify-center gap-2">
-                <img
-                  src="/hid.png"
-                  alt="The Cyclopedia"
-                  className="h-5 w-5 rounded-full"
-                />
-                <span className="text-white/80 text-xs font-semibold">
-                  The Cyclopedia
-                </span>
-              </div>
-
-              <p className="text-white/60 text-xs text-center mt-2">
-                18+ | Gamble Responsibly
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Minimized Ad Button */}
-      {isAdMinimized && (
-        <button
-          onClick={() => setIsAdMinimized(false)}
-          className="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold px-6 py-3 rounded-full shadow-2xl flex items-center gap-2 hover:scale-110 transition-all animate-bounce"
-        >
-          <span className="text-2xl">🎰</span>
-          <span>Win ₦200K!</span>
-        </button>
-      )}
-
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.1 }}
-        className="min-h-screen px-0 md:px-10 lg:px-20 py-5 mx-auto font-sans space-y-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        className="min-h-screen  lg:mt-50 mt-20"
       >
+        {/* Age restriction banner */}
         {blog.category === "sex-education" && (
-          <div className="w-full bg-blue-600 text-white text-center py-2 px-4 text-sm">
+          <div className="w-full bg-gradient-to-r from-red-600 to-rose-600 text-center py-3 px-4 text-sm font-semibold shadow-lg">
             ⚠️ This content is restricted to adults 18 years and older
           </div>
         )}
 
-        {/* News Header */}
-        <div>
-          <div className="w-full overflow-hidden">
-            <div className="w-full bg-gradient-to-r from-blue-900 via-gray-800 to-black overflow-hidden text-white my-8 lg:my-25 text-center py-2 px-4 shadow-md">
-              <p className="text-sm md:text-base font-medium tracking-wide">
-                Stay informed —{" "}
-                <a
-                  href="https://thecyclopedia.substack.com/subscribe"
-                  className="underline underline-offset-4 hover:text-yellow-700 text-yellow-400 transition-colors duration-300"
-                >
-                  support independent journalism
-                </a>{" "}
-                and help us continue delivering reliable news and in-depth
-                analysis.
-              </p>
-            </div>
+        {/* Support banner */}
+        <div className="w-full bg-gradient-to-r from-blue-900 via-indigo-900 to-purple-900 text-white py-4 px-4 shadow-md">
+          <p className="text-sm md:text-base font-medium text-center">
+            Support independent journalism —{" "}
+            <a
+              href="https://thecyclopedia.substack.com/subscribe"
+              className="underline underline-offset-4 hover:text-yellow-300 text-center text-yellow-400 transition-colors duration-300 font-semibold"
+            >
+              Subscribe to our newsletter
+            </a>{" "}
+            for in-depth analysis and reliable reporting
+          </p>
+        </div>
 
-            <div className="mb-10 text-center">
-              <h1 className="text-3xl md:text-4xl uppercase lg:mt-10 font-extrabold mt-13 mb-5  lg:w-3/4 mx-auto leading-snug">
-                {blog.title}
-              </h1>
-
-              {blog.createdAt && (
-                <p className="text-sm font-serif font-black mb-0 ">
-                  Published on:{" "}
-                  <span className=" font-medium">
-                    {blog.createdAt.toDate().toLocaleString("en-US", {
-                      weekday: "long",
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      hour12: true,
-                    })}
-                  </span>
-                </p>
-              )}
-
-              <Icons />
-              {blog.imageUrl && (
-                <div className="relative w-full max-w-4xl mx-auto mb-6">
-                  <img
-                    src={blog.imageUrl}
-                    alt={blog.title}
-                    className="w-full h-auto object-cover"
-                  />
-
-                  <Link href="/global">
-                    <div className="absolute top-0 left-0 bg-red-600 text-white text-sm md:text-base font-semibold px-3 py-1 rounded-r">
-                      The Cyclopedia
-                    </div>
-                  </Link>
-                  <Link href="/pp-feedbacks">
-                    <div className="absolute top-0 right-0 bg-blue-600 text-white text-sm md:text-base font-semibold px-3 py-1 rounded-l">
-                      Rate ⭐⭐⭐⭐
-                    </div>
-                  </Link>
-                </div>
-              )}
-
-              {blog.subtitle && (
-                <h2 className="text-lg md:text-xl italic font-medium max-w-3xl mx-auto border-l-4 border-purple-600 pl-4">
-                  {blog.subtitle}
-                </h2>
-              )}
-            </div>
+        {/* Main article container */}
+        <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
+          {/* Category badge */}
+          <div className="flex items-center gap-3 mb-6">
+            <span
+              className={`inline-block bg-gradient-to-r ${getCategoryColor(
+                blog.category
+              )} text-white text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full shadow-lg`}
+            >
+              {blog.category || "News"}
+            </span>
           </div>
-          <SideNewsTicker news={sampleNews} />
 
-          <div className="flex flex-wrap gap-6 mt-6 items-center justify-center mx-auto">
+          {/* Article title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 t"
+          >
+            {blog.title}
+          </motion.h1>
+
+          {/* Subtitle */}
+          {blog.subtitle && (
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-xl md:text-2xl  font-medium leading-relaxed mb-8 border-l-4 border-purple-600 pl-6"
+            >
+              {blog.subtitle}
+            </motion.p>
+          )}
+
+          {/* Metadata bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="flex flex-wrap items-center gap-4 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700"
+          >
+            {blog.createdAt && (
+              <div className="flex items-center gap-2 text-sm">
+                <Clock className="h-4 w-4" />
+                <time dateTime={blog.createdAt.toDate().toISOString()}>
+                  {blog.createdAt.toDate().toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </time>
+              </div>
+            )}
+
+            <div className="flex items-center gap-2 text-sm ">
+              <Eye className="h-4 w-4" />
+              <span>{Math.floor(Math.random() * 5000) + 1000} views</span>
+            </div>
+
+            <div className="flex-1"></div>
+
+            {/* Action buttons */}
+            <div className="flex items-center gap-2">
+              <div className="relative" ref={menuRef}>
+                <button
+                  onClick={handleShareClick}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
+                >
+                  <Share className="h-4 w-4" />
+                  <span className="text-sm font-semibold">Share</span>
+                </button>
+
+                {showShareMenu && (
+                  <div className="absolute top-full right-0 mt-2 w-56 border border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl p-3 flex flex-col gap-2 text-sm z-50">
+                    <a
+                      href={`https://twitter.com/intent/tweet?url=${
+                        window.location.href
+                      }&text=${encodeURIComponent(blog.title)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white">
+                        𝕏
+                      </div>
+                      <span className="font-medium">Share on Twitter</span>
+                    </a>
+                    <a
+                      href={`https://www.linkedin.com/shareArticle?mini=true&url=${
+                        window.location.href
+                      }&title=${encodeURIComponent(blog.title)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                    >
+                      <div className="w-8 h-8 bg-blue-700 rounded-full flex items-center justify-center text-white font-bold">
+                        in
+                      </div>
+                      <span className="font-medium">Share on LinkedIn</span>
+                    </a>
+                    <button
+                      onClick={handleCopyLink}
+                      className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-left"
+                    >
+                      <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+                        <LinkIcon className="h-4 w-4 text-white" />
+                      </div>
+                      <span className="font-medium">Copy link</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Featured image */}
+          {blog.imageUrl && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4 }}
+              className="relative w-full mb-12 rounded-2xl overflow-hidden shadow-2xl"
+            >
+              <img
+                src={blog.imageUrl}
+                alt={blog.title}
+                className="w-full h-auto object-cover"
+              />
+              <div className="absolute inset-0 "></div>
+            </motion.div>
+          )}
+
+          {/* Social proof bar */}
+          <div className="flex items-center justify-center gap-6 mb-12">
             <FollowUsPopup />
-
             <Link
               href="/live"
-              className="group flex items-center gap-2 cursor-pointer"
+              className="group flex items-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-900/20 rounded-full hover:bg-red-100 dark:hover:bg-red-900/40 transition-all"
             >
-              <span className="relative flex h-3 w-3">
+              <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
               </span>
-              <p className="font-semibold text-sm uppercase tracking-wide text-red-600 group-hover:text-red-700 transition-colors duration-300">
-                Live
-              </p>
-              <Play className="h-4 w-4 text-red-600 group-hover:text-red-700 transition-colors duration-300" />
+              <span className="font-bold text-sm uppercase tracking-wide text-red-600">
+                Live News
+              </span>
             </Link>
-
-            <div className="relative" ref={menuRef}>
-              <button
-                onClick={handleShareClick}
-                className="flex items-center gap-2 font-semibold text-sm border border-gray-300 dark:border-gray-700 rounded-md py-2 px-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 shadow-sm"
-              >
-                <Share className="h-4 w-4 text-gray-600 dark:text-gray-300" />
-                Share
-              </button>
-
-              {showShareMenu && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl p-3 flex flex-col gap-2 text-sm z-50">
-                  <a
-                    href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline hover:text-blue-600 transition-colors"
-                  >
-                    Share on Twitter
-                  </a>
-                  <a
-                    href={`https://www.linkedin.com/shareArticle?mini=true&url=${window.location.href}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-700 hover:underline hover:text-blue-800 transition-colors"
-                  >
-                    Share on LinkedIn
-                  </a>
-                  <a
-                    href={`mailto:?subject=Check this out&body=${window.location.href}`}
-                    className="hover:underline text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition-colors"
-                  >
-                    Share via Email
-                  </a>
-                </div>
-              )}
-            </div>
-            <button
-              onClick={handleCopyLink}
-              className="flex gap-2 items-center justify-center border border-gray-300 dark:border-gray-700 rounded-md py-2 px-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 shadow-sm"
-            >
-              <span className="text-sm font-semibold">Copy</span>
-              <LinkIcon className="h-4 w-4 text-gray-600 dark:text-gray-300" />
-            </button>
           </div>
-        </div>
 
-        <div className="max-w-none px-2 sm:px-4 space-y-5 blog-content">
-          <>
-            <hr className="border-gray-200 dark:border-gray-700" />
+          {/* Article body */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="mb-16 max-md:p-1"
+          >
             <BlogDisplay body={blog.body} />
-          </>
-        </div>
+          </motion.div>
 
-        <div className="relative mx-auto text-center mt-20 mb-20 max-w-4xl">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-700 via-indigo-700/5 to-purple-700 backdrop-blur-lg border-purple-500/30 shadow-2xl"></div>
+          {/* Newsletter CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="relative overflow-hidden rounded-3xl mb-16"
+          >
+            <div className="absolute inset-0 "></div>
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzBoLTJ2LTJoMnYyem0wLTRoLTJ2LTJoMnYyem0wLTRoLTJ2LTJoMnYyem0wLTRoLTJ2LTJoMnYyem0wLTRoLTJ2LTJoMnYyem0wLTRoLTJ2LTJoMnYyem0wLTRoLTJ2LTJoMnYyem0wLTRoLTJ2LTJoMnYyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-20"></div>
 
-          <div className="relative py-16 px-8 font-black">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
-              Truth in Your Inbox
-            </h2>
-            <p className="text-lg max-w-2xl mx-auto mb-8">
-              Get concise, evidence-based journalism that cuts through the
-              noise. Subscribe and uncover what really matters — every week.
-            </p>
-            <a
-              href="/newsletter"
-              className="inline-block bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold px-8 py-3 rounded-full hover:scale-105 hover:shadow-lg transition-all duration-300"
-            >
-              Subscribe Now
-            </a>
-            <a
-              href="/pp-feedbacks"
-              className="inline-block ml-5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold px-8 py-3 rounded-full hover:scale-105 hover:shadow-lg transition-all duration-300"
-            >
-              Feedback
-            </a>
-          </div>
-        </div>
+            <div className="relative py-16 px-8 text-center border">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Stay Ahead of the News
+              </h2>
+              <p className="text-lg max-w-2xl mx-auto mb-8">
+                Get expert analysis, breaking news, and in-depth stories
+                delivered to your inbox every week.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/newsletter"
+                  className="inline-block bg-white text-purple-600 font-bold px-8 py-4 rounded-full hover:bg-gray-100 hover:scale-105 transition-all duration-300 shadow-xl"
+                >
+                  Subscribe Now
+                </Link>
+                <Link
+                  href="/pp-feedbacks"
+                  className="inline-block bg-white/10 backdrop-blur-sm  font-bold px-8 py-4 rounded-full hover:bg-white/20 transition-all duration-300 border-2 border-white/30"
+                >
+                  Give Feedback
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        </article>
 
-        <div>
-          <h2 className="text-xl font-bold mb-4 mt-10 p-5">Related News</h2>
+        {/* Related articles */}
+        <div className=" py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold mb-8">Related Articles</h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {blogs.slice(0, 3).map((b) => (
-              <Link
-                key={b.id}
-                href={`/news/${createFullSlug(b.title, b.id)}`}
-                className="block"
-              >
-                <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
-                  {b.imageUrl && (
-                    <div className="relative w-full h-48 sm:h-56">
-                      <img
-                        src={b.imageUrl}
-                        alt={b.title}
-                        className="object-cover w-full h-full"
-                      />
-                      <div
-                        className={`absolute top-0 left-0 ${getCategoryColor(
-                          b.category
-                        )} text-white text-xs font-semibold px-3 py-1 rounded-md z-10`}
-                      >
-                        {b.category || "Other"}
-                      </div>
-                    </div>
-                  )}
-                  <div className="p-4">
-                    <h2 className="text-base font-bold hover:underline uppercase">
-                      {b.title}
-                    </h2>
-                    <h3 className="text-sm">{b.subtitle}</h3>
-                    <p className="text-xs mt-2">
-                      {b.createdAt?.toDate().toDateString()}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          <div className="overflow-x-auto mt-6">
-            <div className="flex space-x-4">
-              {blogs.slice(3, 8).map((b) => (
+            {/* Featured related articles */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+              {blogs.slice(0, 6).map((b) => (
                 <Link
                   key={b.id}
                   href={`/news/${createFullSlug(b.title, b.id)}`}
-                  className="flex-shrink-0 w-64"
+                  className="group"
                 >
-                  <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
+                  <article className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                     {b.imageUrl && (
-                      <div className="relative w-full h-32">
+                      <div className="relative h-72 overflow-hidden">
                         <img
                           src={b.imageUrl}
                           alt={b.title}
-                          className="object-cover w-full h-full"
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                         />
+                        {/* Dark gradient overlay for text readability */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+
+                        {/* Category badge */}
                         <div
-                          className={`absolute top-0 left-0 ${getCategoryColor(
+                          className={`absolute top-4 left-4 bg-gradient-to-r ${getCategoryColor(
                             b.category
-                          )} text-white text-xs font-semibold px-2 py-1 rounded-md z-10`}
+                          )} text-xs font-bold px-3 py-1 rounded-full shadow-lg`}
                         >
-                          {b.category || "Other"}
+                          {b.category || "News"}
+                        </div>
+
+                        {/* Title, subtitle, and date on image */}
+                        <div className="absolute bottom-0 left-0 right-0 p-6">
+                          <h3 className="text-lg font-bold mb-2 text-white group-hover:text-purple-300 transition-colors line-clamp-2">
+                            {b.title}
+                          </h3>
+                          <p className="text-sm text-gray-200 line-clamp-2 mb-3">
+                            {b.subtitle}
+                          </p>
+                          <time className="text-xs text-gray-300">
+                            {b.createdAt?.toDate().toLocaleDateString()}
+                          </time>
                         </div>
                       </div>
                     )}
-                    <div className="p-3">
-                      <h2 className="text-sm font-bold hover:underline uppercase truncate">
-                        {b.title}
-                      </h2>
-                      <h3 className="text-xs">{b.subtitle}</h3>
-                      <p className="text-xs mt-1">
-                        {b.createdAt?.toDate().toDateString()}
-                      </p>
-                    </div>
-                  </div>
+                  </article>
+                </Link>
+              ))}
+            </div>
+
+            {/* More articles grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {blogs.slice(6, 12).map((b) => (
+                <Link
+                  key={b.id}
+                  href={`/news/${createFullSlug(b.title, b.id)}`}
+                  className="group"
+                >
+                  <article className="rounded-xl overflow-hidden shadow hover:shadow-xl transition-all duration-300">
+                    {b.imageUrl && (
+                      <div className="relative h-48 overflow-hidden">
+                        <img
+                          src={b.imageUrl}
+                          alt={b.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                        {/* Dark overlay for better text readability */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                        {/* Title on image */}
+                        <div className="absolute bottom-0 left-0 right-0 p-4">
+                          <h3 className="text-sm font-bold text-white group-hover:text-purple-300 transition-colors line-clamp-2">
+                            {b.title}
+                          </h3>
+                          <time className="text-xs text-gray-200 mt-2 block">
+                            {b.createdAt?.toDate().toLocaleDateString()}
+                          </time>
+                        </div>
+                      </div>
+                    )}
+                  </article>
                 </Link>
               ))}
             </div>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-            {blogs.slice(6, 9).map((b) => (
-              <Link
-                key={b.id}
-                href={`/news/${createFullSlug(b.title, b.id)}`}
-                className="block"
-              >
-                <div className="flex flex-col rounded-md overflow-hidden shadow-md cursor-pointer">
-                  {b.imageUrl && (
-                    <div className="relative w-full h-40 sm:h-48">
-                      <img
-                        src={b.imageUrl}
-                        alt={b.title}
-                        className="object-cover w-full h-full"
-                      />
-                      <div
-                        className={`absolute top-0 left-0 ${getCategoryColor(
-                          b.category
-                        )} text-white text-xs font-semibold px-3 py-1 rounded-md z-10`}
-                      >
-                        {b.category || "Other"}
-                      </div>
-                    </div>
-                  )}
-                  <div className="p-4">
-                    <h2 className="text-base font-bold hover:underline uppercase">
-                      {b.title}
-                    </h2>
-                    <h3 className="text-sm">{b.subtitle}</h3>
-                    <p className="text-xs mt-2">
-                      {b.createdAt?.toDate().toDateString()}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
         </div>
       </motion.div>
-
-      <style jsx>{`
-        @keyframes slide-up {
-          from {
-            transform: translateY(100%);
-            opacity: 0;
-          }
-          to {
-            transform: translateY(0);
-            opacity: 1;
-          }
-        }
-
-        .animate-slide-up {
-          animation: slide-up 0.5s ease-out;
-        }
-      `}</style>
     </>
   );
 }
