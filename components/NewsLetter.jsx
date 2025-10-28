@@ -86,7 +86,7 @@ export default function NewsletterForm() {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center p-4 overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <section className="relative min-h-screen flex items-center justify-center p-4 overflow-hidden bg-[#0c0b0bfa] ">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/30 rounded-full blur-3xl animate-pulse"></div>
@@ -169,10 +169,10 @@ export default function NewsletterForm() {
               <div className="flex items-start gap-3">
                 <div className="text-4xl">💬</div>
                 <div>
-                  <h1 className="text-lg font-bold">
+                  <h1 className="text-lg font-bold text-white">
                     The Cyclopedia is a Game Changer for News Consumption
                   </h1>
-                  <p className="text-white italic mb-2">
+                  <p className="text-gray-300 italic mb-2">
                     I've been using The Cyclopedia for the past few weeks and
                     I'm genuinely impressed with the platform. The design is
                     clean and intuitive, making it easy to navigate through
@@ -221,11 +221,11 @@ export default function NewsletterForm() {
                   <input
                     type="text"
                     name="firstName"
-                    placeholder="John Doe"
+                    placeholder="Cyclopedia Reader"
                     value={formData.firstName}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all"
+                    className="w-full px-4 py-3 border-2 text-black border-gray-200 rounded-xl focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all"
                   />
                 </div>
 
@@ -236,11 +236,11 @@ export default function NewsletterForm() {
                   <input
                     type="email"
                     name="email"
-                    placeholder="john@example.com"
+                    placeholder="CyclopediaReader@example.com"
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all"
+                    className="w-full px-4 py-3 border-2 text-black border-gray-200 rounded-xl focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all"
                   />
                 </div>
 

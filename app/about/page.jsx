@@ -17,8 +17,8 @@ const About = () => {
   return (
     <main className="min-h-screen font-sans">
       {/* Hero Section */}
-      <header className="flex flex-col justify-center items-center min-h-screen text-center px-6 md:px-20 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-950/20 dark:to-indigo-950/20">
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-8 tracking-tight">
+      <header className="flex flex-col justify-center items-center min-h-screen text-center px-6 md:px-20 bg-[#0c0b0bfa]">
+        <h1 className="text-5xl md:text-6xl text-white font-extrabold mb-8 tracking-tight">
           About{" "}
           <span className="bg-gradient-to-r from-purple-500 to-cyan-400 text-transparent bg-clip-text font-serif">
             The Cyclopedia
@@ -32,10 +32,10 @@ const About = () => {
         <p className="text-purple-600 dark:text-purple-400 mb-4 text-lg font-semibold">
           Uncovering the Unseen, Revealing the Real.
         </p>
-        <p className="max-w-3xl leading-relaxed text-lg opacity-80">
+        <p className="max-w-3xl leading-relaxed text-lg opacity-80 text-gray-300">
           <span className="text-3xl text-purple-400">We</span> are not just
-          another media outlet. We are a movement of minds — built for those
-          who question, research, and seek the truth behind the curtain.
+          another media outlet. We are a movement of minds — built for those who
+          question, research, and seek the truth behind the curtain.
         </p>
       </header>
 
@@ -46,10 +46,12 @@ const About = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-6">Our Mission</h2>
           <p className="text-lg leading-relaxed opacity-95">
-            The Cyclopedia is dedicated to delivering truth, light, and clarity in a world 
-            saturated with misinformation. We provide curated insights, investigative journalism, 
-            and evidence-based information to empower our readers with knowledge that matters. 
-            We believe in transparency, critical thinking, and the power of informed communities.
+            The Cyclopedia is dedicated to delivering truth, light, and clarity
+            in a world saturated with misinformation. We provide curated
+            insights, investigative journalism, and evidence-based information
+            to empower our readers with knowledge that matters. We believe in
+            transparency, critical thinking, and the power of informed
+            communities.
           </p>
         </div>
       </section>
@@ -62,8 +64,8 @@ const About = () => {
 
         <div className="flex overflow-x-auto space-x-6 scrollbar-hide snap-x snap-mandatory pb-4 px-4">
           {/* Card 1 */}
-          <div className="snap-start flex-shrink-0 w-80 bg-purple-50 dark:bg-purple-900/10 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-            <div className="bg-purple-100 dark:bg-purple-900/30 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+          <div className="snap-start flex-shrink-0 w-80 bg-[#0c0b0bfa] text-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+            <div className="bg-[#0c0b0bfa] w-12 h-12 rounded-full flex items-center justify-center mb-4">
               <Eye className="text-purple-600 dark:text-purple-400" size={24} />
             </div>
             <h3 className="text-xl font-semibold mb-3">Our Identity</h3>
@@ -80,14 +82,17 @@ const About = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="snap-start flex-shrink-0 w-80 bg-indigo-50 dark:bg-indigo-900/10 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+          <div className="snap-start flex-shrink-0 w-80 bg-[#0c0b0bfa] text-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
             <div className="bg-indigo-100 dark:bg-indigo-900/30 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-              <Target className="text-indigo-600 dark:text-indigo-400" size={24} />
+              <Target
+                className="text-indigo-600 dark:text-indigo-400"
+                size={24}
+              />
             </div>
             <h3 className="text-xl font-semibold mb-3">Our Purpose</h3>
             <p className="text-sm opacity-80 mb-4">
-              We ask questions and connect dots others ignore. Because
-              truth isn't always comfortable — but it's necessary.
+              We ask questions and connect dots others ignore. Because truth
+              isn't always comfortable — but it's necessary.
             </p>
             <ul className="text-sm space-y-2 opacity-80">
               <li>• Challenge mainstream narratives</li>
@@ -98,9 +103,12 @@ const About = () => {
           </div>
 
           {/* Card 3 */}
-          <div className="snap-start flex-shrink-0 w-80 bg-purple-50 dark:bg-purple-900/10 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+          <div className="snap-start flex-shrink-0 w-80 bg-[#0c0b0bfa] text-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
             <div className="bg-purple-100 dark:bg-purple-900/30 w-12 h-12 rounded-full flex items-center justify-center mb-4">
-              <BookOpen className="text-purple-600 dark:text-purple-400" size={24} />
+              <BookOpen
+                className="text-purple-600 dark:text-purple-400"
+                size={24}
+              />
             </div>
             <h3 className="text-xl font-semibold mb-3">Why We Exist</h3>
             <p className="text-sm opacity-80 mb-4">
@@ -122,77 +130,101 @@ const About = () => {
         <h2 className="text-center text-4xl font-bold mb-12 text-purple-600 dark:text-purple-400">
           What We Do
         </h2>
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Investigative Journalism */}
-          <div className="bg-white dark:bg-slate-900/50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]">
+          <div className="bg-[#0c0b0bfa] text-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]">
             <div className="bg-purple-100 dark:bg-purple-900/30 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
-              <Compass className="text-purple-600 dark:text-purple-400" size={28} />
+              <Compass
+                className="text-purple-600 dark:text-purple-400"
+                size={28}
+              />
             </div>
             <h3 className="text-xl font-bold mb-3">Investigative Journalism</h3>
             <p className="text-sm opacity-80 leading-relaxed">
-              We dig deep into stories that matter, uncovering truths that mainstream media often overlooks. 
-              Our team conducts thorough research and fact-checking to bring you reliable information.
+              We dig deep into stories that matter, uncovering truths that
+              mainstream media often overlooks. Our team conducts thorough
+              research and fact-checking to bring you reliable information.
             </p>
           </div>
 
           {/* Curated Content */}
-          <div className="bg-white dark:bg-slate-900/50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]">
+          <div className="bg-[#0c0b0bfa] text-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]">
             <div className="bg-indigo-100 dark:bg-indigo-900/30 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
-              <BookOpen className="text-indigo-600 dark:text-indigo-400" size={28} />
+              <BookOpen
+                className="text-indigo-600 dark:text-indigo-400"
+                size={28}
+              />
             </div>
             <h3 className="text-xl font-bold mb-3">Curated Insights</h3>
             <p className="text-sm opacity-80 leading-relaxed">
-              We carefully select and analyze information from diverse sources, providing you with 
-              well-rounded perspectives on complex topics and current events.
+              We carefully select and analyze information from diverse sources,
+              providing you with well-rounded perspectives on complex topics and
+              current events.
             </p>
           </div>
 
           {/* Evidence-Based Reporting */}
-          <div className="bg-white dark:bg-slate-900/50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]">
+          <div className="bg-[#0c0b0bfa] text-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]">
             <div className="bg-purple-100 dark:bg-purple-900/30 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
-              <Shield className="text-purple-600 dark:text-purple-400" size={28} />
+              <Shield
+                className="text-purple-600 dark:text-purple-400"
+                size={28}
+              />
             </div>
             <h3 className="text-xl font-bold mb-3">Evidence-Based Reporting</h3>
             <p className="text-sm opacity-80 leading-relaxed">
-              Every claim we make is backed by verifiable sources and rigorous research. 
-              We prioritize accuracy and integrity in all our published content.
+              Every claim we make is backed by verifiable sources and rigorous
+              research. We prioritize accuracy and integrity in all our
+              published content.
             </p>
           </div>
 
           {/* Community Building */}
-          <div className="bg-white dark:bg-slate-900/50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]">
+          <div className="bg-[#0c0b0bfa] text-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]">
             <div className="bg-indigo-100 dark:bg-indigo-900/30 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
-              <Users className="text-indigo-600 dark:text-indigo-400" size={28} />
+              <Users
+                className="text-indigo-600 dark:text-indigo-400"
+                size={28}
+              />
             </div>
             <h3 className="text-xl font-bold mb-3">Community Building</h3>
             <p className="text-sm opacity-80 leading-relaxed">
-              We foster a global community of truth-seekers, critical thinkers, and informed citizens 
-              who engage in meaningful discussions and share valuable insights.
+              We foster a global community of truth-seekers, critical thinkers,
+              and informed citizens who engage in meaningful discussions and
+              share valuable insights.
             </p>
           </div>
 
           {/* Knowledge Transparency */}
-          <div className="bg-white dark:bg-slate-900/50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]">
+          <div className="bg-[#0c0b0bfa] text-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]">
             <div className="bg-purple-100 dark:bg-purple-900/30 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
-              <Lightbulb className="text-purple-600 dark:text-purple-400" size={28} />
+              <Lightbulb
+                className="text-purple-600 dark:text-purple-400"
+                size={28}
+              />
             </div>
             <h3 className="text-xl font-bold mb-3">Knowledge Transparency</h3>
             <p className="text-sm opacity-80 leading-relaxed">
-              We believe in open access to information. Our platform makes complex topics 
-              understandable and accessible to everyone, regardless of background.
+              We believe in open access to information. Our platform makes
+              complex topics understandable and accessible to everyone,
+              regardless of background.
             </p>
           </div>
 
           {/* Global Coverage */}
-          <div className="bg-white dark:bg-slate-900/50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]">
+          <div className="bg-[#0c0b0bfa] text-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]">
             <div className="bg-indigo-100 dark:bg-indigo-900/30 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
-              <Globe className="text-indigo-600 dark:text-indigo-400" size={28} />
+              <Globe
+                className="text-indigo-600 dark:text-indigo-400"
+                size={28}
+              />
             </div>
             <h3 className="text-xl font-bold mb-3">Global Perspective</h3>
             <p className="text-sm opacity-80 leading-relaxed">
-              From Kano to the world, we cover stories with international relevance, 
-              connecting local insights to global movements and trends.
+              From Kano to the world, we cover stories with international
+              relevance, connecting local insights to global movements and
+              trends.
             </p>
           </div>
         </div>
@@ -203,16 +235,19 @@ const About = () => {
         <h2 className="text-center text-4xl font-bold mb-12 bg-gradient-to-r from-purple-500 to-cyan-400 text-transparent bg-clip-text">
           Our Core Values
         </h2>
-        
+
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           <div className="text-center">
             <div className="inline-flex p-4 rounded-full bg-purple-100 dark:bg-purple-900/30 mb-4">
-              <Award className="text-purple-600 dark:text-purple-400" size={32} />
+              <Award
+                className="text-purple-600 dark:text-purple-400"
+                size={32}
+              />
             </div>
             <h3 className="text-xl font-bold mb-3">Integrity</h3>
             <p className="text-sm opacity-80">
-              We stand by our commitment to truthful, accurate, and unbiased reporting. 
-              Our reputation is built on trust and transparency.
+              We stand by our commitment to truthful, accurate, and unbiased
+              reporting. Our reputation is built on trust and transparency.
             </p>
           </div>
 
@@ -222,19 +257,22 @@ const About = () => {
             </div>
             <h3 className="text-xl font-bold mb-3">Clarity</h3>
             <p className="text-sm opacity-80">
-              We cut through the noise to deliver clear, concise, and meaningful information 
-              that helps you make informed decisions.
+              We cut through the noise to deliver clear, concise, and meaningful
+              information that helps you make informed decisions.
             </p>
           </div>
 
           <div className="text-center">
             <div className="inline-flex p-4 rounded-full bg-purple-100 dark:bg-purple-900/30 mb-4">
-              <Heart className="text-purple-600 dark:text-purple-400" size={32} />
+              <Heart
+                className="text-purple-600 dark:text-purple-400"
+                size={32}
+              />
             </div>
             <h3 className="text-xl font-bold mb-3">Courage</h3>
             <p className="text-sm opacity-80">
-              We have the courage to ask difficult questions and challenge conventional narratives, 
-              even when it's uncomfortable.
+              We have the courage to ask difficult questions and challenge
+              conventional narratives, even when it's uncomfortable.
             </p>
           </div>
         </div>
@@ -242,16 +280,19 @@ const About = () => {
 
       {/* Journey Section */}
       <section className="px-6 md:px-20 py-16 text-center dark:from-purple-950/20 dark:to-indigo-950/20">
-        <h2 className="text-4xl font-bold mb-6 text-purple-600 dark:text-purple-400">Our Journey</h2>
+        <h2 className="text-4xl font-bold mb-6 text-purple-600 dark:text-purple-400">
+          Our Journey
+        </h2>
         <p className=" mx-auto text-lg leading-relaxed opacity-80 mb-8">
-          The Cyclopedia was founded out of a need for honest inquiry and open <br/>
-          minds. We began as a small community sharing unconventional
-          insights and evolved into a platform for collective awareness. 
+          The Cyclopedia was founded out of a need for honest inquiry and open{" "}
+          <br />
+          minds. We began as a small community sharing unconventional insights
+          and evolved into a platform for collective awareness.
         </p>
         <p className=" mx-auto text-lg leading-relaxed opacity-80">
-          Today, we serve thousands of readers across Nigeria and beyond, <br/> 
-          providing a trusted source for investigative journalism and critical analysis. 
-          Our journey continues — and you're part of it.
+          Today, we serve thousands of readers across Nigeria and beyond, <br />
+          providing a trusted source for investigative journalism and critical
+          analysis. Our journey continues — and you're part of it.
         </p>
       </section>
 
@@ -259,8 +300,10 @@ const About = () => {
       <section className="px-6 md:px-20 py-16 text-center">
         <h2 className="text-4xl font-bold mb-6">Join Our Community</h2>
         <p className=" mx-auto text-lg opacity-80 mb-8">
-          Become part of a growing movement of truth-seekers, critical thinkers, <br/>
-          and informed citizens. Stay updated with our latest investigations and insights.
+          Become part of a growing movement of truth-seekers, critical thinkers,{" "}
+          <br />
+          and informed citizens. Stay updated with our latest investigations and
+          insights.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
