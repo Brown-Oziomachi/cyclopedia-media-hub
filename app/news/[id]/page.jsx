@@ -246,7 +246,7 @@ export default function NewsDetails() {
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-purple-500 border-t-transparent mb-4"></div>
           <p className="text-lg font-semibold ">
-            Loading article...
+            Loading news...
           </p>
         </div>
       </div>
@@ -373,7 +373,7 @@ export default function NewsDetails() {
                 </button>
 
                 {showShareMenu && (
-                  <div className="absolute top-full right-0 mt-2 w-56 border border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl p-3 flex flex-col gap-2 text-sm z-50">
+                  <div className="absolute top-full left-0 mt-2 w-56 border bg-white dark:text-black border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl p-3 flex flex-col gap-2 text-sm z-50">
                     <a
                       href={`https://twitter.com/intent/tweet?url=${
                         window.location.href
