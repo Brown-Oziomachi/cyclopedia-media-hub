@@ -198,7 +198,7 @@ export default function NewsDetails() {
     if (!blog) return;
     async function fetchBlogs() {
       const snapshot = await getDocs(collection(db1, "blogs"));
-      const allBlogs = snapshot.docs
+      const allBlogs = snapshot.docs 
         .map((doc) => ({ id: doc.id, ...doc.data() }))
         .filter((b) => b.id !== blog.id)
         .sort(
@@ -315,7 +315,6 @@ export default function NewsDetails() {
             for in-depth analysis and reliable reporting
           </p>
         </div>
-
         {/* Main article container */}
         <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
           {/* Category badge */}

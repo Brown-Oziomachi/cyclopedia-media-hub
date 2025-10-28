@@ -579,7 +579,7 @@ useEffect(() => {
                 No videos available
               </p>
               <p className="text-gray-400 text-sm">
-                Check your network connection
+                Please refresh the website or check your network connection
               </p>
                <p className="text-gray-500 text-xs mt-2">
                 find the late news on <a href="/all-sports" className="text-red-600 underline">Sports</a>

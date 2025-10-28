@@ -29,7 +29,7 @@ export default function CyclopediaConnection() {
   };
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto py-8 md:py-16 px-4">
+    <div className="relative w-full max-w-6xl mx-auto py-8 md:py-16 px-4 bg-black">
       {/* Background Glow Effects */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-64 h-64 md:w-96 md:h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
@@ -47,7 +47,7 @@ export default function CyclopediaConnection() {
           variants={itemVariants}
           className="text-center mb-8 md:mb-12"
         >
-          <h2 className="text-2xl md:text-4xl font-bold mb-2 md:mb-3">
+          <h2 className="text-2xl md:text-4xl font-bold mb-2 md:mb-3 text-white">
             Connected Sources of{" "}
             <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Knowledge
@@ -64,7 +64,7 @@ export default function CyclopediaConnection() {
           <motion.div variants={itemVariants} className="flex-1">
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity"></div>
-              <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 border-2 border-blue-500 rounded-2xl p-6 md:p-8 text-center transform group-hover:scale-105 transition-all duration-300">
+              <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-6 md:p-8 text-center transform group-hover:scale-105 transition-all duration-300">
                 <div className="text-4xl md:text-6xl mb-3">📚</div>
                 <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
                   Encyclopedia
@@ -120,12 +120,12 @@ export default function CyclopediaConnection() {
           {/* The Cyclopedia Node */}
           <motion.div variants={itemVariants} className="flex-1">
             <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-3xl blur-2xl opacity-40 animate-pulse"></div>
-              <div className="relative bg-gradient-to-br from-purple-900 via-indigo-900 to-cyan-900 border-4 border-cyan-400 rounded-3xl p-6 md:p-10 text-center transform group-hover:scale-110 transition-all duration-500 shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl blur-2xl opacity-40 animate-pulse"></div>
+              <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-6 md:p-10 text-center transform group-hover:scale-110 transition-all duration-500 shadow-2xl">
                 <div className="text-5xl md:text-7xl mb-3 animate-bounce">
                   👁️
                 </div>
-                <h2 className="text-2xl md:text-4xl font-black text-white mb-2 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                <h2 className="text-2xl md:text-4xl font-black text-white mb-2 bg-gradient-to-br from-gray-900 to-gray-800 bg-clip-text text-transparent">
                   THE CYCLOPEDIA
                 </h2>
                 <p className="text-cyan-300 text-xs md:text-sm font-semibold mb-3">
@@ -188,7 +188,7 @@ export default function CyclopediaConnection() {
           <motion.div variants={itemVariants} className="flex-1">
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-l from-cyan-500 to-blue-500 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity"></div>
-              <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 border-2 border-cyan-500 rounded-2xl p-6 md:p-8 text-center transform group-hover:scale-105 transition-all duration-300">
+              <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-6 md:p-8 text-center transform group-hover:scale-105 transition-all duration-300">
                 <div className="text-4xl md:text-6xl mb-3">🌐</div>
                 <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
                   Wikipedia
@@ -211,7 +211,7 @@ export default function CyclopediaConnection() {
           >
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl blur-lg opacity-30"></div>
-              <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 border-2 border-blue-500 rounded-xl p-6 text-center">
+              <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-6 text-center">
                 <div className="text-5xl mb-2">📚</div>
                 <h3 className="text-lg font-bold text-white mb-1">
                   Encyclopedia
@@ -269,10 +269,10 @@ export default function CyclopediaConnection() {
             className="w-full max-w-xs"
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-2xl blur-xl opacity-40 animate-pulse"></div>
-              <div className="relative bg-gradient-to-br from-purple-900 via-indigo-900 to-cyan-900 border-4 border-cyan-400 rounded-2xl p-6 text-center shadow-2xl">
+              <div className="absolute inset-0  rounded-2xl blur-xl opacity-40 animate-pulse"></div>
+              <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-md p-6 text-center shadow-2xl">
                 <div className="text-5xl mb-2 animate-bounce">👁️</div>
-                <h2 className="text-2xl font-black text-white mb-1 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                <h2 className="text-2xl font-black text-white mb-1 bg-gradient-to-br from-gray-900 to-gray-800 bg-clip-text text-transparent">
                   THE CYCLOPEDIA
                 </h2>
                 <p className="text-cyan-300 text-xs font-semibold mb-2">
@@ -339,7 +339,7 @@ export default function CyclopediaConnection() {
           >
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-l from-cyan-500 to-blue-500 rounded-xl blur-lg opacity-30"></div>
-              <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 border-2 border-cyan-500 rounded-xl p-6 text-center">
+              <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 border-2 rounded-xl p-6 text-center">
                 <div className="text-5xl mb-2">🌐</div>
                 <h3 className="text-lg font-bold text-white mb-1">Wikipedia</h3>
                 <p className="text-gray-400 text-xs">Collaborative Source</p>
@@ -354,7 +354,7 @@ export default function CyclopediaConnection() {
           className="text-center mt-8 md:mt-12"
         >
           <div className="max-w-3xl mx-auto">
-            <p className="text-sm md:text-lg mb-2 md:mb-3">
+            <p className="text-sm md:text-lg mb-2 md:mb-3 text-white">
               <span className="text-purple-400 font-semibold">
                 The Cyclopedia
               </span>{" "}
