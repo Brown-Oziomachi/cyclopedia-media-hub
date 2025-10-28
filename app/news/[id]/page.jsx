@@ -33,6 +33,7 @@ import { checkAgeVerification } from "@/hooks/useAgeVerification";
 import SideNewsTicker from "@/components/SideNewsTicker";
 import FollowUsPopup from "@/components/FollowUsPopup";
 import Icons from "@/components/Icon";
+import { SideSportsNews } from "@/components/SportsSideNews";
 
 // ============================================
 // VIEW TRACKING UTILITIES
@@ -427,15 +428,6 @@ export default function NewsDetails() {
         {/* Main article container */}
         <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
           {/* Category badge */}
-          <div className="flex items-center gap-3 mb-6">
-            <span
-              className={`inline-block bg-gradient-to-r ${getCategoryColor(
-                blog.category
-              )} text-white text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full shadow-lg`}
-            >
-              {blog.category || "News"}
-            </span>
-          </div>
 
           {/* Article title */}
           <motion.h1
@@ -468,17 +460,7 @@ export default function NewsDetails() {
             )}
 
             {/* REAL VIEW COUNTER */}
-            <div className="flex items-center gap-2 text-sm">
-              <Eye className="h-4 w-4" />
-              <span>
-                {views.toLocaleString()} view{views !== 1 ? "s" : ""}
-                {uniqueViews > 0 && (
-                  <span className="text-gray-500 dark:text-gray-400 ml-1">
-                    ({uniqueViews.toLocaleString()} unique)
-                  </span>
-                )}
-              </span>
-            </div>
+            <div className="flex items-center gap-2 text-sm"></div>
 
             <div className="flex-1"></div>
 
@@ -487,21 +469,21 @@ export default function NewsDetails() {
               <div className="relative" ref={menuRef}>
                 <button
                   onClick={handleShareClick}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-gray-200 dark:hover:bg-red-700 hover:text-white transition-all duration-300"
                 >
                   <Share className="h-4 w-4" />
                   <span className="text-sm font-semibold">Share</span>
                 </button>
 
                 {showShareMenu && (
-                  <div className="absolute top-full left-0 mt-2 w-56 border bg-white dark:text-black border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl p-3 flex flex-col gap-2 text-sm z-50">
+                  <div className="absolute top-full right-10 mt-2 w-56 border bg-white dark:text-black border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl p-3 flex flex-col gap-2 text-sm z-50">
                     <a
                       href={`https://twitter.com/intent/tweet?url=${
                         window.location.href
                       }&text=${encodeURIComponent(blog.title)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                      className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-red-700 hover:text-white transition-colors"
                     >
                       <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white">
                         𝕏
@@ -514,7 +496,7 @@ export default function NewsDetails() {
                       }&title=${encodeURIComponent(blog.title)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                      className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-red-700 hover:text-white transition-colors"
                     >
                       <div className="w-8 h-8 bg-blue-700 rounded-full flex items-center justify-center text-white font-bold">
                         in
@@ -523,7 +505,7 @@ export default function NewsDetails() {
                     </a>
                     <button
                       onClick={handleCopyLink}
-                      className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-left"
+                      className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-red-700 hover:text-white transition-colors text-left"
                     >
                       <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
                         <LinkIcon className="h-4 w-4 text-white" />
@@ -559,29 +541,45 @@ export default function NewsDetails() {
             </div>
           </div>
 
+          <div className="flex items-center gap-3 mb-6">
+            <span
+              className={`inline-block bg-gradient-to-r ${getCategoryColor(
+                blog.category
+              )} text-white text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full shadow-lg`}
+            >
+              {blog.category || "News"}
+            </span>
+          </div>
+
           {/* Featured image */}
           {blog.imageUrl && (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4 }}
-              className="relative w-full mb-12 rounded-2xl overflow-hidden shadow-2xl"
+              className=" w-full mb-12 rounded-2xl overflow-hidden shadow-xl z-0"
             >
               <img
                 src={blog.imageUrl}
                 alt={blog.title}
-                className="w-full h-auto object-cover"
+                className="w-full h-auto z-0 relative"
               />
-              <div className="absolute inset-0"></div>
+              <div className="top-0.5 flex ">
+                <img
+                  src="/joins.png"
+                  alt=""
+                  className="h-12 w-12 rounded-full z-[999]"
+                />
+                <SideNewsTicker />
+              </div>
             </motion.div>
           )}
-
           {blog.subtitle && (
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-xl md:text-2xl font-medium leading-relaxed mb-8 border-l-4 border-red-600 pl-6"
+              className="text-xl md:text-2xl font-medium leading-relaxed mb-10 border-l-4 border-red-600 pl-2 "
             >
               {blog.subtitle}
             </motion.p>
