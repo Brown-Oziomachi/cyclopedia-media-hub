@@ -18,6 +18,7 @@ import {
   Bookmark,
   Eye,
   Clock,
+  Ban,
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -255,16 +256,18 @@ export default function NewsDetails() {
 
   if (!blog)
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
+  <div className="min-h-screen flex items-center justify-center bg-red-600">
+        <div className="text-center ">
+        <Ban className="mx-auto border rounded-full bg-white text-red-600"size={80}/>
           <p className="text-xl ">
-            The Cyclopedia has temporarily suspended this news update. <br /> The
-            original source of this information on Nairaland has been removed. <br />
+            The Cyclopedia has temporarily suspended this news update. <br />{" "}
+            The original source of this information on Nairaland has been
+            removed. <br />
             We advise our readers to stay informed and remain safe.
           </p>
           <Link
             href="/"
-            className="text-blue-600 hover:underline mt-4 inline-block"
+            className="text-blue-600 hover:underline mt-4 inline-block underline"
           >
             Return to homepage
           </Link>
