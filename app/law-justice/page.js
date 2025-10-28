@@ -33,9 +33,9 @@ const LegalCategories = () => {
     <div className="w-full max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12 lg:mt-50 mt-20">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Explore Legal Practice Areas
+         Uncover the Different Faces of Law and Justice
         </h2>
-        <p className="text-gray-600 text-lg mx-auto mb-6">
+        <p className="text-gray-400 text-lg mx-auto mb-6">
           Whether you are facing a legal issue or want to learn about a specific legal subject, <br />
           browse through different areas of law to find the information and resources you need
         </p>
@@ -94,47 +94,54 @@ const LegalCategories = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div className=" border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
               <h4 className="font-semibold text-lg mb-2">Constitutional & Civil Rights</h4>
               <p className="text-gray-600 text-sm">Your fundamental rights under the Nigerian Constitution</p>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div className=" border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
               <h4 className="font-semibold text-lg mb-2">Criminal Law</h4>
               <p className="text-gray-600 text-sm">Criminal offenses, procedures, and your rights</p>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div className=" border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
               <h4 className="font-semibold text-lg mb-2">Family Law</h4>
               <p className="text-gray-600 text-sm">Marriage, divorce, custody, and family matters</p>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div className=" border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
               <h4 className="font-semibold text-lg mb-2">Property & Land Law</h4>
               <p className="text-gray-600 text-sm">Land ownership, transactions, and disputes</p>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div className=" border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
               <h4 className="font-semibold text-lg mb-2">Employment & Labor Law</h4>
               <p className="text-gray-600 text-sm">Workers' rights and employment regulations</p>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div className=" border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
               <h4 className="font-semibold text-lg mb-2">Business & Corporate Law</h4>
               <p className="text-gray-600 text-sm">Company registration, contracts, and regulations</p>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div className=" border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
               <h4 className="font-semibold text-lg mb-2">Consumer Protection</h4>
               <p className="text-gray-600 text-sm">Your rights as a consumer in Nigeria</p>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div className=" border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
               <h4 className="font-semibold text-lg mb-2">Taxation</h4>
               <p className="text-gray-600 text-sm">Tax obligations and regulations</p>
             </div>
           </div>
         </div>
+      </div>
+
+      <div className='flex items-center justify-center gap-2 mt-10 mb-10 font-bold'>
+      <h1 className='text-center text-2xl'> Explore In-Depth Law and Legal Information</h1>
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
@@ -143,7 +150,7 @@ const LegalCategories = () => {
           return (
             <Link href={category.link} key={index}>
               <button
-                className="group relative bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-blue-400 hover:shadow-xl transition-all duration-300 text-left overflow-hidden w-full"
+                className="group relative cursor-pointer bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-blue-400 hover:shadow-xl transition-all duration-300 text-left overflow-hidden w-full"
               >
                 {/* Gradient background on hover */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
@@ -172,7 +179,7 @@ const LegalCategories = () => {
       {/* View All Button */}
       <div className="text-center mb-16">
         <Link href="/all-legal">
-          <button className="inline-flex items-center gap-2 bg-white border-2 border-blue-600 text-blue-600 font-semibold px-8 py-3 rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-md hover:shadow-lg">
+          <button className="inline-flex items-center gap-2 bg-blue-600 border-2 border-white text-white font-semibold px-8 py-3 rounded-xl hover:bg-white hover:text-blue-600 cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg">
             All Legal Issues
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -184,7 +191,7 @@ const LegalCategories = () => {
       {/* Additional Legal Issues Section */}
       <div className="mt-20 pt-12 border-t-2 border-gray-200">
         <div className="mb-8">
-          <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">
+          <h3 className="text-2xl md:text-3xl font-bold mb-3">
             Additional Legal Issues
           </h3>
           <p className="text-gray-600">
@@ -192,10 +199,10 @@ const LegalCategories = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 ">
           {additionalIssues.map((issue, index) => (
             <Link href={issue.link} key={index}>
-              <button className="group flex items-center gap-2 text-left text-gray-700 hover:text-blue-600 transition-colors duration-200 py-2">
+              <button className="group cursor-pointer flex items-center gap-2 text-left text-gray-400 hover:text-blue-600 transition-colors duration-200 py-2">
                 <svg className="w-4 h-4 flex-shrink-0 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>

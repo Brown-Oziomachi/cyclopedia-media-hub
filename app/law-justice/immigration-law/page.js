@@ -48,7 +48,7 @@ export default function ImmigrationLawPage() {
                     <h1 className="text-white font-extrabold text-5xl md:text-6xl uppercase mb-3">
                         Truth Behind Immigration
                     </h1>
-                    <p className="text-gray-100 max-w-2xl mx-auto text-sm md:text-lg">
+                    <p className="text-gray-100 text-center mx-auto text-sm md:text-lg">
                         Real stories, migration policies, and the untold sides of movement across borders.
                     </p>
                 </div>
