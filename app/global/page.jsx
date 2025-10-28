@@ -37,6 +37,8 @@ export default function BlogsPage() {
     "legal",
     "family-law",
     "landlord-tenant-law",
+    "sexual-harassment",
+    "civil-rights"
   ];
 
   // Helper function to check if post is legal/justice related

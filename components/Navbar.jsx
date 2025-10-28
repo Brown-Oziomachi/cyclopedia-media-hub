@@ -13,6 +13,7 @@ import {
   Youtube,
   User,
   LogOut,
+  CircleUser,
 } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import LiveClock from "@/components/LiveClock";
@@ -145,6 +146,7 @@ const ProfileDropdownNavbar = () => {
 
   const categories = [
     { name: "Politics", url: "/politics" },
+    { name: "Latest News", url: "/global" },
     { name: "Law + Justice", url: "/law-justice" },
     { name: "Sports + News", url: "/sports" },
     { name: "Sex + Education", url: "/sex-education" },
@@ -154,7 +156,6 @@ const ProfileDropdownNavbar = () => {
     { name: "Media", url: "/media" },
     { name: "Education", url: "/education" },
     { name: "Health", url: "/health" },
-    { name: "Latest News", url: "/global" },
     { name: "Art + Culture", url: "/art" },
     { name: "Technology", url: "/technology" },
     { name: "Sports News", url: "/sports" },
@@ -329,10 +330,9 @@ const ProfileDropdownNavbar = () => {
               ) : (
                 <Link
                   href="/login"
-                  className="flex items-center gap-2 px-6 py-2.5 bg-red-600 text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-purple-500/50"
+                  className="flex items-center gap-2 px-6 py-2.5 text-white rounded-full font-semibold transition-all duration-300 shadow-lg "
                 >
-                  <User size={18} />
-                  Sign In
+                  <CircleUser size={38} />
                 </Link>
               )}
             </div>
@@ -416,8 +416,7 @@ const ProfileDropdownNavbar = () => {
       {showNav && (
         <nav className="fixed inset-0 bg-gradient-to-b from-gray-900 via-black to-gray-900 flex flex-col text-white p-6 z-[50] pt-20 overflow-y-auto">
           {/* Close button and Sign In/Out at top */}
-          <div className="absolute top-6 left-6">
-          </div>
+          <div className="absolute top-6 left-6"></div>
           <div className="absolute top-6 right-6 flex items-center gap-3">
             {user ? (
               <button
@@ -431,10 +430,9 @@ const ProfileDropdownNavbar = () => {
               <Link
                 href="/login"
                 onClick={() => setShowNav(false)}
-                className="text-white bg-gradient-to-r from-purple-600 to-cyan-600 px-4 py-2 rounded-lg shadow-lg hover:from-purple-700 hover:to-cyan-700 transition-all flex items-center gap-2 font-semibold text-sm"
+                className="text-white px-4 py-2 rounded-lg shadow-lg hover:from-purple-700 hover:to-cyan-700 transition-all flex items-center gap-2 font-semibold text-sm"
               >
-                <User size={18} />
-                Sign In
+                <CircleUser size={38} />
               </Link>
             )}
             <button

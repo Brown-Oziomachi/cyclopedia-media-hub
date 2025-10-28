@@ -31,28 +31,66 @@ const LegalCategories = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 py-12">
-      <div className="text-center mb-12 lg:mt-40 mt-20">
+      <div className="text-center mb-12 lg:mt-50 mt-20">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
           Explore Legal Practice Areas
         </h2>
-        <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-6">
-          Whether you are facing a legal issue or want to learn about a specific legal subject,
+        <p className="text-gray-600 text-lg mx-auto mb-6">
+          Whether you are facing a legal issue or want to learn about a specific legal subject, <br />
           browse through different areas of law to find the information and resources you need
         </p>
 
         <div className="mt-8 max-w-4xl mx-auto text-left">
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
-            <h3 className="text-xl font-semibold mb-3 text-blue-900">Understanding Nigerian Law</h3>
-            <p className="text-gray-700 mb-3">
-              Nigeria operates under a mixed legal system that includes:
-            </p>
-            <ul className="space-y-2 text-gray-700">
-              <li><span className="font-semibold">Federal laws</span> - Enacted by the National Assembly</li>
-              <li><span className="font-semibold">State laws</span> - Enacted by State Houses of Assembly across Nigeria's 36 states and FCT</li>
-              <li><span className="font-semibold">Customary law</span> - Traditional practices recognized in many communities</li>
-              <li><span className="font-semibold">Sharia law</span> - Applied in northern states for personal matters involving Muslims</li>
-              <li><span className="font-semibold">Common law</span> - Inherited from the British colonial era</li>
-            </ul>
+            <h3 className="text-xl font-semibold mb-3 text-blue-900">Understanding Legal Systems Across Jurisdictions</h3>
+
+            {/* Nigeria Section */}
+            <div className="mb-4">
+              <h4 className="font-bold text-blue-800 mb-2">Nigeria</h4>
+              <p className="text-gray-700 mb-2">
+                Nigeria operates under a mixed legal system that includes:
+              </p>
+              <ul className="space-y-2 text-gray-700 ml-4">
+                <li><span className="font-semibold">Federal laws</span> - Enacted by the National Assembly</li>
+                <li><span className="font-semibold">State laws</span> - Enacted by State Houses of Assembly across Nigeria's 36 states and FCT</li>
+                <li><span className="font-semibold">Customary law</span> - Traditional practices recognized in many communities</li>
+                <li><span className="font-semibold">Sharia law</span> - Applied in northern states for personal matters involving Muslims</li>
+                <li><span className="font-semibold">Common law</span> - Inherited from the British colonial era</li>
+              </ul>
+            </div>
+
+            {/* Africa Section */}
+            <div className="mb-4 pt-4 border-t border-blue-200">
+              <h4 className="font-bold text-blue-800 mb-2">Across Africa</h4>
+              <p className="text-gray-700 mb-2">
+                African countries have diverse legal frameworks, often combining:
+              </p>
+              <ul className="space-y-2 text-gray-700 ml-4">
+                <li><span className="font-semibold">Civil law systems</span> - Common in francophone countries (Senegal, Côte d'Ivoire)</li>
+                <li><span className="font-semibold">Common law systems</span> - Prevalent in anglophone countries (Kenya, Ghana, South Africa)</li>
+                <li><span className="font-semibold">Customary/Traditional law</span> - Indigenous legal practices across the continent</li>
+                <li><span className="font-semibold">Religious law</span> - Islamic law in North Africa and parts of East Africa</li>
+                <li><span className="font-semibold">Hybrid systems</span> - Many countries blend colonial and indigenous legal traditions</li>
+              </ul>
+            </div>
+
+            {/* Global Section */}
+            <div className="pt-4 border-t border-blue-200">
+              <h4 className="font-bold text-blue-800 mb-2">Around the World</h4>
+              <p className="text-gray-700 mb-2">
+                Global legal systems vary significantly:
+              </p>
+              <ul className="space-y-2 text-gray-700 ml-4">
+                <li><span className="font-semibold">Common law</span> - UK, USA, Canada, Australia, India</li>
+                <li><span className="font-semibold">Civil law</span> - France, Germany, Japan, most of Latin America</li>
+                <li><span className="font-semibold">Religious law</span> - Islamic law (Saudi Arabia, Iran), Canon law (Vatican)</li>
+                <li><span className="font-semibold">Socialist law</span> - China, Vietnam, Cuba</li>
+                <li><span className="font-semibold">Mixed systems</span> - Scotland, Louisiana (USA), Quebec (Canada)</li>
+              </ul>
+              <p className="text-sm text-gray-600 mt-3 italic">
+                Note: While laws differ globally, many jurisdictions share similar principles on fundamental rights and protections.
+              </p>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">

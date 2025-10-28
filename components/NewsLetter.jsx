@@ -169,14 +169,21 @@ export default function NewsletterForm() {
               <div className="flex items-start gap-3">
                 <div className="text-4xl">💬</div>
                 <div>
-                  <h1 className="text-lg font-bold">The Cyclopedia is a Game Changer for News Consumption</h1>
+                  <h1 className="text-lg font-bold">
+                    The Cyclopedia is a Game Changer for News Consumption
+                  </h1>
                   <p className="text-white italic mb-2">
                     I've been using The Cyclopedia for the past few weeks and
                     I'm genuinely impressed with the platform. The design is
                     clean and intuitive, making it easy to navigate through
                     different news categories and regions. What really stands
                     out is how the team has organized content by regions and
-                    topics. <span className="text-cyan-400 underline"><Link href="/pp-feedbacks">Read More</Link></span>
+                    topics.{" "}
+                    <span className="text-cyan-400 underline">
+                      <Link href="https://cyclopedia-media-hub.vercel.app/profile/view?id=AsXfyRgesjNIVXbLmK7UNtsCoOB2">
+                        Read More
+                      </Link>
+                    </span>
                   </p>
                   <p className="text-sm text-gray-300">
                     — Marvelous Bekky, Subscriber since 2025
