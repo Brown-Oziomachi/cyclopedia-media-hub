@@ -19,6 +19,9 @@ import {
   Eye,
   Clock,
   Ban,
+  Twitter,
+  Instagram,
+  Youtube,
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -339,16 +342,6 @@ export default function NewsDetails() {
           </motion.h1>
 
           {/* Subtitle */}
-          {blog.subtitle && (
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-xl md:text-2xl  font-medium leading-relaxed mb-8 border-l-4 border-purple-600 pl-6"
-            >
-              {blog.subtitle}
-            </motion.p>
-          )}
 
           {/* Metadata bar */}
           <motion.div
@@ -431,6 +424,29 @@ export default function NewsDetails() {
             </div>
           </motion.div>
 
+           <div className="mt-8 space-y-4 mb-10">
+                      <div className="flex gap-10 justify-center">
+                        <a
+                          href="https://x.com/cyclopedia_news"
+                          className="text-cyan-400 hover:scale-110 transition-transform"
+                        >
+                          <Twitter size={28} />
+                        </a>
+                        <a
+                          href="https://www.instagram.com/cyclopedia_news"
+                          className="text-pink-500 hover:scale-110 transition-transform"
+                        >
+                          <Instagram size={28} />
+                        </a>
+                        <a
+                          href="https://www.youtube.com/@cyclopedia-media"
+                          className="text-red-600 hover:scale-110 transition-transform"
+                        >
+                          <Youtube size={28} />
+                        </a>
+            </div>
+            </div>
+
           {/* Featured image */}
           {blog.imageUrl && (
             <motion.div
@@ -446,6 +462,17 @@ export default function NewsDetails() {
               />
               <div className="absolute inset-0 "></div>
             </motion.div>
+          )}
+
+          {blog.subtitle && (
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-xl md:text-2xl  font-medium leading-relaxed mb-8 border-l-4 border-red-600 pl-6"
+            >
+              {blog.subtitle}
+            </motion.p>
           )}
 
           {/* Social proof bar */}
@@ -512,83 +539,83 @@ export default function NewsDetails() {
         </article>
 
         {/* FLOATING AD - Bottom Right Corner */}
-              {showFloatingAd && !isAdMinimized && (
-                <div className="fixed bottom-6 right-6 z-50 max-w-sm animate-slide-up">
-                  <div className="bg-gradient-to-br from-green-600 via-emerald-600 to-teal-700 rounded-2xl shadow-2xl overflow-hidden border-4 border-yellow-400">
-                    {/* Close Button */}
-                    <button
-                      onClick={() => setShowFloatingAd(false)}
-                      className="absolute top-3 right-3 bg-black/50 hover:bg-black/70 text-white rounded-full w-8 h-8 flex items-center justify-center z-10 transition-all"
-                    >
-                      ✕
-                    </button>
-        
-                    {/* Minimize Button */}
-                    <button
-                      onClick={() => setIsAdMinimized(true)}
-                      className="absolute top-3 right-14 bg-black/50 hover:bg-black/70 text-white rounded-full w-8 h-8 flex items-center justify-center z-10 transition-all"
-                    >
-                      −
-                    </button>
-        
-                    {/* Sponsored Badge */}
-                    <div className="absolute top-3 left-3 bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full flex items-center gap-2">
-                      <span className="w-2 h-2 bg-black rounded-full animate-pulse"></span>
-                      AD
-                    </div>
-        
-                    <div className="p-6 pt-12">
-                      {/* Emoji */}
-                      <div className="text-6xl text-center mb-4">🎰</div>
-        
-                      {/* Headline */}
-                      <h3 className="text-white font-bold text-xl text-center mb-3">
-                        WIN ₦200K Bonus!
-                      </h3>
-        
-                      {/* Subtext */}
-                      <p className="text-white/90 text-sm text-center mb-4">
-                        Join Nigeria's #1 Sports Betting Platform Now!
-                      </p>
-        
-                      {/* CTA Button */}
-                      <a
-                        href="https://www.betwinner.com?aff=83cdf48899a9ca9715e686a4e71f5b60854e5cc65aabc58f5f"
-                        target="_blank"
-                        rel="noopener noreferrer sponsored"
-                        className="block w-full bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-3 rounded-lg text-center transition-all transform hover:scale-105 mb-3"
-                      >
-                        Claim Bonus Now →
-                      </a>
-        
-                      {/* Sports Link */}
-                      <Link
-                        href="/sports"
-                        className="block w-full bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-semibold py-2 rounded-lg text-center transition-all text-sm"
-                      >
-                        View Sports News
-                      </Link>
-        
-                      {/* Footer */}
-                      <div className="mt-4 pt-4 border-t border-white/20 flex items-center justify-center gap-2">
-                        <img
-                          src="/hid.png"
-                          alt="The Cyclopedia"
-                          className="h-5 w-5 rounded-full"
-                        />
-                        <span className="text-white/80 text-xs font-semibold">
-                          The Cyclopedia
-                        </span>
-                      </div>
-        
-                      <p className="text-white/60 text-xs text-center mt-2">
-                        18+ | Gamble Responsibly
-                      </p>
-                    </div>
-                  </div>
+        {showFloatingAd && !isAdMinimized && (
+          <div className="fixed bottom-6 right-6 z-50 max-w-sm animate-slide-up">
+            <div className="bg-gradient-to-br from-green-600 via-emerald-600 to-teal-700 rounded-2xl shadow-2xl overflow-hidden border-4 border-yellow-400">
+              {/* Close Button */}
+              <button
+                onClick={() => setShowFloatingAd(false)}
+                className="absolute top-3 right-3 bg-black/50 hover:bg-black/70 text-white rounded-full w-8 h-8 flex items-center justify-center z-10 transition-all"
+              >
+                ✕
+              </button>
+
+              {/* Minimize Button */}
+              <button
+                onClick={() => setIsAdMinimized(true)}
+                className="absolute top-3 right-14 bg-black/50 hover:bg-black/70 text-white rounded-full w-8 h-8 flex items-center justify-center z-10 transition-all"
+              >
+                −
+              </button>
+
+              {/* Sponsored Badge */}
+              <div className="absolute top-3 left-3 bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full flex items-center gap-2">
+                <span className="w-2 h-2 bg-black rounded-full animate-pulse"></span>
+                AD
+              </div>
+
+              <div className="p-6 pt-12">
+                {/* Emoji */}
+                <div className="text-6xl text-center mb-4">🎰</div>
+
+                {/* Headline */}
+                <h3 className="text-white font-bold text-xl text-center mb-3">
+                  WIN ₦200K Bonus!
+                </h3>
+
+                {/* Subtext */}
+                <p className="text-white/90 text-sm text-center mb-4">
+                  Join Nigeria's #1 Sports Betting Platform Now!
+                </p>
+
+                {/* CTA Button */}
+                <a
+                  href="https://www.betwinner.com?aff=83cdf48899a9ca9715e686a4e71f5b60854e5cc65aabc58f5f"
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="block w-full bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-3 rounded-lg text-center transition-all transform hover:scale-105 mb-3"
+                >
+                  Claim Bonus Now →
+                </a>
+
+                {/* Sports Link */}
+                <Link
+                  href="/sports"
+                  className="block w-full bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-semibold py-2 rounded-lg text-center transition-all text-sm"
+                >
+                  View Sports News
+                </Link>
+
+                {/* Footer */}
+                <div className="mt-4 pt-4 border-t border-white/20 flex items-center justify-center gap-2">
+                  <img
+                    src="/hid.png"
+                    alt="The Cyclopedia"
+                    className="h-5 w-5 rounded-full"
+                  />
+                  <span className="text-white/80 text-xs font-semibold">
+                    The Cyclopedia
+                  </span>
                 </div>
+
+                <p className="text-white/60 text-xs text-center mt-2">
+                  18+ | Gamble Responsibly
+                </p>
+              </div>
+            </div>
+          </div>
         )}
-        
+
         {/* Related articles */}
         <div className=" py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -642,7 +669,6 @@ export default function NewsDetails() {
             </div>
             <h3 className="text-3xl font-bold mb-8">Explore More News</h3>
 
-            
             {/* More articles grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {blogs.slice(6, 12).map((b) => (

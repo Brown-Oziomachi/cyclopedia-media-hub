@@ -210,6 +210,14 @@ const LegalCategories = () => {
               </button>
             </Link>
           ))}
+          <Link href="https://cyclopedia-media-hub.vercel.app/news/cybercrime-law-in-nigeria--E3bFCjMjVHDpRPUhZgQ4">
+          <div className='flex gap-1 text-gray-400'>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          <h1>Cybercrime Law in Nigeria</h1>
+          </div>
+          </Link>
         </div>
       </div>
     </div>
