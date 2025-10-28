@@ -47,7 +47,7 @@ export default function CyclopediaConnection() {
           variants={itemVariants}
           className="text-center mb-8 md:mb-12"
         >
-          <h2 className="text-2xl md:text-4xl text-white font-bold mb-2 md:mb-3">
+          <h2 className="text-2xl md:text-4xl font-bold mb-2 md:mb-3">
             Connected Sources of{" "}
             <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Knowledge
@@ -354,7 +354,7 @@ export default function CyclopediaConnection() {
           className="text-center mt-8 md:mt-12"
         >
           <div className="max-w-3xl mx-auto">
-            <p className="text-sm md:text-lg text-white mb-2 md:mb-3">
+            <p className="text-sm md:text-lg mb-2 md:mb-3">
               <span className="text-purple-400 font-semibold">
                 The Cyclopedia
               </span>{" "}

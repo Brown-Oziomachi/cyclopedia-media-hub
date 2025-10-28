@@ -86,7 +86,7 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-16 lg:py-24 lg:mt-20 mt-10 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-950/20 dark:to-indigo-950/20">
+      <section className="py-16 lg:py-24 lg:mt-40 mt-10 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-950/20 dark:to-indigo-950/20">
         <div className="container mx-auto px-6 text-center max-w-4xl">
           <div className="inline-flex items-center gap-2 bg-purple-100 dark:bg-purple-900/30 rounded-full px-4 py-2 mb-6">
             <MessageCircle size={18} className="text-purple-600 dark:text-purple-400" />
@@ -95,8 +95,9 @@ export default function ContactPage() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
             Let's Start a Conversation
           </h1>
-          <p className="text-lg md:text-xl opacity-80 max-w-2xl mx-auto leading-relaxed">
-            Whether you have a question, feedback, or a partnership opportunity — we're here to listen and help you discover the truth.
+          <p className="text-lg md:text-xl opacity-80  mx-auto leading-relaxed">
+            Whether you have a question, feedback, or a partnership opportunity — <br />
+            we're here to listen and help you discover the truth.
           </p>
         </div>
       </section>

@@ -118,7 +118,7 @@ const About = () => {
       </section>
 
       {/* What We Do */}
-      <section className="px-6 md:px-20 py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900/30 dark:to-slate-800/30">
+      <section className="px-6 md:px-20 py-16 dark:from-slate-900/30 dark:to-slate-800/30">
         <h2 className="text-center text-4xl font-bold mb-12 text-purple-600 dark:text-purple-400">
           What We Do
         </h2>
@@ -241,7 +241,7 @@ const About = () => {
       </section>
 
       {/* Journey Section */}
-      <section className="px-6 md:px-20 py-16 text-center bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-950/20 dark:to-indigo-950/20">
+      <section className="px-6 md:px-20 py-16 text-center dark:from-purple-950/20 dark:to-indigo-950/20">
         <h2 className="text-4xl font-bold mb-6 text-purple-600 dark:text-purple-400">Our Journey</h2>
         <p className=" mx-auto text-lg leading-relaxed opacity-80 mb-8">
           The Cyclopedia was founded out of a need for honest inquiry and open <br/>

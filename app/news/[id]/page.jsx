@@ -258,7 +258,9 @@ export default function NewsDetails() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <p className="text-xl ">
-            Article not found
+            The Cyclopedia has temporarily suspended this news update. <br /> The
+            original source of this information on Nairaland has been removed. <br />
+            We advise our readers to stay informed and remain safe.
           </p>
           <Link
             href="/"
