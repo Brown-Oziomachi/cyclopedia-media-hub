@@ -145,7 +145,7 @@ export default function LawyerSearchSection() {
                             </li>
                         </ul>
                     </div>
-
+{/* 
                     <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                         <h3 className="text-xl font-bold text-gray-900 mb-3">
                             Types of Criminal Cases We Handle
@@ -168,7 +168,7 @@ export default function LawyerSearchSection() {
                                 <span>Violent crimes and assault</span>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
