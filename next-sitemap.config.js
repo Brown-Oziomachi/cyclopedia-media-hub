@@ -1,8 +1,8 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-    siteUrl: 'https://thecyclopedia.com.ng',
+    siteUrl: 'https://www.thecyclopedia.com.ng', 
     generateRobotsTxt: true,
-    sitemapSize: 7000, // optional, controls splitting large sitemaps
+    sitemapSize: 7000, 
     changefreq: 'weekly',
     priority: 0.7,
 };

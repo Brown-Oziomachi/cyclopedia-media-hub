@@ -1,4 +1,3 @@
-// next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -24,6 +23,22 @@ const nextConfig = {
         hostname: "*.public.blob.uploadthing.com", // UploadThing URLs
       },
     ],
+  },
+
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "thecyclopedia.com.ng",
+          },
+        ],
+        destination: "https://www.thecyclopedia.com.ng/:path*",
+        permanent: true,
+      },
+    ];
   },
 };
 
