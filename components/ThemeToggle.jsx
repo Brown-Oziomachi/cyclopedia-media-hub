@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react"; // icons (install lucide-react if not yet)
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
 
   // Load saved theme on mount
   useEffect(() => {
