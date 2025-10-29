@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://thecyclopedia.com.ng
+
+# Sitemaps
+Sitemap: https://thecyclopedia.com.ng/sitemap.xml

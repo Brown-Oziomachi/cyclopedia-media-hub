@@ -2,12 +2,14 @@
   "name": "my-portfolio-webwiz",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
+ "scripts": {
+  "dev": "next dev --turbopack",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint",
+  "postbuild": "next-sitemap"
+},
+
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
@@ -25,6 +27,7 @@
     "next": "^15.3.1",
     "next-auth": "^5.0.0-beta.25",
     "next-pwa": "^5.6.0",
+    "next-sitemap": "^4.2.3",
     "next-themes": "^0.4.6",
     "nodemailer": "^7.0.5",
     "quill": "^2.0.3",
