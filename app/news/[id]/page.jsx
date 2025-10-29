@@ -35,13 +35,6 @@ import FollowUsPopup from "@/components/FollowUsPopup";
 import Icons from "@/components/Icon";
 import { SideSportsNews } from "@/components/SportsSideNews";
 
-// ============================================
-// VIEW TRACKING UTILITIES
-// ============================================
-
-/**
- * Generates a unique visitor ID stored in localStorage
- */
 const getVisitorId = () => {
   if (typeof window === "undefined") return null;
   

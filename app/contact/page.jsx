@@ -9,7 +9,6 @@ import { LoaderCircle, ThumbsUp, Mail, Phone, MapPin, MessageCircle, Send, Build
 import ChatDropdown from "@/components/Chat";
 import Link from "next/link";
 
-// ✅ Validation Schema
 const valSchema = Yup.object({
   name: Yup.string().required("Name is required"),
   number: Yup.string().required("Phone Number is required"),

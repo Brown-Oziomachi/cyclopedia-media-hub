@@ -4,6 +4,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db1 } from "@/lib/firebaseConfig";
 import Link from "next/link";
 
+
 export default function HealthPostsPage() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);

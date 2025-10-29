@@ -5,6 +5,7 @@ import { useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { db1 } from "@/lib/firebaseConfig"; // make sure this points to your Firestore instance
 
+
 export default function AgeVerification() {
   const { user } = useAuth();
   const router = useRouter();

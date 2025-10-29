@@ -1,4 +1,10 @@
-"use client";
+
+export const metadata = {
+  title: "Privacy Policy | The Cyclopedia",
+  description:
+    "The Cyclopedia's privacy policy. Learn how we protect your data, handle personal information, and maintain your privacy and security.",
+  referrer: "strict-origin-when-cross-origin",
+};
 
 export default function PrivacyPolicy() {
   return (

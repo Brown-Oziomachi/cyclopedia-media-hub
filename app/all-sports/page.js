@@ -14,6 +14,11 @@ import {
 import { db1 } from "@/lib/firebaseConfig";
 import ViewMoreSearchPopup from "../view/page";
 
+export const allSportsMetadata = {
+  title: "All Sports | The Cyclopedia",
+  description: "Complete sports coverage from The Cyclopedia. Get the latest scores, breaking sports news, analysis, and updates from football, basketball, tennis, and more.",
+  referrer: "origin-when-cross-origin",
+};
 const NigeriaPage = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);

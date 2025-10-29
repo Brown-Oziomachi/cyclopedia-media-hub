@@ -1,7 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Lightbulb, Target, Shield, Users, BookOpen, Globe, Eye, Compass, Award, Heart } from "lucide-react";
+import {
+  Lightbulb,
+  Target,
+  Shield,
+  Users,
+  BookOpen,
+  Globe,
+  Eye,
+  Compass,
+  Award,
+  Heart,
+} from "lucide-react";
 import CyclopediaConnection from "@/components/ScrollProgressBar";
 
 const About = () => {

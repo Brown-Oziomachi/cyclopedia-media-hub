@@ -401,7 +401,7 @@ export default function LawyerRegistrationPage() {
                                                 type="text"
                                                 value={formValues.fullName}
                                                 onChange={handleChange}
-                                                placeholder="Barrister John Doe"
+                                                placeholder="Barrister YourName..."
                                                 className="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition outline-none text-gray-900"
                                             />
                                             {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>}
@@ -418,7 +418,7 @@ export default function LawyerRegistrationPage() {
                                                     type="email"
                                                     value={formValues.email}
                                                     onChange={handleChange}
-                                                    placeholder="john.doe@lawfirm.com"
+                                                    placeholder="thecyclopedialawyer@lawfirm.com"
                                                     className="w-full pl-10 p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition outline-none text-gray-900"
                                                 />
                                             </div>

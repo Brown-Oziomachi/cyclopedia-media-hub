@@ -4,7 +4,12 @@ import { db1 } from "@/lib/firebaseConfig";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import Link from "next/link";
 
-// ✅ Helper to create SEO-friendly slug from title and ID
+export const allLegalMetadata = {
+  title: "All Legal | The Cyclopedia",
+  description: "Comprehensive legal news coverage on The Cyclopedia. Explore court cases, legal reforms, justice issues, and law-related stories from around the world.",
+  referrer: "strict-origin-when-cross-origin",
+};
+
 const createSlug = (title) => {
   return title
     .toLowerCase()

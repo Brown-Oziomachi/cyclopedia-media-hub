@@ -1,4 +1,10 @@
-"use client";
+
+export const metadata = {
+  title: "Terms of Services | The Cyclopedia",
+  description:
+    "The Cyclopedia's terms of service. Read our usage policies, user agreements, and guidelines for accessing our news platform.",
+  referrer: "strict-origin-when-cross-origin",
+};
 
 export default function TermsOfService() {
   return (

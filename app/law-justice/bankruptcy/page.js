@@ -1,6 +1,8 @@
 "use client"
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
+import Link from 'next/link';
+
 
 const BankruptcyPage = () => {
   const [openAccordion, setOpenAccordion] = useState(null);
@@ -206,6 +208,14 @@ const BankruptcyPage = () => {
             ))}
           </div>
         </div> */}
+           <div className='mt-10'>
+                      <Link href="/law-justice/find-lawyer/lawyer-directory"
+                          className="bg-orange-600 hover:bg-orange-700 text-white font-bold px-8 py-3 rounded-lg transition-colors inline-flex items-center gap-2"
+                      >
+                          Find a Lawyer
+                          <ArrowRight className="w-5 h-5" />
+                      </Link>
+                      </div>
       </div>
     </div>
   );

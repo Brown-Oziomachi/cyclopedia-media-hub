@@ -26,7 +26,7 @@ export default function LawyerSearchSection() {
 
                 <div className="relative max-w-7xl mx-auto">
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8">
-                        Search Criminal Defense Lawyers Near You.
+                        Search Defense Lawyers Near You.
                     </h1>
 
                     <p className="text-gray-200 mb-8 text-lg">
@@ -106,7 +106,7 @@ export default function LawyerSearchSection() {
 
                 {/* Heading */}
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-300 mb-8">
-                    Find Criminal Defense Attorneys Near You
+                    Find Defense Attorneys Near You
                 </h2>
 
                 {/* Info Box */}
@@ -145,6 +145,8 @@ export default function LawyerSearchSection() {
                             </li>
                         </ul>
                     </div>
+
+                    
 {/* 
                     <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                         <h3 className="text-xl font-bold text-gray-900 mb-3">
@@ -169,6 +171,15 @@ export default function LawyerSearchSection() {
                             </li>
                         </ul>
                     </div> */}
+                </div>
+                <div className='mt-10'>
+                <Link href="/law-justice/find-lawyer/lawyer-directory"
+                    onClick={handleSearch}
+                    className="bg-orange-600 hover:bg-orange-700 text-white font-bold px-8 py-3 rounded-lg transition-colors inline-flex items-center gap-2"
+                >
+                    Find a Lawyer
+                    <ArrowRight className="w-5 h-5" />
+                </Link>
                 </div>
             </div>
         </div>

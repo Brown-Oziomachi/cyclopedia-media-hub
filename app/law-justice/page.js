@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Scale, Users, Ambulance, Home, Briefcase, Gavel, Car, Heart, UserCheck, Building, FileText } from 'lucide-react';
 
+
 const LegalCategories = () => {
   const categories = [
     { name: 'Criminal Law', icon: Scale, color: 'from-blue-500 to-blue-600', link: '/law-justice/criminal-law' },
