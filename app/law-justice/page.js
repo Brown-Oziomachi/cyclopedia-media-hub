@@ -43,14 +43,14 @@ const LegalCategories = () => {
               </h2>
 
               <div className="space-y-4">
-                <a href="https://wa.me/2348142995114" target="_self" rel="noopener noreferrer">
+                <Link href="/law-justice/find-lawyer">
                   <button className="w-full text-left px-6 py-4 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-semibold flex items-center justify-between group">
                     Find a lawyer
                     <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
-                </a>
+                </Link>
 
                 <Link href="/law-justice/legal-issue">
                   <button className="w-full text-left px-6 py-4 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-semibold flex items-center justify-between group">

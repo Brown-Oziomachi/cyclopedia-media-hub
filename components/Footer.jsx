@@ -213,6 +213,22 @@ const Footer = () => {
                   Feedback
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/law-justice/find-lawyer"
+                  className="hover:text-purple-400 transition"
+                >
+                  Find a lawyer
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/law-justice/find-lawyer/lawyer-directory/lawyer-registration-form"
+                  className="hover:text-purple-400 transition"
+                >
+                  Be our lawyer
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -320,6 +336,22 @@ const Footer = () => {
                   className="hover:text-purple-400 transition"
                 >
                   Feedback
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/law-justice/find-lawyer"
+                  className="hover:text-purple-400 transition"
+                >
+                  Find a lawyer
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/law-justice/find-lawyer/lawyer-directory/lawyer-registration-form"
+                  className="hover:text-purple-400 transition"
+                >
+                  Be our lawyer
                 </Link>
               </li>
             </ul>
