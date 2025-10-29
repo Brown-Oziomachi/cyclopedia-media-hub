@@ -47,7 +47,7 @@ const SideNewsTicker = () => {
   if (loading) return null;
 
   return (
-    <div className="w-full mx-auto overflow-hidden text-blue-500 rounded-lg shadow-lg z-50">
+    <div className="w-full mx-auto overflow-hidden text-blue-500 rounded-lg shadow-lg z-0">
       <div className="flex whitespace-nowrap animate-marquee">
         {posts.map((item) => (
           <Link

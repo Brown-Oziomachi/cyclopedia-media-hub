@@ -340,7 +340,7 @@ const ProfileDropdownNavbar = () => {
         </div>
 
         {/* Categories Bar */}
-        <section className="hidden lg:block bg-black/70 backdrop-blur-md border-t border-gray-800">
+        <section className="hidden lg:block bg-[#0c0b0bfa] backdrop-blur-md border-t border-gray-800">
           <div className="max-w-7xl mx-auto px-4">
             <div className="flex items-center justify-between py-3">
               <nav className="flex gap-2 overflow-x-auto no-scrollbar">
@@ -373,7 +373,7 @@ const ProfileDropdownNavbar = () => {
 
       {/* Mobile Header Controls */}
       <div
-        className={`lg:hidden fixed top-4 right-4 left-4 flex items-center justify-between z-50 transition-transform duration-300 bg-black/90 backdrop-blur-sm rounded-lg px-2 py-2 border border-gray-700 ${
+        className={`lg:hidden fixed top-4 right-4 left-4 flex items-center justify-between z-50 transition-transform duration-300 bg-[#0c0b0bfa] backdrop-blur-sm rounded-lg px-2 py-2 border border-gray-700 ${
           showMobileToggle ? "translate-y-0" : "-translate-y-20"
         }`}
       >
