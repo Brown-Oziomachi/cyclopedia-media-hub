@@ -386,7 +386,7 @@ const ProfileDropdownNavbar = () => {
             height={24}
             className="rounded-full brightness-125"
           />
-          <h1 className="font-bold text-sm text-white whitespace-nowrap">
+          <h1 className="font-bold text-white whitespace-nowrap text-lg">
             THE CYCL<span className="text-cyan-400">👁️</span>PEDIA
           </h1>
         </Link>
