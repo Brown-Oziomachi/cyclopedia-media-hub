@@ -205,8 +205,8 @@ export default function BankruptcyGuide() {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-200 py-12 px-4">
-            <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="min-h-screen py-12 px-4">
+            <div className="max-w-6xl mx-auto text-white rounded-2xl shadow-2xl overflow-hidden">
                 {/* Header */}
                 <div className="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 text-white px-8 py-16 text-center lg:mt-40 mt-10">
                     <h1 className="text-4xl md:text-5xl font-bold mb-4">📚 Global Bankruptcy Guide</h1>
@@ -260,10 +260,10 @@ export default function BankruptcyGuide() {
                                     <div className="p-8 space-y-8">
                                         {/* Overview */}
                                         <section>
-                                            <h3 className="text-2xl font-bold text-slate-800 mb-3 pb-2 border-b-2 border-purple-600">
+                                            <h3 className="text-2xl font-bold mb-3 pb-2 border-b-2 border-purple-600">
                                                 Overview
                                             </h3>
-                                            <p className="text-slate-700 leading-relaxed">{country.overview}</p>
+                                            <p className="text-gray-300 leading-relaxed">{country.overview}</p>
                                         </section>
 
                                         {/* Types */}
@@ -275,8 +275,8 @@ export default function BankruptcyGuide() {
                                                 {country.types.map((type, idx) => (
                                                     <div key={idx} className="flex gap-3">
                                                         <span className="text-purple-600 font-bold">•</span>
-                                                        <p className="text-slate-700">
-                                                            <strong className="text-slate-900">{type.title}:</strong> {type.desc}
+                                                        <p className="text-slate-300">
+                                                            <strong className="text-gray-300">{type.title}:</strong> {type.desc}
                                                         </p>
                                                     </div>
                                                 ))}
@@ -285,12 +285,12 @@ export default function BankruptcyGuide() {
 
                                         {/* Filing Process */}
                                         <section>
-                                            <h3 className="text-2xl font-bold text-slate-800 mb-3 pb-2 border-b-2 border-purple-600">
+                                            <h3 className="text-2xl font-bold mb-3 pb-2 border-b-2 border-purple-600">
                                                 Filing Process
                                             </h3>
                                             <ul className="space-y-2">
                                                 {country.filing.map((item, idx) => (
-                                                    <li key={idx} className="flex gap-3 text-slate-700">
+                                                    <li key={idx} className="flex gap-3 text-slate-300">
                                                         <span className="text-purple-600">•</span>
                                                         <span>{item}</span>
                                                     </li>
@@ -300,12 +300,12 @@ export default function BankruptcyGuide() {
 
                                         {/* Exemptions */}
                                         <section>
-                                            <h3 className="text-2xl font-bold text-slate-800 mb-3 pb-2 border-b-2 border-purple-600">
+                                            <h3 className="text-2xl font-bold mb-3 pb-2 border-b-2 border-purple-600">
                                                 Exemptions
                                             </h3>
                                             <ul className="space-y-2">
                                                 {country.exemptions.map((item, idx) => (
-                                                    <li key={idx} className="flex gap-3 text-slate-700">
+                                                    <li key={idx} className="flex gap-3 text-slate-300">
                                                         <span className="text-purple-600">•</span>
                                                         <span>{item}</span>
                                                     </li>
@@ -323,10 +323,10 @@ export default function BankruptcyGuide() {
 
                                         {/* Recovery */}
                                         <section>
-                                            <h3 className="text-2xl font-bold text-slate-800 mb-3 pb-2 border-b-2 border-purple-600">
+                                            <h3 className="text-2xl font-bold mb-3 pb-2 border-b-2 border-purple-600">
                                                 Recovery & Discharge
                                             </h3>
-                                            <p className="text-slate-700 leading-relaxed">{country.recovery}</p>
+                                            <p className="text-slate-300 leading-relaxed">{country.recovery}</p>
                                         </section>
                                     </div>
                                 </div>

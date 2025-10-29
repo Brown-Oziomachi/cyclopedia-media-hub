@@ -120,8 +120,7 @@ export default function AllLegalIssues() {
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
                             Our powerful search tool makes it easy to find the right legal help.                        </h2>
                         <p className="text-lg text-gray-600 mb-2">
-                            Select any one of the practice areas below to find local attorneys near you.
-                        </p>
+                            “Choose a practice area below to explore news and articles on that topic.”                        </p>
                         <p className="text-gray-600">
                             View <Link href="/all-legal" className="text-blue-600 hover:underline font-semibold">full list</Link> of legal issues.
                         </p>
