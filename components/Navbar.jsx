@@ -23,6 +23,7 @@ import { useAuth } from "@/components/AuthProvider";
 import { auth } from "@/lib/firebaseConfig";
 import { signOut } from "firebase/auth";
 import NotificationBell from "./NotificationBell";
+import RssSubscribeButton from "./RssSubscribeButton";
 
 const ProfileDropdownNavbar = () => {
   const [showNav, setShowNav] = useState(false);
@@ -235,6 +236,7 @@ const ProfileDropdownNavbar = () => {
                 <ThemeToggle />
                 <ViewMoreSearchPopup />
                 <NotificationBell />
+                <RssSubscribeButton variant="icon" />
               </div>
 
               {/* Regions Dropdown */}
@@ -401,6 +403,9 @@ const ProfileDropdownNavbar = () => {
           </div>
           <div className="scale">
             <NotificationBell setShowNav={setShowNav} />
+          </div>
+          <div className="scale">
+            <RssSubscribeButton variant="icon" />
           </div>
           <button
             onClick={() => setShowNav(!showNav)}

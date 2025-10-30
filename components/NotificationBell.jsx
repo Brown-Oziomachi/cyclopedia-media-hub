@@ -120,7 +120,7 @@ export default function NotificationBell({ setShowNav }) {
       {/* Bell Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2 text-white hover:bg-white/10 rounded-full transition-all duration-200"
+        className="relative p-1 -ml-2 text-white hover:bg-white/10 rounded-full transition-all duration-200"
         aria-label="Notifications"
       >
         <Bell size={24} />

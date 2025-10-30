@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import RssSubscribeButton from "./RssSubscribeButton";
 
 const Footer = () => {
   return (
@@ -179,6 +180,7 @@ const Footer = () => {
                   About Us
                 </Link>
               </li>
+              <RssSubscribeButton variant="footer" />
               <li>
                 <Link
                   href="/contact"
@@ -338,6 +340,7 @@ const Footer = () => {
                   Feedback
                 </Link>
               </li>
+              <RssSubscribeButton variant="footer" />
               <li>
                 <Link
                   href="/law-justice/find-lawyer"

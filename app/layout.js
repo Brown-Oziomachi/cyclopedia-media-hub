@@ -28,6 +28,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* RSS Feed */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="The Cyclopedia RSS Feed"
+          href="https://www.thecyclopedia.com.ng/feed.xml"
+        />
+
         {/* Google Analytics */}
         <script
           async
