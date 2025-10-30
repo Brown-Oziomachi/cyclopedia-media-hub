@@ -236,7 +236,7 @@ const ProfileDropdownNavbar = () => {
                 <ThemeToggle />
                 <ViewMoreSearchPopup />
                 <NotificationBell />
-                <RssSubscribeButton variant="icon" />
+                {/* <RssSubscribeButton variant="icon" /> */}
               </div>
 
               {/* Regions Dropdown */}
@@ -404,9 +404,9 @@ const ProfileDropdownNavbar = () => {
           <div className="scale">
             <NotificationBell setShowNav={setShowNav} />
           </div>
-          <div className="scale">
+          {/* <div className="scale">
             <RssSubscribeButton variant="icon" />
-          </div>
+          </div> */}
           <button
             onClick={() => setShowNav(!showNav)}
             className="text-white bg-gradient-to-r from-purple-600 to-cyan-600 p-1 rounded-lg ml-0.5"
