@@ -43,6 +43,12 @@ export default function RootLayout({ children }) {
     `,
           }}
         />
+
+        {/* Google Publisher Verification */}
+        <meta
+          name="google-site-verification"
+          content="4yWhwbOmhk-JWr1kLxfcMvXzm0pFcvZO2zbxh3Le9B0"
+        />
       </head>
       <body className="antialiased">
         <ThemeProvider
