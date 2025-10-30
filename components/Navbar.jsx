@@ -375,7 +375,7 @@ const ProfileDropdownNavbar = () => {
 
       {/* Mobile Header Controls */}
       <div
-        className={`lg:hidden fixed top-4 right-4 left-4 flex items-center justify-between z-50 transition-transform duration-300 bg-[#0c0b0bfa] backdrop-blur-sm rounded-lg px-2 py-2 border border-gray-700 ${
+        className={`lg:hidden fixed top-4 right-4 left-3 flex items-center justify-between z-50 transition-transform duration-300 bg-[#0c0b0bfa] backdrop-blur-sm rounded-lg px-1 py-2 border border-gray-700 ${
           showMobileToggle ? "translate-y-0" : "-translate-y-20"
         }`}
       >
@@ -388,7 +388,7 @@ const ProfileDropdownNavbar = () => {
             height={24}
             className="rounded-full brightness-125"
           />
-          <h1 className="font-bold text-white whitespace-nowrap text-lg">
+          <h1 className="font-bold text-white whitespace-nowrap text-sm">
             THE CYCL<span className="text-cyan-400">👁️</span>PEDIA
           </h1>
         </Link>

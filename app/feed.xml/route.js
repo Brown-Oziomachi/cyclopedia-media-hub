@@ -81,8 +81,8 @@ ${articles
                 .map(
                     (article) => `    <item>
       <title><![CDATA[${article.title || 'Untitled'}]]></title>
-      <link>https://www.thecyclopedia.com.ng/${escapeXml(article.slug)}</link>
-      <guid isPermaLink="true">https://www.thecyclopedia.com.ng/${escapeXml(article.slug)}</guid>
+      <link>https://www.thecyclopedia.com.ng/${article.id}</link>
+      <guid isPermaLink="true">https://www.thecyclopedia.com.ng/${article.id}</guid>
       <pubDate>${formatRssDate(article.createdAt || article.updatedAt)}</pubDate>
       <description><![CDATA[${stripHtml(article.description || article.content)}]]></description>
       ${article.content ? `<content:encoded><![CDATA[${article.content}]]></content:encoded>` : ''}

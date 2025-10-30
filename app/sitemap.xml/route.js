@@ -88,7 +88,7 @@ export async function GET() {
                 .map(
                     (article) => `
   <url>
-    <loc>https://www.thecyclopedia.com.ng/${escapeXml(article.slug)}</loc>
+    <loc>https://www.thecyclopedia.com.ng/${article.id}</loc>
     <lastmod>${formatDate(article.updatedAt)}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -109,7 +109,7 @@ export async function GET() {
                 .map(
                     (video) => `
   <url>
-    <loc>https://www.thecyclopedia.com.ng/video/${escapeXml(video.slug)}</loc>
+    <loc>https://www.thecyclopedia.com.ng/video/${video.id}</loc>
     <lastmod>${formatDate(video.updatedAt)}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
