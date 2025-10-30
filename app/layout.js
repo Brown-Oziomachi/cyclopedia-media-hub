@@ -49,6 +49,12 @@ export default function RootLayout({ children }) {
           name="google-site-verification"
           content="4yWhwbOmhk-JWr1kLxfcMvXzm0pFcvZO2zbxh3Le9B0"
         />
+
+        {/* Bing Webmaster Verification */}
+        <meta
+          name="msvalidate.01"
+          content="52CE4DFC7CFF2B7DDB9FB3D5BB017832"
+        />
       </head>
       <body className="antialiased">
         <ThemeProvider

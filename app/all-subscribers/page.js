@@ -138,7 +138,7 @@ export default function MembersPage() {
         return (
             <div className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 dark:from-gray-900 dark:via-amber-950 dark:to-orange-950 py-12 px-4">
                 <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-12 mt-10">
+                    <div className="text-center mb-12 mt-10 lg:mt-30">
                         <div className="inline-flex items-center justify-center mb-6 p-4 rounded-2xl bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500 shadow-2xl shadow-amber-500/50">
                             <Crown size={32} className="text-white" />
                         </div>
