@@ -10,8 +10,8 @@ import AuthProvider from "@/components/AuthProvider";
 export const metadata = {
   title: "The Cyclopedia | News & media company",
   icons: {
-    icon: "/hid.png",
-    shortcut: "/hid.png",
+    icon: "/joins.png",
+    shortcut: "/joins.png",
     apple: "/hid.png",
   },
 };
@@ -35,7 +35,6 @@ export default function RootLayout({ children }) {
           title="The Cyclopedia RSS Feed"
           href="https://www.thecyclopedia.com.ng/feed.xml"
         />
-
         {/* Google Analytics */}
         <script
           async
@@ -51,13 +50,17 @@ export default function RootLayout({ children }) {
     `,
           }}
         />
-
+        {/* Google AdSense */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8408243121163767"
+          crossOrigin="anonymous"
+        ></script>
         {/* Google Publisher Verification */}
         <meta
           name="google-site-verification"
           content="4yWhwbOmhk-JWr1kLxfcMvXzm0pFcvZO2zbxh3Le9B0"
         />
-
         {/* Bing Webmaster Verification */}
         <meta
           name="msvalidate.01"
