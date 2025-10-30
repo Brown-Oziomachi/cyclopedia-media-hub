@@ -9,40 +9,43 @@ async function getRecentArticles() {
         limit(50)
     );
     const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => ({
+    return snapshot.docs.map((doc) => ({
         id: doc.id,
-        ...doc.data()
+        ...doc.data(),
     }));
 }
 
 // Format date to RFC 822 format (required by RSS)
 function formatRssDate(date) {
     if (!date) return new Date().toUTCString();
-
-    // If it's a Firestore Timestamp
-    if (date.toDate) {
-        return date.toDate().toUTCString();
-    }
-
-    // If it's already a string or Date object
+    if (date.toDate) return date.toDate().toUTCString();
     return new Date(date).toUTCString();
 }
 
 // Escape XML special characters
 function escapeXml(text) {
-    if (!text) return '';
+    if (!text) return "";
     return text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&apos;');
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&apos;");
 }
 
 // Strip HTML tags for description
 function stripHtml(html) {
-    if (!html) return '';
-    return html.replace(/<[^>]*>/g, '').substring(0, 300) + '...';
+    if (!html) return "";
+    return html.replace(/<[^>]*>/g, "").substring(0, 300) + "...";
+}
+
+// Detect image type from URL
+function getImageType(url) {
+    if (!url) return "image/jpeg";
+    if (url.endsWith(".png")) return "image/png";
+    if (url.endsWith(".avif")) return "image/avif";
+    if (url.endsWith(".webp")) return "image/webp";
+    return "image/jpeg";
 }
 
 export async function GET() {
@@ -80,20 +83,20 @@ export async function GET() {
 ${articles
                 .map(
                     (article) => `    <item>
-      <title><![CDATA[${article.title || 'Untitled'}]]></title>
+      <title><![CDATA[${article.title || "Untitled"}]]></title>
       <link>https://www.thecyclopedia.com.ng/${article.id}</link>
       <guid isPermaLink="true">https://www.thecyclopedia.com.ng/${article.id}</guid>
       <pubDate>${formatRssDate(article.createdAt || article.updatedAt)}</pubDate>
       <description><![CDATA[${stripHtml(article.description || article.content)}]]></description>
-      ${article.content ? `<content:encoded><![CDATA[${article.content}]]></content:encoded>` : ''}
-      ${article.author ? `<dc:creator><![CDATA[${article.author}]]></dc:creator>` : ''}
-      ${article.category ? `<category><![CDATA[${article.category}]]></category>` : ''}
-      ${article.imageUrl ? `<media:content url="${escapeXml(article.imageUrl)}" medium="image"/>` : ''}
-      ${article.imageUrl ? `<media:thumbnail url="${escapeXml(article.imageUrl)}"/>` : ''}
-      ${article.imageUrl ? `<enclosure url="${escapeXml(article.imageUrl)}" type="image/jpeg"/>` : ''}
+      ${article.content ? `<content:encoded><![CDATA[${article.content}]]></content:encoded>` : ""}
+      ${article.author ? `<dc:creator><![CDATA[${article.author}]]></dc:creator>` : ""}
+      ${article.category ? `<category><![CDATA[${article.category}]]></category>` : ""}
+      ${article.imageUrl ? `<media:content url="${escapeXml(article.imageUrl)}" medium="image"/>` : ""}
+      ${article.imageUrl ? `<media:thumbnail url="${escapeXml(article.imageUrl)}"/>` : ""}
+      ${article.imageUrl ? `<enclosure url="${escapeXml(article.imageUrl)}" type="${getImageType(article.imageUrl)}" length="1" />` : ""}
     </item>`
                 )
-                .join('\n')}
+                .join("\n")}
   </channel>
 </rss>`;
 
