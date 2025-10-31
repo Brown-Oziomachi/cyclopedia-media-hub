@@ -9,11 +9,36 @@ import AuthProvider from "@/components/AuthProvider";
 
 export const metadata = {
   title: "The Cyclopedia | News & media company",
+  description: "The Cyclopedia is your trusted platform for news, articles, and hidden truths. Stay updated with reliable information across politics, business, technology, and more.",
   icons: {
-    icon: "/join.png",
+    icon: "/joins.png",
     shortcut: "/joins.png",
-    apple: "/hid.png",
+    apple: "/joins.png",
   },
+  openGraph: {
+    title: "The Cyclopedia | News & Media Company",
+    description: "The Cyclopedia is your trusted platform for news, articles, and hidden truths. Stay updated with reliable information across politics, business, technology, and more.",
+    url: "https://www.thecyclopedia.com.ng",
+    siteName: "The Cyclopedia",
+    images: [
+      {
+        url: "https://www.thecyclopedia.com.ng/public/joins.png",
+        width: 800,
+        height: 600,
+        alt: "The Cyclopedia Logo",
+      },
+    ],
+    locale: "en_NG",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Cyclopedia | News & Media Company",
+    description: "The Cyclopedia is your trusted platform for news, articles, and hidden truths.",
+    images: ["https://www.thecyclopedia.com.ng/joins.png"],
+    creator: "https://x.com/cyclopedia_news?t=if7x7ktTlukRhO9muucjng&s=09", // replace with your Twitter handle if any
+  },
+  referrer: "strict-origin-when-cross-origin",
 };
 
 function Loader() {
