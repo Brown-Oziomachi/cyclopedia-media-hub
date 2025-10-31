@@ -28,7 +28,7 @@ const About = () => {
   return (
     <main className="min-h-screen font-sans">
       {/* Hero Section */}
-      <header className="flex flex-col justify-center items-center min-h-screen text-center px-6 md:px-20 bg-[#0c0b0bfa]">
+      <header className="flex flex-col justify-center items-center min-h-screen text-center px-6 md:px-20 lg:mt-20 bg-[#0c0b0bfa]">
         <h1 className="text-5xl md:text-6xl text-white font-extrabold mb-8 tracking-tight">
           About{" "}
           <span className="bg-gradient-to-r from-purple-500 to-cyan-400 text-transparent bg-clip-text font-serif">
@@ -36,7 +36,7 @@ const About = () => {
           </span>
         </h1>
         <img
-          src="hid.png"
+          src="/truth.png"
           alt="Cyclopedia image"
           className="shadow-2xl rounded-2xl mb-6 w-48 h-48 object-cover"
         />

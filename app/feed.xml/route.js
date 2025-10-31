@@ -75,7 +75,7 @@ export async function GET() {
     <category>Health</category>
     <category>Education</category>
     <image>
-      <url>https://www.thecyclopedia.com.ng/hid.png</url>
+      <url>https://www.thecyclopedia.com.ng/truth.png</url>
       <title>The Cyclopedia</title>
       <link>https://www.thecyclopedia.com.ng</link>
     </image>

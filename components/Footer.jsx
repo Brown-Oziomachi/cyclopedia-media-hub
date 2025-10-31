@@ -6,7 +6,6 @@ const Footer = () => {
   return (
     <footer className="py-10 text-gray-500 text-sm bg-black border-t border-gray-800">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Mobile: 2 columns, Tablet+: flex row */}
         <div className="grid grid-cols-2 lg:flex lg:justify-between lg:items-start gap-8 mb-10">
           {/* Left: Site links */}
           <div>
@@ -361,7 +360,7 @@ const Footer = () => {
 
         <div className="mt-10 text-center border-t border-gray-800 pt-6">
           <Link href="/">
-            <img src="/hid.png" alt="logo" className="h-16 w-16 mx-auto mb-3" />
+            <img src="/truth.png" alt="logo" className="h-16 w-16 mx-auto mb-3" />
           </Link>
           <p>
             &copy; {new Date().getFullYear()} The Cyclopedia. All rights

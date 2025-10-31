@@ -144,7 +144,7 @@ const Page = () => {
           <main className="z-0 flex opacity flex-col justify-center items-center px-4 lg:px-0 max-lg:-mt-10 mb-10 opacity-100 lg:mt-0">
             <div className="space-y-2 bg-black">
               <img
-                src="/joins.png"
+                src="/truth.png"
                 alt="image"
                 className="z-0 w-fit lg:w-200 lg:h-200 h-fit opacity- lg:-mt-35"
               />

@@ -41,7 +41,7 @@ const LogoSplash = ({ onFinish }) => {
             className="relative"
           >
             <Image
-              src="/hid.png"
+              src="/truth.png"
               alt="Cyclopedia Logo"
               width={300}
               height={300}

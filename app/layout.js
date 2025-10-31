@@ -11,9 +11,9 @@ export const metadata = {
   title: "The Cyclopedia | News & media company",
   description: "The Cyclopedia is your trusted platform for news, articles, and hidden truths. Stay updated with reliable information across politics, business, technology, and more.",
   icons: {
-    icon: "/joins.png",
-    shortcut: "/joins.png",
-    apple: "/joins.png",
+    icon: "/truth.png",
+    shortcut: "/truth.png",
+    apple: "/truth.png",
   },
   openGraph: {
     title: "The Cyclopedia | News & Media Company",
@@ -22,7 +22,7 @@ export const metadata = {
     siteName: "The Cyclopedia",
     images: [
       {
-        url: "/joins.png",
+        url: "https://www.thecyclopedia.com.ng/truth.png",
         width: 800,
         height: 600,
         alt: "The Cyclopedia",
@@ -35,7 +35,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "The Cyclopedia | News & Media Company",
     description: "The Cyclopedia is your trusted platform for news, articles, and hidden truths.",
-    images: ["/joins.png"],
+    images:"https://www.thecyclopedia.com.ng/truth.png",
     creator: "https://x.com/cyclopedia_news?t=if7x7ktTlukRhO9muucjng&s=09", 
   },
   referrer: "strict-origin-when-cross-origin",

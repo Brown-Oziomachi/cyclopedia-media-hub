@@ -545,7 +545,7 @@ export default function NewsDetails() {
               />
               <div className="top-0.5 flex ">
                 <img
-                  src="/joins.png"
+                  src="/truth.png"
                   alt=""
                   className="h-12 w-12 rounded-full "
                 />
