@@ -160,7 +160,7 @@ const ProfileDropdownNavbar = () => {
     { name: "Art + Culture", url: "/art" },
     { name: "Technology", url: "/technology" },
     { name: "Sports News", url: "/sports" },
-    { name: "Live Now", url: "/live" },
+    // { name: "Live Now", url: "/live" },
     { name: "Africa", url: "/african/continent" },
   ];
 

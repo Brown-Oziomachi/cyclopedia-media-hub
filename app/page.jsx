@@ -1154,11 +1154,7 @@ const Page = () => {
               desc: `On the 50th anniversary of the end of the Biafran war, the world’s worst humanitarian crisis in the late 1960s, declassified British files show that Harold Wilson’s government secretly armed and backed Nigeria’s aggression against the secessionist region.`,
               id: "WzsZMEGNhs8e85Pr8hOg",
             },
-            {
-              title: "The Real Intentions Of The Abuja Declaration-1989",
-              desc: `Apparently, as a result of the growing awareness amongst Christians of the evil planned by the Muslims against the Church, the Muslims went online to edit and distort the information on the Abuja Declaration of 1989. The information on Wikipedia was edited on Monday, 21st July, 2014.`,
-              id: "customAbuja1989",
-            },
+         
           ].map((item, i) => (
             <motion.div
               key={i}
