@@ -10,7 +10,7 @@ import AuthProvider from "@/components/AuthProvider";
 export const metadata = {
   title: "The Cyclopedia | News & media company",
   icons: {
-    icon: "/joins.png",
+    icon: "/join.png",
     shortcut: "/joins.png",
     apple: "/hid.png",
   },
@@ -64,7 +64,7 @@ export default function RootLayout({ children }) {
         {/* Bing Webmaster Verification */}
         <meta
           name="msvalidate.01"
-          content="52CE4DFC7CFF2B7DDB9FB3D5BB017832"
+          content="DB9001C412118B30B9B328331C769BBB"
         />
       </head>
       <body className="antialiased">
