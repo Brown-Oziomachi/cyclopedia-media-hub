@@ -22,10 +22,10 @@ export const metadata = {
     siteName: "The Cyclopedia",
     images: [
       {
-        url: "https://www.thecyclopedia.com.ng/public/joins.png",
+        url: "/joins.png",
         width: 800,
         height: 600,
-        alt: "The Cyclopedia Logo",
+        alt: "The Cyclopedia",
       },
     ],
     locale: "en_NG",
@@ -35,8 +35,8 @@ export const metadata = {
     card: "summary_large_image",
     title: "The Cyclopedia | News & Media Company",
     description: "The Cyclopedia is your trusted platform for news, articles, and hidden truths.",
-    images: ["https://www.thecyclopedia.com.ng/joins.png"],
-    creator: "https://x.com/cyclopedia_news?t=if7x7ktTlukRhO9muucjng&s=09", // replace with your Twitter handle if any
+    images: ["/joins.png"],
+    creator: "https://x.com/cyclopedia_news?t=if7x7ktTlukRhO9muucjng&s=09", 
   },
   referrer: "strict-origin-when-cross-origin",
 };
