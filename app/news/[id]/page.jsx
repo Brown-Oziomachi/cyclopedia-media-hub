@@ -48,36 +48,7 @@ const getVisitorId = () => {
   return visitorId;
 };
 
-/**
- * Checks if this visitor has already viewed this article
- */
-const hasViewedArticle = (blogId) => {
-  if (typeof window === "undefined") return false;
-  
-  const viewedArticles = JSON.parse(localStorage.getItem("viewed_articles") || "{}");
-  const lastViewed = viewedArticles[blogId];
-  
-  if (!lastViewed) return false;
-  
-  // Consider it a new view after 24 hours
-  const twentyFourHours = 24 * 60 * 60 * 1000;
-  return (Date.now() - lastViewed) < twentyFourHours;
-};
 
-/**
- * Marks an article as viewed
- */
-const markArticleAsViewed = (blogId) => {
-  if (typeof window === "undefined") return;
-  
-  const viewedArticles = JSON.parse(localStorage.getItem("viewed_articles") || "{}");
-  viewedArticles[blogId] = Date.now();
-  localStorage.setItem("viewed_articles", JSON.stringify(viewedArticles));
-};
-
-/**
- * Tracks a view for an article
- */
 const trackView = async (blogId) => {
   try {
     const visitorId = getVisitorId();
@@ -116,10 +87,6 @@ const trackView = async (blogId) => {
   }
 };
 
-// ============================================
-// HELPER FUNCTIONS
-// ============================================
-
 const createSlug = (title) => {
   return title
     .toLowerCase()
@@ -151,10 +118,6 @@ const BlogDisplay = ({ body }) => {
   );
 };
 
-// ============================================
-// MAIN COMPONENT
-// ============================================
-
 export default function NewsDetails() {
   const { id: slugParam } = useParams();
   const { data: session } = useSession();
@@ -175,8 +138,6 @@ export default function NewsDetails() {
   const menuRef = useRef(null);
   const [showFloatingAd, setShowFloatingAd] = useState(true);
   const [isAdMinimized, setIsAdMinimized] = useState(false);
-
-  // Category colors with modern palette
   const categoryColors = {
     politics: "from-red-600 to-red-700",
     religion: "from-purple-600 to-purple-700",
@@ -199,6 +160,7 @@ export default function NewsDetails() {
     return categoryColors[cat] || categoryColors.other;
   };
 
+  
   // Calculate reading time
   useEffect(() => {
     if (blog?.body) {
