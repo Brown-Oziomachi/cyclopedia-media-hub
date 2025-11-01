@@ -22,13 +22,13 @@ export async function POST(req) {
     });
 
 await resend.emails.send({
-  from: "Cyclopedia <onboarding@resend.dev>",
+  from: 'The Cyclopedia <info@thecyclopedia.com.ng>',
   to: email,
   subject: "Welcome to The Cyclopedia 🚀",
   html: `
     <h2>Hello ${firstName || "Friend"},</h2>
     <p>Welcome to <b>The Cyclopedia</b>! 👁️</p>
-    <p>We’re thrilled to have you on board. As a subscriber, you’ll get the latest newss, insightful articles, and trending news delivered straight to your inbox.</p>
+    <p>We’re thrilled to have you on board. As a subscriber, you’ll get the latest news, insightful articles, and trending news delivered straight to your inbox.</p>
     <p>Explore, discover, and stay informed with content curated just for you. Don’t forget to visit our website to catch the newest updates and hidden insights!</p>
     <p style="text-align:center; margin:30px 0;">
       <a href="https://cyclopedia-media-hub.vercel.app/global"
