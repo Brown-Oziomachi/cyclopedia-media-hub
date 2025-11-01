@@ -1,31 +1,24 @@
 export async function GET() {
-    const robotsTxt = `# *
+    const robotsTxt = `# Allow all crawlers by default
 User-agent: *
 Allow: /
 
 # Disallow admin and private pages
-User-agent: *
 Disallow: /admin
 Disallow: /api/
 Disallow: /profile
 Disallow: /subscriber-profile
 
-# Googlebot specific
+# Optional: specific bots
 User-agent: Googlebot
 Allow: /
 
-# Bingbot specific
 User-agent: Bingbot
 Allow: /
 
-# Host
-Host: https://www.thecyclopedia.com.ng
-
-# Sitemaps
+# Sitemap
 Sitemap: https://www.thecyclopedia.com.ng/sitemap.xml
-
-# Crawl delay (optional - helps prevent server overload)
-Crawl-delay: 1`;
+`;
 
     return new Response(robotsTxt, {
         status: 200,
