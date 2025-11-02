@@ -24,6 +24,7 @@ import { auth } from "@/lib/firebaseConfig";
 import { signOut } from "firebase/auth";
 import NotificationBell from "./NotificationBell";
 import RssSubscribeButton from "./RssSubscribeButton";
+import Greeting from "./Greeting";
 
 const ProfileDropdownNavbar = () => {
   const [showNav, setShowNav] = useState(false);
@@ -181,6 +182,8 @@ const ProfileDropdownNavbar = () => {
         <div className="border-b border-gray-800 bg-black/50 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
             <LiveClock />
+            <Greeting />
+        
             <div className="hidden md:flex items-center gap-4">
               <Link
                 href="/newsletter"
@@ -388,7 +391,7 @@ const ProfileDropdownNavbar = () => {
             height={24}
             className="rounded-full brightness-125"
           />
-          <h1 className="font-bold text-white whitespace-nowrap text-sm">
+          <h1 className="font-bold text-white whitespace-nowrap">
             THE CYCL<span className="text-cyan-400">👁️</span>PEDIA
           </h1>
         </Link>
@@ -421,6 +424,8 @@ const ProfileDropdownNavbar = () => {
       {showNav && (
         <nav className="fixed inset-0 bg-gradient-to-b from-gray-900 via-black to-gray-900 flex flex-col text-white p-6 z-[50] pt-20 overflow-y-auto">
           {/* Close button and Sign In/Out at top */}
+
+          <Greeting />
           <div className="absolute top-6 left-6"></div>
           <div className="absolute top-6 right-6 flex items-center gap-3">
             {user ? (
