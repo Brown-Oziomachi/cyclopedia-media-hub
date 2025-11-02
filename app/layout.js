@@ -6,12 +6,13 @@ import { Suspense } from "react";
 import { ThemeProvider } from "next-themes";
 import CookieBanner from "@/components/Cookies";
 import AuthProvider from "@/components/AuthProvider";
-import Script from "next/script"; // ✅ Added for structured data
+import Script from "next/script";
 
 export const metadata = {
   title: "The Cyclopedia | News & media company",
   description:
     "The Cyclopedia is your trusted platform for news, articles, and hidden truths. Stay updated with reliable information across politics, business, technology, and more.",
+  metadataBase: new URL('https://www.thecyclopedia.com.ng'),
   icons: {
     icon: "/truth.png",
     shortcut: "/truth.png",
@@ -25,10 +26,10 @@ export const metadata = {
     siteName: "The Cyclopedia",
     images: [
       {
-        url: "https://www.thecyclopedia.com.ng/truth.png",
+        url: "/truth.png",
         width: 800,
-        height: 600,
-        alt: "The Cyclopedia",
+        height: 800,
+        alt: "The Cyclopedia - News & Media Company",
       },
     ],
     locale: "en_NG",
@@ -38,12 +39,29 @@ export const metadata = {
     card: "summary_large_image",
     title: "The Cyclopedia | News & Media Company",
     description:
-      "The Cyclopedia is your trusted platform for news, articles, and hidden truths.",
-    images: "https://www.thecyclopedia.com.ng/truth.png",
-    creator:
-      "https://x.com/cyclopedia_news?t=if7x7ktTlukRhO9muucjng&s=09",
+      "The Cyclopedia is your trusted platform for news, articles, and hidden truths. Stay updated with reliable information.",
+    images: ["/truth.png"],
+    site: "@cyclopedia_news",
+    creator: "@cyclopedia_news",
   },
   referrer: "strict-origin-when-cross-origin",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: '4yWhwbOmhk-JWr1kLxfcMvXzm0pFcvZO2zbxh3Le9B0',
+    other: {
+      'msvalidate.01': 'DB9001C412118B30B9B328331C769BBB',
+    },
+  },
 };
 
 function Loader() {
@@ -66,7 +84,7 @@ export default function RootLayout({ children }) {
           href="https://www.thecyclopedia.com.ng/feed.xml"
         />
 
-        {/* ✅ Structured Data (JSON-LD for SEO) */}
+        {/* Structured Data (JSON-LD for SEO) */}
         <Script
           id="structured-data"
           type="application/ld+json"
@@ -76,11 +94,21 @@ export default function RootLayout({ children }) {
               "@type": "NewsMediaOrganization",
               name: "The Cyclopedia",
               url: "https://www.thecyclopedia.com.ng",
-              logo: "https://www.thecyclopedia.com.ng/truth.png",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://www.thecyclopedia.com.ng/truth.png",
+                width: 800,
+                height: 800,
+              },
+              image: {
+                "@type": "ImageObject",
+                url: "https://www.thecyclopedia.com.ng/truth.png",
+                width: 800,
+                height: 800,
+              },
               sameAs: [
-                "https://x.com/cyclopedia_news?t=if7x7ktTlukRhO9muucjng&s=09",
-                // "https://facebook.com/thecyclopedia",
-                "https://www.instagram.com/cyclopedia_news?igsh=MThvdDEwa3c3aGpsMQ==",
+                "https://x.com/cyclopedia_news",
+                "https://www.instagram.com/cyclopedia_news",
               ],
               description:
                 "The Cyclopedia is a trusted news and media platform covering politics, business, law, technology, and hidden truths.",
@@ -95,6 +123,8 @@ export default function RootLayout({ children }) {
                 logo: {
                   "@type": "ImageObject",
                   url: "https://www.thecyclopedia.com.ng/truth.png",
+                  width: 800,
+                  height: 800,
                 },
               },
             }),
@@ -123,18 +153,6 @@ export default function RootLayout({ children }) {
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8408243121163767"
           crossOrigin="anonymous"
         ></script>
-
-        {/* Google Publisher Verification */}
-        <meta
-          name="google-site-verification"
-          content="4yWhwbOmhk-JWr1kLxfcMvXzm0pFcvZO2zbxh3Le9B0"
-        />
-
-        {/* Bing Webmaster Verification */}
-        <meta
-          name="msvalidate.01"
-          content="DB9001C412118B30B9B328331C769BBB"
-        />
       </head>
       <body className="antialiased">
         <ThemeProvider

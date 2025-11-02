@@ -52,21 +52,22 @@ export async function GET() {
 
         // Static pages
         const staticPages = [
-            { url: '', priority: '1.0', changefreq: 'daily' },
-            { url: 'about', priority: '0.8', changefreq: 'monthly' },
-            { url: 'contact', priority: '0.7', changefreq: 'monthly' },
-            { url: 'news', priority: '0.9', changefreq: 'hourly' },
-            { url: 'politics', priority: '0.9', changefreq: 'daily' },
-            { url: 'sports', priority: '0.9', changefreq: 'daily' },
-            { url: 'technology', priority: '0.9', changefreq: 'daily' },
-            { url: 'health', priority: '0.8', changefreq: 'daily' },
-            { url: 'education', priority: '0.8', changefreq: 'daily' },
-            { url: 'law-justice', priority: '0.8', changefreq: 'daily' },
-            { url: 'live', priority: '0.9', changefreq: 'always' },
+            { url: '', priority: '1.0', changefreq: 'daily', image: 'https://www.thecyclopedia.com.ng/truth.png' },
+            { url: 'about', priority: '0.8', changefreq: 'monthly', image: 'https://www.thecyclopedia.com.ng/truth.png' },
+            { url: 'contact', priority: '0.7', changefreq: 'monthly', image: 'https://www.thecyclopedia.com.ng/truth.png' },
+            { url: 'news', priority: '0.9', changefreq: 'hourly', image: 'https://www.thecyclopedia.com.ng/truth.png' },
+            { url: 'politics', priority: '0.9', changefreq: 'daily', image: 'https://www.thecyclopedia.com.ng/truth.png' },
+            { url: 'sports', priority: '0.9', changefreq: 'daily', image: 'https://www.thecyclopedia.com.ng/truth.png' },
+            { url: 'technology', priority: '0.9', changefreq: 'daily', image: 'https://www.thecyclopedia.com.ng/truth.png' },
+            { url: 'health', priority: '0.8', changefreq: 'daily', image: 'https://www.thecyclopedia.com.ng/truth.png' },
+            { url: 'education', priority: '0.8', changefreq: 'daily', image: 'https://www.thecyclopedia.com.ng/truth.png' },
+            { url: 'law-justice', priority: '0.8', changefreq: 'daily', image: 'https://www.thecyclopedia.com.ng/truth.png' },
+            { url: 'live', priority: '0.9', changefreq: 'always', image: 'https://www.thecyclopedia.com.ng/truth.png' },
         ];
 
         const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   
@@ -79,6 +80,10 @@ export async function GET() {
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
+    <image:image>
+      <image:loc>${page.image}</image:loc>
+      <image:title>The Cyclopedia</image:title>
+    </image:image>
   </url>`
                 )
                 .join("")}
@@ -92,6 +97,12 @@ export async function GET() {
     <lastmod>${formatDate(article.updatedAt)}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    ${article.imageUrl || article.image || article.coverImage ? `
+    <image:image>
+      <image:loc>${escapeXml(article.imageUrl || article.image || article.coverImage)}</image:loc>
+      <image:title><![CDATA[${article.title}]]></image:title>
+      <image:caption><![CDATA[${article.description || article.title}]]></image:caption>
+    </image:image>` : ''}
     <news:news>
       <news:publication>
         <news:name>The Cyclopedia</news:name>
@@ -113,6 +124,11 @@ export async function GET() {
     <lastmod>${formatDate(video.updatedAt)}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
+    ${video.thumbnailUrl ? `
+    <image:image>
+      <image:loc>${escapeXml(video.thumbnailUrl)}</image:loc>
+      <image:title><![CDATA[${video.title}]]></image:title>
+    </image:image>` : ''}
     <video:video>
       <video:content_loc>${escapeXml(video.videoUrl)}</video:content_loc>
       <video:thumbnail_loc>${escapeXml(video.thumbnailUrl)}</video:thumbnail_loc>
