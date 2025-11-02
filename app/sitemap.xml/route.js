@@ -1,36 +1,54 @@
-import { db1 } from "@/lib/firebaseConfig";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { adminDb } from "@/lib/firebaseAdmin";
 
-// Fetch all articles
 async function getAllArticles() {
-    const q = query(collection(db1, "blogs"), orderBy("updatedAt", "desc"));
-    const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-    }));
+    try {
+        const snapshot = await adminDb
+            .collection("blogs")
+            .orderBy("updatedAt", "desc")
+            .get();
+
+        return snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+    } catch (error) {
+        console.error("Error fetching articles:", error);
+        return [];
+    }
 }
 
-// Fetch all videos
+// Fetch all videos using Admin SDK
 async function getAllVideos() {
-    const q = query(collection(db1, "videos"), orderBy("updatedAt", "desc"));
-    const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-    }));
+    try {
+        const snapshot = await adminDb
+            .collection("videos")
+            .orderBy("updatedAt", "desc")
+            .get();
+
+        return snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+    } catch (error) {
+        console.error("Error fetching videos:", error);
+        return [];
+    }
 }
 
-// Format date to ISO 8601 format (required by Google)
+// Format date to ISO 8601 format
 function formatDate(date) {
     if (!date) return new Date().toISOString();
 
-    // If it's a Firestore Timestamp
+    // If it's a Firestore Timestamp (Admin SDK)
+    if (date._seconds) {
+        return new Date(date._seconds * 1000).toISOString();
+    }
+
+    // If it's a regular Timestamp with toDate
     if (date.toDate) {
         return date.toDate().toISOString();
     }
 
-    // If it's already a string or Date object
     return new Date(date).toISOString();
 }
 
@@ -50,7 +68,8 @@ export async function GET() {
         const articles = await getAllArticles();
         const videos = await getAllVideos();
 
-        // Static pages
+        console.log(`Sitemap: Found ${articles.length} articles and ${videos.length} videos`);
+
         const staticPages = [
             { url: '', priority: '1.0', changefreq: 'daily', image: 'https://www.thecyclopedia.com.ng/truth.png' },
             { url: 'about', priority: '0.8', changefreq: 'monthly', image: 'https://www.thecyclopedia.com.ng/truth.png' },
