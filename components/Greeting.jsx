@@ -18,7 +18,7 @@ const Greeting = () => {
   }, []);
 
   return (
-    <h2 className="text-sm font-semibold text-gray-800 dark:text-white max-md:-mt-15 flex gap-2 items-center">
+    <h2 className="text-sm font-semibold max-md:-mt-15 flex gap-2 items-center">
       {greeting} <a href="/pp-feedbacks" className="text-blue-700"><p>Subscriber</p></a> 
     </h2>
   );
