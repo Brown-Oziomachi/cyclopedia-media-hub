@@ -366,7 +366,7 @@ export default function NewsDetails() {
             for in-depth analysis and reliable reporting
           </p>
         </div>
-        <AdSense />
+        <AdSense slot="9662897902" />
 
         <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
           {/* Category badge */}
@@ -645,7 +645,7 @@ export default function NewsDetails() {
               ))}
             </div>
             <h3 className="text-3xl font-bold mb-8">Explore More News</h3>
-            <AdSense />
+            <AdSense slot="9662897902" />
             {/* More articles grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {blogs.slice(6, 12).map((b) => (

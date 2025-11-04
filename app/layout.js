@@ -164,6 +164,26 @@ export default function RootLayout({ children }) {
             <AuthProvider>
               <Navbar />
               <CookieBanner />
+
+              {/* Google AdSense Ad Placement */}
+              <div style={{ textAlign: "center", margin: "20px 0" }}>
+                <ins
+                  className="adsbygoogle"
+                  style={{ display: "block", textAlign: "center" }}
+                  data-ad-layout="in-article"
+                  data-ad-format="fluid"
+                  data-ad-client="ca-pub-8408243121163767"
+                  data-ad-slot="9662897902"
+                ></ins>
+                <Script
+                  id="adsbygoogle-init"
+                  strategy="afterInteractive"
+                  dangerouslySetInnerHTML={{
+                    __html: "(adsbygoogle = window.adsbygoogle || []).push({});",
+                  }}
+                />
+              </div>
+
               {children}
               <Footer />
               <Analytics />
