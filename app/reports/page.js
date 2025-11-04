@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { AlertCircle, CheckCircle, Flag, Send, X, ChevronRight } from "lucide-react";
 import { db1 } from "@/lib/firebaseConfig";
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import Link from "next/link";
 
 export default function ReportPage() {
     const [formData, setFormData] = useState({
@@ -351,12 +352,12 @@ export default function ReportPage() {
                 <div className="mt-6 text-center">
                     <p className="text-sm opacity-60">
                         Need help?{" "}
-                        <a
-                            href="mailto:browncemmanuel@gmail.com"
+                        <Link
+                            href="/contact-support"
                             className="text-blue-600 hover:underline font-medium"
                         >
                             Contact Support
-                        </a>
+                        </Link>
                     </p>
                 </div>
             </div>
