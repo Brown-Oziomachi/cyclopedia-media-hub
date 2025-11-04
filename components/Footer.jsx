@@ -189,6 +189,14 @@ const Footer = () => {
               </li>
               <li>
                 <Link
+                  href="/reports"
+                  className="hover:text-purple-400 transition"
+                >
+                  Report
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/newsletter"
                   className="hover:text-purple-400 transition"
                 >
@@ -314,6 +322,14 @@ const Footer = () => {
               </li>
               <li>
                 <Link
+                  href="/reports"
+                  className="hover:text-purple-400 transition"
+                >
+                  Report
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/newsletter"
                   className="hover:text-purple-400 transition"
                 >
@@ -360,7 +376,11 @@ const Footer = () => {
 
         <div className="mt-10 text-center border-t border-gray-800 pt-6">
           <Link href="/">
-            <img src="/truth.png" alt="logo" className="h-16 w-16 mx-auto mb-3" />
+            <img
+              src="/truth.png"
+              alt="logo"
+              className="h-16 w-16 mx-auto mb-3"
+            />
           </Link>
           <p>
             &copy; {new Date().getFullYear()} The Cyclopedia. All rights
