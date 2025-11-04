@@ -130,7 +130,7 @@ export default function ReportPage() {
 
     return (
         <div className="min-h-screen py-8 px-4">
-            <div className="max-w-2xl mx-auto lg:mt-50 mt-20">
+            <div className="max-w-2xl mx-auto lg:mt-55 mt-20">
                 {/* Header */}
                 <div className="mb-6">
                     <h1 className="text-2xl font-bold mb-2">Report</h1>

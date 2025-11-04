@@ -97,7 +97,7 @@ export default function Login() {
 
     return (
         <div className="min-h-screen flex items-center justify-center px-4 py-12 ">
-            <div className="w-full max-w-md mt-30 lg:mt-40">
+            <div className="w-full max-w-md mt-30 lg:mt-50">
                 <div className=" rounded-3xl shadow-2xl border border-red-600 overflow-hidden">
 
                     <div className="relative h-48 bg-red-600 flex items-center justify-center">
