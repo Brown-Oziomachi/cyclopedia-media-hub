@@ -135,12 +135,12 @@ export default function NotificationBell({ setShowNav }) {
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute -right-12 mt-3 w-96  max-w-[calc(100vw-2rem)] bg-[#0c0b0bfa] rounded-2xl shadow-2xl border border-gray-700 z-[100] overflow-hidden">
+        <div className="absolute -right-5 mt-3 w-96  max-w-[calc(100vw-2rem)] bg-[#0c0b0bfa] rounded-2xl shadow-2xl border border-gray-700 z-[100] overflow-hidden">
           {/* Header */}
-          <div className="bg-[#0c0b0bfa]px-6 py-4 flex items-center justify-between">
+          <div className="bg-[#0c0b0bfa]px-6 py-4 flex items-center justify-between border-b border-gray-700">
             <div>
-              <h3 className="text-white font-bold text-lg p-5">Notifications</h3>
-              <p className="text-white/80 text-xs p-5">
+              <h3 className="text-white font-bold text-lg p-2">Notifications</h3>
+              <p className="text-white/80 text-xs p-1">
                 {notifications.length} Latest news
               </p>
             </div>

@@ -101,102 +101,96 @@ const SportsPage = () => {
   useEffect(() => {
     const fetchSportsVideos = async () => {
       setLoadingVideos(true);
-      try {
-        // 🔍 DEBUG: Check if environment variables are loaded
-        console.log("🔍 Environment Check:");
-        console.log("KEY_1 exists:", !!process.env.NEXT_PUBLIC_YOUTUBE_API_KEY_1);
-        console.log("KEY_2 exists:", !!process.env.NEXT_PUBLIC_YOUTUBE_API_KEY_2);
-        console.log("KEY_3 exists:", !!process.env.NEXT_PUBLIC_YOUTUBE_API_KEY_3);
 
+      try {
         // ✅ API KEYS SETUP
         const API_KEYS = [
-          process.env.NEXT_PUBLIC_YOUTUBE_API_KEY,    // No _1
+          process.env.NEXT_PUBLIC_YOUTUBE_API_KEY,
           process.env.NEXT_PUBLIC_YOUTUBE_API_KEY_2,
           process.env.NEXT_PUBLIC_YOUTUBE_API_KEY_3,
         ].filter(Boolean);
 
-        // Enhanced validation
         if (API_KEYS.length === 0) {
           console.error("⚠️ No YouTube API keys configured");
-          console.error("Please check your .env.local file");
           setSpaceVideos([]);
           setLoadingVideos(false);
           return;
         }
-
-        // Randomly select an API key
-        const currentKeyIndex = Math.floor(Math.random() * API_KEYS.length);
-        const YOUTUBE_API_KEY = API_KEYS[currentKeyIndex];
-
-        console.log(`🔑 Using API Key #${currentKeyIndex + 1} of ${API_KEYS.length}`);
 
         const searchQuery = currentSport.searchQuery || "sports highlights 2025";
         console.log("🔍 Searching YouTube for:", searchQuery);
 
-        const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${encodeURIComponent(
-          searchQuery
-        )}&type=video&order=date&videoDuration=medium&key=${YOUTUBE_API_KEY}`;
+        // 🔄 TRY ALL KEYS UNTIL ONE WORKS
+        let videosFetched = false;
+        let lastError = null;
 
-        console.log("📡 Making request to YouTube API...");
+        for (let i = 0; i < API_KEYS.length; i++) {
+          const YOUTUBE_API_KEY = API_KEYS[i];
+          console.log(`🔑 Trying API Key #${i + 1} of ${API_KEYS.length}`);
 
-        const response = await fetch(apiUrl);
+          try {
+            const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${encodeURIComponent(
+              searchQuery
+            )}&type=video&order=date&videoDuration=medium&key=${YOUTUBE_API_KEY}`;
 
-        console.log("📥 Response status:", response.status);
+            const response = await fetch(apiUrl);
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          console.error("❌ YouTube API Error:", errorData);
+            if (!response.ok) {
+              const errorData = await response.json();
+              console.warn(`⚠️ Key #${i + 1} failed:`, errorData.error?.message);
+              lastError = errorData;
 
-          // Detailed error logging
-          if (errorData.error?.errors?.[0]?.reason === "quotaExceeded") {
-            console.error(`⚠️ Quota exceeded for API Key #${currentKeyIndex + 1}`);
-            console.error("Try again tomorrow or add more API keys");
-          } else if (errorData.error?.errors?.[0]?.reason === "keyInvalid") {
-            console.error(`⚠️ Invalid API Key #${currentKeyIndex + 1}`);
-            console.error("Check your API key configuration");
-          } else {
-            console.error("Error reason:", errorData.error?.errors?.[0]?.reason);
-            console.error("Error message:", errorData.error?.message);
+              // If quota exceeded, try next key immediately
+              if (errorData.error?.errors?.[0]?.reason === "quotaExceeded") {
+                console.log(`⏭️ Quota exceeded for Key #${i + 1}, trying next key...`);
+                continue;
+              }
+
+              // For other errors, also try next key
+              continue;
+            }
+
+            const data = await response.json();
+
+            if (data.items && data.items.length > 0) {
+              const videos = data.items.map((item) => ({
+                id: item.id.videoId,
+                title: item.snippet.title,
+                description: item.snippet.description,
+                date: item.snippet.publishedAt,
+                thumbnail:
+                  item.snippet.thumbnails.high?.url ||
+                  item.snippet.thumbnails.medium?.url,
+                embedUrl: `https://www.youtube.com/embed/${item.id.videoId}?autoplay=1&rel=0&controls=1&showinfo=0&modestbranding=1`,
+                watchUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+                channelTitle: item.snippet.channelTitle,
+              }));
+
+              console.log(`✅ Success! Got ${videos.length} videos using Key #${i + 1}`);
+              setSpaceVideos(videos);
+              videosFetched = true;
+              break; // Exit loop on success
+            } else {
+              console.log(`⚠️ Key #${i + 1} returned no videos`);
+            }
+          } catch (fetchError) {
+            console.warn(`❌ Key #${i + 1} network error:`, fetchError.message);
+            lastError = fetchError;
+            continue; // Try next key
           }
-
-          setSpaceVideos([]);
-          setLoadingVideos(false);
-          return;
         }
 
-        const data = await response.json();
-        console.log("✅ YouTube API Response:", data);
-        console.log("📊 Items received:", data.items?.length || 0);
-
-        if (data.items && data.items.length > 0) {
-          const videos = data.items.map((item) => ({
-            id: item.id.videoId,
-            title: item.snippet.title,
-            description: item.snippet.description,
-            date: item.snippet.publishedAt,
-            thumbnail:
-              item.snippet.thumbnails.high?.url ||
-              item.snippet.thumbnails.medium?.url,
-            embedUrl: `https://www.youtube.com/embed/${item.id.videoId}?autoplay=1&rel=0&controls=1&showinfo=0&modestbranding=1`,
-            watchUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`,
-            channelTitle: item.snippet.channelTitle,
-          }));
-          console.log(`✅ Processed ${videos.length} videos using Key #${currentKeyIndex + 1}`);
-          setSpaceVideos(videos);
-        } else {
-          console.log("⚠️ No videos found for query:", searchQuery);
+        // If all keys failed
+        if (!videosFetched) {
+          console.error("❌ All API keys failed");
+          if (lastError) {
+            console.error("Last error:", lastError);
+          }
           setSpaceVideos([]);
         }
+
       } catch (error) {
-        console.error("❌ Error fetching videos:", error);
-        console.error("Error name:", error.name);
-        console.error("Error message:", error.message);
-
-        // Network error handling
-        if (error.message === "Failed to fetch") {
-          console.error("🌐 Network error - check your internet connection");
-        }
-
+        console.error("❌ Fatal error fetching videos:", error);
         setSpaceVideos([]);
       } finally {
         setLoadingVideos(false);
@@ -205,8 +199,8 @@ const SportsPage = () => {
 
     fetchSportsVideos();
     setCurrentVideoIndex(0);
-  }, [sportParam, currentSport.searchQuery]); // Added currentSport.searchQuery to dependencies
-
+  }, [sportParam, currentSport.searchQuery]);
+  
   // Fetch latest sports news for sidebar
   useEffect(() => {
     const fetchSportsNews = async () => {

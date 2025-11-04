@@ -66,7 +66,7 @@ const Page = () => {
         <div className="absolute w-[300px] h-[300px] bg-black/30 blur-3xl rounded-full bottom-10 right-20"></div>
 
         {/* Text Content */}
-        <div className="relative z-10 px-4 lg:mt-35">
+        <div className="relative z-10 px-4 lg:mt-50">
           <p className="inline-block text-cyan-700 bg-white/90 font-semibold text-sm px-4 py-1 rounded-full mb-4 tracking-wide uppercase">
             Science
           </p>

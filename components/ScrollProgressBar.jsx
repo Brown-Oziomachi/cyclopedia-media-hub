@@ -339,7 +339,7 @@ export default function CyclopediaConnection() {
           >
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-l from-cyan-500 to-blue-500 rounded-xl blur-lg opacity-30"></div>
-              <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 border-2 rounded-xl p-6 text-center">
+              <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-6 text-center">
                 <div className="text-5xl mb-2">🌐</div>
                 <h3 className="text-lg font-bold text-white mb-1">Wikipedia</h3>
                 <p className="text-gray-400 text-xs">Collaborative Source</p>
