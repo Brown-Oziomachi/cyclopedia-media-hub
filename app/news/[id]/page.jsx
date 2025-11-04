@@ -366,11 +366,9 @@ export default function NewsDetails() {
             for in-depth analysis and reliable reporting
           </p>
         </div>
-        <AdSense slot="9662897902" />
 
+        <AdSense slot="9662897902" key="ad-top" />
         <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
-          {/* Category badge */}
-
           {/* Article title */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -553,8 +551,7 @@ export default function NewsDetails() {
             <BlogDisplay body={blog.body} />
           </motion.div>
 
-          <AdSense />
-
+          <AdSense slot="9662897902" style={{ minHeight: "300px" }} />
           {/* Newsletter CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

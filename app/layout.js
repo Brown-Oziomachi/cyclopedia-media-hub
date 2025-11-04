@@ -132,11 +132,14 @@ export default function RootLayout({ children }) {
         />
 
         {/* Google Analytics */}
-        <script
-          async
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-TT01H9803V"
-        ></script>
-        <script
+        />
+        <Script
+          id="google-analytics-config"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -147,12 +150,13 @@ export default function RootLayout({ children }) {
           }}
         />
 
-        {/* Google AdSense */}
-        <script
-          async
+        {/* Google AdSense - ONLY LOAD THE SCRIPT, DON'T INITIALIZE ADS HERE */}
+        <Script
+          id="adsbygoogle-script"
+          strategy="afterInteractive"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8408243121163767"
           crossOrigin="anonymous"
-        ></script>
+        />
       </head>
       <body className="antialiased">
         <ThemeProvider
@@ -165,24 +169,7 @@ export default function RootLayout({ children }) {
               <Navbar />
               <CookieBanner />
 
-              {/* Google AdSense Ad Placement */}
-              <div style={{ textAlign: "center", margin: "20px 0" }}>
-                <ins
-                  className="adsbygoogle"
-                  style={{ display: "block", textAlign: "center" }}
-                  data-ad-layout="in-article"
-                  data-ad-format="fluid"
-                  data-ad-client="ca-pub-8408243121163767"
-                  data-ad-slot="9662897902"
-                ></ins>
-                <Script
-                  id="adsbygoogle-init"
-                  strategy="afterInteractive"
-                  dangerouslySetInnerHTML={{
-                    __html: "(adsbygoogle = window.adsbygoogle || []).push({});",
-                  }}
-                />
-              </div>
+              {/* REMOVED THE AD FROM LAYOUT - Let components handle their own ads */}
 
               {children}
               <Footer />

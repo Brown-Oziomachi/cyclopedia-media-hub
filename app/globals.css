@@ -79,3 +79,9 @@ body {
 .reverse-theme {
   @apply bg-gray-900 text-white dark:bg-white dark:text-gray-900;
 }
+
+.adsbygoogle {
+  display: block !important;
+  min-height: 250px;
+  min-width: 300px;
+}

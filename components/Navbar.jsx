@@ -121,6 +121,7 @@ const ProfileDropdownNavbar = () => {
   const navItems = [
     { text: "About us", url: "/about" },
     { text: "Contact us", url: "/contact" },
+    { text: "Report", url: "/reports" },
   ];
 
   const countriesByRegion = {
