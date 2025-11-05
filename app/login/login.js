@@ -5,9 +5,7 @@ import { useRouter } from "next/navigation";
 import { auth } from "@/lib/firebaseConfig";
 import { useAuth } from "@/components/AuthProvider";
 import { TextField, IconButton, InputAdornment, CircularProgress } from "@mui/material";
-import Image from "next/image";
-
-import { LogIn, Eye, EyeOff, ArrowRight } from "lucide-react";
+import { Eye, EyeOff, ArrowRight } from "lucide-react";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -25,19 +23,6 @@ export default function Login() {
         }
     }, [user, authLoading, router]);
 
-    if (authLoading) {
-        return (
-            <div className="min-h-screen flex items-center justify-center ">
-                <div className="text-center">
-                    <CircularProgress size={60} sx={{ color: 'red' }} />
-                    <p className="mt-4 text-lg">Loading...</p>
-                </div>
-            </div>
-        );
-    }
-
-    if (user) return null;
-
     const getErrorMessage = (errorCode) => {
         switch (errorCode) {
             case "auth/invalid-credential":
@@ -52,11 +37,11 @@ export default function Login() {
             case "auth/too-many-requests":
                 return "Too many login attempts. Please try again later";
             case "auth/popup-closed-by-user":
-                return "Sign-in popup was closed before completing";
+                return "Sign-in was cancelled. Please try again and complete the process";
             case "auth/cancelled-popup-request":
                 return "Only one popup request is allowed at a time";
             case "auth/popup-blocked":
-                return "Sign-in popup was blocked by the browser";
+                return "Sign-in popup was blocked. Please allow popups and try again";
             case "auth/account-exists-with-different-credential":
                 return "An account already exists with the same email";
             default:
@@ -95,25 +80,36 @@ export default function Login() {
         }
     };
 
-    return (
-        <div className="min-h-screen flex items-center justify-center px-4 py-12 ">
-            <div className="w-full max-w-md mt-30 lg:mt-50">
-                <div className=" rounded-3xl shadow-2xl border border-red-600 overflow-hidden">
+    if (authLoading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <div className="text-center">
+                    <CircularProgress size={60} sx={{ color: 'red' }} />
+                    <p className="mt-4 text-lg">Loading...</p>
+                </div>
+            </div>
+        );
+    }
 
+    if (user) return null;
+
+    return (
+        <div className="min-h-screen flex items-center justify-center px-4 py-12">
+            <div className="w-full max-w-md lg:mt-50">
+                <div className="rounded-3xl shadow-2xl border border-red-600 overflow-hidden">
                     <div className="relative h-48 bg-red-600 flex items-center justify-center">
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.2),transparent)]"></div>
                         <div className="relative z-10 text-center">
                             <div className="w-24 h-24 mx-auto mb-4 rounded-full mt-4 flex items-center justify-center shadow-2xl">
-                                <img src="/truth.png" className="rounded-full" />
+                                <img src="/truth.png" alt="Logo" className="rounded-full" />
                             </div>
                             <h1 className="text-3xl font-bold text-white drop-shadow-lg">Welcome Back</h1>
-                            <p className="text-purple-100 mt-2">Sign in to continue to The Cyclopedia</p>
+                            <p className="text-white mt-2">Sign in to continue to The Cyclopedia</p>
                         </div>
                     </div>
 
-                    {/* Form Section */}
-                    <div className="p-8">
-                        <h2 className="text-2xl font-bold mb-6 text-center">
+                    <div className="p-8 bg-white dark:bg-gray-900">
+                        <h2 className="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-white">
                             Login to Your Account
                         </h2>
 
@@ -123,12 +119,11 @@ export default function Login() {
                             </div>
                         )}
 
-                        {/* Google Sign In Button */}
                         <button
                             type="button"
                             onClick={handleGoogleSignIn}
                             disabled={googleLoading || loading}
-                            className="w-full mb-6 py-3.5 border-2 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 font-semibold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-3"
+                            className="w-full mb-6 py-3.5 bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-semibold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-3"
                         >
                             {googleLoading ? (
                                 <>
@@ -171,7 +166,7 @@ export default function Login() {
                             </div>
                         </div>
 
-                        <form onSubmit={handleLogin} className="space-y-10">
+                        <form onSubmit={handleLogin} className="space-y-5">
                             <TextField
                                 fullWidth
                                 label="Email Address"
@@ -185,15 +180,14 @@ export default function Login() {
                                     '& .MuiOutlinedInput-root': {
                                         borderRadius: '12px',
                                         '& fieldset': { borderColor: '#e5e7eb' },
-                                        '&:hover fieldset': { borderColor: '#a855f7' },
-                                        '&.Mui-focused fieldset': { borderColor: '#7c3aed', borderWidth: '2px' },
+                                        '&:hover fieldset': { borderColor: '#dc2626' },
+                                        '&.Mui-focused fieldset': { borderColor: '#dc2626', borderWidth: '2px' },
                                     },
-                                    '& .MuiInputLabel-root.Mui-focused': { color: '#7c3aed' },
+                                    '& .MuiInputLabel-root.Mui-focused': { color: '#dc2626' },
                                 }}
                             />
 
                             <TextField
-                                className="mb-5"
                                 fullWidth
                                 label="Password"
                                 type={showPassword ? "text" : "password"}
@@ -219,27 +213,24 @@ export default function Login() {
                                     '& .MuiOutlinedInput-root': {
                                         borderRadius: '12px',
                                         '& fieldset': { borderColor: '#e5e7eb' },
-                                        '&:hover fieldset': { borderColor: '#a855f7' },
-                                        '&.Mui-focused fieldset': { borderColor: '#7c3aed', borderWidth: '2px' },
+                                        '&:hover fieldset': { borderColor: '#dc2626' },
+                                        '&.Mui-focused fieldset': { borderColor: '#dc2626', borderWidth: '2px' },
                                     },
-                                    '& .MuiInputLabel-root.Mui-focused': { color: '#7c3aed' },
+                                    '& .MuiInputLabel-root.Mui-focused': { color: '#dc2626' },
                                 }}
                             />
 
                             <div className="flex items-center justify-between text-sm">
                                 <label className="flex items-center cursor-pointer">
-                                    <input type="checkbox" className="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500" />
+                                    <input type="checkbox" className="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500" />
                                     <span className="ml-2 text-gray-600 dark:text-gray-400">Remember me</span>
                                 </label>
-                                {/* <a href="/forgot-password" className="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium">
-                                    Forgot password?
-                                </a> */}
                             </div>
 
                             <button
                                 type="submit"
                                 disabled={loading || googleLoading}
-                                className="w-full py-3.5 bg-red-600 hover:from-purple-700 hover:via-indigo-700 hover:to-blue-700 text-white font-semibold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group"
+                                className="w-full py-3.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group"
                             >
                                 {loading ? (
                                     <>
@@ -260,7 +251,7 @@ export default function Login() {
                                 <div className="w-full border-t border-gray-200 dark:border-gray-700"></div>
                             </div>
                             <div className="relative flex justify-center text-sm">
-                                <span className="px-4 bg-white text-gray-500 dark:text-gray-400">
+                                <span className="px-4 bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400">
                                     New to The Cyclopedia?
                                 </span>
                             </div>
@@ -269,7 +260,7 @@ export default function Login() {
                         <div className="text-center">
                             <p className="text-gray-600 dark:text-gray-400">
                                 Don't have an account?{" "}
-                                <a href="/signup" className="text-red-600 hover:underline">
+                                <a href="/signup" className="text-red-600 hover:underline font-semibold">
                                     Create Account
                                 </a>
                             </p>
@@ -283,7 +274,7 @@ export default function Login() {
                         Terms of Service
                     </a>{" "}
                     and{" "}
-                    <a href="/privacy-policy" className="text-red-600  hover:underline">
+                    <a href="/privacy-policy" className="text-red-600 hover:underline">
                         Privacy Policy
                     </a>
                 </p>
