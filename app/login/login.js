@@ -95,7 +95,7 @@ export default function Login() {
 
     return (
         <div className="min-h-screen flex items-center justify-center px-4 py-12">
-            <div className="w-full max-w-md lg:mt-50">
+            <div className="w-full max-w-md lg:mt-50 mt-20">
                 <div className="rounded-3xl shadow-2xl border border-red-600 overflow-hidden">
                     <div className="relative h-48 bg-red-600 flex items-center justify-center">
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.2),transparent)]"></div>
