@@ -717,7 +717,7 @@ export default function UserProfile() {
                                     <p className="text-sm text-gray-600 mt-1">Learn more about The Cyclopedia.</p>
                                 </a>
 
-                                <a href="/contact" className="block border rounded-lg p-4 hover:bg-gray-50 cursor-pointer transition">
+                                <a href="/contact-support" className="block border rounded-lg p-4 hover:bg-gray-50 cursor-pointer transition">
                                     <p className="font-semibold text-purple-600">Contact Support</p>
                                     <p className="text-sm text-gray-600 mt-1">Get in touch with our support team.</p>
                                 </a>
