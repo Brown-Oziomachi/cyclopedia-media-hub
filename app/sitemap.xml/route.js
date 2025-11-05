@@ -108,32 +108,32 @@ export async function GET() {
                 .join("")}
 
   <!-- Articles/News -->
-  ${articles
+<!-- Articles/News -->
+${articles
                 .map(
                     (article) => `
-  <url>
-    <loc>https://www.thecyclopedia.com.ng/${article.id}</loc>
-    <lastmod>${formatDate(article.updatedAt)}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-    ${article.imageUrl || article.image || article.coverImage ? `
-    <image:image>
-      <image:loc>${escapeXml(article.imageUrl || article.image || article.coverImage)}</image:loc>
-      <image:title><![CDATA[${article.title}]]></image:title>
-      <image:caption><![CDATA[${article.description || article.title}]]></image:caption>
-    </image:image>` : ''}
-    <news:news>
-      <news:publication>
-        <news:name>The Cyclopedia</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>${formatDate(article.createdAt || article.updatedAt)}</news:publication_date>
-      <news:title><![CDATA[${article.title}]]></news:title>
-    </news:news>
-  </url>`
+<url>
+  <loc>https://www.thecyclopedia.com.ng/news/${article.id}</loc>
+  <lastmod>${formatDate(article.updatedAt)}</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.9</priority>
+  ${article.imageUrl || article.image || article.coverImage ? `
+  <image:image>
+    <image:loc>${escapeXml(article.imageUrl || article.image || article.coverImage)}</image:loc>
+    <image:title><![CDATA[${article.title}]]></image:title>
+    <image:caption><![CDATA[${article.description || article.title}]]></image:caption>
+  </image:image>` : ''}
+  <news:news>
+    <news:publication>
+      <news:name>The Cyclopedia</news:name>
+      <news:language>en</news:language>
+    </news:publication>
+    <news:publication_date>${formatDate(article.createdAt || article.updatedAt)}</news:publication_date>
+    <news:title><![CDATA[${article.title}]]></news:title>
+  </news:news>
+</url>`
                 )
                 .join("")}
-
   <!-- Videos -->
   ${videos
                 .map(
