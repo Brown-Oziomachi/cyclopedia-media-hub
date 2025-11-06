@@ -183,7 +183,7 @@ const ProfileDropdownNavbar = () => {
           <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
             <LiveClock />
             <Greeting />
-        
+
             <div className="hidden md:flex items-center gap-4">
               <Link
                 href="/newsletter"
@@ -316,7 +316,7 @@ const ProfileDropdownNavbar = () => {
                         My Profile
                       </Link>
                       <Link
-                        href="/settings"
+                        href="/profiles"
                         className="block px-4 py-3 hover:bg-gray-800 transition-colors text-gray-200"
                         onClick={() => setShowUserMenu(false)}
                       >
@@ -431,9 +431,9 @@ const ProfileDropdownNavbar = () => {
             {user ? (
               <button
                 onClick={handleSignOut}
-                className="text-white bg-gradient-to-r from-red-600 to-pink-600 px-4 py-2 rounded-lg shadow-lg hover:from-red-700 hover:to-pink-700 transition-all flex items-center gap-2 font-semibold text-sm"
+                className="text-white text-xs bg-gradient-to-r from-red-600 to-pink-600 px-2 py-2 rounded-lg shadow-lg hover:from-red-700 hover:to-pink-700 transition-all flex items-center gap-2 font-semibold "
               >
-                <LogOut size={18} />
+                <LogOut size={7} />
                 Sign Out
               </button>
             ) : (
@@ -450,7 +450,7 @@ const ProfileDropdownNavbar = () => {
               className="text-white bg-gradient-to-r from-red-600 to-pink-600 p-2 rounded-lg shadow-lg hover:from-red-700 hover:to-pink-700 transition-all"
               aria-label="Close navigation"
             >
-              <X size={24} />
+              <X size={15} />
             </button>
           </div>
 

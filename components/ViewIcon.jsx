@@ -43,40 +43,42 @@ export default function ViewMoreSearchPopup() {
       {isOpen && (
         <div
           ref={isOpenRef}
-          className="fixed inset-0 w-screen h-screen z-[999] flex flex-col items-center justify-center bg-black animate-fadeIn px-6 py-0"
+          className="fixed inset-0 w-screen h-screen z-[999] flex flex-col items-center justify-center bg-black animate-fadeIn px-6 py-06 lg:px-32 lg:py-20"
         >
           {/* Close Button */}
           <button
             onClick={() => setIsOpen(false)}
-            className="absolute top-80 left-0 text-white hover:text-red-500 transition-colors duration-200 p-2 bg-gray-900/50 rounded-full"
+            className="absolute top-6 right-6 text-white hover:text-red-500 transition-colors duration-200 p-2 bg-gray-900/50 rounded-full"
           >
             <X size={32} />
           </button>
 
           {/* Search Text */}
           <div className="text-center mb-8">
-            <h2 className="text-white text-3xl lg:text-4xl font-bold">
+            <h2 className="text-white text-3xl lg:text-3xl font-bold">
               Search Here
             </h2>
           </div>
 
-          {/* Search Input */}
-          <div className="relative w-full ">
-            <input
-              type="text"
-              placeholder="Type to search..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-              className="w-full px-6 py-5 bg-transparent border-b-2 border-white text-white text-xl placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors"
-              autoFocus
-            />
-            <button
-              onClick={handleSearch}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-purple-500 transition-colors"
-            >
-              <Search size={28} />
-            </button>
+          {/* Search Input - Now centered on all devices */}
+          <div className="relative w-full flex items-center justify-center">
+            <div className="relative w-full lg:w-2/3">
+              <input
+                type="text"
+                placeholder="Type to search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                className="w-full px-6 py-5 bg-transparent border-b-2 border-white text-white text-xl placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors"
+                autoFocus
+              />
+              <button
+                onClick={handleSearch}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-purple-500 transition-colors"
+              >
+                <Search size={28} />
+              </button>
+            </div>
           </div>
         </div>
       )}

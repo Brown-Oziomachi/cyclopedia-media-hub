@@ -107,7 +107,7 @@ export default function SearchResults() {
   }, [term]);
 
   return (
-    <div className="max-w-3xl mx-auto py-2 max-lg:mt-20 mt-25 p-5 lg:mt-50">
+    <div className="max-w-3xl mx-auto py-2 max-lg:mt-20 mt-25 p-5 lg:mt-55">
       <h1 className="text-lg mb-3 text-center">
         You Searched for: <span className="font-semibold">{term}</span> in{" "}
         <span className="text-purple-700 font-bold">Cyclopedia</span>

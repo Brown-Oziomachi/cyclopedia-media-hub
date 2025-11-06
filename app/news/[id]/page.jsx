@@ -51,44 +51,6 @@ const getVisitorId = () => {
 };
 
 
-const trackView = async (blogId) => {
-  try {
-    const visitorId = getVisitorId();
-    const alreadyViewed = hasViewedArticle(blogId);
-    
-    // Always increment total views
-    const blogRef = doc(db1, "blogs", blogId);
-    await updateDoc(blogRef, {
-      views: increment(1),
-      lastViewed: new Date()
-    });
-    
-    // Only increment unique views if first time viewing (within 24h)
-    if (!alreadyViewed) {
-      await updateDoc(blogRef, {
-        uniqueViews: increment(1)
-      });
-      markArticleAsViewed(blogId);
-    }
-    
-    // Optional: Track individual view in a subcollection for analytics
-    if (typeof window !== "undefined") {
-      const viewRef = doc(db1, `blogs/${blogId}/views`, `${Date.now()}_${visitorId}`);
-      await setDoc(viewRef, {
-        visitorId,
-        timestamp: new Date(),
-        userAgent: navigator.userAgent,
-        referrer: document.referrer || "direct"
-      });
-    }
-    
-    return { success: true, wasUnique: !alreadyViewed };
-  } catch (error) {
-    console.error("Error tracking view:", error);
-    return { success: false, wasUnique: false };
-  }
-};
-
 const createSlug = (title) => {
   return title
     .toLowerCase()
@@ -225,29 +187,6 @@ export default function NewsDetails() {
     verifyAndFetchBlog();
   }, [slugParam, user, authLoading, router]);
 
-  // Track view after blog loads
-  useEffect(() => {
-    if (!blog || isTrackingView) return;
-
-    async function recordView() {
-      setIsTrackingView(true);
-      
-      // Wait 3 seconds to ensure it's not a bounce
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      
-      const result = await trackView(blog.id);
-      
-      if (result.success) {
-        // Optimistically update the view counts
-        setViews(prev => prev + 1);
-        if (result.wasUnique) {
-          setUniqueViews(prev => prev + 1);
-        }
-      }
-    }
-
-    recordView();
-  }, [blog, isTrackingView]);
 
   // Update URL if needed
   useEffect(() => {
