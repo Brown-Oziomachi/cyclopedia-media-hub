@@ -302,24 +302,7 @@ export default function NewsDetails() {
     alert("Link copied to clipboard!");
   };
 
-  const handleLikeClick = async () => {
-    if (!blog) return;
-    const newLikes = liked ? likes - 1 : likes + 1;
-    setLiked(!liked);
-    setLikes(newLikes);
-    localStorage.setItem(`liked-${blog.id}`, (!liked).toString());
-    try {
-      const blogRef = doc(db1, "blogs", blog.id);
-      await updateDoc(blogRef, { likes: newLikes });
-    } catch (error) {
-      console.error("Error updating likes:", error);
-    }
-  };
 
-  const handleBookmarkClick = () => {
-    setBookmarked(!bookmarked);
-    localStorage.setItem(`bookmarked-${blog.id}`, (!bookmarked).toString());
-  };
 
   if (isVerifying || authLoading) {
     return (

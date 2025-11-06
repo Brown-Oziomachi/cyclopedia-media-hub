@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { db1 } from "@/lib/firebaseConfig";
-import { collection, query, orderBy, limit, onSnapshot } from "firebase/firestore";
+import { collection, query, where, orderBy, limit, onSnapshot } from "firebase/firestore";
 import Link from "next/link";
 
 export default function AdBanner() {
@@ -20,10 +20,11 @@ export default function AdBanner() {
         return () => clearTimeout(timer);
     }, []);
 
-    // Fetch ads from Firebase
+    // Fetch ads from Firebase - only sex-education category
     useEffect(() => {
         const q = query(
             collection(db1, "blogs"),
+            where("category", "==", "sex-education"),
             orderBy("createdAt", "desc"),
             limit(60)
         );
@@ -50,7 +51,7 @@ export default function AdBanner() {
 
         const interval = setInterval(() => {
             setCurrentAdIndex((prevIndex) => (prevIndex + 1) % ads.length);
-        }, 12000);
+        }, 10000);
 
         return () => clearInterval(interval);
     }, [ads.length]);
@@ -142,11 +143,11 @@ export default function AdBanner() {
                         <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
                             {currentAd.title || "Advertisement Title"}
                         </h3>
-                        {currentAd.subtitle && (
-                            <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                        {/* {currentAd.subtitle && (
+                            <p className="text-base md:text-lg text-gray-700 leading-relaxed ">
                                 {currentAd.subtitle}
                             </p>
-                        )}
+                        )} */}
                     </div>
                 </a>
 
