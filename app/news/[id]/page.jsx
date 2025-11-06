@@ -35,6 +35,7 @@ import FollowUsPopup from "@/components/FollowUsPopup";
 import Icons from "@/components/Icon";
 import { SideSportsNews } from "@/components/SportsSideNews";
 import AdSenseAd from "@/components/AdSense";
+import AdBanner from "@/app/advertisement/page";
 
 const getVisitorId = () => {
   if (typeof window === "undefined") return null;
@@ -367,7 +368,8 @@ export default function NewsDetails() {
           </p>
         </div>
 
-        <AdSenseAd slot="6386778121" key="ad-top" />
+        {/* <AdSenseAd slot="6386778121" key="ad-top" /> */}
+        <AdBanner />
         <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
           {/* Article title */}
           <motion.h1
@@ -551,7 +553,7 @@ export default function NewsDetails() {
             <BlogDisplay body={blog.body} />
           </motion.div>
 
-          <AdSenseAd slot="6386778121" style={{ minHeight: "300px" }} />
+          {/* <AdSenseAd slot="6386778121" style={{ minHeight: "300px" }} /> */}
           {/* Newsletter CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -642,7 +644,7 @@ export default function NewsDetails() {
               ))}
             </div>
             <h3 className="text-3xl font-bold mb-8">Explore More News</h3>
-            <AdSenseAd slot="6386778121" />
+            {/* <AdSenseAd slot="6386778121" /> */}
             {/* More articles grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {blogs.slice(6, 12).map((b) => (

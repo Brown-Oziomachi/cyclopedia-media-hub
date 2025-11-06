@@ -334,7 +334,7 @@ const ProfileDropdownNavbar = () => {
                 </div>
               ) : (
                 <Link
-                  href="/login"
+                  href="/signup"
                   className="flex items-center gap-2 px-6 py-2.5 text-white rounded-full font-semibold transition-all duration-300 shadow-lg "
                 >
                   <CircleUser size={38} />
@@ -438,7 +438,7 @@ const ProfileDropdownNavbar = () => {
               </button>
             ) : (
               <Link
-                href="/login"
+                href="/signup"
                 onClick={() => setShowNav(false)}
                 className="text-white px-4 py-2 rounded-lg shadow-lg hover:from-purple-700 hover:to-cyan-700 transition-all flex items-center gap-2 font-semibold text-sm"
               >
