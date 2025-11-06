@@ -72,6 +72,30 @@ export default function AdBanner() {
         return () => clearInterval(interval);
     }, [ads.length]);
 
+    const handleCloseAd = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsVisible(false);
+    };
+
+    const handleDotClick = (e, index) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setCurrentAdIndex(index);
+    };
+
+    // Create slug for news articles
+    const createSlug = (title) => {
+        return title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+    };
+
+    const createFullSlug = (title, id) => {
+        return `${createSlug(title)}--${id}`;
+    };
+
     if (isLoading || !ads.length) {
         return null;
     }
@@ -83,11 +107,11 @@ export default function AdBanner() {
             className={`fixed top-4 right-4 z-50 w-80 transition-all duration-500 ease-in-out ${isVisible ? "translate-x-0 opacity-100" : "translate-x-[calc(100%+2rem)] opacity-0"
                 }`}
         >
-            <div className="bg-white rounded-lg shadow-2xl overflow-hidden border border-gray-200">
+            <div className="bg-white rounded-lg shadow-2xl overflow-hidden border border-gray-200 relative">
                 {/* Close Button */}
                 <button
-                    onClick={() => setIsVisible(false)}
-                    className="absolute top-10 right-3 z-10 bg-black/70 hover:bg-black text-white rounded-full p-1.5 transition-colors"
+                    onClick={handleCloseAd}
+                    className="absolute top-8 right-2 z-20 bg-black/70 hover:bg-black text-white rounded-full p-1.5 transition-colors"
                     aria-label="Close advertisement"
                 >
                     <svg
@@ -114,10 +138,8 @@ export default function AdBanner() {
 
                 {/* Ad Content - Vertical Layout */}
                 <a
-                    href={currentAd.link || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block group"
+                    href={`/news/${createFullSlug(currentAd.title, currentAd.id)}`}
+                    className="block group cursor-pointer"
                 >
                     {/* Ad Image */}
                     <div className="relative w-full h-48 overflow-hidden">
@@ -127,7 +149,7 @@ export default function AdBanner() {
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                         {currentAd.source && (
-                            <div className="absolute bottom-2 left-2 bg-black/90 text-white text-xs font-bold px-3 py-1 uppercase">
+                            <div className="absolute bottom-2 left-2 bg-black/90 text-white text-xs font-bold px-3 py-1 uppercase pointer-events-none">
                                 {currentAd.source}
                             </div>
                         )}
@@ -148,15 +170,12 @@ export default function AdBanner() {
 
                 {/* Ad Navigation Dots */}
                 {ads.length > 1 && (
-                    <div className="flex items-center justify-center gap-1.5 px-4 pb-3">
+                    <div className="flex items-center justify-center gap-1.5 px-4 pb-3 relative z-10">
                         {ads.slice(0, 10).map((_, index) => (
                             <button
                                 key={index}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setCurrentAdIndex(index);
-                                }}
-                                className={`h-1.5 rounded-full transition-all duration-300 ${index === currentAdIndex
+                                onClick={(e) => handleDotClick(e, index)}
+                                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${index === currentAdIndex
                                         ? "w-6 bg-blue-600"
                                         : "w-1.5 bg-gray-300 hover:bg-gray-400"
                                     }`}
