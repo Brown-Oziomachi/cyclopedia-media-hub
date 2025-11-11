@@ -275,7 +275,6 @@ export default function NewsDetails() {
             ⚠️ This content is restricted to adults 18 years and older
           </div>
         )}
-
         {/* Support banner */}
         <div className="w-full bg-gradient-to-r from-blue-900 via-indigo-900 to-purple-900 text-white py-4 px-4 shadow-md">
           <p className="text-sm md:text-base font-medium text-center">
@@ -289,9 +288,12 @@ export default function NewsDetails() {
             for in-depth analysis and reliable reporting
           </p>
         </div>
-
         {/* <AdSenseAd slot="6386778121" key="ad-top" /> */}
-        <AdBanner />
+        <AdSenseAd
+          slot="6386778121"
+          format="horizontal"
+          style={{ display: "inline-block", width: "728px", height: "90px" }}
+        />
         <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
           {/* Article title */}
           <motion.h1
@@ -302,7 +304,6 @@ export default function NewsDetails() {
           >
             {blog.title}
           </motion.h1>
-
           {/* Metadata bar */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -403,7 +404,6 @@ export default function NewsDetails() {
               </a>
             </div>
           </div>
-
           <div className="flex items-center gap-3 mb-6">
             <span
               className={`inline-block bg-gradient-to-r ${getCategoryColor(
@@ -413,7 +413,6 @@ export default function NewsDetails() {
               {blog.category || "News"}
             </span>
           </div>
-
           {/* Featured image */}
           {blog.imageUrl && (
             <motion.div
@@ -447,7 +446,6 @@ export default function NewsDetails() {
               {blog.subtitle}
             </motion.p>
           )}
-
           {/* Social proof bar */}
           <div className="flex items-center justify-center gap-6 mb-12">
             <FollowUsPopup />
@@ -464,7 +462,6 @@ export default function NewsDetails() {
               </span>
             </Link>
           </div>
-
           {/* Article body */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -474,8 +471,11 @@ export default function NewsDetails() {
           >
             <BlogDisplay body={blog.body} />
           </motion.div>
-
-          {/* <AdSenseAd slot="6386778121" style={{ minHeight: "300px" }} /> */}
+          <AdSenseAd
+            slot="6386778121"
+            format="rectangle"
+            style={{ display: "inline-block", width: "300px", height: "250px" }}
+          />{" "}
           {/* Newsletter CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -511,7 +511,6 @@ export default function NewsDetails() {
             </div>
           </motion.div>
         </article>
-
         {/* Related articles */}
         <div className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -566,7 +565,12 @@ export default function NewsDetails() {
               ))}
             </div>
             <h3 className="text-3xl font-bold mb-8">Explore More News</h3>
-            {/* <AdSenseAd slot="6386778121" /> */}
+
+            <AdSenseAd 
+  slot="6386778121" 
+  format="auto"
+  responsive={true}
+/>
             {/* More articles grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {blogs.slice(6, 12).map((b) => (

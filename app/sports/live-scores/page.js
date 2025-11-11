@@ -1,257 +1,412 @@
-// Save this as: app/live-scores/page.jsx or pages/live-scores.jsx
+"use client";
+import React, { useState, useEffect } from 'react';
+import { Trophy, Clock, ExternalLink, ChevronRight, RefreshCw, AlertCircle, Wifi, WifiOff } from 'lucide-react';
 
-'use client';
+export default function LiveFootballScores() {
+    const [activeLeague, setActiveLeague] = useState('all');
+    const [currentTime, setCurrentTime] = useState(new Date());
+    const [matches, setMatches] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [apiStatus, setApiStatus] = useState('checking'); // 'checking', 'connected', 'error'
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { Trophy, TrendingUp, ExternalLink, Clock, Zap, DollarSign } from 'lucide-react';
+    const API_KEY = '8ae9d02d3emshe58cbc50b11747fp19b52bjsn5105dc094267';
+    const API_HOST = '    rapidapi.com';
+    
+    // Try different possible endpoints for this API
+    const POSSIBLE_ENDPOINTS = [
+        '/football-live-now',
+        '/football-live',
+        '/live-scores',
+        '/livescore',
+        '/matches/live',
+        '/fixtures/live'
+    ];
 
-export default function LiveScoresPage() {
-    const [activeTab, setActiveTab] = useState('football');
+    useEffect(() => {
+        const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+        return () => clearInterval(timer);
+    }, []);
 
-    // ALL BETTING AFFILIATES - Sign up links at bottom
+    useEffect(() => {
+        fetchLiveMatches();
+        const interval = setInterval(fetchLiveMatches, 60000);
+        return () => clearInterval(interval);
+    }, []);
+
+    const fetchLiveMatches = async () => {
+        setLoading(true);
+        setError(null);
+
+        // Try each endpoint until one works
+        for (const endpoint of POSSIBLE_ENDPOINTS) {
+            try {
+                console.log(`Trying endpoint: ${endpoint}`);
+                const response = await fetch("/api/livescore", {
+                    method: 'GET',
+                    headers: {
+                        'x-rapidapi-key': API_KEY,
+                        'x-rapidapi-host': API_HOST
+                    }
+                });
+
+                console.log(`Response status for ${endpoint}:`, response.status);
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('API Response:', data);
+
+                    // Try to parse the response
+                    let parsedMatches = parseApiResponse(data);
+
+                    if (parsedMatches && parsedMatches.length > 0) {
+                        setMatches(parsedMatches);
+                        setApiStatus('connected');
+                        setLoading(false);
+                        console.log(`✓ Successfully fetched ${parsedMatches.length} matches from ${endpoint}`);
+                        return; // Success! Exit the function
+                    } else {
+                        console.log(`${endpoint} returned empty data, trying next endpoint...`);
+                    }
+                }
+            } catch (err) {
+                console.error(`Error with ${endpoint}:`, err);
+            }
+        }
+
+        // If we get here, none of the endpoints worked
+        setApiStatus('error');
+        setError('Could not connect to the API. Please check: 1) Your API key is active on RapidAPI, 2) You have available requests, 3) The API is currently available');
+        setMatches([]);
+        setLoading(false);
+    };
+
+    const parseApiResponse = (data) => {
+        // Try different possible response structures
+        let matchesArray = null;
+
+        if (data.data?.match) matchesArray = data.data.match;
+        else if (data.data?.matches) matchesArray = data.data.matches;
+        else if (data.matches) matchesArray = data.matches;
+        else if (data.response) matchesArray = data.response;
+        else if (Array.isArray(data)) matchesArray = data;
+
+        if (!matchesArray || matchesArray.length === 0) return null;
+
+        return matchesArray.slice(0, 15).map((match, index) => {
+            // Flexible parsing for different data structures
+            const homeTeam = match.home_team || match.homeTeam || match.teams?.home?.name || 'Home Team';
+            const awayTeam = match.away_team || match.awayTeam || match.teams?.away?.name || 'Away Team';
+
+            let homeScore = 0;
+            let awayScore = 0;
+
+            // Try to parse score from different formats
+            if (match.score) {
+                if (typeof match.score === 'string') {
+                    const scoreMatch = match.score.match(/(\d+)\s*[-:]\s*(\d+)/);
+                    if (scoreMatch) {
+                        homeScore = parseInt(scoreMatch[1]);
+                        awayScore = parseInt(scoreMatch[2]);
+                    }
+                } else if (match.score.home !== undefined) {
+                    homeScore = match.score.home;
+                    awayScore = match.score.away;
+                }
+            } else if (match.goals) {
+                homeScore = match.goals.home || 0;
+                awayScore = match.goals.away || 0;
+            }
+
+            const league = match.league || match.competition || match.league_name || 'Football League';
+            const status = match.status || match.match_status || 'LIVE';
+            const time = match.time || match.minute || match.elapsed || 'LIVE';
+
+            let leagueId = 'other';
+            const leagueLower = league.toLowerCase();
+            if (leagueLower.includes('premier')) leagueId = 'epl';
+            else if (leagueLower.includes('la liga')) leagueId = 'laliga';
+            else if (leagueLower.includes('serie a')) leagueId = 'seriea';
+            else if (leagueLower.includes('bundesliga')) leagueId = 'bundesliga';
+            else if (leagueLower.includes('champion')) leagueId = 'ucl';
+
+            return {
+                id: match.id || match.match_id || `match-${index}`,
+                league: league,
+                leagueId: leagueId,
+                homeTeam: homeTeam,
+                awayTeam: awayTeam,
+                homeScore: homeScore,
+                awayScore: awayScore,
+                time: time,
+                status: status,
+                homeLogo: '⚽',
+                awayLogo: '⚽'
+            };
+        });
+    };
+
     const bettingPlatforms = [
         {
             name: 'BetWinner',
             url: 'https://www.betwinner.com?aff=83cdf48899a9ca9715e686a4e71f5b60854e5cc65aabc58f5f',
-            icon: '🎰',
-            description: 'Live betting with real-time scores & statistics',
-            color: 'from-green-500 to-emerald-600',
-            bonus: 'Get $200 Bonus',
-            features: ['Live Streaming', 'Cash Out', '24/7 Support']
+            logo: '🎰',
+            bonus: '₦200,000',
+            color: 'from-red-600 to-red-700'
         },
         {
             name: '1xBet',
             url: 'https://reffpa.com/L?tag=d_4882646m_97c_3780558&site=4882646&ad=97',
-            icon: '⚽',
-            description: 'Comprehensive live scores & in-play betting',
-            color: 'from-blue-500 to-cyan-600',
-            bonus: 'Live Betting Now',
-            features: ['Best Odds', 'Fast Payouts', 'Mobile App']
-        },
+            logo: '⚽',
+            bonus: '130% Bonus',
+            color: 'from-blue-600 to-blue-700'
+        }
     ];
 
-    const sportsCategories = [
-        { id: 'football', name: 'Football', icon: '⚽', color: 'bg-green-600' },
-        { id: 'basketball', name: 'Basketball', icon: '🏀', color: 'bg-orange-600' },
-        { id: 'tennis', name: 'Tennis', icon: '🎾', color: 'bg-yellow-600' },
-        { id: 'cricket', name: 'Cricket', icon: '🏏', color: 'bg-blue-600' },
-        { id: 'boxing', name: 'Boxing', icon: '🥊', color: 'bg-red-600' }
+    const leagues = [
+        { id: 'all', name: 'All', flag: '🌍' },
+        { id: 'epl', name: 'Premier League', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿' },
+        { id: 'laliga', name: 'La Liga', flag: '🇪🇸' },
+        { id: 'seriea', name: 'Serie A', flag: '🇮🇹' },
+        { id: 'bundesliga', name: 'Bundesliga', flag: '🇩🇪' },
+        { id: 'ucl', name: 'Champions League', flag: '⭐' }
     ];
+
+    const filteredMatches = activeLeague === 'all'
+        ? matches
+        : matches.filter(m => m.leagueId === activeLeague);
+
+    const getStatusBadge = (status, time) => {
+        const statusStr = String(status).toLowerCase();
+        const timeStr = String(time).toLowerCase();
+        const isLive = statusStr.includes('live') || statusStr.includes('1h') || statusStr.includes('2h') || timeStr.includes("'");
+
+        if (isLive) {
+            return (
+                <div className="flex items-center gap-1 bg-red-600 text-white px-2 py-1 rounded text-xs font-bold">
+                    <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                    {time}
+                </div>
+            );
+        }
+        if (statusStr.includes('ht') || statusStr.includes('half')) {
+            return <div className="bg-orange-600 text-white px-2 py-1 rounded text-xs font-bold">HT</div>;
+        }
+        if (statusStr.includes('ft') || statusStr.includes('finished')) {
+            return <div className="bg-gray-600 text-white px-2 py-1 rounded text-xs font-bold">FT</div>;
+        }
+        return <div className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold">{time}</div>;
+    };
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-            {/* Hero Header */}
-            <header className="relative bg-gradient-to-r from-red-600 via-orange-600 to-yellow-600 text-white py-20 px-4 mt-20 overflow-hidden">
-                <div className="absolute inset-0 bg-black/20"></div>
-                <div className="absolute top-10 right-10 text-9xl opacity-10 animate-bounce">⚽</div>
-                <div className="absolute bottom-10 left-10 text-7xl opacity-10 animate-pulse">🏆</div>
-
-                <div className="max-w-7xl mx-auto text-center relative z-10">
-                    <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full mb-6 animate-pulse">
-                        <span className="text-red-300 text-3xl">●</span>
-                        <span className="font-bold text-xl">LIVE NOW</span>
-                    </div>
-                    <h1 className="text-5xl md:text-7xl font-extrabold mb-6 uppercase drop-shadow-2xl">
-                        Live Sports Scores & Betting
-                    </h1>
-                    <p className="text-2xl text-white/90 max-w-3xl mx-auto mb-8">
-                        Watch Live • Bet Live • Win Big
-                    </p>
-                    <div className="flex flex-wrap gap-4 justify-center text-sm">
-                        <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                            ⚡ Instant Updates
+        <div className="min-h-screen bg-gray-100 lg:mt-60">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-red-600 to-red-700 text-white py-4 px-4 sticky top-0 z-50 shadow-lg">
+                <div className="max-w-6xl mx-auto">
+                    <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-2">
+                            <Trophy size={28} className="text-yellow-400" />
+                            <h1 className="text-xl md:text-2xl font-bold">Live Scores</h1>
+                            {apiStatus === 'connected' && (
+                                <div className="flex items-center gap-1 bg-green-500 px-2 py-1 rounded text-xs">
+                                    <Wifi size={14} />
+                                    <span>Live</span>
+                                </div>
+                            )}
+                            {apiStatus === 'error' && (
+                                <div className="flex items-center gap-1 bg-red-800 px-2 py-1 rounded text-xs">
+                                    <WifiOff size={14} />
+                                    <span>Offline</span>
+                                </div>
+                            )}
                         </div>
-                        <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                            💰 Best Odds
-                        </div>
-                        <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                            🎁 Huge Bonuses
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <div className="max-w-7xl mx-auto px-4 py-12">
-                {/* Sports Category Tabs */}
-                <div className="mb-12 overflow-x-auto">
-                    <div className="flex gap-3 pb-4">
-                        {sportsCategories.map((sport) => (
+                        <div className="flex items-center gap-2">
                             <button
-                                key={sport.id}
-                                onClick={() => setActiveTab(sport.id)}
-                                className={`flex items-center gap-2 px-6 py-4 rounded-xl font-bold whitespace-nowrap transition-all ${activeTab === sport.id
-                                        ? `${sport.color} text-white shadow-2xl scale-110`
-                                        : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:shadow-lg hover:scale-105'
-                                    }`}
+                                onClick={fetchLiveMatches}
+                                disabled={loading}
+                                className="bg-white/20 hover:bg-white/30 p-2 rounded-full transition-all disabled:opacity-50"
+                                title="Refresh scores"
                             >
-                                <span className="text-3xl">{sport.icon}</span>
-                                <span className="text-lg">{sport.name}</span>
+                                <RefreshCw size={20} className={loading ? 'animate-spin' : ''} />
                             </button>
-                        ))}
-                    </div>
-                </div>
-
-                {/* MEGA Promotion Banner */}
-                <div className="mb-12 relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-3xl blur-xl opacity-50 animate-pulse"></div>
-                    <div className="relative bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 rounded-3xl p-10 text-center shadow-2xl">
-                        <div className="text-6xl mb-4 animate-bounce">🎉</div>
-                        <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 uppercase">
-                            Exclusive Bonus Alert!
-                        </h2>
-                        <p className="text-2xl text-white/90 mb-6 font-semibold">
-                            Get Up to ₦200,000 Welcome Bonus + Free Bets
-                        </p>
-                        <p className="text-white/80 mb-8 max-w-2xl mx-auto">
-                            Choose your favorite platform below and claim your massive welcome bonus.
-                            Limited time offer for new users!
-                        </p>
-                        <div className="flex items-center justify-center gap-3 text-white text-sm">
-                            <Zap className="animate-pulse" />
-                            <span className="font-bold">Don't miss out - Offer expires soon!</span>
-                            <Zap className="animate-pulse" />
-                        </div>
-                    </div>
-                </div>
-
-                {/* TOP TIER BETTING PLATFORMS */}
-                <div className="mb-16">
-                    <div className="flex items-center gap-3 mb-8">
-                        <Trophy className="text-yellow-500" size={40} />
-                        <div>
-                            <h2 className="text-4xl font-extrabold dark:text-white">Live Betting Platforms</h2>
-                            <p className="text-gray-600 dark:text-gray-400">Watch live scores & place your bets</p>
+                            <div className="text-xs md:text-sm bg-white/20 px-3 py-1 rounded-full">
+                                {currentTime.toLocaleTimeString()}
+                            </div>
                         </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-8">
-                        {bettingPlatforms.map((platform, index) => (
-                            <a
-                                key={index}
-                                href={platform.url}
-                                target="_blank"
-                                rel="noopener noreferrer sponsored"
-                                className={`group relative bg-gradient-to-br ${platform.color} rounded-3xl p-8 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 hover:scale-105`}
-                            >
-                                {/* Animated background effects */}
-                                <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
-                                <div className="absolute bottom-0 left-0 w-32 h-32 bg-black/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+                    {/* League Filter */}
+                    <div className="overflow-x-auto -mx-4 px-4 pb-2">
+                        <div className="flex gap-2 min-w-max">
+                            {leagues.map(league => (
+                                <button
+                                    key={league.id}
+                                    onClick={() => setActiveLeague(league.id)}
+                                    className={`px-4 py-2 rounded-full font-semibold text-sm whitespace-nowrap transition-all ${activeLeague === league.id
+                                            ? 'bg-white text-red-600 shadow-lg scale-105'
+                                            : 'bg-white/20 hover:bg-white/30'
+                                        }`}
+                                >
+                                    <span className="mr-1">{league.flag}</span>
+                                    {league.name}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                                <div className="relative z-10">
-                                    {/* Header */}
-                                    <div className="flex items-center justify-between mb-6">
-                                        <span className="text-7xl drop-shadow-lg">{platform.icon}</span>
-                                        <span className="bg-yellow-400 text-black text-sm font-extrabold px-4 py-2 rounded-full shadow-lg animate-pulse">
-                                            {platform.bonus}
-                                        </span>
+            <div className="max-w-6xl mx-auto px-4 py-6">
+                {/* Betting Platforms Banner */}
+                <div className="mb-6 grid md:grid-cols-2 gap-4">
+                    {bettingPlatforms.map((platform, idx) => (
+                        <a
+                            key={idx}
+                            href={platform.url}
+                            target="_blank"
+                            rel="noopener noreferrer sponsored"
+                            className={`bg-gradient-to-r ${platform.color} rounded-xl p-4 text-white flex items-center justify-between hover:shadow-xl transition-all transform hover:scale-105`}
+                        >
+                            <div className="flex items-center gap-3">
+                                <span className="text-4xl">{platform.logo}</span>
+                                <div>
+                                    <p className="font-bold text-lg">{platform.name}</p>
+                                    <p className="text-sm opacity-90">Get {platform.bonus} Bonus</p>
+                                </div>
+                            </div>
+                            <ExternalLink size={20} />
+                        </a>
+                    ))}
+                </div>
+
+                {/* API Setup Instructions */}
+                {apiStatus === 'error' && (
+                    <div className="mb-6 bg-red-50 border-l-4 border-red-400 p-4 rounded">
+                        <div className="flex items-start gap-3">
+                            <AlertCircle className="text-red-600 mt-1" size={20} />
+                            <div>
+                                <h3 className="font-bold text-red-800 mb-2">Unable to Connect to API</h3>
+                                <p className="text-sm text-red-700 mb-3">{error}</p>
+                                <div className="text-sm text-red-700 space-y-2">
+                                    <p className="font-semibold">Troubleshooting Steps:</p>
+                                    <ol className="list-decimal ml-4 space-y-1">
+                                        <li>Go to <a href="https://rapidapi.com/Creativesdev/api/free-api-live-football-data" target="_blank" rel="noopener" className="underline font-semibold">RapidAPI Free API Live Football Data</a></li>
+                                        <li>Make sure you're subscribed (even the free plan requires subscription)</li>
+                                        <li>Check your API dashboard for remaining requests</li>
+                                        <li>Verify your API key is correct</li>
+                                        <li>Check the browser console (F12) for detailed error messages</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Live Matches */}
+                <div className="mb-6">
+                    <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-2">
+                            {apiStatus === 'connected' && (
+                                <div className="w-3 h-3 bg-red-600 rounded-full animate-pulse"></div>
+                            )}
+                            <h2 className="text-lg md:text-xl font-bold text-gray-800">
+                                {apiStatus === 'connected' ? 'Live Matches' : 'Waiting for Connection...'}
+                                {filteredMatches.length > 0 && ` (${filteredMatches.length})`}
+                            </h2>
+                        </div>
+                        {loading && (
+                            <span className="text-sm text-gray-500">Updating...</span>
+                        )}
+                    </div>
+
+                    {apiStatus === 'checking' ? (
+                        <div className="bg-white rounded-lg shadow-md p-8 text-center">
+                            <RefreshCw size={48} className="mx-auto text-blue-500 mb-3 animate-spin" />
+                            <p className="text-gray-600 font-semibold">Connecting to API...</p>
+                            <p className="text-sm text-gray-400 mt-2">Please wait</p>
+                        </div>
+                    ) : filteredMatches.length === 0 ? (
+                        <div className="bg-white rounded-lg shadow-md p-8 text-center">
+                            <Clock size={48} className="mx-auto text-gray-300 mb-3" />
+                            <p className="text-gray-500 font-semibold">No live matches at the moment</p>
+                            <p className="text-sm text-gray-400 mt-2">
+                                {apiStatus === 'connected'
+                                    ? 'Check back soon when matches are playing'
+                                    : 'Please check your API connection above'}
+                            </p>
+                        </div>
+                    ) : (
+                        <div className="space-y-3">
+                            {filteredMatches.map((match) => (
+                                <div key={match.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                                    <div className="bg-gray-50 px-4 py-2 flex items-center justify-between border-b">
+                                        <span className="text-xs font-semibold text-gray-600">{match.league}</span>
+                                        {getStatusBadge(match.status, match.time)}
                                     </div>
 
-                                    {/* Title & Description */}
-                                    <h3 className="text-3xl font-extrabold text-white mb-3 uppercase">
-                                        {platform.name}
-                                    </h3>
-                                    <p className="text-white/90 text-lg mb-6 font-medium">
-                                        {platform.description}
-                                    </p>
-
-                                    {/* Features */}
-                                    <div className="grid grid-cols-3 gap-3 mb-6">
-                                        {platform.features.map((feature, i) => (
-                                            <div key={i} className="bg-white/20 backdrop-blur-sm rounded-lg p-3 text-center">
-                                                <p className="text-white text-xs font-bold">{feature}</p>
+                                    <div className="p-4">
+                                        <div className="flex items-center justify-between gap-4">
+                                            <div className="flex-1 flex items-center gap-2 md:gap-3">
+                                                <span className="text-2xl md:text-3xl">{match.homeLogo}</span>
+                                                <span className="font-semibold text-sm md:text-base text-gray-800 truncate">
+                                                    {match.homeTeam}
+                                                </span>
                                             </div>
-                                        ))}
-                                    </div>
 
-                                    {/* CTA */}
-                                    <div className="flex items-center justify-between bg-white/20 backdrop-blur-sm rounded-xl p-4 group-hover:bg-white/30 transition-colors">
-                                        <span className="text-white font-extrabold text-lg">
-                                            Click to Bet Now
-                                        </span>
-                                        <ExternalLink className="text-white group-hover:translate-x-2 transition-transform" size={28} />
+                                            <div className="flex items-center gap-2 md:gap-4 px-4 py-2 bg-gray-100 rounded-lg">
+                                                <span className="text-2xl md:text-3xl font-bold text-red-600">
+                                                    {match.homeScore}
+                                                </span>
+                                                <span className="text-gray-400 font-bold">-</span>
+                                                <span className="text-2xl md:text-3xl font-bold text-red-600">
+                                                    {match.awayScore}
+                                                </span>
+                                            </div>
+
+                                            <div className="flex-1 flex items-center gap-2 md:gap-3 justify-end">
+                                                <span className="font-semibold text-sm md:text-base text-gray-800 truncate text-right">
+                                                    {match.awayTeam}
+                                                </span>
+                                                <span className="text-2xl md:text-3xl">{match.awayLogo}</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-3 pt-3 border-t">
+                                            <button className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
+                                                <span className="text-sm md:text-base">Bet Now</span>
+                                                <ChevronRight size={18} />
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-
-                                {/* Corner badge */}
-                                <div className="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse">
-                                    HOT 🔥
-                                </div>
-                            </a>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
-                {/* Why Choose Us Section */}
-                <div className="mb-16 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-3xl p-10">
-                    <h3 className="text-3xl font-bold text-center mb-8 dark:text-white">
-                        Why Bet With Our Partners?
-                    </h3>
-                    <div className="grid md:grid-cols-4 gap-6">
-                        <div className="text-center">
-                            <div className="text-5xl mb-3">⚡</div>
-                            <h4 className="font-bold mb-2 dark:text-white">Instant Deposits</h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">Fund your account in seconds</p>
-                        </div>
-                        <div className="text-center">
-                            <div className="text-5xl mb-3">🏆</div>
-                            <h4 className="font-bold mb-2 dark:text-white">Best Odds</h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">Highest returns guaranteed</p>
-                        </div>
-                        <div className="text-center">
-                            <div className="text-5xl mb-3">💰</div>
-                            <h4 className="font-bold mb-2 dark:text-white">Fast Payouts</h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">Withdraw winnings instantly</p>
-                        </div>
-                        <div className="text-center">
-                            <div className="text-5xl mb-3">🛡️</div>
-                            <h4 className="font-bold mb-2 dark:text-white">100% Safe</h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">Licensed & secure platforms</p>
-                        </div>
+                {/* Bottom CTA */}
+                <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl p-6 text-white text-center">
+                    <h3 className="text-xl md:text-2xl font-bold mb-2">Start Betting on Live Matches! 🎯</h3>
+                    <p className="text-sm md:text-base mb-4 opacity-90">Join now and get massive welcome bonuses</p>
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                        <a
+                            href={bettingPlatforms[0].url}
+                            target="_blank"
+                            rel="noopener noreferrer sponsored"
+                            className="bg-white text-green-600 font-bold px-6 py-3 rounded-lg hover:bg-gray-100 transition-all"
+                        >
+                            🎰 Claim Bonus Now
+                        </a>
+                        <a
+                            href={bettingPlatforms[1].url}
+                            target="_blank"
+                            rel="noopener noreferrer sponsored"
+                            className="bg-yellow-400 text-black font-bold px-6 py-3 rounded-lg hover:bg-yellow-300 transition-all"
+                        >
+                            ⚽ Bet on 1xBet
+                        </a>
                     </div>
-                </div>
-
-                {/* Final CTA */}
-                <div className="mb-12 text-center bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 rounded-3xl p-12 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-black/10"></div>
-                    <div className="relative z-10">
-                        <DollarSign className="mx-auto mb-4 text-yellow-400" size={64} />
-                        <h3 className="text-4xl font-extrabold text-white mb-4">
-                            Ready to Win Big? Start Now! 💸
-                        </h3>
-                        <p className="text-white/90 text-xl mb-8 max-w-2xl mx-auto">
-                            Join millions of winners. Pick any platform above and start betting on live sports today!
-                        </p>
-                        <div className="flex flex-wrap gap-4 justify-center">
-                            <a
-                                href={bettingPlatforms[0].url}
-                                target="_blank"
-                                rel="noopener noreferrer sponsored"
-                                className="bg-white text-green-600 font-extrabold px-10 py-5 rounded-xl hover:bg-gray-100 transition-all transform hover:scale-110 text-lg shadow-2xl"
-                            >
-                                🎰 Claim BetWinner Bonus
-                            </a>
-                            <a
-                                href={bettingPlatforms[1].url}
-                                target="_blank"
-                                rel="noopener noreferrer sponsored"
-                                className="bg-yellow-400 text-black font-extrabold px-10 py-5 rounded-xl hover:bg-yellow-300 transition-all transform hover:scale-110 text-lg shadow-2xl"
-                            >
-                                ⚽ Try 1xBet Now
-                            </a>
-                        </div>
-                        <p className="text-white/60 text-sm mt-6">18+ | T&Cs apply | Please gamble responsibly</p>
-                    </div>
-                </div>
-
-                {/* Back to Sports */}
-                <div className="text-center">
-                    <Link
-                        href="/sports"
-                        className="inline-flex items-center gap-2 bg-gray-800 dark:bg-white text-white dark:text-gray-900 font-bold px-8 py-4 rounded-xl hover:bg-gray-700 dark:hover:bg-gray-100 transition-all transform hover:scale-105"
-                    >
-                        ← Back to Sports News
-                    </Link>
+                    <p className="text-xs mt-4 opacity-70">18+ | T&Cs apply | Gamble responsibly</p>
                 </div>
             </div>
         </div>
